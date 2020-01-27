@@ -1,0 +1,128 @@
+{{breadcrums 'Home' 'Add Rule'}}
+
+<div class="app-content center-layout mt-2 mx-md-3 px-1">
+
+    <div class="content-wrapper">
+	<div class="row">
+	<div class="col-md-12">
+	<div class="card">
+	<div class="card-header p-0 border-bottom border-light">
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+	</div>
+	<div class="card-content collpase show">
+	<div class="card-body">
+		<form method="POST" id="formID" action="/rule/addrule"  class="needs-validation form form-horizontal" novalidate enctype="multipart/form-data">
+		{{#each data}}
+		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Rule Information" setlang}}{{/with}}</p>
+			<div class="form-body user_form">
+			<div class="row">
+			<div class="col-md-6">
+			<div class="heading-elements ">
+					<ul class="list-inline mb-0">
+					<li class="col-md-12 p-0 form-control" id="export">
+						<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}}>
+						<select class="select2 form-control export" name="loantype">
+						<option>Loan Type</option>
+						<option value="PersonalLoan" {{#ifCond this.loantype '==' 'PersonalLoan'}} selected {{/ifCond}}>Personal Loan</option>
+						<option value="ShortTermLoan" {{#ifCond this.loantype '==' 'ShortTermLoan'}} selected {{/ifCond}}>Short Term Loan</option>
+						<option value="HomeLoan"{{#ifCond this.loantype '==' 'HomeLoan'}} selected {{/ifCond}}>Home Loan</option>
+						<option value="CarLoan"{{#ifCond this.loantype '==' 'CarLoan'}} selected {{/ifCond}}>Car Loan</option>
+						<option value="TwoWheelerLoan"{{#ifCond this.loantype '==' 'TwoWheelerLoan'}} selected {{/ifCond}}>Two Wheeler Loan</option>
+						<option value="UsedcarLoan"{{#ifCond this.loantype '==' 'UsedcarLoan'}} selected {{/ifCond}}>Used Car Loan</option>
+						<option value="EducationLoan"{{#ifCond this.loantype '==' 'EducationLoan'}} selected {{/ifCond}}>Education Loan</option>
+						<option value="BusinessLoan"{{#ifCond this.loantype '==' 'BusinessLoan'}} selected {{/ifCond}}>Business Loan</option>
+						</select>
+					</li>	
+					</ul>
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+			<div class="form-group1 input">
+			<div class="col-md-12">
+				<!--<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} > 
+				<input type="text" id="userinput1" name="rule_title" {{#if this.rule_title}} value="{{this.rule_title}}"{{/if}}>
+				<label for="userinput1">Applicable for amount<span class="required red">*</span></label>--->
+				
+				<select class="select2 form-control export" name="loan_amount_rule">
+						<option>Applicable for amount</option>
+						<option value="Less Than 50,000" {{#ifCond this.loan_amount_rule '==' 'Less Than 50,000'}} selected {{/ifCond}}>Less Than 50,000</option>
+						
+						<option value="1,00,000 - 3,00,000" {{#ifCond this.loan_amount_rule '==' '1,00,000 - 3,00,000'}} selected {{/ifCond}}>1,00,000 - 3,00,000</option>
+						
+						<option value="3,00,000 - 6,00,000" {{#ifCond this.loan_amount_rule '==' '3,00,000 - 6,00,000'}} selected {{/ifCond}}>3,00,000 - 6,00,000</option>
+						
+						<option value="6,00,000 - 9,00,000" {{#ifCond this.loan_amount_rule '==' '6,00,000 - 9,00,000'}} selected {{/ifCond}}>6,00,000 - 9,00,000</option>
+						
+						<option value="1,00,00,000 Above"{{#ifCond this.loan_amount_rule '==' 'More Than 1,00,00,000'}} selected {{/ifCond}}>More Than 1,00,00,000</option>
+						
+				</select>
+				
+				
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			
+			<div class="col-md-6">
+			<div class="form-group input">
+			<div class="col-md-12 form-control border-light">
+				<!--<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} >-->
+				<input type="text" id="userinput1"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Role name is required" name="rule_title" {{#if this.rule_title}} value="{{this.rule_title}}"{{/if}} >
+				<label for="userinput1">{{#with ..}}{{__ "Rule Title" setlang}}{{/with}}<span class="required red">*</span></label>
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			
+			<div class="col-md-6">	
+			<div class="form-group input">
+			<div class="col-md-12" style="border: 1px solid #ddd;">
+			<div class="form-field">	
+
+			<textarea name="rule_desc"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Description is required" {{#if this.rule_desc}} value="{{this.rule_desc}}"{{/if}}>{{this.rule_desc}}</textarea>
+				<span class="txt-title-label"></span> 
+				<label class="text-area address ">{{#with ..}}{{__ "Description" setlang}}{{/with}}<span class="required red">*</span></label>
+			</div>
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			
+			 <div class="col-md-6">
+			<div class="form-group row">
+			<div class="col-md-12">
+				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Document For Rule" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input class="form-control border-light"  name="rule_image" {{#if this.rule_image}} value="{{this.rule_image}}" {{/if}} type="file" id="userinput5" >
+				{{#if this.rule_image}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.rule_image}}"> 
+				<input class="form-control border-light" name="rule_photo_old" value="{{this.rule_image}}" type="hidden" placeholder="" id="userinput5"> {{/if}}
+			</div><div class="help-block"></div>
+
+			</div>
+			</div> 
+			 
+			
+			
+			
+			
+			
+</div>
+			{{/each}}
+		<div class="form-actions left">
+				<button type="submit" class="btn btn-secondary">
+					<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
+				</button>
+				<button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
+					<i class="ft-refresh-cw"></i> {{__ "Reset"}}
+				</button>
+			</div>
+			
+		</form>
+		
+	<!-- space not allow -->
+	 
+	</div>
+	</div>
+	</div>
+	</div>
+    </div>
+</div>
+</div>
+</div> 

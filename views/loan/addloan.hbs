@@ -1,0 +1,549 @@
+{{breadcrums 'Home' 'Add Loan'}}
+<div class="app-content center-layout mt-2 mx-md-3 px-1">
+    <div class="content-wrapper">
+	<div class="row">
+	<div class="col-md-12">
+	<div class="card">
+	<div class="card-header pb-0 border-bottom border-light">
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+	</div>
+	<div class="card-content collpase show">
+	<div class="card-body">
+		<form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/addloan"  enctype="multipart/form-data">
+		<!-- <h1>{{formatNumber 1222222 2 '.' ','}}</h1> -->
+		{{#each data as |result|}}
+		<script>
+		function deleteParentElement(n){
+   		<!-- n.parentNode.parentNode.parentNode.removeChild(n.parentNode.parentNode);-->
+		$("#addeddiv").remove();
+			}
+		<!-- $(document).ready(function(){ -->
+		<!-- $('.startdate').datetimepicker({ -->
+			<!-- maxDate:new Date(), -->
+			<!-- minDate : '1900-01-01', -->
+		<!-- }); -->
+		<!-- }); -->
+		<!-- $(document).ready(function(){ -->
+		<!-- $('.enddate').datetimepicker({ -->
+			<!-- maxDate:new Date(), -->
+			<!-- minDate : '1900-01-01', -->
+		<!-- }); -->
+		<!-- }); -->
+		<!-- $(document).ready(function(){ -->
+		
+			<!-- $('.startdate').datepicker({ -->
+			<!-- numberOfMonths: 1, -->
+				<!-- maxDate:new Date(), -->
+				<!-- minDate : '1900-01-01', -->
+				<!-- onSelect: function() { -->
+				<!-- var date = $('.startdate').datepicker('getDate');   -->
+					<!-- alert(date); -->
+				<!-- date.setDate(date.getDate() + 30); -->
+			   
+					<!-- $(".enddate").datepicker("option","minDate", date); -->
+				 
+				<!-- } -->
+				
+			<!-- }); -->
+			<!-- $('.enddate').datepicker({ -->
+				
+				<!-- numberOfMonths: 1, -->
+				<!-- minDate : '1900-01-01', -->
+				<!-- onSelect: function() { -->
+				<!-- } -->
+			<!-- }); -->
+		<!-- }); -->
+	
+		function CheckColors(val){
+		 var element=document.getElementById('color');
+		 if(val=='pick a color'||val=='others')
+		   element.style.display='block';
+		 else  
+		   element.style.display='none';
+		}
+</script> 
+
+		<p class="form-section text-bold-600 font-medium-2"><i class="iconify  " data-icon="fa-solid:hand-holding-usd" data-inline="false"></i> {{#with ..}}{{__ "Loan details" setlang}}{{/with}}</p>
+		
+		<div class="form-body user_form">
+			<div class="row">
+		 	<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light">
+					<input type="text" class="form-control" id="readonlyInput" readonly="readonly" name="loancount"  {{#if this.loancount}} value="{{this.loancount}}" {{else}} value="L{{loannumber}}" {{/if}} >
+					<label for="userinput4" >{{#with ..}}{{__ "Loan No." setlang}}{{/with}}</label>
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+			<div class="form-group input">
+				<div class="heading-elements "> 
+					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">User Name<span class="required red">*</span></label>
+						<select class="select2 form-control export" data-validation-required-message="User name is required" name="user" >					
+							<option value="">User</option> 
+							{{#each ../user as |data1| }}
+							
+								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{this._id}}" >{{this.firstname}} {{this.middlename}} {{this.lastname}}</option>
+								
+							{{/each}}
+						</select>
+						 
+				</div><div class="help-block"></div>
+			</div>
+			</div>
+			
+			<div class="col-md-6">
+			<div class="form-group input">
+			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ">
+					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{__ 'Loan Type'}}<span class="required red">*</span></label>	
+						<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
+						<select id="loantype" class="select2 form-control export" data-validation-required-message="Loan Type is required" name="loantype" >
+						<option value="">Loan Type</option>
+						{{#each ../loan as |data2| }}
+						<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.loantype}} selected {{/ifCond}}{{/if}} value="{{this._id}}">{{this.type}}</option>
+						{{/each}}
+						</select>
+					 
+				</div><div class="help-block"></div>
+			</div>
+			</div>
+			<div class="col-md-6">	
+			<div class="form-group input">
+			<div class="col-md-12" style="border: 1px solid #ddd;">
+			<div class="form-field">	
+
+			<textarea maxlength="300" id="loantypdesc" {{#if this.description}} value="{{this.description}}"{{/if}}  name="description" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{__ 'Only Characters, no numbers'}}" data-validation-required-message="Loan description is required">{{this.description}}</textarea>
+
+				<span class="txt-title-label"></span>
+				<label class="text-area address">{{#with ..}}{{__ "Loan description" setlang}}{{/with}}<span class="required red">*</span></label>
+			</div>
+			</div><div class="help-block"></div>
+			</div>
+			
+			</div>
+			
+			</div>
+			
+			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="iconify  " data-icon="fxemoji:informationsource" data-inline="false"></i> {{#with ..}}{{__ "Loan Information" setlang}}{{/with}} <span class="existingPriceSymbole"></span></p>
+			
+			<!-- {{{currencyList ../session.generaldata.currency}}} -->			
+			<div class="row">			
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Loan Amount" setlang}}{{/with}}<span class="existingPriceSymbole"> </span><span class="required red">*</span></label>
+				
+                     <div class="input-group touchspincolor">
+					  <input type="text" id="loanamount" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="loanamount" data-validation-required-message="{{__ 'Interest rate is required'}}" data-bts-step="1000" {{#if this.loanamount}} value="{{this.loanamount}}"{{/if}} />
+                     </div>
+                   </fieldset>
+                 </div>
+               </div>
+             </div>			 
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Annual interest rate" setlang}}{{/with}}<span class="required red">*</span></label>
+                     <div class="input-group touchspincolor">
+					 <input type="text" id="interestrate" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="interestrate" data-validation-required-message="{{__ 'Interest rate is required'}}"  {{#if this.interestrate}} value="{{this.interestrate}}"{{/if}} />
+                     </div>
+                   </fieldset>
+                 </div>
+               </div>
+             </div>
+			<script>
+				
+				$(document).ready(function(){
+
+				//$('.startdate').data("DateTimePicker").maxDate(new Date());
+				var year = $( "#spinner" ).val();
+				$(".startdate").on("dp.change", function (e) {
+							e.date= $('.startdate').data("DateTimePicker").date();
+							
+							 e.date.add(year,'year');
+							
+							$('.enddate').data("DateTimePicker").minDate(e.date);
+						});
+						$(".enddate").on("dp.change", function (e) {
+							$('.startdate').data("DateTimePicker").maxDate(e.date);
+
+						});
+				
+					 $( "#spinner" ).on( "change", function() {
+					  var year = $( "#spinner" ).val();
+
+					  <!-- alert(year); -->
+						//$('.startdate').data("DateTimePicker").maxDate(new Date());
+						$(".startdate").on("dp.change", function (e) {
+							 e.date= $('.startdate').data("DateTimePicker").date();
+							
+							 e.date.add(year,'year');
+							$('.enddate').data("DateTimePicker").minDate(e.date);
+						});
+						$(".enddate").on("dp.change", function (e) {
+							$('.startdate').data("DateTimePicker").maxDate(e.date);
+						});
+
+					});
+				});
+			</script>
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                    <fieldset>
+					<label for="spinner">{{#with ..}}{{__ "Loan Period in years" setlang}}{{/with}}<span class="required red">*</span></label>
+                      <div class="input-group bootstrap-touchspin touchspincolor">
+                       <input id="spinner" type="text" data-min="1" data-max="100" data-validation-required-message="{{__ 'Years are required'}}" class="touchspin form-control" name="years" {{#if this.years}} value="{{this.years}}" {{else}}value="1"{{/if}} style="display: block;">
+					   <div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div><div class="help-block"></div>
+            </div>
+			
+			 <div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                    <fieldset>
+					<label>{{#with ..}}{{__ "Total EMI Months" setlang}}{{/with}}</label>
+                      <div class="input-group bootstrap-touchspin touchspincolor">
+                       <input type="text" class="touchspin form-control" name="totalemimonth" data-validation-required-message="{{__ 'Total EMI Months is required'}}"  {{#if this.totalemimonth}} value="{{this.totalemimonth}}"{{/if}} value="1" style="display: block;"><div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  </div>
+                  </div>
+
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                    <fieldset>
+					<label>{{#with ..}}{{__ "Actual number of payments" setlang}}{{/with}}</label>
+                      <div class="input-group bootstrap-touchspin touchspincolor">
+                       <input type="text" class="touchspin form-control" name="nofpayments" {{#if this.nofpayments}} value="{{this.nofpayments}}"{{/if}} value="1" style="display: block;"><div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  </div>
+                  </div> 
+
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+
+             <div class="card">
+               <div class="card-content">
+                    <fieldset>
+					<label>{{#with ..}}{{__ "Total Extra payments" setlang}}{{/with}}</label>
+                      <div class="input-group bootstrap-touchspin touchspincolor">
+                       <input type="text" class="touchspin form-control" name="epayment" {{#if this.epayment}} value="{{this.epayment}}"{{/if}} value="1" style="display: block;"><div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  </div>
+
+                  </div>
+				 <div class="col-md-6">
+					<div class="form-group row">
+					<div class="col-md-12">
+
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Start Date of loan" setlang}}{{/with}}<span class="required red">*</span></label>
+
+					<input type='text' class="form-control startdate dateformat"  data-validation-required-message="{{__ 'Start Date is required'}}" name="startdate" {{#if this.startdate}} value="{{this.startdate}}" {{else}}  {{/if}} aria-invalid="false">
+
+					<i class="ft-calendar icon-care"></i> 
+					</div>
+			</div><div class="help-block"></div>
+			</div>
+			<div class="col-md-6">
+					<div class="form-group row">
+					<div class="col-md-12">
+ 
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "End Date of loan" setlang}}{{/with}}<span class="required red">*</span></label>
+					<input type='text'  class="form-control enddate dateformat"  data-validation-required-message="Birth Date is required" name="enddate" {{#if this.enddate}} value="{{this.enddate}}" {{else}}{{/if}} aria-invalid="false"  id="enddate"> 
+					<i class="ft-calendar icon-care"></i> 
+					</div>
+			</div><div class="help-block"></div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Total Interest" setlang}}{{/with}}<span class="required red">*</span></label>
+                     <div class="input-group touchspincolor">
+					 <input type="text" class="touchspin" id="interest" data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="interest" data-validation-required-message="{{__ 'Interest rate is required'}}"  {{#if this.interest}} value="{{this.interest}}"{{/if}} />
+                     </div>
+                   </fieldset>
+                 </div>
+               </div>
+             </div>
+			<!-- <div class="col-md-6"> -->
+			<!-- <div class="form-group row"> -->
+			<!-- <div class="col-md-12"> -->
+
+			<!-- <label>End Date of loan<span class="required red">*</span></label> -->
+			<!-- <input type='text' id="enddate" class="form-control enddate dateformat"  data-validation-required-message="Birth Date is required" name="enddate" {{#if this.enddate}} value="{{this.enddate}}"{{/if}}> -->
+			<!-- </div><div class="help-block"></div> -->
+			<!-- </div> -->
+			<!-- </div> -->
+			
+			</div>
+			
+			<p class="form-section text-bold-600 font-medium-2 border-light"> <i class="iconify" data-icon="fa-solid:file-invoice-dollar" data-inline="false"></i>{{#with ..}}{{__ " Financial details" setlang}}{{/with}}</p>
+			
+			<div class="row">
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Income per annum" setlang}}{{/with}}<span class="required red">*</span></label>
+                     <div class="input-group touchspincolor">
+					 <input type="text" class="touchspin " name="incomeperyear" {{#if this.incomeperyear}} value="{{this.incomeperyear}}"{{/if}} value="500000" data-bts-step="1000"/>
+                     </div>
+                   </fieldset>
+                 </div><div class="help-block"></div>
+               </div>
+             </div>
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Income per month" setlang}}{{/with}}<span class="required red">*</span></label>
+                     <div class="input-group touchspincolor">
+					 <input type="text" class="touchspin " name="incomepermonth" {{#if this.incomepermonth}} value="{{this.incomepermonth}}"{{/if}} value="5000" data-bts-step="1000"/>
+                     </div>
+                   </fieldset>
+                 </div><div class="help-block"></div>
+               </div>
+             </div>
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Other Income" setlang}}{{/with}}<span class="required red">*</span></label>
+                     <div class="input-group touchspincolor">
+					 <input type="text" class="touchspin " name="oincome" {{#if this.oincome}} value="{{this.oincome}}"{{/if}} value="5000" data-bts-step="1000"/>
+                     </div>
+                   </fieldset>
+                 </div>
+               </div>
+             </div>
+			
+			<div class="col-md-6">	
+			<div class="form-group input">
+			<div class="col-md-12" style="border: 1px solid #ddd;">
+			<div class="form-field">
+			<textarea name="workdetail"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="workdetail may only contain characters, numbers, space and _,`.'^-" data-validation-required-message="{{__ 'workdetail is required'}}" {{#if this.workdetail}} value="{{this.workdetail}}"{{/if}}>{{this.workdetail}}</textarea>
+				<span class="txt-title-label"></span>
+				<label class="text-area address ">{{#with ..}}{{__ "Work Detail" setlang}}{{/with}}<span class="required red">*</span></label>
+			</div>
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			</div>
+			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Properties and Equipments" setlang}}{{/with}}</p>
+		
+			
+			
+			<div class="row">
+			{{#each this.document}}
+			<div class="col-md-6">
+				<div class="form-group"> 
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Upload Document" setlang}}{{/with}}<span class="required red">*</span></label>
+					<input class="form-control border-light fileUpload docfile" id="fileUpload" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="Document is required" {{/if}} type="file" multiple> 
+					<span class="required red notice"></span>
+					{{#if this}}
+					<!-- <span id="lblError" style="color: red;"></span> -->
+					<p>{{this}}</p> 
+
+					<input class="form-control border-light fileUpload doc_old_in" name="doc_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
+					{{/if}}
+				</div>
+				<div class="help-block"></div>
+			</div>
+			{{/each}}
+			<div class="row col-md-12">
+			{{#if this.document }}
+				
+				{{addelement 'data'}}
+				{{addelement 'data'}}
+			{{else}}
+				{{addelement 'nodata'}}
+				{{addelement 'nodata'}}
+			{{/if}}
+			
+			</div>
+			</div>
+			<b><p style="font-size:12px; color:#10701a">{{#with ..}}{{__ "NOTE:- Only doc, pdf and xlxs files are supported." setlang}}{{/with}}</p></b>
+			
+			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Colleague Information for Inquiry" setlang}}{{/with}} </p>
+			
+			<div class="row">
+			
+			<div class="col-md-6 notCustomerBlock">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light"> 
+					<input type="text" id="colleague" class="" name="colleague" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="colleague name is required" {{#if this.colleague}} value="{{this.colleague}}"{{/if}}>
+					<label for="colleague">{{#with ..}}{{__ "Colleague Name" setlang}}{{/with}}<span class="required red">*</span> </label> 
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light"> 
+					<input type="text" name="mobile" class="form-control"  minlength="10" maxlength="16" data-validation-required-message="Contact Number is required" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="Contact Number may only contain numbers" aria-invalid="false" {{#if this.mobile}} value="{{this.mobile}}"{{/if}}>
+					<label for="userinput4">{{#with ..}}{{__ "Phone/Mobile" setlang}}{{/with}}<span class="required red">*</span></label> 
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			
+			<div class="col-md-6 notCustomerBlock">
+				<div class="form-group input">
+				<label></label>
+					<div class="heading-elements"> 
+					   <label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Colleague Address Type" setlang}}{{/with}}<span class="required red">*</span></label> 
+						<select class="select2 form-control export" id="export" name="addtype" data-validation-required-message="Colleague address type is required" onchange='Checkaddtype(this.value)'> 
+						<option>Select colleague address type</option>
+						<option value="home" {{#ifCond this.addtype '==' 'home'}} selected {{/ifCond}}>Home</option>
+						<option value="work"{{#ifCond this.addtype '==' 'work'}} selected {{/ifCond}}>Work</option>
+						
+						<option value="other"{{#ifCond this.addtype '==' 'other'}} selected {{/ifCond}}>Other</option>
+						</select>
+				</div><div class="help-block"></div>			
+				</div>
+				<textarea placeholder="Other text.." class="mytextarea" type="text" name="othertext" id="addtype" style='display:none'data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Address may only contain characters, numbers, space and _,`.'^-" data-validation-required-message="Other is required" {{#if this.other}} value="{{this.other}}"{{/if}}>{{this.other}}</textarea>
+				</div>
+			<script>
+				function Checkaddtype(val){
+				 var element=document.getElementById('addtype');
+				 if(val=='other')
+				   element.style.display='block';
+				 else  
+				   element.style.display='none';
+				}
+			</script> 	
+			
+			<div class="col-md-6">
+			<div class="form-group input">
+			<div class="col-md-12" style="border: 1px solid #ddd;">
+			<div class="form-field">	
+
+			<textarea name="address"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Address may only contain characters, numbers, space and _,`.'^-" data-validation-required-message="{{__ 'Address is required'}}" {{#if this.address}} value="{{this.address}}"{{/if}}>{{this.address}}</textarea>
+				<span class="txt-title-label"></span>
+				<label class="text-area address ">{{#with ..}}{{__ "Address" setlang}}{{/with}}<span class="required red">*</span></label>
+			</div>
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			
+			</div>
+			
+			<div class="form-actions left">
+				<button id="submit" value="upload" onclick="return ValidateExtension()" class="btn btn-secondary">
+					<i class="fa fa-check-square-o"></i> {{#with ..}}{{__ "Submit" setlang}}{{/with}}
+				</button>
+				<button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
+					<i class="ft-refresh-cw"></i>{{#with ..}}{{__ "Reset" setlang}}{{/with}}
+				</button>
+			</div>
+			<div id="valid_msg"/>
+		{{/each}}
+		</form>	
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+<!-- for state -->
+	$(document).ready(function(){
+	
+	$("body").on("change", "#loantype", function (e) {
+			
+			var loanid= $(this).val()
+			<!-- alert(loanid); -->
+			
+			if(loanid!=''){
+			$.ajax({
+						type: 'GET',
+						url: '/ajxfun/loantypedesc/',
+						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+						data : {loanid:loanid},
+						success: function (response)			 							
+						{						
+						var loantype = response.loantype;
+						<!-- alert(loantype); -->
+						console.log(loantype[0].type_loan_amount);
+							$('#loantypdesc').empty().append(loantype[0].loan_desc);
+							$('#loanamount').val(loantype[0].loan_min_amount);
+							$('#loanamount').attr('value',loantype[0].loan_min_amount);
+							$('#loanamount').attr('data-min',loantype[0].loan_min_amount);
+							$('#loanamount').attr('data-max',loantype[0].loan_max_amount);
+							$('#interestrate').val(loantype[0].interestrate);
+							$('#interest').val(loantype[0].interestrate);
+						},
+				error: function(e) 
+						{
+							alert("An error occurred: " + e.responseText);
+							console.log(e);
+						}
+					});
+			}else{
+				$('#loantypdesc').empty().append(loantype[0].loan_desc);
+			}   
+		});
+		});
+</script>
+{{#each geninfo as |geninfom|}}
+{{log geninfom.doctype_Doc}}
+{{log "11111111111111111111"}}
+<script type="text/javascript">
+        function ValidateExtension() {
+		var m=0;
+		$('.fileUpload').each(function(){
+		//alert(m);
+			if($(this).val() != '') {
+				var fileUpload=$(this).val();
+				var allowedFiles = ['{{geninfom.doctype_Doc}}', '{{geninfom.doctype_Docx}}', '{{geninfom.doctype_Pdf}}', '{{geninfom.doctype_Xls}}'];
+				
+				//var lblError = document.getElementById("lblError");
+				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				//alert(regex.test(fileUpload.toLowerCase()));
+				if (!regex.test(fileUpload.toLowerCase())) {
+					
+					m++;
+					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
+					
+				}
+				else{
+					$(this).siblings('.notice').html('');
+				}
+			}
+		});
+		if(m>0){
+			return false;
+		}
+		//return false;
+        }
+</script>
+{{/each}}
+<script>
+$(document).ready(function(){
+	$("body").on("change", ".docfile", function (e) {
+		$(".doc_old_in").remove();
+	});
+	});
+			
+</script>

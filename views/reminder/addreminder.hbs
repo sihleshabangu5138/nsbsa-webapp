@@ -1,0 +1,163 @@
+  {{breadcrums 'Home' 'Add User Reminder'}}
+<div class="app-content center-layout mt-2 mx-md-3 px-1">
+<!-- <h1>{{__ "text to test"}}</h1> -->
+    <div class="content-wrapper">
+	<div class="row">
+	<div class="col-md-12">
+	<div class="card">
+	<div class="card-header pb-0 border-bottom border-light">
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+	</div>
+	<div class="card-content collpase show">
+	<div class="card-body">
+		<form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/reminder/addreminder" enctype="multipart/form-data"> 
+        {{#each data}}
+    <p class="form-section text-bold-600 font-medium-3"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Reminder Details" setlang}}{{/with}}</p>
+		<div class="form-body user_form">
+        <div class="row">
+        <div class="col-md-12">
+        <div class="form-group input">
+        <div class="col-md-12 form-control border-light"> 
+			<input type="text" id="userinput1" data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Reminder name is required" name="reminder_nm" {{#if this.reminder_nm}} value="{{this.reminder_nm}}" {{/if}}>
+             <label for="userinput1">{{#with ..}}{{__ "Reminder Title" setlang}}{{/with}}<span class="required red">*</span></label> 
+        </div><div class="help-block"></div>
+        </div>
+        </div>
+		<div class="col-md-6 mb-2 input">
+		<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Reminder Type" setlang}}{{/with}}<span class="required red">*</span></label>
+         <select id="reminder_type" required="" class="form-control select2" name="reminder_type">
+			 <option value="reminder_type">Select</option>
+			 <option value="charged_failed" {{#ifCond this.reminder_type '==' 'charged_failed'}} selected {{/ifCond}}> Subscription Payment Failed</option>
+             <option value="upcoming_invoice" {{#ifCond this.reminder_type '==' 'upcoming_invoice'}} selected {{/ifCond}}> Upcoming Invoice</option>
+             <option value="invoice_pending" {{#ifCond this.reminder_type '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
+             <option value="customer_subscription_deleted" {{#ifCond this.reminder_type '==' 'customer_subscription_deleted'}} selected {{/ifCond}}> Subscription End</option>
+             <option value="customer_source_expiring" {{#ifCond this.reminder_type '==' 'customer_source_expiring'}} selected {{/ifCond}}> Card Expiring</option>
+             <option value="customer_registration_failed" {{#ifCond this.reminder_type '==' 'customer_registration_failed'}} selected {{/ifCond}}> Registration Payment Failed</option>
+             <option value="customer_unvisited" {{#ifCond this.reminder_type '==' 'customer_unvisited'}} selected {{/ifCond}}> Customer Unvisited</option>
+             <option value="new_customer_guidance" {{#ifCond this.reminder_type '==' 'new_customer_guidance'}} selected {{/ifCond}}> New Customer Guidance</option>
+             <option value="trial_to_paid" {{#ifCond this.reminder_type '==' 'trial_to_paid'}} selected {{/ifCond}}> Trial To Paid</option>
+             <option value="coupon_code_for_trial" {{#ifCond this.reminder_type '==' 'coupon_code_for_trial'}} selected {{/ifCond}}> Coupon Code For Trial Or Canceled Users</option>
+		</select>
+		</div>
+		<div class="col-md-6 mb-2 input">
+			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}<span class="required red">*</span></label>
+            <select id="reminder_template" required="" class="form-control select2" name="reminder_template">
+            <option value="reminder_template ">Select</option>
+			<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>            
+			<option value="profile_update" {{#ifCond this.reminder_template '==' 'profile_update'}} selected {{/ifCond}}> User Profile Update</option>
+            <option value="account_delete" {{#ifCond this.reminder_template '==' 'account_delete'}} selected {{/ifCond}}> Account Delete</option>
+            <option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>
+            <option value="add_notice" {{#ifCond this.reminder_template '==' 'add_notice'}} selected {{/ifCond}}>Add EMI</option>
+            <option value="update_notice" {{#ifCond this.reminder_template '==' 'update_notice'}} selected {{/ifCond}}> Update EMI</option>
+            <option value="add_invoice" {{#ifCond this.reminder_template '==' 'add_invoice'}} selected {{/ifCond}}> Add Invoice</option>
+            <option value="add_support" {{#ifCond this.reminder_template '==' 'add_support'}} selected {{/ifCond}}> Add Support Ticket</option>
+            <option value="registration_failed" {{#ifCond this.reminder_template '==' 'registration_failed'}} selected {{/ifCond}}> Registration Failed</option>
+            <option value="invoice_pending" {{#ifCond this.reminder_template '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
+        </select>
+       </div>
+		<div class="col-md-6">
+        <div class="form-group input">
+        <div class="col-md-12 form-control border-light textarea_css">
+             <div class="form-field">
+                 <input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}" {{/if}}>
+                 <textarea name="reminder_desc" data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message='{{__ "Only Characters, no numbers"}}' {{#if this.reminder_desc}} value="{{this.reminder_desc}}" {{/if}}>{{this.reminder_desc}}</textarea>
+                  <span class="txt-title-label"></span>
+                  <label class="text-area address">{{#with ..}}{{__ "Description" setlang}}{{/with}}</label>
+              </div>
+               </div><div class="help-block"></div>
+         </div>
+        </div>
+   </div> 
+	<p class="form-section text-bold-600 font-medium-3 border-light"><i class="ft-clock font-medium-2 mr-1"></i>{{#with ..}}{{__ "Reminder Time" setlang}}{{/with}}</p>	
+      <div class="addTime">
+        <div class="row reminder_div ">         	
+ 		<div class="col-md-3">
+          <div class="form-group">
+          <div class="col-md-12 form-control">
+          <div class="skin skin-flat row">
+           <div class="input-group">
+            <label class="custom-control-label custom-top-label ml-2">{{#with ..}}{{__ "Reminder Time" setlang}}{{/with}}<span class="red">*</span></label>
+             <div class="d-inline-block custom-control custom-radio mr-1">
+				<input type="radio" name="reminder_will_send" class="custom-control-input " {{#ifCond this.reminder_will_send '==' 'Before'}} checked="" value="{{this.reminder_will_send}}" {{/ifCond}} value="Before"  id="yes">
+				 <label class="custom-control-label mr-1 " for="yes">{{#with ..}}{{__ "Before" setlang}}{{/with}}</label>
+				<input type="radio" name="reminder_will_send" class="custom-control-input" {{#ifCond this.reminder_will_send '==' 'After'}} checked="" value="{{this.reminder_will_send}}" {{/ifCond}} value="After"  id="no">
+                <label class="custom-control-label" for="no">{{#with ..}}{{__ "After" setlang}}{{/with}}</label>
+			</div> 
+            </div>
+			</div>
+		</div>
+		</div>
+		</div>	 
+				<div class="form-group col-md-9 mb-2 contact-repeater pl-0">
+					<div data-repeater-list="reminderdata">
+					{{#each this.reminderdata}}
+						<div class="row" data-repeater-item>  
+							<div class="col-md-4 notCustomerBlock">
+							        <div class="form-group input">
+									<input class="col-md-12 form-control t_d valid mb-2"  type="number" min="1" name="number"  aria-invalid="false" {{#if this.number}} value="{{this.number}}" {{/if}}>
+									</div>
+						    </div> 
+							<div class="col-md-4 notCustomerBlock ">
+								<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Select Days" setlang}}{{/with}}<span class="required red">*</span></label> 
+								<select class="select1 form-control t_t valid  mb-2" name="recurense"  id="recurense"> 				 
+									<option value="days"  {{#ifCond this.recurense '==' 'days'}} value="{{this.recurense}}" selected {{/ifCond}}>Day(s)</option>
+									<option value="week" {{#ifCond this.recurense '==' 'week'}} value="{{this.recurense}}" selected {{/ifCond}}>Week(s)</option>
+									<option value="months" {{#ifCond this.recurense '==' 'months'}} value="{{this.recurense}}" selected {{/ifCond}}>Month(s)</option>
+									<option  value="years" {{#ifCond this.recurense '==' 'years'}} value="{{this.recurense}}" selected {{/ifCond}}>Year(s)</option> 
+								</select> 
+					        </div>  
+							<div class="col-md-4 notCustomerBlock"> 
+								  <div class="input-group-append"> 
+								  <span class="input-group-btn" id="button-addon2">
+								  <button class="btn btn-danger mb-2" type="button" data-repeater-delete><i class=" ft-x"></i></button>
+									</span> 
+			                      </div> 
+                            </div>  
+							</div>
+							{{/each}}
+                        </div>
+						<button type="button" data-repeater-create id="repeater-button"  class="btn btn-secondary "><i class="icon-plus4"></i> {{#with ..}}{{__ "Add More" setlang}}{{/with}}
+                        </button>
+                </div>
+	    </div>
+	 </div>   
+			<div class="form-actions left">
+				<button type="submit" class="btn btn-secondary" >
+					<i class="fa fa-check-square-o"></i> {{#with ..}}{{__ "Submit" setlang}}{{/with}} 
+				</button> 
+				<button type="reset" class="btn btn-warning">
+					<i class="ft-refresh-cw"></i>  {{#with ..}}{{__ "Reset" setlang}}{{/with}} 
+				</button>
+			</div> 
+			{{/each}}
+	</div>   
+	</form>
+	</div>
+	</div>
+	</div>
+    </div>
+</div>
+</div>
+</div>
+ <script type="text/javascript">
+ <!-- $("#repeater-button").click(function(){ -->
+        <!-- setTimeout(function(){ -->
+ 
+            <!-- $(".select2").select2({ -->
+                <!-- placeholder: "", -->
+                <!-- allowClear: true -->
+            <!-- });     -->
+                  
+        <!-- }, 100); -->
+    <!-- });     -->
+ 
+ 
+    <!-- $( document ).ready(function() { -->
+    <!-- $(".select2").select2({  -->
+        <!-- placeholder: "",  -->
+        <!-- allowClear: true  -->
+    <!-- });  -->
+<!-- }); -->
+     
+ 
+</script> 

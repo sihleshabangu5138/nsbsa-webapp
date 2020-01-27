@@ -1,0 +1,134 @@
+{{breadcrums 'Home' 'Add EMI'}}
+<div class="app-content center-layout mt-2 mx-md-3 px-1">
+    <div class="content-wrapper">
+	<div class="row">
+	<div class="col-md-12">
+	<div class="card">
+	<div class="card-header pb-0 border-bottom border-light">
+		
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+	</div>
+	<div class="card-content collpase show">
+	<div class="card-body">
+	{{#each loan}}
+		<form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/addemi" >
+			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{__ "Your loan details"}}</p>
+			<div class="row">
+			<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light">
+					<input type="text" name="loancount" id="readonlyInput" readonly="readonly" class="form-control" aria-invalid="false" {{#if this.loancount}} value="{{this.loancount}}"{{/if}}>
+					<label for="userinput4">{{__ "Loan No."}}</label>
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			{{#each ../type as |result|}}
+			<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light">
+					<input type="text" name="loantype" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if result.type}} value="{{result.type}}"{{/if}}>
+					<label for="userinput4">{{__ "Loan Type"}}</label>
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			{{/each}}
+			
+			</div>
+			{{/each}}
+			{{#each data}}
+			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{__ "Your EMI information according to your loan period"}}</p>
+			<div class="row">
+			<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light">
+				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
+					<input type="text" name="month_on" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.month}} value="{{this.month}}"{{/if}}>
+					<label for="userinput4">{{__ "This EMI Month"}}</label>
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light">
+					<input type="text" name="month_on" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.remainingBalance}} value="{{this.remainingBalance}}"{{else}} value="0"{{/if}}>
+					<label for="userinput4">{{__ "Amount Remaining"}}</label>
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+			<div class="form-group row">
+			<div class="col-md-12">
+
+			<label class="custom-control-label-date ml-2">{{__ "EMI Start Date"}}<span class="required red">*</span></label>
+			<input type='text' id="readonlyInput" readonly="readonly" class="form-control startdate "  data-validation-required-message="Start Date is required" name="emistartdate" {{#if this.date}} value="{{this.date}}"{{/if}}><i class="ft-calendar icon-care"></i> 
+				
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			<div class="col-md-6">
+			<div class="form-group row">
+			<div class="col-md-12">
+
+			<label class="custom-control-label-date ml-2">{{__ "EMI Due Date"}}<span class="required red">*</span></label>
+			<input type='text'  class="form-control enddate" id="readonlyInput" readonly="readonly" name="emienddate" {{#if this.emienddate}} value="{{this.emienddate}}"{{/if}}><i class="ft-calendar icon-care"></i> 
+				
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light">
+					<input type="text" name="emipermonth" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.principal}} value="{{this.principal}}"{{/if}}>
+					<label for="userinput4">{{__ "EMI Amount for this month"}}</label>
+				</div><div class="help-block"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group input">
+				<div class="col-md-12 form-control border-light">
+					<input type="text" name="interest" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.interest}} value="{{this.interest}}"{{/if}}>
+					<label for="userinput4">{{__ "Interest Rate for this month"}}</label>
+				</div><div class="help-block"></div>
+				</div>
+			</div>			
+			</div>
+			{{/each}}
+			<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Payment Method"}}</p>
+		
+		<div class="form-body user_form">
+			<div class="row">
+			<div class="col-md-6 notCustomerBlock">
+				<div class="form-group input">
+					<div class="heading-elements ">
+					<ul class="list-inline mb-0">
+					<li class="col-md-12 p-0 form-control" id="export">
+						<select class="select2 form-control export" name="paytype" >
+						<option>{{__ "Select your payment mode"}}</option>
+						<option value="cash" {{#ifCond this.paytype '==' 'cash'}} selected {{/ifCond}}>Cash</option>
+						<option value="creditcard" {{#ifCond this.paytype '==' 'creditcard'}} selected {{/ifCond}}>Credit card</option>
+						<option value="debitcard"{{#ifCond this.paytype '==' 'debitcard'}} selected {{/ifCond}}>Debit Card</option>
+						<option value="netbanking"{{#ifCond this.paytype '==' 'netbanking'}} selected {{/ifCond}}>Net Banking</option>
+						</select>
+					</li>	
+					</ul>
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+			<div class="form-actions left">
+				<button type="submit" class="btn btn-secondary">
+					<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
+				</button>
+				<button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
+					<i class="ft-refresh-cw"></i> {{__ "Reset"}}
+				</button>
+			</div>
+		</form>	
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
