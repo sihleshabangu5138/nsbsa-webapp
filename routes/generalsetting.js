@@ -12,7 +12,7 @@ var lang = require('./languageconfig');
 router.use(lang.init);
 //var lang = require('./languageconfig');
 //router.use(lang.init);  
-  var path = require('path');
+var path = require('path');
   
   // FOR IMAGE SAVE
 var multer  =   require('multer');
@@ -29,9 +29,9 @@ var storage =   multer.diskStorage({
 	},
 	filename: function (req, file, callback) {
 		callback(null, Date.now()+ '-' +file.originalname );
-		var xyz = db.get();
-		//var myquery ={"_id": ObjectId(id)}; console.log(myquery); console.log("fffffffffffffffff");
-		xyz.collection("Generalsetting").find().toArray(function(err, result) {
+		var dbo = db.get();
+		//var myquery ={"_id": ObjectId(id)}; 
+		dbo.collection("Generalsetting").find().toArray(function(err, result) {
 			
 			//var jpg = result[0].imgtype_jpg;
 			//var jpeg = result[0].imgtype_jpeg;
@@ -60,30 +60,30 @@ router.use(flash());
 router.route('/:id?')
 .get(isAuthenticated,function (req, res) {
     var languages = lang.getLocale();
-	var xyz = db.get();
+	var dbo = db.get();
 	var id = req.params.id;
-	 //console.log(req.session);
     if (id){
 			var myquery ={"_id": ObjectId(id)}; 
-			var xyz=db.get();
+			var dbo=db.get();
 			
-			xyz.collection("Generalsetting").find(myquery).toArray(function(err, result) {
+			dbo.collection("Generalsetting").find(myquery).toArray(function(err, result) {
 				
 				fs.readFile('public/data/countries.json', function(err, data) { 
 					var jsonData = data;
 					var jsonParsed = JSON.parse(jsonData);
+						
+			dbo.collection("customfields").find().toArray(function(err, customfield) {
 				
-				
-					res.render('generalsettings/generalsetting', {title:"General Settings", data: result,id:id,session:req.session,country:jsonParsed.countries,messages:req.flash(),setlang:languages}); 
+					res.render('generalsettings/generalsetting', {title:"General Settings", data: result,id:id,session:req.session,country:jsonParsed.countries,messages:req.flash(),setlang:languages, newfield:customfield}); 
 				});
-				
+				});
 			});
 			}
-	
 	else{ 
         var news = [{'userid':'-1'}];
-
-        res.render('generalsettings/generalsetting', { data: news,session:req.session});
+		dbo.collection("customfields").find().toArray(function(err, customfield) {
+			res.render('generalsettings/generalsetting', { data: news,session:req.session, newfield:customfield});
+		});
     }
 	
 })
@@ -91,7 +91,6 @@ router.route('/:id?')
  
 .post(upload.single('company_logo'), isAuthenticated, function (req, res){ 
 	var id1 =req.body.id;
-	 // console.log(req.body);
 	if(id1){ 
 	  	var updt_id ={"_id": ObjectId(id1)}; 
 		var dbo = db.get();
@@ -110,7 +109,6 @@ router.route('/:id?')
 			 */ 
 			/* if (!req.file.originalname.match(/\.(jpg|jpeg|png)$/))
 			{
-				console.log("ddddddddddddddddddddddddddddddddd");
 			} */
 			
 			
@@ -157,16 +155,17 @@ router.route('/:id?')
 		state:parseInt(req.body.state,10),
 		city:parseInt(req.body.city,10),
 		doctype_Pdf: req.body.doctype_Pdf,
+		doctype_Xlsx: req.body.doctype_Xlsx,
 		doctype_Xls: req.body.doctype_Xls,
+		doctype_Zip: req.body.doctype_Zip,
 		doctype_Doc: req.body.doctype_Doc,
-		doctype_Docx: req.body.doctype_Docx,
-		
+		doctype_Docx: req.body.doctype_Docx,		
 		}}; 
 		 
 			//update for company details.
 			dbo.collection("Generalsetting").updateOne(updt_id, newvalues, function(err, result) {
 				if (err) {  
-					req.flash('error','Error occured in Settings.');
+					req.flash('error',lang.__('Error occured in Settings.'));
 					res.redirect('/generalsettings/generalsetting/'+id1);
 				 }
 				else{ 
@@ -175,7 +174,7 @@ router.route('/:id?')
 					
 						req.session.company_logo=logo;
 						req.session.generaldata=data1[0];	
-						req.flash('success','Company Details Updated Successfully.');
+						req.flash('success',lang.__('Company Details Updated Successfully.'));
 						res.redirect('/generalsettings/generalsetting/'+id1);
 					
 					});
@@ -198,7 +197,7 @@ router.route('/:id?')
 				 
 				
 				if (err) {  
-					req.flash('error','Error occured in Settings.');
+					req.flash('error',lang.__('Error occured in Settings.'));
 					res.redirect('/generalsettings/generalsetting/'+id1);
 				 }
 				else{ 
@@ -209,7 +208,7 @@ router.route('/:id?')
 						req.session.generaldata=data1[0];	 
 						res.cookie('locale', data1[0].language, { maxAge: 90000000, httpOnly: true });
 						
-						req.flash('success','Localization Updated Sucessfully.');
+						req.flash('success',lang.__('Localization Updated Sucessfully.'));
 						res.redirect('/generalsettings/generalsetting/'+id1);
 					
 					});
@@ -231,7 +230,7 @@ router.route('/:id?')
 			//update for company details.
 			dbo.collection("Generalsetting").updateOne(updt_id, fin, function(err, result) {
 				if (err) {  
-					req.flash('error','Error occured in Settings.');
+					req.flash('error',lang.__('Error occured in Settings.'));
 					res.redirect('/generalsettings/generalsetting/'+id1);
 				 }
 				else{ 
@@ -240,7 +239,7 @@ router.route('/:id?')
 					
 						req.session.company_logo=data1[0].company_logo;
 						req.session.generaldata=data1[0];	
-						req.flash('success','Finance Updated Successfully.');
+						req.flash('success',lang.__('Finance Updated Successfully.'));
 						res.redirect('/generalsettings/generalsetting/'+id1);
 					
 					});
@@ -263,7 +262,7 @@ router.route('/:id?')
 			//update for company details.
 			dbo.collection("Generalsetting").updateOne(updt_id, inv, function(err, result) {
 				if (err) {  
-					req.flash('error','Error occured in Settings.');
+					req.flash('error',lang.__('Error occured in Settings.'));
 					res.redirect('/generalsettings/generalsetting/'+id1);
 				 }
 				else{ 
@@ -272,7 +271,7 @@ router.route('/:id?')
 					
 						req.session.company_logo=data1[0].company_logo;
 						req.session.generaldata=data1[0];	
-						req.flash('success','Invoice Updated Successfully.');
+						req.flash('success',lang.__('Invoice Updated Successfully.'));
 						res.redirect('/generalsettings/generalsetting/'+id1);
 					
 					});
@@ -310,14 +309,14 @@ router.route('/:id?')
 			//update for company details.
 			dbo.collection("Generalsetting").updateOne(updt_id, pdf, function(err, result) {
 				if (err) {  
-					req.flash('error','Error occured in Settings.');
+					req.flash('error',lang.__('Error occured in Settings.'));
 					res.redirect('/generalsettings/generalsetting/'+id1);
 				 }
 				else{ 
 					dbo.collection("Generalsetting").find(updt_id).toArray(function(err, data1) {
 						req.session.company_logo=data1[0].company_logo;
 						req.session.generaldata=data1[0];	
-						req.flash('success','PDF Settings Updated Successfully.');
+						req.flash('success',lang.__('PDF Settings Updated Successfully.'));
 						res.redirect('/generalsettings/generalsetting/'+id1);
 					
 					});
@@ -328,15 +327,30 @@ router.route('/:id?')
 })
    
 function isAuthenticated(req, res, next) {
-	 
+	var dbo = db.get();
 	if (req.session.username != undefined) {
-		 return next();
-
-		
-	} else {
+		if(req.session.admin_access == 1){
+			 return next();
+		}
+		else{
+			var query = {"rolename":req.session.role_slug};
+			dbo.collection("Access_Rights").find(query).toArray(function(err, result) {
+				if(result[0].access_type != undefined){
+					if(result[0].access_type.generalsetting != undefined){
+						if(result[0].access_type.generalsetting.view != undefined){
+							return next();
+						}
+					}
+				}
+				else{
+					res.redirect('/dashboard');	
+				}
+			});
+		}
+	}
+	else {
 		res.redirect('/');	
 	}
-	
 };
 
 module.exports = router;

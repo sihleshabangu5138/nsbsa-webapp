@@ -1083,7 +1083,9 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu-footer .content {
     height: auto;
     border: 0 none;
     border-radius: 1000px; }
-
+	.roundimage img{
+		height: -webkit-fill-available;
+	}
 .avatar-online i {
   background-color: #16D39A; }
 

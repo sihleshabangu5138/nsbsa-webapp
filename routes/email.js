@@ -16,6 +16,7 @@ function sendMail(to,subject,message)
    var mailOptions = {
       from: '"EWS" <sender@gmail.com>', // sender address
       to: to, // list of receivers
+	  headers:{ 'X-MC-AutoHtml':"true"},
       subject: subject, // Subject line
       text: 'Hello world ?', // plaintext body
       html: message // html body

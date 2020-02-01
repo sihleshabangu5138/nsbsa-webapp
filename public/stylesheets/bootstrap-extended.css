@@ -712,9 +712,11 @@ button, html [type='button'], [type='reset'], [type='submit'] {
         letter-spacing: 1px; }
   .header-navbar .navbar-container {
     padding: 0rem 18px;
-    height: 4rem;
+    height: 4rem; 
+    transition: 300ms ease all;
 	margin: 0px auto;
-    transition: 300ms ease all; }
+    /*background: inherit; */}
+ 
     .header-navbar .navbar-container ul.nav li > a.nav-link {
       padding: 1.4rem 0.6rem; }
       .header-navbar .navbar-container ul.nav li > a.nav-link i.flag-icon {

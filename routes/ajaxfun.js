@@ -3,28 +3,54 @@ var router = express.Router();
 var db = require('./mongo_db');
 var ObjectId = require('mongodb').ObjectId;
 var fs = require('fs');
-var Mail = require('./email');
+var Mail = require('./email');  
+var functions = require('../helpers/function');
+var moment = require('moment');
  
 
 /* GET users listing. */
 router.get('/',isAuthenticated, function(req, res, next) {
-	// var dbo = db.get();
-	
 	var dbo = db.get("BankingSystem");
 	var query ={status : 1};
-	
-	dbo.collection("Users").find(query).toArray(function(err, result) {
+
+	/*dbo.collection("Users").find(query).toArray(function(err, result) {
 		if (err) throw err;
-		// res.setHeader('Content-Type', 'application/json');
-		
+
+		for (const [key,value] of Object.entries(result)) {
+			var birthdate_f=functions.getdate(value.birthdate,req.session.generaldata.date_format);
+			result[key].birthdate = birthdate_f;
+			
+		}
+		//console.log(result);
 		res.json(result);
-		//res.json({ data: result });
-	});
-  });
- 
-router.get('/deactivateuser',isAuthenticated, function(req, res, next) {
-	// var dbo = db.get();
+	});*/
 	
+	dbo.collection("Users").aggregate([
+		{
+			$lookup:{
+				from : 'Role',
+				localField : 'role',
+				foreignField : '_id',
+				as : 'role_nm'
+			}
+		},
+		{
+			$unwind : '$role_nm'
+		}
+	]).toArray(function(err,result){
+		if(err) throw err;
+		
+		for (const [key,value] of Object.entries(result)) {
+			var birthdate_f=functions.getdate(value.birthdate,req.session.generaldata.date_format);
+			result[key].birthdate = birthdate_f;
+			
+		}
+		//console.log(result);
+		res.json(result);
+	})
+});
+
+router.get('/deactivateuser',isAuthenticated, function(req, res, next) {
 	var dbo = db.get("BankingSystem");
 	var query ={status : 0};
 	
@@ -47,7 +73,33 @@ router.get('/delete/',isAuthenticated, function(req, res) {
 		}
 
 	dbo.collection("Users").updateOne(myquery, newvalues, function(err, result) {
-		
+		var date = Date(Date.now());
+		var formatdate = moment(date).format("YYYY-MM-DD");
+		dbo.collection("Users").find(myquery).toArray(function(err, useresult) {
+			dbo.collection("notificationtemplate").find({templatetitle:"user deleted"}).toArray(function(err, notification) {
+			for (const [key,value] of Object.entries(notification)){
+			for (const [key1,value1] of Object.entries(useresult)){
+				var message = value.content;
+				var subject = value.subject;
+				var Obj = {
+					'_USERFIRSTNAME_': value1.firstname,
+					'_USERLASTNAME_': value1.lastname,
+					'_DATETIME_' : formatdate,
+					'_newline_': '<br>',
+					'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+					'_systemname_':req.session.generaldata.com_name,
+					};
+				var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_DATETIME_|_newline_|_tab_|_systemname_/gi, function(matched){
+					return Obj[matched]; 
+				});
+				var subtrans=subject.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_DATETIME_|_newline_|_tab_|_systemname_/gi, function(matched){
+					return Obj[matched]; 
+				});
+				Mail.sendMail(value1.email,subtrans,trans);
+				};
+				};
+			});
+		});
         if (err) {
            res.json(false);
         } 
@@ -75,13 +127,65 @@ router.get('/deleteloan/',isAuthenticated, function(req, res) {
 		}
 	});
 });
-router.get('/roles', isAuthenticated,function(req, res) { 
+router.get('/deletenoti',isAuthenticated, function(req, res) { 	
 	var dbo = db.get("BankingSystem");
-	dbo.collection("Role").find({}).toArray(function(err, result) {
+	dbo.collection("notification_badges").remove({});
+});
+router.get('/roles', isAuthenticated,function(req, res) {
+	
+	var dbo = db.get("BankingSystem");
+	var query = {status:0}
+	dbo.collection("Role").find(query).toArray(function(err, result) {
 		if (err) throw err;
-		
 		res.json(result);
 });
+});
+router.get('/customfields', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	dbo.collection("customfields").find({}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result);
+});
+});
+
+router.get('/category', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	dbo.collection("category").find({}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result);
+});
+});
+
+router.get('/service', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	dbo.collection("service").find({}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result);
+});
+});
+
+router.get('/product', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	dbo.collection("product").find({}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result);
+});
+});
+
+router.get('/events', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	dbo.collection("events").find({}).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result);
+});
+});
+
+router.post('/addcategorytype', isAuthenticated, function(req, res) {
+	var dbo = db.get("BankingSystem");
+	var data = {category_type:req.body.cat_type};
+	dbo.collection("categorytypes").insertOne(data, function(err, result) {
+		if (err) throw err;
+	});
 });
 
 router.get('/reminder', isAuthenticated,function(req, res) { 
@@ -109,6 +213,16 @@ router.get('/rules', isAuthenticated,function(req, res) {
 		res.json(result);
 });
 });
+
+router.get('/notes', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	dbo.collection("notes").find({}).toArray(function(err, result) {
+		if (err) throw err;
+		
+		res.json(result);
+});
+});
+
 router.get('/notificationtemplate', isAuthenticated,function(req, res) { 
 	var dbo = db.get("BankingSystem");
 	dbo.collection("notificationtemplate").find({}).toArray(function(err, result) {
@@ -123,29 +237,265 @@ router.get('/rules/delete', isAuthenticated,function(req, res) {
 	
 	var myquery = { _id: id };
 	dbo.collection("Rule").remove({_id: new ObjectId(id)}, function(err, result){
-        if (err) {
-           
+	if (err) {
+           res.json(false);
         } 
 		else{
-			res.json("done");
+			res.json(true);
 		}
 		 								
 	}); 
 });
+router.get('/events/delete', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	var id = req.query._id;
+	var myquery = { "_id":ObjectId(id) };
+		dbo.collection("events").find(myquery).toArray(function(err, eventresult) {
+			if(eventresult[0].eventfor == "all"){
+				var queries = {"status":1};
+				dbo.collection("Users").find(queries).toArray(function(err, useresult) {
+				if(eventresult[0].duration == "one day"){
+					dbo.collection("notificationtemplate").find({templatetitle:"one day event deleted"}).toArray(function(err, notification) {
+					for (const [key,value] of Object.entries(notification)){
+					for (const [key1,value1] of Object.entries(useresult)){
+						var message = value.content;
+						var subject = value.subject;
+						var Obj = {
+								'_USERFIRSTNAME_': value1.firstname, 
+								'_USERLASTNAME_': value1.lastname, 
+								'_EVENTDURATION_': eventresult[0].duration, 
+								'_EVENTSTARTDATE_': eventresult[0].startdate,
+								'_EVENTNAME_': eventresult[0].eventtitle, 
+								'_EVENTVENUE_': eventresult[0].eventvenue,  
+								'_newline_': '<br>',
+								'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+								'_systemname_':req.session.generaldata.com_name,
+							};
+						var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+						var subtrans=subject.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+						Mail.sendMail(value1.email,subtrans,trans);
+						};
+						};
+					});
+				}
+				else{
+					dbo.collection("notificationtemplate").find({templatetitle:"multiple day event deleted"}).toArray(function(err, notification) {
+					for (const [key,value] of Object.entries(notification)){
+					for (const [key1,value1] of Object.entries(useresult)){
+						var message = value.content;
+						var subject = value.subject;
+						var Obj = {
+								'_USERFIRSTNAME_': value1.firstname, 
+								'_USERLASTNAME_': value1.lastname, 
+								'_EVENTDURATION_': eventresult[0].duration, 
+								'_EVENTSTARTDATE_': eventresult[0].startdate, 
+								'_EVENTENDDATE_': eventresult[0].enddate, 
+								'_EVENTNAME_': eventresult[0].eventtitle, 
+								'_EVENTVENUE_': eventresult[0].eventvenue,  
+								'_newline_': '<br>',
+								'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+								'_systemname_':req.session.generaldata.com_name,
+							};
+						var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_EVENTENDDATE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+						var subtrans=subject.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_EVENTENDDATE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+						Mail.sendMail(value1.email,subtrans,trans);
+						};
+						};
+				});
+			}
+			});
+			}
+			else{
+				var mailquery = { $and: [ {"role":ObjectId(eventresult[0].eventfor)} , {"status":1} ] };
+				dbo.collection("Users").find(mailquery).toArray(function(err, useresult) {		
+				if(req.body.duration == "one day"){
+					dbo.collection("notificationtemplate").find({templatetitle:"one day event deleted"}).toArray(function(err, notification) {
+					for (const [key,value] of Object.entries(notification)){
+					for (const [key1,value1] of Object.entries(useresult)){
+						var message = value.content;
+						var subject = value.subject;
+						var Obj = {
+								'_USERFIRSTNAME_': value1.firstname, 
+								'_USERLASTNAME_': value1.lastname, 
+								'_EVENTDURATION_': eventresult[0].duration, 
+								'_EVENTSTARTDATE_': eventresult[0].startdate, 
+								'_EVENTENDDATE_': eventresult[0].enddate, 
+								'_EVENTNAME_': eventresult[0].eventtitle, 
+								'_EVENTVENUE_': eventresult[0].eventvenue,  
+								'_newline_': '<br>',
+								'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+								'_systemname_':req.session.generaldata.com_name,
+							};
+						var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_EVENTENDDATE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+						var subtrans=subject.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_EVENTENDDATE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+						Mail.sendMail(value1.email,subtrans,trans);
+						};
+						};
+					});
+				}			
+				else{
+				dbo.collection("notificationtemplate").find({templatetitle:"multiple day event deleted"}).toArray(function(err, notification) {
+				for (const [key,value] of Object.entries(notification)){
+				for (const [key1,value1] of Object.entries(useresult)){
+					var message = value.content;
+					var subject = value.subject;
+					var Obj = {
+							'_USERFIRSTNAME_': value1.firstname, 
+							'_USERLASTNAME_': value1.lastname, 
+							'_EVENTDURATION_': eventresult[0].duration, 
+							'_EVENTSTARTDATE_': eventresult[0].startdate, 
+							'_EVENTENDDATE_': eventresult[0].enddate, 
+							'_EVENTNAME_': eventresult[0].eventtitle, 
+							'_EVENTVENUE_': eventresult[0].eventvenue,  
+							'_newline_': '<br>',
+							'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+							'_systemname_':req.session.generaldata.com_name,
+							};
+						var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_EVENTENDDATE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+						var subtrans=subject.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_EVENTDURATION_|_EVENTNAME_|_EVENTSTARTDATE_|_EVENTVENUE_|_EVENTENDDATE_|_newline_|_tab_|_systemname_/gi, function(matched){
+							return Obj[matched]; 
+						});
+					Mail.sendMail(value1.email,subtrans,trans);
+					};
+					};
+				});	
+				}	
+				});	
+			}
+	dbo.collection("events").remove({_id: new ObjectId(id)}, function(err, result){
+         if (err) {
+           res.json(false);
+        } 
+		else{
+			res.json(true);
+		}
+	}); 
+	
+});
+});
+router.get('/customfield/delete', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	var id = req.query._id;
+	
+	var myquery = { _id: id };
+	dbo.collection("customfields").remove({_id: new ObjectId(id)}, function(err, result){
+         if (err) {
+           res.json(false);
+        } 
+		else{
+			res.json(true);
+		}
+		 								
+	}); 
+});
+router.get('/notes/delete', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	var id = req.query._id;
+	
+	var myquery = { _id: id };
+	dbo.collection("notes").remove({_id: new ObjectId(id)}, function(err, result){
+        if (err) {
+           res.json(false);
+        } 
+		else{
+			res.json(true);
+		}
+		 								
+	}); 
+});
+router.get('/category/delete', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	var id = req.query._id;
+	
+	var myquery = { _id: id };
+	dbo.collection("category").remove({_id: new ObjectId(id)}, function(err, result){
+        if (err) {
+           res.json(false);
+        } 
+		else{
+			res.json(true);
+		}							
+	}); 
+});
  
+router.post('/clearlog', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	var date = Date(Date.now());
+	var myobjs = { 
+			module: "Log",
+			date:formatdate,
+			action: "cleared",
+			user: ObjectId(req.session.user_id),
+			item: "activitylog",
+		};
+	var formatdate = moment(date).format("YYYY-MM-DD");
+	dbo.collection("activitylog").remove({});
+	
+			
+	dbo.collection("activitylog").insertOne(myobjs , function(err, activity) {
+        if (err) {    
+			 res.json(false);
+        } 
+		else{
+			res.json(true);
+		}
+});
+});
+ 
+router.get('/service/delete', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	var id = req.query._id;
+	
+	var myquery = { _id: id };
+	dbo.collection("service").remove({_id: new ObjectId(id)}, function(err, result){
+         if (err) {
+           res.json(false);
+        } 
+		else{
+			res.json(true);
+		}							
+	}); 
+});
+
+router.get('/product/delete', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	var id = req.query._id;	
+	var myquery = { _id: id };
+	dbo.collection("product").remove({_id: new ObjectId(id)}, function(err, result){
+        if (err) {
+           res.json(false);
+        } 
+		else{
+			res.json(true);
+		}							
+	}); 
+});
 router.get('/roles/delete', isAuthenticated,function(req, res) { 
 	var dbo = db.get("BankingSystem");
 	var id = req.query._id;
 	
 	var myquery = { _id: id };
 	dbo.collection("Role").remove({_id: new ObjectId(id)}, function(err, result){
-        if (err) {
-           
+         if (err) {
+           res.json(false);
         } 
 		else{
-			res.json("done");
-		}
-		 								
+			res.json(true);
+		}								
 	}); 
 });
 router.get('/reminder/delete', isAuthenticated,function(req, res) { 
@@ -155,37 +505,102 @@ router.get('/reminder/delete', isAuthenticated,function(req, res) {
 	var myquery = { _id: id };
 	dbo.collection("Reminder").remove({_id: new ObjectId(id)}, function(err, result){
         if (err) {
-           
+           res.json(false);
         } 
 		else{
-			res.json("done");
-		}	 								
+			res.json(true);
+		} 								
 	}); 
 });
 
 router.get('/loanlist', isAuthenticated,function(req, res) {
-
-// console.log("ffffffffff");
 	var dbo = db.get("BankingSystem");
+	var id = req.query._id;
 	var query = { $and: [ {status : 1 },{approvestatus : 1 }] };
-	dbo.collection("loan_details").find(query).toArray(function(err, result) {
-		if (err) throw err;
+	/*dbo.collection("loan_details").find(query).toArray(function(err, result) {
+		if (err) throw err;				
 		res.json(result);
-});
+	});*/
+	
+	dbo.collection("loan_details").aggregate([
+		{
+			$lookup:{
+				from: "loantype",
+				localField: "loantype", 
+				foreignField: "_id", 
+				as: "loan" 
+			}
+		},
+		{ 
+			$unwind: "$loan" 
+		},
+		{
+			$lookup:{
+				from: "Users", 
+				localField: "user", 
+				foreignField: "_id", 
+				as: "user" 
+			}
+		},
+		{ 
+			$unwind: "$user" 
+		},
+		{
+			$match:{
+				$and: [ {status : 1 },{approvestatus : 1 }]
+			}
+		}
+	]).toArray(function(err, result) {
+		if (err) throw err;
+		
+		res.json(result);
+	});
 });
 
-router.get('/disapproveloan', isAuthenticated,function(req, res) { 
-// console.log("ffffffffff");
+router.get('/disapproveloan', isAuthenticated,function(req, res) {
 	var dbo = db.get("BankingSystem");
 	var query = { $and: [ {status : 1 },{approvestatus : 0 }] };
-	dbo.collection("loan_details").find(query).toArray(function(err, result) {
+	/*dbo.collection("loan_details").find(query).toArray(function(err, result) {
 		if (err) throw err;
+		res.json(result);  
+	});*/
+	
+	dbo.collection("loan_details").aggregate([
+		{
+			$lookup:{
+				from: "loantype",
+				localField: "loantype", 
+				foreignField: "_id", 
+				as: "loan" 
+			}
+		},
+		{ 
+			$unwind: "$loan" 
+		},
+		{
+			$lookup:{
+				from: "Users", 
+				localField: "user", 
+				foreignField: "_id", 
+				as: "user" 
+			}
+		},
+		{ 
+			$unwind: "$user" 
+		},
+		{
+			$match:{
+				$and: [ {status : 1 },{approvestatus : 0 }]
+			}
+		}
+	]).toArray(function(err, result) {
+		if (err) throw err;
+		
 		res.json(result);
-});
+	});
 });
 
-router.get('/loanlist/delete', isAuthenticated,function(req, res) { 
-// console.log("ffffffffff");
+router.get('/loanlist/delete', isAuthenticated,function(req, res) {
 	var dbo = db.get("BankingSystem");
 	var id = req.query._id;
 	
@@ -200,14 +615,12 @@ router.get('/loanlist/delete', isAuthenticated,function(req, res) {
 		 								
 	}); 
 });
-router.get('/loantypedesc', isAuthenticated,function(req, res) { 
-console.log("ffffffffff");
+router.get('/loantypedesc', isAuthenticated,function(req, res) {
 	var dbo = db.get("BankingSystem");
 	var id = req.query.loanid;
 	var myquery ={"_id": ObjectId(id)}; 
 	dbo.collection("loantype").find(myquery).toArray(function(err, result) {
 		if (err) throw err;
-		// console.log(result);
 		res.json({loantype:result});
 });
 });
@@ -215,6 +628,15 @@ router.get('/username', isAuthenticated,function(req, res) {
 	var dbo = db.get("BankingSystem");
 	var user = req.query.username;
 	var myquery ={"username": user}; 
+	dbo.collection("Users").find(myquery).toArray(function(err, result) {
+		if (err) throw err;
+		res.json(result);
+});
+});
+router.get('/duplicateemail', isAuthenticated,function(req, res) {
+	var dbo = db.get("BankingSystem");
+	var email = req.query.email;
+	var myquery ={"email": email}; 
 	dbo.collection("Users").find(myquery).toArray(function(err, result) {
 		if (err) throw err;
 		res.json(result);
@@ -252,12 +674,11 @@ router.get('/username', isAuthenticated,function(req, res) {
 			
 			var newvalues = {$set: { 
 				admin_access:value
-		}};
+			}};
 		}
 		
 		dbo.collection("Role").updateOne(myquery, newvalues, function(err, res) {
 			if (err) throw err;
-			console.log(" document(s) updated");
 		});
 	} 
 	else {  
@@ -274,7 +695,6 @@ router.get('/username', isAuthenticated,function(req, res) {
 		};
 		 dbo.collection("Role").insertOne(myobj, function(err, res) {
 			if (err) throw err;
-				console.log("1 document inserted");
 			});
 			res.redirect('/role/roles');
 	 }
@@ -285,9 +705,7 @@ router.get('/username', isAuthenticated,function(req, res) {
 	if(id){ 
 	  	var myquery ={"_id": ObjectId(id)}; 
 		var dbo = db.get();
-		
 		var name1 =req.body.name;
-		console.log(name1);
 		if(name1=='approvestatus'){
 			if('checked'==req.body.approvestatus){
 				var value= 1;
@@ -296,43 +714,50 @@ router.get('/username', isAuthenticated,function(req, res) {
 				var iduser = ObjectId(userid);
 				var loantype = result[0].loantype;
 				var typeid = ObjectId(loantype);
-				dbo.collection("Users").find(iduser).toArray(function(err, result) {
-					dbo.collection("notificationtemplate").find({templatetitle:"Loan Approved"}).toArray(function(err, notification) {
-					dbo.collection("loantype").find(typeid).toArray(function(err, typeloan) {
-						console.log(typeloan);
-						for (const [key,value] of Object.entries(notification)){
-						var message = value.content;
-						var subject = value.subject;
-							var Obj = {
-									'_USERFIRSTNAME_': result[0].firstname, 
-									'_USERLASTNAME_': result[0].lastname, 
-									'_LOANTYPE_': typeloan[0].type, 
-								};
-							var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_LOANTYPE_/gi, function(matched){ 
-								return Obj[matched]; 
-							});  
-							console.log(trans);
-				Mail.sendMail(result[0].email,subject,trans);	
-				};
-			});
-			});
-			});
-			});
+					dbo.collection("Users").find(iduser).toArray(function(err, result) {
+						dbo.collection("notificationtemplate").find({templatetitle:"Loan Approved"}).toArray(function(err, notification) {
+							dbo.collection("loantype").find(typeid).toArray(function(err, typeloan) {
+									for (const [key,value] of Object.entries(notification)){
+										var message = value.content;
+										var subject = value.subject;
+											var Obj = {
+													'_USERFIRSTNAME_': result[0].firstname, 
+													'_USERLASTNAME_': result[0].lastname, 
+													'_LOANTYPE_': typeloan[0].type, 
+												};
+											var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_LOANTYPE_/gi, function(matched){ 
+												return Obj[matched]; 
+											});  
+											
+										Mail.sendMail(result[0].email,subject,trans);	
+									};
+								 
+							});
+						});
+					});
+				}); 
 			}
 			else{
-				var value= 0;
+				var value= 0; 
 			}
 			var newvalues = {$set: { 
 				approvestatus:value
-		}};
-		console.log(newvalues);
+			}}; 
 		}
-		dbo.collection("loan_details").updateOne(myquery, newvalues, function(err, res) {
-			if (err) throw err;
-			// console.log(" document(s) updated");
+		dbo.collection("loan_details").updateOne(myquery, newvalues, function(err, result) {
+			if (err) { 
+				req.flash('error',('Error occured.'));
+				res.redirect('/loan/loanlist');
+			}
+			 else{ 
+				req.flash('success',('Loan Updated Sucessfully.'));
+				res.redirect('/loan/loanlist');
+				
+				
+			} 
 		});
-	}
-})
+    }
+});
 router.post('/state',isAuthenticated, function (req, res){
 	var id = req.body.countryId;
 	
@@ -379,7 +804,7 @@ router.post('/city',isAuthenticated, function (req, res){
 function isAuthenticated(req, res, next) {
 	
 	if (req.session.username != undefined) {
-		 return next();
+			return next();
 	} else {
 		res.redirect('/');	
 	}

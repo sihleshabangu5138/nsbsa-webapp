@@ -231,9 +231,10 @@
 					 {
                         field: "content",
                          title: "Content",
-                        width: 250
-                    },				
-					 
+                        width: 350
+                    },	
+					{{#ifCond session.admin_access "==" 0}}
+					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}} 
 					{
 						width: "100px",
 						command:
@@ -242,21 +243,10 @@
 								template : "<center>" 
 							},
 							
-							  { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "addnotificationtemplate/"<!--+id;-->
-								  return false;
-								} 
-							},   
 							{template : "&nbsp;" },
 							
 							/* Edit action start */
-							
+							{{#if accessrightdata.update }}
 							 { 	
 								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
 								click:function(e) 
@@ -268,13 +258,46 @@
 								  return false;
 								} 
 							},
-							
+							{{/if}}
 							{template : "&nbsp;" },
 							{template : "</center>" },
 							 
-							], title: "Action", 
+							],
+							{{#if accessrightdata.add }}
+							title: "Action", 
+							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							{{/if}}
+					}
+					{{/ifCondition}}
+					{{else}}
+						{
+						width: "100px",
+						command:
+						[
+							{
+								template : "<center>" 
+							},
+							{template : "&nbsp;" },
+							/* Edit action start */
+							 { 	
+								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
+								click:function(e) 
+								{ 
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id; 
+								  window.location.href = "addnotificationtemplate/"+id;
+								  return false;
+								} 
+							},
+							{template : "&nbsp;" },
+							{template : "</center>" },
+							 
+							],
+							title: "Action", 
 							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
 					}
+					{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"

@@ -4,24 +4,21 @@ var  i18n = require('i18n');
  
 
 i18n.configure({
-  locales: ['en','fr'], 
+  locales: ['en','fr','hi','sp'], 
   cookie: 'locale',
   directory:  "./locales",
 	register: global,
     extension: '.json',
 
    logDebugFn: function (msg) {
-        console.log('debug', msg); 
     },
 
     // setting of log level WARN - default to require('debug')('i18n:warn')
     logWarnFn: function (msg) {
-        console.log('warn', msg);
     },
 
     // setting of log level ERROR - default to require('debug')('i18n:error')
     logErrorFn: function (msg) {
-        console.log('error', msg);
     },
     api: {
  

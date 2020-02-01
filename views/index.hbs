@@ -1,5 +1,4 @@
 {{breadcrums 'Home' 'Dashboard'}}
- 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
         <div class="content-body">
@@ -17,9 +16,10 @@
                     <h5 class="text-uppercase">{{__ "Total Customer"}}</h5>
                     <h5 >{{this.activecount}}</h5>
                     <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: 3%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{this.activecount}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                    <h5 class="text-bold-400 mb-0"></i>{{__ "3% Increase.."}}</h5>
+                    <!-- <h5 class="text-bold-400 mb-0"></i>{{__ "3% Increase.."}}</h5> -->
+                    <h5 class="text-bold-400 mb-0"></i>{{this.activecount}}% increase</h5>
                   </div>
                 </div>
               </div>
@@ -36,9 +36,9 @@
                     <h5 class="text-uppercase">{{__ "Total Loan"}}</h5>
                     <h5>{{this.loanno}}</h5>
 					 <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{this.loanno}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                    <h5 class="text-bold-400 mb-0"></i>{{__ "1% Increase.."}}</h5>
+                    <h5 class="text-bold-400 mb-0"></i>{{this.loanno}}{{__ "% Increase.."}}</h5>
                   </div>
                 </div>
               </div>
@@ -53,11 +53,11 @@
                   </div>
                   <div class="p-1 white media-body block_violet">
                     <h5 class="text-uppercase">{{__ "Completed loan"}}</h5>
-					<h5>{{__ "55,009"}}</h5>
+					<h5>{{this.loanno}}</h5>
 					 <div class="progress mt-0 mb-1" style="height: 2px;">
                             <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                    <h5 class="text-bold-400 mb-0"></i> {{__ "89% Increase.."}}</h5>
+                    <h5 class="text-bold-400 mb-0"></i>{{this.loanno}} {{__ "% Increase.."}}</h5>
                   </div>
                 </div>
               </div>
@@ -72,11 +72,11 @@
                   </div>
                   <div class="p-1 bg-red bg-accent-4 white media-body">
                     <h5 class="text-uppercase">{{__ "Failed Loan"}}</h5>
-                    <h5>{{__ "13,921"}}</h5>
+                    <h5>{{__ "0"}}</h5>
 					 <div class="progress mt-0 mb-1" style="height: 2px;">
                             <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                    <h5 class="text-bold-400 mb-0">{{__ "65% Increase.."}}</h5>
+                    <h5 class="text-bold-400 mb-0">{{__ "0% Increase.."}}</h5>
                   </div>
                 </div>
               </div>
@@ -96,22 +96,13 @@
                         <a class="nav-link border-bottom-accent-2 active" id="homeIcon1-tab1" data-toggle="tab" href="#calendatIcon11" aria-controls="calendatIcon11"
                         aria-expanded="true"><i class="fa fa-calendar"></i>{{__ "Calendar"}}</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link " id="profileIcon1-tab1" data-toggle="tab" href="#profileIcon11"
-                        aria-controls="profileIcon11" aria-expanded="false"><i class="fa fa-align-left"></i> {{__ "My Projects"}}</a>
-                      </li>
-                      
-                      <li class="nav-item">
-                        <a class="nav-link" id="MyTask-tab1" data-toggle="tab" href="#MyTaskIcon11" aria-controls="MyTaskIcon11"
-                        aria-expanded="false"><i class="fa fa-tags"></i> {{__ "Today's Task"}}</a>
-                      </li> 
 					  <li class="nav-item">
                         <a class="nav-link" id="aboutIcon11-tab1" data-toggle="tab" href="#aboutIcon11" aria-controls="aboutIcon11"
                         aria-expanded="false"><i class="fa fa-clock-o"></i>{{__ "Reminders"}}</a>
                       </li> 
 					  <li class="nav-item">
                         <a class="nav-link" id="Notices-tab1" data-toggle="tab" href="#Notices" aria-controls="Notices"
-                        aria-expanded="false"><i class="fa fa-bullhorn"></i> {{__ "Notices"}}</a>
+                        aria-expanded="false"><i class="fa fa-bullhorn"></i> {{__ "Events"}}</a>
                       </li>
 				
                     </ul>
@@ -120,28 +111,23 @@
                       aria-expanded="true">
                         
 					 <!-- Full calendar basic example section start -->
-        <section id="basic-examples">
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                 
-                <div class="card-content collapse show">
-                  <div class="card-body123">
-                    
-                    <div id='fc-default'></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          
-        </section>
+						<section id="basic-examples">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-content collapse show">
+											<div class="card-body123 ">
+												<div id='dashboard_calendar'></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
         <!-- // Full calendar basic example section end -->
-       
-            </div> 
+       </div> 
 			
-		<div role="tabpanel" class="tab-pane" id="MyTaskIcon11" aria-labelledby="MyTask-tab1"
+		<div role="tabpanel" class="tab-pane" id="aboutIcon11" aria-labelledby="MyTask-tab1"
                       aria-expanded="true">
             <div class="card-content">
                 
@@ -223,44 +209,21 @@
                   <table id="recent-orders" class="table table-borderless mb-0">
                     <thead>
                       <tr>
-                        <th>Notice title</th>
-                        <th>Notice Description</th>
+                        <th>Event title</th>
+                        <th>Event Description</th>
                         <th>Start Date</th>
-                        <th>Notice For</th>
+                        <th>End For</th>
 		               </tr>
                     </thead>
                     <tbody>
+					{{#each events}}
                       <tr>
-                        <td class="text-truncate">P10011</td>
-                        <td class="text-truncate">Accountant</td>
-                        
-						 <td class="text-truncate">26-07-2018</td>
-						 <td class="text-truncate">Elizabeth W.</td>
+                        <td class="text-truncate">{{this.eventtitle}}</td>
+						 <td class="text-truncate">{{this.eventdetail}}</td>
+                        <td class="text-truncate">{{this.startdate}}</td>                        
+						 <td class="text-truncate">{{this.enddate}}</td>
                       </tr>
-                      <tr>
-                        <td class="text-truncate">P10012</td>
-						<td class="text-truncate">Integration Specialist</td>
-                         
-						<td class="text-truncate">26-07-2018</td>
-						<td class="text-truncate">Doris R.</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10013</td><td class="text-truncate">
-                         Junior Technical Author</td><td class="text-truncate">26-07-2018</td>
-						<td class="text-truncate">Andrew D.</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10014</td><td class="text-truncate">
-                         Sales Assistant</td>
-						<td class="text-truncate">26-07-2018</td>
-						<td class="text-truncate">Megan S.</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10015</td> 
-                        <td class="text-truncate">Marketing Designer</td>
-                       	<td class="text-truncate">26-07-2018</td>
-						<td class="text-truncate">Walter R.</td>
-                      </tr>
+                     {{/each}}
                     </tbody>
                   </table>
                 </div>
@@ -276,50 +239,33 @@
           <div class="col-xl-4 col-lg-12 Buyers">
             <div class="card">
               <div class="card-header border-bottom border-light">
-                <h4 class="card-title text-capitalize">Recent Buyers</h4>
+                <h4 class="card-title text-capitalize">Active Users</h4>
                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                <div class="heading-elements">
-					<a href="#" title="View New Customer"><i class="ft-external-link"></i></a>
+					<a href="/users/userlist" title="View New Customer"><i class="ft-external-link"></i></a>
 				</div>
               </div>
               <div class="card-content px-1">
                 <div id="recent-buyers" class="media-list height-300 position-relative">
-                  <a href="#" class="media border-0">
+				{{#each userdata}}
+                  <a href="/users/viewuser/{{this._id}}" class="media border-0">
                     <div class="media-left pr-1">
                       <span class="avatar avatar-md avatar-online">
-                        <img class="media-object rounded-circle" src="/images/portrait/small/avatar-s-1.png"
+                        <img class="media-object avatar avatar-online roundimage" src="/images/upload/{{this.photo}}"
                         alt="Generic placeholder image">
                         <i></i>
                       </span>
                     </div>
                     <div class="media-body w-100">
-                      <h6 class="list-group-item-heading">Kristopher Candy
-                        <span class="font-medium-1 float-right pt-1 text-bold-500">$1,021</span>
+                      <h6 class="list-group-item-heading">{{this.firstname}} {{this.middlename}} {{this.lastname}}
+                        <!-- <span class="font-medium-1 float-right pt-1 text-bold-500">$1,021</span> -->
                       </h6>
                       <p class="list-group-item-text mb-0">
-                        <span class="badge badge-primary">Electronics</span>
-                        <span class="badge badge-warning ml-1">Decor</span>
-                      </p>
-                    </div>
-                  </a> <a href="#" class="media border-0">
-                    <div class="media-left pr-1">
-                      <span class="avatar avatar-md avatar-online">
-                        <img class="media-object rounded-circle" src="/images/portrait/small/avatar-s-1.png"
-                        alt="Generic placeholder image">
-                        <i></i>
-                      </span>
-                    </div>
-                    <div class="media-body w-100">
-                      <h6 class="list-group-item-heading">Kristopher Candy
-                        <span class="font-medium-1 float-right pt-1 text-bold-500">$1,021</span>
-                      </h6>
-                      <p class="list-group-item-text mb-0">
-                        <span class="badge badge-info">Electronics</span>
-                        <span class="badge badge-success ml-1">Decor</span>
+                        <span class="badge badge-warning ml-1">{{this.occupation}}</span>
                       </p>
                     </div>
                   </a>
-                  
+				  {{/each}}
                 </div>
               </div>
             </div>
@@ -327,7 +273,7 @@
 			<!-- failed order   --->
 			<div class="card">
               <div class="card-header border-bottom border-light">
-                <h4 class="card-title text-capitalize">Failed Order</h4>
+                <h4 class="card-title text-capitalize">Types of Loan</h4>
                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                <div class="heading-elements">
 					<a href="#" title="View New Customer"><i class="ft-external-link"></i></a>
@@ -335,42 +281,30 @@
               </div>
               <div class="card-content px-1">
                 <div id="recent-buyers" class="media-list height-300 position-relative">
-                  <a href="#" class="media border-0">
-                    <div class="media-left pr-1">
-                      <span class="avatar avatar-md avatar-online">
-                        <img class="media-object rounded-circle" src="/images/portrait/small/avatar-s-1.png"
-                        alt="Generic placeholder image">
-                        <i></i>
-                      </span>
-                    </div>
-                    <div class="media-body w-100">
-                      <h6 class="list-group-item-heading">Kristopher Candy
-                       
-                      </h6>
-                      <p class="list-group-item-text mb-0">
-                        <span class="badge badge-primary">Electronics</span>
-                        <span class="badge badge-warning ml-1">Decor</span>
-						 <span class=" text-bold-500 float-right ">Payment Error</span>
-                      </p>
-                    </div>
-                  </a> <a href="#" class="media border-0">
-                    <div class="media-left pr-1">
-                      <span class="avatar avatar-md avatar-online">
-                        <img class="media-object rounded-circle" src="/images/portrait/small/avatar-s-1.png"
-                        alt="Generic placeholder image">
-                        <i></i>
-                      </span>
-                    </div>
-                    <div class="media-body w-100">
-                      <h6 class="list-group-item-heading">Kristopher Candy</h6>
-                      <p class="list-group-item-text mb-0">
-                        <span class="badge badge-info">Electronics</span>
-                        <span class="badge badge-success ml-1">Decor</span>
-						 <span class=" text-bold-500 float-right">Not Delivered</span>
-                      </p>
-                    </div>
-                  </a>
-                  
+                  <div class="card-content">
+                
+                <div class="table-responsive">
+				 
+                  <table id="recent-orders" class="table table-borderless mb-0">
+                    <thead>
+                      <tr>
+                        <th>Loan Type</th>
+						<th>Interest Rate</th>	
+                      </tr>
+                    </thead>
+                    <tbody>
+					{{#each loandata}}
+                      <tr>
+                        <td class="text-truncate">
+                          <span class="badge badge-default badge-success">{{this.type}}</span>
+                        </td>
+                        <td class="text-truncate">{{this.interestrate}} %</td>
+                      </tr>
+					{{/each}}   
+                    </tbody>
+                  </table>
+                </div>
+              </div>
                 </div>
               </div>
             </div>
@@ -378,153 +312,8 @@
 		  
         </div>
         <!--/ Product sale & buyers -->
-       <div class="row match-height skin skin-flat">
-          <div class="col-xl-8 col-lg-12">
-            <div class="card" >
-              <div class="card-header">
-                <h4 class="card-title text-capitalize">Invoice Summery</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-					<a href="#" title="View New Customer"><i class="ft-external-link"></i></a>
-				</div>
-              </div>
-              <div class="card-content">
-                
-                <div class="table-responsive">
-				 
-                  <table id="recent-orders" class="table table-borderless mb-0">
-                    <thead>
-                      <tr>
-                        <th>Invoice Id</th>
-                        <th>Customer Name</th>
-                        <th>Product</th>
-                        <th>Amount</th>
-						<th>Status</th>	
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-truncate">P10011</td>
-                        <td class="text-truncate">Elizabeth W.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-success">Audit 5s</span>
-                          <span class="badge badge-default badge-info">Sis</span>
-                        </td>
-                        <td class="text-truncate">$ 1200.00</td>
-						 
-						 <td class="text-truncate"><span class="text-bold-500 amber accent-4">
-							<i class="font-medium-1 icon-line-height ft-disc"></i>&nbsp; Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10012</td>
-                        <td class="text-truncate">Doris R.</td>
-                        
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-primary">Sis</span>
-                          <span class="badge badge-default badge-warning">Professional</span>
-                        </td>
-                        <td class="text-truncate">$ 5685.00</td>
-						<td class="text-truncate"><span class="text-bold-500 cyan accent-4">
-							<i class="font-medium-1 icon-line-height ft-disc"></i>&nbsp; completed</span></td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10013</td>
-                         
-                        <td class="text-truncate">Andrew D.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-success">Gym</span>
-                          <span class="badge badge-default badge-info">Premium</span>
-                        </td>
-                        <td class="text-truncate">$ 152.00</td>
-						 <td class="text-truncate"><span class="text-bold-500 amber accent-4">
-							<i class="font-medium-1 icon-line-height ft-disc"></i>&nbsp; Pending</span></td>
-							</tr>
-                      <tr>
-                        <td class="text-truncate">P10014</td>
-                        
-                        <td class="text-truncate">Megan S.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-danger">Sis</span>
-                          <span class="badge badge-default badge-warning">Gym</span>
-                        </td>
-                        <td class="text-truncate">$ 1450.00</td>
-						<td class="text-truncate"><span class="text-bold-500 red accent-4">
-					<i class="font-medium-1 icon-line-height ft-disc"></i>&nbsp; Delined</span></td>
-						 
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10015</td>
-                        
-                        <td class="text-truncate">Walter R.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-info">Overdue</span>
-                        </td>
-                        <td class="text-truncate">$ 685.00</td>
-						<td class="text-truncate"><span class="text-bold-500 cyan accent-4">
-								<i class="font-medium-1 icon-line-height ft-disc"></i>&nbsp; completed</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-		  <!--  new order --->
-			<div class="col-xl-4 col-lg-12 Buyers">
-			<div class="card">
-              <div class="card-header border-bottom border-light">
-                <h4 class="card-title text-capitalize">New Order</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-					<a href="#" title="View New Customer"><i class="ft-external-link"></i></a>
-				</div>
-              </div>
-              <div class="card-content px-1">
-                <div id="recent-buyers" class="media-list height-300 position-relative">
-                  <a href="#" class="media border-0">
-                    <div class="media-left pr-1">
-                      <span class="avatar avatar-md avatar-online">
-                        <img class="media-object rounded-circle" src="/images/portrait/small/avatar-s-1.png"
-                        alt="Generic placeholder image">
-                        <i></i>
-                      </span>
-                    </div>
-                    <div class="media-body w-100">
-                      <h6 class="list-group-item-heading">Kristopher Candy
-                        <span class="font-medium-1 text-bold-500 float-right pt-1">$1,021</span>
-                      </h6>
-                      <p class="list-group-item-text mb-0">
-                        <span class="badge badge-primary">Electronics</span>
-                        <span class="badge badge-warning ml-1">Decor</span>
-                      </p>
-                    </div>
-                  </a> <a href="#" class="media border-0">
-                    <div class="media-left pr-1">
-                      <span class="avatar avatar-md avatar-online">
-                        <img class="media-object rounded-circle" src="/images/portrait/small/avatar-s-1.png"
-                        alt="Generic placeholder image">
-                        <i></i>
-                      </span>
-                    </div>
-                    <div class="media-body w-100">
-                      <h6 class="list-group-item-heading">Kristopher Candy
-                        <span class="font-medium-1 text-bold-500 float-right pt-1">$1,021</span>
-                      </h6>
-                      <p class="list-group-item-text mb-0">
-                        <span class="badge badge-info">Electronics</span>
-                        <span class="badge badge-success ml-1">Decor</span>
-                      </p>
-                    </div>
-                  </a>
-                  
-                </div>
-              </div>
-            </div>
-            </div>
-		   
-		  <!-- end new order ---->
-         
+       
+		 
         </div>
       </div>
     </div>
@@ -536,4 +325,22 @@
 
 
 <!--   -->
-
+<script>
+$(document).ready(function(){
+$('#dashboard_calendar').fullCalendar({		
+			defaultDate: new Date(),
+			businessHours: true, // display business hours
+			editable: false,
+			displayEventTime : false ,
+			eventRender: function(eventObj, $el) {
+			  $el.popover({
+				title: eventObj.title,
+				content: eventObj.description,
+				trigger: 'hover',
+				placement: 'top',
+				container: 'body'
+			  });
+			},			
+		});
+	});
+</script>

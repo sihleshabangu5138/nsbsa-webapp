@@ -57,7 +57,7 @@
 					<div class="form-group input">
 					<div class="col-md-12 form-control border-light">
 						<!--<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} >--> 
-						<input type="text" id="userinput1"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Subject is required" name="subject" {{#if this.subject}} value="{{this.subject}}"{{/if}} >
+						<input type="text" id="userinput1"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,100})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Subject is required" name="subject" {{#if this.subject}} value="{{this.subject}}"{{/if}} >
 						<label for="userinput1">{{#with ..}}{{__ "Subject" setlang}}{{/with}}<span class="required red">*</span></label> 
 					</div><div class="help-block"></div>
 					</div>
@@ -67,7 +67,7 @@
 					<div class="col-md-12 form-control border-light textarea_css">
 					<div class="form-field">	
 
-					<textarea name="content"  data-validation-regex-regex="([A-Za-z0-9_, `.'^-]{1,150})" data-validation-regex-message='{{__ "Only Characters, no numbers and no special characters"}}'data-validation-required-message="{{__ 'Content is required'}}" {{#if this.content}} value="{{this.content}}"{{/if}}>{{this.content}}</textarea>
+					<textarea name="content" style="resize: vertical;" data-validation-regex-regex="([A-Za-z0-9_, `.'^-\n]{1,150})" data-validation-regex-message='{{__ "Only Characters, no numbers and no special characters"}}'data-validation-required-message="{{__ 'Content is required'}}" {{#if this.content}} value="{{this.content}}"{{/if}}>{{this.content}}</textarea>
 						<span class="txt-title-label"></span>
 						<label class="text-area address ">{{#with ..}}{{__ "Content" setlang}}{{/with}}<span class="required red">*</span></label>
 					</div>
@@ -83,9 +83,15 @@
 				<!-- <span><b> _USER_ </b> User</span><br> -->
 				<!-- <span><b> [ACCOUNT_URL] </b> Account Url</span><br> -->
 				<span><b> {{__ "_ROLENAME_"}} </b> {{__ "Role"}}</span><br>
-				<span><b> {{__ "_USERLASTNAME_"}} </b> {{__ "User Last Name"}}</span><br>
-				<span><b> {{__ "_USERFIRSTNAME_"}} </b> {{__ "User First Name"}}</span><br>
+				<span><b>{{__ "_USERFIRSTNAME_"}} {{__ "_USERLASTNAME_"}} </b> {{__ "User Name"}}</span><br>
 				<span><b> {{__ "_LOANTYPE_"}} </b> {{__ "Loan Type"}}</span><br>
+				<span><b> {{__ "_EVENTNAME_"}} </b> {{__ "Event Name"}}</span><br>
+				<span><b> {{__ "_EVENTDURATION_"}} </b> {{__ "Event Duration"}}</span><br>
+				<span><b> {{__ "_EVENTVENUE_"}} </b> {{__ "Event Venue"}}</span><br>
+				<span><b> {{__ "_EVENTSTARTDATE_"}} </b> {{__ "Event start date"}}</span><br>
+				<span><b> {{__ "_EVENTENDDATE_"}} </b> {{__ "Event end date"}}</span><br>
+				<span><b> {{__ "_newline_"}} </b> {{__ "for new line"}}</span><br>
+				<span><b> {{__ "_tab_"}} </b> {{__ "for tab space"}}</span><br>
 		</div>
 		<div class="form-actions left">
 				<button type="submit" class="btn btn-secondary">

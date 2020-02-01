@@ -8,8 +8,6 @@ router.get('/',isAuthenticated, function(req, res, next) {
 
 function isAuthenticated(req, res, next) {
 	
-	console.log('jkhjkhjkhkjhjkhhhkh');
-	
 	if (req.session.username != undefined) {
 		 return next();
 

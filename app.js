@@ -6,7 +6,6 @@ var logger = require('morgan');
 var MongoClient = require('mongodb').MongoClient;
 var session = require('express-session');
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adduserRouter = require('./routes/adduser');
@@ -33,9 +32,28 @@ var remindersRouter = require('./routes/reminders');
 var addreminderRouter = require('./routes/addreminder');
 var addnotificationtemplateRouter = require('./routes/addnotificationtemplate');
 var notificationtemplateRouter = require('./routes/notificationtemplate');
+var apiconfigRouter = require('./routes/apiconfig');
+var addcustomfieldsRouter = require('./routes/addcustomfields');
+var customfieldlistRouter = require('./routes/customfieldlist');
+var addcategoryRouter = require('./routes/addcategory');
+var categorylistRouter = require('./routes/categorylist');
+var repaymentRouter = require('./routes/repayment');
+var accessrightsRouter = require('./routes/accessright');
+var addserviceRouter = require('./routes/addservice');
+var servicelistRouter = require('./routes/servicelist');
+var activitylogRouter = require('./routes/activitylog');
+var addproductRouter = require('./routes/addproduct');
+var productlistRouter = require('./routes/productlist');
+var viewproductRouter = require('./routes/viewproduct');
+var notelistRouter = require('./routes/notelist');
+var viewnoteRouter = require('./routes/viewnote');
+var impersonateRouter = require('./routes/impersonateuser');
+var addeventRouter = require('./routes/addevent');
+var eventlistRouter = require('./routes/eventlist');
+var vieweventRouter = require('./routes/viewevent');
+var reportRouter = require('./routes/report');
 
 var hbs1 = require('hbs');
-
 
 var app = express();
 hbs  = require( 'express-handlebars' );
@@ -55,6 +73,17 @@ app.engine( 'hbs', hbs( {
   generalsettingsDir: __dirname + '/views/generalsettings/',
   reminderDir: __dirname + '/views/reminder/',
   notificationDir: __dirname + '/views/notification/',
+  customfieldsDir: __dirname + '/views/customfields/',
+  accessrightsDir: __dirname + '/views/accessrights/',
+  categoriesDir: __dirname + '/views/category/',
+  categoriesDir: __dirname + '/views/category/',
+  serviceDir: __dirname + '/views/service/',
+  activitylogDir: __dirname + '/views/activitylog/',
+  productDir: __dirname + '/views/product/',
+  noteDir: __dirname + '/views/notes/',
+  impersonateDir: __dirname + '/views/impersonate/',
+  eventsDir: __dirname + '/views/events/',
+  reportDir: __dirname + '/views/report',
   
   helpers: require('./helpers/handlebars'),
 
@@ -86,6 +115,7 @@ app.use('/dashboard', indexRouter);
 app.use('/users', usersRouter);
 app.use('/users/editprofile',editprofileRouter);
 app.use('/users/adduser', adduserRouter);
+app.use('/users/apiconfig', apiconfigRouter);
 app.use('/users/viewuser', viewuserRouter);
 app.use('/role/addrole', addroleRouter);
 app.use('/rule/addrule', addruleRouter);
@@ -107,11 +137,31 @@ app.use('/reminder/reminders', remindersRouter);
 app.use('/reminder/addreminder', addreminderRouter);
 app.use('/notification/addnotificationtemplate', addnotificationtemplateRouter);
 app.use('/notification/notificationtemplate', notificationtemplateRouter);
+app.use('/customfields/addcustomfields', addcustomfieldsRouter);
+app.use('/customfields/customfieldlist', customfieldlistRouter);
+app.use('/category/addcategory', addcategoryRouter);
+app.use('/category/categorylist', categorylistRouter);
+app.use('/loan/repayment', repaymentRouter);
+app.use('/accessrights/accessright', accessrightsRouter);
+app.use('/service/addservice', addserviceRouter);
+app.use('/service/servicelist', servicelistRouter);
+app.use('/activitylog/activitylog', activitylogRouter);
+app.use('/product/addproduct', addproductRouter);
+app.use('/product/productlist', productlistRouter);
+app.use('/product/viewproduct', viewproductRouter);
+app.use('/notes/notelist', notelistRouter);
+app.use('/notes/viewnote', viewnoteRouter);
+app.use('/events/addevent', addeventRouter);
+app.use('/events/eventlist', eventlistRouter);
+app.use('/events/viewevent', vieweventRouter);
+app.use('/impersonate/impersonateuser', impersonateRouter);
+app.use('/report/report',reportRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(createError(404,"This page doesnot exist."));
 });
+
 const db = require('./routes/mongo_db');
 global.__basedir = __dirname;
 
@@ -120,17 +170,15 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-	
-	
+
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error',{layout:"errorlayout",statuscode:err.statusCode});
 });
 db.connect(() => {
     app.listen(process.env.PORT || 5555, function (){
         console.log(`Listening`);
     });
 })
-
 
 module.exports = app;

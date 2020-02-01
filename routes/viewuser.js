@@ -12,25 +12,25 @@ router.use(lang.init);
 router.route('/:id?')
 .get(isAuthenticated,function (req, res) {
 	
-	var xyz = db.get();
+	var dbo = db.get();
 	var id = req.params.id;
 	// var dbo = db.get();
 	//res.json({ success: true });
 	if (id){
 		var myquery ={"_id": ObjectId(id)}; 
-		var xyz=db.get();
+		var dbo=db.get();
 		var dbo = db.get("BankingSystem");
 		var result_data=[];
-		xyz.collection("Users").find(myquery).toArray(function(err, result) {
+		dbo.collection("Users").find(myquery).toArray(function(err, result) {
 			var role = {"_id": result[0].role};
-		xyz.collection("Role").find(role).toArray(function(err, rolename) {
+		dbo.collection("Role").find(role).toArray(function(err, rolename) {
 			if (err) throw err;
 			
 			result_data=result;
 			var query ={"user_id": ObjectId(id)};
 				 
 				var family_data=[];
-					xyz.collection("familydata").find(query).toArray(function(err, family_data1) {
+					dbo.collection("familydata").find(query).toArray(function(err, family_data1) {
 						family_data=family_data1;
 						family_data[0].id_d=ObjectId(family_data1[0]._id).toString();
 
@@ -51,7 +51,6 @@ router.route('/:id?')
 		 }
 	else{
         var news = [{'userid':'-1'}];
-         //console.log("else");
         res.render('users/adduser', {title:"View User", data: news,family:news,session:req.session});
     }
 });

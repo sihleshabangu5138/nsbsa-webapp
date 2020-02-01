@@ -52,12 +52,12 @@
 				<!--{{log messages}}-->
 				{{#if messages.error  }}
 			<script>
-					toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
 			{{#if messages.success }}
 				<script>
-					toastr.success("{{messages.success}}", "Sucess!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.success("{{messages.success}}", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
                 <div class="card-body card-dashboard card-design">
@@ -98,14 +98,14 @@
 										<span class="swal-icon--warning__dot"></span>
 									</span>
 								</div>
-								<div class="swal-title">Delete !</div>
-								<div class="swal-text">Are You sure wan't to delete this rule ?</div>
+								<div class="swal-title">{{{__ "Delete !"}}}</div>
+								<div class="swal-text">{{{__ "Are You sure wan't to delete this rule ?"}}}</div>
 								<div class="swal-footer">
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--confirm" id="noButton">NO</button>
+									<button class="swal-button swal-button--confirm" id="noButton">{{{__ "NO"}}}</button>
 								</div>
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--cancel" id="yesButton">YES</button>
+									<button class="swal-button swal-button--cancel" id="yesButton">{{{__ "YES"}}}</button>
 								</div>
 								</div>  
 								
@@ -130,7 +130,7 @@
 		
 		
 		 var window1 = $("#window").kendoWindow({
-            title: " Warning !",
+            title: "{{__ 'Warning !'}}",
 			resizable: false,
             visible: false, //the window will not appear before its .open method is called
            
@@ -157,12 +157,10 @@
 		scrollable: true,
 		pdfExport: function(e) {
                   var grid = $("#grid").data("kendoGrid");
-                  grid.hideColumn(0);
-                  grid.hideColumn(4);
+                  grid.hideColumn(3);
                   e.promise
-                  .done(function() {
-                      grid.showColumn(0);
-                      grid.showColumn(2);
+                  .done(function(){
+                      grid.showColumn(3);
                   });
                 },
 				
@@ -182,19 +180,16 @@
 							type:'get',
 							complete: function(e) {
 								$("#grid").data("kendoGrid").dataSource.read(); 
-								 
-                            $('tr[data-uid="' + row.uid + '"]').css("border-bottom", "1pt solid black");
-                        
+								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									<!-- toastr.success("('Role deleted successfully!')", "('Success!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
+									toastr.success("{{__ "Deleted! Rule deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									<!-- toastr.error("('Role can not be deleted!')", "'Error!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
-			
-									
-								}		
+									 toastr.error("{{__ " Error! Rule can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 
+								}
 							}
 						},
 					
@@ -237,19 +232,20 @@
 					
 					{
                         field: "loantype",
-                        title: "Loan Type",
+                        title: "{{__ "Loan Type"}}",
 						width: 150
                     }, {
                         field: "rule_title",
-                        title: "Name",
+                        title: "{{__ "Name"}}",
 						width: 150
                     },  
 					{
                         field: "rule_desc",
-                         title: "Description",
+                         title: "{{__ "Description"}}",
                         width: 150
-                    },				
-					 
+                    },			
+					{{#ifCond session.admin_access "==" 0}}
+					 {{#ifCondition accessrightdata.add "||" accessrightdata.delete "||" accessrightdata.update}}
 					{
 						width: "150px",
 						command:
@@ -272,7 +268,7 @@
 							{template : "&nbsp;" },
 							
 							/* Edit action start */
-							
+							{{#if accessrightdata.update }}
 							 { 
 								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
 								click:function(e) 
@@ -284,33 +280,12 @@
 								  return false;
 								} 
 							},
-							
+							{{/if}}
 							{template : "&nbsp;" },
 						
 							
 							/* Delete action start */
-							/* { 
-								name: "destroy", text:"", className: "btn btn-icon delete_role btn-outline-light",iconClass:"fa fa-trash-o",
-								click: function(e){  //add a click event listener on the delete button
-									e.preventDefault(); //prevent page scroll reset
-									var tr = $(e.target).closest("tr"); //get the row for deletion
-									var data = this.dataItem(tr); //get the row data so it can be referred later
-									window1.content(windowTemplate(data)); //send the row data object to the template and render it
-									window1.center().open();
-									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-									$("#yesButton").click(function(){
-										var grid = $("#grid").data("kendoGrid");
-										grid.dataSource.remove(data)  //prepare a "destroy" request
-										grid.dataSource.sync()  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
-										
-      
-										  window1.close();
-									})
-									$("#noButton").click(function(){
-										window1.close();
-									})
-								}	
-							}, */
+							{{#if accessrightdata.delete }}
 							{ 
 								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
 								click: function(e){  //add a click event listener on the delete button
@@ -332,15 +307,88 @@
 									})
 								}	
 							},
-							 
+							{{/if}} 
 							
 							/* Delete action end */
 							
 							{template : "</center>" },
 							 
-							], title: "Action", 
+							], 
+							{{#if accessrightdata.add }}
+							title: "{{__ "Action"}}", 
+							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addrule'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							{{/if}}
+					}
+					{{/ifCondition}}
+					{{else}}
+						{
+						width: "150px",
+						command:
+						[
+							{
+								template : "<center>" 
+							},
+							
+							  /* { 
+								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
+								click:function(e) 
+								{
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id;
+								  window.location.href = "addrole/"+id;
+								  return false;
+								} 
+							},   */
+							{template : "&nbsp;" },
+							
+							/* Edit action start */
+							 { 
+								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
+								click:function(e) 
+								{ 
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id; 
+								  window.location.href = "addrule/"+id;
+								  return false;
+								} 
+							},
+							{template : "&nbsp;" },
+						
+							
+							/* Delete action start */
+							{ 
+								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
+								click: function(e){  //add a click event listener on the delete button
+									e.preventDefault(); //prevent page scroll reset
+									var tr = $(e.target).closest("tr"); //get the row for deletion
+									var data = this.dataItem(tr); //get the row data so it can be referred later
+									window1.content(windowTemplate(data)); //send the row data object to the template and render it
+									window1.center().open();
+									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+									$("#yesButton").click(function(){
+										var grid = $("#grid").data("kendoGrid");
+										grid.dataSource.remove(data)  //prepare a "destroy" request
+										grid.dataSource.sync();  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
+										<!-- alert('Delete'); -->
+										window1.close();
+									})
+									$("#noButton").click(function(){
+										window1.close();
+									})
+								}	
+							}, 
+							
+							/* Delete action end */
+							
+							{template : "</center>" },
+							 
+							], 
+							title: "{{__ "Action"}}", 
 							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addrule'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
 					}
+					{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"

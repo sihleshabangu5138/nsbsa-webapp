@@ -12,7 +12,7 @@ router.use(lang.init);
 /* GET users listing. */
 router.route('/:id?')
 .get(isAuthenticated,function (req, res) {
-	var xyz = db.get();
+	var dbo = db.get();
 	var id = req.params.id;
 	if (id){
 		var myquery ={"_id": ObjectId(id)}; 
@@ -20,7 +20,7 @@ router.route('/:id?')
 		var dbo = db.get("BankingSystem");
 		var result_data=[];
 		
-		xyz.collection("loan_details").find(myquery).toArray(function(err, result) {
+		dbo.collection("loan_details").find(myquery).toArray(function(err, result) {
 			
 			if (err) throw err;
 			result_data=result;
@@ -29,20 +29,21 @@ router.route('/:id?')
 			var query ={"_id": result[0].user}; 
 
 			 var loanid ={"loan_id": ObjectId(id)};
-			xyz.collection("Users").find(query).toArray(function(err, result1) {
-			xyz.collection("loantype").find(loanquery).toArray(function(err, typeofloan) {
+			dbo.collection("Users").find(query).toArray(function(err, result1) {
+			dbo.collection("loantype").find(loanquery).toArray(function(err, typeofloan) {
+			dbo.collection("Re_Payments").find().toArray(function(err, repayment) {
 				if (err) throw err;
-				xyz.collection("emi_details").find(loanid).toArray(function(err, emilist) {
-			res.render('loan/viewloan', {title:"View Loan", emi:emilist, type:typeofloan, data: result_data,user:result1,id:id,session:req.session}); 
+				dbo.collection("emi_details").find(loanid).toArray(function(err, emilist) {
+			res.render('loan/viewloan', {title:"View Loan", emi:emilist, type:typeofloan,repayment:repayment,data: result_data,user:result1,id:id,session:req.session}); 
 
 		});	 
 		});	 
 	});	 
 	});
-    } 	 
+    });
+    }	
 	else{
         var news = [{'userid':'-1'}];
-         //console.log("else");
         res.render('loan/viewloan', {title:"View Loan",data: news,family:news,session:req.session});
     }
 });

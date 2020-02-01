@@ -2,7 +2,7 @@
 html body .pace .pace-progress{background:#d50000;}
 .card{height:auto !important;}
 img.nifty-logo { max-height: 30px;}
-.form-control:focus{border-color:#404E67 !important;}
+.form-control:focus{border-color:#404E67 }
 .dropdown-item.active, .dropdown-item:active{background-color: #F5F7FA; color:#000;}
 ol.breadcrumb li.breadcrumb-item > a {color: #404e67;}
 .table-bordered th, .table-bordered td{font-family: "Montserrat", Georgia, "Times New Roman", Times, serif; color:#536076;}
@@ -283,6 +283,12 @@ span.select2.select2-container.select2-container--default.select2-container--bel
 	width:100% !important;
 } 
 
+.roundimg{
+	border-radius:50%;
+	object-fit: cover; 
+	width: 150px; 
+	height: 150px;
+}
 /* .k-grid-content{max-width: 98%; */
 /* margin: 0 auto;} */
 /* .k-grid-content{overflow: visible; */

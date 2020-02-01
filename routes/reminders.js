@@ -15,10 +15,21 @@ router.use(flash());
 
 /* GET users listing. */
 router.get('/', isAuthenticated,function(req, res, next) {
-	var path=__basedir+"/public/images/upload/";
-		// console.log(req.flash());
-	res.render('reminder/reminders', { title: 'Reminders',session:req.session,messages:req.flash()});
- 
+	var dbo = db.get();
+	var myquery ={"rolename": req.session.role_slug}; 
+				var access_data=[];	
+				dbo.collection("Access_Rights").find(myquery).toArray(function(err, access) {
+					 
+					for (const [key,value] of Object.entries(access)) {
+					 
+							for (const [key1,value1] of Object.entries(value['access_type'])) {
+								if(key1=="product"){
+									access_data=value1;
+								} 
+							} 
+					};
+	res.render('reminder/reminders', { title: 'Reminders',session:req.session,messages:req.flash(),accessrightdata:access_data});
+});
 });
 
 router.get('/delete/:id',isAuthenticated, function(req, res) { 
@@ -28,7 +39,6 @@ router.get('/delete/:id',isAuthenticated, function(req, res) {
 	var myquery = { _id: id };
 	dbo.collection("Reminder").remove({_id: new ObjectId(id)}, function(err, result){
        if (err) {
-           // console.log(err);
 				} 
 		else {
 			res.redirect('/role/rolelist');
@@ -38,13 +48,30 @@ router.get('/delete/:id',isAuthenticated, function(req, res) {
 
 
 function isAuthenticated(req, res, next) {
-	
+	var dbo = db.get();
 	if (req.session.username != undefined) {
-		return next();
-	} else {
+		if(req.session.admin_access == 1){
+			 return next();
+		}
+		else{
+			var query = {"rolename":req.session.role_slug};
+			dbo.collection("Access_Rights").find(query).toArray(function(err, result) {
+				if(result[0].access_type != undefined){
+					if(result[0].access_type.reminder != undefined){
+						if(result[0].access_type.reminder.view != undefined){
+							return next();
+						}
+					}
+				}
+				else{
+					res.redirect('/dashboard');	
+				}
+			});
+		}
+	}
+	else {
 		res.redirect('/');	
 	}
-	
 };
 
 module.exports = router;

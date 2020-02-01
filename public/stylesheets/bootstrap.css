@@ -5850,8 +5850,9 @@ a.text-dark:focus, a.text-dark:hover {
   color: #0c131e !important; }
 
 .text-muted {
-  color: #404E67 !important; }
-
+  color: #404E67 !important; 
+  word-break: break-all; }
+  
 .text-hide {
   font: 0/0 a;
   color: transparent;
@@ -5864,3 +5865,7 @@ a.text-dark:focus, a.text-dark:hover {
 
 .invisible {
   visibility: hidden !important; }
+
+.tabletext{
+	word-break: break-all;
+}

@@ -39,21 +39,21 @@ router.use(flash());
 
 router.route('/:id?')
 .get(isAuthenticated,function (req, res) {
-	var xyz = db.get();
+	var dbo = db.get();
 	var id = req.params.id;
 	global.msg=1
 	
     if (id){
 		var myquery ={"_id": ObjectId(id)}; 
-		var xyz=db.get();
+		var dbo=db.get();
 		var result_data=[];
-			xyz.collection("Users").find(myquery).toArray(function(err, result) {
+			dbo.collection("Users").find(myquery).toArray(function(err, result) {
 				//res.render('adduser', { data: result,id:id	}); 
 					result_data=result;
 					result_data[0].id_d=ObjectId(result_data[0].role).toString();
 				
 						
-						xyz.collection("Role").find().toArray(function(err, role_name) {
+						dbo.collection("Role").find().toArray(function(err, role_name) {
 							
 				fs.readFile('public/data/countries.json', function(err, data) { 
 					var jsonData = data;
@@ -63,23 +63,21 @@ router.route('/:id?')
 						role_name[key].id_d=ObjectId(value._id).toString();
 						
 					};
+				dbo.collection("Generalsetting").find().toArray(function(err, setting) {
+
 					
-					
-				res.render('users/editprofile', {title:"Edit Profile",data: result_data,id:id,role:role_name,session:req.session,country:jsonParsed.countries});
+				res.render('users/editprofile', {title:"Edit Profile",data: result_data,id:id,role:role_name,session:req.session,country:jsonParsed.countries,setting:setting});
 				});	
 				});
 				});
-		
+				});
 			}
 	else{
-		xyz.collection("Role").find().toArray(function(err, role_name) {	
-		 // console.log(role_name);
+		dbo.collection("Role").find().toArray(function(err, role_name) {
 			var news = [{'userid':'-1'}];
-         // console.log(news);
 		 fs.readFile('public/data/countries.json', function(err, data) { 
 			var jsonData = data;
 			var jsonParsed = JSON.parse(jsonData);
-			 // console.log(jsonParsed.countries);
 		res.render('users/adduser', {title:"Edit Profile", data: news,role:role_name,session:req.session,country:jsonParsed.countries});
 		});
 	});
@@ -89,10 +87,7 @@ router.route('/:id?')
 .post(upload.single('photo'),isAuthenticated,function (req, res){
     var id = req.body.id;
 	 var msg;	
-	//console.log(id);
 	if(id){
-		 //console.log(req.body);
-		// console.log(req.file);
 		var myquery ={"_id": ObjectId(id)}; 
 		var dbo = db.get();
 		if(req.file != undefined){
@@ -112,8 +107,6 @@ router.route('/:id?')
 		}
 		var roleid = req.body.role;
 		var idrole = ObjectId(roleid);
-		// console.log(ObjectId(roleid));
-		// console.log('123456');
 		var newvalues = {$set: { 
 			firstname: req.body.firstname,
 			middlename: req.body.middlename,
@@ -155,7 +148,6 @@ router.route('/:id?')
 				}
 	
 	else{
-		 //console.log(req.body);
 		var dbo = db.get();
 		var pass= md5(req.body.password);
 		var pass1= md5(req.body.confirmpassword);
@@ -203,7 +195,6 @@ router.route('/:id?')
 	  // fs.readFile('public/data/countries.json', function(err, data) { 
 			// var jsonData = data;
 			// var jsonParsed = JSON.parse(jsonData);
-			// console.log(data);
 	  // });
  // });
 

@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'User details'}}
+ {{breadcrums 'Home' 'User details'}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
@@ -8,7 +8,7 @@
 		<div class="card-content123">
 			{{#each data}}
 				<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} >
-					<div class="col-12"><img class="img-fluid" src="/images/upload/{{this.photo}}" style="border-radius:50%;"alt="User image" data-pagespeed-url-hash="3236208173" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></div>
+					<div class="col-12"><img class="roundimg" src="/images/upload/{{this.photo}}" alt="User image" data-pagespeed-url-hash="3236208173" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></div>
 					<!-- <i class="fa fa-camera fa-2x upload_btn_css" data-toggle="modal" data-target="#image_upload" aria-hidden="true"></i> -->
 				<div class="card-body text-center p-0 pt-1 pb-1">
 					<h5 class="card-title"></h5>
@@ -116,7 +116,7 @@
 						  </div>
 						  <div class="col-sm-6 "> 
 						    <span class="colon">:</span>
-							<div class="tabletext"> {{this.birthdate}}</div>
+							<div class="tabletext">{{getdate this.birthdate ../session.generaldata.date_format}} </div>
 						  </div>
 						</div>
 				    </div>
@@ -126,7 +126,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{this.gender}}</div>
+							<div class="tabletext">{{this.gender}} </div>
 						  </div>
 						</div>  
 				 </div>    
@@ -188,7 +188,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						    <span class="colon">:</span>
-							 <div class="tabletext">{{getcitybyid this.city}}.</div> 
+							 <div class="tabletext">{{getcitybyid this.city}}</div> 
 						  </div>
 						</div>
 				    </div>
@@ -198,7 +198,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{getcitybyid this.state}}.</div>
+							<div class="tabletext">{{getcitybyid this.state}}</div>
 						  </div>
 						</div>  
 				 </div>    
@@ -210,7 +210,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{getcountrybyid this.country}}. </div>
+							<div class="tabletext">{{getcountrybyid this.country}} </div>
 						  </div>
 						</div>
 				    </div>
@@ -310,11 +310,11 @@
 				<div class="row p-1">
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Income" setlang}}{{/with}}
+						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Annual Income" setlang}}{{/with}}
 						  </div>
 						  <div class="col-sm-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{this.income}} </div>
+							<div class="tabletext"> {{{currencyList ../session.generaldata.currency}}} {{this.income}} </div>
 						  </div>
 						</div>
 				    </div>
@@ -338,7 +338,7 @@
 			</div>
 			 
 		 
-		<script>
+<script>
 function myFunction() {
   var dots = document.getElementById("dots");
   var moreText = document.getElementById("more");
@@ -347,14 +347,14 @@ function myFunction() {
   
   if (dots.style.display === "none") {
     dots.style.display = "inline";
-    btnText.innerHTML = "View more <br/><i class='fa fa-2x'>&#xf107;</i>"; 
+    btnText.innerHTML = "{{{__ 'View more'}}} <br/><i class='fa fa-2x'>&#xf107;</i>"; 
     moreText.style.display = "none";
-	viewbtn.style.display = "View more";
+	viewbtn.style.display = "{{{__ 'View more'}}}";
   } else {
     dots.style.display = "none";
-    btnText.innerHTML = "View less <br/><i class='fa fa-2x'>&#xf106;</i>"; 
+    btnText.innerHTML = "{{{__ 'View less'}}} <br/><i class='fa fa-2x'>&#xf106;</i>"; 
     moreText.style.display = "inline";
-	viewbtn.style.display = "View less";
+	viewbtn.style.display = "{{{__ 'View less'}}}";
   }
 }
 
@@ -442,7 +442,7 @@ function myFunction() {
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="baseIcon-tab13" data-toggle="tab" aria-controls="tabIcon13"
-                        href="#tabIcon13" aria-expanded="false"><i class="fa fa-cog"></i>{{__ "ALert Details"}}</a>
+                        href="#tabIcon13" aria-expanded="false"><i class="fa fa-cog"></i>{{__ "Alert Details"}}</a>
                       </li>
                     </ul>
                     <div class="tab-content px-1 pt-1">

@@ -37,10 +37,9 @@
 										<h6><b>{{#with ..}}{{__ "Loan description:" setlang}}{{/with}}</b> {{this.description}}</h6>
 									</div>
 								<div class="col-xl-4 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
-										 <h6>
-
-										<b>{{#with ..}}{{__ "Loan amount:" setlang}}{{/with}}</b> {{formatNumber this.loanamount 0 ','','}}
-										</h6>
+									<h6>
+										<b>{{#with ..}}{{__ "Loan amount" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}}):</b> {{formatNumber this.loanamount 0 ','','}}
+									</h6>
 								</div>
 								<div class="col-xl-3 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
 										 <h6>
@@ -100,14 +99,14 @@
 							 <div class="tabletext">{{this.years}}</div> 
 						  </div>
 						</div>
-				    </div>
-				 <div class="col-sm-6"> 
+				    </div> 
+					 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Payments Per year" setlang}}{{/with}}
+						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Work detail" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6 "> 
-						    <span class="colon">:</span>
-							<div class="tabletext"> {{this.paymentsperyear}}</div>
+						  <div class="col-sm-6"> 
+						    <span class="colon">:</span> 
+							<div class="tabletext">{{this.workdetail}}</div>
 						  </div>
 						</div>  
 				 </div>    
@@ -145,21 +144,11 @@
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
-						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Total number of payments" setlang}}{{/with}}
-						  </div>
-						  <div class="col-sm-6"> 
-						    <span class="colon">:</span> 
-							<div class="tabletext">{{this.nofpayments}}</div>
-						  </div>
-						</div>  
-				 </div>    
-                </div>
-				<div class="row p-1">
+                
+				
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Income per year" setlang}}{{/with}}
+						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Income per year" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
 						  </div>
 						  <div class="col-sm-6"> 
 						    <span class="colon">:</span>
@@ -167,9 +156,11 @@
 						  </div>
 						</div>
 				    </div>
+				    </div>
+				<div class="row p-1">
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Income per month" setlang}}{{/with}}
+						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Income per month" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
 						  </div>
 						  <div class="col-sm-6"> 
 						    <span class="colon">:</span> 
@@ -177,8 +168,7 @@
 						  </div>
 						</div>  
 				 </div>    
-                </div>
-				<div class="row p-1">
+                
 				    <div class="col-sm-6"> 
 				        <div class="row">
 						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Documents shown" setlang}}{{/with}}
@@ -189,21 +179,12 @@
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
-						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Work detail" setlang}}{{/with}} 
-						  </div>
-						  <div class="col-sm-6"> 
-						    <span class="colon">:</span> 
-							<div class="tabletext">{{this.workdetail}}</div>
-						  </div>
-						</div>  
-				 </div>    
+				
                 </div>
 				
 		</div> 
 		<div class="h3 p-1">
-			<i class="fa fa fa-user" aria-hidden="true"></i>{{#with ..}}{{__ "Colleague Information" setlang}}{{/with}}
+			<i class="fa fa fa-user" aria-hidden="true"></i> {{#with ..}}{{__ "Colleague Information" setlang}}{{/with}}
 		</div>
 	 <div class="container-fluid ">
 		 <div class="row p-1">
@@ -250,9 +231,7 @@
 						</div>  
 				 </div>    
                 </div>
-		</div> 
-		
-		
+		</div>  
 					<!--</div>-->  
                     </span>    
         </div>
@@ -260,7 +239,7 @@
         </div>
  
 			
-		<script>
+<script>
 function myFunction() {
   var dots = document.getElementById("dots");
   var moreText = document.getElementById("more");
@@ -269,20 +248,19 @@ function myFunction() {
   
   if (dots.style.display === "none") {
     dots.style.display = "inline";
-    btnText.innerHTML = "View more <br/><i class='fa  fa-2x'>&#xf107;</i>"; 
+    btnText.innerHTML = "{{{__ 'View more'}}} <br/><i class='fa fa-2x'>&#xf107;</i>"; 
     moreText.style.display = "none";
-	viewbtn.style.display = "View more";
+	viewbtn.style.display = "{{{__ 'View more'}}}";
   } else {
     dots.style.display = "none";
-    btnText.innerHTML = "View less <br/><i class='fa  fa-2x'>&#xf106;</i>"; 
+    btnText.innerHTML = "{{{__ 'View less'}}} <br/><i class='fa fa-2x'>&#xf106;</i>"; 
     moreText.style.display = "inline";
-	viewbtn.style.display = "View less";
+	viewbtn.style.display = "{{{__ 'View less'}}}";
   }
 }
 
 </script>
-
-	</section>
+</section>
 
 {{/each}}
 		 
@@ -298,11 +276,15 @@ function myFunction() {
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="baseIcon-tab13" data-toggle="tab" aria-controls="tabIcon13"
-                        href="#tabIcon13" aria-expanded="false"><i class="fa fa-cog"></i>{{__ 'ALert Details'}}</a>
+                        href="#tabIcon13" aria-expanded="false"><i class="fa fa-cog"></i>{{__ 'Alert Details'}}</a>
+                      </li>
+					  <li class="nav-item">
+                        <a class="nav-link" id="baseIcon-tab15" data-toggle="tab" aria-controls="tabIcon15"
+                        href="#tabIcon15" aria-expanded="false"><i class="fa fa-cog"></i>{{__ 'Re-Payment'}}</a>
                       </li>
                     </ul>
                     <div class="tab-content px-1 pt-1">
-                      <div role="tabpanel" class="tab-pane active" id="tabIcon11" aria-expanded="true"
+                    <div role="tabpanel" class="tab-pane active" id="tabIcon11" aria-expanded="true"
                       aria-labelledby="baseIcon-tab11">
 					<div class="app-content center-layout mt-2 mx-md-3 px-1">
 					<div class="content-wrapper">
@@ -324,10 +306,10 @@ function myFunction() {
 										<table class="table designtable">
 										<thead class="headcolor"><tr>
 										<th>{{__ 'No'}}</th>
-										<th>{{__ 'Interest'}}</th>
-										<th>{{__ 'Principal'}}</th>
-										<th>{{__ 'Remaining Balance'}}</th>
 										<th>{{__ 'Date'}}</th>
+										<th>{{__ 'Principal'}}</th>
+										<th>{{__ 'Interest'}}</th>										
+										<th>{{__ 'Remaining Balance'}}</th>									
 										<th>{{__ 'Status'}}</th></tr>
 										</thead>
 
@@ -336,32 +318,39 @@ function myFunction() {
 										
 									<tr class="colortr"> 
 									<td class="bordertop">{{@index}}</td>
-									<td class="bordertop">{{formatNumber result.interest}}</td>
-									<td class="bordertop">{{formatNumber result.principal 0 ','','}}</td>
-									<td class="bordertop">{{formatNumber result.remainingBalance 0 ','','}}</td>
 									<td class="bordertop">{{ result.date}}</td>
-											<!-- <td class="bordertop"> </td>  -->
-											<!-- {{#if this.paid_amount}} -->
-											<!--<td class="bordertop"><a href="/loan/addemi">Pending</a></td>-->
-											 <!-- {{else}}{{/if}} -->
+									<td class="bordertop">{{formatNumber result.principal 0 ','','}}</td>
+									<td class="bordertop">{{formatNumber result.interest}}</td>					
+									<td class="bordertop">{{formatNumber result.remainingBalance 0 ','','}}</td>
 									<td class="bordertop"><a href="/loan/addemi/{{result._id}}">
 									{{#ifCond this.status '==' '0'}}<button type="button" class="btn btn-info">{{__ 'pending'}}</button>{{/ifCond}}</a>
-									{{#ifCond this.status '==' '1'}}<button type="button" disabled class="btn" style="background-color:#00c735; color:#fff">{{__ 'Completed'}}</button>{{/ifCond}}</td> 
-											
-											
+									{{#ifCond this.status '==' '1'}}<button type="button" disabled class="btn" style="background-color:#00c735; color:#fff">{{__ 'Completed'}}</button>{{/ifCond}}</td>  
 											</tr>
+											
 										{{/each}}										
-										<tr class="colortr font-weight-bold addi">
-										<td>{{__ 'Sum'}}</td>
-										<td>300000.00</td>
-										<td>250.00</td>
-										<td>300250.00</td> 
-										<td>-</td> 
-										<td>-</td> 
-										</tr>
-										
+										<!-- <tr class="colortr font-weight-bold addi"> -->
+										<!-- <td>{{__ 'Sum'}}</td> -->
+										<!-- <td>300000.00</td> -->
+										<!-- <td>250.00</td> -->
+										<!-- <td>300250.00</td>  -->
+										<!-- <td>-</td>  -->
+										<!-- <td>-</td>  -->
+										<!-- </tr> --> 
 										</tbody></table>
-										
+										<!-- <script> -->
+									<!-- function CompareDate() { -->
+								 	<!-- var dateOne = new Date($(".startdate")); //Year, Month, Date -->
+									<!-- var dateTwo = new Date($(".end_date")); //Year, Month, Date -->
+									<!-- if (dateOne == dateTwo) { -->
+									     <!-- alert("Status Compalate"); -->
+										 <!-- } -->
+									<!-- else  -->
+										<!-- { -->
+									     <!-- alert("Status Pending"); -->
+										 <!-- } -->
+										<!-- }  -->
+						<!-- CompareDate(); -->
+							<!-- </script> -->
 										</div>
 										</div>
 									</div>
@@ -386,13 +375,93 @@ function myFunction() {
                           Oat cake lemon drops gingerbread dessert caramels. Sweet
                           dessert jujubes powder sweet sesame snaps.</p>
                       </div>
-                    </div>
-                  </div>
+		    <!-- <div class="tab-pane" id="tabIcon15" aria-labelledby="baseIcon-tab3"> -->
+			        <!-- <a href="/loan/repayment/{{result._id}}"> -->
+					<!-- <button type="button" class="btn btn-info">Add Repay Now</button></a> -->
+            <!-- </div> -->
+			 
+			<div class="tab-pane " id="tabIcon15" aria-expanded="true"
+                      aria-labelledby="baseIcon-tab3">  
+					  <a href="/loan/repayment">  
+					<!-- <input type="hidden" id="userinput1" name="id" {{#if this.loan_id}} value="{{this.loan_id}}"{{/if}} >   -->
+					<!-- <p>{{this.id}}</p> --> 
+					<button type="button" class="btn btn-info">Add Repay Now</button></a>  
+					<div class="app-content center-layout mt-2 mx-md-3 px-1">
+					<div class="content-wrapper"> 
+					<div class="row">
+					<div class="col-md-12"> 
+					<div class="card"> 
+						<div class="card-content collpase show">
+						 <section id="configuration">
+							<div class="row">
+							<div class="col-12">
+								<div class="card">
+								<div class="card-content collapse show">
+								<div class="card-body card-dashboard card-design">
+								<section id="horizontal">
+									<div class="row">
+									<div class="col-12">
+										<div class="card">
+										<div id="tableBox">
+										<table class="table designtable">
+										<thead class="headcolor"><tr>
+										<th>{{__ 'No'}}</th>
+										<th>{{__ 'Date'}}</th>
+										<!-- <th>{{__ 'Total EMI Months'}}</th> -->
+										<th>{{__ 'Payment Method'}}</th>
+										<th>{{__ 'Actual Number Of Payments'}}</th> 
+										<th>{{__ 'Extra Payment Of Amount'}}</th>  
+										</thead>
+
+										<tbody>
+									{{#each repayment as |result|}} 
+									<tr class="colortr"> 
+									<td class="bordertop">{{@index}}</td>
+									<td class="bordertop">{{ result.date}}</td>
+									<!-- <td class="bordertop">{{formatNumber result.paymentemimonth }}</td> -->
+									<td class="bordertop">{{result.payment_type}}</td>
+									<td class="bordertop">{{formatNumber result.repayments}}</td> 
+									<td class="bordertop">{{formatNumber result.repaymentamount }}</td> 
+									</tr>
+										{{/each}}										
+										<!-- <tr class="colortr font-weight-bold addi"> -->
+										<!-- <td>{{__ 'Sum'}}</td> -->
+										<!-- <td>300000.00</td> -->
+										<!-- <td>250.00</td> -->
+										<!-- <td>300250.00</td>  -->
+										<!-- <td>-</td>  -->
+										<!-- <td>-</td>  -->
+										<!-- </tr> -->
+										
+										</tbody></table>
+										
+										</div>
+										</div>
+									</div>
+									</div>
+								</section>
+								</div>
+								</div>
+								</div>
+							</div>
+							</div>
+						</section>
+					</div>
+					</div>
+					</div>
 				</div>
-            </div>
+			</div>
+			</div>
+        </div>	
+		<!---Re_Payment List Table end--->	 
+			
+           </div>
           </div>
-		  </div>
-          </div>
+	    </div>
+        </div>
+        </div>
+	  </div>
+      </div>
            
 	</div>
 	</div>

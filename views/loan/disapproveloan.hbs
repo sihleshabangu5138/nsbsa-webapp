@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Loan List'}}
+ {{breadcrums 'Home' 'Loan List'}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="content-header row">
@@ -171,47 +171,44 @@
 			resizable: false,
             visible: false, //the window will not appear before its .open method is called
            
-        }).data("kendoWindow");
+         }).data("kendoWindow");
 		
-		var element=$("#grid").kendoGrid({
-			//var path='{{path}}';	
-				pdf: {
-		allPages: true,
-		template: $("#page-template").html(),
-		avoidLinks: true,
-		fileName: "Loan-list.pdf",// Bug 277	
-		paperSize: "A4",
-		margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
-		landscape: true,
-		repeatHeaders: true,
-		scale: 0.8
-		},
-		excel: {
-		fileName: "Loan-list.xlsx",// Bug 277
-		allPages:true
-		},
-		scrollable: true,
-		pdfExport: function(e) {
+			var element=$("#grid").kendoGrid({
+				//var path='{{path}}';	
+					pdf: {
+						allPages: true,
+						template: $("#page-template").html(),
+						avoidLinks: true,
+						fileName: "Loan-list.pdf",// Bug 277	
+						paperSize: "A4",
+						margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+						landscape: true,
+						repeatHeaders: true,
+						scale: 0.8
+					},
+					excel: {
+						fileName: "Loan-list.xlsx",// Bug 277
+						allPages:true
+					},
+				scrollable: true,
+				pdfExport: function(e) {
                   var grid = $("#grid").data("kendoGrid");
-					//grid.hideColumn(0);
-					grid.hideColumn(10);
+				  grid.hideColumn(10);
                   e.promise
                   .done(function() {
-                    // grid.showColumn(0);
-                     grid.showColumn(10);
+                   grid.showColumn(10);
                   });
                 },
 				
 				dataSource: {
-				serverPaging: false,
-			serverSorting: false,
-				 transport: {
-				  read:{
-					url: '/ajxfun/disapproveloan',
-					dataType: "json",
-				  },
-					
-					
+					serverPaging: false,
+					serverSorting: false,
+					transport: {
+					  read:{
+						url: '/ajxfun/disapproveloan',
+						dataType: "json",
+					  },
+					 
 					  destroy:{
 							url: '/ajxfun/deleteloan/',
 							dataType: "json",
@@ -223,7 +220,8 @@
 									
 									 toastr.success("Loan deleted successfully!", "Success!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
-								}else{
+								}
+								else{
 									
 									 toastr.error("Loan can not be deleted!", "Error!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 			
@@ -250,8 +248,8 @@
 					requestEnd: function (e) {
 								if (e.type == "create" && e.response) {
 									enablefilter();
-							}
-						}
+								}
+					}
                 },
                 
                 sortable: true,
@@ -271,33 +269,25 @@
                 columns: [
 				 
 					{
-                        field: "loantype" ,
+                        field: "loan.type" ,
                         title: "Loan Type",
-						<!-- template:"<left>" + "<div class='customer-photo'" +  -->
-						<!-- "style='background-image:url(/images/upload/#=photo #);'></div> " + "#= firstname # #= middlename # #= lastname #", -->
-                        <!-- field: "photo" , -->
                         width: 180
                     }, 
 					{
-                        field: "user",
-                         title: "User Name",
+                        field: "user.firstname",
+                        title: "User Name",
+						template : "#= user.firstname # #= user.lastname #",
                         width: 150
                     },
 					
 					{
                         field: "description",
-                         title: "Loan Description",
+                        title: "Loan Description",
                         width: 150
                     },
 					{
                         field: "loanamount",
-                         title: "Loan Amount",
-                        width: 150
-                    },
-					{
-                        field: "paymentsperyear",
-                         title: "Payments per Year",
-						 
+                        title: "{{{currencyList session.generaldata.currency}}} "+"Loan Amount",
                         width: 150
                     },
 					{
@@ -308,30 +298,23 @@
                     },
 					{
                         field: "currency",
-                         title: "Currency",
-						 hidden: true,
+                        title: "{{{currencyList session.generaldata.currency}}} "+"Currency",
+						hidden: true,
                         width: 150
                     },
 					{
                         field: "interestrate",
-                         title: "Interest Rate",
-						  hidden: true,
-                        width: 150
+                        title: "Interest Rate"+"%",
+						width: 150
                     },
 					{
                         field: "years",
-                         title: "Loan period in years",
-						 <!-- template: "<div class='123'>{{getcountrybyid '#= country #' }}</div>", -->
-	                   hidden: true,
+                        title: "Loan period in years",
+						<!-- template: "<div class='123'>{{getcountrybyid '#= country #' }}</div>", -->
+						hidden: true,
                         width: 150
                     },
 					
-					{
-                        field: "monthlypayment",
-                         title: "Monthly Payments",
-						 hidden: true,
-                        width: 150
-                    },
 					{
                         field: "startdate",
                          title: "Start Date",
@@ -339,17 +322,12 @@
                         width: 150
                     },
 					{
-                        field: "ptype",
-                         title: "Payment Type",
+                        field: "enddate",
+                         title: "{{__ 'End Date'}}",
 						 hidden: true,
                         width: 150
                     },
-					{
-                        field: "nofpayments",
-                         title: "Number of payments",
-						 hidden: true,
-                        width: 150
-                    },
+					
 					
 					{
 						width: "150px",
@@ -409,21 +387,7 @@
 									})
 								}	
 							},
-							<!-- {  -->
-								<!-- name: "Delete", text:"", className: "btn btn-icon delete_role btn-outline-light",iconClass:"fa fa-trash-o", -->
-								<!-- click: function(e){   -->
-									
-									
-								 <!-- var clickedRow = this.dataItem($(e.currentTarget).closest("tr")); -->
-								 
-								  <!-- var id = clickedRow._id; -->
-								 
-								   <!-- window.location.href = "/userlist/delete/"+id; -->
-								  
-									
-								  
-								<!-- } -->
-							<!-- }, -->
+							
 							
 							/* Delete action end */
 							
@@ -434,47 +398,12 @@
 					}
                 ],
 				editable: {
-                mode: "inline"
-            }
+                   mode: "inline"
+                }
             }); 
         });
         </script>
 		
-		
-								<!--<table class="table display nowrap table-striped table-bordered scroll-horizontal">
-								<thead>
-								<tr>
-									<th>First name</th>
-									<th>Last name</th>
-									<th>Middle name</th>
-									<th>Profile Photo</th>
-									<th>Email</th>
-									<th>Contact Number</th>
-									<th>Address</th>
-									
-									<th style="text-align:center"><a href="/adduser"><i class="ft-plus" style="font-size:30px; font-weight:bold"></i></a></th>
-								</tr>
-								</thead>
-								<tbody>
-								{{#each data}}
-								<tr align="left">
-									<td>{{this.firstname}}</td>
-									<td>{{this.middlename}}</td>
-									<td>{{this.lastname}}</td>
-									<td>{{this.photo}}</td>
-									<td>{{this.email}}</td>
-									<td>{{this.mobile}}</td>
-									<td>{{this.address}}</td>
-									<td style="">
-										<center> <a class="btn btn-info mb-2" ><i class="ft-eye"></i></a>
-										<a class="btn btn-primary mb-2" href="/adduser/{{this._id}}"><i class="ft-edit"></i></a>
-										<a class="btn btn-danger mb-2" href="/userlist/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="ft-trash-2"></i></a>
-										<!--<a href="/userlist/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="ft-trash-2" style="font-size:20px"></i></a></center>
-									</td>
-								</tr>
-								{{/each}}
-								</tbody>
-								</table>-->
 							</div>
 							</div>
 						</div>
@@ -507,7 +436,8 @@
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						data : {id:id,approvestatus:value,name:'approvestatus'},
 						success: function (response)
-						{		 //alert(response);
+						{		
+							window.location.replace('/loan/loanlist'); 
 						},
 						error: function(e) 
 						{		
@@ -534,5 +464,4 @@
 					});
 			}
 		});
-    </script>
-	
+    </script> 

@@ -121,10 +121,11 @@
 			</div>
 			<div class="col-md-6">
 			<div class="form-group row">
-			<div class="col-md-12"> 
+			<div class="col-md-12">
 				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Image" setlang}}{{/with}}<span class="required red">*</span></label>
-				<input class="form-control border-light"  name="photo" {{#if this.photo}} value="{{this.photo}}" {{else}} data-validation-required-message="Profile Image is required" {{/if}} type="file" id="userinput5" > 
-				{{#if this.photo}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.photo}}"> 
+				<input class="form-control border-light imageUpload"  name="photo" {{#if this.photo}} value="{{this.photo}}" {{else}} data-validation-required-message="{{__ 'Profile Image is required'}}" {{/if}} type="file" id="userinput5" >
+				<span class="required red notice"></span>
+				{{#if this.photo}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.photo}}">
 				<input class="form-control border-light"  name="photo_old" value="{{this.photo}}" type="hidden"  placeholder="" id="userinput5" > {{/if}}
 			</div><div class="help-block"></div>
 			</div>
@@ -171,7 +172,7 @@
 			<div class="form-group row">
 			<div class="col-md-12"> 
 			<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Birth Date" setlang}}{{/with}}<span class="required red">*</span></label>
-			<input type='text'  class="form-control  brithdate dateformat" data-validation-required-message="Birth Date is required" name="birthdate" {{#if this.birthdate}} value="{{this.birthdate}}" {{else}} value="{{getdate}}" {{/if}} aria-invalid="false" > 
+			<input type='text'  class="form-control  brithdate dateformat" data-validation-required-message="Birth Date is required" name="birthdate" {{#if this.birthdate}} value="{{getdate this.birthdate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false" > 
 
 				<i class="ft-calendar icon-care"></i> 
             </div><div class="help-block"></div>
@@ -188,9 +189,9 @@
 				&nbsp;&nbsp;&nbsp;
 				<div class="d-inline-block custom-control custom-radio mr-1">
 			
-					<input type="radio" name="gender" class="custom-control-input" {{#ifCond this.gender '==' '0'}} checked="" {{/ifCond}} value="0" id="yes">
+					<input type="radio" name="gender" class="custom-control-input" {{#ifCond this.gender '==' 'Male'}} checked="" {{/ifCond}} value="Male" id="yes">
 					<label class="custom-control-label mr-1" for="yes">{{#with ..}}{{__ "Male" setlang}}{{/with}}</label>
-					<input type="radio" name="gender" class="custom-control-input" {{#ifCond this.gender '==' '1'}} checked="" {{/ifCond}}  value="1" id="no">
+					<input type="radio" name="gender" class="custom-control-input" {{#ifCond this.gender '==' 'Female'}} checked="" {{/ifCond}}  value="Female" id="no">
 					<label class="custom-control-label" for="no">{{#with ..}}{{__ "Female" setlang}}{{/with}}</label>
 					&nbsp; &nbsp;&nbsp; &nbsp;
 					&nbsp; &nbsp;&nbsp; &nbsp;
@@ -314,7 +315,7 @@
 			{{/each}}
 			
 			<div class="form-actions left">
-				<button type="submit" class="btn btn-secondary" >
+				<button type="submit" class="btn btn-secondary" onclick="return ValidateExtension()">
 					<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
 				</button>
 				<button type="reset" class="btn btn-warning">
@@ -407,3 +408,40 @@
 		});
 		});
 </script>
+{{#each setting as |geninfom|}}
+<script type="text/javascript">
+        function ValidateExtension(){
+		<!-- alert("123"); -->
+		m=0;
+		$('.imageUpload').each(function(){
+			if($(this).val() != '') {
+				var imageUpload=$(this).val();
+				var allowedFiles = [];
+				var jpeg="{{geninfom.imgtype_jpeg}}";
+				var jpg="{{geninfom.imgtype_jpg}}";
+				var png="{{geninfom.imgtype_png}}";
+				if(jpeg!=''){
+					allowedFiles.push('{{geninfom.imgtype_jpeg}}');
+				}
+				if(jpg!=''){
+					allowedFiles.push('{{geninfom.imgtype_jpg}}');
+				}
+				if(png!=''){
+					allowedFiles.push('{{geninfom.imgtype_png}}');
+				}
+				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				if (!regex.test(imageUpload.toLowerCase())) {
+					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
+					m++;
+				}
+				else{
+					$(this).siblings('.notice').html();
+				}
+			}
+		});
+			if(m>0){
+			return false;
+			}
+        }
+</script>
+{{/each}}

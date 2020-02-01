@@ -17,15 +17,6 @@ function get(){
 function close(){
     mongodb.close();
 }
-/*  mongoClient.connect(mongoDbUrl, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("BankingSystem");
-  dbo.collection("Users").find({}).toArray(function(err, result) {
-    if (err) throw err;
-    console.log(result);
-  });
-});  */
-
 
 module.exports = {
     connect,

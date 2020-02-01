@@ -84,16 +84,16 @@
 	<div class="card-content collpase show">
 			{{#if messages.error  }}
 			<script>
-					toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
 			{{#if messages.Eroor_doc }}
 				<script>
-					toastr.error("{{messages.Eroor_doc}}", "Error!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.error("{{messages.Eroor_doc}}", "{{__ 'Error!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{else if messages.success }}
 				<script>
-					toastr.success("{{messages.success}}", "Sucess!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.success("{{messages.success}}", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
 		<!-- Zero configuration table -->
@@ -141,14 +141,14 @@
 										<span class="swal-icon--warning__dot"></span>
 									</span>
 								</div>
-								<div class="swal-title">Delete !</div>
-								<div class="swal-text">Are You sure wan't to delete this role ?</div>
+								<div class="swal-title">{{{__ "Delete !"}}}</div>
+								<div class="swal-text">{{{__ "Are You sure wan't to delete this role ?"}}}</div>
 								<div class="swal-footer">
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--confirm" id="noButton">NO</button>
+									<button class="swal-button swal-button--confirm" id="noButton">{{{__ "NO"}}}</button>
 								</div>
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--cancel" id="yesButton">YES</button>
+									<button class="swal-button swal-button--cancel" id="yesButton">{{{__ "YES"}}}</button>
 								</div>
 								</div>
 							</script>
@@ -172,7 +172,7 @@
 		
 		
 		 var window1 = $("#window").kendoWindow({
-            title: " Warning !",
+            title: "{{__ 'Warning !'}}",
 			resizable: false,
             visible: false, //the window will not appear before its .open method is called
            
@@ -199,11 +199,11 @@
 		pdfExport: function(e) {
                   var grid = $("#grid").data("kendoGrid");
 					//grid.hideColumn(0);
-					grid.hideColumn(10);
+					grid.hideColumn(9);
                   e.promise
                   .done(function() {
                     // grid.showColumn(0);
-                     grid.showColumn(10);
+                     grid.showColumn(9);
                   });
                 },
 				
@@ -223,15 +223,14 @@
 								$("#grid").data("kendoGrid").dataSource.read(); 
 								console.log(e.responseText);
 								if(e.responseText=="true"){
-								
-									toastr.success("Loan deleted successfully!", "Success!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
+									toastr.success("{{__ "Deleted! Loan deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									
+								}else{
+									
+									 toastr.error("{{__ " Error! Loan can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 
 								}
-								else{
-									
-									toastr.error("Loan can not be deleted!", "Error!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				
-								}		
 							}
 						},
 					}, 
@@ -270,89 +269,63 @@
 					pageSize: 10,
 					pageSizes: [10, 20, 25, 50, 100]
 				},
+				
                 columns: [
-				 
+					
 					{
-                        field: "loantype" ,
-                        title: "Loan Type",
-						<!-- template:"<left>" + "<div class='customer-photo'" +  -->
-						<!-- "style='background-image:url(/images/upload/#=photo #);'></div> " + "#= firstname # #= middlename # #= lastname #", -->
-                        <!-- field: "photo" , -->
-                        width: 180
+                        field: "loan.type" ,
+                        title: "{{__ 'Loan Type'}}",
+                        width: 130
                     }, 
 					{
-                        field: "user",
-                         title: "User Name", 
+                        field: "user.firstname",
+                        title: "{{__ 'User Name'}}", 
+						template : "#= user.firstname # #= user.lastname #",
                         width: 150
                     },
 					
 					{
                         field: "description",
-                         title: "Loan Description",
-                        width: 150
+                        title: "{{__ 'Loan Description'}}",
+                        width: 180
                     },
 					{
                         field: "loanamount",
-                         title: "Loan Amount",
-                        width: 150
-                    },
-					{
-                        field: "paymentsperyear",
-                         title: "Payments per Year",
-						 
-                        width: 100
-                    },
-					{
-                        field: "approvestatus",
-                        title: "Approved Status",
-						template:'<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
-                        width: 150
-                    },
-					{
-                        field: "currency",
-                         title: "Currency",
-						 hidden: true,
+                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Loan Amount'}}",
                         width: 150
                     },
 					{
                         field: "interestrate",
-                         title: "Interest Rate",
-						  hidden: true,
+                         title: "{{__ 'Interest Rate'}}"+" %",
+                        width: 150
+                    },
+					{
+                        field: "approvestatus",
+                        title: "{{__ 'Approved Status'}}",
+						template:'<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
                         width: 150
                     },
 					{
                         field: "years",
-                         title: "Loan period in years",
+                         title: "{{__ 'Loan period in years'}}",
 						 <!-- template: "<div class='123'>{{getcountrybyid '#= country #' }}</div>", -->
 	                   hidden: true,
                         width: 150
                     },
-					
-					{
-                        field: "monthlypayment",
-                         title: "Monthly Payments",
-						 hidden: true,
-                        width: 150
-                    },
 					{
                         field: "startdate",
-                         title: "Start Date",
+                         title: "{{__ 'Start Date'}}",
 						 hidden: true,
                         width: 150
                     },
 					{
-                        field: "ptype",
-                         title: "Payment Type",
+                        field: "enddate",
+                         title: "{{__ 'End Date'}}",
 						 hidden: true,
                         width: 150
                     },
-					{
-                        field: "nofpayments",
-                         title: "Number of payments",
-						 hidden: true,
-                        width: 150
-                    },
-					
+					{{#ifCond session.admin_access "==" 0}}
+					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}}
 					{
 						width: "200px",
 					
@@ -361,7 +334,7 @@
 							{
 								template : "<center>"
 							},
-							
+							{{#if accessrightdata.view }}
 							{
 								name: "pageview", text:"", className: "btn btn-icon color-navy btn-outline-light",iconClass:"fa fa-eye",
 								click:function(e)
@@ -373,8 +346,10 @@
 								  return false;
 								}
 							},
+							{{/if}}
 							{template : "&nbsp;" },
 							/* Edit action start */
+							{{#if accessrightdata.update }}
 							{ 
 								name: "pageEdit", text:"", className: "btn btn-icon color-blue btn-outline-light",iconClass:"fa fa-pencil",
 								click:function(e) 
@@ -386,10 +361,12 @@
 								  return false;
 								} 
 							},
+							{{/if}}
 							{template : "&nbsp;" },
 						
 							
 							/* Delete action start */
+							{{#if accessrightdata.delete}}
 							{ 
 								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
 								click: function(e){  //add a click event listener on the delete button
@@ -411,72 +388,89 @@
 									})
 								}	
 							},
-							<!-- {  -->
-								<!-- name: "Delete", text:"", className: "btn btn-icon delete_role btn-outline-light",iconClass:"fa fa-trash-o", -->
-								<!-- click: function(e){   -->
-									
-									
-								 <!-- var clickedRow = this.dataItem($(e.currentTarget).closest("tr")); -->
-								 
-								  <!-- var id = clickedRow._id; -->
-								 
-								   <!-- window.location.href = "/userlist/delete/"+id; -->
-								  
-									
-								  
-								<!-- } -->
-							<!-- }, -->
-							
+							{{/if}}
 							/* Delete action end */
 							
-							{template : "</center>" },
-							 
-							], title: "Action", 
+							{template : "</center>" }, 
+							],
+							{{#if accessrightdata.add }}
+							title: "{{__ "Action"}}", 
 							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloan'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							{{/if}}
 					}
+					{{/ifCondition}}
+					{{else}}
+						{
+						width: "200px",
+					
+						command:
+						[
+							{
+								template : "<center>"
+							}, 
+							{
+								name: "pageview", text:"", className: "btn btn-icon color-navy btn-outline-light",iconClass:"fa fa-eye",
+								click:function(e)
+								{
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id;
+								  window.location.href = "viewloan/"+id; <!-- +id -->
+								  return false;
+								}
+							}, 
+							{template : "&nbsp;" },
+							/* Edit action start */ 
+							{ 
+								name: "pageEdit", text:"", className: "btn btn-icon color-blue btn-outline-light",iconClass:"fa fa-pencil",
+								click:function(e) 
+								{
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id;
+								  window.location.href = "addloan/"+id;
+								  return false;
+								} 
+							}, 
+							{template : "&nbsp;" },
+						 
+							/* Delete action start */ 
+							{ 
+								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
+								click: function(e){  //add a click event listener on the delete button
+									e.preventDefault(); //prevent page scroll reset
+									var tr = $(e.target).closest("tr"); //get the row for deletion
+									var data = this.dataItem(tr); //get the row data so it can be referred later
+									window1.content(windowTemplate(data)); //send the row data object to the template and render it
+									window1.center().open();
+									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+									$("#yesButton").click(function(){
+										var grid = $("#grid").data("kendoGrid");
+										grid.dataSource.remove(data)  //prepare a "destroy" request
+										grid.dataSource.sync();  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
+										<!-- alert('Delete'); -->
+										window1.close();
+									})
+									$("#noButton").click(function(){
+										window1.close();
+									})
+								}	
+							}, 
+							/* Delete action end */
+							
+							{template : "</center>" }, 
+							], 
+							title: "{{__ "Action"}}", 
+							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloan'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>" 
+					}
+					{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"
             }
             }); 
         });
-        </script>
-		
-		
-								<!--<table class="table display nowrap table-striped table-bordered scroll-horizontal">
-								<thead>
-								<tr>
-									<th>First name</th>
-									<th>Last name</th>
-									<th>Middle name</th>
-									<th>Profile Photo</th>
-									<th>Email</th>
-									<th>Contact Number</th>
-									<th>Address</th>
-									
-									<th style="text-align:center"><a href="/adduser"><i class="ft-plus" style="font-size:30px; font-weight:bold"></i></a></th>
-								</tr>
-								</thead>
-								<tbody>
-								{{#each data}}
-								<tr align="left">
-									<td>{{this.firstname}}</td>
-									<td>{{this.middlename}}</td>
-									<td>{{this.lastname}}</td>
-									<td>{{this.photo}}</td>
-									<td>{{this.email}}</td>
-									<td>{{this.mobile}}</td>
-									<td>{{this.address}}</td>
-									<td style="">
-										<center> <a class="btn btn-info mb-2" ><i class="ft-eye"></i></a>
-										<a class="btn btn-primary mb-2" href="/adduser/{{this._id}}"><i class="ft-edit"></i></a>
-										<a class="btn btn-danger mb-2" href="/userlist/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="ft-trash-2"></i></a>
-										<!--<a href="/userlist/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="ft-trash-2" style="font-size:20px"></i></a></center>
-									</td>
-								</tr>
-								{{/each}}
-								</tbody>
-								</table>-->
+        </script> 
 							</div>
 							</div>
 						</div>

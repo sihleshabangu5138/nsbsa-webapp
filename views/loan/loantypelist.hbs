@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Loan List'}}
+{{breadcrums 'Home' 'Loan Type List'}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1 content-header row">
 	<div class="col-xl-12 col-lg-12 box-four-view">
 	<div class="card_boxnf">
@@ -153,12 +153,10 @@
 		scrollable: true,
 		pdfExport: function(e) {
                   var grid = $("#grid").data("kendoGrid");
-					//grid.hideColumn(0);
-					grid.hideColumn(10);
+					grid.hideColumn(6);
                   e.promise
                   .done(function() {
-                    // grid.showColumn(0);
-                     grid.showColumn(10);
+                     grid.showColumn(6);
                   });
                 },
 				
@@ -181,14 +179,13 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									 toastr.success("Loan deleted successfully!", "Success!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Deleted! Loan Type deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("Loan can not be deleted!", "Error!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
-			
-									
-								}		
+									 toastr.error("{{__ " Error! Loan Type can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 
+								}
 							}
 						},
 					
@@ -234,30 +231,69 @@
 					{
                         field: "type",
                          title: "Type of loans",
-                        width: 150
+                        width: 100
                     },
 					{
                         field: "loan_desc",
                          title: "Loan Description",
-                        width: 150
+                        width: 280
                     },
 					{
                         field: "loan_min_amount",
-                         title: "Mininmum Amount Range",
+                         title: "{{{currencyList session.generaldata.currency}}} "+"Mininmum Amount Range",
                         width: 150
                     },
 					{
                         field: "loan_max_amount",
-                         title: "Maximum Amount Range",
+                         title: "{{{currencyList session.generaldata.currency}}} "+"Maximum Amount Range",
                         width: 150
                     },
 					{
                         field: "interestrate",
-                         title: "Interest Rate",
+                         title: "Interest Rate"+"%",
                         width: 150
                     },
+					{
+                        field: "latepaymentcharge",
+                         title:"{{{currencyList session.generaldata.currency}}}"+"Late Payment Charge",
+						  hidden: true,
+                        width: 100
+                    },
+					{{#ifCond session.admin_access "==" 0}}
+					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}}					
+					{
+						width: "150px",
 					
-					
+						command:
+						[
+							{
+								template : "<center>"
+							},
+							/* Edit action start */
+							{{#if accessrightdata.update }}
+							{ 
+								name: "pageEdit", text:"", className: "btn btn-icon color-blue btn-outline-light",iconClass:"fa fa-pencil",
+								click:function(e) 
+								{
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id;
+								  window.location.href = "addloantype/"+id;
+								  return false;
+								} 
+							},
+							{{/if}}
+							{template : "&nbsp;" },
+							{template : "</center>" },
+							 
+							],
+							{{#if accessrightdata.add}}
+							title: "Action", 
+							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							{{/if}}
+					}
+				{{/ifCondition}}
+				{{else}}
 					{
 						width: "150px",
 					
@@ -281,9 +317,11 @@
 							{template : "&nbsp;" },
 							{template : "</center>" },
 							 
-							], title: "Action", 
+							],
+							title: "Action", 
 							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
 					}
+				{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"

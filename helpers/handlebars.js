@@ -6,16 +6,17 @@ var Promise = require('rsvp').Promise;
 var  i18n = require('i18n');
 var str="";
 var time="";
+var dateFormat = require('dateformat');
 
 module.exports = {
       __: function(options) {
 		 return i18n.__.apply(this, arguments);
 	  },
       getFormat: function(value,format, options) {
-
+		// THIS USE ONLY datepicker DATE FORMATE
 			if(value=='date_format'){
 
-			var xyz=db.get();
+			
 					if(format!=undefined){
 						 var str=format;
 					}
@@ -82,7 +83,6 @@ module.exports = {
 			var states= jsonParsed.states;
 			
 			for (const [key, value] of Object.entries(states)) {
-				// console.log(value.id);
 				if(id == value.id){
 					var result= "<p>"+value.name+"</p>";
 					return value.name;
@@ -92,8 +92,6 @@ module.exports = {
 		},
 		getcountrybyid: function(value, options) {
 		var id = value;
-		// console.log('11111111111111111111111111111111');
-		// console.log(id);
 		var data1 = [];
 		var jsonData = fs.readFileSync('public/data/countries.json', 'utf8');
 		
@@ -101,7 +99,6 @@ module.exports = {
 			var countries= jsonParsed.countries;
 			
 			for (const [key, value] of Object.entries(countries)) {
-				// console.log(value.id);
 				if(id == value.id){
 					var result= "<p>"+value.name+"</p>";
 					return value.name;
@@ -118,14 +115,100 @@ module.exports = {
 			var cities= jsonParsed.cities;
 			
 			for (const [key, value] of Object.entries(cities)) {
-				// console.log(value.id);
 				if(id == value.id){
 					var result= "<p>"+value.name+"</p>";
 					return value.name;
 				} 
 			};
 		},
-	  ifCond:function(v1, operator, v2, options){
+		hiddenmodules:function (access_data, admin_access,options, v1)
+		{
+			 if(admin_access == 0 && access_data != undefined){
+				 return (v1) ? options.inverse(this) : options.fn(this);
+			 }
+			 else if(admin_access == 1){
+				 return (v1) ? options.inverse(this) : options.fn(this);
+			 }
+			 else{
+				 return "";
+			 }
+		},
+		// inaccessright:function (notification_tem, access_rights, custom_fields, options, v1)
+		// {	
+			// console.log(notification_tem);
+			// console.log(access_rights);
+			// console.log("......................");
+			// if(notification_tem != undefined || access_rights != undefined || custom_fields != undefined){
+				// return (true);
+			// }
+			// else{
+				// return (false);
+			// }
+		// },
+		check_value_in:function (array, v1,options)
+		{
+			i=0;
+			if(array.length>0){
+				for (const [key, value] of Object.entries(array)) {
+					
+					if(value.rolename == v1){
+						i=0;
+						return (v1) ? options.fn(this) : options.inverse(this); 
+					}
+					else{
+						i++;
+					}
+				}
+				if(i!=0){
+					return options.inverse(this); 
+				} 
+			}
+			else{
+				return options.inverse(this); 
+			}
+			
+		}, 
+		ifEquals:function (array, v1,options)
+		{
+			for(var i = 0 ; i< array.length; i++)
+			{
+					console.log("FIRST loop");
+					if(array > 0){
+						
+						for(var j = 0 ; j< array[i].length; j++)
+						{ 
+							console.log("second loop");
+							if(array[i][j] == v1){					
+							 return "checked";
+							}					
+						}
+					}
+					else{
+						 if(array[i] == v1){						
+						return "checked"; 
+					}
+				}
+			}
+		}, 
+		ifEqual:function (array, v1, options)
+		{
+			if(array!= undefined){
+				for(var i = 0 ; i< array.length; i++)
+					{
+						if(array[i] == v1){						
+						return (v1) ? options.fn(this) : options.inverse(this);
+						}
+					} 
+				}
+			}, 
+		 
+		regexlimit:function (options)
+		{
+			var limit = "{1,5000}"
+			return new hbs1.SafeString(limit);
+		},		
+	   
+	   ifCond:function(v1, operator, v2, options){
 		switch (operator) {
         case '==':
             return (v1 == v2) ? options.fn(this) : options.inverse(this);
@@ -150,27 +233,95 @@ module.exports = {
 		}
 		},
 		
+		ifCondition:function(v1, operator, v2, operator, v3, options){
+			switch (operator) {
+				case '&&':
+					return (v1 && v2 && v3) ? options.fn(this) : options.inverse(this);
+				case '||':
+					return (v1 || v2 && v3) ? options.fn(this) : options.inverse(this);
+			}
+		},
+		
 		breadcrums:function(v1,v2, options){
 			var result = '<section class="card"><div class="app-content container123 center-layout mt-2 mx-md-3 px-1"><div class="content-wrapper row"><div class="content-header-left col-md-6 col-sm-6 col-12 mb-1 "><h2 class="content-header-title">'+v2+'</h2> </div><div class=" breadcrumbs-right breadcrumbs-top col-sm-6 col-md-6 col-12"><div class="breadcrumb-wrapper float-md-right"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="/"><i class="fa fa-home  "></i>'+v1+'</a></li><li><i class="ft-chevron-right"></i>'+v2+'</li></ol></div></div></div></div></section>';
 			return new hbs1.SafeString(result);
-			//return '<h1>Hello</h1><h2>'+v1+'<h2>';
+			
 		},
 		
 		addelement:function(v1, options){	
 			if(v1=="data"){
-				var add= '<div class="col-md-6"><div class="form-group"><label class="custom-control-label-date ml-2">Upload Document</label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="document" type="file" multiple><span class="required red notice"></span></div></div>';
+				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Upload Document</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
 				var add= '<div class="col-md-6"><div class="form-group"><label class="custom-control-label-date ml-2">Upload Document<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="document"  data-validation-required-message="Document is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
-			
-			/* var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Upload Document</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>'; */			
 			return new hbs1.SafeString(add);			
-			//return '<h1>Hello</h1><h2>'+v1+'<h2>';
+			
+		},		
+		addimage:function(v1, options){	
+			if(v1=="data"){
+				var add = '<div id="addedimage" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Upload Image</label><input class="form-control border-light fileUpload"  name="uploadimages" type="file" multiple><span class="required red notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedimage()"><i class=" ft-x"></i></button></div>';
+			}
+			else{
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Upload Image<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="uploadimages"  data-validation-required-message="Image is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+			}
+			return new hbs1.SafeString(add);			
+		},	
+		addnote:function(v1, options){	
+			if(v1=="data"){
+				var add = '<div id="addednote" class="col-md-12 p-0 mr-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2"  style="z-index: 9;">Add Note</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><button style="margin-bottom: 72px;" class="btn" type="button" onclick="deleteaddednote()"><i class=" ft-x"></i></button></div>'; 		
+			}
+			else{
+				var add= '<div class="col-md-12 p-0 mr-0"><div class="form-group"><label class="custom-control-label-date ml-2"  style="z-index: 9;">Add Note</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><div class="help-block"></div></div>';
+			}
+			return new hbs1.SafeString(add);			
+		},
+		attachfile:function(v1, options){	
+			if(v1=="data"){
+				var add = '<div id="attachfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Attach file</label><input class="form-control border-light"  name="attachfile" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
+			}
+			else{
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Attach file</label><input class="form-control border-light  docfile" id="fileupload" name="attachfile" type="file" multiple></div><div class="help-block"></div></div>';
+			}
+			return new hbs1.SafeString(add);			
+		},
+		productimage:function(v1, options){	
+			if(v1=="data"){
+				var add = '<div id="addedfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Product Image</label><input class="form-control border-light fileUpload"  name="productimage" type="file" multiple><span class="notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedfile()"><i class=" ft-x"></i></button></div>'; 		
+			}
+			else{
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Product Image</label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="productimage" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+			}
+			return new hbs1.SafeString(add);			
 		},
 		
-		getdate: function() {
-			return new Date();
+		getdate: function(date,format) {
+			// THIS USE ONLY HBS DATE FORMATE
+			if(date!=''){
+						 var date1=date;
+					}
+					else{
+						var date1=new Date();
+					}
+			if(format!=undefined){
+						 var str=format;
+					}
+					else{
+						var str='Y-m-d';
+					}
+					var Obj = {
+						Y: "yyyy", 
+						m: "mm", 
+						d: "dd", 
+						j: "dd", 
+						F: "mmmm", 
+					}; 
+					var trans=str.replace(/Y|m|d|j|F/gi, function(matched){ 
+						return Obj[matched];  
+					});  
+			//return dateFormat(date1, trans);
+			return dateFormat(date1, trans);
+ 
 		},
 		
 		loannumber: function() {
@@ -206,6 +357,7 @@ module.exports = {
 				'BTN' : '&#78;&#117;&#46;', // ?
 				'BWP' : '&#80;',
 				'BYR' : '&#112;&#46;',
+				'BYN' : '&#8381;',
 				'BZD' : '&#66;&#90;&#36;',
 				'CAD' : '&#36;',
 				'CDF' : '&#70;&#67;',
@@ -242,6 +394,7 @@ module.exports = {
 				'HUF' : '&#70;&#116;',
 				'IDR' : '&#82;&#112;',
 				'ILS' : '&#8362;',
+				'IRL' : '&#65020;',
 				'INR' : '&#8377;',
 				'IQD' : '&#1593;.&#1583;', // ?
 				'IRR' : '&#65020;',
@@ -278,7 +431,7 @@ module.exports = {
 				'MUR' : '&#8360;', // ?
 				'MVR' : '.&#1923;', // ?
 				'MWK' : '&#77;&#75;',
-				'MXN' : '&#36;',
+				'MXN' : '&#8369;',
 				'MYR' : '&#82;&#77;',
 				'MZN' : '&#77;&#84;',
 				'NAD' : '&#36;',

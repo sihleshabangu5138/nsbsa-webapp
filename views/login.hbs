@@ -3,7 +3,6 @@
 	<script src="/js/scripts/extensions/toastr.js" type="text/javascript"></script>
 <!-- END Toastr JS-->
 
-
 <div class="content-wrapper">
     <div class="content-header row">
     </div>
@@ -15,8 +14,7 @@
                 <div class="card-header border-0">
                   <div class="card-title text-center">
                     <img src="/images/Nifty-EWS.png" style="width:60%" alt="branding logo">
-                  </div>
-                  
+                  </div>                  
                 </div>
                 <div class="card-content">
 				
@@ -24,7 +22,6 @@
                     <span>{{__ "Using Account Details"}}</span>
                   </p>
                   <div class="card-body NF_login">
-				  {{log messages}}
 				  {{#if messages.error}}
 					<script>
 						toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
