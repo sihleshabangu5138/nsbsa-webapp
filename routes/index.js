@@ -23,18 +23,27 @@ router.get('/',isAuthenticated, function(req, res, next) {
 		 
 		var languages = lang.getLocale();
 		var query = {status : 1};
+		var myquery = {status : 0};
+		var dquery = {approvestatus : 1};
+		var lquery = {approvestatus : 0};
 		dbo.collection("Users").count((query), function(error, activeuser){
+		dbo.collection("Users").count((myquery), function(error, deactiveuser){
 			//var percent = activeuser * 100 +"%";
             if(error) return callback(error);
-		dbo.collection("loan_details").count((query), function(error, num_of_loan){
+		dbo.collection("loan_details").count((dquery), function(error, num_of_loan){
+		dbo.collection("loan_details").count((lquery), function(error, num_of_disloan){
             if(error) return callback(error); 
 		dbo.collection("Users").find(query).toArray(function(err, userresult) {
 		dbo.collection("loantype").find().limit(5).toArray(function(err, loanresult) {
 		dbo.collection("loan_details").find(query).limit(3).toArray(function(err, loan) {
 		dbo.collection("events").find().toArray(function(err, events) {
+		dbo.collection("Reminder").find().toArray(function(err, Reminder) {
 			
-		res.render('index', {title:"Dashboard",session:req.session,activecount:activeuser,loanno:num_of_loan,setlang:languages, userdata:userresult, loandata:loanresult, loan:loan, events:events});
+		res.render('index', {title:"Dashboard",session:req.session,activecount:activeuser,deactiveuser:deactiveuser,loanno:num_of_loan,setlang:languages, userdata:userresult, loandata:loanresult, loan:loan, events:events,Reminder:Reminder,num_of_disloan:num_of_disloan});
 		});
+});
+});
+});
 });
 });
 });

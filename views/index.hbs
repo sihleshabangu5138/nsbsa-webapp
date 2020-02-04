@@ -136,63 +136,25 @@
                   <table id="recent-orders" class="table table-borderless mb-0">
                     <thead>
                       <tr>
-                        <th>Task title</th>
-                        <th>Assigned To</th>
-                        <th>Status</th>
-                        <th>Due Date</th>
+                        <th>Reminder name</th>
+                        <th>Reminder for</th>
+                        <th>Description</th>
+                        <th>Type</th>
 		               </tr>
                     </thead>
                     <tbody>
+					{{#each Reminder}}
                       <tr>
-                        <td class="text-truncate">P10011</td>
-                        <td class="text-truncate">Elizabeth W.</td>
+                        <td class="text-truncate">{{this.reminder_nm}}</td>
+                        <td class="text-truncate">{{this.reminder_template}}</td>
                         <td class="text-truncate">
-                          <span class="badge badge-default badge-success">Started</span>
+                          <span class="badge badge-default badge-success">{{this.reminder_desc}}</span>
                         </td>
                         
-						 <td class="text-truncate">26-07-2018 08:15:00</td>
+						 <td class="text-truncate">{{this.reminder_type}}</td>
 						 
                       </tr>
-                      <tr>
-                        <td class="text-truncate">P10012</td>
-                        <td class="text-truncate">Doris R.</td>
-                        
-                        <td class="text-truncate">
-                           <span class="badge badge-default badge-danger">Not Started</span>
-                        </td>
-                         
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10013</td>
-                         
-                        <td class="text-truncate">Andrew D.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-success">Started</span>
-                        </td>
-                        
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10014</td>
-                        
-                        <td class="text-truncate">Megan S.</td>
-                        <td class="text-truncate">
-                         <span class="badge badge-default badge-success">Started</span>
-                        </td>
-                       
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10015</td>
-                        
-                        <td class="text-truncate">Walter R.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-danger">Not Started</span>
-                        </td>
-                       
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
+					{{/each}}
                     </tbody>
                   </table>
                 </div>
@@ -312,12 +274,60 @@
 		  
         </div>
         <!--/ Product sale & buyers -->
-       
+		<div class="row m-0">
+		<div class="card col-md-6">
+		  <div class="card-header border-bottom border-light">
+			<h4 class="card-title text-capitalize">Users</h4>
+			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+		   <div class="heading-elements">
+				<a href="#" title="View New Customer"><i class="ft-external-link"></i></a>
+			</div>
+		  </div>
+		  <div class="card-content">
+			<div id="recent-buyers" class="media-list height-300 position-relative">
+			  <div class="card-content">
+				<!-- Pie charts section start -->
+				<section id="chartjs-pie-charts">
+				  <div class="row">
+					<!-- Simple Pie Chart -->
+					<div id="piechart"></div>
+				  </div>
+				</section>
+				<!-- // Pie charts section end -->
+		  </div>
+			</div>
+		  </div>
+        </div>
+		<div class="card col-md-6">
+		  <div class="card-header border-bottom border-light">
+			<h4 class="card-title text-capitalize">Loans</h4>
+			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+		   <div class="heading-elements">
+				<a href="#" title="View New Customer"><i class="ft-external-link"></i></a>
+			</div>
+		  </div>
+		  <div class="card-content px-1">
+			<div id="recent-buyers" class="media-list height-300 position-relative">
+			  <div class="card-content">
+				<!-- Pie charts section start -->
+				<section id="chartjs-pie-charts">
+				  <div class="row">
+					<!-- Simple Pie Chart -->
+					<div id="piechart2"></div>
+				  </div>
+				</section>
+				<!-- // Pie charts section end -->
+		  </div>
+			</div>
+		  </div>
+        </div>
+        </div>
 		 
         </div>
+		
+	  
       </div>
     </div>
-  </div>
 	
 <!--/ Product sale & buyers -->
 
@@ -343,4 +353,51 @@ $('#dashboard_calendar').fullCalendar({
 			},			
 		});
 	});
+</script>
+<script type="text/javascript" src="/js/loader.js"></script>
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var count = '{{this.activecount}}'
+  var decount = '{{this.deactiveuser}}'
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Active Users', parseInt(count)],
+  ['Deactive users', parseInt(decount)]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'width':600, 'height':300};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var loan = '{{this.loanno}}'
+  var deloan = '{{this.num_of_disloan}}'
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Approved Loans', parseInt(deloan)],
+  ['Disapproved Loans', parseInt(loan)]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'width':600, 'height':300};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+  chart.draw(data, options);
+}
 </script>

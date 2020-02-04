@@ -15,9 +15,23 @@ router.use(flash());
 
 
 router.get('/', isAuthenticated,function(req, res, next) {
-	
-	res.render('report/report', { title: 'report',session:req.session,messages:req.flash()});
+	var dbo = db.get("BankingSystem"); 
+	var query = {status : 1};
+	var myquery = {status : 0};
+	var mysquery = {approvestatus : 0};
+	var mylquery = {approvestatus : 1};
+	dbo.collection("Users").count((query), function(error, activeuser){
+	dbo.collection("Users").count((myquery), function(error, deactiveuser){
+		if(error) return callback(error);
+	dbo.collection("loan_details").count((mylquery), function(error, num_of_loan){
+	dbo.collection("loan_details").count((mysquery), function(error, num_of_disloan){
+		if(error) return callback(error); 
+	res.render('report/report', { title: 'report',session:req.session,messages:req.flash(),activecount:activeuser,loanno:num_of_loan,deactivecount:deactiveuser,deloanno:num_of_disloan});
  
+});
+});
+});
+});
 });
 
 function isAuthenticated(req, res, next) {

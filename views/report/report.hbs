@@ -1,346 +1,89 @@
 {{breadcrums 'Home' 'Report'}}
-<div class="app-content center-layout mt-2 mx-md-3 px-1">
-    <div class="content-wrapper">
-        <div class="content-body">
-        <!-- Stats -->
-        <div class="row">
-          <div class="col-xl-3 col-lg-6 col-12 block_four">
-            <div class="card">
-              <div class="card-content">
-                <div class="media align-items-stretch">
-                  <div class="p-1 text-center block_first bg-darken-2">
-                    <i class="icon-camera font-large-1 white"></i>
-					 
-                  </div>
-                  <div class="p-1 block_first white media-body">
-                    <h5 class="text-uppercase">{{__ "Total Customer"}}</h5>
-                    <h5 >{{this.activecount}}</h5>
-                    <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: {{this.activecount}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    <!-- <h5 class="text-bold-400 mb-0"></i>{{__ "3% Increase.."}}</h5> -->
-                    <h5 class="text-bold-400 mb-0"></i>{{this.activecount}}% increase</h5>
-                  </div>
+<div class="app-content container center-layout mt-2">
+<div class="content-wrapper">
+<div class="content-body">
+        <!-- Pie charts section start -->
+        <section id="chartjs-pie-charts">
+          <div class="row">
+            <!-- Simple Pie Chart -->
+            <div class="col-md-12 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Users </h4>
+                </div>
+                <div class="card-content collapse show">
+                    <div id="piechart"></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-6 col-12 block_four">
-            <div class="card">
-              <div class="card-content">
-                <div class="media align-items-stretch">
-                  <div class="p-1 text-center block_second bg-darken-2">
-                    <i class="ft-eye font-large-1 white"></i>
-                  </div>
-                  <div class="p-1 block_second white media-body">
-                    <h5 class="text-uppercase">{{__ "Total Loan"}}</h5>
-                    <h5>{{this.loanno}}</h5>
-					 <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: {{this.loanno}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    <h5 class="text-bold-400 mb-0"></i>{{this.loanno}}{{__ "% Increase.."}}</h5>
-                  </div>
+        </section>
+        <!-- // Pie charts section end -->
+		<!-- Pie charts section start -->
+        <section id="chartjs-pie-charts">
+          <div class="row">
+            <!-- Simple Pie Chart -->
+            <div class="col-md-12 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Loans </h4>
+                </div>
+                <div class="card-content collapse show">
+                    <div id="piechart2"></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-6 col-12 block_four">
-            <div class="card">
-              <div class="card-content">
-                <div class="media align-items-stretch ">
-                  <div class="p-1 text-center bg-darken-2 block_violet">
-                    <i class="ft-download-cloud font-large-1 white"></i>
-                  </div>
-                  <div class="p-1 white media-body block_violet">
-                    <h5 class="text-uppercase">{{__ "Completed loan"}}</h5>
-					<h5>{{this.loanno}}</h5>
-					 <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    <h5 class="text-bold-400 mb-0"></i>{{this.loanno}} {{__ "% Increase.."}}</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-6 col-12 block_four">
-            <div class="card">
-              <div class="card-content">
-                <div class="media align-items-stretch">
-                  <div class="p-1 text-center bg-red bg-accent-4 bg-darken-2">
-                    <i class="fa fa-comment-o font-large-1 white"></i>
-                  </div>
-                  <div class="p-1 bg-red bg-accent-4 white media-body">
-                    <h5 class="text-uppercase">{{__ "Failed Loan"}}</h5>
-                    <h5>{{__ "0"}}</h5>
-					 <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    <h5 class="text-bold-400 mb-0">{{__ "0% Increase.."}}</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-       <!--/ Stats -->
-        <!--Product sale & buyers -->
-        <div class="row match-height" id="calendar">
-          <div class="col-xl-8 col-lg-12">
-            <div class="card">
-              <div class="card-content">
-                <div class="card-body px-0">
-
-				 <ul class="nav nav-tabs nav-underline border-bottom border-light px-1">
-                      <li class="nav-item">
-                        <a class="nav-link border-bottom-accent-2 active" id="homeIcon1-tab1" data-toggle="tab" href="#calendatIcon11" aria-controls="calendatIcon11"
-                        aria-expanded="true"><i class="fa fa-calendar"></i>{{__ "Calendar"}}</a>
-                      </li>
-					  <li class="nav-item">
-                        <a class="nav-link" id="aboutIcon11-tab1" data-toggle="tab" href="#aboutIcon11" aria-controls="aboutIcon11"
-                        aria-expanded="false"><i class="fa fa-clock-o"></i>{{__ "Reminders"}}</a>
-                      </li> 
-					  <li class="nav-item">
-                        <a class="nav-link" id="Notices-tab1" data-toggle="tab" href="#Notices" aria-controls="Notices"
-                        aria-expanded="false"><i class="fa fa-bullhorn"></i> {{__ "Events"}}</a>
-                      </li>
-				
-                    </ul>
-					 <div class="tab-content px-1 pt-1">
-                      <div role="tabpanel" class="tab-pane active in" id="calendatIcon11" aria-labelledby="homeIcon1-tab1"
-                      aria-expanded="true">
-                        
-					 <!-- Full calendar basic example section start -->
-						<section id="basic-examples">
-							<div class="row">
-								<div class="col-12">
-									<div class="card">
-										<div class="card-content collapse show">
-											<div class="card-body123 ">
-												<div id='dashboard_calendar'></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-        <!-- // Full calendar basic example section end -->
-       </div> 
-			
-		<div role="tabpanel" class="tab-pane" id="aboutIcon11" aria-labelledby="MyTask-tab1"
-                      aria-expanded="true">
-            <div class="card-content">
-                
-                <div class="table-responsive">
-				 
-                  <table id="recent-orders" class="table table-borderless mb-0">
-                    <thead>
-                      <tr>
-                        <th>Task title</th>
-                        <th>Assigned To</th>
-                        <th>Status</th>
-                        <th>Due Date</th>
-		               </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-truncate">P10011</td>
-                        <td class="text-truncate">Elizabeth W.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-success">Started</span>
-                        </td>
-                        
-						 <td class="text-truncate">26-07-2018 08:15:00</td>
-						 
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10012</td>
-                        <td class="text-truncate">Doris R.</td>
-                        
-                        <td class="text-truncate">
-                           <span class="badge badge-default badge-danger">Not Started</span>
-                        </td>
-                         
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10013</td>
-                         
-                        <td class="text-truncate">Andrew D.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-success">Started</span>
-                        </td>
-                        
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10014</td>
-                        
-                        <td class="text-truncate">Megan S.</td>
-                        <td class="text-truncate">
-                         <span class="badge badge-default badge-success">Started</span>
-                        </td>
-                       
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">P10015</td>
-                        
-                        <td class="text-truncate">Walter R.</td>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-danger">Not Started</span>
-                        </td>
-                       
-						<td class="text-truncate">26-07-2018 08:15:00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-          
-                      </div> 
-					 
-             <div role="tabpanel" class="tab-pane" id="Notices" aria-labelledby="Notices-tab1"
-                      aria-expanded="true">
-            <div class="card-content">
-                
-                <div class="table-responsive">
-				 
-                  <table id="recent-orders" class="table table-borderless mb-0">
-                    <thead>
-                      <tr>
-                        <th>Event title</th>
-                        <th>Event Description</th>
-                        <th>Start Date</th>
-                        <th>End For</th>
-		               </tr>
-                    </thead>
-                    <tbody>
-					{{#each events}}
-                      <tr>
-                        <td class="text-truncate">{{this.eventtitle}}</td>
-						 <td class="text-truncate">{{this.eventdetail}}</td>
-                        <td class="text-truncate">{{this.startdate}}</td>                        
-						 <td class="text-truncate">{{this.enddate}}</td>
-                      </tr>
-                     {{/each}}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-          
-                      </div>  
-                </div>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-12 Buyers">
-            <div class="card">
-              <div class="card-header border-bottom border-light">
-                <h4 class="card-title text-capitalize">Active Users</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-					<a href="/users/userlist" title="View New Customer"><i class="ft-external-link"></i></a>
-				</div>
-              </div>
-              <div class="card-content px-1">
-                <div id="recent-buyers" class="media-list height-300 position-relative">
-				{{#each userdata}}
-                  <a href="/users/viewuser/{{this._id}}" class="media border-0">
-                    <div class="media-left pr-1">
-                      <span class="avatar avatar-md avatar-online">
-                        <img class="media-object avatar avatar-online roundimage" src="/images/upload/{{this.photo}}"
-                        alt="Generic placeholder image">
-                        <i></i>
-                      </span>
-                    </div>
-                    <div class="media-body w-100">
-                      <h6 class="list-group-item-heading">{{this.firstname}} {{this.middlename}} {{this.lastname}}
-                        <!-- <span class="font-medium-1 float-right pt-1 text-bold-500">$1,021</span> -->
-                      </h6>
-                      <p class="list-group-item-text mb-0">
-                        <span class="badge badge-warning ml-1">{{this.occupation}}</span>
-                      </p>
-                    </div>
-                  </a>
-				  {{/each}}
-                </div>
-              </div>
-            </div>
-			
-			<!-- failed order   --->
-			<div class="card">
-              <div class="card-header border-bottom border-light">
-                <h4 class="card-title text-capitalize">Types of Loan</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-               <div class="heading-elements">
-					<a href="#" title="View New Customer"><i class="ft-external-link"></i></a>
-				</div>
-              </div>
-              <div class="card-content px-1">
-                <div id="recent-buyers" class="media-list height-300 position-relative">
-                  <div class="card-content">
-                
-                <div class="table-responsive">
-				 
-                  <table id="recent-orders" class="table table-borderless mb-0">
-                    <thead>
-                      <tr>
-                        <th>Loan Type</th>
-						<th>Interest Rate</th>	
-                      </tr>
-                    </thead>
-                    <tbody>
-					{{#each loandata}}
-                      <tr>
-                        <td class="text-truncate">
-                          <span class="badge badge-default badge-success">{{this.type}}</span>
-                        </td>
-                        <td class="text-truncate">{{this.interestrate}} %</td>
-                      </tr>
-					{{/each}}   
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-        </div>
-        <!--/ Product sale & buyers -->
-       
-		 
-        </div>
+        </section>
+        <!-- // Pie charts section end -->
       </div>
-    </div>
-  </div>
-	
-<!--/ Product sale & buyers -->
+</div>
+</div>
 
+<script type="text/javascript" src="/js/loader.js"></script>
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
+// Draw the chart and set the chart values
+function drawChart() {
+  var count = '{{this.activecount}}'
+  var decount = '{{this.deactivecount}}'
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Active Users', parseInt(count)],
+  ['Deactive users', parseInt(decount)]
+]);
 
+  // Optional; add a title and set the width and height of the chart
+  var options = {'width':'100%', 'height':700};
 
-<!--   -->
-<script>
-$(document).ready(function(){
-$('#dashboard_calendar').fullCalendar({		
-			defaultDate: new Date(),
-			businessHours: true, // display business hours
-			editable: false,
-			displayEventTime : false ,
-			eventRender: function(eventObj, $el) {
-			  $el.popover({
-				title: eventObj.title,
-				content: eventObj.description,
-				trigger: 'hover',
-				placement: 'top',
-				container: 'body'
-			  });
-			},			
-		});
-	});
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var loan = '{{this.loanno}}'
+  var deloan = '{{this.deloanno}}'
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Approved Loans', parseInt(deloan)],
+  ['Disapproved Loans', parseInt(loan)]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'width':'100%', 'height':700};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+  chart.draw(data, options);
+}
 </script>
