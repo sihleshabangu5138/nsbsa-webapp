@@ -40,7 +40,7 @@ router.use(session({ secret: '222222'}))
 router.use(flash());
 
 router.route('/:id?')
-.get(function (req, res) {
+.get(isAuthenticated,function (req, res) {
 	var languages = lang.getLocale();
 	var dbo = db.get();
 	var id = req.params.id;
@@ -108,7 +108,7 @@ router.route('/:id?')
     }
 })
 // FOR FORM UPDATE AND ADD
-.post(upload.any(),function (req, res){	
+.post(upload.any(),isAuthenticated,function (req, res){	
     var id = req.body.id;
 	var msg;
 	var i=0;	
@@ -506,7 +506,7 @@ router.route('/:id?')
 	}
 })
 
-/* function isAuthenticated(req, res, next) {
+function isAuthenticated(req, res, next) {
 	var dbo = db.get();
 	if (req.session.username != undefined) {
 		if(req.session.admin_access == 1){
@@ -545,5 +545,5 @@ router.route('/:id?')
 	else {
 		res.redirect('/');	
 	}
-}; */
+};
 module.exports = router;
