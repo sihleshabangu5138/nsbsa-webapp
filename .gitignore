@@ -5,4 +5,4 @@ public/images/upload/
 node_modules/
 node_modules/uuid/package.json
 node_modules/*
-locales
+locales/
