@@ -473,24 +473,24 @@ router.route('/:id?')
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 					}
-					if(req.files){
-					for (const [key, value] of Object.entries(req.files)){
-					if (value.fieldname == "photo"){						
+					// if(req.files){
+					// for (const [key, value] of Object.entries(req.files)){
+					// if (value.fieldname == "photo"){						
 							
-					}
-					else{
-						var this_data = {
-							custom_field_id: ObjectId(value.fieldname),
-							customfield_value: value.filename,
-							module: "user",
-							user_id: ObjectId(req.session.user_id),
-							reference_id: result.insertedId,
-							updated_at: formatdate,
-						}
-					}
-					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
-					}
-					}
+					// }
+					// else{
+						// var this_data = {
+							// custom_field_id: ObjectId(value.fieldname),
+							// customfield_value: value.filename,
+							// module: "user",
+							// user_id: ObjectId(req.session.user_id),
+							// reference_id: result.insertedId,
+							// updated_at: formatdate,
+						// }
+					// }
+					// dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
+					// }
+					// }
 					 if (err) {			
 						req.flash('error',lang.__('Error occured.'));
 						res.redirect('/users/userlist');
