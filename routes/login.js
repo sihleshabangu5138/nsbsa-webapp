@@ -139,7 +139,6 @@ function isAuthenticated(req, res, next) {
 		res.render('login', { title: 'NiftyEWS',layout:"loginlayout"});	
 	}
 };
-
 function roleaccess(role,callback) {
 	var dbo = db.get();
 	var myquery ={"_id": ObjectId(role)}; 
