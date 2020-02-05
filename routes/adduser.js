@@ -54,10 +54,10 @@ router.route('/:id?')
 			result_data=result;
 			result_data[0].id_d=ObjectId(result_data[0].role).toString();
 		var query ={"user_id": ObjectId(id)};
-		// var family_data=[];
-		// dbo.collection("familydata").find(query).toArray(function(err, family_data1) {
-			// family_data=family_data1;
-			// family_data[0].id_d=ObjectId(family_data1[0]._id).toString();
+		var family_data=[];
+		dbo.collection("familydata").find(query).toArray(function(err, family_data1) {
+			family_data=family_data1;
+			family_data[0].id_d=ObjectId(family_data1[0]._id).toString();
 		dbo.collection("Role").find().toArray(function(err, role_name) {
 			fs.readFile('public/data/countries.json', function(err, data) { 
 			var jsonData = data;
@@ -80,12 +80,12 @@ router.route('/:id?')
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
 				};				
-				res.render('users/adduser', {title:"Add User",data: result_data,id:id,role:role_name,session:req.session,country:jsonParsed.countries,setting:setting, setlang:languages, newfield:customfield, customfield_value:customfield_value});
+				res.render('users/adduser', {title:"Add User",data: result_data,id:id,role:role_name,family:family_data,session:req.session,country:jsonParsed.countries,setting:setting, setlang:languages, newfield:customfield, customfield_value:customfield_value});
 			});			
 		});	
 		});
 		});
-		// });
+		});
 		});
 		});
 		}
@@ -473,24 +473,24 @@ router.route('/:id?')
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 					}
-					// if(req.files){
-					// for (const [key, value] of Object.entries(req.files)){
-					// if (value.fieldname == "photo"){						
+					if(req.files){
+					for (const [key, value] of Object.entries(req.files)){
+					if (value.fieldname == "photo"){						
 							
-					// }
-					// else{
-						// var this_data = {
-							// custom_field_id: ObjectId(value.fieldname),
-							// customfield_value: value.filename,
-							// module: "user",
-							// user_id: ObjectId(req.session.user_id),
-							// reference_id: result.insertedId,
-							// updated_at: formatdate,
-						// }
-					// }
-					// dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
-					// }
-					// }
+					}
+					else{
+						var this_data = {
+							custom_field_id: ObjectId(value.fieldname),
+							customfield_value: value.filename,
+							module: "user",
+							user_id: ObjectId(req.session.user_id),
+							reference_id: result.insertedId,
+							updated_at: formatdate,
+						}
+					}
+					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
+					}
+					}
 					 if (err) {			
 						req.flash('error',lang.__('Error occured.'));
 						res.redirect('/users/userlist');
