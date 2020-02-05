@@ -27,6 +27,7 @@ router.get('/',isAuthenticated, function(req, res, next) {
 	}
 });
 router.post('/',function(req, res) {
+	console.log("In login")
 	var dbo=db.get();
 		dbo.collection("Generalsetting").find().toArray(function(err, result) {
 			//res.cookie('locale', result[0].language, { maxAge: 90000000, httpOnly: true });
@@ -101,10 +102,10 @@ router.post('/',function(req, res) {
 								}
 							 req.session.impersondata = '';
 							res.redirect('/dashboard'); 
-						}); 
-						}); 
-						}); 
-					}  
+						});
+						});
+						});
+					}
 				 }
 				 else{
 					req.flash('error','You are not allow to login.');
