@@ -487,8 +487,8 @@ router.route('/:id?')
 							reference_id: result.insertedId,
 							updated_at: formatdate,
 						}
-					}
 					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
+					}
 					}
 					}
 					 if (err) {			
