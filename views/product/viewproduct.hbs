@@ -146,27 +146,27 @@
                 </div>				 
 		</div>
 		<div class="h3 p-1 font-weight-bolder">
-		  <i class="fa fa-sign-in  " aria-hidden="true"></i> {{#with ..}}{{__ "Price Details" setlang}}{{/with}}
+		  <i class="fa fa-sign-in  " aria-hidden="true"></i>({{{currencyList ../session.generaldata.currency}}}) {{#with ..}}{{__ "Price Details" setlang}}{{/with}}
 		</div>
 		<div class="container-fluid"> 
 				<div class="row p-1">
 				    <div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Retail Price" setlang}}{{/with}}
+						  <div class="col-sm-6 font-weight-bold ">({{{currencyList ../session.generaldata.currency}}}){{#with ..}}{{__ "Retail Price" setlang}}{{/with}}
 						  </div>
 						  <div class="col-sm-6 "> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{this.retailprice}}</div>
+						  <div class="tabletext">{{this.retailprice}}</div>
 						  </div>
 						</div>
 				    </div>
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Special Price" setlang}}{{/with}}        
+						  <div class="col-sm-6 font-weight-bold ">({{{currencyList ../session.generaldata.currency}}}){{#with ..}}{{__ "Special Price" setlang}}{{/with}}        
 						  </div>
 						  <div class="col-sm-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{this.specialprice}}</div>  
+						  <div class="tabletext">{{this.specialprice}}</div>  
 						  </div>
 						</div>  
 				 </div> 				 
@@ -174,21 +174,21 @@
 				<div class="row p-1">
 				    <div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Supply Price" setlang}}{{/with}}
+						  <div class="col-sm-6 font-weight-bold ">({{{currencyList ../session.generaldata.currency}}}){{#with ..}}{{__ "Supply Price" setlang}}{{/with}}
 						  </div>
 						  <div class="col-sm-6 "> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{this.supplyprice}}</div>
+						  <div class="tabletext">{{this.supplyprice}}</div>
 						  </div>
 						</div>
 				    </div>
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Commission" setlang}}{{/with}}        
+						  <div class="col-sm-6 font-weight-bold ">({{{currencyList ../session.generaldata.currency}}}){{#with ..}}{{__ "Commission" setlang}}{{/with}}        
 						  </div>
 						  <div class="col-sm-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{#if this.commission}}{{this.commission}} {{else}}No Commission{{/if}}</div>  
+						  <div class="tabletext">{{#if this.commission}}{{this.commission}} {{else}}No Commission{{/if}}</div>  
 						  </div>
 						</div>  
 				 </div> 				 
