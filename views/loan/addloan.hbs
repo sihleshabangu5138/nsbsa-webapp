@@ -100,10 +100,10 @@
 				<div class="heading-elements "> 
 					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">User Name<span class="required red">*</span></label>
 						<select class="select2 form-control export" data-validation-required-message="User name is required" name="user" >					
-							<option value="">User</option> 
+							<option value="">---User---</option> 
 							{{#each ../user as |data1| }}
-							
-								<option {{#if data1.id_d}}{{#ifCond data1.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{data1._id}}" >{{data1.firstname}} {{data1.middlename}} {{data1.lastname}}</option>
+								
+								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{this._id}}" >{{this.firstname}} {{this.middlename}} {{this.lastname}}</option>
 								
 							{{/each}}
 						</select>
