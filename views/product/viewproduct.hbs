@@ -156,7 +156,7 @@
 						  </div>
 						  <div class="col-sm-6 "> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.retailprice}}</div>
+						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{this.retailprice}}</div>
 						  </div>
 						</div>
 				    </div>
@@ -166,7 +166,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">{{this.specialprice}}</div>  
+						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{this.specialprice}}</div>  
 						  </div>
 						</div>  
 				 </div> 				 
@@ -178,7 +178,7 @@
 						  </div>
 						  <div class="col-sm-6 "> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.supplyprice}}</div>
+						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{this.supplyprice}}</div>
 						  </div>
 						</div>
 				    </div>
@@ -188,7 +188,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">{{#if this.commission}}{{this.commission}} {{else}}No Commission{{/if}}</div>  
+						  <div class="tabletext">({{{currencyList ../session.generaldata.currency}}}){{#if this.commission}}{{this.commission}} {{else}}No Commission{{/if}}</div>  
 						  </div>
 						</div>  
 				 </div> 				 
