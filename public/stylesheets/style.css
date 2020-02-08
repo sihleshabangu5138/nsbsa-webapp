@@ -3,7 +3,9 @@
 	padding-left:25px !important;
 	padding-right:25px !important;
 }
-
+.media [class*="avatar-"] {
+    height: 40px!important;
+}
 textarea:focus {
   outline: none;
   border-bottom: 1px solid #BABFC7 !important;

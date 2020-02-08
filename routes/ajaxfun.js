@@ -144,6 +144,9 @@ router.get('/customfields', isAuthenticated,function(req, res) {
 	var dbo = db.get("BankingSystem");
 	dbo.collection("customfields").find({}).toArray(function(err, result) {
 		if (err) throw err;
+		for (const [key,value] of Object.entries(result)) {
+			result[key].valids=(value.validation).toString();
+		};
 		res.json(result);
 });
 });
