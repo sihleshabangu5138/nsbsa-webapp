@@ -33,7 +33,7 @@ router.get('/',isAuthenticated, function(req, res, next) {
 		dbo.collection("loan_details").count((dquery), function(error, num_of_loan){
 		dbo.collection("loan_details").count((lquery), function(error, num_of_disloan){
             if(error) return callback(error); 
-		dbo.collection("Users").find(query).toArray(function(err, userresult) {
+		dbo.collection("Users").find(query).limit(4).toArray(function(err, userresult) {
 		dbo.collection("loantype").find().limit(5).toArray(function(err, loanresult) {
 		dbo.collection("loan_details").find(query).limit(3).toArray(function(err, loan) {
 		dbo.collection("events").find().toArray(function(err, events) {
