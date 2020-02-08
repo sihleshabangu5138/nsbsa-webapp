@@ -97,7 +97,7 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} > 
+				<input type="hidden" id="userinput_1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} > 
 				<input type="text" id="userinput1" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Firstname is required" name="firstname"{{#if this.firstname}} value="{{this.firstname}}"{{/if}} >
 				<label for="userinput1">{{#with ..}}{{__ "First Name" setlang}}{{/with}}<span class="required red">*</span></label> 
 			</div><div class="help-block"></div>
@@ -106,7 +106,7 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light"> 
-				<input type="text"id="userinput1"name="middlename" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Middlename is required" {{#if this.middlename}} value="{{this.middlename}}"{{/if}} >
+				<input type="text"id="userinput__1"name="middlename" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Middlename is required" {{#if this.middlename}} value="{{this.middlename}}"{{/if}} >
 				<label for="userinput2">{{#with ..}}{{__ "Middle Name" setlang}}{{/with}}<span class="required red">*</span></label> 
 			</div><div class="help-block"></div>
 			</div>
@@ -126,7 +126,7 @@
 				<input class="form-control border-light imageUpload"  name="photo" {{#if this.photo}} value="{{this.photo}}" {{else}} data-validation-required-message="{{__ 'Profile Image is required'}}" {{/if}} type="file" id="userinput5" >
 				<span class="required red notice"></span>
 				{{#if this.photo}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.photo}}">
-				<input class="form-control border-light"  name="photo_old" value="{{this.photo}}" type="hidden"  placeholder="" id="userinput5" > {{/if}}
+				<input class="form-control border-light"  name="photo_old" value="{{this.photo}}" type="hidden"  placeholder="" id="userinput_5" > {{/if}}
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -294,7 +294,7 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light"> 
-				<input type="password" id="userinput24" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="Password must be of 6 to 12 digits" {{#if this.password}} {{else}} required data-validation-required-message="This field is required"  {{/if}}>
+				<input type="password" id="userinput_2" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="Password must be of 6 to 12 digits" {{#if this.password}} {{else}} required data-validation-required-message="This field is required"  {{/if}}>
 				<label for="userinput2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">*</span></label> 
 				
 				{{#if this.password}} 
