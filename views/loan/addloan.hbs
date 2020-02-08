@@ -103,7 +103,7 @@
 							<option value="">User</option> 
 							{{#each ../user as |data1| }}
 							
-								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{this._id}}" >{{this.firstname}} {{this.middlename}} {{this.lastname}}</option>
+								<option {{#if data1.id_d}}{{#ifCond data1.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{data1._id}}" >{{data1.firstname}} {{data1.middlename}} {{data1.lastname}}</option>
 								
 							{{/each}}
 						</select>
