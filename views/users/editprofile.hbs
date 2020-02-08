@@ -114,8 +114,8 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light"> 
-				<input type="text" id="userinput2" class="" name="lastname" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Lastname is required" {{#if this.lastname}} value="{{this.lastname}}"{{/if}}>
-				<label for="userinput2">{{#with ..}}{{__ "Last Name" setlang}}{{/with}}<span class="required red">*</span></label> 
+				<input type="text" id="userinput21" class="" name="lastname" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Lastname is required" {{#if this.lastname}} value="{{this.lastname}}"{{/if}}>
+				<label for="userinput21">{{#with ..}}{{__ "Last Name" setlang}}{{/with}}<span class="required red">*</span></label> 
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -163,8 +163,8 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light"> 
-				<input type="text" id="userinput2" class="" name="occupation" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Occupation is required" {{#if this.occupation}} value="{{this.occupation}}"{{/if}}>
-				<label for="userinput2">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}<span class="required red">*</span></label> 
+				<input type="text" id="userinput23" class="" name="occupation" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Occupation is required" {{#if this.occupation}} value="{{this.occupation}}"{{/if}}>
+				<label for="userinput23">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}<span class="required red">*</span></label> 
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -269,8 +269,8 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light"> 
-				<input type="text" id="userinput3" class="form-control" required=""  name="username" data-validation-regex-regex="([a-z0-9_\.-]+)" data-validation-regex-message="Enter Valid username" aria-invalid="true" {{#if this.username}} value="{{this.username}}"{{/if}}>
-				<label for="userinput3">{{#with ..}}{{__ "Username" setlang}}{{/with}}<span class="required red">*</span></label> 
+				<input type="text" id="userinput32" class="form-control" required=""  name="username" data-validation-regex-regex="([a-z0-9_\.-]+)" data-validation-regex-message="Enter Valid username" aria-invalid="true" {{#if this.username}} value="{{this.username}}"{{/if}}>
+				<label for="userinput32">{{#with ..}}{{__ "Username" setlang}}{{/with}}<span class="required red">*</span></label> 
 			</div>	<div class="help-block"></div>	
 			</div>
 			</div>
@@ -294,11 +294,11 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light"> 
-				<input type="password" id="userinput2" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="Password must be of 6 to 12 digits" {{#if this.password}} {{else}} required data-validation-required-message="This field is required"  {{/if}}>
+				<input type="password" id="userinput24" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="Password must be of 6 to 12 digits" {{#if this.password}} {{else}} required data-validation-required-message="This field is required"  {{/if}}>
 				<label for="userinput2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">*</span></label> 
 				
 				{{#if this.password}} 
-				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput5" > {{/if}}
+				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput24" > {{/if}}
 				
 			</div><div class="help-block"></div>
 			</div>
@@ -306,7 +306,7 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
-					<input type="password" id="userinput2" class="" name="confirmpassword"  data-validation-match-match="password"  {{#if this.confirmpassword}} {{/if}}>
+					<input type="password" id="userinput25" class="" name="confirmpassword"  data-validation-match-match="password"  {{#if this.confirmpassword}} {{/if}}>
 					<label for="userinput2">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">*</span></label>
 				</div><div class="help-block"></div>
 			</div>
