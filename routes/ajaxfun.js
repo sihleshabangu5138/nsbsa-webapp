@@ -119,7 +119,7 @@ router.get('/deleteloan/',isAuthenticated, function(req, res) {
 			}
 		}
 	dbo.collection("loan_details").updateOne(myquery, newvalues, function(err, result){
-		dbo.collection("emi_details").remove(myquery, function(err, result){
+		dbo.collection("emi_details").remove({"loan_id": ObjectId(id)}, function(err, result){
 		
         if (err) {
            res.json(false);
