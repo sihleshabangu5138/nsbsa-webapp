@@ -119,13 +119,11 @@
         </li>
 		
 		<li data-menu="dropdown" class="dropdown nav-item mr-1">
-          <a href="/report/report" class="dropdown-toggle nav-link"><i class="icon-speedometer" aria-hidden="true"></i>
+          <a href="/report/report" class="dropdown-toggle nav-link"><i class="fa fa-newspaper-o" aria-hidden="true"></i>
             <span>{{__ "Reports"}}</span>
           </a>
         </li>
-		
-
-        <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-wrench custom_height_width_icons"></i><span>{{__ "Services"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
+		  <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-wrench custom_height_width_icons"></i><span>{{__ "Services"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
 			<ul class="dropdown-menu">
 			
 			{{#hiddenmodules session.access_rights.service.view session.admin_access}}
