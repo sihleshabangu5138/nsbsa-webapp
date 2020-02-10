@@ -6,6 +6,9 @@
 .media [class*="avatar-"] {
     height: 40px!important;
 }
+.user_form{
+	min-height:180px
+}
 textarea:focus {
   outline: none;
   border-bottom: 1px solid #BABFC7 !important;
