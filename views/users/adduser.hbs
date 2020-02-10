@@ -11,8 +11,7 @@
 	<div class="card-content collpase show">
 	<div class="card-body">
 		<form autocomplete="off" id="formID" class="needs-validation form form-horizontal" novalidate method="post" action="/users/adduser" enctype="multipart/form-data">
-		<input type="radio" name="gender" value="male"> Male<br>
-
+		<input type="radio" name="gender" class="custom-control-input" {{#ifCond this.gender '==' 'Male'}} checked="" {{/ifCond}} value="Male" id="yes">
 		{{#each data as |result|}}
 		<script>
 		$(document).ready(function(){
@@ -106,7 +105,7 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} >
+				<input type="hidden" id="userinput" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} >
 				<input type="text" id="userinput1" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,25})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers and no space' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Firstname is required' setlang}}{{/with}}" name="firstname"{{#if this.firstname}} value="{{this.firstname}}"{{/if}} >
 				<label for="userinput1">{{#with ..}}{{__ "First Name" setlang}}{{/with}}<span class="required red">*</span></label>
 
@@ -117,8 +116,8 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 
-				<input type="text"id="userinput1"name="middlename" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,25})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers and no space' setlang}}{{/with}}" data-validation-required-message="{{__ 'Middlename is required'}}" {{#if this.middlename}} value="{{this.middlename}}"{{/if}} >
-				<label for="userinput2">{{#with ..}}{{__ "Middle Name" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input type="text"id="userinput_1"name="middlename" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,25})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers and no space' setlang}}{{/with}}" data-validation-required-message="{{__ 'Middlename is required'}}" {{#if this.middlename}} value="{{this.middlename}}"{{/if}} >
+				<label for="userinput_1">{{#with ..}}{{__ "Middle Name" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -320,8 +319,8 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input type="password" id="userinput2" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="Password must be of 6 to 12 digits" {{#if this.password}} {{else}} required data-validation-required-message="Password is required"  {{/if}}>
-				<label for="userinput2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input type="password" id="userinput_2" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="Password must be of 6 to 12 digits" {{#if this.password}} {{else}} required data-validation-required-message="Password is required"  {{/if}}>
+				<label for="userinput_2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">*</span></label>
 
 				{{#if this.password}}
 				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput5" > {{/if}}
@@ -332,8 +331,8 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
-					<input type="password" id="userinput2" class="" name="confirmpassword"  data-validation-match-match="password"  {{#if this.confirmpassword}} {{/if}}>
-					<label for="userinput2">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">*</span></label>
+					<input type="password" id="userinput21" class="" name="confirmpassword"  data-validation-match-match="password"  {{#if this.confirmpassword}} {{/if}}>
+					<label for="userinput21">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">*</span></label>
 				</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -587,7 +586,7 @@
 					<div>
 					{{#each family}}
 						<div class="row" data-repeater-item>
-							<input type="hidden" id="familymember" class="" name="id" {{#if this._id}} value="{{this._id}}" {{/if}}>
+							<input type="hidden" id="familymembers" class="" name="id" {{#if this._id}} value="{{this._id}}" {{/if}}>
 							<div class="col-md-3 notCustomerBlock">
 								<div class="form-group input">
 									<div class="col-md-12 form-control border-light">
