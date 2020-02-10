@@ -11,7 +11,7 @@
 	<div class="card-content collpase show">
 	<div class="card-body">
 		<form autocomplete="off" id="formID" class="needs-validation form form-horizontal" novalidate method="post" action="/users/adduser" enctype="multipart/form-data">
-		<input type="radio" name="gender" class="custom-control-input" {{#ifCond this.gender '==' 'Male'}} checked="" {{/ifCond}} value="Male" id="yes">
+		<input type="radio" name="gender" class="custom-control-input" value="Male" id="yes">
 		{{#each data as |result|}}
 		<script>
 		$(document).ready(function(){
