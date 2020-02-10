@@ -11,6 +11,8 @@
 	<div class="card-content collpase show">
 	<div class="card-body">
 		<form autocomplete="off" id="formID" class="needs-validation form form-horizontal" novalidate method="post" action="/users/adduser" enctype="multipart/form-data">
+		<input type="radio" name="gender" value="male"> Male<br>
+
 		{{#each data as |result|}}
 		<script>
 		$(document).ready(function(){
