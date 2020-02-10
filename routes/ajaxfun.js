@@ -119,12 +119,15 @@ router.get('/deleteloan/',isAuthenticated, function(req, res) {
 			}
 		}
 	dbo.collection("loan_details").updateOne(myquery, newvalues, function(err, result){
+		dbo.collection("emi_details").remove(myquery, function(err, result){
+		
         if (err) {
            res.json(false);
         }
 		else{
 			res.json(true);
 		}
+	});
 	});
 });
 router.get('/deletenoti',isAuthenticated, function(req, res) { 	

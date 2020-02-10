@@ -317,7 +317,7 @@ function myFunction() {
 										{{#each emi as |result|}}
 										
 									<tr class="colortr"> 
-									<td class="bordertop">{{@index}}</td>
+									<td class="bordertop">{{result.month}}</td>
 									<td class="bordertop">{{ result.date}}</td>
 									<td class="bordertop">{{formatNumber result.principal 0 ','','}}</td>
 									<td class="bordertop">{{formatNumber result.interest}}</td>					
@@ -416,7 +416,7 @@ function myFunction() {
 										<tbody>
 									{{#each repayment as |result|}} 
 									<tr class="colortr"> 
-									<td class="bordertop">{{@index}}</td>
+									<td class="bordertop">{{result.month}}</td>
 									<td class="bordertop">{{ result.date}}</td>
 									<!-- <td class="bordertop">{{formatNumber result.paymentemimonth }}</td> -->
 									<td class="bordertop">{{result.payment_type}}</td>

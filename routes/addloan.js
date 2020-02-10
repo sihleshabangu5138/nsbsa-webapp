@@ -430,7 +430,7 @@ router.route('/:id?')
 				startDate: req.body.startdate,
 			});
 			var data = [];
-			var index_id=1; 			
+			var index_id=1;
 			mortgage.schedule.forEach(element => {		
 			var date = moment(element.date).format("YYYY-MM-DD"); 
 				var this_news = { 
