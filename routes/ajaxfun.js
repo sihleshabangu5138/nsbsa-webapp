@@ -223,8 +223,11 @@ router.get('/rules', isAuthenticated,function(req, res) {
 router.get('/notes', isAuthenticated,function(req, res) { 
 	var dbo = db.get("BankingSystem");
 	dbo.collection("notes").find({}).toArray(function(err, result) {
-		if (err) throw err;
-		
+		for (const [key,value] of Object.entries(result)) {
+			result[key].obj=(value.note).toString();
+			result[key].object=(value.fileattach).toString();
+		};
+		if (err) throw err;		
 		res.json(result);
 });
 });
