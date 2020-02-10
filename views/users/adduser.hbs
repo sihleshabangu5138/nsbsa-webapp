@@ -11,7 +11,6 @@
 	<div class="card-content collpase show">
 	<div class="card-body">
 		<form autocomplete="off" id="formID" class="needs-validation form form-horizontal" novalidate method="post" action="/users/adduser" enctype="multipart/form-data">
-		<input type="radio" name="gender" class="custom-control-input" value="Male" id="yes">
 		{{#each data as |result|}}
 		<script>
 		$(document).ready(function(){
@@ -173,8 +172,8 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input type="text" id="userinput2" class="" name="occupation" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Occupation is required" {{#if this.occupation}} value="{{this.occupation}}"{{/if}}>
-				<label for="userinput2">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input type="text" id="userinput_2" class="" name="occupation" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Occupation is required" {{#if this.occupation}} value="{{this.occupation}}"{{/if}}>
+				<label for="userinput_2">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -290,8 +289,8 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input type="text" id="userinput3" class="form-control username" data-validation-required-message="User name is required" name="username" data-validation-regex-regex="([a-z0-9_\.-]+)" data-validation-regex-message="Enter Valid username" aria-invalid="true" {{#if this.username}} value="{{this.username}}"{{/if}}>
-				<label for="userinput3">{{#with ..}}{{__ "Username" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input type="text" id="userinput_3" class="form-control username" data-validation-required-message="User name is required" name="username" data-validation-regex-regex="([a-z0-9_\.-]+)" data-validation-regex-message="Enter Valid username" aria-invalid="true" {{#if this.username}} value="{{this.username}}"{{/if}}>
+				<label for="userinput_3">{{#with ..}}{{__ "Username" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div>	<span class="required red username" style="font-size:11px"></span><div class="help-block username"></div>
 			</div>
 			</div>
@@ -323,7 +322,7 @@
 				<label for="userinput_2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">*</span></label>
 
 				{{#if this.password}}
-				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput5" > {{/if}}
+				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput52" > {{/if}}
 
 			</div><div class="help-block"></div>
 			</div>
@@ -342,16 +341,16 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input autocomplete="off" type="text" id="userinput2" class="" name="accountnumber" data-validation-regex-regex="([0-9]{1,18})" minlength="9" maxlength="18" data-validation-regex-message="Enter valid Account Number" data-validation-required-message="Account Number is required" {{#if this.accountnumber}} value="{{this.accountnumber}}"{{/if}}>
-				<label for="userinput2">{{#with ..}}{{__ "Account Number" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input autocomplete="off" type="text" id="userinput22" class="" name="accountnumber" data-validation-regex-regex="([0-9]{1,18})" minlength="9" maxlength="18" data-validation-regex-message="Enter valid Account Number" data-validation-required-message="Account Number is required" {{#if this.accountnumber}} value="{{this.accountnumber}}"{{/if}}>
+				<label for="userinput22">{{#with ..}}{{__ "Account Number" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input autocomplete="off" type="text" id="userinput3" class="form-control" name="pannumber" data-validation-regex-regex="([A-Z]{5}[0-9]{4}[A-Z]{1})" maxlength="10" data-validation-regex-message="{{__ 'Enter Valid pan number'}}" data-validation-required-message="Pan Number is required" aria-invalid="true" {{#if this.pannumber}} value="{{this.pannumber}}"{{/if}}>
-				<label for="userinput3">{{__ "Pan Number"}}<span class="required red">*</span></label>
+				<input autocomplete="off" type="text" id="userinput33" class="form-control" name="pannumber" data-validation-regex-regex="([A-Z]{5}[0-9]{4}[A-Z]{1})" maxlength="10" data-validation-regex-message="{{__ 'Enter Valid pan number'}}" data-validation-required-message="Pan Number is required" aria-invalid="true" {{#if this.pannumber}} value="{{this.pannumber}}"{{/if}}>
+				<label for="userinput33">{{__ "Pan Number"}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 		</div>
@@ -569,7 +568,7 @@
 				
 				{{/ifCond}}
 		{{/each}}
-		name="{{datafield._id}}" type="file">{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "==" datafield.id_d}}<p>{{custome_value.customfield_value}}</p><input class="form-control border-light edit_val"  name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden"  placeholder="" id="userinput5">{{/ifCond}}{{/each}}
+		name="{{datafield._id}}" type="file">{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "==" datafield.id_d}}<p>{{custome_value.customfield_value}}</p><input class="form-control border-light edit_val"  name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden"  placeholder="" id="userinput51">{{/ifCond}}{{/each}}
 		<span class="required red notice"></span>
 	</div><div class="help-block"></div>
 	</div>
