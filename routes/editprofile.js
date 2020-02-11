@@ -202,9 +202,7 @@ router.route('/:id?')
 function isAuthenticated(req, res, next) {
 		
 	if (req.session.username != undefined) {
-		 return next();
-
-		
+		 return next();		
 	} else {
 		res.redirect('/');	
 	}

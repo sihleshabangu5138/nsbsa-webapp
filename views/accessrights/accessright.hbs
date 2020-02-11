@@ -58,6 +58,20 @@
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][owndata]" class="user_0" value="user_owndata"   {{#ifCond this.access_type.user.owndata "==" "user_owndata"}} checked{{/ifCond}}>
 										</td> 
 									</tr> 
+									<!--Deactivated Users Access Rights -->
+									<tr>
+										<td class=" skin skin-flat" value="deactiveuser" >Users</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][view]"  class="main_access" data-for="deactiveuser" value="deactiveuser_view" {{#ifCond this.access_type.deactiveuser.view "==" "deactiveuser_view"}} checked {{/ifCond}}> 
+										</td> 
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][add]" class="user_0" value="deactiveuser_add" {{#ifCond this.access_type.deactiveuser.add "==" "deactiveuser_add"}} checked {{/ifCond}}>
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][update]" class="user_0" value="deactiveuser_update"  {{#ifCond this.access_type.deactiveuser.update "==" "deactiveuser_update"}} checked {{/ifCond}}>
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][delete]" class="user_0" value="deactiveuser_delete" {{#ifCond this.access_type.deactiveuser.delete "==" "deactiveuser_delete"}} checked {{/ifCond}}>
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][owndata]" class="user_0" value="deactiveuser_owndata"   {{#ifCond this.access_type.deactiveuser.owndata "==" "deactiveuser_owndata"}} checked{{/ifCond}}>
+										</td> 
+									</tr> 
 									<!--Types Of Loans Rights -->
 									<tr>
 										<td class=" skin skin-flat" value="typeofloan" >Loan Type</td>
@@ -82,6 +96,20 @@
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][delete]" class="custom_fields_0" value="loan_list_delete" {{#ifCond this.access_type.loanlist.delete "==" "loan_list_delete"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][owndata]" class="custom_fields_0" value="loan_list_owndata" {{#ifCond this.access_type.loanlist.owndata "==" "loan_list_owndata"}} checked {{/ifCond}} >
+										</td>
+									</tr>
+									<!--Disapproved Loan List Access Rights -->
+									<tr>
+										<td class="skin skin-flat" value="disapproveloanlist" >Disapproved Loan List</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][view]" data-row="0" class="main_access" data-for="custom_fields" value="disapproveloan_list_view" {{#ifCond this.access_type.disapproveloanlist.view "==" "disapproveloan_list_view"}} checked {{/ifCond}}>
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][add]" class="custom_fields_0" value="disapproveloan_list_add" {{#ifCond this.access_type.disapproveloanlist.add "==" "disapproveloan_list_add"}} checked {{/ifCond}} >
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][update]" class="custom_fields_0" value="disapproveloan_list_update" {{#ifCond this.access_type.disapproveloanlist.update "==" "disapproveloan_list_update"}} checked {{/ifCond}}  >
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][delete]" class="custom_fields_0" value="disapproveloan_list_delete" {{#ifCond this.access_type.disapproveloanlist.delete "==" "disapproveloan_list_delete"}} checked {{/ifCond}}>
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][owndata]" class="custom_fields_0" value="disapproveloan_list_owndata" {{#ifCond this.access_type.disapproveloanlist.owndata "==" "disapproveloan_list_owndata"}} checked {{/ifCond}} >
 										</td>
 									</tr>
 									<!-- Product Rights-->

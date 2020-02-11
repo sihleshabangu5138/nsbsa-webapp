@@ -61,10 +61,17 @@ function isAuthenticated(req, res, next) {
 			var query = {"rolename":req.session.role_slug};
 			dbo.collection("Access_Rights").find(query).toArray(function(err, result) {
 				if(result[0].access_type != undefined){
+					console.log(result)
 					if(result[0].access_type.user != undefined){
 						if(result[0].access_type.user.view != undefined){
 							return next();
 						}
+						else{
+							res.redirect('/dashboard');	
+						}
+					}
+					else{
+						res.redirect('/dashboard');	
 					}
 				}
 				else{

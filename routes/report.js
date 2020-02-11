@@ -43,29 +43,21 @@ function isAuthenticated(req, res, next) {
 		else{
 			var query = {"rolename":req.session.role_slug};
 			dbo.collection("Access_Rights").find(query).toArray(function(err, result) {
-				if(req.url == "/"){
-					if(result[0].access_type != undefined){
-						if(result[0].access_type.category != undefined){
-							if(result[0].access_type.category.add != undefined){
-								return next();
-							}
-							else{
-								res.redirect('/dashboard');	
-							}
+				if(result[0].access_type != undefined){
+					if(result[0].access_type.report != undefined){
+						if(result[0].access_type.report.view != undefined){
+							return next();
 						}
+						else{
+							res.redirect('/dashboard');	
+						}
+					}
+					else{
+						res.redirect('/dashboard');	
 					}
 				}
 				else{
-					if(result[0].access_type != undefined){
-						if(result[0].access_type.category != undefined){
-							if(result[0].access_type.category.update != undefined){
-								return next();
-							}
-							else{
-								res.redirect('/dashboard');	
-							}
-						}
-					}
+					res.redirect('/dashboard');	
 				}
 			});
 		}

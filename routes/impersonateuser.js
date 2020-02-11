@@ -103,13 +103,37 @@ router.route('/:id?')
 	});
 })
 function isAuthenticated(req, res, next) {
+	var dbo = db.get();
 	if (req.session.username != undefined) {
-		 return next();
-	
-	} else {
+		if(req.session.admin_access == 1){
+			 return next();
+		}
+		else{
+			var query = {"rolename":req.session.role_slug};
+			dbo.collection("Access_Rights").find(query).toArray(function(err, result) {
+				if(result[0].access_type != undefined){
+					if(result[0].access_type.impersonate != undefined){
+						if(result[0].access_type.impersonate.view != undefined){
+							return next();
+						}
+						else{
+							res.redirect('/dashboard');	
+						}
+					}
+					else{
+						res.redirect('/dashboard');	
+					}
+				}
+				else{
+					res.redirect('/dashboard');	
+				}
+			});
+		}
+	}
+	else {
 		res.redirect('/');	
 	}
-	
 };
+
 
 module.exports = router;

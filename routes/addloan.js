@@ -522,6 +522,12 @@ function isAuthenticated(req, res, next) {
 								res.redirect('/dashboard');	
 							}
 						}
+						else{
+							res.redirect('/dashboard');	
+						}
+					}
+					else{
+						res.redirect('/dashboard');	
 					}
 				}
 				else{
@@ -534,6 +540,12 @@ function isAuthenticated(req, res, next) {
 								res.redirect('/dashboard');	
 							}
 						}
+						else{
+							res.redirect('/dashboard');	
+						}
+					}
+					else{
+						res.redirect('/dashboard');	
 					}
 				}
 			});

@@ -46,6 +46,12 @@ function isAuthenticated(req, res, next) {
 						if(result[0].access_type.service.view != undefined){
 							return next();
 						}
+						else{
+							res.redirect('/dashboard');	
+						}
+					}
+					else{
+						res.redirect('/dashboard');	
 					}
 				}
 				else{
