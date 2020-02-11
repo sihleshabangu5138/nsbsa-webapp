@@ -127,22 +127,23 @@
 			<ul class="dropdown-menu">
 			
 			{{#hiddenmodules session.access_rights.service.view session.admin_access}}
-            <a href="/service/servicelist"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Service List"}}
+            <a href="/service/servicelist"><li class="dropdown-item"><i class="fa fa-cog" aria-hidden="true"></i>{{__ "Service List"}}
             </li></a>
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.category.view session.admin_access}}
-			<a href="/category/categorylist"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Category List"}}
+			<a href="/category/categorylist"><li class="dropdown-item"><i class="fa fa-list-ul" aria-hidden="true"></i>{{__ "Category List"}}
             </li></a>
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.events.view session.admin_access}}
-			<a href="/events/eventlist"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Events"}}
+			<a href="/events/eventlist"><li class="dropdown-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>{{__ "Events"}}
             </li></a>	
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.rulesandregulation.view session.admin_access}}
-			<a href="/rule/rules"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Rules and Regulations"}}
+			<a href="/rule/rules"><li class="dropdown-item"><i class="fa fa-clipboard" aria-hidden="true"></i>
+{{__ "Rules and Regulations"}}
             </li></a>
 			{{/hiddenmodules}}
 			
