@@ -4,7 +4,7 @@
 	padding-right:25px !important;
 }
 .image-height{
-	height:40px;
+	height:40px!important;
 }
 textarea:focus {
   outline: none;
