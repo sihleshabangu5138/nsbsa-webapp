@@ -108,5 +108,4 @@ function isAuthenticated(req, res, next) {
 		res.redirect('/');	
 	}
 };
-
 module.exports = router;
