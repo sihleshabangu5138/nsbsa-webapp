@@ -55,7 +55,9 @@ router.post('/',function(req, res) {
 						var myquery1 ={"id": req.body._id };
 						dbo.collection("Generalsetting").find(myquery1).toArray(function(err, result1) {					
 						dbo.collection("Role").find({"_id": result[0].role}).toArray(function(err, roledata) {	
-						dbo.collection("Access_Rights").find({"rolename": roledata[0].role_slug}).toArray(function(err, accessdata) {						
+						console.log(roledata)
+						dbo.collection("Access_Rights").find({"rolename": roledata[0].role_slug}).toArray(function(err, accessdata) {		
+						console.log(accessdata)
 						if (err) throw err;
 							else{								
 								var language= result1[0].language;
