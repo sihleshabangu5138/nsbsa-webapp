@@ -371,7 +371,6 @@ router.route('/:id?')
 						module:"product",
 						module_id: ObjectId(result.insertedId),
 					}
-					
 				dbo.collection("notes").insertOne(this_data, function(err,notefile) {});
 				}
 				}
