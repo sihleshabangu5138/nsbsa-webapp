@@ -371,8 +371,8 @@ router.route('/:id?')
 						module:"product",
 						module_id: ObjectId(result.insertedId),
 					}
-				}}
 				dbo.collection("notes").insertOne(this_data, function(err,notefile) {});
+				}}
 			}
 			if(req.body.customfields){
 				for (const [key, value] of Object.entries(req.body.customfields)) {
