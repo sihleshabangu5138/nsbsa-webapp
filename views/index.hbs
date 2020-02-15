@@ -394,8 +394,8 @@ function drawChart() {
   var deloan = '{{this.num_of_disloan}}'
   var data = google.visualization.arrayToDataTable([
   ['Task', 'Hours per Day'],
-  ['Approved Loans', parseInt(deloan)],
-  ['Disapproved Loans', parseInt(loan)]
+  ['Approved Loans', parseInt(loan)],
+  ['Disapproved Loans', parseInt(deloan)]
 ]);
 
   // Optional; add a title and set the width and height of the chart
