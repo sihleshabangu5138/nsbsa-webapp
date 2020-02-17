@@ -118,9 +118,8 @@
 							   <div class="card-content">
 								 <!-- <div class="card-body"> -->
 								<fieldset>
-								<label>{{#with ..}}{{__ "Annual interest rate" setlang}}{{/with}}<span class="required red">*</span></label>
 									 <div class="input-group touchspincolor">
-									 <input type="text" id="interestrate" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="interestrate" data-validation-required-message="{{__ 'Interest rate is required'}}"  {{#if this.interestrate}} value="{{this.interestrate}}"{{/if}} />
+									 <input type="text" id="number" class="touchspin "  data-bts-step="1" data-bts-decimals="2" data-bts-postfix="%" name="number" data-validation-required-message="{{__ 'Interest rate is required'}}"  {{#if this.number}} value="{{this.number}}"{{/if}} />
 									 </div>
 								   </fieldset>
 								 </div>
