@@ -106,30 +106,19 @@
 					<div data-repeater-list="reminderdata">
 					{{#each this.reminderdata}}
 						<div class="row" data-repeater-item>  
-							<!-- <div class="col-md-4 "> -->
-	                            <!-- <div class="col-12">    						 -->
-							        <!-- <div class="form-group input"> -->
-									<!-- <input class=" form-control t_d valid mb-2" value="1" type="number" min="1" max="15"  name="number"  aria-invalid="false" {{#if this.number}} value="{{this.number}}" {{/if}}> -->
-									<!-- </div> -->
-								<!-- </div>	 -->
-						    <!-- </div>  -->
-							<div class="col-xl-4 col-lg-4 col-md-4" style="float:right">
-							 <div class="card">
-							   <div class="card-content">
-								 <!-- <div class="card-body"> -->
-								<fieldset>
-									 <div class="input-group touchspincolor">
-									 <input type="text" id="number" data-min="1" data-max="15" class="touchspin "  data-bts-step="1" name="number" value=1 data-validation-required-message="{{__ 'Interest rate is required'}}"  {{#if this.number}} value="{{this.number}}"{{/if}} />
-									 </div>
-								   </fieldset>
-								 </div>
-							   </div>
-							 </div>
+							<div class="col-md-4 ">
+	                            <div class="col-12">    						
+							        <div class="form-group input">
+									<input class=" form-control t_d valid mb-2" value="1" type="number" min="1" max="15"  name="number"  aria-invalid="false" {{#if this.number}} value="{{this.number}}" {{/if}}>
+									</div>
+								</div>	
+						    </div> 
 							<div class="col-md-4 ">
 							   <div class="col-12 ">
 								<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Select Days" setlang}}{{/with}}<span class="required red">*</span></label> 
-								<select class="select1 form-control t_t valid  mb-2" name="recurense"  id="recurense"> 				 
-									<option value="">Select Day(s)</option>
+								<select class="select1 form-control t_t valid  mb-2" name="recurense"  id="recurense"> 	
+									
+									<option value="">Select Days</option>
 									<option value="days"  {{#ifCond this.recurense '==' 'days'}} value="{{this.recurense}}" selected {{/ifCond}}>Day(s)</option>
 									<option value="week" {{#ifCond this.recurense '==' 'week'}} value="{{this.recurense}}" selected {{/ifCond}}>Week(s)</option>
 									<option value="months" {{#ifCond this.recurense '==' 'months'}} value="{{this.recurense}}" selected {{/ifCond}}>Month(s)</option>
