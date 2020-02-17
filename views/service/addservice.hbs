@@ -19,7 +19,7 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}}>
-				<input type="text" id="userinput1" maxlength="50" data-validation-required-message="Category name is required" name="servicename" {{#if this.servicename}} value="{{this.servicename}}"{{/if}}>
+				<input type="text" id="userinput1" maxlength="50" data-validation-required-message="Service name is required" name="servicename" {{#if this.servicename}} value="{{this.servicename}}"{{/if}}>
 				<label for="userinput1">{{__ "Service Name"}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
@@ -123,9 +123,9 @@
 			<div class="row">
 				<div class="col-lg-4">
 				<div class="form-group input">
-				<div class="col-md-12 form-control border-light">
+				<div class="col-md-12 form-control ">
 					<label for="userinput1">{{__ "Service Duration"}}<span class="required red">*</span></label>
-					<input name="duration_hour" class="inputnumber duration_hour" type="number" min="0" max="100000 " {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
+					<input name="duration_hour" placeholder="1" class="inputnumber border-light duration_hour" type="number" min="0" max="100000 " {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
 				</div><div class="help-block"></div>
 				</div>
 				</div>
