@@ -5,6 +5,9 @@
     margin-right: -15px;
     padding: 14px;
 }
+.bordern{
+	border:none!important;
+}
 .inputnumber:focus{
 	outline:none
 }
