@@ -121,14 +121,21 @@
 			</div>			
 		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Pricing and Related Details"}}</p>
 			<div class="row">
-				<div class="col-lg-4">
+				<!-- <div class="col-lg-4">
 				<div class="form-group input">
 					<label for="userinput1">{{__ "Service Duration"}}<span class="required red">*</span></label>
 				<div class="col-md-12 form-control border-light">
-					<input class=" form-control t_d valid mb-2 duration_hour" placeholder="1" type="number" min="1" max="15000"  name="duration_hour"  aria-invalid="false" {{#if this.duration_hour}} value="{{this.duration_hour}}" {{/if}}>
+					<input class="t_d valid mb-2 duration_hour" placeholder="1" type="number" min="1" max="15000"  name="duration_hour"  aria-invalid="false" {{#if this.duration_hour}} value="{{this.duration_hour}}" {{/if}}>
 				</div><div class="help-block"></div>
 				</div>
-				</div>
+				</div> -->
+				<div class="col-md-4 ">
+	                            <div class="col-12">    						
+							        <div class="form-group input">
+									<input class=" form-control t_d valid mb-2" placeholder="1" type="number" min="1" max="15"  name="number"  aria-invalid="false" {{#if this.number}} value="{{this.number}}" {{/if}}>
+									</div>
+								</div>	
+						    </div> 
 				<div class="form-group col-lg-2">
 					<label style="font-weight:100;">Hour</label>
 					<label style="font-weight:100;">
