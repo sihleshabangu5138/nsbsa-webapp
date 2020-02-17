@@ -97,7 +97,7 @@
 			 <div class="col-md-6">
 			<div class="form-group row">
 			<div class="col-md-12">
-				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Document For Rule" setlang}}{{/with}}<span class="required red">*</span></label>
+				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Document For Rule" setlang}}{{/with}}</label>
 				<input  class="form-control border-light imageUpload" name="rule_image" {{#if this.rule_image}} value="{{this.rule_image}}" {{/if}} type="file" id="userinput5" >
 				<span class="required red notice"></span>
 				{{#if this.rule_image}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.rule_image}}"> 
