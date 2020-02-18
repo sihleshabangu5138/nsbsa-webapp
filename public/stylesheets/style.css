@@ -1,3 +1,13 @@
+
+rect{
+	width:auto !important;
+}
+.column6{
+	max-width:49%!important;
+}
+.divmargin{
+	margin-left:2%;
+}
 .inputnumber {
     margin-top: -12px;
     float: right;
