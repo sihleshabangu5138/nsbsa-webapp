@@ -4,7 +4,6 @@ var http = require('http');
 var db = require('./mongo_db');
 var ObjectId = require('mongodb').ObjectId;
 var bodyParser = require('body-parser');
-// var md5 = require('md5');
 var bcrypt = require('bcrypt');
 var flash = require('express-flash');
 var cookieParser = require('cookie-parser');
@@ -378,7 +377,6 @@ router.route('/:id?')
 			}
 			}
 		bcrypt.hash(req.body.password, 10, function(err, hash) {
-		bcrypt.hash(req.body.confirmpassword, 10, function(err, conhash) {
 		  // Store hash in database
 		var pass= hash;
 		var roleid = req.body.role;
@@ -509,7 +507,6 @@ router.route('/:id?')
 						 res.redirect('/users/userlist');
 					 }
 				});	
-		});
 		});
 		});
 		});
