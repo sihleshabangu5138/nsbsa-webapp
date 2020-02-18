@@ -1134,10 +1134,10 @@
 							<div class="form-group row">
 								<div class="col-md-12 input">
 								<label class="ml-1 custom-top-label top" for="userinput7">{{#with ..}}{{__ "signature Image for pdf" setlang}}{{/with}}<span class="red">*</span></label> 
-							<input class="form-control border-light" id="company_logo1" type="file" name="company_logo" {{#if this.signature_image}} value="{{this.signature_image}}" {{else}} data-validation-required-message="Profile Image is required" {{/if}}  id="userinput5">
-				{{#if this.signature_image}} <br/><img class="existing_user_image update_time_team_image" src="/images/upload/generalsetting/{{this.signature_image}}"> 
-				<input class="form-control border-light" name="sig_photo_old" value="{{this.signature_image}}" type="hidden" id="userinput5"> {{/if}}
-					</div>
+								<input class="form-control border-light" id="company_logo1" type="file" name="company_logo" {{#if this.signature_image}} value="{{this.signature_image}}" {{else}} data-validation-required-message="Profile Image is required" {{/if}}  id="userinput5">
+								{{#if this.signature_image}} <br/><img class="existing_user_image update_time_team_image" src="/images/upload/generalsetting/{{this.signature_image}}"> 
+								<input class="form-control border-light" name="sig_photo_old" value="{{this.signature_image}}" type="hidden" id="userinput5"> {{/if}}
+							</div>
 							</div>
 						</div>
 						
