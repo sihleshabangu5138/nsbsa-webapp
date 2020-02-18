@@ -13,7 +13,7 @@ var moment = require('moment');
 
 router.use(lang.init);
 router.use(cookieParser());
-router.use(session({ secret: '343ji43j4n3jn4jk3n', cookie: { maxAge: 60000 }}))
+router.use(session({ secret: '343ji43j4n3jn4jk3n', cookie: { maxAge: 600 }}))
 router.use(flash()); 
 
 // Access the session as req.session
