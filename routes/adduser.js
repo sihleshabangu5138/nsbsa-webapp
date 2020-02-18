@@ -4,7 +4,8 @@ var http = require('http');
 var db = require('./mongo_db');
 var ObjectId = require('mongodb').ObjectId;
 var bodyParser = require('body-parser');
-var md5 = require('md5');
+// var md5 = require('md5');
+var bcrypt = require('bcrypt');
 var flash = require('express-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -124,13 +125,17 @@ router.route('/:id?')
 		}
 		if(i==0){
 			var img=req.body.photo_old;
-		}				
+		}		
+	bcrypt.hash(req.body.password, 10, function(err, hash) {
+			  // Store hash in database
 		if(req.body.password != ''){
-			var pass= md5(req.body.password);
+			// var pass= md5(req.body.password);
+			var pass= hash;
 		}
 		else{
 			var pass = req.body.password_old; 
 		}
+		
 		var roleid = req.body.role;
 		var idrole = ObjectId(roleid);
 		var birthdate = moment(req.body.birthdate).format("YYYY-MM-DD");      
@@ -157,6 +162,7 @@ router.route('/:id?')
 			pannumber:req.body.pannumber,
 			status:1,
 		}};
+
 		dbo.collection("Users").updateOne(myquery, newvalues, function(err, result) {
 			var date = Date(Date.now());
 			var formatdate = moment(date).format("YYYY-MM-DD");
@@ -314,7 +320,8 @@ router.route('/:id?')
 			}
 			if (err) throw err;
 		});		
-		});	
+		});			
+		});
 		var m=0;
 		var data = [];
 			myquery1='';
@@ -370,8 +377,10 @@ router.route('/:id?')
 				var img=value.filename;
 			}
 			}
-		var pass= md5(req.body.password);
-		var pass1= md5(req.body.confirmpassword);
+		bcrypt.hash(req.body.password, 10, function(err, hash) {
+		bcrypt.hash(req.body.confirmpassword, 10, function(err, conhash) {
+		  // Store hash in database
+		var pass= hash;
 		var roleid = req.body.role;
 		var idrole = ObjectId(roleid);
 		var birthdate = moment(req.body.birthdate).format("YYYY-M-D");      
@@ -500,6 +509,8 @@ router.route('/:id?')
 						 res.redirect('/users/userlist');
 					 }
 				});	
+		});
+		});
 		});
 		});
 		});

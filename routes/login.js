@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./mongo_db');
 var ObjectId = require('mongodb').ObjectId;
-var md5 = require('md5');
+var bcrypt = require('bcrypt');
 var app = express();
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -34,7 +34,7 @@ router.post('/',function(req, res) {
 		});
 	var myquery ={"username": req.body.username };
 	var name = req.body.username;
-	var frompass =md5(req.body.password);
+	var frompass =req.body.password;
 	var query = {status : 1};
 	dbo.collection("Users").find(myquery).toArray(function(err, result) {
 	dbo.collection("notification_badges").find().toArray(function(err, notiresult) {
@@ -44,7 +44,9 @@ router.post('/',function(req, res) {
 			if(result.length > 0){
 				roleaccess(result[0].role, function(access){			 
 				if(access == 1){ 
-					if(frompass == result[0].password && name == result[0].username){
+					bcrypt.compare(frompass, result[0].password, function(err, rest) {
+					if(rest){
+					// if(frompass == result[0].password && name == result[0].username){
 						req.session.email=result[0].email;
 						req.session.username=result[0].username;
 						req.session.password=req.body.password;
@@ -108,6 +110,7 @@ router.post('/',function(req, res) {
 						});
 						});
 					}
+					});
 				 }
 				 else{
 					req.flash('error','You are not allow to login.');
