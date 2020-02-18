@@ -914,7 +914,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" type="text" name="invoice_prefix" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,20})" data-validation-regex-message={{__ "Only Characters, no numbers and"}} {{#if this.invoice_prefix}}  value="{{this.invoice_prefix}}" {{/if}}>
+											<input id="userinput1" class="form-control" type="text" name="invoice_prefix" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,20})" data-validation-required-message="Invoice Prefix is required"  data-validation-regex-message={{__ "Only Characters, no numbers and"}} {{#if this.invoice_prefix}}  value="{{this.invoice_prefix}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Invoice Prefix" setlang}}{{/with}}<span class="red">*</span></label>
 										</div>
 									</div>
@@ -958,7 +958,7 @@
 							<div class="col-md-6">
 								<div class="form-group input">
 								<div class="col-md-12 form-control border-light">
-								<input id="number_length" class="form-control" required="" type="text" name="number_length" minlength="1" maxlength="5" required="" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message={{__ "No Characters, Only Numbers"}} {{#if this.number_length}} value="{{this.number_length}}" {{/if}} >
+								<input id="number_length" class="form-control" data-validation-required-message="Number Length is required" type="text" name="number_length" minlength="1" maxlength="5" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message={{__ "No Characters, Only Numbers"}} {{#if this.number_length}} value="{{this.number_length}}" {{/if}} >
 								<label for="number_length" class="active">{{#with ..}}{{__ "Number Length" setlang}}{{/with}}<span class="red">*</span></label>
 								</div> <div class="help-block"></div> 									</div>
 							    </div>
@@ -1062,7 +1062,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" required="" type="text" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-regex-message={{__ "Only Characters, no numbers"}} data-validation-required-message={{__ "Color is required"}} name="tbl_head_color" {{#if this.tbl_head_color}} value="{{this.tbl_head_color}}" {{/if}}>
+											<input id="userinput1" class="form-control" type="text" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-regex-message={{__ "Only Characters, no numbers"}} data-validation-required-message={{__ "Table Head Color is required"}} name="tbl_head_color" {{#if this.tbl_head_color}} value="{{this.tbl_head_color}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Table Head Color" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1071,7 +1071,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" required="" type="text" name="font_size" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" {{#if this.font_size}} value="{{this.font_size}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-required-message={{__ "Font Size is required"}} type="text" name="font_size" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" {{#if this.font_size}} value="{{this.font_size}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Font Size" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1079,7 +1079,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" required="" type="text"  data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" name="tbl_head_txt_color" {{#if this.tbl_head_txt_color}} value="{{this.tbl_head_txt_color}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-required-message={{__ "Table Head Text Color is required"}} type="text"  data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" name="tbl_head_txt_color" {{#if this.tbl_head_txt_color}} value="{{this.tbl_head_txt_color}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Table Head Text Color" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1087,7 +1087,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" required="" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,150})"
+											<input id="userinput1" class="form-control" data-validation-required-message={{__ "pdf logo url is required"}} data-validation-regex-regex="([A-Za-z_,`.'^-]{1,150})"
 											type="text" name="pdf_logo_url" {{#if this.pdf_logo_url}} value="{{this.pdf_logo_url}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "pdf logo url" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
@@ -1097,7 +1097,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" required="" type="text"   name="pdf_logo_width" {{#if this.pdf_logo_width}} value="{{this.pdf_logo_width}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-required-message={{__ "logo width is required"}} type="text"   name="pdf_logo_width" {{#if this.pdf_logo_width}} value="{{this.pdf_logo_width}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "logo width" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1137,7 +1137,6 @@
 							<input class="form-control border-light" id="company_logo1" type="file" name="company_logo" {{#if this.signature_image}} value="{{this.signature_image}}" {{else}} data-validation-required-message="Profile Image is required" {{/if}}  id="userinput5">
 				{{#if this.signature_image}} <br/><img class="existing_user_image update_time_team_image" src="/images/upload/generalsetting/{{this.signature_image}}"> 
 				<input class="form-control border-light" name="sig_photo_old" value="{{this.signature_image}}" type="hidden" id="userinput5"> {{/if}}
- 
 					</div>
 							</div>
 						</div>
