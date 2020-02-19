@@ -165,7 +165,7 @@ router.route('/:id?')
 		dbo.collection("Users").updateOne(myquery, newvalues, function(err, result) {
 			var date = Date(Date.now());
 			var formatdate = moment(date).format("YYYY-MM-DD");
-			dbo.collection("notificationtemplate").find({templatetitle:"user profile updated"}).toArray(function(err, notification) {				
+			dbo.collection("notificationtemplate").find({templatetitle:"user profile updated"}).toArray(function(err, notification) {			
 				for (const [key,value] of Object.entries(notification)) {
 				var message = value.content;
 				var subject = value.subject;
@@ -182,7 +182,7 @@ router.route('/:id?')
 					});
 					var subtrans=subject.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_newline_|_tab_|_systemname_|_DATETIME_/gi, function(matched){
 						return Obj[matched];
-					});					
+					});
 				Mail.sendMail(req.body.email,subtrans,trans);
 				};
 			});
