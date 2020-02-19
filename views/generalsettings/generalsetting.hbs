@@ -1062,7 +1062,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" type="text" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-regex-message={{__ "Only Characters, no numbers"}} data-validation-required-message={{__ "Table Head Color is required"}} name="tbl_head_color" {{#if this.tbl_head_color}} value="{{this.tbl_head_color}}" {{/if}}>
+											<input id="userinput1" class="form-control" type="text" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-regex-message= "Only Characters, no numbers" data-validation-required-message="Table Head Color is required" name="tbl_head_color" {{#if this.tbl_head_color}} value="{{this.tbl_head_color}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Table Head Color" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1071,15 +1071,15 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-required-message={{__ "Font Size is required"}} type="text" name="font_size" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" {{#if this.font_size}} value="{{this.font_size}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-required-message="Font Size is required" type="text" name="font_size" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" {{#if this.font_size}} value="{{this.font_size}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Font Size" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
-								</div>	
+								</div>
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-required-message={{__ "Table Head Text Color is required"}} type="text"  data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" name="tbl_head_txt_color" {{#if this.tbl_head_txt_color}} value="{{this.tbl_head_txt_color}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-required-message= "Table Head Text Color is required" type="text"  data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" name="tbl_head_txt_color" {{#if this.tbl_head_txt_color}} value="{{this.tbl_head_txt_color}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Table Head Text Color" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1087,7 +1087,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-required-message={{__ "pdf logo url is required"}} data-validation-regex-regex="([A-Za-z_,`.'^-]{1,150})"
+											<input id="userinput1" class="form-control" data-validation-required-message= "pdf logo url is required" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,150})"
 											type="text" name="pdf_logo_url" {{#if this.pdf_logo_url}} value="{{this.pdf_logo_url}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "pdf logo url" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
@@ -1097,7 +1097,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-required-message={{__ "logo width is required"}} type="text"   name="pdf_logo_width" {{#if this.pdf_logo_width}} value="{{this.pdf_logo_width}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-required-message="logo width is required" type="text"   name="pdf_logo_width" {{#if this.pdf_logo_width}} value="{{this.pdf_logo_width}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "logo width" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>

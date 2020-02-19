@@ -13,7 +13,7 @@ var moment = require('moment');
 
 router.use(lang.init);
 router.use(cookieParser());
-router.use(session({ secret: '343ji43j4n3jn4jk3n', cookie: { maxAge: 600000 }}))
+router.use(session({ secret: '343ji43j4n3jn4jk3n', cookie: { maxAge: 6000000 }}))
 router.use(flash()); 
 
 // Access the session as req.session
@@ -132,7 +132,7 @@ router.post('/',function(req, res) {
 router.get('/logout', isAuthenticated,function(req, res) {
 	req.session.destroy(function(err) {
 		res.clearCookie('locale');
-    res.redirect('/');	
+    res.redirect('/');
   })
 });
 
