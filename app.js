@@ -7,6 +7,7 @@ var MongoClient = require('mongodb').MongoClient;
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
+var installationRouter = require('./routes/installation');
 var usersRouter = require('./routes/users');
 var adduserRouter = require('./routes/adduser');
 var viewuserRouter = require('./routes/viewuser');
@@ -113,6 +114,7 @@ app.use('/',loginRouter);
 app.use('/logout',loginRouter);
 app.use('/dashboard', indexRouter);
 app.use('/users', usersRouter);
+app.use('/installation', installationRouter);
 app.use('/users/editprofile',editprofileRouter);
 app.use('/users/adduser', adduserRouter);
 app.use('/users/apiconfig', apiconfigRouter);
