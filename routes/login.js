@@ -43,7 +43,7 @@ router.post('/',function(req, res) {
 		else{
 			if(result.length > 0){
 				roleaccess(result[0].role, function(access){			 
-				if(access == 1){ 
+				if(access == 1 && result[0].status == 1){ 
 					bcrypt.compare(frompass, result[0].password, function(err, rest) {
 					if(rest){
 					// if(frompass == result[0].password && name == result[0].username){

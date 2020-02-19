@@ -36,6 +36,11 @@ router.get('/',isAuthenticated, function(req, res, next) {
 		},
 		{
 			$unwind : '$role_nm'
+		},
+		{
+			$match:{
+				$and: [ {status : 1 }]
+			}
 		}
 	]).toArray(function(err,result){
 		if(err) throw err;
