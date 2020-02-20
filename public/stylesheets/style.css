@@ -6,6 +6,9 @@
 .column6{
 	max-width:49% !important;
 }
+.margindiv{
+	margin-left:24px;
+}
 rect{
 	width:0px !important;
 }
