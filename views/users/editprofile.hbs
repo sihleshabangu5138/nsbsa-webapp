@@ -278,11 +278,10 @@
 			<div class="form-group input">
 			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
 				<div class="heading-elements "> 
-					<select class="select2 form-control export" data-validation-required-message="role name is required" name="role" {{#ifCond session.admin_access "!==" 1}}disabled{{/ifCond}}>
+					<select class="select2 form-control export" data-validation-required-message="role name is required" name="role" {{#ifCond session.admin_access "==" 0}}disabled{{/ifCond}}>
 						<option value="">Select Role</option> 
 						{{#each ../role as |role_nm| }}
-						<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}} {{/if}} value="{{this._id}}" >{{this.role_nm}}</option>
-
+							<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}} {{/if}} value="{{this._id}}" >{{this.role_nm}}</option>
 						{{/each}}
 						</select>					
 				</div>
