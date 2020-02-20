@@ -568,8 +568,9 @@ router.get('/loanlist', isAuthenticated,function(req, res) {
 		console.log(result)
 		console.log("...............................")
 		if (err) throw err;
-		if (result == null){
+		if (result == ""){
 			result = "No items to display"
+			
 		}
 		res.json(result);
 	});
