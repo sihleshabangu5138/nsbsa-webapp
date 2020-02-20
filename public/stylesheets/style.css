@@ -4,7 +4,7 @@
 	padding-right:25px !important;
 }
 .column6{
-	max-width:49%;
+	max-width:49% !important;
 }
 textarea:focus {
   outline: none;
