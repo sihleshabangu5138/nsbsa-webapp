@@ -568,7 +568,7 @@ router.get('/loanlist', isAuthenticated,function(req, res) {
 		console.log(result)
 		console.log("...............................")
 		if (err) throw err;
-		if (result == ""){
+		if (result == "[]"){
 			result = "No items to display"
 			
 		}
