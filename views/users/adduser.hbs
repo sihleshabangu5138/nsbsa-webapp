@@ -301,7 +301,7 @@
 
 					<li class="col-md-12 p-0 form-control" id="export">
 					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Select Role" setlang}}{{/with}}<span class="red">*</span></label>
-						<select class="select2 form-control export" data-validation-required-message="Role name is required" name="role" >
+						<select class="select2 form-control export" data-validation-required-message="Role name is required" name="role" {{#ifCond session.admin_access "==" 0}} disabled {{/ifCond}}>
 							<option value="">Select Role</option>
 							{{#each ../role as |role_nm| }}
 								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}} {{/if}} value="{{this._id}}" >{{this.role_nm}}</option>
