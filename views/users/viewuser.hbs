@@ -257,12 +257,11 @@
                 </div>	 
 		</div>
 		{{/each}}
-		{{#if family}}
+		{{#each family}}
+		{{#if this.familymember}}
 		<div class="h3 p-1 font-weight-bolder">
-
 			 <i class="icon-users  " aria-hidden="true"></i> {{__ "Family Information"}} 
 	    </div>
-		{{#each family}}
 		<div class="container-fluid">
 		       <div class="row p-1">
 				    <div class="col-sm-6">
@@ -331,8 +330,8 @@
 				 </div>    
                 </div>
 		</div>
-		{{/each}}
 		{{/if}}
+		{{/each}}
 				</div> 
 			  </div>  
 			</span>    
