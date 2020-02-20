@@ -1080,7 +1080,7 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu-footer .content {
   .avatar img {
     width: 100%;
     max-width: 100%;
-    height: auto;
+    height: 40px;
     border: 0 none;
     border-radius: 1000px; }
 	.roundimage img{

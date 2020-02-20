@@ -191,12 +191,12 @@ router.route('/:id?')
 				});	
 	}
 	});
-				// router.post('/getstate',isAuthenticated, function (req, res){
-	  // fs.readFile('public/data/countries.json', function(err, data) { 
-			// var jsonData = data;
-			// var jsonParsed = JSON.parse(jsonData);
-	  // });
- // });
+// router.post('/getstate',isAuthenticated, function (req, res){
+// fs.readFile('public/data/countries.json', function(err, data) { 
+// var jsonData = data;
+// var jsonParsed = JSON.parse(jsonData);
+// });
+// });
 
 
 function isAuthenticated(req, res, next) {
