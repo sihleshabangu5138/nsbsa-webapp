@@ -64,7 +64,6 @@ router.route('/:id?')
 						
 					};
 				dbo.collection("Generalsetting").find().toArray(function(err, setting) {
-
 					
 				res.render('users/editprofile', {title:"Edit Profile",data: result_data,id:id,role:role_name,session:req.session,country:jsonParsed.countries,setting:setting});
 				});	
