@@ -132,7 +132,7 @@ router.route('/:id?')
 				 {
 					 if (err) {
 						req.flash('error','Error occured.');
-						res.redirect('/users/userlist');
+						res.redirect('/dashboard');
 					 }
 					 else{
 						req.session.email=req.body.email; 
@@ -141,7 +141,7 @@ router.route('/:id?')
 						req.session.role=idrole;
 						 
 						 req.flash('success','User Updated Sucessfully.');
-						res.redirect('/users/userlist');
+						res.redirect('/dashboard');
 					 }
 					 
 				});
@@ -177,7 +177,7 @@ router.route('/:id?')
 		 dbo.collection("Users").insertOne(myobj, function(err, result)  {
 					 if (err) {
 						req.flash('error','Error occured.');
-						res.redirect('/users/userlist');
+						res.redirect('/dashboard');
 					 }
 					 else{
 						req.session.email=req.body.email; 
@@ -186,7 +186,7 @@ router.route('/:id?')
 						req.session.role=idrole;  
 						
 						 req.flash('success','User Instered Sucessfully.');
-						 res.redirect('/users/userlist');
+						 res.redirect('/dashboard');
 					 }
 				});	
 	}

@@ -1,9 +1,15 @@
-
-	.step-content{		
-		margin-top: 1%;
+body{
+	background: url(../../images/bg-2.jpg) no-repeat center center fixed !important;
+	background-size: cover;
+}
+.padding-css{
+	padding:1% !important;
+}
+	.step-content{
+		padding-top:1%;
 		margin-left: auto;
 		margin-right: auto;
-		width:70%;
+		width:42%;
 		/*background: url('../../webroot/img/footer_stripes_bg.png');*/
 		background-position: top center;
 		background-repeat: repeat;
@@ -12,7 +18,7 @@
 	.pg-header{
 		position : relative;
 		height: 50px;
-		background-image: url(/images/brodcrum.png) !important;
+		/* background-image: url(/images/brodcrum.png) !important; */
 	}
 	
 	.install_title{
@@ -31,10 +37,10 @@
 		margin-top: -13px;
 	}
 	.wizard > .content {		
-		/* background: #f6feff; */
+		background: #f6feff;
 		/*background : url("../../webroot/img/body_bg.png");*/
 		background-repeat : repeat;
-		min-height: 31em;
+		min-height: 34em;
 		margin-left : 0;
 		margin-right : 0 ;
 		margin-top : 0 ;
@@ -43,16 +49,15 @@
 		margin-top: 0.5em;
 	}
 	.wizard > .steps .disabled a{
-		border:1px solid #a2a2a2;
+		background: #f6feff;
 	}
 	.wizard > .actions .disabled a, .wizard > .actions .disabled a:hover, .wizard > .actions .disabled a:active{
 		/* background:#f6feff; */
-		background : url("../../webroot/img/body_bg.png");
+		/* background : url("../../webroot/img/body_bg.png"); */
 		background-repeat : repeat;
 	}
 	.wizard > .steps .current a, .wizard > .steps .current a:hover, .wizard > .steps .current a:active{
-		/* background:#1DB198; */
-		background :#404E67;
+		background:#1DB198;
 	}
 	.wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
 		/* background: #88dacc; */
