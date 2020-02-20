@@ -565,8 +565,12 @@ router.get('/loanlist', isAuthenticated,function(req, res) {
 			}
 		}
 	]).toArray(function(err, result) {
+		console.log(result)
+		console.log("...............................")
 		if (err) throw err;
-		
+		if (result == null){
+			result = "No items to display"
+		}
 		res.json(result);
 	});
 });
