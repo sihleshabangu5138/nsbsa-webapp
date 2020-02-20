@@ -6,6 +6,9 @@
 .column6{
 	max-width:49% !important;
 }
+rect{
+	width:0px !important;
+}
 textarea:focus {
   outline: none;
   border-bottom: 1px solid #BABFC7 !important;
