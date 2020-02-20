@@ -570,8 +570,8 @@ router.get('/loanlist', isAuthenticated,function(req, res) {
 		if (err) throw err;
 		if (result == []){
 			result = "No items to display"
-			
 		}
+		console.log(result)
 		res.json(result);
 	});
 });
