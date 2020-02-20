@@ -30,6 +30,7 @@ router.get('/',isAuthenticated, function(req, res, next) {
 		dbo.collection("Users").count((myquery), function(error, deactiveuser){
 			//var percent = activeuser * 100 +"%";
             if(error) return callback(error);
+		dbo.collection("loan_details").count(function(error, totaloan){
 		dbo.collection("loan_details").count((dquery), function(error, num_of_loan){
 		dbo.collection("loan_details").count((lquery), function(error, num_of_disloan){
             if(error) return callback(error); 
@@ -39,8 +40,9 @@ router.get('/',isAuthenticated, function(req, res, next) {
 		dbo.collection("events").find().toArray(function(err, events) {
 		dbo.collection("Reminder").find().toArray(function(err, Reminder) {
 			
-		res.render('index', {title:"Dashboard",session:req.session,activecount:activeuser,deactiveuser:deactiveuser,loanno:num_of_loan,setlang:languages, userdata:userresult, loandata:loanresult, loan:loan, events:events,Reminder:Reminder,num_of_disloan:num_of_disloan});
+		res.render('index', {title:"Dashboard",session:req.session,activecount:activeuser,deactiveuser:deactiveuser,loanno:num_of_loan,setlang:languages, userdata:userresult, loandata:loanresult, loan:loan, events:events,Reminder:Reminder,num_of_disloan:num_of_disloan, loans:totaloan});
 		});
+});
 });
 });
 });

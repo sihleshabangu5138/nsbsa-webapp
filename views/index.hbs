@@ -39,9 +39,9 @@
                     <h5 class="text-uppercase">{{__ "Total Loan"}}</h5>
                     <h5>{{this.loanno}}</h5>
 					 <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: {{this.loanno}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{this.loans}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                    <h5 class="text-bold-400 mb-0"></i>{{this.loanno}}{{__ "% Increase.."}}</h5>
+                    <h5 class="text-bold-400 mb-0"></i>{{this.loans}}{{__ "% Increase.."}}</h5>
                   </div>
                 </div>
 				</a>
@@ -60,7 +60,7 @@
                     <h5 class="text-uppercase">{{__ "Completed loan"}}</h5>
 					<h5>{{this.loanno}}</h5>
 					 <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{this.loanno}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     <h5 class="text-bold-400 mb-0"></i>{{this.loanno}} {{__ "% Increase.."}}</h5>
                   </div>
@@ -81,9 +81,9 @@
                     <h5 class="text-uppercase">{{__ "Failed Loan"}}</h5>
                     <h5>{{__ "0"}}</h5>
 					 <div class="progress mt-0 mb-1" style="height: 2px;">
-                            <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{this.num_of_disloan}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                    <h5 class="text-bold-400 mb-0">{{__ "0% Increase.."}}</h5>
+                    <h5 class="text-bold-400 mb-0">{{this.num_of_disloan}} {{__ "% Increase.."}}</h5>
                   </div>
                 </div>
 				</a>
