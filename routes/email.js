@@ -8,8 +8,8 @@ function sendMail(to,subject,message)
    var smtpConfig = {
     service: 'Gmail',
     auth: {
-       user: 'cakephp.projects@gmail.com',
-       pass: '99Inchrod'
+       user: 'deepali@dasinfomedia.com',
+       pass: 'F4&>Se6Z'
     },
    };
    var transporter = nodemailer.createTransport(smtpConfig);
