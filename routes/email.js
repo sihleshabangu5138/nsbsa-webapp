@@ -7,8 +7,8 @@ function sendMail(to,subject,message)
 {
    var smtpConfig = {
       // service: 'Gmail',
-	host: 'smtp.gmail.com',
-	port: 465,
+	host: '34.93.67.96',
+	port: 3000,
 	secure: true,
     auth: {
        user: 'cakephp.projects@gmail.com',
