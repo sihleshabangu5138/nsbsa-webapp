@@ -6,7 +6,10 @@ const nodemailer = require('nodemailer');
 function sendMail(to,subject,message) 
 {
    var smtpConfig = {
-      service: 'Gmail',
+      // service: 'Gmail',
+	host: 'smtp.gmail.com',
+	port: 465,
+	secure: true,
     auth: {
        user: 'cakephp.projects@gmail.com',
        pass: '99Inchrod'
