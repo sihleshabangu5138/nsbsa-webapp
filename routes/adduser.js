@@ -196,7 +196,7 @@ router.route('/:id?')
 			};
 			dbo.collection("activitylog").insertOne(myobj , function(err, activity) {});
 			var myobj = { 
-				action: "New User",
+				action: "User Updated",
 				desc: "Updated an account",
 				user:  ObjectId(id),
 				Name: req.body.username,
