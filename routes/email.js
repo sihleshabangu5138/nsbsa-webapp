@@ -8,8 +8,8 @@ function sendMail(to,subject,message)
    var smtpConfig = {
     service: 'Gmail',
     auth: {
-       user: 'deepali@dasinfomedia.com',
-       pass: 'F4&>Se6Z'
+       user: 'vivek@dasinfomedia.com',
+       pass: 'vivek@1234'
     },
    };
    var transporter = nodemailer.createTransport(smtpConfig);
