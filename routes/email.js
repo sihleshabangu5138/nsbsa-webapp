@@ -7,6 +7,7 @@ function sendMail(to,subject,message)
 {
    var smtpConfig = {
     service: 'Gmail',
+	host: "smtp.gmail.com",
     auth: {
        user: 'cakephp.projects@gmail.com',
        pass: '99Inchrod'
