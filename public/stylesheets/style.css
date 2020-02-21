@@ -1,3 +1,6 @@
+.form-body{
+	min-height:180px !important;
+}
 .buttons{
 	float: right;
 	padding-left:25px !important;
