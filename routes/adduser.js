@@ -80,7 +80,7 @@ router.route('/:id?')
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
 				};				
-				res.render('users/adduser', {title:"Add User",data: result_data,id:id,role:role_name,family:family_data,session:req.session,country:jsonParsed.countries,setting:setting, setlang:languages, newfield:customfield, customfield_value:customfield_value});
+				res.render('users/adduser', {title:"Edit User",data: result_data,id:id,role:role_name,family:family_data,session:req.session,country:jsonParsed.countries,setting:setting, setlang:languages, newfield:customfield, customfield_value:customfield_value});
 			});			
 		});	
 		});

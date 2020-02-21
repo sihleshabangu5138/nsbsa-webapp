@@ -19,12 +19,12 @@ router.route('/:id?')
 		var myquery ={"_id": ObjectId(id)}; 
 		var dbo=db.get();
 		dbo.collection("notificationtemplate").find(myquery).toArray(function(err, result) {
-			res.render('notification/addnotificationtemplate', {title:"Notification Template ", data: result,id:id,session:req.session}); 
+			res.render('notification/addnotificationtemplate', {title:"Edit Notification Template ", data: result,id:id,session:req.session}); 
 		});
 	}
 	else{
         var news = [{'userid':'-1'}];
-        res.render('notification/addnotificationtemplate', {title:"Notification Template ", data: news,session:req.session});
+        res.render('notification/addnotificationtemplate', {title:"Add Notification Template ", data: news,session:req.session});
     }	
 })
 

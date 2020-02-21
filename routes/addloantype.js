@@ -54,7 +54,7 @@ router.route('/:id?')
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
 				};		
 			
-			res.render('loan/addloantype', {title:"Add Loan Types", data: result,id:id,session:req.session,setlang:languages,newfield:customfield, customfield_value:customfield_value}); 
+			res.render('loan/addloantype', {title:"Edit Loan Types", data: result,id:id,session:req.session,setlang:languages,newfield:customfield, customfield_value:customfield_value}); 
 		});
 		});
 		});

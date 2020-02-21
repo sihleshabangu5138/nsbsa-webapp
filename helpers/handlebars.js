@@ -245,7 +245,6 @@ module.exports = {
 		breadcrums:function(v1,v2, options){
 			var result = '<section class="card"><div class="app-content container123 center-layout mt-2 mx-md-3 px-1"><div class="content-wrapper row"><div class="content-header-left col-md-6 col-sm-6 col-12 mb-1 "><h2 class="content-header-title">'+v2+'</h2> </div><div class=" breadcrumbs-right breadcrumbs-top col-sm-6 col-md-6 col-12"><div class="breadcrumb-wrapper float-md-right"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="/"><i class="fa fa-home  "></i>'+v1+'</a></li><li><i class="ft-chevron-right"></i>'+v2+'</li></ol></div></div></div></div></section>';
 			return new hbs1.SafeString(result);
-			
 		},
 		
 		addelement:function(v1, options){	

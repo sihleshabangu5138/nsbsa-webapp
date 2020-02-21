@@ -12,6 +12,17 @@
 rect{
 	width:0px !important;
 }
+.bordern{
+	border:none !important;
+}
+.duration_hour{
+	float: right;
+    margin: -11px -12px;
+    padding: 12px;
+    border: none;
+    border: 1px solid;
+	border-radius:4px;
+}
 textarea:focus {
   outline: none;
   border-bottom: 1px solid #BABFC7 !important;

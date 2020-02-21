@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Add Service'}}
+{{breadcrums 'Home' title}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 	<div class="content-wrapper">
@@ -125,7 +125,7 @@
 				<div class="form-group input">
 				<div class="col-md-12 form-control bordern">
 					<label for="userinput1">{{__ "Service Duration"}}<span class="required red">*</span></label>
-					<input name="duration_hour" placeholder="1" class="inputnumber border-light duration_hour" type="number" min="1" max="100000 " {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
+					<input name="duration_hour" placeholder="1" class="inputnumber border-light duration_hour" type="number" min="1" max="100000 " data-validation-required-message="Service Duration is required" {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
 				</div><div class="help-block"></div>
 				</div>
 				</div>

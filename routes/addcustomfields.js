@@ -21,7 +21,7 @@ router.route('/:id?')
 	if (id){
 		var myquery ={"_id": ObjectId(id)};
 		dbo.collection("customfields").find(myquery).toArray(function(err, result) {
-			res.render('customfields/addcustomfields', { title:"Add Custom Fields",data: result,id:id,session:req.session,messages:req.flash()});
+			res.render('customfields/addcustomfields', { title:"Edit Custom Fields",data: result,id:id,session:req.session,messages:req.flash()});
 		});
 	}
 	else{

@@ -62,7 +62,7 @@ router.route('/:id?')
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
 				};		
-				 res.render('reminder/addreminder', {title:"Add Reminder",data: result_data,id:id,session:req.session,setlang:languages, newfield:customfield, customfield_value:customfield_value});
+				 res.render('reminder/addreminder', {title:"Edit Reminder",data: result_data,id:id,session:req.session,setlang:languages, newfield:customfield, customfield_value:customfield_value});
 			});
 			});
 			

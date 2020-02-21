@@ -60,7 +60,7 @@ router.route('/:id?')
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
 				};
-		res.render('product/addproduct', { title: 'Add Product',session:req.session,messages:req.flash(),category:category,unit:unitcategory, data:product ,newfield:customfield,customfield_value:customfield_value, note:notes});
+		res.render('product/addproduct', { title: 'Edit Product',session:req.session,messages:req.flash(),category:category,unit:unitcategory, data:product ,newfield:customfield,customfield_value:customfield_value, note:notes});
 		});
 		});
 		});

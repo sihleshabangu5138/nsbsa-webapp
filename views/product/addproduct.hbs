@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Add Product'}}
+{{breadcrums 'Home' title}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 	<div class="content-wrapper">
@@ -99,20 +99,48 @@
 				<div class="col-md-4">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
-					<input type="text" id="userinput1" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="Only Numbers" data-validation-required-message="Warranty is required" minlength="1" maxlength="3" name="warranty" {{#if this.warranty}} value="{{this.warranty}}"{{/if}}>
+					<input type="text" id="warranty" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="Only Numbers" data-validation-required-message="Warranty is required"  minlength="1" maxlength="3" name="warranty" {{#if this.warranty}} value="{{this.warranty}}"{{/if}}>
 					<label for="userinput1">{{__ "Warranty"}}<span class="required red">*</span></label>
-				</div><div class="help-block"></div>
+				</div><div class="help-block"></div><span class="message"></span>
 				</div>
 				</div>
 				<div class="col-md-2">
-					<select class="select2 form-control export cate_type select2-hidden-accessible" name="dur_type">
+					<select class="select2 form-control export cate_type select2-hidden-accessible" name="dur_type" id="duration" >
 						<option value="">Select</option>
 						<option value="Day(s)" {{#ifCond this.dur_type "==" "Day(s)"}}selected{{/ifCond}}>Day(s)</option>
 						<option value="Week(s)" {{#ifCond this.dur_type "==" "Week(s)"}}selected{{/ifCond}}>Week(s)</option>
 						<option value="Month(s)" {{#ifCond this.dur_type "==" "Month(s)"}}selected{{/ifCond}}>Month(s)</option>
-						<option value="Year(s)" {{#ifCond this.dur_type "==" "Year(s)"}}selected{{/ifCond}}>Year(s)</option>
+						<option value="Year(s)" {{#ifCond this.dur_type "==" "Year(s)"}}selected{{/ifCond}} >Year(s)</option>
 					</select>
-				</div>			
+				</div>	
+			
+				<script>
+				$(document).ready(function(){
+					$("#duration").change(function () {
+						var selectedText = $(this).find("option:selected").text();
+						var selectedValue = $(this).val();
+						var text = $('#warranty').val();
+							if(selectedValue == "Year(s)" && text > 100){
+								$('.message').html('Years cannot be more than 100');
+							}
+							else{
+								$('.message').html('');
+							}
+						});
+					
+					$('#warranty').on('blur', function(){
+						var selectedText = $(this).find("option:selected").text();
+						var selectedValue = $(this).val();
+						var text = $('#warranty').val();
+							if(selectedValue == "Year(s)" && text > 100){
+								$('.message').html('Years cannot be more than 100');
+							}
+							else{
+								$('.message').html('');
+							}
+					});
+				});
+				</script>
 			<div class="col-md-6">
 			<div class="row checkbox_cat">
 				<div class="col-md-10">
@@ -544,6 +572,7 @@ function deleteattachfile(n){
 </script>
 <script>
 $(document).ready(function(){
+	
 	$('.afterdate').each(function(){
 		$(this).data("DateTimePicker").minDate(new Date());
 	});
@@ -579,5 +608,6 @@ $(document).ready(function(){
 	{
 		$(this).parents('.label_checkbox').remove();
 	});
+	
 });	
 </script>

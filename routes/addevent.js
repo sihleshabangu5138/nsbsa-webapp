@@ -36,7 +36,7 @@ router.route('/:id?')
 			for (const [key,value] of Object.entries(roles)) {
 				roles[key].id_d=ObjectId(value._id).toString();				
 			};
-		res.render('events/addevent', { title: 'Add event',session:req.session,messages:req.flash(),data:events,type:category,role:roles});
+		res.render('events/addevent', { title: 'Edit event',session:req.session,messages:req.flash(),data:events,type:category,role:roles});
 		});
 		});
 		});

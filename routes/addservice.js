@@ -66,7 +66,7 @@ router.route('/:id?')
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
 				};				
-		res.render('service/addservice', { title: 'Add Service',session:req.session,messages:req.flash(),category:result, staff:staff, data:service,newfield:customfield,customfield_value:customfield_value, note:notes});
+		res.render('service/addservice', { title: 'Edit Service',session:req.session,messages:req.flash(),category:result, staff:staff, data:service,newfield:customfield,customfield_value:customfield_value, note:notes});
 		});
 		});
 		});

@@ -22,7 +22,7 @@ router.route('/:id?')
 		var myquery ={"_id": ObjectId(id)};
 		dbo.collection("category").find(myquery).toArray(function(err, result) {
 		dbo.collection("categorytypes").find().toArray(function(err, cat_types) {			
-			res.render('category/addcategory', { title: 'Add Category',session:req.session,messages:req.flash(),data:result,types:cat_types});
+			res.render('category/addcategory', { title: 'Edit Category',session:req.session,messages:req.flash(),data:result,types:cat_types});
 		});
 		});
 	}

@@ -71,7 +71,7 @@ router.route('/:id?')
 		var notequery ={"module_id": ObjectId(id)};
 		
 		dbo.collection("notes").find(notequery).toArray(function(err, notes) {
-			res.render('loan/addloan', {title:"Add Loan", data: result_data,id:id,session:req.session,user:User_name,loan:loan_type,geninfo:geninfo,setlang:languages, newfield:customfield, customfield_value:customfield_value, note:notes});
+			res.render('loan/addloan', {title:"Edit Loan", data: result_data,id:id,session:req.session,user:User_name,loan:loan_type,geninfo:geninfo,setlang:languages, newfield:customfield, customfield_value:customfield_value, note:notes});
 		});
 		});
 		});

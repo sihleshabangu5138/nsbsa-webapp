@@ -56,7 +56,7 @@ router.route('/:id?')
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
 				};		
-			res.render('role/addrole', {title:"Add Role", data: result,id:id,session:req.session, newfield:customfield, customfield_value:customfield_value}); 
+			res.render('role/addrole', {title:"Edit Role", data: result,id:id,session:req.session, newfield:customfield, customfield_value:customfield_value}); 
 		});
 		});
 		});
