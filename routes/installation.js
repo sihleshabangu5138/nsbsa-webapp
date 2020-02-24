@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var lang = require('./languageconfig');
+var fs = require('fs');
 router.use(lang.init);
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -63,6 +64,10 @@ router.post('/',function(req, res) {
 		db.createCollection("product", function(err, product) {
 			if (err) throw err;
 		db.createCollection("service", function(err, service) {
+			fs.writeFile('temp.txt', 'Never delete this file', function (err) {
+			  if (err) throw err;
+			  console.log('File is created successfully.');
+			}); 
 			if (err) {
 				
 				res.redirect('installation');
