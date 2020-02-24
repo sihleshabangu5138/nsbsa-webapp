@@ -10,6 +10,7 @@ var flash = require('express-flash');
 var lang = require('./languageconfig');  
 var functions = require('../helpers/function');  
 var moment = require('moment');
+var fs = require('fs');
 
 router.use(lang.init);
 router.use(cookieParser());
@@ -18,7 +19,7 @@ router.use(flash());
 
 // Access the session as req.session
 /* GET users listing. */
-router.get('/',isAuthenticated, function(req, res, next) {
+router.get('/',isinstalled,isAuthenticated, function(req, res, next) {
 	var languages = lang.getLocale();
 	if (req.session.username != undefined) {
 		 res.redirect('/dashboard');
@@ -135,7 +136,15 @@ router.get('/logout', isAuthenticated,function(req, res) {
     res.redirect('/');
   })
 });
-
+function isinstalled(req, res, next) {
+	fs.exists('./temp.txt', function(exists) {console.log("file exists ? " + exists);
+		if(exists == true){
+			 return next();		
+		} else {
+			res.render('installation', { title: 'NiftyEWS',layout:"loginlayout"});	
+		}	
+	});
+};
 function isAuthenticated(req, res, next) {
 	if (req.session.username != undefined) {
 		 return next();

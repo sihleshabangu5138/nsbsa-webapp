@@ -4,12 +4,11 @@ var lang = require('./languageconfig');
 var fs = require('fs');
 router.use(lang.init);
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/',isAuthenticated, function(req, res, next) {
  res.render('installation', { title: 'NiftyEWS',layout:"loginlayout",session:req.session,message:req.flash()});
 });
 
-router.post('/',function(req, res) {
-	console.log("Post method")
+router.post('/',isAuthenticated,function(req, res) {
 	// we create 'users' collection in newdb database
 	var dbname = req.body.dbname
 	var url = "mongodb://localhost:27017/"+dbname;
@@ -79,4 +78,16 @@ router.post('/',function(req, res) {
 		});});});});});});});});});});});});});});});});});});});});});
 	});
 })
+
+function isAuthenticated(req, res, next) {
+	fs.exists('./temp.txt', function(exists) {console.log("file exists ? " + exists);
+		if(exists == true){
+			res.redirect('/');
+		}
+		else {
+			return next();
+			
+		}
+	});
+};
 module.exports = router;

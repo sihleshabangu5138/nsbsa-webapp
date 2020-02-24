@@ -108,8 +108,8 @@ function isAuthenticated(req, res, next) {
 		res.render('login', { title: 'NiftyEWS',layout:"loginlayout"});	
 	}	
 };
-//var fns = {isAuthenticated : isAuthenticated,}
 
+//var fns = {isAuthenticated : isAuthenticated,}
 app.use('/',loginRouter);
 app.use('/logout',loginRouter);
 app.use('/dashboard', indexRouter);
@@ -158,7 +158,6 @@ app.use('/events/eventlist', eventlistRouter);
 app.use('/events/viewevent', vieweventRouter);
 app.use('/impersonate/impersonateuser', impersonateRouter);
 app.use('/report/report',reportRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404,"This page doesnot exist."));

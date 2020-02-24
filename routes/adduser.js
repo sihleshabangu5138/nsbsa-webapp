@@ -41,7 +41,6 @@ router.use(flash());
 
 router.route('/:id?')
 .get(isAuthenticated,function (req, res) {
-	console.log("get method user")
 	var languages = lang.getLocale();
 	var dbo = db.get();
 	var id = req.params.id;
@@ -110,7 +109,6 @@ router.route('/:id?')
 })
 // FOR FORM UPDATE AND ADD
 .post(upload.any(),isAuthenticated,function (req, res){	
-console.log("Post method user")
     var id = req.body.id;
 	var msg;
 	var i=0;	
