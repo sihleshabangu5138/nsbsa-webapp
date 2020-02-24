@@ -63,13 +63,12 @@ router.post('/',function(req, res) {
 		db.createCollection("product", function(err, product) {
 			if (err) throw err;
 		db.createCollection("service", function(err, service) {
-			if (err) {			
-				req.flash('error',lang.__('Error occured.'));
+			if (err) {
+				
 				res.redirect('installation');
 			 }
 			 else{
-				 req.flash('success',lang.__('User Instered Sucessfully.'));
-				 res.render('login', { title: 'NiftyEWS',layout:"loginlayout"});	
+				 res.redirect('/');
 			 }
 			// close the connection to db when you are done with it
 		});});});});});});});});});});});});});});});});});});});});});
