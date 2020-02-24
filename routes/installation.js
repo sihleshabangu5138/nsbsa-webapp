@@ -64,10 +64,9 @@ router.post('/',function(req, res) {
 			if (err) throw err;
 		db.createCollection("service", function(err, service) {
 			if (err) {
-				console.log(err);
+				throw err;
 			}
 			else{
-				console.log("Collection is created!");
 				res.render("login",{ title: 'NiftyEWS',layout:"loginlayout",session:req.session,message:req.flash()});
 			}
 			// close the connection to db when you are done with it
