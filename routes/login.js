@@ -45,7 +45,7 @@ router.post('/',function(req, res) {
 				roleaccess(result[0].role, function(access){			 
 				if(access == 1 && result[0].status == 1){ 
 					bcrypt.compare(frompass, result[0].password, function(err, rest) {
-					if(rest){
+					if(rest && name == result[0].username){
 					// if(frompass == result[0].password && name == result[0].username){
 						req.session.email=result[0].email;
 						req.session.username=result[0].username;

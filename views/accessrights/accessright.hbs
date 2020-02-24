@@ -5,11 +5,11 @@
 <div class="col-xl-12 col-lg-12 col-12">
 <div class="card123 access_right">
 		<ul class="nav nav-pills nav-pill-toolbar" id=""> 
-				{{#each roledata}} 
-					<li class="nav-item nav-item col-lg-3 col-md-3 col-sm-6 pl-md-0 mb-1 ">
-						<a class="nav-link tab {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{this.role_slug}}-tab" data-toggle="pill" href="#{{this.role_slug}}" aria-expanded="true" {{#ifCond this.role_slug '==' 'role_nm'}}{{/ifCond}}>{{this.role_nm}}</a>
-					</li>
-			    {{/each}}	
+			{{#each roledata}} 
+				<li class="nav-item nav-item col-lg-3 col-md-3 col-sm-6 pl-md-0 mb-1 ">
+					<a class="nav-link tab {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{this.role_slug}}-tab" data-toggle="pill" href="#{{this.role_slug}}" aria-expanded="true" {{#ifCond this.role_slug '==' 'role_nm'}}{{/ifCond}}>{{this.role_nm}}</a>
+				</li>
+			{{/each}}	
 		</ul>  
 		<div class="card-content" id="left-handles">  
 		<div id="card-drag-title-area">

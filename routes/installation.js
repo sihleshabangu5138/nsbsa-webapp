@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/',function(req, res) {
+	console.log("Post method")
 	// we create 'users' collection in newdb database
 	var dbname = req.body.dbname
 	var url = "mongodb://localhost:27017/"+dbname;
@@ -62,8 +63,13 @@ router.post('/',function(req, res) {
 		db.createCollection("product", function(err, product) {
 			if (err) throw err;
 		db.createCollection("service", function(err, service) {
-			if (err) throw err;
-			console.log("Collection is created!");
+			if (err) {
+				console.log(err);
+			}
+			else{
+				console.log("Collection is created!");
+				res.render("login",{ title: 'NiftyEWS',layout:"loginlayout",session:req.session,message:req.flash()});
+			}
 			// close the connection to db when you are done with it
 		});});});});});});});});});});});});});});});});});});});});});
 	});

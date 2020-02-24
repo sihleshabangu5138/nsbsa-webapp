@@ -3,7 +3,7 @@ const mongoDbUrl = 'mongodb://127.0.0.1:27017/BankingSystem';
 let mongodb;
 var express = require('express');
 var app = express();
- 
+
 function connect(callback){
     mongoClient.connect(mongoDbUrl,{useNewUrlParser: true}, (err, db) => {
         mongodb = db;
