@@ -69,7 +69,7 @@ router.post('/',function(req, res) {
 			 }
 			 else{
 				 req.flash('success',lang.__('User Instered Sucessfully.'));
-				 res.redirect('login');
+				 res.render('login', { title: 'NiftyEWS',layout:"loginlayout"});	
 			 }
 			// close the connection to db when you are done with it
 		});});});});});});});});});});});});});});});});});});});});});
