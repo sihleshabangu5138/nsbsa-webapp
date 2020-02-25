@@ -343,20 +343,22 @@ router.route('/:id?')
 							});
 					}
 					else{
-						var this_data= [];
-						this_data = {
-							user_id: user_id,
-							familymember: value.familymember,
-							relationship: value.relationship,
-							famoccupation: value.famoccupation,
-							famcontact: value.famcontact,
-							income: value.income,
+						if (req.body.family){
+							var this_data= [];
+							this_data = {
+								user_id: user_id,
+								familymember: value.familymember,
+								relationship: value.relationship,
+								famoccupation: value.famoccupation,
+								famcontact: value.famcontact,
+								income: value.income,
+							}
+							dbo.collection("familydata").insertOne(this_data, function(err, result) {
+								 if (err) {
+									m++;
+								 }
+							});
 						}
-						dbo.collection("familydata").insertOne(this_data, function(err, result) {
-							 if (err) {
-								m++;
-							 }
-						});
 					}
 			}
 			if (m>0) 
