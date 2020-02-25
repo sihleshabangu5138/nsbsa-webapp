@@ -19,7 +19,9 @@
 				<div class="card-header bg-transparent border-0">
 					<h1 class="text-center mb-1"><img class="img-fluid" src="https://test.accounts.niftysol.com/public/app-assets/images/nifty.png"></h1>
 					<h1 class="text-center error-code">{{statuscode}}</h1>
-					<h2 class="text-center error-code">{{message}}</h2>
+					<h2 class="text-center error-code">{{message}}</h2>					
+					<h2>{{error.status}}</h2>
+					<pre>{{error.stack}}</pre>
 				</div>
 				<div class="card-content">
 					<div class="row py-2">
