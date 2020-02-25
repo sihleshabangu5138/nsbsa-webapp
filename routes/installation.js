@@ -73,7 +73,7 @@ router.post('/',isAuthenticated,function(req, res) {
 			if (err) throw err;
 		db.createCollection("service", function(err, service) {			
 			// close the connection to db when you are done with it
-		});});});});});});});});});});});});});});});});
+		});});});});});});});});});});});});});});});
 		db.collection("Role").insertMany( [
 			{
 				_id:ObjectId("5d5671a63d7d020a9857f935"),
@@ -258,6 +258,7 @@ router.post('/',isAuthenticated,function(req, res) {
 	else{
 		res.redirect('/');
 	}
+});
 });
 
 function isAuthenticated(req, res, next) {
