@@ -31,6 +31,7 @@ router.route('/:id?')
 				 
 				var family_data=[];
 					dbo.collection("familydata").find(query).toArray(function(err, family_data1) {
+						console.log(family_data1)
 						if(family_data1 != undefined){
 							family_data=family_data1;
 							family_data[0].id_d=ObjectId(family_data1[0]._id).toString();		 
