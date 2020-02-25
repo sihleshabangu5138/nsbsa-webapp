@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('express-flash');
 var lang = require('./languageconfig');  
+var installdata = require('./installation');  
 var functions = require('../helpers/function');  
 var moment = require('moment');
 var fs = require('fs');

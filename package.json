@@ -41,9 +41,11 @@
     "mongodb": "^2.2.36",
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
+    "node-localstorage": "^2.1.5",
     "nodemailer": "^6.3.0",
     "parse": "^2.5.1",
     "path": "^0.12.7",
+    "replace-in-file": "^5.0.2",
     "req-flash": "0.0.3",
     "time-stamp": "^2.2.0",
     "uuid": "^3.3.2"

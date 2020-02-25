@@ -1,9 +1,18 @@
 var express = require('express');
+const MongoClient = require('mongodb').MongoClient;
 var router = express.Router();
 var lang = require('./languageconfig');
 var fs = require('fs');
 var ObjectId = require('mongodb').ObjectId;
 var bcrypt = require('bcrypt');
+var session = require('express-session');
+const replace = require('replace-in-file');
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
+
 router.use(lang.init);
 /* GET users listing. */
 router.get('/',isAuthenticated, function(req, res, next) {
@@ -14,11 +23,8 @@ router.post('/',isAuthenticated,function(req, res) {
 	// we create 'users' collection in newdb database
 	var dbname = req.body.dbname
 	var url = "mongodb://127.0.0.1:27017/"+dbname;
-	console.log("0000000000000000000000000000");
-	console.log(url);
+	localStorage.setItem("database", dbname);  
 	// create a client to mongodb
-	var MongoClient = require('mongodb').MongoClient;
-	 
 	// make client connect to mongo service
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
@@ -122,7 +128,7 @@ router.post('/',isAuthenticated,function(req, res) {
 				middlename: "admin",
 				lastname: "admin",
 				email:req.body.email,
-				photo:"public/images/default.png",
+				photo:"default.png",
 				ccode: "000",
 				mobile:"9999999999",
 				occupation:"admin",
