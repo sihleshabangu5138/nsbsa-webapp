@@ -56,8 +56,10 @@ router.route('/:id?')
 		var query ={"user_id": ObjectId(id)};
 		var family_data=[];
 		dbo.collection("familydata").find(query).toArray(function(err, family_data1) {
-			family_data=family_data1;
-			family_data[0].id_d=ObjectId(family_data1[0]._id).toString();
+			if (family_data1 != ""){
+				family_data=family_data1;
+				family_data[0].id_d=ObjectId(family_data1[0]._id).toString();
+			}
 		dbo.collection("Role").find().toArray(function(err, role_name) {
 			fs.readFile('public/data/countries.json', function(err, data) { 
 			var jsonData = data;
