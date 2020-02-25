@@ -45,7 +45,7 @@
 			<div class="col-md-12 form-control border-light textarea_css">
 			<div class="form-field">	
 
-			<textarea name="loan_desc"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{__ 'Only Characters, no numbers and no special characters'}}" data-validation-required-message="{{__ 'Description is required'}}" {{#if this.loan_desc}} value="{{this.loan_desc}}"{{/if}}>{{this.loan_desc}}</textarea>
+			<textarea name="loan_desc"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,300})" data-validation-regex-message="{{__ 'Only Characters, no numbers and no special characters'}}" data-validation-required-message="{{__ 'Description is required'}}" {{#if this.loan_desc}} value="{{this.loan_desc}}"{{/if}}>{{this.loan_desc}}</textarea>
 				<span class="txt-title-label"></span>
 				<label class="text-area address ">{{#with ..}}{{__ "Description" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div>
