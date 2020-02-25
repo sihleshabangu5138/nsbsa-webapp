@@ -13,7 +13,7 @@ router.get('/',isAuthenticated, function(req, res, next) {
 router.post('/',isAuthenticated,function(req, res) {
 	// we create 'users' collection in newdb database
 	var dbname = req.body.dbname
-	var url = "mongodb://34.93.67.96:27017/"+dbname;
+	var url = "mongodb://127.0.0.1:29480/"+dbname;
 	console.log("0000000000000000000000000000");
 	console.log(url);
 	// create a client to mongodb
