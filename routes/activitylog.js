@@ -16,7 +16,7 @@ router.use(flash());
 router.get('/', isAuthenticated,function(req, res, next) {
 	var dbo = db.get();
 	dbo.collection("activitylog").find().sort({ _id: -1 }).toArray(function(err, activity) {
-		if(activity){
+		if(activity != ""){
 			var userquery ={"_id": activity[0].user};
 			dbo.collection("Users").find(userquery).toArray(function(err, username) {
 				res.render('activitylog/activitylog', { title: 'Activity Log',session:req.session,messages:req.flash(),activity:activity, user:username});
@@ -24,10 +24,10 @@ router.get('/', isAuthenticated,function(req, res, next) {
 		}
 		else{
 			var news = [{'userid':'-1'}];
-			var userquery ={"_id": activity[0].user};
-			dbo.collection("Users").find(userquery).toArray(function(err, username) {
+			// var userquery ={"_id": activity[0].user};
+			// dbo.collection("Users").find(userquery).toArray(function(err, username) {
 				res.render('activitylog/activitylog', { title: 'Activity Log',session:req.session,messages:req.flash(),activity:news, user:username});
-			});
+			// });
 		}
 	});
 });
