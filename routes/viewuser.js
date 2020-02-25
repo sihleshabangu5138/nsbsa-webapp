@@ -31,11 +31,10 @@ router.route('/:id?')
 				 
 				var family_data=[];
 					dbo.collection("familydata").find(query).toArray(function(err, family_data1) {
-						family_data=family_data1;
-						family_data[0].id_d=ObjectId(family_data1[0]._id).toString();
-
-		 
-			 
+						if(family_data1 != undefined){
+							family_data=family_data1;
+							family_data[0].id_d=ObjectId(family_data1[0]._id).toString();		 
+						}
 			res.render('users/viewuser', {title:"View User", data: result,role:rolename,family:family_data,id:id,session:req.session,}); 
 		});
 		});
