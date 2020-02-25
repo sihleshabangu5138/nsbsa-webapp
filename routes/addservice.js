@@ -401,17 +401,17 @@ router.route('/:id?')
 						
 					}
 							
-				if(req.files){
-				for (const [key,value] of Object.entries(req.files)){
-				if(req.body.note || value.fieldname == "attachfile"){
-				var this_data = {
-					note: addnote,
-					fileattach: attachfiles,
-					module:"service",
-					module_id: result.insertedId,
-				}}}
-				dbo.collection("notes").insertOne(this_data, function(err,notefile) {});
-			}
+				if(req.files && req.body.note){
+					for (const [key,value] of Object.entries(req.files)){
+					if(req.body.note || value.fieldname == "attachfile"){
+					var this_data = {
+						note: addnote,
+						fileattach: attachfiles,
+						module:"service",
+						module_id: result.insertedId,
+					}}}
+					dbo.collection("notes").insertOne(this_data, function(err,notefile) {});
+				}
 			if (err) { 
 				req.flash('error','Error occured.');
 				res.redirect('/service/servicelist');
