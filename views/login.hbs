@@ -21,7 +21,7 @@
                   <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
                     <span>{{__ "Using Account Details"}}</span>
                   </p>
-                  <div class="card-body NF_login mb-2">
+                  <div class="card-body NF_login ">
 				  {{#if messages.error}}
 					<script>
 						toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
@@ -51,31 +51,19 @@
                         </div>
                         <div class="col-md-6 col-12 float-sm-left text-center text-sm-right Forgot_pass"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
                       <!-- <!-- </div>-->
-                      <button type="submit" class="btn btn-outline-secondary btn-block"><i class="ft-unlock"></i> {{__ "Login"}}</button>
+                      <button type="submit" class="btn btn-outline-secondary btn-block  mb-2"><i class="ft-unlock"></i> {{__ "Login"}}</button>
+					  <hr>
+					  <br>
+					   <table class="table passwordtable" style="background-color:#faf7f7;">
+						<tr><th>Role</th><th>Username</th><th>Password</th></tr>
+						<tr><td>Customer</td><td>customer</td><td>customer</td></tr>
+						<tr><td>Staff</td><td>staff</td><td>staff</td></tr>
+					   </table>
                     </form>
                   </div>
                   <!-- <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"> -->
                     <!-- <span>{{__ "New User?"}}</span> -->
                   <!-- </p> -->
-					<table class="table col-md-3 text-center">
-						<thead class="thead-dark">
-						  <tr>
-							<th>Username</th>
-							<th>Password</th>
-						  </tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>staff</td>
-								<td>staff1</td>
-							</tr>
-							<tr>
-								<td>customer</td>
-								<td>customer</td>
-							</tr>
-							<tr>
-						</tbody>
-					</table>
                   <!-- <div class="card-body"> -->
                     <!-- <a href="#" class="btn btn-outline-red btn-block"><i class="ft-user"></i>{{__ " Sign up"}}</a> -->
                  <!-- </div> -->
