@@ -324,7 +324,7 @@ router.route('/:id?')
 		});
 		var m=0;
 		var data = [];
-			myquery1='';
+		if (req.body.family){
 			for (const [key, value] of Object.entries(req.body.family)) {	
 					if(value.id!=''){
 						
@@ -343,7 +343,6 @@ router.route('/:id?')
 							});
 					}
 					else{
-						if (req.body.family){
 							var this_data= [];
 							this_data = {
 								user_id: user_id,
@@ -358,8 +357,8 @@ router.route('/:id?')
 									m++;
 								 }
 							});
-						}
 					}
+			}
 			}
 			if (m>0) 
 			{
