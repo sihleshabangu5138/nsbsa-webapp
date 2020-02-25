@@ -43,8 +43,8 @@ router.post('/',isAuthenticated,function(req, res) {
 			if (err) throw err;
 		// db.createCollection("Users", function(err, Users) {
 			// if (err) throw err;
-		db.createCollection("activitylog", function(err, activitylog) {
-			if (err) throw err;
+		// db.createCollection("activitylog", function(err, activitylog) {
+			// if (err) throw err;
 		db.createCollection("category", function(err, category) {
 			if (err) throw err;
 		db.createCollection("categorytypes", function(err, categorytypes) {
@@ -146,7 +146,15 @@ router.post('/',isAuthenticated,function(req, res) {
 				pannumber:"YYYYY0000Y",
 				status:1,
 			}
-			db.collection("Users").insertOne(myobj, function(err, res) {});
+			db.collection("Users").insertOne(myobj, function(err, res) {
+			db.collection("activitylog").insertOne({
+				date: Date(Date.now()),
+				module: "User",
+				action: "inserted user named admin",
+				user: ObjectId(res.insertedId),				
+				item: req.body.username,
+				status:0,
+			});});
 		});
 		db.collection("Generalsetting").insertOne({
 			_id:ObjectId("5d3ed73f5ec5ca0f0871f679"),
