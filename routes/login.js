@@ -137,7 +137,7 @@ router.get('/logout', isAuthenticated,function(req, res) {
   })
 });
 function isinstalled(req, res, next) {
-	fs.exists('./temp.txt', function(exists) {console.log("file exists ? " + exists);
+	fs.exists('./temp/temp.txt', function(exists) {console.log("file exists ? " + exists);
 		if(exists == true){
 			 return next();		
 		} else {

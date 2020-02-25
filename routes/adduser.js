@@ -134,7 +134,6 @@ router.route('/:id?')
 		else{
 			var pass = req.body.password_old; 
 		}
-		console.log(hash)
 		var roleid = req.body.role;
 		var idrole = ObjectId(roleid);
 		var birthdate = moment(req.body.birthdate).format("YYYY-MM-DD");      
