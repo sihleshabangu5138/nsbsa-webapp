@@ -21,7 +21,7 @@
                   <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
                     <span>{{__ "Using Account Details"}}</span>
                   </p>
-                  <div class="card-body NF_login">
+                  <div class="card-body NF_login mb-2">
 				  {{#if messages.error}}
 					<script>
 						toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
@@ -54,12 +54,31 @@
                       <button type="submit" class="btn btn-outline-secondary btn-block"><i class="ft-unlock"></i> {{__ "Login"}}</button>
                     </form>
                   </div>
-                  <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
-                    <span>{{__ "New User?"}}</span>
-                  </p>
-                  <div class="card-body">
-                    <a href="#" class="btn btn-outline-red btn-block"><i class="ft-user"></i>{{__ " Sign up"}}</a>
-                 </div>
+                  <!-- <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"> -->
+                    <!-- <span>{{__ "New User?"}}</span> -->
+                  <!-- </p> -->
+					<table class="table col-md-3">
+						<thead class="thead-dark">
+						  <tr>
+							<th>Username</th>
+							<th>Password</th>
+						  </tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>staff</td>
+								<td>staff1</td>
+							</tr>
+							<tr>
+								<td>Mary</td>
+								<td>Moe</td>
+							</tr>
+							<tr>
+						</tbody>
+					</table>
+                  <!-- <div class="card-body"> -->
+                    <!-- <a href="#" class="btn btn-outline-red btn-block"><i class="ft-user"></i>{{__ " Sign up"}}</a> -->
+                 <!-- </div> -->
                </div>
              </div>
            </div>
