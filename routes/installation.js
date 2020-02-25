@@ -258,8 +258,6 @@ router.post('/',isAuthenticated,function(req, res) {
 	else{
 		res.redirect('/');
 	}
-	
-	})
 });
 
 function isAuthenticated(req, res, next) {
