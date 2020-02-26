@@ -624,7 +624,7 @@ html .k-error-colored {
 .k-widget,
 .k-widget *,
 .k-widget:before {
-    box-sizing: content-box
+    /* box-sizing: content-box */
 }
 
 .k-autocomplete,
