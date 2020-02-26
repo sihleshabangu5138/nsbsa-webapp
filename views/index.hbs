@@ -152,7 +152,7 @@
                     </thead>
                     <tbody>
 					{{#each Reminder}}
-                      <tr>
+                      <tr href="/reminder/reminders">
                         <td class="text-truncate">{{this.reminder_nm}}</td>
                         <td class="text-truncate">{{this.reminder_template}}</td>
                         <td class="text-truncate">
@@ -185,7 +185,7 @@
                     </thead>
                     <tbody>
 					{{#each events}}
-                      <tr>
+                      <tr href="/events/viewevent/{{this._id}}">
                         <td class="text-truncate">{{this.eventtitle}}</td>
 						 <td class="text-truncate">{{this.eventdetail}}</td>
                         <td class="text-truncate">{{this.startdate}}</td>
