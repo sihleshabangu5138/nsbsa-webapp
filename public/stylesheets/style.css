@@ -68,6 +68,9 @@ textarea:focus {
 	    padding: 1.6em .6em !important;
 } 
 /*****************************/
+.k-animation-container, .k-animation-container *, .k-animation-container::after, .k-block .k-header, .k-dialog .k-window-content, .k-list-container, .k-widget, .k-widget *, .k-widget::before {
+    box-sizing: none!important;
+}
 .k-grid-content tr:hover td:first-child
 {
 	border-left: 5px solid #50d799!important;;
