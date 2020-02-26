@@ -50,7 +50,7 @@ textarea:focus {
 .form-control:focus {
     border-color: #BABFC7 !important;
 }
-.avatar-online{
+.avatar-online img{
 	height:30px !important;
 }
 .float{
