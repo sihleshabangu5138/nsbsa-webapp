@@ -50,7 +50,7 @@ textarea:focus {
 .form-control:focus {
     border-color: #BABFC7 !important;
 }
-.imageround{
+.imageround img{
 	height:30px !important;
 }
 .float{
