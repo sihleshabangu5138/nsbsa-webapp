@@ -1,6 +1,8 @@
 .form-body{
-	font-family:Montserrat, Georgia, "Times New Roman", Times, serif !important;
 	min-height:180px !important;
+}
+.font-way{
+	font-family:Montserrat, Georgia, "Times New Roman", Times, serif !important;
 }
 .passwordtable tr th {
     padding: 0.75rem 0.5rem !important;
