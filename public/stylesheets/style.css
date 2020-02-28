@@ -1,6 +1,6 @@
 body{
 	font-family:Montserrat, Georgia, "Times New Roman", Times, serif !important;
-	min-height:180px !important;
+	min-height:-webkit-fill-available !important;
 }
 .font-way{
 	font-family:Montserrat, Georgia, "Times New Roman", Times, serif !important;
