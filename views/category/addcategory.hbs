@@ -16,6 +16,24 @@
 			<div class="form-body user_form">
 			<div class="col-md-6">
 			<div class="form-group input">
+			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ">
+					<ul class="list-inline mb-0">
+					<li class="col-md-12 p-0 form-control" id="export">
+						<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Country" setlang}}{{/with}}<span class="required red">*</span></label>
+						<select class="select2 form-control export" data-validation-required-message="Country is required" name="country" maxlength="50" id="country" {{#if this.country}} value="{{this.country}}"{{/if}}>
+						<option value="">Select Country</option>
+						{{#each ../country as |id| }}
+						<option {{#ifCond this.id '===' result.country}} selected {{/ifCond}} value="{{this.id}}" >{{this.name}}</option>
+							{{/each}}
+						</select>
+                     </li>
+					 </ul>
+				</div><div class="help-block"></div>
+			</div>
+			</div>
+			<div class="col-md-6">
+			<div class="form-group input">
 				<div class="heading-elements ">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">

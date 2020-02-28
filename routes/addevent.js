@@ -237,16 +237,29 @@ router.route('/:id?')
 			});
 	}
 	else{
-		var myobj = {
-			eventtype: req.body.eventtype,
-			eventtitle: req.body.eventtitle,
-			eventvenue: req.body.eventvenue,
-			duration: req.body.duration,
-			startdate: req.body.startdate,
-			enddate: req.body.enddate,
-			eventfor: forevent,
-			eventdetail: req.body.eventdetail,
+		if(req.body.duration == "one day"){
+			var myobj = {
+				eventtype: req.body.eventtype,
+				eventtitle: req.body.eventtitle,
+				eventvenue: req.body.eventvenue,
+				duration: req.body.duration,
+				startdate: req.body.startdate,
+				eventfor: forevent,
+				eventdetail: req.body.eventdetail,
+			}
 		}
+		else{
+			var myobj = {
+				eventtype: req.body.eventtype,
+				eventtitle: req.body.eventtitle,
+				eventvenue: req.body.eventvenue,
+				duration: req.body.duration,
+				startdate: req.body.startdate,
+				enddate: req.body.enddate,
+				eventfor: forevent,
+				eventdetail: req.body.eventdetail,
+			}
+		}	
 		dbo.collection("events").insertOne(myobj, function(err, result) {
 			var date = Date(Date.now());
 			var formatdate = moment(date).format("YYYY-MM-DD");
