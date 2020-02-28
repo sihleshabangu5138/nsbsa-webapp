@@ -21,10 +21,14 @@
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
 						<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Category Type"}}{{/with}}<span class="required red">*</span></label>
-						<select class="select2 form-control cate_type export" data-validation-required-message="Category Type is required" name="categorytypes" maxlength="50" id="country" {{#if this.country}} value="{{this.country}}"{{/if}}>
-						<option value="">Select Country</option>
-						{{#each ../country as |id| }}
-						<option {{#ifCond this.id '===' result.country}} selected {{/ifCond}} value="{{this.id}}" >{{this.name}}</option>
+						<select class="select2 form-control cate_type export" data-validation-required-message="Category Type is required" name="categorytypes">
+							<option>{{__ "Category Type"}}</option>
+							<option value="service" {{#ifCond result.categorytypes '==' "service"}} selected {{/ifCond}}>{{__ "Service"}}</option>
+							<option value="product" {{#ifCond result.categorytypes '==' "product"}} selected {{/ifCond}}>{{__ "Product"}}</option>
+							<option value="product_unit" {{#ifCond result.categorytypes '==' "product_unit"}} selected {{/ifCond}}>{{__ "Product_unit"}}</option>
+							<option value="event" {{#ifCond result.categorytypes '==' "event"}} selected {{/ifCond}}>{{__ "Event"}}</option>
+							{{#each ../types as |type|}}
+								<option {{#ifCond type.category_type '==' result.categorytypes}} selected {{/ifCond}} value="{{type.category_type}}">{{type.category_type}}</option>
 							{{/each}}
 						</select>
                      </li>
