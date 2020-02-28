@@ -21,7 +21,7 @@
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
 						<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Category Type"}}{{/with}}<span class="required red">*</span></label>
-						<select class="select2 form-control export" data-validation-required-message="Country is required" name="country" maxlength="50" id="country" {{#if this.country}} value="{{this.country}}"{{/if}}>
+						<select class="select2 form-control cate_type export" data-validation-required-message="Country is required" name="country" maxlength="50" id="country" {{#if this.country}} value="{{this.country}}"{{/if}}>
 						<option value="">Select Country</option>
 						{{#each ../country as |id| }}
 						<option {{#ifCond this.id '===' result.country}} selected {{/ifCond}} value="{{this.id}}" >{{this.name}}</option>
