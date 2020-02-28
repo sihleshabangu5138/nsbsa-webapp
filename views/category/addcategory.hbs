@@ -16,46 +16,26 @@
 			<div class="form-body user_form">
 			<div class="col-md-6">
 			<div class="form-group input">
-			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements ">
-					<ul class="list-inline mb-0">
-					<li class="col-md-12 p-0 form-control" id="export">
-						<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Category Type"}}{{/with}}<span class="required red">*</span></label>
-						<select class="select2 form-control cate_type export" data-validation-required-message="Category Type is required" name="categorytypes">
-							<option>{{__ "Category Type"}}</option>
-							<!-- <option value="service" {{#ifCond result.categorytypes '==' "service"}} selected {{/ifCond}}>{{__ "Service"}}</option> -->
-							<!-- <option value="product" {{#ifCond result.categorytypes '==' "product"}} selected {{/ifCond}}>{{__ "Product"}}</option> -->
-							<!-- <option value="product_unit" {{#ifCond result.categorytypes '==' "product_unit"}} selected {{/ifCond}}>{{__ "Product_unit"}}</option> -->
-							<!-- <option value="event" {{#ifCond result.categorytypes '==' "event"}} selected {{/ifCond}}>{{__ "Event"}}</option> -->
-							<!-- {{#each ../types as |type|}} -->
-								<!-- <option {{#ifCond type.category_type '==' result.categorytypes}} selected {{/ifCond}} value="{{type.category_type}}">{{type.category_type}}</option> -->
-							<!-- {{/each}} -->
-						</select>
-                     </li>
-					 </ul>
-				</div><div class="help-block"></div>
-			</div>
-			</div>
-			<div class="col-md-6">
-			<div class="form-group input">
-				<div class="heading-elements ">
-					<ul class="list-inline mb-0">
-					<li class="col-md-12 p-0 form-control" id="export">
-					    <label class="ml-1 custom-top-label top" style="z-index:9">{{__ "Category Type"}}<span class="red">*</span></label>
-						<select class="select2 form-control export cate_type" data-validation-required-message="Category type is required" name="categorytypes" >
-							<option>{{__ "Category Type"}}</option>
+			<div class="heading-elements "> 
+			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Category Type" setlang}}{{/with}} <span class="required red">*</span></label>
+			 <select class="select2 form-control export cate_type" id="export" maxlength="50" data-validation-required-message="Category type is required" name="categorytypes" aria-hidden="true" aria-invalid="true"> 
+			 
+						<option value="">{{__ "Category Type"}}</option>
+						
 						<option value="service" {{#ifCond result.categorytypes '==' "service"}} selected {{/ifCond}}>{{__ "Service"}}</option>
+						
 						<option value="product" {{#ifCond result.categorytypes '==' "product"}} selected {{/ifCond}}>{{__ "Product"}}</option>
+						
 						<option value="product_unit" {{#ifCond result.categorytypes '==' "product_unit"}} selected {{/ifCond}}>{{__ "Product_unit"}}</option>
+						
 						<option value="event" {{#ifCond result.categorytypes '==' "event"}} selected {{/ifCond}}>{{__ "Event"}}</option>
+						
 						{{#each ../types as |type|}}
 							<option {{#ifCond type.category_type '==' result.categorytypes}} selected {{/ifCond}} value="{{type.category_type}}">{{type.category_type}}</option>
 						{{/each}}
-						</select>
-					</li>
-
-					</ul>
-				</div><div class="help-block"></div>
+				</select>
+				
+			</div><div class="help-block"></div>
 			</div>
 			</div>
 			<div class="col-md-6 mb-2">
