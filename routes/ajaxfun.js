@@ -734,13 +734,16 @@ router.get('/duplicateemail', isAuthenticated,function(req, res) {
 										var message = value.content;
 										var subject = value.subject;
 											var Obj = {
-													'_USERFIRSTNAME_': result[0].firstname, 
-													'_USERLASTNAME_': result[0].lastname, 
-													'_LOANTYPE_': typeloan[0].type, 
-												};
-											var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_LOANTYPE_/gi, function(matched){ 
-												return Obj[matched]; 
-											});  
+											'_USERFIRSTNAME_': value1.firstname,
+											'_USERLASTNAME_': value1.lastname,
+											'_DATETIME_' : formatdate,
+											'_newline_': '<br>',
+											'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+											'_systemname_':req.session.generaldata.com_name,
+											};
+										var trans=message.replace(/_USERFIRSTNAME_|_USERLASTNAME_|_DATETIME_|_newline_|_tab_|_systemname_/gi, function(matched){
+											return Obj[matched]; 
+										});  
 											
 										Mail.sendMail(result[0].email,subject,trans);	
 									};
