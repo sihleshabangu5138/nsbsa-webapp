@@ -161,12 +161,12 @@
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
-			<a href="/activitylog/activitylog"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Activity Log"}}
+			<a href="/activitylog/activitylog"><li class="dropdown-item"><i class="fa fa-history" aria-hidden="true"></i>{{__ "Activity Log"}}
             </li></a>
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
-			<a href="/impersonate/impersonateuser"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Impersonate"}}</li></a>
+			<a href="/impersonate/impersonateuser"><li class="dropdown-item"><i class="fa fa-unlock-alt" aria-hidden="true"></i>{{__ "Impersonate"}}</li></a>
 			{{/hiddenmodules}}	
 			
 			</ul>
