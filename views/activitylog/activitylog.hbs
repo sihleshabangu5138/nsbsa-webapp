@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Activity Log'}}
+{{breadcrums {{__ "Home"}} {{__ "Activity Log"}}}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="row">
@@ -24,7 +24,7 @@
 									<!-- {{#each activity}} -->
 										<!-- <button type="button" {{#ifCond this.module "==" "Log"}}style="display:none"{{else}}{{/ifCond}} class="btn btn-danger m-1" id="clearlog">Clear log</button> -->
 									<!-- {{/each}} -->
-									<button type="button" class="btn btn-danger m-1" style="float:right" id="clearlog">Clear log</button>
+									<button type="button" class="btn btn-danger m-1" style="float:right" id="clearlog">{{__ "Clear log"}}</button>
 									</div>
 									<div class="col-12">
 										<div class="card">
@@ -42,7 +42,7 @@
 										</tr>
 										{{/each}}
 										{{else}}
-										<tr class="colortr"><td class="bordertop">Log clear </td> </tr>
+										<tr class="colortr"><td class="bordertop">{{__ "Log clear"}}</td> </tr>
 										{{/if}}
 										
 										</tbody></table>

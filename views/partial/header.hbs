@@ -140,7 +140,7 @@
 			
 			{{#hiddenmodules session.access_rights.rulesandregulation.view session.admin_access}}
 			<a href="/rule/rules"><li class="dropdown-item"><i class="fa fa-clipboard" aria-hidden="true"></i>
-{{__ "Rules and Regulations"}}
+			{{__ "Rules and Regulations"}}
             </li></a>
 			{{/hiddenmodules}}
 			
@@ -153,6 +153,11 @@
 			{{#hiddenmodules session.access_rights.notification.view session.admin_access}}
 				<a href="/notification/notificationtemplate"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Notification Template"}}
 				</li></a>	
+			{{/hiddenmodules}}	
+			
+			{{#hiddenmodules session.access_rights.reminder.view session.admin_access}}
+			<li class="dropdown-item"><a href="/reminder/reminders"><i class="fa fa-clock-o custom_height_width_icons"></i>{{__ "Reminders"}}</a>
+            </li>  
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
@@ -165,9 +170,6 @@
             </li></a>
 			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
-			<a href="/impersonate/impersonateuser"><li class="dropdown-item"><i class="fa fa-unlock-alt" aria-hidden="true"></i>{{__ "Impersonate"}}</li></a>
-			{{/hiddenmodules}}	
 			
 			</ul>
 		</li>
@@ -183,9 +185,8 @@
 			<a href="/accessrights/accessright"><li class="dropdown-item"><i class="fa fa-key custom_height_width_icons"></i>{{__ "Access Rights"}}</li></a>
 			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.reminder.view session.admin_access}}
-			<li class="dropdown-item"><a href="/reminder/reminders"><i class="fa fa-clock-o custom_height_width_icons"></i>{{__ "Reminders"}}</a>
-            </li>  
+			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
+			<a href="/impersonate/impersonateuser"><li class="dropdown-item"><i class="fa fa-unlock-alt" aria-hidden="true"></i>{{__ "Impersonate"}}</li></a>
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.generalsetting.view session.admin_access}}
@@ -203,7 +204,7 @@
 		
 		{{#ifCond session.impersondata "!==" ""}}
 			<li>
-				<a class="blink_impersonate nav-link" id="leaveimpersonate"><span class="draw"><i class="fa fa-unlock-alt custom_height_width_icons"></i>&nbsp;Leave Impersonate</span></a>
+				<a class="blink_impersonate nav-link" id="leaveimpersonate"><span class="draw"><i class="fa fa-unlock-alt custom_height_width_icons"></i>&nbsp;{{__ "Leave Impersonate"}}</span></a>
 			</li>
 		{{/ifCond}}
     </div>
