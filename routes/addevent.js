@@ -237,6 +237,7 @@ router.route('/:id?')
 			});
 	}
 	else{
+		console.log(req.body)
 		var myobj = {
 			eventtype: req.body.eventtype,
 			eventtitle: req.body.eventtitle,

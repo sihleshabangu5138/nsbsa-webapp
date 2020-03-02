@@ -447,5 +447,13 @@
 	"Event end date": "Event end date",
 	"_newline_": "_newline_",
 	"for new line": "for new line",
-	"_tab_": "_tab_"
+	"_tab_": "_tab_",
+	"Event Type": "Event Type",
+	"Event Title": "Event Title",
+	"Event venue": "Event venue",
+	"Start date": "Start date",
+	"End date": "End date",
+	"Event for": "Event for",
+	"Event Detail": "Event Detail",
+	"Event Inserted Sucessfully.": "Event Inserted Sucessfully."
 }
