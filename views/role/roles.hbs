@@ -42,9 +42,9 @@
 								
 								<li id="export">
 										<select class="select2 form-control export">
-											<option value="">Export</option>
-											<option value="csv">XLSX</option>
-											<option value="pdf">PDF</option>
+											<option value="">{{__ "Export"}}</option>
+											<option value="csv">{{__ "XLSX"}}</option>
+											<option value="pdf">{{__ "PDF"}}</option>
 										</select>
 									</li>
 								<!--<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -331,7 +331,7 @@
 							],
 							{{#if accessrightdata.add }}
 							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addrole'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addrole'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
 							{{/if}}
 					}
 					{{/ifCondition}}

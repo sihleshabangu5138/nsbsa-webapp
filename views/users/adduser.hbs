@@ -233,7 +233,7 @@
 					<li class="col-md-12 p-0 form-control" id="export">
 						<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Country" setlang}}{{/with}}<span class="required red">*</span></label>
 						<select class="select2 form-control export" data-validation-required-message="Country is required" name="country" maxlength="50" id="country" {{#if this.country}} value="{{this.country}}"{{/if}}>
-						<option value="">Select Country</option>
+						<option value="">{{#with ..}}{{__ "Select Country" setlang}}{{/with}}</option>
 						{{#each ../country as |id| }}
 						<option {{#ifCond this.id '===' result.country}} selected {{/ifCond}} value="{{this.id}}" >{{this.name}}</option>
 							{{/each}}
@@ -251,7 +251,7 @@
 					<li class="col-md-12 p-0 form-control" id="export">
 					<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "State" setlang}}{{/with}}<span class="required red">*</span></label>
 						<select class="select2 form-control export" maxlength="50" data-validation-required-message="State is required" name="state" id="state" {{#if this.state}} value="{{this.state}}"{{/if}} >
-						<option value="">Select State</option>
+						<option value="">{{#with ..}}{{__ "Select State" setlang}}{{/with}}</option>
 						</select>
 					</li>
 					</ul>
@@ -265,9 +265,9 @@
 				<div class="heading-elements ">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					<label class="custom-control-label-date ml-2" style="z-index:99">City<span class="required red">*</span></label>
+					<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "City" setlang}}{{/with}}<span class="required red">*</span></label>
 						<select class="select2 form-control export" maxlength="50" data-validation-required-message="City name is required" name="city" id="city" {{#if this.city}} value="{{this.city}}"{{/if}} >
-						<option value="">Select City</option>
+						<option value="">{{#with ..}}{{__ "Select City" setlang}}{{/with}}</option>
 						</select>
 					</li>
 					</ul>
@@ -302,7 +302,7 @@
 					<li class="col-md-12 p-0 form-control" id="export">
 					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Select Role" setlang}}{{/with}}<span class="red">*</span></label>
 						<select class="select2 form-control export" data-validation-required-message="Role name is required" name="role" {{#ifCond ../session.admin_access "==" 0}} disabled {{/ifCond}}>
-							<option value="">Select Role</option>
+							<option value="">{{#with ..}}{{__ "Select Role" setlang}}{{/with}}</option>
 							{{#each ../role as |role_nm| }}
 								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}} {{/if}} value="{{this._id}}" >{{this.role_nm}}</option>
 							{{/each}}
@@ -336,7 +336,7 @@
 			</div>
 			</div>
 			</div>
-		<p class="form-section text-bold-600 font-medium-2 border-light"><i class="fa fa-address-card-o" aria-hidden="true"></i> {{__ "Bank Account Details"}} </p>
+		<p class="form-section text-bold-600 font-medium-2 border-light"><i class="fa fa-address-card-o" aria-hidden="true"></i>{{#with ..}} {{__ "Bank Account Details" setlang}} {{/with}}</p>
 		<div class="row">
 			<div class="col-md-6">
 			<div class="form-group input">
@@ -350,7 +350,7 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input autocomplete="off" type="text" id="userinput33" class="form-control" name="pannumber" data-validation-regex-regex="([A-Z]{5}[0-9]{4}[A-Z]{1})" maxlength="10" data-validation-regex-message="{{__ 'Enter Valid pan number'}}" data-validation-required-message="Pan Number is required" aria-invalid="true" {{#if this.pannumber}} value="{{this.pannumber}}"{{/if}}>
-				<label for="userinput33">{{__ "Pan Number"}}<span class="required red">*</span></label>
+				<label for="userinput33">{{#with ..}}{{__ "Pan Number" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 		</div>

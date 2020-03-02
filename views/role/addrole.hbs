@@ -34,7 +34,7 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} >
-				<input type="text" id="userinput1"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,20})" data-validation-regex-message=" Only Characters and space, no numbers" data-validation-required-message="Role name is required" name="role_nm" {{#if this.role_nm}} value="{{this.role_nm}}"{{/if}} >
+				<input type="text" id="userinput1"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,20})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Role name is required' setlang}}{{/with}}" name="role_nm" {{#if this.role_nm}} value="{{this.role_nm}}"{{/if}} >
 				<label for="userinput1">{{#with ..}}{{__ "Role Name" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
@@ -43,8 +43,8 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				
-				<input type="text"id="userinput1" name="role_slug"  data-validation-regex-regex="([A-Za-z_,`.'^-]{1,20})" data-validation-regex-message="Enter only alphabets and allowed underscore only" data-validation-required-message="Role Slug is required"  {{#if this.role_slug}} value="{{this.role_slug}}"{{/if}} >
-				<label for="userinput2">{{#with ..}}{{__ "Role Slug" setlang}}{{/with}}<span class="required red">*{{__ "Do not enter space"}}</span></label>
+				<input type="text"id="userinput1" name="role_slug"  data-validation-regex-regex="([A-Za-z_,`.'^-]{1,20})" data-validation-regex-message="{{#with ..}}{{__ 'Enter only alphabets and allowed underscore only' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Role Slug is required' setlang}}{{/with}}" {{#if this.role_slug}} value="{{this.role_slug}}"{{/if}} >
+				<label for="userinput2">{{#with ..}}{{__ "Role Slug" setlang}}{{/with}}<span class="required red">*{{#with ..}}{{__ "Do not enter space" setlang}}{{/with}}</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -53,7 +53,7 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light textarea_css">
 			<div class="form-field">
-				<textarea name="role_desc"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,250})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Role Description is required" {{#if this.role_desc}} value="{{this.role_desc}}"{{/if}}>{{this.role_desc}}</textarea>
+				<textarea name="role_desc"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,250})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Description is required' setlang}}{{/with}}" {{#if this.role_desc}} value="{{this.role_desc}}"{{/if}}>{{this.role_desc}}</textarea>
 				<span class="txt-title-label"></span>
 				<label class="text-area address ">{{#with ..}}{{__ "Description" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div>
