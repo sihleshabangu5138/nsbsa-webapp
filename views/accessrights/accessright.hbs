@@ -323,12 +323,12 @@
 								<table id="dataTables-example" class="display table table-bordered table-striped">
 									<thead>
 										<tr class="text-center">
-											<th class="text-left">{{__ "Module Name"}}</th>
-											<th>{{__ "View"}}</th>
-											<th>{{__ "Add"}}</th>
-											<th>{{__ "Update"}}</th>
-											<th>{{__ "Delete"}}</th>
-											<th>{{__ "Own data"}}</th>
+											<th class="text-left">{{#with ..}}{{__ "Module Name" setlang}}{{/with}}</th>
+											<th>{{#with ..}}{{__ "View" setlang}}{{/with}}</th>
+											<th>{{#with ..}}{{__ "Add" setlang}}{{/with}}</th>
+											<th>{{#with ..}}{{__ "Update" setlang}}{{/with}}</th>
+											<th>{{#with ..}}{{__ "Delete" setlang}}{{/with}}</th>
+											<th>{{#with ..}}{{__ "Own data" setlang}}{{/with}}</th>
 										</tr>
 									</thead>
 								<tbody>
@@ -336,7 +336,7 @@
 									<tr> 
 									<!-- {{log this.access_type.user.owndata}} -->
 									<!-- {{log "111111111111111111111"}} -->
-										<td class=" skin skin-flat" value="user" >{{__ "Users"}}</td>
+										<td class=" skin skin-flat" value="user" >{{#with ..}}{{__ "Users" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][view]"  class="main_access" data-for="user" value="user_view" {{#ifCond this.access_type.user.view "==" "user_view"}} checked {{/ifCond}}> 
 										</td> 
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][add]" class="user_0" value="user_add" {{#ifCond this.access_type.user.add "==" "user_add"}} checked {{/ifCond}}>
@@ -350,7 +350,7 @@
 									</tr> 
 									<!--Types Of Loans Rights -->
 									<tr>
-										<td class=" skin skin-flat" value="typeofloan" >{{__ "Loan Type"}}</td>
+										<td class=" skin skin-flat" value="typeofloan" >{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="typeofloan" name="accessrights[typeofloan][view]" value="typeofloan_view" {{#ifCond this.access_type.typeofloan.view "==" "typeofloan_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"></td>
@@ -361,7 +361,7 @@
 									</tr>
 									<!--Loan List Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="loanlist" >{{__ "Loan List"}}</td>
+										<td class="skin skin-flat" value="loanlist" >{{#with ..}}{{__ "Loan List" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][view]" data-row="0" class="main_access" data-for="custom_fields" value="loan_list_view" {{#ifCond this.access_type.loanlist.view "==" "loan_list_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][add]" class="custom_fields_0" value="loan_list_add" {{#ifCond this.access_type.loanlist.add "==" "loan_list_add"}} checked {{/ifCond}} >
@@ -375,7 +375,7 @@
 									</tr>
 									<!-- Product Rights-->
 									<tr>
-										<td class="skin skin-flat" value="product" >{{__ "Product"}}</td>
+										<td class="skin skin-flat" value="product" >{{#with ..}}{{__ "Product" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[product][view]" data-row="0" class="main_access" data-for="custom_fields" value="product_view" {{#ifCond this.access_type.product.view "==" "product_view"}} checked {{/ifCond}}> 
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[product][add]" class="custom_fields_0" value="product_add" {{#ifCond this.access_type.product.add "==" "product_add"}} {{/ifCond}}>
@@ -389,7 +389,7 @@
 									</tr>
 									<!--Rules and Regulation Access Rights -->
 									<tr>
-										<td class=" skin skin-flat" value="rulesandregulation" >{{__ "Rules and Regulation"}}</td>
+										<td class=" skin skin-flat" value="rulesandregulation" >{{#with ..}}{{__ "Rules and Regulation" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="customer_info" name="accessrights[rulesandregulation][view]" value="rules_and_regulation_view" {{#ifCond this.access_type.rulesandregulation.view "==" "rules_and_regulation_view"}} checked {{/ifCond}} >
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="customer_info_0" name="accessrights[rulesandregulation][add]" value="rules_and_regulation_add" {{#ifCond this.access_type.rulesandregulation.add "==" "rules_and_regulation_add"}} checked  {{/ifCond}} ></td>
@@ -401,7 +401,7 @@
 									</tr>
 									<!--Alerts Rights -->
 									<tr>
-										<td class=" skin skin-flat" value="alert" >{{__ "Alerts"}}</td>
+										<td class=" skin skin-flat" value="alert" >{{#with ..}}{{__ "Alerts" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="email_log" name="accessrights[alert][view]" value="view_alert" {{#ifCond this.access_type.alert.view "==" "view_alert"}} checked {{/ifCond}}></td>
 										<td class="text-center skin skin-flat"></td>
 										<td class="text-center skin skin-flat"></td>
@@ -412,7 +412,7 @@
 									</tr>
 									<!--Report Access Rights -->
 									<tr>
-										<td class=" skin skin-flat" value="report" >{{__ "Reports"}}</td>
+										<td class=" skin skin-flat" value="report" >{{#with ..}}{{__ "Reports" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="report" name="accessrights[report][view]" value="report_view" {{#ifCond this.access_type.report.view "==" "report_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"></td>
@@ -422,7 +422,7 @@
 									</tr>
 									<!--Service Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="service" >{{__ "Service"}}</td>
+										<td class="skin skin-flat" value="service" >{{#with ..}}{{__ "Service" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[service][view]"  value="service_view" {{#ifCond this.access_type.service.view "==" "service_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[service][add]" value="service_add" {{#ifCond this.access_type.service.add "==" "service_add"}} checked {{/ifCond}}>
@@ -436,7 +436,7 @@
 									</tr>
 									<!--Category Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="category" >{{__ "Category"}}</td>
+										<td class="skin skin-flat" value="category" >{{#with ..}}{{__ "Category" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[category][view]"  value="category_view" {{#ifCond this.access_type.category.view "==" "category_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[category][add]" value="category_add" {{#ifCond this.access_type.category.add "==" "category_add"}} checked {{/ifCond}}>
@@ -450,7 +450,7 @@
 									</tr>
 									<!--Events Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="events" >{{__ "Events"}}</td>
+										<td class="skin skin-flat" value="events" >{{#with ..}}{{__ "Events" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[events][view]"  value="events_view" {{#ifCond this.access_type.events.view "==" "events_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[events][add]" value="events_add" {{#ifCond this.access_type.events.add "==" "events_add"}} checked {{/ifCond}}>
@@ -464,7 +464,7 @@
 									</tr>
 									<!--Notification Template Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="notification" >{{__ "Notification Template"}}</td>
+										<td class="skin skin-flat" value="notification" >{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[notification][view]"  value="notifications_view" {{#ifCond this.access_type.notification.view "==" "notifications_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[notification][add]" value="notifications_add" {{#ifCond this.access_type.notification.add "==" "notifications_add"}} checked {{/ifCond}}>
@@ -477,7 +477,7 @@
 									</tr>
 									<!--Roles Access Rights -->
 									<tr>
-										<td class=" skin skin-flat" value="role" >{{__ "Roles"}}</td>
+										<td class=" skin skin-flat" value="role" >{{#with ..}}{{__ "Roles" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="role" name="accessrights[role][view]" value="roles_view" {{#ifCond this.access_type.role.view "==" "roles_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="role_0" name="accessrights[role][add]" value="roles_add" {{#ifCond this.access_type.role.add "==" "roles_add"}} checked {{/ifCond}}>
@@ -491,7 +491,7 @@
 									</tr>
 									<!-- Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="access" >{{__ "Access Rights"}}</td>
+										<td class="skin skin-flat" value="access" >{{#with ..}}{{__ "Access Rights" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="accessright" name="accessrights[access][view]" value="access_view" {{#ifCond this.access_type.access.view "==" "access_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"></td>
@@ -501,7 +501,7 @@
 									</tr>
 									<!--Reminder Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="reminder" >{{__ "Reminders"}}</td>
+										<td class="skin skin-flat" value="reminder" >{{#with ..}}{{__ "Reminders" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="reminder" name= "accessrights[reminder][view]" value="reminder_view" {{#ifCond this.access_type.reminder.view "==" "reminder_view"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="reminder_0" name= "accessrights[reminder][add]" value="reminder_add" {{#ifCond this.access_type.reminder.add "==" "reminder_add"}} checked {{/ifCond}}>
@@ -515,7 +515,7 @@
 									</tr> 
 									<!--General Settings -->
 									<tr>
-										<td class=" skin skin-flat" value="generalsetting">{{__ "General Settings"}}</td>
+										<td class=" skin skin-flat" value="generalsetting">{{#with ..}}{{__ "General Settings" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"></td>
 										<td class="text-center skin skin-flat"></td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name= "accessrights[generalsetting][update]" class="general_settings0" value="general_settings" {{#ifCond this.access_type.generalsetting.update "==" "general_settings"}} checked{{/ifCond}} >
@@ -525,7 +525,7 @@
 									</tr>
 									<!--Custom Fields Access Rights -->
 									<tr>
-										<td class="skin skin-flat" value="customfield" >{{__ "Custom Fields"}}</td>
+										<td class="skin skin-flat" value="customfield" >{{#with ..}}{{__ "Custom Fields" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[customfield][view]" data-row="0" class="main_access" data-for="customfield" value="custom_fields_view" {{#ifCond this.access_type.customfield.view "==" "custom_fields_view"}} Checked {{/ifCond}} >
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[customfield][add]" class="custom_fields_0" value="custom_fields_add" {{#ifCond this.access_type.customfield.add "==" "custom_fields_add"}} checked {{/ifCond}}></td>
@@ -537,10 +537,10 @@
 								</table>
 										<div class="form-actions left">
 											<button type="submit" class="btn btn-secondary" onclick="return ValidateExtension()">
-												<i class="fa fa-check-square-o"></i>{{__ "Submit"}}
+												<i class="fa fa-check-square-o"></i>{{#with ..}}{{__ "Submit" setlang}}{{/with}}
 											</button>
 											<button type="reset" class="btn btn-warning">
-												<i class="ft-refresh-cw"></i>{{__ "Reset"}}
+												<i class="ft-refresh-cw"></i>{{#with ..}}{{__ "Reset" setlang}}{{/with}}
 											</button>
 										</div>
 							</div>
