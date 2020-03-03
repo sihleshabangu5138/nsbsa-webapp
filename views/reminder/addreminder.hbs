@@ -40,7 +40,7 @@
 		<div class="col-md-6 mb-2 input">
 		<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Reminder Type" setlang}}{{/with}}<span class="required red">*</span></label>
          <select id="reminder_type" required="" class="form-control select2" name="reminder_type">
-			 <option value="reminder_type">Select</option>
+			 <option value="reminder_type">{{#with ..}}{{__ "Select" setlang}}{{/with}}</option>
 			 <option value="charged_failed" {{#ifCond this.reminder_type '==' 'charged_failed'}} selected {{/ifCond}}> Subscription Payment Failed</option>
              <option value="upcoming_invoice" {{#ifCond this.reminder_type '==' 'upcoming_invoice'}} selected {{/ifCond}}> Upcoming Invoice</option>
              <option value="invoice_pending" {{#ifCond this.reminder_type '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>

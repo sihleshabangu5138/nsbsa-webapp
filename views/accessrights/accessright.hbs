@@ -13,7 +13,7 @@
 		</ul>  
 		<div class="card-content" id="left-handles">  
 		<div id="card-drag-title-area">
-			<div class="tab-content pt-1">
+			<div class="tab-content pt-1">{{log roledata}}
 	        {{#each roledata as |role_data| }}
 			<!-- {{log access_data}} --> 
 				<div role="tabpanel" class="tab-pane {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{role_data.role_slug}}"  aria-labelledby="" aria-expanded="true"> 

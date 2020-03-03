@@ -18,9 +18,9 @@
 			<ul class="list-inline mb-0">
 			<li id="export">
 				<select class="select2 form-control export">
-					<option value="">Export</option>
-					<option value="csv">XLSX</option>
-					<option value="pdf">PDF</option>
+					<option value="">{{__ "Export"}}</option>
+					<option value="csv">{{__ "XLSX"}}</option>
+					<option value="pdf">{{__ "PDF"}}</option>
 				</select>
 			</li>	
 			</ul>
@@ -98,14 +98,14 @@
 										<span class="swal-icon--warning__dot"></span>
 									</span>
 								</div>
-								<div class="swal-title">Delete !</div>
-								<div class="swal-text">Are You sure wan't to delete this rule ?</div>
+									<div class="swal-title">{{{__ "Delete !"}}}</div>
+								<div class="swal-text">{{{__ "Are You sure wan't to delete this custom field ?"}}}</div>
 								<div class="swal-footer">
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--confirm" id="noButton">NO</button>
+									<button class="swal-button swal-button--confirm" id="noButton">{{{__ "NO"}}}</button>
 								</div>
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--cancel" id="yesButton">YES</button>
+									<button class="swal-button swal-button--cancel" id="yesButton">{{{__ "YES"}}}
 								</div>
 								</div>  
 								
@@ -211,26 +211,26 @@
 					
 					{
                         field: "notificationtype",
-                        title: "Notification Type",
+                        title: "{{__ "Notification Type"}}",
 						width: 80
                     }, {
                         field: "slug",
-                        title: "Slug",
+                        title: "{{__ "Slug"}}",
 						width: 80
                     },  
 					{
                         field: "templatetitle",
-                         title: "Template Title",
+                         title: ""{{__ "Template Title"}}",
                         width: 90
                     },				
 					 {
                         field: "subject",
-                         title: "Subject",
+                         title: "{{__ "Subject"}}",
                         width: 100
                     },				
 					 {
                         field: "content",
-                         title: "Content",
+                         title: "{{__ "Content"}}",
                         width: 350
                     },	
 					{{#ifCond session.admin_access "==" 0}}
@@ -265,7 +265,7 @@
 							],
 							{{#if accessrightdata.add }}
 							title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i>{{__ "New"}}</button></a></center>"
 							{{/if}}
 					}
 					{{/ifCondition}}

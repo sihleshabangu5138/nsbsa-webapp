@@ -12,9 +12,9 @@
 			<ul class="list-inline mb-0">
 			<li id="export">
 				<select class="select2 form-control export">
-					<option value="">Export</option>
-					<option value="csv">XLSX</option>
-					<option value="pdf">PDF</option>
+					<option value="">{{__ "Export"}}</option>
+					<option value="csv">{{__ "XLSX"}}</option>
+					<option value="pdf">{{__ "PDF"}}</option>
 				</select>
 			</li>	
 			</ul>
@@ -221,17 +221,17 @@
 					
 					{
                         field: "obj" ,
-                        title: "Notes",
+                        title: "{{__ "Notes"}}",
 						width: 150
                     },
 					{
                         field: "object" ,
-                        title: "Files attached",
+                        title: "{{__ "Files attached"}}",
 						width: 150
                     },
 					{
                         field: "module" ,
-                        title: "Module",
+                        title: "{{__ "Module"}}",
 						width: 150
                     },
 					{{#ifCond session.admin_access "==" 0}}
