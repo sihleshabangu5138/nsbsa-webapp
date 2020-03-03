@@ -30,6 +30,25 @@
 			<div class="form-body user_form">
 			<div class="row">
 			<div class="col-md-6">
+			<div class="form-group input">
+			<div class="heading-elements "> 
+			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}} <span class="required red">*</span></label>
+			 <select class="select2 form-control export" name="loantype">
+				<option>{{__ "Loan Type"}}</option>
+				<option value="PersonalLoan" {{#ifCond this.loantype '==' 'PersonalLoan'}} selected {{/ifCond}}>Personal Loan</option>
+				<option value="ShortTermLoan" {{#ifCond this.loantype '==' 'ShortTermLoan'}} selected {{/ifCond}}>Short Term Loan</option>
+				<option value="HomeLoan"{{#ifCond this.loantype '==' 'HomeLoan'}} selected {{/ifCond}}>Home Loan</option>
+				<option value="CarLoan"{{#ifCond this.loantype '==' 'CarLoan'}} selected {{/ifCond}}>Car Loan</option>
+				<option value="TwoWheelerLoan"{{#ifCond this.loantype '==' 'TwoWheelerLoan'}} selected {{/ifCond}}>Two Wheeler Loan</option>
+				<option value="UsedcarLoan"{{#ifCond this.loantype '==' 'UsedcarLoan'}} selected {{/ifCond}}>Used Car Loan</option>
+				<option value="EducationLoan"{{#ifCond this.loantype '==' 'EducationLoan'}} selected {{/ifCond}}>Education Loan</option>
+				<option value="BusinessLoan"{{#ifCond this.loantype '==' 'BusinessLoan'}} selected {{/ifCond}}>Business Loan</option>
+			</select>
+				
+			</div><div class="help-block"></div>
+			</div>
+			</div>
+			<div class="col-md-6">
 			<div class="heading-elements form-group input">
 			<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}}>
 					<ul class="list-inline mb-0">
@@ -49,6 +68,25 @@
 					</li>	
 					</ul>
 				</div>
+			</div>
+			<div class="col-md-6">
+			<div class="form-group input">
+			<div class="heading-elements "> 
+			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}} <span class="required red">*</span></label>
+			 <select class="select2 form-control export" name="loantype">
+				<option>{{__ "Loan Type"}}</option>
+				<option value="PersonalLoan" {{#ifCond this.loantype '==' 'PersonalLoan'}} selected {{/ifCond}}>Personal Loan</option>
+				<option value="ShortTermLoan" {{#ifCond this.loantype '==' 'ShortTermLoan'}} selected {{/ifCond}}>Short Term Loan</option>
+				<option value="HomeLoan"{{#ifCond this.loantype '==' 'HomeLoan'}} selected {{/ifCond}}>Home Loan</option>
+				<option value="CarLoan"{{#ifCond this.loantype '==' 'CarLoan'}} selected {{/ifCond}}>Car Loan</option>
+				<option value="TwoWheelerLoan"{{#ifCond this.loantype '==' 'TwoWheelerLoan'}} selected {{/ifCond}}>Two Wheeler Loan</option>
+				<option value="UsedcarLoan"{{#ifCond this.loantype '==' 'UsedcarLoan'}} selected {{/ifCond}}>Used Car Loan</option>
+				<option value="EducationLoan"{{#ifCond this.loantype '==' 'EducationLoan'}} selected {{/ifCond}}>Education Loan</option>
+				<option value="BusinessLoan"{{#ifCond this.loantype '==' 'BusinessLoan'}} selected {{/ifCond}}>Business Loan</option>
+			</select>
+				
+			</div><div class="help-block"></div>
+			</div>
 			</div>
 			<div class="col-md-6">
 			<div class="heading-elements form-group input">

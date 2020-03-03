@@ -12,7 +12,7 @@
 	<div class="card-body">
 		<form method="POST" id="formID" action="/product/addproduct"  class="needs-validation form form-horizontal" novalidate enctype="multipart/form-data">
 		{{#each data as |result|}}
-		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Basic details"}}</p>
+		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ {{__ "Basic details" setlang}}{{/with}}</p>
 			<div class="form-body user_form">
 			<div class="row">
 			<div class="col-md-6">
@@ -20,7 +20,7 @@
 			<div class="col-md-12 form-control border-light">
 				<input type="hidden" id="userinput1" name="id" {{#if this._id}} maxlength="25" value="{{this._id}}"{{/if}}>
 				<input type="text" id="userinput1" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,25})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" data-validation-required-message="Product name is required" name="productname" {{#if this.productname}} value="{{this.productname}}"{{/if}}>
-				<label for="userinput1">{{__ "Product Name"}}<span class="required red">*</span></label>
+				<label for="userinput1">{{#with ..}}{{__ "Product Name" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -29,9 +29,9 @@
 				<div class="heading-elements ">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					    <label class="ml-1 custom-top-label top" style="z-index:9">{{__ "Category Type"}}</label>
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Category Type" setlang}}{{/with}}</label>
 						<select class="select2 form-control export cate_type" name="categorytypes" >
-							<option value="">Select Category Type</option>
+							<option value="">{{#with ..}}{{__ "Select Category Type"setlang}} {{/with}}</option>
 							{{#each ../category as |type|}}
 								<option value="{{type.categoryname}}" {{#ifCond type.categoryname '==' result.categorytypes}} selected {{/ifCond}}>{{type.categoryname}}</option>
 							{{/each}}
@@ -46,9 +46,9 @@
 				<div class="heading-elements ">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					    <label class="ml-1 custom-top-label top" style="z-index:9">{{__ "Product Unit"}}</label>
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Product Unit" setlang}}{{/with}}</label>
 						<select class="select2 form-control export cate_type" name="productunit" >
-							<option value="">Select Product Unit</option>
+							<option value="">{{#with ..}}{{__ "Select Product Unit" setlang}}{{/with}}</option>
 							{{#each ../unit as |unitype|}}
 								<option value="{{unitype.categoryname}}" {{#ifCond unitype.categoryname '==' result.productunit}} selected {{/ifCond}}>{{unitype.categoryname}}</option>
 							{{/each}}
@@ -65,7 +65,7 @@
 			<div class="form-field">
 			<textarea name="description" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,250})" data-validation-regex-message="{{__ 'Enter valid description'}}" data-validation-required-message="{{__ 'Description is required'}}" {{#if this.description}} value="{{this.description}}"{{/if}}>{{this.description}}</textarea>
 				<span class="txt-title-label"></span>
-				<label class="text-area">{{__ "Description"}}<span class="required red">*</span></label>
+				<label class="text-area">{{#with ..}}{{__ "Description" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div>
 			</div><div class="help-block"></div>
 			</div>
@@ -93,20 +93,20 @@
 			</div>
 			<div class="col-md-1 p-0">
 			<button type="button" id="add_img" class="btn shover" style="background-color:#6badc2;color:#fff">
-				<i class="icon-plus4"></i>Add more
+				<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more" setlang}}{{/with}}
             </button>
 			</div>
 				<div class="col-md-4">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="text" id="warranty" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="Only Numbers" data-validation-required-message="Warranty is required"  minlength="1" maxlength="3" name="warranty" {{#if this.warranty}} value="{{this.warranty}}"{{/if}}>
-					<label for="userinput1">{{__ "Warranty"}}<span class="required red">*</span></label>
+					<label for="userinput1">{{#with ..}}{{__ "Warranty"}} setlang}}{{/with}}<span class="required red">*</span></label>
 				</div><div class="help-block"></div><span class="message"></span>
 				</div>
 				</div>
 				<div class="col-md-2">
 					<select class="select2 form-control export cate_type select2-hidden-accessible" name="dur_type" id="duration" >
-						<option value="">Select</option>
+						<option value="">{{#with ..}}{{__ "Select" setlang}}{{/with}}</option>
 						<option value="Day(s)" {{#ifCond this.dur_type "==" "Day(s)"}}selected{{/ifCond}}>Day(s)</option>
 						<option value="Week(s)" {{#ifCond this.dur_type "==" "Week(s)"}}selected{{/ifCond}}>Week(s)</option>
 						<option value="Month(s)" {{#ifCond this.dur_type "==" "Month(s)"}}selected{{/ifCond}}>Month(s)</option>
@@ -147,7 +147,7 @@
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
 							<input type="text" maxlength="30"  class="form-control c_label">
-							<label>Tag</label>
+							<label>{{#with ..}}{{__ "Tag" setlang}}{{/with}}</label>
 						</div>
 					</div>
 				</div> 
@@ -169,18 +169,18 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input type="text" id="userinput1" maxlength="8" minlength="6" data-validation-regex-regex="([A-Z0-9_,` .'^-]{6,8})" data-validation-regex-message="{{__ 'SKU/Barcode must contain capital letters and numeric value'}}" data-validation-required-message="SKU/Barcode is required" name="skubarcode" {{#if this.skubarcode}} value="{{this.skubarcode}}"{{/if}}>
-				<label for="userinput1">{{__ "SKU/Barcode"}}<span class="required red">*</span></label>
+				<label for="userinput1">{{#with ..}}{{__ "SKU/Barcode" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
 			</div>			
-		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Stock Details"}}</p>
+		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Stock Details" setlang}}{{/with}}</p>
 			<div class="row">
 			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
              <div class="card">
                <div class="card-content">
 				<fieldset>
-				<label>{{__ "Initial Stock"}}</label>				
+				<label>{{#with ..}}{{__ "Initial Stock" setlang}}{{/with}}</label>				
                      <div class="input-group touchspincolor">
 					  <input type="text" class="touchspin " data-bts-step="0.5" data-bts-decimals="2"name="initialstock" {{#if this.initialstock}} value="{{this.initialstock}}"{{else}} value="1"{{/if}} />
                      </div>
@@ -194,7 +194,7 @@
 			<div class="form-field">
 			<textarea name="locationrack" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{__ 'Enter valid location'}}" {{#if this.locationrack}} value="{{this.locationrack}}"{{/if}}>{{this.locationrack}}</textarea>
 				<span class="txt-title-label"></span>
-				<label class="text-area">{{__ "Stock Location/Rack Number"}}</label>
+				<label class="text-area">{{#with ..}}{{__ "Stock Location/Rack Number" setlang}}{{/with}}</label>
 			</div>
 			</div><div class="help-block"></div>
 			</div>
@@ -202,21 +202,21 @@
 			 <div class="col-md-6">
 					<div class="form-group row">
 					<div class="col-md-12"> 
-					<label class="custom-control-label-date ml-2">{{__ "Stock Expiry Date" }}<span class="required red">*</span></label>
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Stock Expiry Date" setlang}}{{/with}}<span class="required red">*</span></label>
 					<input type='text' class="form-control afterdate dateformat" name="stockexpiry" aria-invalid="false">
 					<i class="ft-calendar icon-care"></i> 
 					</div>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
-			<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Price Details"}} <span style="font-size:12px">(Price will be counted per unit)</span></p>
+			<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Price Details" setlang}}{{/with}}<span style="font-size:12px">{{#with ..}}{{__ "(Price will be counted per unit)" setlang}}{{/with}}</span></p>
 			<div class="row">
 				<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
              <div class="card">
                <div class="card-content">
                  <!-- <div class="card-body"> -->
 				<fieldset>
-				<label>{{__ "Retail Price"}}<span class="required red">*</span></label>				
+				<label>{{#with ..}}{{__ "Retail Price" setlang}}{{/with}}<span class="required red">*</span></label>				
                      <div class="input-group touchspincolor">
 					  <input type="text" class="touchspin " maxlength="6" data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="retailprice" data-bts-step="10" data-bts-decimals="2" {{#if this.retailprice}} value="{{this.retailprice}}" readonly {{else}} value="100"{{/if}} />
                      </div>
@@ -229,7 +229,7 @@
                <div class="card-content">
                  <!-- <div class="card-body"> -->
 				<fieldset>
-				<label>{{__ "Special Price"}}</label>				
+				<label>{{#with ..}}{{__ "Special Price" setlang}}{{/with}}</label>				
                      <div class="input-group touchspincolor">
 					  <input type="text" class="touchspin " maxlength="6" data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="specialprice" data-bts-step="10" data-bts-decimals="2" {{#if this.specialprice}} value="{{this.specialprice}}" readonly {{else}} value="100"{{/if}} />
                      </div>
@@ -242,7 +242,7 @@
                <div class="card-content">
                  <!-- <div class="card-body"> -->
 				<fieldset>
-				<label>{{__ "Supply Price"}}</label>				
+				<label>{{#with ..}}{{__ "Supply Price" setlang}}{{/with}}</label>				
                      <div class="input-group touchspincolor">
 					  <input type="text" class="touchspin " maxlength="6" data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="supplyprice" data-bts-step="10" data-bts-decimals="2" {{#if this.supplyprice}} value="{{this.supplyprice}}" {{else}} value="100"{{/if}} />
                      </div>
@@ -254,7 +254,7 @@
              <div class="card">
                <div class="card-content">
 				<fieldset>
-				<label>{{__ "Commission"}} (If any)</label>
+				<label>{{#with ..}}{{__ "Commission" setlang}}{{/with}} {{#with ..}}{{__ "(If any)" setlang}}{{/with}}</label>
                      <div class="input-group touchspincolor">
 					 <input type="text" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="commission" {{#if this.commission}} value="{{this.commission}}"{{else}}value="0"{{/if}} />
                      </div>
@@ -275,7 +275,7 @@
 						{{#each this.note}}
 					<div class="col-md-12 p-0 mr-0">
 						<div class="form-group">
-							<label class="custom-control-label-date ml-2"  style="z-index: 9;">Add Note</label>
+							<label class="custom-control-label-date ml-2"  style="z-index: 9;">{{#with ..}}{{__ "Add Note" setlang}}{{/with}}</label>
 							<textarea class="form-control custom-control" rows="4" name="note" style="resize:none" {{#if this}}value="{{this}}"{{/if}} >{{this}}</textarea>
 						<span class="required red notice"></span>
 						</div><div class="help-block"></div>
@@ -287,7 +287,7 @@
 					</div>
 					<div class="col-md-2 p-0">
 					<button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
-						<i class="icon-plus4"></i>Add more
+						<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more" setlang}}{{/with}}
 					</button>
 					</div>
 					</div>
@@ -317,7 +317,7 @@
 					</div>
 					<div class="col-md-2 p-0">
 					<button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
-						<i class="icon-plus4"></i>Add more
+						<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more" setlang}}{{/with}}
 					</button>
 					</div>
 					</div>
