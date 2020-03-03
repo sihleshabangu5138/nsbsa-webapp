@@ -204,7 +204,7 @@
 	"Setup": "Setup",
 	"Roles": "Roles",
 	"Access Rights": "Access Rights",
-	"Module Name":"Module Name",
+	"Module Name": "Module Name",
 	"Module": "Module",
 	"Reminders": "Reminders",
 	"Validations": "Validations",
@@ -325,7 +325,6 @@
 	"_LOANTYPE_": "_LOANTYPE_",
 	"Active Customers": "Active Customers",
 	"Loan type": "Loan type",
-	"Type": "Type",
 	"Description is required": "Description is required",
 	"Minimum Range of Amount": "Minimum Range of Amount",
 	"Maximum Range of Amount": "Maximum Range of Amount",
@@ -473,7 +472,6 @@
 	"_tab_": "_tab_",
 	"Event Type": "Event Type",
 	"Event Title": "Event Title",
-	"End Date": "End Date",
 	"Event Description": "Event Description",
 	"Event venue": "Event venue",
 	"Start date": "Start date",
@@ -489,5 +487,6 @@
 	"Add": "Add",
 	"Update": "Update",
 	"Delete": "Delete",
-	"Own data": "Own data"
+	"Own data": "Own data",
+	"Service Duration:": "Service Duration:"
 }

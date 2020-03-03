@@ -228,7 +228,6 @@
 				noRecords: true,
                 columns: [
 				 
-					
 					{
                         field: "type",
                          title: "{{__ "Type of loans"}}",
@@ -256,12 +255,12 @@
                     },
 					{
                         field: "latepaymentcharge",
-                         title:"{{{currencyList session.generaldata.currency}}}"+"{{__ "Late Payment Charge"}}",
-						  hidden: true,
+                        title:"{{{currencyList session.generaldata.currency}}}"+"{{__ "Late Payment Charge"}}",
+						hidden: true,
                         width: 100
                     },
 					{{#ifCond session.admin_access "==" 0}}
-					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}}					
+					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}}
 					{
 						width: "150px",
 					
