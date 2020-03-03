@@ -454,7 +454,7 @@
 	"Product Images": "Product Images",
 	"Product Image": "Product Image",
 	"Tags": "Tags",
-	"Access_Rights Updated Sucessfully.": "Access_Rights Updated Sucessfully.",
+	"Access Rights Updated Sucessfully.": "Access Rights Updated Sucessfully.",
 	"Product Inserted Sucessfully.": "Product Inserted Sucessfully.",
 	"Sucess!": "Sucess!",
 	"Copyright &copy; 2020": "Copyright &copy; 2020",
@@ -480,5 +480,14 @@
 	"End date": "End date",
 	"Event for": "Event for",
 	"Event Detail": "Event Detail",
-	"Event Inserted Sucessfully.": "Event Inserted Sucessfully."
+	"Event Inserted Sucessfully.": "Event Inserted Sucessfully.",
+	"Reminder name": "Reminder name",
+	"Reminder for": "Reminder for",
+	"Event title": "Event title",
+	"Types of Loan": "Types of Loan",
+	"View": "View",
+	"Add": "Add",
+	"Update": "Update",
+	"Delete": "Delete",
+	"Own data": "Own data"
 }
