@@ -18,11 +18,12 @@ router.use(flash());
 
 router.route('/:id?')
 .get(isAuthenticated,function (req, res) { 
+    var languages = lang.getLocale();
 		var dbo=db.get();
 			var query = {"status":0};
 		    dbo.collection("Role").find(query).toArray(function(err, result) { 
 			    dbo.collection("Access_Rights").find().toArray(function(err, access) { 
-					res.render('accessrights/accessright', {title:"Access Rights", roledata: result,session:req.session, accessrightdata:access});  
+					res.render('accessrights/accessright', {title:"Access Rights", roledata: result,session:req.session, accessrightdata:access,setlang:languages});  
 					 
 			    }); 
             });
