@@ -1,4 +1,5 @@
 {{breadcrums "Home" "Access Rights"}}
+{{log setlang}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
 <div class="row">
@@ -13,9 +14,8 @@
 		</ul>  
 		<div class="card-content" id="left-handles">  
 		<div id="card-drag-title-area">
-			<div class="tab-content pt-1">{{log roledata}}
+			<div class="tab-content pt-1">
 	        {{#each roledata as |role_data| }}
-			<!-- {{log access_data}} --> 
 				<div role="tabpanel" class="tab-pane {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{role_data.role_slug}}"  aria-labelledby="" aria-expanded="true"> 
 					<div class="align-self-start">
 						<div class="card">
@@ -223,7 +223,6 @@
 										<td class="text-center skin skin-flat"></td>
 										<td class="text-center skin skin-flat"></td>
 									</tr>
-									<!-- Activity Log Access Rights -->
 									<tr>
 										<td class=" skin skin-flat" value="activitylog" >{{#with ..}}{{__ "Activity Log" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="activitylog" name="accessrights[activitylog][view]" value="activitylog_view" {{#ifCond this.access_type.activitylog.view "==" "activitylog_view"}} checked {{/ifCond}}>
@@ -332,10 +331,7 @@
 										</tr>
 									</thead>
 								<tbody>
-									<!--Users Access Rights -->
 									<tr> 
-									<!-- {{log this.access_type.user.owndata}} -->
-									<!-- {{log "111111111111111111111"}} -->
 										<td class=" skin skin-flat" value="user" >{{#with ..}}{{__ "Users" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][view]"  class="main_access" data-for="user" value="user_view" {{#ifCond this.access_type.user.view "==" "user_view"}} checked {{/ifCond}}> 
 										</td> 
