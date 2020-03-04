@@ -1,5 +1,5 @@
 {{breadcrums "Home" "Access Rights"}}
-{{log setlang}}
+{{ setlang}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
 <div class="row">
@@ -10,7 +10,7 @@
 				<li class="nav-item nav-item col-lg-3 col-md-3 col-sm-6 pl-md-0 mb-1 ">
 					<a class="nav-link tab {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{this.role_slug}}-tab" data-toggle="pill" href="#{{this.role_slug}}" aria-expanded="true" {{#ifCond this.role_slug '==' 'role_nm'}}{{/ifCond}}>{{this.role_nm}}</a>
 				</li>
-			{{/each}}	
+			{{/each}}
 		</ul>  
 		<div class="card-content" id="left-handles">  
 		<div id="card-drag-title-area">
