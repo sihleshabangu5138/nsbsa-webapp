@@ -29,8 +29,6 @@
 								<div class="card-body">
 								{{#check_value_in ../accessrightdata role_data.role_slug }}  
 								{{#each ../accessrightdata as |access_data|}} 
-							{{__ "View"}}
-							{{__ "View" setlang}}
 								{{#ifCond role_data.role_slug '==' access_data.rolename}}  
 								<form  action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
 								<input type="hidden" name="id" value="{{access_data._id}}" id="{{role_data._id}}"> 
@@ -39,8 +37,8 @@
 								<table id="dataTables-example" class="display table table-bordered table-striped">
 									<thead>
 										<tr class="text-center">
-											<th class="text-left">{{__ "Module Name"}}</th>
-											<th>{{#with ..}}{{__ "View" setlang}}{{/with}}</th>
+											<th class="text-left">{{#with ..}}{{__ "Module Name"}}{{/with}}</th>
+											<th>{{#with /..}}{{__ "View" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Add" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Update" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Delete" setlang}}{{/with}}</th>
