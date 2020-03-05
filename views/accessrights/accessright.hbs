@@ -2,6 +2,7 @@
 {{ setlang}}
 {{__ "View" setlang}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
+
 <div class="content-wrapper">
 <div class="row">
 <div class="col-xl-12 col-lg-12 col-12">
@@ -17,6 +18,7 @@
 		<div id="card-drag-title-area">
 			<div class="tab-content pt-1">
 	        {{#each roledata as |role_data| }}
+			{{#with ..}}{{__ "View" setlang}}{{/with}}
 				<div role="tabpanel" class="tab-pane {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{role_data.role_slug}}"  aria-labelledby="" aria-expanded="true"> 
 					<div class="align-self-start">
 						<div class="card">
@@ -37,7 +39,7 @@
 									<thead>
 										<tr class="text-center">
 											<th class="text-left">{{__ "Module Name"}}</th>
-											<th>{{#with ....}}{{__ "View" setlang}}{{/with}}</th>
+											<th>{{#with ..}}{{__ "View" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Add" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Update" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Delete" setlang}}{{/with}}</th>
