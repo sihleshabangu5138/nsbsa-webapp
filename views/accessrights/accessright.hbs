@@ -18,7 +18,6 @@
 		<div id="card-drag-title-area">
 			<div class="tab-content pt-1">
 	        {{#each roledata as |role_data| }}
-			{{#with ..}}{{__ "View" setlang}}{{/with}}
 				<div role="tabpanel" class="tab-pane {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{role_data.role_slug}}"  aria-labelledby="" aria-expanded="true"> 
 					<div class="align-self-start">
 						<div class="card">
@@ -30,6 +29,7 @@
 								<div class="card-body">
 								{{#check_value_in ../accessrightdata role_data.role_slug }}  
 								{{#each ../accessrightdata as |access_data|}} 
+			{{#with ..}}{{__ "View" setlang}}{{/with}}
 								{{#ifCond role_data.role_slug '==' access_data.rolename}}  
 								<form  action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
 								<input type="hidden" name="id" value="{{access_data._id}}" id="{{role_data._id}}"> 
