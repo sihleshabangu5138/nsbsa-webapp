@@ -30,7 +30,6 @@
 								{{#check_value_in ../accessrightdata role_data.role_slug }}  
 								{{#each ../accessrightdata as |access_data|}} 
 								{{#with ..}}{{#with ..}}{{__ "View" setlang}}{{/with}}{{/with}}
-								{{#with .. ..}}{{__ "View" setlang}}{{/with}}
 								{{#ifCond role_data.role_slug '==' access_data.rolename}}  
 								<form  action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
 								<input type="hidden" name="id" value="{{access_data._id}}" id="{{role_data._id}}"> 
