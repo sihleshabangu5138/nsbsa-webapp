@@ -24,7 +24,6 @@ router.route('/:id?')
 		    dbo.collection("Role").find(query).toArray(function(err, result) { 
 			    dbo.collection("Access_Rights").find().toArray(function(err, access) { 
 					res.render('accessrights/accessright', {title:"Access Rights", roledata: result,session:req.session, accessrightdata:access,setlang:languages});  
-					 
 			    }); 
             });
 })

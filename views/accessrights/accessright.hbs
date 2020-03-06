@@ -24,23 +24,21 @@
 						<div class="card">
 							<div class="card-header">
 								<h4 class="card-title">{{role_data.role_nm}}</h4>
-								<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a> 
+								<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
 							</div>
 								<div class="card-content collapse show">
 								<div class="card-body">
-								{{#check_value_in ../accessrightdata role_data.role_slug }}  
-								{{#each ../accessrightdata as |access_data|}} 
-								{{#ifCond role_data.role_slug '==' access_data.rolename}}  
+								{{#check_value_in ../accessrightdata role_data.role_slug }}
+								{{#each ../accessrightdata as |access_data|}}
+								{{#ifCond role_data.role_slug '==' access_data.rolename}}
 								<form  action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
-								<input type="hidden" name="id" value="{{access_data._id}}" id="{{role_data._id}}"> 
+								<input type="hidden" name="id" value="{{access_data._id}}" id="{{role_data._id}}">
 								<input type="hidden" name="role_name" value="{{role_data.role_slug}}" id="{{role_data.role_slug}}">
 								<div class="table-responsive">
 								<table id="dataTables-example" class="display table table-bordered table-striped">
 									<thead>
 										<tr class="text-center">
 											<th class="text-left">{{#with ..}}{{__ "Module Name"}}{{/with}}</th>
-											<h3>{{setlang "View"}}</h3>
-
 											<th>{{#with ..}}{{__ "View" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Add" setlang}}{{/with}}</th>
 											<th>{{#with ..}}{{__ "Update" setlang}}{{/with}}</th>
