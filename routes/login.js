@@ -29,7 +29,6 @@ router.get('/',isinstalled,isAuthenticated, function(req, res, next) {
 	}
 });
 router.post('/',function(req, res) {
-	console.log("In login")
 	var dbo=db.get();
 		dbo.collection("Generalsetting").find().toArray(function(err, result) {
 			//res.cookie('locale', result[0].language, { maxAge: 90000000, httpOnly: true });
@@ -59,9 +58,7 @@ router.post('/',function(req, res) {
 						var myquery1 ={"id": req.body._id };
 						dbo.collection("Generalsetting").find(myquery1).toArray(function(err, result1) {					
 						dbo.collection("Role").find({"_id": result[0].role}).toArray(function(err, roledata) {	
-						console.log(roledata)
-						dbo.collection("Access_Rights").find({"rolename": roledata[0].role_slug}).toArray(function(err, accessdata) {		
-						console.log(accessdata)
+						dbo.collection("Access_Rights").find({"rolename": roledata[0].role_slug}).toArray(function(err, accessdata) {
 						if (err) throw err;
 							else{								
 								var language= result1[0].language;
