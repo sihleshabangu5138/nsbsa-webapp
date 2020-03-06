@@ -1,8 +1,5 @@
 {{breadcrums "Home" "Access Rights"}}
-{{ setlang}}
-{{__ "View" setlang}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
-
 <div class="content-wrapper">
 <div class="row">
 <div class="col-xl-12 col-lg-12 col-12">
@@ -17,9 +14,8 @@
 		<div class="card-content" id="left-handles">  
 		<div id="card-drag-title-area">
 			<div class="tab-content pt-1">
-	        {{#each roledata as |role_data| }}
-			
-				<div role="tabpanel" class="tab-pane {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{role_data.role_slug}}"  aria-labelledby="" aria-expanded="true"> 
+	        {{#each roledata as |role_data|}}			
+				<div role="tabpanel" class="tab-pane {{#ifCond @index '==' 0}} active {{/ifCond}}" id="{{role_data.role_slug}}"  aria-labelledby="" aria-expanded="true">
 					<div class="align-self-start">
 						<div class="card">
 							<div class="card-header">
