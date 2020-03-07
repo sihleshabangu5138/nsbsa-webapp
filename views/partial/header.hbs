@@ -124,7 +124,6 @@
 		{{log "11111111111111111111111111"}}
 		
 		{{#ifCondition session.access_rights.service.view "||" session.access_rights.category.view "||" session.access_rights.events.view "||" session.access_rights.events.view "||" session.access_rights.rulesandregulation.view}}
-		{{log "hiiiiiiiiiiiiiiiiiiiiiii"}}
 		  <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-wrench custom_height_width_icons"></i><span>{{__ "Services"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
 			<ul class="dropdown-menu">
 			
@@ -152,34 +151,7 @@
 			</ul>
 		</li>
 		{{/ifCondition}}
-		{{#ifCond session.admin_access "==" 1}}
-		  <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-wrench custom_height_width_icons"></i><span>{{__ "Services"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
-			<ul class="dropdown-menu">
-			
-			{{#hiddenmodules session.access_rights.service.view session.admin_access}}
-            <a href="/service/servicelist"><li class="dropdown-item"><i class="fa fa-cog" aria-hidden="true"></i>{{__ "Service List"}}
-            </li></a>
-			{{/hiddenmodules}}
-			
-			{{#hiddenmodules session.access_rights.category.view session.admin_access}}
-			<a href="/category/categorylist"><li class="dropdown-item"><i class="fa fa-list-ul" aria-hidden="true"></i>{{__ "Category List"}}
-            </li></a>
-			{{/hiddenmodules}}
-			
-			{{#hiddenmodules session.access_rights.events.view session.admin_access}}
-			<a href="/events/eventlist"><li class="dropdown-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>{{__ "Events"}}
-            </li></a>	
-			{{/hiddenmodules}}
-			
-			{{#hiddenmodules session.access_rights.rulesandregulation.view session.admin_access}}
-			<a href="/rule/rules"><li class="dropdown-item"><i class="fa fa-clipboard" aria-hidden="true"></i>
-			{{__ "Rules and Regulations"}}
-            </li></a>
-			{{/hiddenmodules}}
-			
-			</ul>
-		</li>
-		{{/ifCond}}
+		
 		{{#ifCondition session.access_rights.notification.view "||" session.access_rights.reminder.view "||" session.access_rights.customfield.view "||" session.access_rights.notes.view "||" session.access_rights.activitylog.view}}
 		
 		<li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa ft-list custom_height_width_icons"></i><span>{{__ "Others"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
