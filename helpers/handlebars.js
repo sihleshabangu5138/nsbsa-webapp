@@ -233,12 +233,12 @@ module.exports = {
 		}
 		},
 		
-ifCondition:function(v1, operator, v2, operator, v3, operator, v4, operator, v5 ,options){
+		ifCondition:function(v1, operator, v2, operator, v3, operator, v4, operator, v5, operator, v6 ,operator, v7,options){
 			switch (operator) {
 				case '&&':
-					return (v1 && v2 && v3 && v4 && v5) ? options.fn(this) : options.inverse(this);
+					return (v1 && v2 && v3 && v4 && v5 && v6 == v7) ? options.fn(this) : options.inverse(this);
 				case '||':
-					return (v1 || v2 || v3 || v4 || v5) ? options.fn(this) : options.inverse(this);
+					return (v1 || v2 || v3 || v4 || v5 || v6 == v7) ? options.fn(this) : options.inverse(this);
 			}
 		},
 		

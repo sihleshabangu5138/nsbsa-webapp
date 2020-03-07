@@ -147,6 +147,7 @@
 			</ul>
 		</li>
 		{{#ifCondition session.access_rights.notification.view "||" session.access_rights.reminder.view "||" session.access_rights.customfield.view "||" session.access_rights.notes.view "||" session.access_rights.activitylog.view "||" session.admin_access "==" 1}}
+		
 		<li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa ft-list custom_height_width_icons"></i><span>{{__ "Others"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
 			<ul class="dropdown-menu">
 			
