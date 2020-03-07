@@ -19,13 +19,40 @@ router.use(flash());
 router.route('/:id?')
 .get(isAuthenticated,function (req, res) { 
     var languages = lang.getLocale();
-		var dbo=db.get();
-			var query = {"status":0};
-		    dbo.collection("Role").find(query).toArray(function(err, result) { 
-			    dbo.collection("Access_Rights").find().toArray(function(err, access) { 
-					res.render('accessrights/accessright', {title:"Access Rights", roledata: result,session:req.session, accessrightdata:access,setlang:languages});  
-			    }); 
-            });
+	var dbo=db.get();
+	var query = {"status":0};
+		    // dbo.collection("Role").find(query).toArray(function(err, result) { 
+			    // dbo.collection("Access_Rights").find().toArray(function(err, access) {
+	dbo.collection("Access_Rights").aggregate([
+		{
+			$lookup:{
+				from : 'Role',
+				localField : 'rolename',
+				foreignField : 'role_slug',
+				as : 'role_nm'
+			}
+		},
+		{
+			$unwind : '$role_nm'
+		},
+		{
+			$match:{
+				$and: [ {status : 0 }]
+			}
+		}
+	]).toArray(function(err,result){
+		if(err) throw err;
+		
+		for (const [key,value] of Object.entries(result)) {
+			var birthdate_f=functions.getdate(value.birthdate,req.session.generaldata.date_format);
+			result[key].birthdate = birthdate_f;
+			
+		}
+		console.log(result)
+		console.log("................................")
+		res.render('accessrights/accessright', {title:"Access Rights", roledata: result,session:req.session, accessrightdata:access,setlang:languages});  
+			    // }); 
+	});
 })
 .post(passarray.array(),isAuthenticated,function (req, res){   
 		
