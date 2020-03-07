@@ -93,24 +93,8 @@ function isAuthenticated(req, res, next) {
 			 return next();
 		}
 		else{
-			var query = {"rolename":req.session.role_slug};
-			xyz.collection("Access_Rights").find(query).toArray(function(err, result) {
-				if(result[0].access_type != undefined){
-					if(result[0].access_type.access != undefined){
-						if(result[0].access_type.access.view != undefined){
-							return next();
-						}
-					}
-				}
-				else{
-					res.redirect('/dashboard');	
-				}
-			});
-		}
-	}
-	else {
-		res.redirect('/');	
-	}
+			res.redirect('/dashboard');	
+		}	
 };
 
 module.exports = router;
