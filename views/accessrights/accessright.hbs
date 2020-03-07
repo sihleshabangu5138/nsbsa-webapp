@@ -231,40 +231,7 @@
 										<td class="text-center skin skin-flat"></td>
 										<td class="text-center skin skin-flat"></td>
 									</tr>
-									<!--Impersonate Access Rights -->
-									<tr>
-										<td class=" skin skin-flat" value="impersonate" >{{#with ..}}{{__ "Impersonate" setlang}}{{/with}}</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="impersonate" name="accessrights[impersonate][view]" value="impersonate_view" {{#ifCond this.access_type.impersonate.view "==" "impersonate_view"}} checked {{/ifCond}}>
-										</td>
-										<td class="text-center skin skin-flat"></td>
-										<td class="text-center skin skin-flat"></td>
-										<td class="text-center skin skin-flat"></td>
-										<td class="text-center skin skin-flat"></td>
-									</tr>
-									<!--Roles Access Rights -->
-									<tr>
-										<td class=" skin skin-flat" value="role" >{{#with ..}}{{__ "Roles" setlang}}{{/with}}</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="role" name="accessrights[role][view]" value="roles_view" {{#ifCond this.access_type.role.view "==" "roles_view"}} checked {{/ifCond}}>
-										</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" class="role_0" name="accessrights[role][add]" value="roles_add" {{#ifCond this.access_type.role.add "==" "roles_add"}} checked {{/ifCond}}>
-										</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" class="role_0" name="accessrights[role][update]"  value="roles_update" {{#ifCond this.access_type.role.update "==" "roles_update"}} checked {{/ifCond}}>
-										</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" class="role_0" name="accessrights[role][delete]" value="roles_delete" {{#ifCond this.access_type.role.delete "==" "roles_delete"}} checked {{/ifCond}}>
-										</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[role][owndata]" class="role_0" value="roles_owndata" {{#ifCond this.access_type.role.owndata "==" "roles_owndata"}} checked {{/ifCond}}>
-										</td>
-									</tr>
-									<!-- Access Rights -->
-									<tr>
-										<td class="skin skin-flat" value="access" >{{#with ..}}{{__ "Access Rights" setlang}}{{/with}}</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="accessright" name="accessrights[access][view]" value="access_view" {{#ifCond this.access_type.access.view "==" "access_view"}} checked {{/ifCond}}>
-										</td>
-										<td class="text-center skin skin-flat"></td>
-										<td class="text-center skin skin-flat"></td>
-										<td class="text-center skin skin-flat"></td>
-										<td class="text-center skin skin-flat"></td>
-									</tr>
+									
 									<!--Reminder Access Rights -->
 									<tr>
 										<td class="skin skin-flat" value="reminder" >{{#with ..}}{{__ "Reminders" setlang}}{{/with}}</td>
@@ -278,26 +245,6 @@
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name= "accessrights[reminder][owndata]" class="reminder_0" value="reminder_owndata" {{#ifCond this.access_type.reminder.owndata "==" "reminder_owndata"}} checked {{/ifCond}}>
 										</td>
-									</tr> 
-									<!--General Settings -->
-									<tr>
-										<td class=" skin skin-flat" value="generalsetting">{{#with ..}}{{__ "General Settings" setlang}}{{/with}}</td>
-										<td></td>
-										<td></td>
-										<td class="text-center skin skin-flat"><input type="checkbox" name= "accessrights[generalsetting][update]" class="general_settings0" value="general_settings" {{#ifCond this.access_type.generalsetting.update "==" "general_settings"}} checked{{/ifCond}} >
-										</td> 
-										<td></td>
-										<td></td>
-									</tr>
-									<!--Custom Fields Access Rights -->
-									<tr>
-										<td class="skin skin-flat" value="customfield" >{{#with ..}}{{__ "Custom Fields" setlang}}{{/with}}</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[customfield][view]" data-row="0" class="main_access" data-for="customfield" value="custom_fields_view" {{#ifCond this.access_type.customfield.view "==" "custom_fields_view"}} Checked {{/ifCond}} >
-										</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[customfield][add]" class="custom_fields_0" value="custom_fields_add" {{#ifCond this.access_type.customfield.add "==" "custom_fields_add"}} checked {{/ifCond}}></td>
-										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[customfield][update]" class="custom_fields_0" value="custom_fields_update" {{#ifCond this.access_type.customfield.update "==" "custom_fields_update"}} checked {{/ifCond}}></td>
-										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[customfield][delete]" class="custom_fields_0" value="custom_fields_delete" {{#ifCond this.access_type.customfield.delete "==" "custom_fields_delete"}} checked {{/ifCond}}></td>
-										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[customfield][owndata]" class="custom_fields_0" value="custom_fields_owndata" {{#ifCond this.access_type.customfield.owndata "==" "custom_fields_owndata"}} checked {{/ifCond}}></td> 
 									</tr> 
 								</tbody>
 								</table>
