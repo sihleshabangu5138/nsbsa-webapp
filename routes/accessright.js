@@ -94,7 +94,11 @@ function isAuthenticated(req, res, next) {
 		}
 		else{
 			res.redirect('/dashboard');	
-		}	
+		}
+	}
+	else {
+		res.redirect('/');	
+	}
 };
 
 module.exports = router;
