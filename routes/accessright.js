@@ -50,7 +50,7 @@ router.route('/:id?')
 					console.log("req.session.access_rights")
 					req.flash('success',lang.__('Access_Rights Updated Sucessfully.'));
 					if(req.session.access_rights != undefined){
-						if(req.session.access_rights.access != undefined){
+						if(req.session.access_rights.access != undefined || req.session.admin_access == 1){
 							res.redirect('/accessrights/accessright');
 						}
 						else{
