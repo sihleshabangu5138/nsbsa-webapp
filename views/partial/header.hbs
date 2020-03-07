@@ -146,7 +146,7 @@
 			
 			</ul>
 		</li>
-		
+		{{#ifCondition session.access_rights.notification.view "||" session.access_rights.reminder.view "||" session.access_rights.customfield.view "||" session.access_rights.notes.view "||" session.access_rights.activitylog.view "||" session.admin_access "==" 1}}
 		<li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa ft-list custom_height_width_icons"></i><span>{{__ "Others"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
 			<ul class="dropdown-menu">
 			
@@ -160,12 +160,12 @@
             </li>  
 			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
+			{{#hiddenmodules session.access_rights.notes.view session.admin_access}}
 			<a href="/notes/notelist"><li class="dropdown-item"><i class="fa fa-commenting-o" aria-hidden="true"></i>{{__ "Notes"}}
             </li></a>
 			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
+			{{#hiddenmodules session.access_rights.activitylog.view session.admin_access}}
 			<a href="/activitylog/activitylog"><li class="dropdown-item"><i class="fa fa-history" aria-hidden="true"></i>{{__ "Activity Log"}}
             </li></a>
 			{{/hiddenmodules}}
@@ -173,33 +173,23 @@
 			
 			</ul>
 		</li>
-		{{log session}}
+		{{/ifCondition}}
 		{{#ifCond session.admin_access "==" 1}}
         <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-cogs"></i><span>{{__ "Setup"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
           <ul class="dropdown-menu">
 		  
-		    {{#hiddenmodules session.access_rights.role.view session.admin_access}}
             <a href="/role/roles"><li class="dropdown-item"><i class="fa fa-child custom_height_width_icons"></i>{{__ "Roles"}}
             </li></a>
-			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.access.view session.admin_access}}
 			<a href="/accessrights/accessright"><li class="dropdown-item"><i class="fa fa-key custom_height_width_icons"></i>{{__ "Access Rights"}}</li></a>
-			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
 			<a href="/impersonate/impersonateuser"><li class="dropdown-item"><i class="fa fa-unlock-alt" aria-hidden="true"></i>{{__ "Impersonate"}}</li></a>
-			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.generalsetting.view session.admin_access}}
 			<a href="/generalsettings/generalsetting/{{session.gen_id}}"><li class="dropdown-item"><i class="fa fa-cogs" aria-hidden="true"></i>{{__ "General Settings"}}
             </li></a>
-			{{/hiddenmodules}}
 			
-			{{#hiddenmodules session.access_rights.customfield.view session.admin_access}}
 			<a href="/customfields/customfieldlist">
 			<li class="dropdown-item"><i class="fa fa-edit custom_height_width_icons"></i>{{__ "Custom Fields"}}</a>
-			{{/hiddenmodules}}
             </li>
 			</ul>
 		</li>
