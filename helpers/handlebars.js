@@ -150,7 +150,6 @@ module.exports = {
 			i=0;
 			if(array.length>0){
 				for (const [key, value] of Object.entries(array)) {
-					
 					if(value.rolename == v1){
 						i=0;
 						return (v1) ? options.fn(this) : options.inverse(this); 
@@ -161,7 +160,7 @@ module.exports = {
 				}
 				if(i!=0){
 					return options.inverse(this); 
-				} 
+				}
 			}
 			else{
 				return options.inverse(this); 

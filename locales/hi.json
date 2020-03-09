@@ -497,7 +497,6 @@
 	"Files attached": "फ़ाइलों को संलग्न",
 	"Select": "का चयन करें",
 	"Category Information": "श्रेणी जानकारी",
-	"Product_unit": "Product_unit",
 	"Event": "घटना",
 	"Enter Category Type": "दर्ज श्रेणी के प्रकार",
 	"The category type name may only contain alphabets, space and _ ,`'.^-": "श्रेणी नाम टाइप कर सकते हैं केवल अक्षर होते हैं, और अंतरिक्ष _ ,`.^-",
@@ -515,6 +514,5 @@
 	"Type of loans": "प्रकार के ऋण",
 	"Mininmum Amount Range": "Mininmum राशि रेंज",
 	"Maximum Amount Range": "अधिकतम राशि रेंज",
-	"Late Payment Charge": "देर से भुगतान शुल्क",
-	"Access_Rights Updated Sucessfully.": "Access_Rights Updated Sucessfully."
+	"Late Payment Charge": "देर से भुगतान शुल्क"
 }
