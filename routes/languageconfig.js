@@ -4,11 +4,12 @@ var  i18n = require('i18n');
  
 
 i18n.configure({
-  locales: ['en','fr','hi','sp'], 
-  cookie: 'locale',
-  directory:  "./locales",
+	locales: ['en','fr','hi','sp'], 
+	cookie: 'locale',
+	directory:  "./locales",
 	register: global,
-    extension: '.json',
+	extension: '.json',
+	textsVarName: 'translation',
 
    logDebugFn: function (msg) {
     },
