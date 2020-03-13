@@ -94,14 +94,14 @@
 										<span class="swal-icon--warning__dot"></span>
 									</span>
 								</div>
-								<div class="swal-title">{{__ "Delete !"}}</div>
-								<div class="swal-text">{{__ "Are You sure wan't to delete this role ?"}}</div>
+								<div class="swal-title">{{{__ "Delete !"}}}</div>
+								<div class="swal-text">{{{__ "Are You sure wan't to delete this role ?"}}}</div>
 								<div class="swal-footer">
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--confirm" id="noButton">{{__ "NO"}}</button>
+									<button class="swal-button swal-button--confirm" id="noButton">{{{__ "NO"}}}</button>
 								</div>
 								<div class="swal-button-container">
-									<button class="swal-button swal-button--cancel" id="yesButton">{{__ "YES"}}</button>
+									<button class="swal-button swal-button--cancel" id="yesButton">{{{__ "YES"}}}</button>
 								</div>
 								</div>  
 								
@@ -230,32 +230,32 @@
 				 
 					{
                         field: "type",
-                         title: "{{__ "Type of loans"}}",
+                         title: "{{__ 'Type of loans'}}",
                         width: 100
                     },
 					{
                         field: "loan_desc",
-                         title: "{{__ "Loan Description"}}",
+                         title: "{{__ 'Loan Description'}}",
                         width: 280
                     },
 					{
                         field: "loan_min_amount",
-                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ "Mininmum Amount Range"}}",
+                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Mininmum Amount Range'}}",
                         width: 150
                     },
 					{
                         field: "loan_max_amount",
-                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ "Maximum Amount Range"}}",
+                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Maximum Amount Range'}}",
                         width: 150
                     },
 					{
                         field: "interestrate",
-                         title: "{{__ "Interest Rate"}}"+"%",
+                         title: "{{__ 'Interest Rate'}}"+"%",
                         width: 150
                     },
 					{
                         field: "latepaymentcharge",
-                        title:"{{{currencyList session.generaldata.currency}}}"+"{{__ "Late Payment Charge"}}",
+                        title:"{{{currencyList session.generaldata.currency}}}"+"{{__ 'Late Payment Charge'}}",
 						hidden: true,
                         width: 100
                     },
@@ -289,7 +289,7 @@
 							],
 							{{#if accessrightdata.add}}
 							title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ 'New'}}</button></a></center>"
 							{{/if}}
 							
 					}
