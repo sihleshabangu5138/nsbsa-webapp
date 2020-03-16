@@ -109,6 +109,10 @@ router.post('/',function(req, res) {
 						});
 						});
 					}
+					else{
+						req.flash('error','You are not allow to login.');
+						res.render('login', { title: 'NiftyEWS',layout:"loginlayout"});
+					}	
 					});
 				 }
 				 else{
