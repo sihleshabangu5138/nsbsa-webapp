@@ -110,7 +110,7 @@ router.post('/',function(req, res) {
 						});
 					}
 					else{
-						req.flash('error','You are not allow to login.');
+						req.flash('error','You are not allow to login. Enter correct username or password.');
 						res.render('login', { title: 'NiftyEWS',layout:"loginlayout"});
 					}	
 					});
