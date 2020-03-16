@@ -86,7 +86,6 @@ router.route('/:id?')
 		} 
 }) 
 function isAuthenticated(req, res, next) {
-	console.log(req.url);
 	var xyz = db.get();
 	if (req.session.username != undefined) {
 		if(req.session.admin_access == 1){
@@ -99,7 +98,12 @@ function isAuthenticated(req, res, next) {
 					if(result[0].access_type.access != undefined){
 						if(result[0].access_type.access.view != undefined){
 							return next();
+						}else{
+							res.redirect('/dashboard');	
 						}
+					}
+					else{
+						res.redirect('/dashboard');	
 					}
 				}
 				else{
