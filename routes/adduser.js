@@ -81,7 +81,7 @@ router.route('/:id?')
 			dbo.collection("custom_field_meta").find(myquery1).toArray(function(err, customfield_value) {
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
-				};				
+				};	
 				res.render('users/adduser', {title:"Edit User",data: result_data,id:id,role:role_name,family:family_data,session:req.session,country:jsonParsed.countries,setting:setting, setlang:languages, newfield:customfield, customfield_value:customfield_value});
 			});			
 		});	
@@ -205,11 +205,13 @@ router.route('/:id?')
 			};
 			dbo.collection("notification_badges").insertOne(myobj , function(err,noti) {			
 				dbo.collection("notification_badges").find().toArray(function(err, notidata) {
-					req.session.noti = notidata;
+					for (const [keys, values] of Object.entries(notidata)){
+						req.session.noti = values;
+					};
 				});
 			});
 			var query ={"reference_id": ObjectId(id)};
-			dbo.collection("custom_field_meta").find(query).toArray(function(err, metadata) {			
+			dbo.collection("custom_field_meta").find(query).toArray(function(err, metadata) {
 			if(metadata != ""){
 				var date = Date(Date.now());
 				var formatdate = moment(date).format("YYYY-MM-DD");
@@ -299,28 +301,28 @@ router.route('/:id?')
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 					}
-					if(req.files){
-				for (const [key, value] of Object.entries(req.files)){
-					if (value.fieldname == "photo"){					
-							
-					}
-					else{
-						var this_data = {
-							custom_field_id: ObjectId(value.fieldname),
-							customfield_value: value.filename,
-							module: "user",
-							user_id: ObjectId(req.session.user_id),
-							reference_id:  ObjectId(id),
-							updated_at: formatdate,
+				if(req.files){
+					for (const [key, value] of Object.entries(req.files)){
+						if (value.fieldname == "photo"){					
+								
 						}
-					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
+						else{
+							var this_data = {
+								custom_field_id: ObjectId(value.fieldname),
+								customfield_value: value.filename,
+								module: "user",
+								user_id: ObjectId(req.session.user_id),
+								reference_id:  ObjectId(id),
+								updated_at: formatdate,
+							}
+						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
+						}
 					}
-				}
 				}
 			}
 			if (err) throw err;
-		});		
-		});			
+		});
+		});
 		});
 		var m=0;
 		var data = [];

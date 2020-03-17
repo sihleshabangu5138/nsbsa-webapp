@@ -73,7 +73,6 @@ router.post('/',function(req, res) {
 								}
 								req.session.noti = notiresult;
 								req.session.noticount = activenoti;
-							
 								var date = Date(Date.now());
 								var formatdate = moment(date).format("YYYY-MM-DD"); 
 															

@@ -6,6 +6,7 @@ var fs = require('fs');
 var Mail = require('./email');  
 var functions = require('../helpers/function');
 var moment = require('moment');
+var session = require('express-session');
  
 
 /* GET users listing. */
@@ -137,7 +138,9 @@ router.get('/deleteloan/',isAuthenticated, function(req, res) {
 });
 router.get('/deletenoti',isAuthenticated, function(req, res) { 	
 	var dbo = db.get("BankingSystem");
+	console.log(req.session)
 	dbo.collection("notification_badges").remove({});
+	
 });
 router.get('/roles', isAuthenticated,function(req, res) {
 	

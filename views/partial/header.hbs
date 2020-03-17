@@ -20,6 +20,7 @@
 				</li>
 			</ul>
 		</div>
+		{{log session.noti}}
 		<div class="navbar-container center-layout mx-sm-3 ">
 			<div id="navbar-mobile" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav mr-auto float-left">
@@ -149,7 +150,7 @@
 		</li>
 		{{/ifCondition}}
 		{{#ifCond session.admin_access "==" 1}}
-		  <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-wrench custom_height_width_icons"></i><span>{{__ "Services"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
+		<li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-wrench custom_height_width_icons"></i><span>{{__ "Services"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
 			<ul class="dropdown-menu">
 			
 			{{#hiddenmodules session.access_rights.service.view session.admin_access}}
@@ -184,11 +185,11 @@
 			{{#hiddenmodules session.access_rights.notification.view session.admin_access}}
 				<a href="/notification/notificationtemplate"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Notification Template"}}
 				</li></a>	
-			{{/hiddenmodules}}	
+			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.reminder.view session.admin_access}}
 			<li class="dropdown-item"><a href="/reminder/reminders"><i class="fa fa-clock-o custom_height_width_icons"></i>{{__ "Reminders"}}</a>
-            </li>  
+            </li>
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.notes.view session.admin_access}}
@@ -200,24 +201,21 @@
 			<a href="/activitylog/activitylog"><li class="dropdown-item"><i class="fa fa-history" aria-hidden="true"></i>{{__ "Activity Log"}}
             </li></a>
 			{{/hiddenmodules}}
-			
-			
 			</ul>
 		</li>
 		{{/ifCondition}}
 		{{#ifCond session.admin_access "==" 1}}
-		
 		<li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa ft-list custom_height_width_icons"></i><span>{{__ "Others"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
 			<ul class="dropdown-menu">
 			
 			{{#hiddenmodules session.access_rights.notification.view session.admin_access}}
 				<a href="/notification/notificationtemplate"><li class="dropdown-item"><i class="fa fa-envelope-o custom_height_width_icons"></i>{{__ "Notification Template"}}
 				</li></a>	
-			{{/hiddenmodules}}	
+			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.reminder.view session.admin_access}}
 			<li class="dropdown-item"><a href="/reminder/reminders"><i class="fa fa-clock-o custom_height_width_icons"></i>{{__ "Reminders"}}</a>
-            </li>  
+            </li>
 			{{/hiddenmodules}}
 			
 			{{#hiddenmodules session.access_rights.notes.view session.admin_access}}
