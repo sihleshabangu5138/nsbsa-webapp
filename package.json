@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./bin/www"
+      "start": "node ./bin/www"
   },
   "dependencies": {
     "amortizejs": "^1.0.3",
