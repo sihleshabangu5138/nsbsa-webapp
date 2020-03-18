@@ -753,7 +753,7 @@ $(document).ready(function(){
 	});
 
 	// load the list of available timezones, build the <select> options
-	$.getJSON('../../../app-assets/data/fullcalendar/php/get-timezones.php', function(timezones) {
+	$.getJSON('../../../stylesheets/data/fullcalendar/php/get-timezones.php', function(timezones) {
 		$.each(timezones, function(i, timezone) {
 			if (timezone != 'UTC') { // UTC is already in the list
 				$('#timezone-selector').append(
