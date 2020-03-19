@@ -51,7 +51,30 @@ router.route('/:id?')
 	
 function isAuthenticated(req, res, next) {
 	if (req.session.username != undefined) {
-		 return next();
+		if(req.session.admin_access == 1){
+			 return next();
+		}
+		else{
+			var query = {"rolename":req.session.role_slug};
+			dbo.collection("Access_Rights").find(query).toArray(function(err, result) {
+				if(result[0].access_type != undefined){
+					if(result[0].access_type.loanlist != undefined){
+						if(result[0].access_type.loanlist.view != undefined){
+							return next();
+						}
+						else{
+							res.redirect('/dashboard');	
+						}
+					}
+					else{
+						res.redirect('/dashboard');	
+					}
+				}
+				else{
+					res.redirect('/dashboard');	
+				}
+			});
+		}
 	}
 	else {
 		res.redirect('/');	

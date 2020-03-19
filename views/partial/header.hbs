@@ -20,7 +20,7 @@
 				</li>
 			</ul>
 		</div>
-		{{log session.noti}}
+		{{log session}}
 		<div class="navbar-container center-layout mx-sm-3 ">
 			<div id="navbar-mobile" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav mr-auto float-left">
@@ -93,6 +93,7 @@
            </ul>-->
 		   </li>
         </li>
+		{{#ifCond session.access_rights.typeofloan.view "||" session.access_rights.loanlist.view}}
           <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="ft-sliders" aria-hidden="true"></i><span>{{__ "Loan Management"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
           <ul class="dropdown-menu">
 		  
@@ -108,7 +109,24 @@
 			
            </ul>
 		   </li>
+		  {{/ifCond}}
+		  {{#ifCond session.admin_access "==" 1}}
+          <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="ft-sliders" aria-hidden="true"></i><span>{{__ "Loan Management"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
+          <ul class="dropdown-menu">
 		  
+			{{#hiddenmodules session.access_rights.typeofloan.view session.admin_access}}
+            <a href="/loan/loantypelist"><li class="dropdown-item"><i class="fa fa-stack-overflow" aria-hidden="true"></i>{{__ "Types of Loans"}}
+            </li></a>
+			{{/hiddenmodules}}
+			
+			{{#hiddenmodules session.access_rights.loanlist.view session.admin_access}}
+            <a href="/loan/loanlist"><li class="dropdown-item"><i class="fa fa-list-alt" aria-hidden="true"></i>{{__ "Loan List"}}
+            </li></a>
+			{{/hiddenmodules}}
+			
+           </ul>
+		   </li>
+		  {{/ifCond}}
 		 {{#hiddenmodules session.access_rights.product.view session.admin_access}}
         <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/product/productlist" class="dropdown-toggle nav-link"><i class="icon-bag"></i><span>{{__ "Products"}}</span></a>
 		</li>
