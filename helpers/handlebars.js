@@ -1,3 +1,4 @@
+'use strict';
 var hbs1 = require('hbs');
 var fs = require('fs');
 var db = require('../routes/mongo_db');
@@ -232,7 +233,7 @@ module.exports = {
 		}
 		},
 		
-		ifCondition:function(v1, operator, v2, operator, v3, operator, v4, operator, v5,options){
+		ifCondition:function(v1, operator, v2, operators, v3, operate, v4, operat, v5,options){
 			switch (operator) {
 				case '&&':
 					return (v1 && v2 && v3 && v4 && v5) ? options.fn(this) : options.inverse(this);

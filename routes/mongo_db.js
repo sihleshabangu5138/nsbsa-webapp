@@ -1,7 +1,8 @@
+'use strict';
 const mongoClient = require('mongodb').MongoClient;
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
+  var localStorage = new LocalStorage('./scratch');
 }
 var dbname = localStorage.getItem("database");
 var DB_NAME = dbname;

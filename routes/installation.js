@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 var router = express.Router();
@@ -10,7 +11,7 @@ const replace = require('replace-in-file');
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
+  var localStorage = new LocalStorage('./scratch');
 }
 
 router.use(lang.init);
@@ -138,9 +139,9 @@ router.post('/',isAuthenticated,function(req, res) {
 				role:ObjectId("5d5685d8c7053f2780bb0753"),
 				password: pass,
 				address: "India",
-				country:parseInt(000, 10),
-				state:parseInt(000,10),
-				city:parseInt(000,10),
+				country:parseInt('000', 10),
+				state:parseInt('000',10),
+				city:parseInt('000',10),
 				pincode:"000000",
 				accountnumber:"00000000000",
 				pannumber:"YYYYY0000Y",

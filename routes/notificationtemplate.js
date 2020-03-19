@@ -1,4 +1,5 @@
- var express = require('express');
+'use strict';
+var express = require('express');
 var router = express.Router();
 var db = require('./mongo_db');
 var ObjectId = require('mongodb').ObjectId; 

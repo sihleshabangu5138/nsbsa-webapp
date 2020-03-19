@@ -1,4 +1,5 @@
-;var express = require('express');
+'use strict';
+var express = require('express');
 var router = express.Router();
 var http = require('http');
 var db = require('./mongo_db');
