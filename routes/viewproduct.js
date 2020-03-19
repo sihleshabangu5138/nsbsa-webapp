@@ -53,6 +53,7 @@ function isAuthenticated(req, res, next) {
 			});
 		}
 	}
+	}
 	else {
 		res.redirect('/');	
 	}	
