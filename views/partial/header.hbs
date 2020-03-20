@@ -136,7 +136,7 @@
             <span>{{__ "Reports"}}</span>
           </a>
         </li>		
-		
+
 		{{#ifCondition session.access_rights.service.view "||" session.access_rights.category.view "||" session.access_rights.events.view "||" session.access_rights.events.view "||" session.access_rights.rulesandregulation.view}}
 		  <li data-menu="dropdown" class="dropdown nav-item mr-1"><a href="/generalsetting" data-toggle="dropdown" class="dropdown-toggle nav-link"><i class="fa fa-wrench custom_height_width_icons"></i><span>{{__ "Services"}} <span class="fa fa-angle-down d-none d-md-inline"></span></span></a>
 			<ul class="dropdown-menu">
