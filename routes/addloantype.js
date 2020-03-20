@@ -11,16 +11,16 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var moment = require('moment');
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 var bodyParser = require('body-parser');
 // FOR IMAGE SAVE
 var multer  =   require('multer');
 var app = express();
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var storage =   multer.diskStorage({
 
 // file upload destination
@@ -31,7 +31,7 @@ var storage =   multer.diskStorage({
 		callback(null, Date.now()+ '-' +file.originalname );
 }
 });
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 // IMAGE SAVE END
 
 router.route('/:id?')
@@ -53,8 +53,7 @@ router.route('/:id?')
 			dbo.collection("custom_field_meta").find(myquery1).toArray(function(err, customfield_value) {
 				for (const [key,value] of Object.entries(customfield_value)) {
 					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
-				};		
-			
+				};
 			res.render('loan/addloantype', {title:"Edit Loan Types", data: result,id:id,session:req.session,setlang:languages,newfield:customfield, customfield_value:customfield_value}); 
 		});
 		});
@@ -90,21 +89,20 @@ router.route('/:id?')
 				date: formatdate,
 				module: "Loan Type",
 				action: "updated loantype",
-				user: ObjectId(req.session.user_id),
+				user: ObjectId(req.session.user_id),				
 				item: req.body.type,
 				status:0,
 			};  
 			dbo.collection("activitylog").insertOne(myobj , function(err, activity) {});
 			var query ={"reference_id": ObjectId(id)};
-			dbo.collection("custom_field_meta").find(query).toArray(function(err, metadata) {			
-			
+		dbo.collection("custom_field_meta").find(query).toArray(function(err, metadata) {	
 			if(metadata != ""){
 				var date = Date(Date.now());
 				var formatdate = moment(date).format("YYYY-MM-DD");
 				if(req.body.customfields){
 					for (const [keys, values] of Object.entries(metadata)){
 						 var findquery ={"_id": values.custom_field_id};
-						 dbo.collection("customfields").find(findquery).toArray(function(err, finddata) {		 
+						 dbo.collection("customfields").find(findquery).toArray(function(err, finddata) {
 							for (const [keysdata, valuesdata] of Object.entries(finddata)) {
 							 if(valuesdata.field_type=='file'){
 								 for (const [key, value] of Object.entries(req.files)) {
@@ -163,9 +161,7 @@ router.route('/:id?')
 					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 			    }
-			}
-			
-			
+			}			
 			else{
 				var date = Date(Date.now());
 				var formatdate = moment(date).format("YYYY-MM-DD");
@@ -183,20 +179,20 @@ router.route('/:id?')
 					}
 				}
 				if(req.files){
-				for (const [key, value] of Object.entries(req.files)){
-					var this_data = {
-						custom_field_id: ObjectId(value.fieldname),
-						customfield_value: value.filename,
-						module: "loantype",
-						user_id: ObjectId(id),
-						reference_id: ObjectId(id),
-						updated_at: formatdate,
+					for (const [key, value] of Object.entries(req.files)){
+						var this_data = {
+							custom_field_id: ObjectId(value.fieldname),
+							customfield_value: value.filename,
+							module: "loantype",
+							user_id: ObjectId(id),
+							reference_id: ObjectId(id),
+							updated_at: formatdate,
+						}
+						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
 					}
-					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
-				}			
 				}
 			}
-			if (err){ 
+			if (err){
 				req.flash('error','Error occured.');
 				res.redirect('/loan/loantypelist');
 			 }

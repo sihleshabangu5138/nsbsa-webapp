@@ -12,10 +12,10 @@ var moment = require('moment');
 // FOR IMAGE SAVE
 var multer  =   require('multer');
 var app = express();
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var storage =   multer.diskStorage({
 
 // file upload destination
@@ -26,11 +26,11 @@ var storage =   multer.diskStorage({
 		callback(null, Date.now()+ '-' +file.originalname );
 }
 });
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 // IMAGE SAVE END
 router.use(lang.init);
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 
 
@@ -105,7 +105,7 @@ router.route('/:id?')
 		var upimg=req.body.productimage_old;
 		if(upimg != undefined){
 			if(Array.isArray(upimg)){
-				var productimg=req.body.productimage_old
+				var productimg=req.body.productimage_old;
 			}
 			else{
 					productimg.push(upimg);
@@ -121,7 +121,7 @@ router.route('/:id?')
 		var atimg = req.body.attachfile_old;
 		if(atimg != undefined){
 			if(Array.isArray(atimg)){
-				var attachfiles=req.body.attachfile_old
+				var attachfiles=req.body.attachfile_old;
 			}
 			else{
 					attachfiles.push(atimg);
@@ -198,7 +198,7 @@ router.route('/:id?')
 									fileattach: attachfiles,
 									module:"product",
 									module_id: ObjectId(id),
-								}}
+								}};
 							dbo.collection("notes").updateOne(nquery, this_data, function(err,notefile) {});
 							}
 						}
@@ -242,20 +242,19 @@ router.route('/:id?')
 					});
 					}
 					for (const [keys1, values1] of Object.entries(req.body.customfields)) {
-								
-									var this_data = {
-										custom_field_id: ObjectId(keys1),
-										customfield_value: values1,
-										module: "product",
-										user_id: ObjectId(req.session.user_id),
-										reference_id: ObjectId(id),
-										updated_at: formatdate,
-									}
-									dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
-							}
+						var this_data = {
+							custom_field_id: ObjectId(keys1),
+							customfield_value: values1,
+							module: "product",
+							user_id: ObjectId(req.session.user_id),
+							reference_id: ObjectId(id),
+							updated_at: formatdate,
+						};
+						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
+					}
 			 	}
 				var m=0;
-				for (const [key, value] of Object.entries(req.files)) {		
+				for (const [key, value] of Object.entries(req.files)) {
 					if (value.fieldname == "productimage" || value.fieldname == "attachfile"){
 					}
 					else{
@@ -278,7 +277,7 @@ router.route('/:id?')
 								user_id: ObjectId(req.session.user_id),
 								reference_id: ObjectId(id),
 								updated_at: formatdate,
-							}
+							};
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 						}
 					}
@@ -296,7 +295,7 @@ router.route('/:id?')
 							user_id: ObjectId(req.session.user_id),
 							reference_id: ObjectId(id),
 							updated_at: formatdate,
-						}
+						};
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 				}
@@ -371,7 +370,7 @@ router.route('/:id?')
 						fileattach: attachfiles,
 						module:"product",
 						module_id: ObjectId(result.insertedId),
-					}
+					};
 				dbo.collection("notes").insertOne(this_data, function(err,notefile) {});
 				}
 				}
@@ -385,7 +384,7 @@ router.route('/:id?')
 						user_id: ObjectId(req.session.user_id),
 						reference_id: result.insertedId,
 						updated_at: formatdate,
-					}
+					};
 					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 				}
 			}

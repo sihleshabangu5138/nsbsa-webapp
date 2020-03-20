@@ -18,10 +18,10 @@ var session = require('express-session');
 // FOR IMAGE SAVE
 var multer  =   require('multer');
 var app = express();
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var storage =   multer.diskStorage({
 
 // file upload destination
@@ -32,7 +32,7 @@ var storage =   multer.diskStorage({
 		callback(null, Date.now()+ '-' +file.originalname );
 	}
 });
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 // IMAGE SAVE END
 
 
@@ -117,8 +117,8 @@ router.route('/:id?')
 						 var findquery ={"_id": values.custom_field_id};
 						 dbo.collection("customfields").find(findquery).toArray(function(err, finddata) {		 
 							for (const [keysdata, valuesdata] of Object.entries(finddata)) {
-							 if(valuesdata.field_type=='file'){
-								 for (const [key, value] of Object.entries(req.files)) {		
+							if(valuesdata.field_type=='file'){
+								for (const [key, value] of Object.entries(req.files)) {		
 									if (value.fieldname == "rule_image"){
 									}
 									else{
@@ -128,18 +128,17 @@ router.route('/:id?')
 											dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
 												if (err) throw err;
 											});
-										}
-										 
+										}										 
 									}
-								 }
-							 }
-							 else{
-								 var query1 ={"_id": values._id};
-								 dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
+								}
+							}
+							else{
+								var query1 ={"_id": values._id};
+								dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
 									if (err) throw err;
-									}); 
-							 }
-						 }
+								}); 
+							}
+						}
 					});
 					}
 					for (const [keys1, values1] of Object.entries(req.body.customfields)) {
@@ -150,7 +149,7 @@ router.route('/:id?')
 							user_id: ObjectId(req.session.user_id),
 							reference_id: ObjectId(id),
 							updated_at: formatdate,
-						}
+						};
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 				}
@@ -178,7 +177,7 @@ router.route('/:id?')
 								user_id: ObjectId(req.session.user_id),
 								reference_id: ObjectId(id),
 								updated_at: formatdate,
-							}
+							};
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 						}
 					}
@@ -195,7 +194,7 @@ router.route('/:id?')
 							user_id: ObjectId(req.session.user_id),
 							reference_id: ObjectId(id),
 							updated_at: formatdate,
-						}
+						};
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 					}
@@ -251,8 +250,7 @@ router.route('/:id?')
 		};   
 		dbo.collection("Rule").insertOne(myobj, function(err, result) {
 			var date = Date(Date.now());
-			var formatdate = moment(date).format("YYYY-MM-DD");
-			
+			var formatdate = moment(date).format("YYYY-MM-DD");			
 			var myobj = { 
 				date: formatdate,
 				module: "Rule",
@@ -261,8 +259,7 @@ router.route('/:id?')
 				item: req.body.loantype,
 				status:0,
 			};  
-			dbo.collection("activitylog").insertOne(myobj , function(err, result) {});
-			
+			dbo.collection("activitylog").insertOne(myobj , function(err, result) {});			
 			if(req.body.customfields){
 			for (const [key, value] of Object.entries(req.body.customfields)) {
 				var this_data = {
@@ -290,7 +287,7 @@ router.route('/:id?')
 							reference_id: result.insertedId,
 							updated_at: formatdate,
 						}
-				dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
+						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
 					}
 				}
 			}

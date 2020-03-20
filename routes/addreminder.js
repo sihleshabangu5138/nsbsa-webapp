@@ -17,9 +17,9 @@ var lang = require('./languageconfig');
 router.use(lang.init); 
 /////////////// FOR IMAGE SAVE
 	var multer  =   require('multer');
-	var jsonParser = bodyParser.json()
+	var jsonParser = bodyParser.json();
 	// create application/x-www-form-urlencoded parser
-	var urlencodedParser = bodyParser.urlencoded({ extended: false })
+	var urlencodedParser = bodyParser.urlencoded({ extended: false });
 	var storage =   multer.diskStorage({
 	// file upload destination
 		destination: function (req, file, callback) {
@@ -29,12 +29,12 @@ router.use(lang.init);
 			callback(null, Date.now()+ '-' +file.originalname );
 		}
 	});
-	var upload = multer({ storage: storage })
+	var upload = multer({ storage: storage });
 /////////////// IMAGE SAVE END
 
 // FOR GETTING VALUE IN FORM EDIT
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 
 router.route('/:id?')
@@ -47,10 +47,10 @@ router.route('/:id?')
 		var myquery ={"_id": ObjectId(id)}; 
 		var dbo=db.get();
 		var result_data=[];
-			dbo.collection("Reminder").find(myquery).toArray(function(err, result) {
-					result_data=result;
-					result_data[0].id_d=ObjectId(result_data[0].role).toString();
-				var query ={"user_id": ObjectId(id)};
+		dbo.collection("Reminder").find(myquery).toArray(function(err, result) {
+			result_data=result;
+			result_data[0].id_d=ObjectId(result_data[0].role).toString();
+		var query ={"user_id": ObjectId(id)};
 		var mydata = { $and: [ {"module_name":"reminder"},{"field_visibility" : 1 }] };	
 		dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {
 			for (const [key,value] of Object.entries(customfield)) {
@@ -73,13 +73,11 @@ router.route('/:id?')
 	{
 		var news = [{'reminderdata':{'1':'1'}}];
 		var mydata = { $and: [ {"module_name":"reminder"},{"field_visibility" : 1 }] };
-		dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {
-			
+		dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {			
 			res.render('reminder/addreminder', {title:"Add Reminder", data: news,session:req.session, newfield:customfield}); 
 		});
 	}
 })
-
 // FOR FORM UPDATE AND ADD
 .post(upload.any(),isAuthenticated,function (req, res){
     var id = req.body.id;
@@ -199,25 +197,25 @@ router.route('/:id?')
 					}
 				}
 				if(req.files){
-				for (const [key, value] of Object.entries(req.files)){
-					var this_data = {
-						custom_field_id: ObjectId(value.fieldname),
-						customfield_value: value.filename,
-						module: "reminder",
-						user_id: ObjectId(req.session.user_id),
-						reference_id: resultes.insertedId,
-						updated_at: formatdate,
+					for (const [key, value] of Object.entries(req.files)){
+						var this_data = {
+							custom_field_id: ObjectId(value.fieldname),
+							customfield_value: value.filename,
+							module: "reminder",
+							user_id: ObjectId(req.session.user_id),
+							reference_id: resultes.insertedId,
+							updated_at: formatdate,
+						}
+						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
 					}
-					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
-				}
 				}
 			}
 			 // if (err) throw err;
-				if (err) { 
+			if (err) { 
 				req.flash('error',lang.__('Error occured.'));
 				res.redirect('/reminder/reminders');
-			 }
-			 else{ 
+			}
+			else{ 
 				 req.flash('success',lang.__('Reminder Updated Sucessfully.'));
 				res.redirect('/reminder/reminders');
 			} 
@@ -234,8 +232,7 @@ router.route('/:id?')
 			reminder_type: req.body.reminder_type,
 			reminderdata:data,
 		};
-
-		 dbo.collection("Reminder").insertOne(myobj, function(err, result) {
+		dbo.collection("Reminder").insertOne(myobj, function(err, result) {
 			var date = Date(Date.now());
 			var formatdate = moment(date).format("YYYY-MM-DD");
 			var myobj = { 

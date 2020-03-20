@@ -16,9 +16,7 @@ module.exports = {
       getFormat: function(value,format, options) {
 		// THIS USE ONLY datepicker DATE FORMATE
 			if(value=='date_format'){
-
-			
-					if(format!=undefined){
+			if(format!=undefined){
 						 var str=format;
 					}
 					else{
@@ -48,7 +46,6 @@ module.exports = {
 				 var trans=time.replace(/i|h|H|s/gi, function(matched){ 
 					return Obj[matched]; 
 				}); 
-				
 				return trans; 
 			}
 		},
@@ -88,7 +85,7 @@ module.exports = {
 					var result= "<p>"+value.name+"</p>";
 					return value.name;
 					
-				} 
+				}
 			};
 		},
 		getcountrybyid: function(value, options) {
@@ -165,26 +162,24 @@ module.exports = {
 			}
 			else{
 				return options.inverse(this); 
-			}
-			
+			}			
 		}, 
 		ifEquals:function (array, v1,options)
 		{
 			for(var i = 0 ; i< array.length; i++)
 			{
-					console.log("FIRST loop");
-					if(array > 0){
-						
-						for(var j = 0 ; j< array[i].length; j++)
-						{ 
-							console.log("second loop");
-							if(array[i][j] == v1){					
-							 return "checked";
-							}					
-						}
+				if(array > 0){
+					
+					for(var j = 0 ; j< array[i].length; j++)
+					{ 
+						console.log("second loop");
+						if(array[i][j] == v1){					
+						 return "checked";
+						}					
 					}
-					else{
-						 if(array[i] == v1){						
+				}
+				else{
+					if(array[i] == v1){						
 						return "checked"; 
 					}
 				}
@@ -194,43 +189,41 @@ module.exports = {
 		{
 			if(array!= undefined){
 				for(var i = 0 ; i< array.length; i++)
-					{
-						if(array[i] == v1){						
-						return (v1) ? options.fn(this) : options.inverse(this);
-						}
-					} 
-				}
-			}, 
-		 
-		regexlimit:function (options)
+				{
+					if(array[i] == v1){						
+					return (v1) ? options.fn(this) : options.inverse(this);
+					}
+				} 
+			}
+		},		 
+		regexlimit:function(options)
 		{
-			var limit = "{1,5000}"
+			var limit = "{1,5000}";
 			return new hbs1.SafeString(limit);
-		},		
-	   
+		},
 	   ifCond:function(v1, operator, v2, options){
 		switch (operator) {
-        case '==':
-            return (v1 == v2) ? options.fn(this) : options.inverse(this);
-        case '===':
-            return (v1 === v2) ? options.fn(this) : options.inverse(this);
-        case '!==':
-            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-        case '<':
-            return (v1 < v2) ? options.fn(this) : options.inverse(this);
-        case '<=':
-            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-        case '>':
-            return (v1 > v2) ? options.fn(this) : options.inverse(this);
-        case '>=':
-            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-        case '&&':
-            return (v1 && v2) ? options.fn(this) : options.inverse(this);
-        case '||':
-            return (v1 || v2) ? options.fn(this) : options.inverse(this);
-        // default:
-            // return options.inverse(this);
-		}
+			case '==':
+				return (v1 == v2) ? options.fn(this) : options.inverse(this);
+			case '===':
+				return (v1 === v2) ? options.fn(this) : options.inverse(this);
+			case '!==':
+				return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+			case '<':
+				return (v1 < v2) ? options.fn(this) : options.inverse(this);
+			case '<=':
+				return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+			case '>':
+				return (v1 > v2) ? options.fn(this) : options.inverse(this);
+			case '>=':
+				return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+			case '&&':
+				return (v1 && v2) ? options.fn(this) : options.inverse(this);
+			case '||':
+				return (v1 || v2) ? options.fn(this) : options.inverse(this);
+			// default:
+				// return options.inverse(this);
+			}
 		},
 		
 		ifCondition:function(v1, operator, v2, operators, v3, operate, v4, operat, v5,options){
@@ -246,15 +239,14 @@ module.exports = {
 			return new hbs1.SafeString(result);
 		},
 		
-		addelement:function(v1, options){	
+		addelement:function(v1, options){
 			if(v1=="data"){
-				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Upload Document</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>'; 		
+				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Upload Document</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>';	
 			}
 			else{
 				var add= '<div class="col-md-6"><div class="form-group"><label class="custom-control-label-date ml-2">Upload Document<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="document"  data-validation-required-message="Document is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);			
-			
+			return new hbs1.SafeString(add);
 		},		
 		addimage:function(v1, options){	
 			if(v1=="data"){
@@ -274,23 +266,23 @@ module.exports = {
 			}
 			return new hbs1.SafeString(add);			
 		},
-		attachfile:function(v1, options){	
+		attachfile:function(v1, options){
 			if(v1=="data"){
 				var add = '<div id="attachfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Attach file</label><input class="form-control border-light"  name="attachfile" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
 				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Attach file</label><input class="form-control border-light  docfile" id="fileupload" name="attachfile" type="file" multiple></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);			
+			return new hbs1.SafeString(add);
 		},
-		productimage:function(v1, options){	
+		productimage:function(v1, options){
 			if(v1=="data"){
-				var add = '<div id="addedfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Product Image</label><input class="form-control border-light fileUpload"  name="productimage" type="file" multiple><span class="notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedfile()"><i class=" ft-x"></i></button></div>'; 		
+				var add = '<div id="addedfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Product Image</label><input class="form-control border-light fileUpload"  name="productimage" type="file" multiple><span class="notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedfile()"><i class=" ft-x"></i></button></div>'; 	
 			}
 			else{
 				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Product Image</label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="productimage" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);			
+			return new hbs1.SafeString(add);
 		},
 		
 		getdate: function(date,format) {
@@ -318,8 +310,7 @@ module.exports = {
 						return Obj[matched];  
 					});  
 			//return dateFormat(date1, trans);
-			return dateFormat(date1, trans);
- 
+			return dateFormat(date1, trans); 
 		},
 		
 		loannumber: function() {

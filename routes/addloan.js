@@ -15,7 +15,7 @@ var session = require('express-session');
 var multer  =   require('multer');
 var moment = require('moment');
 var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 router.use(lang.init);
 var storage =   multer.diskStorage({
 	destination: function (req, file, callback) {
@@ -27,7 +27,7 @@ var storage =   multer.diskStorage({
 });
 var upload = multer({ storage: storage});
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 
 router.route('/:id?')
@@ -93,10 +93,10 @@ router.route('/:id?')
 			};
         var news = [{'userid':'-1'}];
 			res.render('loan/addloan', {title:"Add Loan",data: news,session:req.session,user:User_name,loan:loan_type,geninfo:geninfo, newfield:customfield,note:news});
-		})
-		})
-		})
-		})
+		});
+		});
+		});
+		});
 	}
 })
 
@@ -179,8 +179,7 @@ router.route('/:id?')
 			mobile:req.body.mobile,
 			addtype:req.body.addtype,
 			othertext:req.body.othertext, 
-		}};
-		
+		}};		
 		dbo.collection("loan_details").updateOne(myquery, newvalues , function(err, result) {			
 			var date = Date(Date.now());
 			var formatdate = moment(date).format("YYYY-MM-DD");			
@@ -215,17 +214,17 @@ router.route('/:id?')
 				}
 			}
 			var query ={"reference_id": ObjectId(id)};
-			dbo.collection("custom_field_meta").find(query).toArray(function(err, metadata) {			
+		dbo.collection("custom_field_meta").find(query).toArray(function(err, metadata) {			
 			if(metadata != ""){
 				var date = Date(Date.now());
 				var formatdate = moment(date).format("YYYY-MM-DD");
 				if(req.body.customfields){
 					for (const [keys, values] of Object.entries(metadata)){
-						 var findquery ={"_id": values.custom_field_id};
-						 dbo.collection("customfields").find(findquery).toArray(function(err, finddata) {		 
-							for (const [keysdata, valuesdata] of Object.entries(finddata)) {
-							 if(valuesdata.field_type=='file'){
-								 for (const [key, value] of Object.entries(req.files)) {		
+					var findquery ={"_id": values.custom_field_id};
+					dbo.collection("customfields").find(findquery).toArray(function(err, finddata) {
+						for (const [keysdata, valuesdata] of Object.entries(finddata)) {
+							if(valuesdata.field_type=='file'){
+								 for (const [key, value] of Object.entries(req.files)) {
 									if (value.fieldname == "document" || value.fieldname == "attachfile"){
 									}
 									else{
@@ -239,31 +238,30 @@ router.route('/:id?')
 										 
 									}
 								 }
-							 }
-							 else{
-								 var query1 ={"_id": values._id};
-								 dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
+							}
+							else{
+								var query1 ={"_id": values._id};
+								dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
 									if (err) throw err;
-									}); 
-							 }
-						 }
+								}); 
+							}
+						}
 					});
 					}
 					for (const [keys1, values1] of Object.entries(req.body.customfields)) {
-								
-									var this_data = {
-										custom_field_id: ObjectId(keys1),
-										customfield_value: values1,
-										module: "loan",
-										user_id: ObjectId(req.session.user_id),
-										reference_id: ObjectId(id),
-										updated_at: formatdate,
-									}
-									dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
-							}
+						var this_data = {
+							custom_field_id: ObjectId(keys1),
+							customfield_value: values1,
+							module: "loan",
+							user_id: ObjectId(req.session.user_id),
+							reference_id: ObjectId(id),
+							updated_at: formatdate,
+						}
+						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
+					}
 			 	}
 				var m=0;
-				for (const [key, value] of Object.entries(req.files)) {		
+				for (const [key, value] of Object.entries(req.files)) {
 					if (value.fieldname == "document" || value.fieldname == "attachfile"){
 					}
 					else{
@@ -394,7 +392,7 @@ router.route('/:id?')
 				item: req.body.loancount,
 				status:0,
 			};  
-			dbo.collection("activitylog").insertOne(myobj , function(err, activity) {});
+		dbo.collection("activitylog").insertOne(myobj , function(err, activity) {});
 		dbo.collection("Users").find(iduser).toArray(function(err, result) {
 		dbo.collection("notificationtemplate").find({templatetitle:"Loan Add"}).toArray(function(err, notification) {
 		dbo.collection("loantype").find(loantype).toArray(function(err, typeloan) {

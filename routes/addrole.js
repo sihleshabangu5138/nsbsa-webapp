@@ -15,10 +15,10 @@ var bodyParser = require('body-parser');
 // FOR IMAGE SAVE
 var multer  =   require('multer');
 var app = express();
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var storage =   multer.diskStorage({
 
 // file upload destination
@@ -29,12 +29,12 @@ var storage =   multer.diskStorage({
 		callback(null, Date.now()+ '-' +file.originalname );
 }
 });
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 // IMAGE SAVE END
 
 router.use(lang.init); 
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 
 router.route('/:id?')
@@ -179,7 +179,7 @@ router.route('/:id?')
 							user_id: ObjectId(req.session.user_id),
 							reference_id: ObjectId(id),
 							updated_at: formatdate,
-						}
+						};
 					dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 			    }
@@ -194,7 +194,7 @@ router.route('/:id?')
 							user_id: ObjectId(req.session.user_id),
 							reference_id: ObjectId(id),
 							updated_at: formatdate,
-						}
+						};
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 					}
 				}
@@ -207,7 +207,7 @@ router.route('/:id?')
 								user_id: ObjectId(req.session.user_id),
 								reference_id: ObjectId(id),
 								updated_at: formatdate,
-							}
+							};
 						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
 						}
 					}
@@ -227,12 +227,12 @@ router.route('/:id?')
 		
 		var dbo = db.get();
 		var myobj = { 
-		role_nm: req.body.role_nm,
-		role_slug: req.body.role_slug,
-		role_desc: req.body.role_desc,
-		admin_access:parseInt(value1),
-		allow_access:parseInt(value2),
-		status:0,
+			role_nm: req.body.role_nm,
+			role_slug: req.body.role_slug,
+			role_desc: req.body.role_desc,
+			admin_access:parseInt(value1),
+			allow_access:parseInt(value2),
+			status:0,
 		}; 
 		dbo.collection("Role").insertOne(myobj, function(err, result) {
 			var date = Date(Date.now());
@@ -255,7 +255,7 @@ router.route('/:id?')
 					user_id: ObjectId(req.session.user_id),
 					reference_id: result.insertedId,
 					updated_at: formatdate,
-				}
+				};
 				dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
 			}
 			}
@@ -268,7 +268,7 @@ router.route('/:id?')
 						user_id: ObjectId(req.session.user_id),
 						reference_id: result.insertedId,
 						updated_at: formatdate,
-					}
+					};
 				dbo.collection("custom_field_meta").insertOne(this_data, function(err, result5) {});
 				}
 			}

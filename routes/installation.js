@@ -22,7 +22,7 @@ router.get('/',isAuthenticated, function(req, res, next) {
 
 router.post('/',isAuthenticated,function(req, res) {
 	// we create 'users' collection in newdb database
-	var dbname = req.body.dbname
+	var dbname = req.body.dbname;
 	var url = "mongodb://127.0.0.1:27017/"+dbname;
 	localStorage.setItem("database", dbname);  
 	// create a client to mongodb
@@ -31,21 +31,10 @@ router.post('/',isAuthenticated,function(req, res) {
 		if (err) throw err;
 		// db pointing to newdb
 		console.log("Switched to "+db.databaseName+" database");
-		// create 'users' collection in newdb database
-		// db.createCollection("Access_Rights", function(err, Access_Rights) {
-			// if (err) throw err;
-		// db.createCollection("Generalsetting", function(err, Generalsetting) {
-			// if (err) throw err;
 		db.createCollection("Reminder", function(err, Reminder) {
 			if (err) throw err;
-		// db.createCollection("Role", function(err, Role) {
-			// if (err) throw err;
 		db.createCollection("Rule", function(err, Rule) {
 			if (err) throw err;
-		// db.createCollection("Users", function(err, Users) {
-			// if (err) throw err;
-		// db.createCollection("activitylog", function(err, activitylog) {
-			// if (err) throw err;
 		db.createCollection("category", function(err, category) {
 			if (err) throw err;
 		db.createCollection("categorytypes", function(err, categorytypes) {
@@ -68,8 +57,6 @@ router.post('/',isAuthenticated,function(req, res) {
 			if (err) throw err;
 		db.createCollection("notification_badges", function(err, notification_badges) {
 			if (err) throw err;
-		// db.createCollection("notificationtemplate", function(err, notificationtemplate) {
-			// if (err) throw err;
 		db.createCollection("product", function(err, product) {
 			if (err) throw err;
 		db.createCollection("service", function(err, service) {			
@@ -123,7 +110,7 @@ router.post('/',isAuthenticated,function(req, res) {
 			}
 		]);
 		bcrypt.hash(req.body.password, 10, function(err, hash) {
-			pass = hash
+			pass = hash;
 			myobj={
 				firstname: "admin",
 				middlename: "admin",
@@ -146,7 +133,7 @@ router.post('/',isAuthenticated,function(req, res) {
 				accountnumber:"00000000000",
 				pannumber:"YYYYY0000Y",
 				status:1,
-			}
+			};
 			db.collection("Users").insertOne(myobj, function(err, res) {
 			db.collection("activitylog").insertOne({
 				date: Date(Date.now()),
@@ -248,7 +235,7 @@ router.post('/',isAuthenticated,function(req, res) {
 			{_id:ObjectId("5df069667f4fd726c4d220a6"),notificationtype:"email",slug:"update user",templatetitle:"user profile updated",subject:"Profile Updated Succesfully at _systemname_","content":"Dear _USERFIRSTNAME_ _USERLASTNAME_,_newline__tab_Your Profile has been successfully Updated on _DATETIME_, _newline_Regards From _systemname_."},
 
 			{_id:ObjectId("5df06fb80cba9c1f204f61e0"),notificationtype:"email",slug:"delete user",templatetitle:"user deleted",subject:"Your Account Deleted from _systemname_","content":"Dear _USERFIRSTNAME_ _USERLASTNAME_,_newline__tab_Your Profile has been deleted from _systemname_ on _DATETIME_, _newline_Regards From _systemname_."}
-		])
+		]);
 	fs.writeFile('./temp/temp.txt', 'Never delete this file', function (err) {
 	if (err) throw err;
 	  console.log('File is created successfully.');

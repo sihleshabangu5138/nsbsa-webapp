@@ -12,16 +12,16 @@ var moment = require('moment');
 
 router.use(lang.init);
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 
 // FOR IMAGE SAVE
 var multer  =   require('multer');
 var app = express();
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var storage =   multer.diskStorage({
 
 // file upload destination
@@ -32,7 +32,7 @@ var storage =   multer.diskStorage({
 		callback(null, Date.now()+ '-' +file.originalname );
 }
 });
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 // IMAGE SAVE END
 
 router.route('/:id?')
@@ -44,29 +44,28 @@ router.route('/:id?')
 		var myquery ={"_id": ObjectId(id)};
 		var query ={"categorytypes":"service"};
 		var notequery ={"module_id": ObjectId(id)}; 
-		var staffquery ={"role":ObjectId("5d5ce97225a26b1fb45236ba")}; 
-			dbo.collection("service").find(myquery).toArray(function(err, service) {
-			dbo.collection("category").find(query).toArray(function(err, result) {
+		var staffquery ={"role":ObjectId("5d5ce97225a26b1fb45236ba")};
+		dbo.collection("service").find(myquery).toArray(function(err, service) {
+		dbo.collection("category").find(query).toArray(function(err, result) {
 		dbo.collection("notes").find(notequery).toArray(function(err, notes) {
-			dbo.collection("Users").find(staffquery).toArray(function(err, staff) {	
-				for (const [key,value] of Object.entries(staff)) {
-					staff.forEach(element => {
+		dbo.collection("Users").find(staffquery).toArray(function(err, staff) {	
+			for (const [key,value] of Object.entries(staff)) {
+				staff.forEach(element => {
 					staff[key].id_d=ObjectId(value._id).toString();
 				});
-				};
-			var mydata = { $and: [ {"module_name":"service"},{"field_visibility" : 1 }] };				
-			dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {
-			
-			for (const [key,value] of Object.entries(customfield)) {
-			customfield.forEach(element => {
-				customfield[key].id_d=ObjectId(value._id).toString();
-			});
 			};
-			var myquery1 = {"reference_id" :ObjectId(id)};
-			dbo.collection("custom_field_meta").find(myquery1).toArray(function(err, customfield_value) {
-				for (const [key,value] of Object.entries(customfield_value)) {
-					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
-				};				
+		var mydata = { $and: [ {"module_name":"service"},{"field_visibility" : 1 }] };				
+		dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {		
+			for (const [key,value] of Object.entries(customfield)) {
+				customfield.forEach(element => {
+					customfield[key].id_d=ObjectId(value._id).toString();
+				});
+			};
+		var myquery1 = {"reference_id" :ObjectId(id)};
+		dbo.collection("custom_field_meta").find(myquery1).toArray(function(err, customfield_value) {
+			for (const [key,value] of Object.entries(customfield_value)) {
+				customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
+			};				
 		res.render('service/addservice', { title: 'Edit Service',session:req.session,messages:req.flash(),category:result, staff:staff, data:service,newfield:customfield,customfield_value:customfield_value, note:notes});
 		});
 		});
@@ -80,21 +79,20 @@ router.route('/:id?')
 		var query ={"categorytypes":"service"};
 		var staffquery ={"role":ObjectId("5d5ce97225a26b1fb45236ba")};
         var news = [{'userid':'-1'}];
-			dbo.collection("category").find(query).toArray(function(err, result) {
-			dbo.collection("Users").find(staffquery).toArray(function(err, staff) {	
-			var mydata = { $and: [ {"module_name":"service"},{"field_visibility" : 1 }] };				
-			dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {
-			
+		dbo.collection("category").find(query).toArray(function(err, result) {
+		dbo.collection("Users").find(staffquery).toArray(function(err, staff) {	
+		var mydata = { $and: [ {"module_name":"service"},{"field_visibility" : 1 }] };				
+		dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {
 			for (const [key,value] of Object.entries(customfield)) {
-			customfield.forEach(element => {
-				customfield[key].id_d=ObjectId(value._id).toString();
-			});
+				customfield.forEach(element => {
+					customfield[key].id_d=ObjectId(value._id).toString();
+				});
 			};
-			var myquery1 = {"reference_id" :ObjectId(id)};
-			dbo.collection("custom_field_meta").find(myquery1).toArray(function(err, customfield_value) {
-				for (const [key,value] of Object.entries(customfield_value)) {
-					customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
-				};	
+		var myquery1 = {"reference_id" :ObjectId(id)};
+		dbo.collection("custom_field_meta").find(myquery1).toArray(function(err, customfield_value) {
+			for (const [key,value] of Object.entries(customfield_value)) {
+				customfield_value[key].id_d=ObjectId(value.custom_field_id).toString();
+			};	
         res.render('service/addservice', {title:"Add Service",data:news,session:req.session,category:result,staff:staff,newfield:customfield,customfield_value:customfield_value,note:news});
 	});
 	});
@@ -110,37 +108,37 @@ router.route('/:id?')
 	var uploadimg = [];
 	var attachfiles = [];
 	var upimg=req.body.image_old;
-		if(upimg != undefined){
-			if(Array.isArray(upimg)){
-				 uploadimg=req.body.image_old;
-			}
-			else{
-					uploadimg.push(upimg);
-				}
-			}	
-		for (const [keys, values] of Object.entries(req.files)) {
-			if(values.fieldname == "uploadimages"){			
-				var img = values.filename;
-				uploadimg.push(img);
-				i++;
-			}
-		}
-		var atimg = req.body.attachfile_old;
-		if(atimg != undefined){
-		if(Array.isArray(atimg)){
-			var attachfiles=req.body.attachfile_old
+	if(upimg != undefined){
+		if(Array.isArray(upimg)){
+			uploadimg=req.body.image_old;
 		}
 		else{
-				attachfiles.push(atimg);
-			}
+			uploadimg.push(upimg);
 		}
-		for (const [keys, values] of Object.entries(req.files)) {
-			if(values.fieldname == "attachfile"){			
-				var attach = values.filename;
-				attachfiles.push(attach);
-				j++;
-			}
-		}		
+	}	
+	for (const [keys, values] of Object.entries(req.files)) {
+		if(values.fieldname == "uploadimages"){			
+			var img = values.filename;
+			uploadimg.push(img);
+			i++;
+		}
+	}
+	var atimg = req.body.attachfile_old;
+	if(atimg != undefined){
+	if(Array.isArray(atimg)){
+		var attachfiles=req.body.attachfile_old;
+	}
+	else{
+			attachfiles.push(atimg);
+		}
+	}
+	for (const [keys, values] of Object.entries(req.files)) {
+		if(values.fieldname == "attachfile"){			
+			var attach = values.filename;
+			attachfiles.push(attach);
+			j++;
+		}
+	}
 	var staff = req.body.assigned_staff;
 	var staffs = [];
 	if(Array.isArray(staff)){
@@ -227,7 +225,7 @@ router.route('/:id?')
 						 dbo.collection("customfields").find(findquery).toArray(function(err, finddata) {		 
 							for (const [keysdata, valuesdata] of Object.entries(finddata)) {
 							 if(valuesdata.field_type=='file'){
-								 for (const [key, value] of Object.entries(req.files)) {		
+								for (const [key, value] of Object.entries(req.files)){		
 									if (value.fieldname == "uploadimages" || value.fieldname == "attachfile"){
 									}
 									else{
@@ -237,35 +235,33 @@ router.route('/:id?')
 											dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
 												if (err) throw err;
 											});
-										}
-										 
+										}										 
 									}
-								 }
-							 }
-							 else{
-								 var query1 ={"_id": values._id};
-								 dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
+								}
+							}
+							else{
+								var query1 ={"_id": values._id};
+								dbo.collection("custom_field_meta").remove(query1, function(err, deletealldata){
 									if (err) throw err;
-									}); 
-							 }
-						 }
+								}); 
+							}
+						}
 					});
 					}
 					for (const [keys1, values1] of Object.entries(req.body.customfields)) {
-								
-									var this_data = {
-										custom_field_id: ObjectId(keys1),
-										customfield_value: values1,
-										module: "service",
-										user_id: ObjectId(req.session.user_id),
-										reference_id: ObjectId(id),
-										updated_at: formatdate,
-									}
-									dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
-							}
+						var this_data = {
+							custom_field_id: ObjectId(keys1),
+							customfield_value: values1,
+							module: "service",
+							user_id: ObjectId(req.session.user_id),
+							reference_id: ObjectId(id),
+							updated_at: formatdate,
+						}
+						dbo.collection("custom_field_meta").insertOne(this_data, function(err, result2) {});
+					}
 			 	}
 				var m=0;
-				for (const [key, value] of Object.entries(req.files)) {		
+				for (const [key, value] of Object.entries(req.files)) {
 					if (value.fieldname == "uploadimages" || value.fieldname == "attachfile"){
 					}
 					else{

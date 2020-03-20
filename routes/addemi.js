@@ -14,10 +14,10 @@ router.use(lang.init);
 // FOR IMAGE SAVE
 var multer  =   require('multer');
 var app = express();
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var storage =   multer.diskStorage({
 
 // file upload destination
@@ -87,7 +87,7 @@ router.route('/:id?')
 		cheque_date:req.body.cheque_date,
 		paymentamount:req.body.paymentamount,
 		status:1,
-	}}
+	}};
 	dbo.collection("emi_details").updateOne(myquery, newvalues , function(err, result) {
 		var date = Date(Date.now());
 		var formatdate = moment(date).format("YYYY-MM-DD");

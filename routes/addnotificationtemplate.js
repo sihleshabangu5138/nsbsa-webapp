@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var moment = require('moment');
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 
 /* GET users listing. */

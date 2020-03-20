@@ -12,7 +12,7 @@ var Mail = require('./email');
 
 router.use(lang.init);
 router.use(cookieParser());
-router.use(session({ secret: '222222'}))
+router.use(session({ secret: '222222'}));
 router.use(flash());
 
 
@@ -217,7 +217,7 @@ router.route('/:id?')
 			}
 				
 			var date = Date(Date.now());
-		var formatdate = moment(date).format("YYYY-MM-DD");
+			var formatdate = moment(date).format("YYYY-MM-DD");
 			var myobjs = { 
 				date: formatdate,
 				module: "Event",
@@ -238,7 +238,6 @@ router.route('/:id?')
 			});
 	}
 	else{
-		console.log(req.body)
 		var myobj = {
 			eventtype: req.body.eventtype,
 			eventtitle: req.body.eventtitle,

@@ -6,7 +6,6 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 var dbname = localStorage.getItem("database");
 var DB_NAME = dbname;
-console.log(DB_NAME)
 const mongoDbUrl = 'mongodb://127.0.0.1:27017/'+DB_NAME;
 
 // const mongoDbUrl = 'mongodb://127.0.0.1:27017/BankingSystem';
