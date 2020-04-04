@@ -353,6 +353,7 @@ $('#dashboard_calendar').fullCalendar({
 			businessHours: true, // display business hours
 			editable: false,
 			displayEventTime : false ,
+			events : "/ajxfun/mapevents",
 			eventRender: function(eventObj, $el) {
 			  $el.popover({
 				title: eventObj.title,

@@ -38,17 +38,66 @@
 								</h6>
 							</li>
 							{{#each session.noti}}
+							{{#ifCond this.action "==" "New User"}}
 							<li class="scrollable-container media-list" id="click_event">
 								<a href="/users/viewuser/{{this.user}}">
 									<div class="media">
 									<div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+									<input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
 										<div class="media-body">
+											<span class="notification-tag badge badge-default badge-warning float-right m-0">{{this.date}}</span>
 											<h6 class="media-heading">{{this.action}}!</h6>
-											<p class="notification-text font-small-3 text-muted">{{this.Name}} {{this.desc}}</p>
+											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{this.desc}} {{this.Name}} </p>
 										</div>
 									</div>
 								</a>
 							</li>
+							{{/ifCond}}
+							{{#ifCond this.action "==" "User Updated"}}
+							<li class="scrollable-container media-list" id="click_event">
+								<a href="/users/viewuser/{{this.user}}">
+									<div class="media">
+									<div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+									<input type="hidden" id="upusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
+										<div class="media-body">
+											<h6 class="media-heading">{{this.action}}!</h6>
+											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{this.date}}</span>
+											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{this.Name}} {{this.desc}}</p>
+										</div>
+									</div>
+								</a>
+							</li>
+							{{/ifCond}}
+							{{#ifCond this.action "==" "New Loan Added"}}
+							<li class="scrollable-container media-list" id="click_event">
+								<a href="/loan/viewloan/{{this.loan}}">
+									<div class="media">
+									<div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+									<input type="hidden" id="addloanoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
+										<div class="media-body">
+											<h6 class="media-heading">{{this.action}}!</h6>
+											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{this.date}}</span>
+											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{this.Name}} {{this.desc}}</p>
+										</div>
+									</div>
+								</a>
+							</li>
+							{{/ifCond}}
+							{{#ifCond this.action "==" "Loan Updated"}}
+							<li class="scrollable-container media-list" id="click_event">
+								<a href="/loan/viewloan/{{this.loan}}">
+									<div class="media">
+									<div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+									<input type="hidden" id="uploanoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
+										<div class="media-body">
+											<h6 class="media-heading">{{this.action}}!</h6>
+											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{this.date}}</span>
+											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{this.Name}} {{this.desc}} {{this.nameofuser.[0]}} {{this.nameofuser.[1]}} {{this.nameofuser.[2]}}</p>
+										</div>
+									</div>
+								</a>
+							</li>
+							{{/ifCond}}
 							{{/each}}
 						</ul>
 					</li>
@@ -290,9 +339,12 @@ $(document).ready(function(){
 <script>
 $(document).ready(function(){
 	$('body').on('click', '#click_event', function() {
+	var notivalue = $('#uploanoti').val();
+	alert(notivalue)
 		$.ajax({
 			type: "GET",
 			url: '/ajxfun/deletenoti',
+			data: {"notivalue" : notivalue}
 		});
 	});
 });

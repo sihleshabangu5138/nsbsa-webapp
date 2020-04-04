@@ -102,7 +102,7 @@
 						<select class="select2 form-control export" data-validation-required-message="User name is required" name="user" >					
 							<option value="">---User---</option> 
 							{{#each ../user as |data1| }}
-								
+							
 								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{this._id}}" >{{this.firstname}} {{this.middlename}} {{this.lastname}}</option>
 								
 							{{/each}}
@@ -700,7 +700,6 @@
 {{/ifCond}}
 {{/each}}
 {{/if}}
-</div>
 
 <!-- Custome fields End--> 
 			<div class="form-actions left">
@@ -715,6 +714,7 @@
 			</div>
 			</div>
 		</form>	
+</div>
 </div>
 </div>
 </div>
