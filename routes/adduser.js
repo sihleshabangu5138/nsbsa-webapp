@@ -197,20 +197,7 @@ router.route('/:id?')
 				status:0,
 			};
 			dbo.collection("activitylog").insertOne(myobj , function(err, activity) {});
-			var myobj = { 
-				action: "User Updated",
-				desc: "Updated an account",
-				user:  ObjectId(id),
-				Name: req.body.username,
-				status:1,
-			};
-			dbo.collection("notification_badges").insertOne(myobj , function(err,noti) {			
-				dbo.collection("notification_badges").find().toArray(function(err, notidata) {
-					for (const [keys, values] of Object.entries(notidata)){
-						req.session.noti = values;
-					};
-				});
-			});
+			
 			var query ={"reference_id": ObjectId(id)};
 			dbo.collection("custom_field_meta").find(query).toArray(function(err, metadata) {
 			if(metadata != ""){
@@ -363,6 +350,32 @@ router.route('/:id?')
 					}
 			}
 			}
+			var date = Date(Date.now());
+			var formatdate = moment(date).format("YYYY-MM-DD");
+			dbo.collection("Users").find({"_id" : ObjectId(id)}).toArray(function(err, useresult) {
+			var myobj = { 
+				action: "User Updated",
+				desc: "is updated",
+				user:  ObjectId(id),
+				Name: req.body.username,
+				date: formatdate,
+				status:useresult[0].status
+			};
+			var noquery = {"user": ObjectId(req.session.user_id)};
+			var query = { $and: [ {status:1 }, { "user":  ObjectId(req.session.user_id) } ] }
+					dbo.collection("notification_badges").insertOne(myobj , function(err,noti) {
+					dbo.collection("notification_badges").find(noquery).toArray(function(err, notiresult) {
+					dbo.collection("notification_badges").find().toArray(function(err, adminnoti) {
+					dbo.collection("notification_badges").count((query), function(error, activenoti){
+					dbo.collection("notification_badges").count({}, function(error, adminnoticount){
+						if (req.session.admin_access == 1){
+							req.session.noti = adminnoti;
+							req.session.noticount = adminnoticount;
+						}
+						else{
+							req.session.noti = notiresult;
+							req.session.noticount = activenoti;
+						}
 			if (m>0) 
 			{
 				req.flash('error',lang.__('Error occured.'));
@@ -372,7 +385,13 @@ router.route('/:id?')
 				 req.flash('success',lang.__('User Updated Sucessfully.'));
 				res.redirect('/users/userlist');
 			 }	
-		}
+		});
+		});
+		});
+		});
+		});
+		});
+	}
 	else{
 		
 		var dbo = db.get();
@@ -417,22 +436,12 @@ router.route('/:id?')
 				date: formatdate,
 				module: "User",
 				action: "inserted user named",
-				user: ObjectId(req.session.user_id),				
+				user: ObjectId(req.session.user_id),
 				item: req.body.username,
 				status:0,
 			};  
 			dbo.collection("activitylog").insertOne(myobj , function(err, activity) {});
-			var myobj = { 
-				action: "New User",
-				desc: "created an account",
-				user: result.insertedId,
-				Name: req.body.username,
-				status:1,
-			};
-			dbo.collection("notification_badges").insertOne(myobj , function(err,noti) {});
-			// dbo.collection("notification_badges").find().toArray(function(err,noti) {
-				// req.session.noti = noti
-			// });
+			
 			if (err) throw err;
 			dbo.collection("notificationtemplate").find({templatetitle:"Added User"}).toArray(function(err, notification) {
 				var myquery2 = {"_id": idrole};
@@ -503,7 +512,32 @@ router.route('/:id?')
 					}
 					}
 					}
-					 if (err) {			
+					var date = Date(Date.now());
+				    var formatdate = moment(date).format("YYYY-MM-DD");
+					dbo.collection("Users").find({"_id" : result.insertedId}).toArray(function(err, useresult) {
+					var myobj = { 
+						action: "New User",
+						desc: "New account created.",
+						user: ObjectId(req.session.user_id),
+						date: formatdate,
+						status:useresult[0].status
+					};
+					var noquery = {"user": ObjectId(req.session.user_id)};
+					var query = { $and: [ {status:1 }, { "user":  ObjectId(req.session.user_id) } ] }
+					dbo.collection("notification_badges").insertOne(myobj , function(err,noti) {
+					dbo.collection("notification_badges").find(noquery).toArray(function(err, notiresult) {
+					dbo.collection("notification_badges").find().toArray(function(err, adminnoti) {
+					dbo.collection("notification_badges").count((query), function(error, activenoti){
+					dbo.collection("notification_badges").count({}, function(error, adminnoticount){
+						if (req.session.admin_access == 1){
+							req.session.noti = adminnoti;
+							req.session.noticount = adminnoticount;
+						}
+						else{
+							req.session.noti = notiresult;
+							req.session.noticount = activenoti;
+						}
+					if (err) {			
 						req.flash('error',lang.__('Error occured.'));
 						res.redirect('/users/userlist');
 					 }
@@ -511,7 +545,13 @@ router.route('/:id?')
 						 req.flash('success',lang.__('User Instered Sucessfully.'));
 						 res.redirect('/users/userlist');
 					 }
+					});	
+					});	
 				});	
+		});
+		});
+		});
+		});
 		});
 		});
 		});

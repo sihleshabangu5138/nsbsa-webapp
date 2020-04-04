@@ -227,6 +227,7 @@ router.route('/:id?')
 				status:0,
 			};  
 			dbo.collection("activitylog").insertOne(myobjs , function(err, activity) {});
+			
 			if (err){ 
 					req.flash('error','Error occured.');
 					res.redirect('/events/eventlist');

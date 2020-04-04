@@ -53,7 +53,7 @@ router.route('/:id?')
 			};
 		dbo.collection("Generalsetting").find().toArray(function(err, geninfo) {
 			for (const [key,value] of Object.entries(geninfo)) {
-				User_name[key].id_d=ObjectId(value._id).toString();
+				geninfo[key].id_d=ObjectId(value._id).toString();
 			};
 		var mydata = { $and: [ {"module_name":"loan"},{"field_visibility" : 1 }] };
 		dbo.collection("customfields").find(mydata).toArray(function(err, customfield) {
@@ -337,6 +337,33 @@ router.route('/:id?')
 			}
 			}
 			});
+			dbo.collection("loantype").find({"_id":idloan}).toArray(function(err, typeloans) {
+			var myobj = { 
+				action: "Loan Updated",
+				desc: "is updated",
+				loan: ObjectId(id),
+				user: iduser,
+				userby: ObjectId(req.session.user_id),
+				Name: typeloans[0].type,
+				date:formatdate,
+				status:1
+			};
+			var noquery = {"user": ObjectId(req.session.user_id)};
+			var query = { $and: [ {status:1 }, { "user":  ObjectId(req.session.user_id) } ] }
+			console.log(noquery)
+					dbo.collection("notification_badges").insertOne(myobj , function(err,noti) {
+					dbo.collection("notification_badges").find(noquery).toArray(function(err, notiresult) {
+					dbo.collection("notification_badges").find().toArray(function(err, adminnoti) {
+					dbo.collection("notification_badges").count((query), function(error, activenoti){
+					dbo.collection("notification_badges").count({}, function(error, adminnoticount){
+					if (req.session.admin_access == 1){
+						req.session.noti = adminnoti;
+						req.session.noticount = adminnoticount;
+					}
+					else{
+						req.session.noti = notiresult;
+						req.session.noticount = activenoti;
+					}
 			if (err) { 
 				req.flash('error',lang.__('Error occured.'));
 				res.redirect('/loan/loanlist');
@@ -346,6 +373,12 @@ router.route('/:id?')
 				res.redirect('/loan/loanlist');
 			}
 		});
+		});		
+		});		
+		});		
+		});		
+		});		
+		});		
 		});		
 		});		
 	}
@@ -489,6 +522,33 @@ router.route('/:id?')
 				}
 				}
 			}
+			dbo.collection("loantype").find({"_id":loantype}).toArray(function(err, typeloans) {
+			var myobj = { 
+				action: "New Loan Added",
+				desc: "is added ",
+				loan: resultes.insertedId,
+				user: iduser,
+				userby: ObjectId(req.session.user_id),
+				Name: typeloans[0].type,
+				date:formatdate,
+				status:1
+			};
+			var noquery = {"user": ObjectId(req.session.user_id)};
+			var query = { $and: [ {status:1 }, { "user":  ObjectId(req.session.user_id) } ] }
+			console.log(noquery)
+					dbo.collection("notification_badges").insertOne(myobj , function(err,noti) {
+					dbo.collection("notification_badges").find(noquery).toArray(function(err, notiresult) {
+					dbo.collection("notification_badges").find().toArray(function(err, adminnoti) {
+					dbo.collection("notification_badges").count((query), function(error, activenoti){
+					dbo.collection("notification_badges").count({}, function(error, adminnoticount){
+					if (req.session.admin_access == 1){
+						req.session.noti = adminnoti;
+						req.session.noticount = adminnoticount;
+					}
+					else{
+						req.session.noti = notiresult;
+						req.session.noticount = activenoti;
+					}
 			if (err) { 
 				req.flash('error',lang.__('Error occured.'));
 				res.redirect('/loan/disapproveloan');
@@ -497,6 +557,12 @@ router.route('/:id?')
 				req.flash('success',lang.__('Loan Inserted Sucessfully.'));
 				res.redirect('/loan/disapproveloan');
 			}
+		});
+		});
+		});
+		});
+		});
+		});
 		});
 		});
 		});

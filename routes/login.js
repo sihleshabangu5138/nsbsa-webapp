@@ -37,10 +37,9 @@ router.post('/',function(req, res) {
 	var myquery ={"username": req.body.username };
 	var name = req.body.username;
 	var frompass =req.body.password;
-	var query = {status : 1};
+	
 	dbo.collection("Users").find(myquery).toArray(function(err, result) {
-	dbo.collection("notification_badges").find().toArray(function(err, notiresult) {
-		dbo.collection("notification_badges").count((query), function(error, activenoti){
+	
 		if (err) throw err;
 		else{
 			if(result.length > 0){
@@ -55,15 +54,21 @@ router.post('/',function(req, res) {
 						req.session.photo=result[0].photo;
 						req.session.user_id=result[0]._id;		
 						req.session.role=result[0].role;
-						 
+						
+						var noquery = {"user": ObjectId(req.session.user_id)};
+						var query = { $and: [ {status:1 }, { "user":  ObjectId(req.session.user_id) } ] }
 						var myquery1 ={"id": req.body._id };
 						dbo.collection("Generalsetting").find(myquery1).toArray(function(err, result1) {					
 						dbo.collection("Role").find({"_id": result[0].role}).toArray(function(err, roledata) {	
+						dbo.collection("notification_badges").find(noquery).toArray(function(err, notiresult) {
+						dbo.collection("notification_badges").find().toArray(function(err, adminnoti) {
+						dbo.collection("notification_badges").count((query), function(error, activenoti){
+						dbo.collection("notification_badges").count({}, function(error, adminnoticount){
 						dbo.collection("Access_Rights").find({"rolename": roledata[0].role_slug}).toArray(function(err, accessdata) {
 						if (err) throw err;
 							else{								
 								var language= result1[0].language;
-								res.cookie('locale', language, { maxAge: 900000, httpOnly: true }); 	
+								res.cookie('locale', language, { maxAge: 900000, httpOnly: true });
 								req.session.gen_id=result1[0]._id;			
 								req.session.company_logo=result1[0].company_logo;
 								req.session.generaldata=result1[0];
@@ -72,8 +77,14 @@ router.post('/',function(req, res) {
 								if(accessdata != ""){
 									req.session.access_rights=accessdata[0].access_type; 
 								}
-								req.session.noti = notiresult;
-								req.session.noticount = activenoti;
+								if(req.session.admin_access == 1){
+									req.session.noti = adminnoti;
+									req.session.noticount = adminnoticount;
+								}
+								else{
+									req.session.noti = notiresult;
+									req.session.noticount = activenoti;
+								}
 								var date = Date(Date.now());
 								var formatdate = moment(date).format("YYYY-MM-DD"); 
 															
@@ -108,6 +119,10 @@ router.post('/',function(req, res) {
 						});
 						});
 						});
+						});
+						});
+						});
+						});
 					}
 					else{
 						req.flash('error','You are not allow to login. Enter correct username or password.');
@@ -126,8 +141,6 @@ router.post('/',function(req, res) {
 				res.render('login', { title: 'NiftyEWS',layout:"loginlayout"});	
 			}
 		}
-	});
-	});
 	});
 	/*for Generalsetting id*/
 });

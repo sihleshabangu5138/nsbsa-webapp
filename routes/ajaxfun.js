@@ -139,9 +139,7 @@ router.get('/deleteloan/',isAuthenticated, function(req, res) {
 });
 router.get('/deletenoti',isAuthenticated, function(req, res) { 	
 	var dbo = db.get("BankingSystem");
-	console.log(req.session)
-	dbo.collection("notification_badges").remove({});
-	
+	dbo.collection("notification_badges").remove( { "_id" : ObjectId(req.query.notivalue)});
 });
 router.get('/roles', isAuthenticated,function(req, res) {
 	
@@ -157,6 +155,7 @@ router.get('/customfields', isAuthenticated,function(req, res) {
 	dbo.collection("customfields").find({}).toArray(function(err, result) {
 		if (err) throw err;
 		for (const [key,value] of Object.entries(result)) {
+			console.log(result)
 			result[key].valids=(value.validation).toString();
 		};
 		res.json(result);
@@ -195,6 +194,24 @@ router.get('/events', isAuthenticated,function(req, res) {
 });
 });
 
+router.get('/mapevents', isAuthenticated,function(req, res) { 
+	var dbo = db.get("BankingSystem");
+	dbo.collection("events").find({}).toArray(function(err, result) {
+		if (err) throw err;
+		var data = []
+		result.forEach(element => {
+			var this_data = {
+				title: element.eventtitle,
+				start: element.startdate,
+				end: element.enddate,
+				color: "darkcyan"
+			}
+			data.push(this_data);
+		});
+		res.json(data);
+});
+});
+
 router.post('/addcategorytype', isAuthenticated, function(req, res) {
 	var dbo = db.get("BankingSystem");
 	var data = {category_type:req.body.cat_type};
@@ -214,8 +231,7 @@ router.get('/reminder', isAuthenticated,function(req, res) {
 router.get('/loantypelist', isAuthenticated,function(req, res) { 
 	var dbo = db.get("BankingSystem");
 	dbo.collection("loantype").find({}).toArray(function(err, result) {
-		if (err) throw err;
-		
+		if (err) throw err;		
 		res.json(result);
 });
 });
