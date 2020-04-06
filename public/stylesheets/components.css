@@ -2,7 +2,7 @@ html {
   font-size: 14px;
   height: 100%; }
   html body {
-    height: 100%;
+    height: unset;
     background-color: #F5F7FA;
     direction: ltr; }
     html body.fixed-navbar {

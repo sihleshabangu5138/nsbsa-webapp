@@ -10,7 +10,6 @@ i18n.configure({
 	directory:  "./locales",
 	register: global,
 	extension: '.json',
-	
    logDebugFn: function (msg) {
     },
 

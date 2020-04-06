@@ -23,9 +23,34 @@ router.route('/:id?')
 	var languages = lang.getLocale();
 	var query = {"status":0};
 	dbo.collection("Role").find(query).toArray(function(err, result) { 
-		dbo.collection("Access_Rights").find().toArray(function(err, access) { 
-			res.render('accessrights/accessright', {title:"Access Rights", roledata: result,session:req.session, accessrightdata:access,setlang:languages});
+		dbo.collection("Access_Rights").find().toArray(function(err, access) {
+		dbo.collection("Role").aggregate([
+		{
+			$lookup:{
+				from : 'Access_Rights',
+				localField : 'role_slug',
+				foreignField : 'rolename',
+				as : 'role_db'
+			}
+		},
+		{
+			$unwind : '$role_db'
+		},
+		{
+			$match:{
+				$and: [ {status :0 }]
+			}
+		}
+	]).toArray(function(err,results){
+		if(err) throw err;
+		
+		for (const [key,value] of Object.entries(results)) {
+			result[key].dataofaccess = value.role_db;
+			
+		}	
+			res.render('accessrights/accessright', {title:"Access Rights", roledata: results,session:req.session, accessrightdata:access,setlang:languages});
 		}); 
+	});
 	});
 })
 .post(passarray.array(),isAuthenticated,function (req, res){   

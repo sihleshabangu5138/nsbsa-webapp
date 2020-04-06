@@ -110,8 +110,8 @@ router.post('/',isAuthenticated,function(req, res) {
 			}
 		]);
 		bcrypt.hash(req.body.password, 10, function(err, hash) {
-			pass = hash;
-			myobj={
+			var pass = hash;
+			var myobj={
 				firstname: "admin",
 				middlename: "admin",
 				lastname: "admin",
@@ -236,6 +236,8 @@ router.post('/',isAuthenticated,function(req, res) {
 
 			{_id:ObjectId("5df06fb80cba9c1f204f61e0"),notificationtype:"email",slug:"delete user",templatetitle:"user deleted",subject:"Your Account Deleted from _systemname_","content":"Dear _USERFIRSTNAME_ _USERLASTNAME_,_newline__tab_Your Profile has been deleted from _systemname_ on _DATETIME_, _newline_Regards From _systemname_."}
 		]);
+		
+	fs.mkdirSync("./temp");
 	fs.writeFile('./temp/temp.txt', 'Never delete this file', function (err) {
 	if (err) throw err;
 	  console.log('File is created successfully.');
