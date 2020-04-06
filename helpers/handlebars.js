@@ -144,11 +144,11 @@ module.exports = {
 		// },
 		check_value_in:function (array, v1,options)
 		{
-			i=0;
+			var i=0;
 			if(array.length>0){
 				for (const [key, value] of Object.entries(array)) {
 					if(value.rolename == v1){
-						i=0;
+						var i=0;
 						return (v1) ? options.fn(this) : options.inverse(this); 
 					}
 					else{
