@@ -39,7 +39,7 @@
 							</li>
 							{{#each session.noti}}
 							{{#ifCond this.action "==" "New User"}}
-							<li class="scrollable-container media-list" id="click_event">
+							<li class="scrollable-container media-list" id="clickonevent">
 								<a href="/users/viewuser/{{this.user}}">
 									<div class="media">
 									<div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
@@ -54,7 +54,7 @@
 							</li>
 							{{/ifCond}}
 							{{#ifCond this.action "==" "User Updated"}}
-							<li class="scrollable-container media-list" id="click_event">
+							<li class="scrollable-container media-list" id="onclickevent">
 								<a href="/users/viewuser/{{this.user}}">
 									<div class="media">
 									<div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
@@ -69,7 +69,7 @@
 							</li>
 							{{/ifCond}}
 							{{#ifCond this.action "==" "New Loan Added"}}
-							<li class="scrollable-container media-list" id="click_event">
+							<li class="scrollable-container media-list" id="clickevent">
 								<a href="/loan/viewloan/{{this.loan}}">
 									<div class="media">
 									<div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
@@ -346,5 +346,29 @@ $(document).ready(function(){
 			data: {"notivalue" : notivalue}
 		});
 	});
+	$('body').on('click', '#clickevent', function() {
+		var notivalue = $('#addloanoti').val();
+			$.ajax({
+				type: "GET",
+				url: '/ajxfun/deletenoti',
+				data: {"notivalue" : notivalue}
+			});
+		});
+	$('body').on('click', '#onclickevent', function() {
+		var notivalue = $('#upusernoti').val();
+			$.ajax({
+				type: "GET",
+				url: '/ajxfun/deletenoti',
+				data: {"notivalue" : notivalue}
+			});
+		});
+	$('body').on('click', '#clickonevent', function() {
+		var notivalue = $('#addusernoti').val();
+			$.ajax({
+				type: "GET",
+				url: '/ajxfun/deletenoti',
+				data: {"notivalue" : notivalue}
+			});
+		});
 });
 </script>
