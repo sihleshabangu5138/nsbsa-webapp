@@ -100,7 +100,7 @@
 				<div class="heading-elements "> 
 					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">User Name<span class="required red">*</span></label>
 						<select class="select2 form-control export" data-validation-required-message="User name is required" name="user" >					
-							<option value="">---User---</option> 
+							<option value="">Select User</option> 
 							{{#each ../user as |data1| }}
 							
 								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{this._id}}" >{{this.firstname}} {{this.middlename}} {{this.lastname}}</option>
@@ -240,7 +240,7 @@
 
 					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Start Date of loan" setlang}}{{/with}}<span class="required red">*</span></label>
 
-					<input type='text' class="form-control startdate dateformat"  data-validation-required-message="{{__ 'Start Date is required'}}" name="startdate" {{#if this.startdate}} value="{{getdate this.startdate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false">
+					<input type='text' class="form-control afterdate startdate dateformat"  data-validation-required-message="{{__ 'Start Date is required'}}" name="startdate" {{#if this.startdate}} value="{{getdate this.startdate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false">
 
 					<i class="ft-calendar icon-care"></i> 
 					</div>
@@ -383,7 +383,7 @@
 				<label></label>
 					<div class="heading-elements"> 
 					   <label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Colleague Address Type" setlang}}{{/with}}</label> 
-						<select class="select2 form-control export" id="export" name="addtype" data-validation-required-message="Colleague address type is required" onchange='Checkaddtype(this.value)'> 
+						<select class="select2 form-control export" id ="dataother" name="addtype" data-validation-required-message="Colleague address type is required" onchange='Checkaddtype(this.value)' {{#ifCond this.addtype '==' 'other'}} value="{{this.addtype}}" {{/ifCond}} > 
 						<option>Select colleague address type</option>
 						<option value="home" {{#ifCond this.addtype '==' 'home'}} selected {{/ifCond}}>Home</option>
 						<option value="work"{{#ifCond this.addtype '==' 'work'}} selected {{/ifCond}}>Work</option>
@@ -392,16 +392,35 @@
 						</select>
 				</div><div class="help-block"></div>			
 				</div>
-				<textarea placeholder="Other text.." class="mytextarea" type="text" name="othertext" id="addtype" style='display:none'data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Address may only contain characters, numbers, space and _,`.'^-" data-validation-required-message="Other is required" {{#if this.other}} value="{{this.other}}"{{/if}}>{{this.other}}</textarea>
+				<div class="col-md-12 p-0" style='display:none;' id="addtype">	
+				<div class="form-group input">
+				<div class="col-md-12" style="border: 1px solid #ddd;">
+				<div class="form-field">
+				<textarea placeholder="Other text.." class="mytextarea" type="text" name="othertext"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Address may only contain characters, numbers, space and _,`.'^-" data-validation-required-message="Other is required" {{#if this.othertext}} value="{{this.othertext}}"{{/if}}>{{this.othertext}}</textarea>
+					<span class="txt-title-label"></span>
+					<label class="text-area address ">{{#with ..}}{{__ "Other" setlang}}{{/with}}</label>
+				</div>
+				</div><div class="help-block"></div>
+				</div>
+				</div>
+				
 				</div>
 			<script>
+				$( document ).ready(function() {
+					var element=document.getElementById('addtype');
+					 if(document.getElementById("dataother").value =='other' )
+					   element.style.display='block';
+					 else  
+					   element.style.display='none';
+				})
 				function Checkaddtype(val){
 				 var element=document.getElementById('addtype');
-				 if(val=='other')
+				 if(val=='other' )
 				   element.style.display='block';
 				 else  
 				   element.style.display='none';
 				}
+				
 			</script> 	
 			
 			<div class="col-md-6">
