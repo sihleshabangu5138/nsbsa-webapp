@@ -752,6 +752,7 @@ router.get('/duplicateemail', isAuthenticated,function(req, res) {
 					dbo.collection("Users").find(iduser).toArray(function(err, resultuser) {
 						dbo.collection("notificationtemplate").find({templatetitle:"Loan Approved"}).toArray(function(err, notification) {
 							dbo.collection("loantype").find(typeid).toArray(function(err, typeloan) {
+								console.log(typeloan)
 									for (const [key,value] of Object.entries(notification)){
 										var message = value.content;
 										var subject = value.subject;
