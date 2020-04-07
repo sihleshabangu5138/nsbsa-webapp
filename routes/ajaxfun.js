@@ -747,15 +747,15 @@ router.get('/duplicateemail', isAuthenticated,function(req, res) {
 				var iduser = ObjectId(userid);
 				var loantype = result[0].loantype;
 				var typeid = ObjectId(loantype);
-					dbo.collection("Users").find(iduser).toArray(function(err, result) {
+					dbo.collection("Users").find(iduser).toArray(function(err, resultuser) {
 						dbo.collection("notificationtemplate").find({templatetitle:"Loan Approved"}).toArray(function(err, notification) {
 							dbo.collection("loantype").find(typeid).toArray(function(err, typeloan) {
 									for (const [key,value] of Object.entries(notification)){
 										var message = value.content;
 										var subject = value.subject;
 											var Obj = {
-											'_USERFIRSTNAME_': value1.firstname,
-											'_USERLASTNAME_': value1.lastname,
+											'_USERFIRSTNAME_': resultuser[0].firstname,
+											'_USERLASTNAME_': resultuser[0].lastname,
 											'_DATETIME_' : formatdate,
 											'_newline_': '<br>',
 											'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
