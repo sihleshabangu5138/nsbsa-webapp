@@ -747,6 +747,8 @@ router.get('/duplicateemail', isAuthenticated,function(req, res) {
 				var iduser = ObjectId(userid);
 				var loantype = result[0].loantype;
 				var typeid = ObjectId(loantype);
+				var date = Date(Date.now());
+				var formatdate = moment(date).format("YYYY-MM-DD");
 					dbo.collection("Users").find(iduser).toArray(function(err, resultuser) {
 						dbo.collection("notificationtemplate").find({templatetitle:"Loan Approved"}).toArray(function(err, notification) {
 							dbo.collection("loantype").find(typeid).toArray(function(err, typeloan) {
@@ -765,7 +767,7 @@ router.get('/duplicateemail', isAuthenticated,function(req, res) {
 											return Obj[matched]; 
 										});  
 											
-										Mail.sendMail(result[0].email,subject,trans);	
+										Mail.sendMail(resultuser[0].email,subject,trans);	
 									};
 								 
 							});
