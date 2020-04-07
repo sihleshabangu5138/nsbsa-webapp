@@ -424,7 +424,7 @@ th.fc-widget-header, .fc-basic-view td.fc-day-number, .fc-basic-view td.fc-week-
   color: #FFF; }
 
 .fc-unthemed .fc-today {
-  color: #FFF;
+  color: #fc0356;
   background: #00B5B8; }
 
 .fc-unthemed .fc-divider, .fc-unthemed .fc-popover .fc-header {
