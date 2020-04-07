@@ -759,6 +759,7 @@ router.get('/duplicateemail', isAuthenticated,function(req, res) {
 											'_USERFIRSTNAME_': resultuser[0].firstname,
 											'_USERLASTNAME_': resultuser[0].lastname,
 											'_DATETIME_' : formatdate,
+											'_LOANTYPE_': typeloan[0].type, 
 											'_newline_': '<br>',
 											'_tab_': '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
 											'_systemname_':req.session.generaldata.com_name,
