@@ -50,12 +50,23 @@
 		</fieldset>
 		<div class="row" style="">
 		<div class="col-lg-2 col-md-2 mb-2 custom_select">
-		<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 181.156px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jzyt-container"><span class="select2-selection__rendered" id="select2-jzyt-container" title="Customer">Customer</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+		<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 181.156px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jzyt-container"><span class="select2-selection__rendered" id="select2-jzyt-container" title="Customer">{{__ "Customer"}}</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
 		</div>
-		<div class="col-lg-2 col-md-2 mb-2">
-			<div class="btn-group mr-1">
-				<button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ 'GO'}}</button>
-			</div>
+		<!-- <div class="col-lg-2 col-md-2 mb-2"> -->
+			<!-- <div class="btn-group mr-1"> -->
+				<!-- <button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ 'GO'}}</button> -->
+			<!-- </div> -->
+		<!-- </div> -->
+			<div class=" col-lg-12 col-md-12 mb-1 pr-2 heading-elements p-0 text-right" >
+			<ul class="list-inline mb-0">
+			<li id="export">
+				<select class="select2 form-control export">
+					<option value="">{{__ "Export"}}</option>
+					<option value="csv">{{__ "XLSX"}}</option>
+					<option value="pdf">{{__ "PDF"}}</option>
+				</select>
+			</li>	
+			</ul>
 		</div>
 		</div>
 		</div>
@@ -79,7 +90,7 @@
 				</script>
 			{{/if}}
 		<!-- Zero configuration table -->
-        <section id="configuration">
+		<section id="configuration">
         <div class="row">
             <div class="col-12">
              <div class="card">
@@ -91,22 +102,6 @@
 						<div class="row">
 						<div class="col-12">
 						<div class="card">
-							<div class="card-header">
-								<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-								<div class="heading-elements">
-									 
-									<ul class="list-inline mb-0">
-									<li id="export">
-										<select class="select2 form-control export">
-											<option value="">Export</option>
-											<option value="csv">XLSX</option>
-											<option value="pdf">PDF</option>
-										</select>
-									</li>	
-									 
-								</ul>
-								</div>
-							</div>
 							<div class="card-content collapse show" id="NF-datatable">
 							<div class="card-body">
 								<div id="grid"></div>
@@ -345,8 +340,9 @@
 							
 							{template : "</center>" },
 							 
-							], title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='adduser'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							],
+							<!-- title: "Action",  -->
+							<!-- headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='adduser'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>" -->
 					}
                 ],
 				editable: {
