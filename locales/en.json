@@ -526,5 +526,20 @@
 	"Loan Type Inserted Sucessfully.": "Loan Type Inserted Sucessfully.",
 	"Other": "Other",
 	"Are You sure wan't to delete this category ?": "Are You sure wan't to delete this category ?",
-	"Are You sure wan't to delete this event ?": "Are You sure wan't to delete this event ?"
+	"Are You sure wan't to delete this event ?": "Are You sure wan't to delete this event ?",
+	"Applicable for amount": "Applicable for amount",
+	"Are You sure wan't to delete this product ?": "Are You sure wan't to delete this product ?",
+	"Personal Loan": "Personal Loan",
+	"Short Term Loan": "Short Term Loan",
+	"Home Loan": "Home Loan",
+	"Car Loan": "Car Loan",
+	"Two Wheeler Loan": "Two Wheeler Loan",
+	"Used Car Loan": "Used Car Loan",
+	"Education Loan": "Education Loan",
+	"Business Loan": "Business Loan",
+	"Less Than 50,000": "Less Than 50,000",
+	"1,00,000 - 3,00,000": "1,00,000 - 3,00,000",
+	"3,00,000 - 6,00,000": "3,00,000 - 6,00,000",
+	"6,00,000 - 9,00,000": "6,00,000 - 9,00,000",
+	"More Than 1,00,00,000": "More Than 1,00,00,000"
 }

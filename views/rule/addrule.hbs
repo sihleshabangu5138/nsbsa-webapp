@@ -31,42 +31,47 @@
 			<div class="row">
 			<div class="col-md-6">
 			<div class="form-group input">
-			<div class="heading-elements "> 
-			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}} <span class="required red">*</span></label>
-			 <select class="select2 form-control export" name="loantype">
-				<option>{{__ "Loan Type"}}</option>
-				<option value="PersonalLoan" {{#ifCond this.loantype '==' 'PersonalLoan'}} selected {{/ifCond}}>Personal Loan</option>
-				<option value="ShortTermLoan" {{#ifCond this.loantype '==' 'ShortTermLoan'}} selected {{/ifCond}}>Short Term Loan</option>
-				<option value="HomeLoan"{{#ifCond this.loantype '==' 'HomeLoan'}} selected {{/ifCond}}>Home Loan</option>
-				<option value="CarLoan"{{#ifCond this.loantype '==' 'CarLoan'}} selected {{/ifCond}}>Car Loan</option>
-				<option value="TwoWheelerLoan"{{#ifCond this.loantype '==' 'TwoWheelerLoan'}} selected {{/ifCond}}>Two Wheeler Loan</option>
-				<option value="UsedcarLoan"{{#ifCond this.loantype '==' 'UsedcarLoan'}} selected {{/ifCond}}>Used Car Loan</option>
-				<option value="EducationLoan"{{#ifCond this.loantype '==' 'EducationLoan'}} selected {{/ifCond}}>Education Loan</option>
-				<option value="BusinessLoan"{{#ifCond this.loantype '==' 'BusinessLoan'}} selected {{/ifCond}}>Business Loan</option>
-			</select>
-				
-			</div><div class="help-block"></div>
+				<div class="heading-elements ">
+					<ul class="list-inline mb-0">
+					<li class="col-md-12 p-0 form-control" id="export">
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}<span class="red">*</span></label>
+						<select class="select2 form-control export" data-validation-required-message="Loan Type is required" name="loantype">
+							<option value="">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</option>
+							<option value="PersonalLoan" {{#ifCond this.loantype '==' 'PersonalLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Personal Loan" setlang}}{{/with}}</option>
+							<option value="ShortTermLoan" {{#ifCond this.loantype '==' 'ShortTermLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Short Term Loan" setlang}}{{/with}}</option>
+							<option value="HomeLoan"{{#ifCond this.loantype '==' 'HomeLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Home Loan" setlang}}{{/with}}</option>
+							<option value="CarLoan"{{#ifCond this.loantype '==' 'CarLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Car Loan" setlang}}{{/with}}</option>
+							<option value="TwoWheelerLoan"{{#ifCond this.loantype '==' 'TwoWheelerLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Two Wheeler Loan" setlang}}{{/with}}</option>
+							<option value="UsedcarLoan"{{#ifCond this.loantype '==' 'UsedcarLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Used Car Loan" setlang}}{{/with}}</option>
+							<option value="EducationLoan"{{#ifCond this.loantype '==' 'EducationLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Education Loan" setlang}}{{/with}}</option>
+							<option value="BusinessLoan"{{#ifCond this.loantype '==' 'BusinessLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Business Loan" setlang}}{{/with}}</option>
+						</select>
+					</li>
+					</ul>
+				</div><div class="help-block"></div>
 			</div>
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-			<div class="heading-elements "> 
-			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}} <span class="required red">*</span></label>
-			 <select class="select2 form-control export" name="loantype">
-				<option>Applicable for amount</option>
-						<option value="Less Than 50,000" {{#ifCond this.loan_amount_rule '==' 'Less Than 50,000'}} selected {{/ifCond}}>Less Than 50,000</option>
+				<div class="heading-elements ">
+					<ul class="list-inline mb-0">
+					<li class="col-md-12 p-0 form-control" id="export">
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Applicable for amount" setlang}}{{/with}}<span class="red">*</span></label>
+						<select class="select2 form-control export" data-validation-required-message="Applicable for amount is required" name="loan_amount_rule">
+							<option value="">{{#with ..}}{{__ "Applicable for amount" setlang}}{{/with}}</option>
+							<option value="Less Than 50,000" {{#ifCond this.loan_amount_rule '==' 'Less Than 50,000'}} selected {{/ifCond}}>{{#with ..}}{{__ "Less Than 50,000" setlang}}{{/with}}</option>
 						
-						<option value="1,00,000 - 3,00,000" {{#ifCond this.loan_amount_rule '==' '1,00,000 - 3,00,000'}} selected {{/ifCond}}>1,00,000 - 3,00,000</option>
+						<option value="1,00,000 - 3,00,000" {{#ifCond this.loan_amount_rule '==' '1,00,000 - 3,00,000'}} selected {{/ifCond}}>{{#with ..}}{{__ "1,00,000 - 3,00,000" setlang}}{{/with}}</option>
 						
-						<option value="3,00,000 - 6,00,000" {{#ifCond this.loan_amount_rule '==' '3,00,000 - 6,00,000'}} selected {{/ifCond}}>3,00,000 - 6,00,000</option>
+						<option value="3,00,000 - 6,00,000" {{#ifCond this.loan_amount_rule '==' '3,00,000 - 6,00,000'}} selected {{/ifCond}}>{{#with ..}}{{__ "3,00,000 - 6,00,000" setlang}}{{/with}}</option>
 						
-						<option value="6,00,000 - 9,00,000" {{#ifCond this.loan_amount_rule '==' '6,00,000 - 9,00,000'}} selected {{/ifCond}}>6,00,000 - 9,00,000</option>
+						<option value="6,00,000 - 9,00,000" {{#ifCond this.loan_amount_rule '==' '6,00,000 - 9,00,000'}} selected {{/ifCond}}>{{#with ..}}{{__ "6,00,000 - 9,00,000" setlang}}{{/with}}</option>
 						
-						<option value="1,00,00,000 Above"{{#ifCond this.loan_amount_rule '==' 'More Than 1,00,00,000'}} selected {{/ifCond}}>More Than 1,00,00,000</option>
-						
-			</select>
-				
-			</div><div class="help-block"></div>
+						<option value="1,00,00,000 Above"{{#ifCond this.loan_amount_rule '==' 'More Than 1,00,00,000'}} selected {{/ifCond}}>{{#with ..}}{{__ "More Than 1,00,00,000" setlang}}{{/with}}</option>
+						</select>
+					</li>
+					</ul>
+				</div><div class="help-block"></div>
 			</div>
 			</div>		
 			<div class="col-md-6">
