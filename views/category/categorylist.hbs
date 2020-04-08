@@ -87,7 +87,7 @@
 									</span>
 								</div>
 								<div class="swal-title">{{{__ "Delete !"}}}</div>
-								<div class="swal-text">{{{__ "Are You sure wan't to delete this custom field ?"}}}</div>
+								<div class="swal-text">{{{__ "Are You sure wan't to delete this category ?"}}}</div>
 								<div class="swal-footer">
 								<div class="swal-button-container">
 									<button class="swal-button swal-button--confirm" id="noButton">{{{__ "NO"}}}</button>
@@ -145,11 +145,11 @@
 				
                   var grid = $("#grid").data("kendoGrid");
                   <!-- grid.hideColumn(0); -->
-                  grid.hideColumn(5);
+                  grid.hideColumn(2);
                   e.promise
                   .done(function() {
                       <!-- grid.showColumn(0); -->
-                      grid.showColumn(5);
+                      grid.showColumn(2);
                   });
                 },
 				
