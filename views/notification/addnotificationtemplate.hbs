@@ -62,18 +62,18 @@
 					</div><div class="help-block"></div>
 					</div>
 				</div>
-				<div class="col-md-12">	
-					<div class="form-group input">
-					<div class="col-md-12 form-control border-light textarea_css">
-					<div class="form-field">	
+				<div class="col-md-12">
+			<div class="form-group input">
+			<div class="col-md-12 form-control textarea_css border-light">
+			<div class="form-field">
 
-					<textarea name="content" style="resize: vertical;" data-validation-regex-regex="([A-Za-z0-9_, `.'^-\n]{1,150})" data-validation-regex-message='{{__ "Only Characters, no numbers and no special characters"}}'data-validation-required-message="{{__ 'Content is required'}}" {{#if this.content}} value="{{this.content}}"{{/if}}>{{this.content}}</textarea>
-						<span class="txt-title-label"></span>
-						<label class="text-area address ">{{#with ..}}{{__ "Content" setlang}}{{/with}}<span class="required red">*</span></label>
-					</div>
-					</div><div class="help-block"></div>
-					</div>
-				</div>
+			<textarea name="content" style="resize: vertical;" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{__ 'Only Characters, no numbers and no special character'}}" data-validation-required-message="{{__ 'Content is required'}}" {{#if this.content}} value="{{this.content}}"{{/if}}>{{this.content}}</textarea>
+				<span class="txt-title-label"></span>
+				<label class="text-area address ">{{#with ..}}{{__ "Content" setlang}}{{/with}}<span class="required red">*</span></label>
+			</div>
+			</div><div class="help-block"></div>
+			</div>
+			</div>	
 			</div>
 			</div>
 		{{/each}}

@@ -541,5 +541,6 @@
 	"1,00,000 - 3,00,000": "1,00,000 - 3,00,000",
 	"3,00,000 - 6,00,000": "3,00,000 - 6,00,000",
 	"6,00,000 - 9,00,000": "6,00,000 - 9,00,000",
-	"More Than 1,00,00,000": "More Than 1,00,00,000"
+	"More Than 1,00,00,000": "More Than 1,00,00,000",
+	"Only Characters, no numbers and no special character": "Only Characters, no numbers and no special character"
 }
