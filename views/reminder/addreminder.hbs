@@ -65,7 +65,7 @@
 				<label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}<span class="required red">*</span></label> 
 						<select id="reminder_template" class="select2 form-control export" data-validation-required-message="Notification Template is required" name="reminder_template" >
 						<option value="">Notification Template</option>
-						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>            
+						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>
 						<option value="profile_update" {{#ifCond this.reminder_template '==' 'profile_update'}} selected {{/ifCond}}> User Profile Update</option>
 						<option value="account_delete" {{#ifCond this.reminder_template '==' 'account_delete'}} selected {{/ifCond}}> Account Delete</option>
 						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>
