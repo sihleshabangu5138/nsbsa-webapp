@@ -74,7 +74,9 @@ router.route('/:id?')
     var id = req.body.id;
 		var name1 =req.body.admin_access;
 		var name2 =req.body.allow_access;
-		 
+		console.log(req.body)
+		console.log(req.body.allow_access)
+		console.log(req.body.allow_access)
 		if(name1=='on'){
 			 
 			var value1= "1";
