@@ -469,6 +469,7 @@ router.get('/category/delete', isAuthenticated,function(req, res) {
 router.post('/clearlog', isAuthenticated,function(req, res) { 
 	var dbo = db.get("BankingSystem");
 	var date = Date(Date.now());
+	var formatdate = moment(date).format("YYYY-MM-DD");
 	var myobjs = { 
 			module: "Log",
 			date:formatdate,
@@ -476,7 +477,6 @@ router.post('/clearlog', isAuthenticated,function(req, res) {
 			user: ObjectId(req.session.user_id),
 			item: "activitylog",
 		};
-	var formatdate = moment(date).format("YYYY-MM-DD");
 	dbo.collection("activitylog").remove({});
 	
 			
