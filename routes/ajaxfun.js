@@ -250,7 +250,9 @@ router.get('/notes', isAuthenticated,function(req, res) {
 	dbo.collection("notes").find({}).toArray(function(err, result) {
 		for (const [key,value] of Object.entries(result)) {
 			result[key].obj=(value.note).toString();
+			console.log("111111111111111111")
 			if (value.fileattach == ""){
+				console.log("hereeeeeeeeeee")
 				result[key].object = "No files attached"
 			}
 			else{
