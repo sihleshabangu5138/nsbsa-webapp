@@ -37,38 +37,48 @@
         </div><div class="help-block"></div>
         </div>
         </div>
-		<div class="col-md-6 mb-2 input">
-		<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Reminder Type" setlang}}{{/with}}<span class="required red">*</span></label>
-         <select id="reminder_type" required="" class="form-control select2" name="reminder_type">
-			 <option value="reminder_type">{{#with ..}}{{__ "Select" setlang}}{{/with}}</option>
-			 <option value="charged_failed" {{#ifCond this.reminder_type '==' 'charged_failed'}} selected {{/ifCond}}> Subscription Payment Failed</option>
-             <option value="upcoming_invoice" {{#ifCond this.reminder_type '==' 'upcoming_invoice'}} selected {{/ifCond}}> Upcoming Invoice</option>
-             <option value="invoice_pending" {{#ifCond this.reminder_type '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
-             <option value="customer_subscription_deleted" {{#ifCond this.reminder_type '==' 'customer_subscription_deleted'}} selected {{/ifCond}}> Subscription End</option>
-             <option value="customer_source_expiring" {{#ifCond this.reminder_type '==' 'customer_source_expiring'}} selected {{/ifCond}}> Card Expiring</option>
-             <option value="customer_registration_failed" {{#ifCond this.reminder_type '==' 'customer_registration_failed'}} selected {{/ifCond}}> Registration Payment Failed</option>
-             <option value="customer_unvisited" {{#ifCond this.reminder_type '==' 'customer_unvisited'}} selected {{/ifCond}}> Customer Unvisited</option>
-             <option value="new_customer_guidance" {{#ifCond this.reminder_type '==' 'new_customer_guidance'}} selected {{/ifCond}}> New Customer Guidance</option>
-             <option value="trial_to_paid" {{#ifCond this.reminder_type '==' 'trial_to_paid'}} selected {{/ifCond}}> Trial To Paid</option>
-             <option value="coupon_code_for_trial" {{#ifCond this.reminder_type '==' 'coupon_code_for_trial'}} selected {{/ifCond}}> Coupon Code For Trial Or Canceled Users</option>
-		</select>
-		</div>
-		<div class="col-md-6 mb-2 input">
-			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}<span class="required red">*</span></label>
-            <select id="reminder_template" required="" class="form-control select2" name="reminder_template">
-            <option value="reminder_template ">Select</option>
-			<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>            
-			<option value="profile_update" {{#ifCond this.reminder_template '==' 'profile_update'}} selected {{/ifCond}}> User Profile Update</option>
-            <option value="account_delete" {{#ifCond this.reminder_template '==' 'account_delete'}} selected {{/ifCond}}> Account Delete</option>
-            <option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>
-            <option value="add_notice" {{#ifCond this.reminder_template '==' 'add_notice'}} selected {{/ifCond}}>Add EMI</option>
-            <option value="update_notice" {{#ifCond this.reminder_template '==' 'update_notice'}} selected {{/ifCond}}> Update EMI</option>
-            <option value="add_invoice" {{#ifCond this.reminder_template '==' 'add_invoice'}} selected {{/ifCond}}> Add Invoice</option>
-            <option value="add_support" {{#ifCond this.reminder_template '==' 'add_support'}} selected {{/ifCond}}> Add Support Ticket</option>
-            <option value="registration_failed" {{#ifCond this.reminder_template '==' 'registration_failed'}} selected {{/ifCond}}> Registration Failed</option>
-            <option value="invoice_pending" {{#ifCond this.reminder_template '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
-        </select>
-       </div>
+		<div class="col-md-6">
+			<div class="form-group input">
+			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ">
+				<label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{#with ..}}{{__ "Reminder Type" setlang}}{{/with}}<span class="required red">*</span></label> 
+						<select id="reminder_type" class="select2 form-control export" data-validation-required-message="Reminder Type is required" name="reminder_type" >
+						<option value="">Reminder Type</option>
+						<option value="charged_failed" {{#ifCond this.reminder_type '==' 'charged_failed'}} selected {{/ifCond}}> Subscription Payment Failed</option>
+						 <option value="upcoming_invoice" {{#ifCond this.reminder_type '==' 'upcoming_invoice'}} selected {{/ifCond}}> Upcoming Invoice</option>
+						 <option value="invoice_pending" {{#ifCond this.reminder_type '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
+						 <option value="customer_subscription_deleted" {{#ifCond this.reminder_type '==' 'customer_subscription_deleted'}} selected {{/ifCond}}> Subscription End</option>
+						 <option value="customer_source_expiring" {{#ifCond this.reminder_type '==' 'customer_source_expiring'}} selected {{/ifCond}}> Card Expiring</option>
+						 <option value="customer_registration_failed" {{#ifCond this.reminder_type '==' 'customer_registration_failed'}} selected {{/ifCond}}> Registration Payment Failed</option>
+						 <option value="customer_unvisited" {{#ifCond this.reminder_type '==' 'customer_unvisited'}} selected {{/ifCond}}> Customer Unvisited</option>
+						 <option value="new_customer_guidance" {{#ifCond this.reminder_type '==' 'new_customer_guidance'}} selected {{/ifCond}}> New Customer Guidance</option>
+						 <option value="trial_to_paid" {{#ifCond this.reminder_type '==' 'trial_to_paid'}} selected {{/ifCond}}> Trial To Paid</option>
+						 <option value="coupon_code_for_trial" {{#ifCond this.reminder_type '==' 'coupon_code_for_trial'}} selected {{/ifCond}}> Coupon Code For Trial Or Canceled Users</option>
+						</select> 
+				</div><div class="help-block"></div>
+			</div>
+			</div>
+			<div class="col-md-6">
+			<div class="form-group input">
+			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ">
+				<label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}<span class="required red">*</span></label> 
+						<select id="reminder_template" class="select2 form-control export" data-validation-required-message="Notification Template is required" name="reminder_template" >
+						<option value="">Notification Template</option>
+						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>            
+						<option value="profile_update" {{#ifCond this.reminder_template '==' 'profile_update'}} selected {{/ifCond}}> User Profile Update</option>
+						<option value="account_delete" {{#ifCond this.reminder_template '==' 'account_delete'}} selected {{/ifCond}}> Account Delete</option>
+						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>
+						<option value="add_notice" {{#ifCond this.reminder_template '==' 'add_notice'}} selected {{/ifCond}}>Add EMI</option>
+						<option value="update_notice" {{#ifCond this.reminder_template '==' 'update_notice'}} selected {{/ifCond}}> Update EMI</option>
+						<option value="add_invoice" {{#ifCond this.reminder_template '==' 'add_invoice'}} selected {{/ifCond}}> Add Invoice</option>
+						<option value="add_support" {{#ifCond this.reminder_template '==' 'add_support'}} selected {{/ifCond}}> Add Support Ticket</option>
+						<option value="registration_failed" {{#ifCond this.reminder_template '==' 'registration_failed'}} selected {{/ifCond}}> Registration Failed</option>
+						<option value="invoice_pending" {{#ifCond this.reminder_template '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
+						</select> 
+				</div><div class="help-block"></div>
+			</div>
+			</div>
 		<div class="col-md-6">
         <div class="form-group input">
         <div class="col-md-12 form-control border-light textarea_css">

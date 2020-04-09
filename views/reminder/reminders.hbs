@@ -1,6 +1,28 @@
 {{breadcrums 'Home' 'Reminder'}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
+
+<div class="row" style="">
+		<div class="col-lg-2 col-md-2 mb-2 custom_select">
+		
+		</div>
+		<div class="col-lg-2 col-md-2 mb-2">
+			
+		</div>
+		<div class=" col-lg-7 col-md-7 mb-7">
+		</div>
+		<div class=" col-lg-1 col-md-1 mb-1 heading-elements p-0">
+			<ul class="list-inline mb-0">
+			<li id="export">
+				<select class="select2 form-control export">
+					<option value="">{{__ "Export"}}</option>
+					<option value="csv">{{__ "XLSX"}}</option>
+					<option value="pdf">{{__ "PDF"}}</option>
+				</select>
+			</li>	
+			</ul>
+		</div>
+		</div>
     <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
@@ -37,21 +59,7 @@
 				   
 							<h4 class="text-bold-500">{{__ "Reminder Listing"}}</h4>
 							<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-							<div class="heading-elements">
-							  <ul class="list-inline mb-0">
-								
-								<li id="export">
-										<select class="select2 form-control export">
-											<option value="">{{__ "Export"}}</option>
-											<option value="csv">{{__ "XLSX"}}</option>
-											<option value="pdf">{{__ "PDF"}}</option>
-										</select>
-									</li>
-								<!--<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-								<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-								-->
-							  </ul>
-							</div>
+							
 						  </div>
 							<!--<div class="card-header">
 								<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
