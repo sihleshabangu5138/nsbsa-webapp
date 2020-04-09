@@ -80,7 +80,7 @@
 				<div class="input-group">
 				
 					&nbsp;<input type="checkbox" data-toggle="toggle" name="admin_access"
-						{{#ifCond this.admin_access "==" 1 }} checked  value="1"  {{/ifCond }}> 
+						{{#ifCond this.admin_access "==" 1 }} checked  value={{this.admin_access}}  {{/ifCond }}> 
 					<label class="custom-control-label" for="visable">{{#with ..}}{{__ "Admin Access" setlang}}{{/with}}</label>
 					
 					
@@ -88,7 +88,7 @@
 				</div> 
 				
 			<div class="skin skin-flat row pl-3">
-				 <div class="d-none1"><input type="checkbox" data-toggle="toggle" name="allow_access" {{#ifCond this.allow_access "==" 1 }} checked value="1" {{/ifCond}}>
+				 <div class="d-none1"><input type="checkbox" data-toggle="toggle" name="allow_access" {{#ifCond this.allow_access "==" 1 }} checked value={{this.admin_access}} {{/ifCond}}>
 				 <label class="custom-control-label" for="visable">{{#with ..}}{{__ "Allow Access" setlang}}{{/with}}</label>
 				 </div>
 			</div> 

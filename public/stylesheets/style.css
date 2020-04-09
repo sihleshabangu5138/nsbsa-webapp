@@ -631,3 +631,13 @@ body {
 	color:red;
 	font-size:12px;
 }
+.nobutton{
+	float: left;
+    margin: 10px;
+    margin-left: 23%;
+}
+.yesbutton{
+	float: right;
+    margin: 10px;
+    margin-right: 23%;
+}
