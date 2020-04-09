@@ -17,40 +17,40 @@
 			<div class="row"><!--Row Div--> 								
 			<div class="col-md-6 mb-2 input">
 				<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} > 
-				<label class="ml-1 custom-top-label top" style="z-index:99" for="module_name">Module Name<span class="required red">*</span></label>
+				<label class="ml-1 custom-top-label top" style="z-index:99" for="module_name">{{#with ..}}{{__ "Module Name" setlang}}{{/with}}<span class="required red">*</span></label>
 				<select id="module_name" class="select2 form-control"  name="module_name" >
-				<option value="">Select Module</option>
-				<option value="user" {{#ifCond this.module_name '==' 'user'}} selected {{/ifCond}}>User</option>
-				<option value="loan" {{#ifCond this.module_name '==' 'loan'}} selected {{/ifCond}}>Loan</option>
-				<option value="loantype" {{#ifCond this.module_name '==' 'loantype'}} selected {{/ifCond}}>Loan Type</option>
-				<option value="emi" {{#ifCond this.module_name '==' 'emi'}} selected {{/ifCond}}>EMI</option>
-				<option value="role" {{#ifCond this.module_name '==' 'role'}} selected {{/ifCond}}>Role</option>
-				<option value="rule"{{#ifCond this.module_name '==' 'rule'}} selected {{/ifCond}} >Rules and Regulations</option>
-				<option value="reminder" {{#ifCond this.module_name '==' 'reminder'}} selected {{/ifCond}}>Reminder</option>
-				<option value="service" {{#ifCond this.module_name '==' 'service'}} selected {{/ifCond}}>Service</option>	
-				<option value="product" {{#ifCond this.module_name '==' 'product'}} selected {{/ifCond}}>Product</option>	
+				<option value="">{{#with ..}}{{__ "Select Module" setlang}}{{/with}}</option>
+				<option value="user" {{#ifCond this.module_name '==' 'user'}} selected {{/ifCond}}>{{#with ..}}{{__ "User" setlang}}{{/with}}</option>
+				<option value="loan" {{#ifCond this.module_name '==' 'loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Loan" setlang}}{{/with}}</option>
+				<option value="loantype" {{#ifCond this.module_name '==' 'loantype'}} selected {{/ifCond}}>{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</option>
+				<option value="emi" {{#ifCond this.module_name '==' 'emi'}} selected {{/ifCond}}>{{#with ..}}{{__ "EMI" setlang}}{{/with}}</option>
+				<option value="role" {{#ifCond this.module_name '==' 'role'}} selected {{/ifCond}}>{{#with ..}}{{__ "Role" setlang}}{{/with}}</option>
+				<option value="rule"{{#ifCond this.module_name '==' 'rule'}} selected {{/ifCond}} >{{#with ..}}{{__ "Rules and Regulations" setlang}}{{/with}}</option>
+				<option value="reminder" {{#ifCond this.module_name '==' 'reminder'}} selected {{/ifCond}}>{{#with ..}}{{__ "Reminder" setlang}}{{/with}}</option>
+				<option value="service" {{#ifCond this.module_name '==' 'service'}} selected {{/ifCond}}>{{#with ..}}{{__ "Service" setlang}}{{/with}}</option>	
+				<option value="product" {{#ifCond this.module_name '==' 'product'}} selected {{/ifCond}}>{{#with ..}}{{__ "Product" setlang}}{{/with}}</option>	
 				</select>
 			</div>					  
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input type="text" id="userinput1"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Label is required" name="label" {{#if this.label}} value="{{this.label}}"{{/if}}>
-				<label for="userinput1">Label<span class="required red">*</span></label> 
+				<input type="text" id="userinput1"  data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Label is required' setlang}}{{/with}}" name="label" {{#if this.label}} value="{{this.label}}"{{/if}}>
+				<label for="userinput1">{{#with ..}}{{__ "Label" setlang}}{{/with}}<span class="required red">*</span></label> 
 			</div><div class="help-block"></div>
 			</div>
 			</div>	
 			<div class="col-md-6">	
 				<div class="mb-2 input">	
-					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">Type<span class="required red">*</span></label>
+					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">{{#with ..}}{{__ "Type" setlang}}{{/with}}<span class="required red">*</span></label>
 					<select id="field_type" class="select2 form-control dropdown_change"  name="field_type" >
-						<option value="">Select Input Type</option>
-						<option value="text" {{#ifCond this.field_type '==' 'text'}} selected {{/ifCond}}>Text Box</option>
-						<option value="textarea" {{#ifCond this.field_type '==' 'textarea'}} selected {{/ifCond}}>Textarea</option>
-						<option value="dropdown" {{#ifCond this.field_type '==' 'dropdown'}} selected {{/ifCond}}>Dropdown</option>
-						<option value="date" {{#ifCond this.field_type '==' 'date'}} selected {{/ifCond}}>Date Field</option>
-						<option value="checkbox" {{#ifCond this.field_type '==' 'checkbox'}} selected {{/ifCond}}>Checkbox</option>
-						<option value="radio" {{#ifCond this.field_type '==' 'radio'}} selected {{/ifCond}}>Radio</option>
-						<option value="file" {{#ifCond this.field_type '==' 'file'}} selected {{/ifCond}}>File</option>
+						<option value="">{{#with ..}}{{__ "Select Input Type" setlang}}{{/with}}</option>
+						<option value="text" {{#ifCond this.field_type '==' 'text'}} selected {{/ifCond}}>{{#with ..}}{{__ "Text Box" setlang}}{{/with}}</option>
+						<option value="textarea" {{#ifCond this.field_type '==' 'textarea'}} selected {{/ifCond}}>{{#with ..}}{{__ "Textarea" setlang}}{{/with}}</option>
+						<option value="dropdown" {{#ifCond this.field_type '==' 'dropdown'}} selected {{/ifCond}}>{{#with ..}}{{__ "Dropdown" setlang}}{{/with}}</option>
+						<option value="date" {{#ifCond this.field_type '==' 'date'}} selected {{/ifCond}}>{{#with ..}}{{__ "Date Field" setlang}}{{/with}}</option>
+						<option value="checkbox" {{#ifCond this.field_type '==' 'checkbox'}} selected {{/ifCond}}>{{#with ..}}{{__ "Checkbox" setlang}}{{/with}}</option>
+						<option value="radio" {{#ifCond this.field_type '==' 'radio'}} selected {{/ifCond}}>{{#with ..}}{{__ "Radio" setlang}}{{/with}}</option>
+						<option value="file" {{#ifCond this.field_type '==' 'file'}} selected {{/ifCond}}>{{#with ..}}{{__ "File" setlang}}{{/with}}</option>
 					</select>
 				</div>								
 			</div>
@@ -59,59 +59,59 @@
 			<div class="col-md-12 form-control">
 			<div class="skin skin-flat row">
 			<div class="input-group">
-				<label class="ml-1 custom-top-label">Validation<span class="red">*</span></label>
+				<label class="ml-1 custom-top-label">{{#with ..}}{{__ "Validation" setlang}}{{/with}}<span class="red">*</span></label>
 				<div class="d-inline-block custom-control custom-checkbox mr-1 margin_left_custom_field">
 					
 					<label class="checkbox-inline mr-2"> 
-					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'nullable'}}  {{/ifEquals}}{{/if}} value="nullable" class="nullable_rule" checked><span>Nullable</span>
+					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'nullable'}}  {{/ifEquals}}{{/if}} value="nullable" class="nullable_rule" checked><span>{{#with ..}}{{__ "Nullable" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation  'required'}}  {{/ifEquals}}{{/if}} value="required" class="required_rule" ><span>Required</span>
+					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation  'required'}}  {{/ifEquals}}{{/if}} value="required" class="required_rule" ><span>{{#with ..}}{{__ "Required" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox"  name="validation" {{#if this.validation}}{{#ifEquals this.validation 'numeric'}}  {{/ifEquals}}{{/if}} value="numeric" class="only_number" ><span>Only Number</span>
+					<input type="checkbox"  name="validation" {{#if this.validation}}{{#ifEquals this.validation 'numeric'}}  {{/ifEquals}}{{/if}} value="numeric" class="only_number" ><span>{{#with ..}}{{__ "Only Number" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'alpha'}}  {{/ifEquals}}{{/if}} value="alpha"  class="only_char"><span>Only Character</span>
+					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'alpha'}}  {{/ifEquals}}{{/if}} value="alpha"  class="only_char"><span>{{#with ..}}{{__ "Only Character" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'alpha_space'}}  {{/ifEquals}}{{/if}} value="alpha_space"  class="char_space" ><span>Character with Space</span>
+					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'alpha_space'}}  {{/ifEquals}}{{/if}} value="alpha_space"  class="char_space" ><span>{{#with ..}}{{__ "Character with Space" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" class="char_num" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'alpha_num'}}  {{/ifEquals}}{{/if}} value="alpha_num" ><span>Number & Character</span>
+					<input type="checkbox" class="char_num" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'alpha_num'}}  {{/ifEquals}}{{/if}} value="alpha_num" ><span>{{#with ..}}{{__ "Number & Character" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox"  class="email" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'email'}}  {{/ifEquals}}{{/if}}  value="email" ><span>Email</span>
+					<input type="checkbox"  class="email" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'email'}}  {{/ifEquals}}{{/if}}  value="email" ><span>{{#with ..}}{{__ "Email" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" name="validation" id="Maximum" {{#if this.validation}}{{#ifEquals this.validation 'max'}}  {{/ifEquals}}{{/if}} class="opentext maxcheck max" value="max" ><span>Maximum</span>
+					<input type="checkbox" name="validation" id="Maximum" {{#if this.validation}}{{#ifEquals this.validation 'max'}}  {{/ifEquals}}{{/if}} class="opentext maxcheck max" value="max" ><span>{{#with ..}}{{__ "Maximum" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" name="validation" id="Minimum" {{#if this.validation}}{{#ifEquals this.validation 'min'}}  {{/ifEquals}}{{/if}} class="opentext mincheck min" value="min" ><span>Minimum</span>
+					<input type="checkbox" name="validation" id="Minimum" {{#if this.validation}}{{#ifEquals this.validation 'min'}}  {{/ifEquals}}{{/if}} class="opentext mincheck min" value="min" ><span>{{#with ..}}{{__ "Minimum" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" class="url" {{#if this.validation}}{{#ifEquals this.validation 'url'}}  {{/ifEquals}}{{/if}} name="validation" value="url" ><span>URL</span>
+					<input type="checkbox" class="url" {{#if this.validation}}{{#ifEquals this.validation 'url'}}  {{/ifEquals}}{{/if}} name="validation" value="url" ><span>{{#with ..}}{{__ "URL" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'before_or_equal:today'}}  {{/ifEquals}}{{/if}} id="date0" class="date" value="before_or_equal:today" ><span>Before Or Equal(Today's Date)</span>
+					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'before_or_equal:today'}}  {{/ifEquals}}{{/if}} id="date0" class="date" value="before_or_equal:today" ><span>{{#with ..}}{{__ "Before Or Equal(Today's Date)" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
-					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'date_equals:today'}}  {{/ifEquals}}{{/if}} id="date1"  class="date"  value="date_equals:today" ><span>Today's Date</span>
+					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'date_equals:today'}}  {{/ifEquals}}{{/if}} id="date1"  class="date"  value="date_equals:today" ><span>{{#with ..}}{{__ "Today's Date" setlang}}{{/with}}</span>
 					</label>
 					
 					<label>
-					<input type="checkbox" name="validation" id="date2" {{#if this.validation}}{{#ifEquals this.validation 'after_or_equal:today'}}  {{/ifEquals}}{{/if}}  class="date"   value="after_or_equal:today" ><span>After Or Equal(Today's Date)</span>
+					<input type="checkbox" name="validation" id="date2" {{#if this.validation}}{{#ifEquals this.validation 'after_or_equal:today'}}  {{/ifEquals}}{{/if}}  class="date"   value="after_or_equal:today" ><span>{{#with ..}}{{__ "After Or Equal(Today's Date)" setlang}}{{/with}}</span>
 					</label>
 				</div>
 			</div>
@@ -125,7 +125,7 @@
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
 							<input type="text" maxlength="30" class="form-control d_label" >
-							<label>Dropdown Label</label>
+							<label>{{#with ..}}{{__ "Dropdown Label" setlang}}{{/with}}</label>
 						</div>
 					</div>
 				</div>
@@ -147,7 +147,7 @@
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
 							<input type="text" maxlength="30"  class="form-control c_label" >
-							<label>Checkbox Label</label>
+							<label>{{#with ..}}{{__ "Checkbox Label" setlang}}{{/with}}</label>
 						</div>
 					</div>
 				</div> 
@@ -169,7 +169,7 @@
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
 							<input type="text" maxlength="30"  class="form-control r_label" >
-							<label>Radio Label</label>
+							<label>{{#with ..}}{{__ "Radio Label" setlang}}{{/with}}</label>
 						</div>
 					</div>
 				</div>
@@ -193,7 +193,7 @@
 						<div class="col-md-12 form-control border-light">
 							<input type="hidden" value="" class="file_types_value">   
 							<input class="form-control validate[required,custom[onlyLetter_specialcharacter]] file_types_input"  name="filetype" maxlength="100" {{#if this.filetype}} value={{this.filetype}}{{/if}} type="text" id="userinput11">
-							<label for="userinput11" class="active ml-1 custom-top-label top">File Types (like png,jpg,pdf,doc)<span class="red">*</span></label>
+							<label for="userinput11" class="active ml-1 custom-top-label top">{{#with ..}}{{__ "File Types (like png,jpg,pdf,doc)" setlang}}{{/with}}<span class="red">*</span></label>
 						</div>
 					</div>
 				</div>
@@ -202,7 +202,7 @@
 						<div class="col-md-12 form-control border-light">
 							<input type="hidden" value="" class="file_size_value">  
 							<input class="form-control validate[required,custom[number]] file_size_input" {{#if this.filesize}} value={{this.filesize}}{{/if}}  name="filesize" maxlength="3" type="text" id="userinput9" >
-							<label for="userinput9" class="active ml-1 custom-top-label top">File Upload Size(mb)<span class="red">*</span></label>
+							<label for="userinput9" class="active ml-1 custom-top-label top">{{#with ..}}{{__ "File Upload Size(mb)" setlang}}{{/with}}<span class="red">*</span></label>
 						</div>
 				   </div>
 				</div>
@@ -211,16 +211,16 @@
 				<div class="col-md-6 Minimum-text" id="min_limit" style="display:none;">
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
-							<input type="text" maxlength="5" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="Only numbers" class="form-control validate[required] valuemin" name="minival" {{#if this.minival}} value={{this.minival}}{{/if}} id="min" >
-							<label>Minimum Limit<span class="red">*</span></label>
+							<input type="text" maxlength="5" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ 'Only numbers' setlang}}{{/with}}" class="form-control validate[required] valuemin" name="minival" {{#if this.minival}} value={{this.minival}}{{/if}} id="min" >
+							<label>{{#with ..}}{{__ "Minimum Limit" setlang}}{{/with}}<span class="red">*</span></label>
 						</div><div class="help-block"></div>
 					</div>
 				</div>
 				<div class="col-md-6 Maximum-text" id="max_limit" style="display:none;">
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
-							<input type="text" maxlength="5" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="Only numbers" class="form-control validate[required] valuemax" name="maxival" {{#if this.maxival}}value={{this.maxival}}{{/if}} id="max" >
-							<label>Maximum Limit<span class="red">*</span></label>
+							<input type="text" maxlength="5" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ 'Only numbers' setlang}}{{/with}}" class="form-control validate[required] valuemax" name="maxival" {{#if this.maxival}}value={{this.maxival}}{{/if}} id="max" >
+							<label>{{#with ..}}{{__ "Maximum Limit" setlang}}{{/with}}<span class="red">*</span></label>
 						</div><div class="help-block"></div>
 					</div>
 				</div>
@@ -231,10 +231,10 @@
 						<div class="col-md-12 form-control">
 							<div class="skin skin-flat row">
 								<div class="input-group">
-									<label class="ml-1 custom-top-label">Visibility</label>
+									<label class="ml-1 custom-top-label">{{#with ..}}{{__ "Visibility" setlang}}{{/with}}</label>
 									<div class="d-inline-block custom-control custom-checkbox mr-1">
 										<input type="checkbox" {{#ifCond this.field_visibility "==" 1}} checked {{/ifCond}} value = "1" class="custom-control-input hideattar" name="field_visibility" >
-										<label class="custom-control-label" for="colorCheck1">Yes</label>
+										<label class="custom-control-label" for="colorCheck1">{{#with ..}}{{__ "Yes" setlang}}{{/with}}</label>
 									</div>
 								</div>
 							</div>
@@ -245,11 +245,11 @@
 			</div><!--Card Body Div End--> 
 			<div class="form-actions left">
 				<button type="submit" class="btn btn-secondary">
-					<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
+					<i class="fa fa-check-square-o"></i> {{#with ..}}{{__ "Submit" setlang}}{{/with}}
 				</button>
 				<button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
-					<i class="ft-refresh-cw"></i> {{__ "Reset"}}
-				</button>
+					<i class="ft-refresh-cw"></i> {{#with ..}}{{__ "Reset" setlang}}{{/with}}
+					</button>
 			</div>
 			</form>					
 			</div><!--Card Body div end-->

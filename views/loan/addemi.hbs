@@ -26,13 +26,13 @@
 		</script>
 	{{#each loan}}
 		<form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/addemi" >
-			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{__ "Your loan details"}}</p>
+			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Your loan details" setlang}}{{/with}}</p>
 			<div class="row">
 			<div class="col-md-6">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="text" name="loancount" id="readonlyInput" readonly="readonly" class="form-control" aria-invalid="false" {{#if this.loancount}} value="{{this.loancount}}"{{/if}}>
-					<label for="userinput4">{{__ "Loan No."}}</label>
+					<label for="userinput4">{{#with ..}}{{__ "Loan No." setlang}}{{/with}}</label>
 				</div><div class="help-block"></div>
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="text" name="loantype" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if result.type}} value="{{result.type}}"{{/if}}>
-					<label for="userinput4">{{__ "Loan Type"}}</label>
+					<label for="userinput4">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</label>
 				</div><div class="help-block"></div>
 				</div>
 			</div>
@@ -50,14 +50,14 @@
 			</div>
 			{{/each}}
 			{{#each data}}
-			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{__ "Your EMI information according to your loan period"}}</p>
+			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Your EMI information according to your loan period" setlang}}{{/with}}</p>
 			<div class="row">
 			<div class="col-md-6">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
 					<input type="text" name="month_on" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.month}} value="{{this.month}}"{{/if}}>
-					<label for="userinput4">{{__ "This EMI Month"}}</label>
+					<label for="userinput4">{{#with ..}}{{__ "This EMI Month"}} setlang}}{{/with}}</label>
 				</div><div class="help-block"></div>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="text" name="month_on" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.remainingBalance}} value="{{this.remainingBalance}}"{{else}} value="0"{{/if}}>
-					<label for="userinput4">{{__ "Amount Remaining"}}</label>
+					<label for="userinput4">{{#with ..}}{{__ "Amount Remaining" setlang}}{{/with}}</label>
 				</div><div class="help-block"></div>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 			<div class="form-group row">
 			<div class="col-md-12">
 
-			<label class="custom-control-label-date ml-2">{{__ "EMI Start Date"}}<span class="required red">*</span></label>
+			<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "EMI Start Date" setlang}}{{/with}}<span class="required red">*</span></label>
 			<input type='text' id="readonlyInput" readonly="readonly" class="form-control startdate "  data-validation-required-message="Start Date is required" name="emistartdate" {{#if this.date}} value="{{this.date}}"{{/if}}><i class="ft-calendar icon-care"></i> 
 				
 			</div><div class="help-block"></div>
@@ -93,7 +93,7 @@
 			<div class="form-group row">
 			<div class="col-md-12">
 
-			<label class="custom-control-label-date ml-2">{{__ "EMI Due Date"}}<span class="required red">*</span></label>
+			<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "EMI Due Date" setlang}}{{/with}}<span class="required red">*</span></label>
 			<!-- <input type='text'  class="form-control end_date" id="readonlyInput" readonly="" name="emienddate"><i class="ft-calendar icon-care"></i>  -->
 			<input type='text'  class="form-control end_date dateformat"  data-validation-required-message="End Date is required" name="emienddate"   id="readonlyInput" readonly="readonly" ><i class="ft-calendar icon-care"></i> 	
 			</div><div class="help-block"></div>
@@ -103,7 +103,7 @@
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="text" name="emipermonth" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.principal}} value="{{formatNumber this.principal 0 ','','}}"{{/if}}>
-					<label for="userinput4">{{__ "EMI Amount for this month"}}</label>
+					<label for="userinput4">{{#with ..}}{{__ "EMI Amount for this month" setlang}}{{/with}}</label>
 				</div><div class="help-block"></div>
 				</div>
 			</div>
@@ -111,13 +111,13 @@
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="text" name="interest" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.interest}} value="{{formatNumber this.interest 0 ','','}}"{{/if}}>
-					<label for="userinput4">{{__ "Interest Rate for this month"}}</label>
+					<label for="userinput4">{{#with ..}}{{__ "Interest Rate for this month" setlang}}{{/with}}</label>
 				</div><div class="help-block"></div>
 				</div>
 			</div>			
 			</div>
 			
-		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Payment Method"}}</p> 
+		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Payment Method" setlang}}{{/with}}</p> 
 		<div class="form-body user_form">
 			<div class="row">
 			<div class="col-md-6 notCustomerBlock">
@@ -132,14 +132,14 @@
 						<!-- <option value="debitcard"{{#ifCond this.paytype '==' 'debitcard'}} selected {{/ifCond}}>Debit Card</option> -->
 						<!-- <option value="netbanking"{{#ifCond this.paytype '==' 'netbanking'}} selected {{/ifCond}}>Net Banking</option> -->
 						<!-- </select> -->
-					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">Select your payment mode<span class="required red">*</span></label>
+					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">{{#with ..}}{{__ "Select your payment mode" setlang}}{{/with}}<span class="required red">*</span></label>
 					<select id="payment_type" class="select2 form-control dropdown_change"  name="payment_type" >
-						<option value="">Select Input Type</option>
-						<option value="cash" name="payment_type" {{#ifCond this.payment_type '==' 'cash'}} selected {{/ifCond}}>Cash</option>
-						<option value="creditcard" name="payment_type" {{#ifCond this.payment_type '==' 'creditcard'}} selected {{/ifCond}}>Credit Card</option>
-						<option value="debitcard" name="payment_type" {{#ifCond this.payment_type '==' 'debitcard'}} selected {{/ifCond}}>Debit Card</option>
-						<option value="netbanking" name="payment_type" {{#ifCond this.payment_type '==' 'netbanking'}} selected {{/ifCond}}>Net Banking</option>
-						<option value="cheque" name="cheque_detail" {{#ifCond this.cheque_detail '==' 'cheque'}} selected {{/ifCond}}>Cheque</option>
+						<option value="">{{#with ..}}{{__ "Select Input Type" setlang}}{{/with}}</option>
+						<option value="cash" name="payment_type" {{#ifCond this.payment_type '==' 'cash'}} selected {{/ifCond}}>{{#with ..}}{{__ "Cash" setlang}}{{/with}}</option>
+						<option value="creditcard" name="payment_type" {{#ifCond this.payment_type '==' 'creditcard'}} selected {{/ifCond}}>{{#with ..}}{{__ "Credit Card" setlang}}{{/with}}</option>
+						<option value="debitcard" name="payment_type" {{#ifCond this.payment_type '==' 'debitcard'}} selected {{/ifCond}}>{{#with ..}}{{__ "Debit Card" setlang}}{{/with}}</option>
+						<option value="netbanking" name="payment_type" {{#ifCond this.payment_type '==' 'netbanking'}} selected {{/ifCond}}>{{#with ..}}{{__ "Net Banking" setlang}}{{/with}}</option>
+						<option value="cheque" name="cheque_detail" {{#ifCond this.cheque_detail '==' 'cheque'}} selected {{/ifCond}}>{{#with ..}}{{__ "Cheque" setlang}}{{/with}}</option>
 					</select>
 					</li>	
 					</ul>
@@ -153,20 +153,20 @@
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
 							<input type="text" maxlength="30"  class=" c_label" name="cheque_name" {{#if this.cheque_name}} value="{{this.cheque_name}}" {{else}} {{/if}} data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message='{{__ "Only Characters, no numbers"}}' aria-invalid="false">
-							<label>Name of the pay</label>
+							<label>{{#with ..}}{{__ "Name of the pay" setlang}}{{/with}}</label>
 						</div> 
 					</div>
 					<div class="form-group input">
 					<div class="col-md-12 form-control border-light">
 							<input type="text" maxlength="30"  class="form-control c_label" name="cheque_accountno" {{#if this.cheque_accountno}} value="{{this.cheque_accountno}}" {{else}}  {{/if}}  data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false">
-							<label>Account number</label>
+							<label>{{#with ..}}{{__ "Account number" setlang}}{{/with}}</label>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6"> 
 				  <div class="form-group row">
 					<div class="col-md-12"> 
-					<label class="custom-control-label-date ml-2">Payment Date<span class=""></span></label>
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Payment Date" setlang}}{{/with}}<span class=""></span></label>
 					<input type='text' class="form-control  dateformat"  name="cheque_date" {{#if this.cheque_date}} value="{{this.cheque_date}}" {{else}}  {{/if}} aria-invalid="false"> 
 					<i class="ft-calendar icon-care"></i> 
 					</div>
@@ -178,7 +178,7 @@
 							<!-- <input type="text" maxlength="30"  class="form-control c_label" > -->
 							<!-- <label>Amount</label> -->
 					<fieldset>
-				    <label>Cheque Amount<span class=""></span></label> 
+				    <label>{{#with ..}}{{__ "Cheque Amount" setlang}}{{/with}}<span class=""></span></label> 
                      <div class="input-group touchspincolor">
 					  <input type="text" id="paymentamount" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="paymentamount"  data-bts-step="1000" {{#if this.paymentamount}} value="{{this.paymentamount}}"{{/if}} />
                      </div>
