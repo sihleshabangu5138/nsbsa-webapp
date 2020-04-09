@@ -98,9 +98,9 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 				<div class="heading-elements "> 
-					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{#with ..}}{{__ "User Name" setlang}}{{/with}}<span class="required red">*</span></label>
-						<select class="select2 form-control export" data-validation-required-message="{{#with ..}}{{__ 'User name is required' setlang}}{{/with}}" name="user" >					
-							<option value="">{{#with ..}}{{__ "Select User" setlang}}{{/with}}</option> 
+					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">User Name<span class="required red">*</span></label>
+						<select class="select2 form-control export" data-validation-required-message="User name is required" name="user" >					
+							<option value="">---User---</option> 
 							{{#each ../user as |data1| }}
 							
 								<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}}{{/if}} value="{{this._id}}" >{{this.firstname}} {{this.middlename}} {{this.lastname}}</option>
@@ -116,10 +116,10 @@
 			<div class="form-group input">
 			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
 				<div class="heading-elements ">
-					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}<span class="required red">*</span></label>	
+					  <label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{__ 'Loan Type'}}<span class="required red">*</span></label>	
 						<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
-						<select id="loantype" class="select2 form-control export" data-validation-required-message="{{#with ..}}{{__ 'Loan Type is required' setlang}}{{/with}}" name="loantype" >
-						<option value="">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</option>
+						<select id="loantype" class="select2 form-control export" data-validation-required-message="Loan Type is required" name="loantype" >
+						<option value="">Loan Type</option>
 						{{#each ../loan as |data2| }}
 						<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.loantype}} selected {{/ifCond}}{{/if}} value="{{this._id}}">{{this.type}}</option>
 						{{/each}}
@@ -132,7 +132,7 @@
 			<div class="form-group input">
 			<div class="col-md-12" style="border: 1px solid #ddd;">
 			<div class="form-field">	
-				<textarea maxlength="300" id="loantypdesc" {{#if this.description}} value="{{this.description}}"{{/if}}  name=	"description" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,300})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Loan description is required' setlang}}{{/with}}">{{this.description}}</textarea>
+				<textarea maxlength="300" id="loantypdesc" {{#if this.description}} value="{{this.description}}"{{/if}}  name=	"description" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,300})" data-validation-regex-message="{{__ 'Only Characters, no numbers'}}" data-validation-required-message="Loan description is required">{{this.description}}</textarea>
 				<span class="txt-title-label"></span>
 				<label class="text-area address">{{#with ..}}{{__ "Loan description" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div>
@@ -155,7 +155,7 @@
 				<label>{{#with ..}}{{__ "Loan Amount" setlang}}{{/with}}<span class="required red">*</span></label>
 				
                      <div class="input-group touchspincolor">
-					  <input type="text" id="loanamount" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="loanamount" data-validation-required-message="{{#with ..}}{{__ 'Interest rate is required' setlang}}{{/with}}" data-bts-step="1000" {{#if this.loanamount}} value="{{this.loanamount}}"{{/if}} />
+					  <input type="text" id="loanamount" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="loanamount" data-validation-required-message="{{__ 'Interest rate is required'}}" data-bts-step="1000" {{#if this.loanamount}} value="{{this.loanamount}}"{{/if}} />
                      </div>
                    </fieldset>
                  </div>
@@ -168,7 +168,7 @@
 				<fieldset>
 				<label>{{#with ..}}{{__ "Annual interest rate" setlang}}{{/with}}<span class="required red">*</span></label>
                      <div class="input-group touchspincolor">
-					 <input type="text" id="interestrate" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="interestrate" data-validation-required-message="{{#with ..}}{{__ 'Interest rate is required' setlang}}{{/with}}"  {{#if this.interestrate}} value="{{this.interestrate}}"{{/if}} />
+					 <input type="text" id="interestrate" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="interestrate" data-validation-required-message="{{__ 'Interest rate is required'}}"  {{#if this.interestrate}} value="{{this.interestrate}}"{{/if}} />
                      </div>
                    </fieldset>
                  </div>
@@ -213,7 +213,7 @@
                     <fieldset>
 					<label for="spinner">{{#with ..}}{{__ "Loan Period in years" setlang}}{{/with}}<span class="required red">*</span></label>
                       <div class="input-group bootstrap-touchspin touchspincolor">
-                       <input id="spinner" type="text" data-min="1" data-max="100" data-validation-required-message="{{#with ..}}{{__ 'Years are required' setlang}}{{/with}}" data-bts-step="0.5" data-bts-decimals="1" class="touchspin form-control" name="years" {{#if this.years}} value="{{this.years}}" {{else}}value="1"{{/if}} style="display: block;">
+                       <input id="spinner" type="text" data-min="1" data-max="100" data-validation-required-message="{{__ 'Years are required'}}" data-bts-step="0.5" data-bts-decimals="1" class="touchspin form-control" name="years" {{#if this.years}} value="{{this.years}}" {{else}}value="1"{{/if}} style="display: block;">
 
 					   <div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
                       </div>
@@ -228,7 +228,7 @@
                     <fieldset>
 					<label>{{#with ..}}{{__ "Total EMI Months" setlang}}{{/with}}<span class="required red">*</span></label>
                       <div class="input-group bootstrap-touchspin touchspincolor">
-                       <input type="text" class="touchspin form-control" name="totalemimonth" data-validation-required-message="{{#with ..}}{{__ 'Total EMI Months is required' setlang}}{{/with}}"  {{#if this.totalemimonth}} value="{{this.totalemimonth}}"{{/if}} value="1" style="display: block;"><div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
+                       <input type="text" class="touchspin form-control" name="totalemimonth" data-validation-required-message="{{__ 'Total EMI Months is required'}}"  {{#if this.totalemimonth}} value="{{this.totalemimonth}}"{{/if}} value="1" style="display: block;"><div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
                       </div>
                     </fieldset>
                   </div>
@@ -240,7 +240,7 @@
 
 					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Start Date of loan" setlang}}{{/with}}<span class="required red">*</span></label>
 
-					<input type='text' class="form-control afterdate startdate dateformat"  data-validation-required-message="{{#with ..}}{{__ 'Start Date is required'setlang}}{{/with}}" name="startdate" {{#if this.startdate}} value="{{getdate this.startdate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false">
+					<input type='text' class="form-control startdate dateformat"  data-validation-required-message="{{__ 'Start Date is required'}}" name="startdate" {{#if this.startdate}} value="{{getdate this.startdate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false">
 
 					<i class="ft-calendar icon-care"></i> 
 					</div>
@@ -251,7 +251,7 @@
 					<div class="col-md-12">
  
 					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "End Date of loan" setlang}}{{/with}}<span class="required red">*</span></label>
-					<input type='text'  class="form-control enddate dateformat"  data-validation-required-message="{{#with ..}}{{__ 'End Date is required'setlang}}{{/with}}" name="enddate" {{#if this.enddate}} value="{{getdate this.enddate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false"  id="enddate"> 
+					<input type='text'  class="form-control enddate dateformat"  data-validation-required-message="End Date is required" name="enddate" {{#if this.enddate}} value="{{getdate this.enddate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false"  id="enddate"> 
 					<i class="ft-calendar icon-care"></i> 
 					</div>
 			</div><div class="help-block"></div>
@@ -318,7 +318,7 @@
 			<div class="form-group input">
 			<div class="col-md-12" style="border: 1px solid #ddd;">
 			<div class="form-field">
-			<textarea name="workdetail"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{#with ..}}{{__ 'workdetail may only contain characters, numbers, space and _,`.'^-' setlang}}{{/with}}" {{#if this.workdetail}} value="{{this.workdetail}}"{{/if}}>{{this.workdetail}}</textarea>
+			<textarea name="workdetail"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="workdetail may only contain characters, numbers, space and _,`.'^-" {{#if this.workdetail}} value="{{this.workdetail}}"{{/if}}>{{this.workdetail}}</textarea>
 				<span class="txt-title-label"></span>
 				<label class="text-area address ">{{#with ..}}{{__ "Work Detail" setlang}}{{/with}}</label>
 			</div>
@@ -335,7 +335,7 @@
 			<div class="col-md-6">
 				<div class="form-group"> 
 					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Upload Document" setlang}}{{/with}}<span class="required red">*</span></label>
-					<input class="form-control border-light fileUpload docfile" id="fileUpload" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ 'Document is required' setlang}}{{/with}}" {{/if}} type="file" multiple> 
+					<input class="form-control border-light fileUpload docfile" id="fileUpload" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="Document is required" {{/if}} type="file" multiple> 
 					<span class="required red notice"></span>
 					{{#if this}}
 					<p>{{this}}</p> 
@@ -364,7 +364,7 @@
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light"> 
-					<input type="text" id="colleague" class="" name="colleague" data-validation-regex-regex="([A-Za-z_,`.'^- ]{1,50})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" {{#if this.colleague}} value="{{this.colleague}}"{{/if}}>
+					<input type="text" id="colleague" class="" name="colleague" data-validation-regex-regex="([A-Za-z_,`.'^- ]{1,50})" data-validation-regex-message="Only Characters, no numbers" {{#if this.colleague}} value="{{this.colleague}}"{{/if}}>
 					<label for="colleague">{{#with ..}}{{__ "Colleague Name" setlang}}{{/with}} </label> 
 				</div><div class="help-block"></div>
 				</div>
@@ -372,7 +372,7 @@
 			<div class="col-md-6">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light"> 
-					<input type="text" name="mobile" class="form-control"  minlength="10" maxlength="16"data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ 'Contact Number may only contain numbers' setlang}}{{/with}}" aria-invalid="false" {{#if this.mobile}} value="{{this.mobile}}"{{/if}}>
+					<input type="text" name="mobile" class="form-control"  minlength="10" maxlength="16"data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="Contact Number may only contain numbers" aria-invalid="false" {{#if this.mobile}} value="{{this.mobile}}"{{/if}}>
 					<label for="userinput4">{{#with ..}}{{__ "Phone/Mobile" setlang}}{{/with}}</label> 
 				</div><div class="help-block"></div>
 				</div>
@@ -383,44 +383,25 @@
 				<label></label>
 					<div class="heading-elements"> 
 					   <label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Colleague Address Type" setlang}}{{/with}}</label> 
-						<select class="select2 form-control export" id ="dataother" name="addtype" data-validation-required-message="{{#with ..}}{{__ 'Colleague address type is required' setlang}}{{/with}}" onchange='Checkaddtype(this.value)' {{#ifCond this.addtype '==' 'other'}} value="{{this.addtype}}" {{/ifCond}} > 
-						<option>{{#with ..}}{{__ "Select colleague address type" setlang}}{{/with}}</option>
-						<option value="home" {{#ifCond this.addtype '==' 'home'}} selected {{/ifCond}}>{{#with ..}}{{__ "Home" setlang}}{{/with}}</option>
-						<option value="work"{{#ifCond this.addtype '==' 'work'}} selected {{/ifCond}}>{{#with ..}}{{__ "Work" setlang}}{{/with}}</option>
+						<select class="select2 form-control export" id="export" name="addtype" data-validation-required-message="Colleague address type is required" onchange='Checkaddtype(this.value)'> 
+						<option>Select colleague address type</option>
+						<option value="home" {{#ifCond this.addtype '==' 'home'}} selected {{/ifCond}}>Home</option>
+						<option value="work"{{#ifCond this.addtype '==' 'work'}} selected {{/ifCond}}>Work</option>
 						
-						<option value="other"{{#ifCond this.addtype '==' 'other'}} selected {{/ifCond}}>{{#with ..}}{{__ "Other" setlang}}{{/with}}</option>
+						<option value="other"{{#ifCond this.addtype '==' 'other'}} selected {{/ifCond}}>Other</option>
 						</select>
 				</div><div class="help-block"></div>			
 				</div>
-				<div class="col-md-12 p-0" style='display:none;' id="addtype">	
-				<div class="form-group input">
-				<div class="col-md-12" style="border: 1px solid #ddd;">
-				<div class="form-field">
-				<textarea placeholder="Other text.." class="mytextarea" type="text" name="othertext"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{#with ..}}{{__ 'Address may only contain characters, numbers, space and _,`.'^-' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Other is required' setlang}}{{/with}}" {{#if this.othertext}} value="{{this.othertext}}"{{/if}}>{{this.othertext}}</textarea>
-					<span class="txt-title-label"></span>
-					<label class="text-area address ">{{#with ..}}{{__ "Other" setlang}}{{/with}}</label>
-				</div>
-				</div><div class="help-block"></div>
-				</div>
-				</div>
-				
+				<textarea placeholder="Other text.." class="mytextarea" type="text" name="othertext" id="addtype" style='display:none'data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Address may only contain characters, numbers, space and _,`.'^-" data-validation-required-message="Other is required" {{#if this.other}} value="{{this.other}}"{{/if}}>{{this.other}}</textarea>
 				</div>
 			<script>
-				$( document ).ready(function() {
-					var element=document.getElementById('addtype');
-					 if(document.getElementById("dataother").value =='other' )
-					   element.style.display='block';
-					 else  
-					   element.style.display='none';
-				})
 				function Checkaddtype(val){
 				 var element=document.getElementById('addtype');
-				 if(val=='other' )
+				 if(val=='other')
 				   element.style.display='block';
 				 else  
 				   element.style.display='none';
 				}
-				
 			</script> 	
 			
 			<div class="col-md-6">
@@ -428,7 +409,7 @@
 			<div class="col-md-12" style="border: 1px solid #ddd;">
 			<div class="form-field">	
 
-			<textarea name="address"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{#with ..}}{{__ 'Address may only contain characters, numbers, space and _,`.'^-' setlang}}{{/with}}"  {{#if this.address}} value="{{this.address}}"{{/if}}>{{this.address}}</textarea>
+			<textarea name="address"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Address may only contain characters, numbers, space and _,`.'^-"  {{#if this.address}} value="{{this.address}}"{{/if}}>{{this.address}}</textarea>
 				<span class="txt-title-label"></span>
 				<label class="text-area address ">{{#with ..}}{{__ "Address" setlang}}{{/with}}</label>
 			</div>
@@ -449,7 +430,7 @@
 						{{#each this.note}}
 					<div class="col-md-12 p-0 mr-0">
 						<div class="form-group">
-							<label class="custom-control-label-date ml-2"  style="z-index: 9;">{{#with ..}}{{__ "Add note" setlang}}{{/with}}</label>
+							<label class="custom-control-label-date ml-2"  style="z-index: 9;">Add Note</label>
 							<textarea class="form-control custom-control" rows="4" name="note" style="resize:none" {{#if this}}value="{{this}}"{{/if}} >{{this}}</textarea>
 						<span class="required red notice"></span>
 						</div><div class="help-block"></div>
@@ -461,7 +442,7 @@
 					</div>
 					<div class="col-md-2 p-0">
 					<button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
-						<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more" setlang}}{{/with}}
+						<i class="icon-plus4"></i>Add more
 					</button>
 					</div>
 					</div>
@@ -491,7 +472,7 @@
 					</div>
 					<div class="col-md-2 p-0">
 					<button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
-						<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more" setlang}}{{/with}}
+						<i class="icon-plus4"></i>Add more
 					</button>
 					</div>
 					</div>
