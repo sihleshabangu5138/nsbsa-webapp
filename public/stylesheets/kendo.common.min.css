@@ -1995,7 +1995,11 @@ input[type=reset].k-button-expand {
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    margin: 0 1em
+    margin: 0 1.3em
+}
+
+.k-link input{
+    margin-right: 5px !important;
 }
 
 .k-pager-wrap .k-pager-input .k-textbox {
@@ -16649,3 +16653,13 @@ div.k-scrollview-wrap>[data-role=page] {
 
 
 /*# sourceMappingURL=kendo.common.min.css.map */
+/* @media (max-width:768px) {
+    .k-pager-wrap .k-label {
+        display: -ms-flexbox;
+        
+        -ms-flex-align: center;
+        align-items: center;
+        margin: 0 0.6em !important;
+        display: block;
+    }
+} */

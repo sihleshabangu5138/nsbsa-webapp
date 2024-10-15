@@ -1219,7 +1219,13 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu-footer .content {
   .chart-container {
     overflow-x: scroll;
     overflow-y: visible;
-    max-width: 100%; } }
+    max-width: 100%; }
+  .chart-container-custom {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    max-width: 100% !important;
+    height: 470px !important;
+  } }
 
 .chart {
   position: relative;

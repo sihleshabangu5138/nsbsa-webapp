@@ -1,12 +1,15 @@
-var hbs1 = require('hbs');
+var hbs = require('hbs');
 var fs = require('fs');
-var db = require('../routes/mongo_db');
-var ObjectId = require('mongodb').ObjectId;
-var Promise = require('rsvp').Promise;
+
 var  i18n = require('i18n');
-var str="";
-var time="";
-var dateFormat = require('dateformat');
+
+var dateFormat;
+
+import('dateformat').then((module) => {
+	dateFormat = module.default;
+  }).catch((error) => {
+	console.error("Error importing dateformat:", error);
+  });
 
 module.exports = {
       __: function(options) {
@@ -198,7 +201,7 @@ module.exports = {
 		regexlimit:function(options)
 		{
 			var limit = "{1,5000}";
-			return new hbs1.SafeString(limit);
+			return new hbs.SafeString(limit);
 		},
 	   ifCond:function(v1, operator, v2, options){
 		switch (operator) {
@@ -224,64 +227,174 @@ module.exports = {
 				// return options.inverse(this);
 		}
 	   },
+	   isCustomer : function(role_slug, options) {
+		console.log("role", role_slug);
+		if (role_slug !== 'customer') {
+			console.log("1");
+			return options.fn(this);
+		} else {
+			console.log("2");
+			return options.inverse(this);
+		}
+	},
+	
+	// ifCond: function () {
+	// 	const args = Array.from(arguments);
+	// 	const options = args.pop();
+	
+	// 	for (let i = 0; i < args.length - 2; i += 2) {
+	// 		switch (args[i + 1]) {
+	// 			case '==':
+	// 				if (args[i] == args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '===':
+	// 				if (args[i] === args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '!==':
+	// 				if (args[i] !== args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '<':
+	// 				if (args[i] < args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '<=':
+	// 				if (args[i] <= args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '>':
+	// 				if (args[i] > args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '>=':
+	// 				if (args[i] >= args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '&&':
+	// 				if (args[i] && args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 			case '||':
+	// 				if (args[i] || args[i + 2]) {
+	// 					return options.fn(this);
+	// 				}
+	// 				break;
+	// 		}
+	// 	}
+	
+	// 	return options.inverse(this);
+	// },
+	
 		
-		ifCondition:function(v1, operator, v2, operator, v3, operator, v4, operator, v5,options){
-			switch (operator) {
-				case '&&':
-					return (v1 && v2 && v3 && v4 && v5) ? options.fn(this) : options.inverse(this);
-				case '||':
-					return (v1 || v2 || v3 || v4 || v5) ? options.fn(this) : options.inverse(this);
-			}
-		},
-		breadcrums:function(v1,v2, options){
-			var result = '<section class="card"><div class="app-content container123 center-layout mt-2 mx-md-3 px-1"><div class="content-wrapper row"><div class="content-header-left col-md-6 col-sm-6 col-12 mb-1 "><h2 class="content-header-title">'+v2+'</h2> </div><div class=" breadcrumbs-right breadcrumbs-top col-sm-6 col-md-6 col-12"><div class="breadcrumb-wrapper float-md-right"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="/"><i class="fa fa-home  "></i>'+v1+'</a></li><li><i class="ft-chevron-right"></i>'+v2+'</li></ol></div></div></div></div></section>';
-			return new hbs1.SafeString(result);
-		},
+    ifCondition: function(v1, operator, v2, operator, v3, options) {
+
+        switch (operator) {
+            case '&&':
+                return (v1 && v2 && v3) ? options.fn(this) : options.inverse(this);
+            case '||':
+                return (v1 || v2 || v3) ? options.fn(this) : options.inverse(this);
+        }
+
+    },
+	ifConditionfive: function(v1, operator, v2, operator, v3, operator, v4, operator, v5, options) {
+
+        switch (operator) {
+            case '&&':
+                return (v1 && v2 && v3 && v4 && v5) ? options.fn(this) : options.inverse(this);
+            case '||':
+                return (v1 || v2 || v3 || v4 || v5) ? options.fn(this) : options.inverse(this);
+        }
+
+    },
+	eq: function (a, b) {
+		return a === b;
+	},
+		breadcrums: function (v1, v2, options) {
+			// console.log('v1',v1)
+			// 	console.log('v2',v2)
+			var result = `
+			  <section class="card">
+				<div class="app-content container123 center-layout mt-2 mx-md-3 px-1">
+				  <div class="content-wrapper row">
+					<div class="content-header-left col-md-6 col-sm-6 col-12 mb-1">
+					  <h2 class="content-header-title">${v2}</h2>
+					</div>
+					<div class="breadcrumbs-right breadcrumbs-top col-sm-6 col-md-6 col-12">
+					  <div class="breadcrumb-wrapper float-md-right">
+						<ol class="breadcrumb">
+						  <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i>${v1}</a></li>
+						  <li><i class="ft-chevron-right"></i>${v2}</li>
+						</ol>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </section>
+			`;
+			return new hbs.SafeString(result);
+		  },
 		
 		addelement:function(v1, options){
+			var translatedLabel = __("Upload Document");
 			if(v1=="data"){
-				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Upload Document</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>';	
+				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>';	
 			}
 			else{
-				var add= '<div class="col-md-6"><div class="form-group"><label class="custom-control-label-date ml-2">Upload Document<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="document"  data-validation-required-message="Document is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+				// console.log('v1',v1);
+				// console.log('translatedLabel', translatedLabel);
+				var add= '<div class="col-md-6"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="document"  data-validation-required-message="Document is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);
+			return new hbs.SafeString(add);
 		},		
 		addimage:function(v1, options){	
+			var translatedLabel = __("Upload Image");
 			if(v1=="data"){
-				var add = '<div id="addedimage" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Upload Image</label><input class="form-control border-light fileUpload"  name="uploadimages" type="file" multiple><span class="required red notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedimage()"><i class=" ft-x"></i></button></div>';
+				var add = '<div id="addedimage" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="uploadimages" type="file" multiple><span class="required red notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedimage()"><i class=" ft-x"></i></button></div>';
 			}
 			else{
-				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Upload Image<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="uploadimages"  data-validation-required-message="Image is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="uploadimages"  data-validation-required-message="Image is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);			
+			return new hbs.SafeString(add);			
 		},	
-		addnote:function(v1, options){	
+		addnote:function(v1, options){
+			var translatedLabel = __("Add Note");	
 			if(v1=="data"){
-				var add = '<div id="addednote" class="col-md-12 p-0 mr-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2"  style="z-index: 9;">Add Note</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><button style="margin-bottom: 72px;" class="btn" type="button" onclick="deleteaddednote()"><i class=" ft-x"></i></button></div>'; 		
+				var add = '<div id="addednote" class="col-md-12 p-0 mr-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2"  style="z-index: 9;">'+translatedLabel+'</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><button style="margin-bottom: 72px;" class="btn" type="button" onclick="deleteaddednote()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
-				var add= '<div class="col-md-12 p-0 mr-0"><div class="form-group"><label class="custom-control-label-date ml-2"  style="z-index: 9;">Add Note</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-12 p-0 mr-0"><div class="form-group"><label class="custom-control-label-date ml-2"  style="z-index: 9;">'+translatedLabel+'</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);			
+			return new hbs.SafeString(add);			
 		},
 		attachfile:function(v1, options){
+			var translatedLabel = __("Attach file");	
 			if(v1=="data"){
-				var add = '<div id="attachfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Attach file</label><input class="form-control border-light"  name="attachfile" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
+				var add = '<div id="attachfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light"  name="attachfile" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
-				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Attach file</label><input class="form-control border-light  docfile" id="fileupload" name="attachfile" type="file" multiple></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light  docfile" id="fileupload" name="attachfile" type="file" multiple></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);
+			return new hbs.SafeString(add);
 		},
 		productimage:function(v1, options){
+			var translatedLabel = __("Product Image");	
 			if(v1=="data"){
-				var add = '<div id="addedfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">Product Image</label><input class="form-control border-light fileUpload"  name="productimage" type="file" multiple><span class="notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedfile()"><i class=" ft-x"></i></button></div>'; 	
+				var add = '<div id="addedfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="productimage" type="file" multiple><span class="notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedfile()"><i class=" ft-x"></i></button></div>'; 	
 			}
 			else{
-				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">Product Image</label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="productimage" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="productimage" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
-			return new hbs1.SafeString(add);
+			return new hbs.SafeString(add);
 		},
 		
 		getdate: function(date,format) {
@@ -311,7 +424,14 @@ module.exports = {
 			//return dateFormat(date1, trans);
 			return dateFormat(date1, trans); 
 		},
-		
+		humanize: function(str) {
+			// THIS USE ONLY HBS DATE FORMATE
+			 var i, frags = str.split('_');
+			  for (i=0; i<frags.length; i++) {
+				frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+			  }
+			  return frags.join(' ');
+		},
 		loannumber: function() {
 			
 				 //return new Date().getTime();

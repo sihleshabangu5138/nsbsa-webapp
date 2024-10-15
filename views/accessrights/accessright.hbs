@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Access Rights'}}
+{{breadcrums (__ 'Home') (__ 'Access Rights')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
 <div class="row">
@@ -20,13 +20,13 @@
 						<div class="card">
 							<div class="card-header">
 								<h4 class="card-title">{{role_data.role_nm}}</h4>
-								<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a> 
+							 
 							</div>
 								<div class="card-content collapse show">
 								<div class="card-body">
 								{{#check_value_in ../accessrightdata role_data.role_slug }} 
 								{{#ifCond role_data.role_slug '==' role_data.role_db.rolename}} 
-								<form  action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
+								<form id="myForm" action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
 								<input type="hidden" name="id" value="{{role_data.role_db._id}}" id="{{role_data._id}}"> 
 								<input type="hidden" name="role_name" value="{{role_data.role_slug}}" id="{{role_data.role_slug}}">
 								<div class="table-responsive">
@@ -47,13 +47,20 @@
 										<td class=" skin skin-flat" value="user" >{{#with ..}}{{__ "Users" setlang}}{{/with}}</td>
 			
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][view]"  class="main_access" data-for="user" value="user_view" {{#ifCond role_data.role_db.access_type.user.view "==" "user_view"}} checked {{/ifCond}}> 
-										</td> 
+										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}  
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][add]" class="user_0" value="user_add" {{#ifCond role_data.role_db.access_type.user.add "==" "user_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][update]" class="user_0" value="user_update"  {{#ifCond role_data.role_db.access_type.user.update "==" "user_update"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][delete]" class="user_0" value="user_delete" {{#ifCond role_data.role_db.access_type.user.delete "==" "user_delete"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{!-- <td class="text-center skin skin-flat"></td>	 --}}
+										{{/ifCond}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[user][owndata]" class="user_0" value="user_owndata"   {{#ifCond role_data.role_db.access_type.user.owndata "==" "user_owndata"}} checked{{/ifCond}}>
 										</td> 
 									</tr> 
@@ -61,13 +68,20 @@
 									<tr>
 										<td class=" skin skin-flat" value="deactiveuser">{{#with ..}}{{__ "Deactivated Users" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][view]"  class="main_access" data-for="deactiveuser" value="deactiveuser_view" {{#ifCond role_data.role_db.access_type.deactiveuser.view "==" "deactiveuser_view"}} checked {{/ifCond}}> 
-										</td> 
+										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}} 
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][add]" class="user_0" value="deactiveuser_add" {{#ifCond role_data.role_db.access_type.deactiveuser.add "==" "deactiveuser_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][update]" class="user_0" value="deactiveuser_update"  {{#ifCond role_data.role_db.access_type.deactiveuser.update "==" "deactiveuser_update"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][delete]" class="user_0" value="deactiveuser_delete" {{#ifCond role_data.role_db.access_type.deactiveuser.delete "==" "deactiveuser_delete"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{!-- <td class="text-center skin skin-flat"></td>	 --}}
+										{{/ifCond}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[deactiveuser][owndata]" class="user_0" value="deactiveuser_owndata"   {{#ifCond role_data.role_db.access_type.deactiveuser.owndata "==" "deactiveuser_owndata"}} checked{{/ifCond}}>
 										</td> 
 									</tr> 
@@ -76,24 +90,60 @@
 										<td class=" skin skin-flat" value="typeofloan" >{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="typeofloan" name="accessrights[typeofloan][view]" value="typeofloan_view" {{#ifCond role_data.role_db.access_type.typeofloan.view "==" "typeofloan_view"}} checked {{/ifCond}}>
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[typeofloan][add]" class="custom_fields_0" value="typeofloan_add" {{#ifCond role_data.role_db.access_type.typeofloan.add "==" "typeofloan_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[typeofloan][update]" class="custom_fields_0" value="typeofloan_update" {{#ifCond role_data.role_db.access_type.typeofloan.update "==" "typeofloan_update"}} checked {{/ifCond}}>
 										</td>
-										<td class="text-center skin skin-flat"></td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[typeofloan][delete]" class="custom_fields_0" value="typeofloan_delete" {{#ifCond role_data.role_db.access_type.typeofloan.delete "==" "typeofloan_delete"}} checked {{/ifCond}}>
+										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{!-- <td class="text-center skin skin-flat"></td>	 --}}
+										{{/ifCond}}
+										{{!-- <td class="text-center skin skin-flat"></td> --}}
 										<td class="text-center skin skin-flat"></td>
 									</tr>
 									<!--Loan List Access Rights -->
 									<tr>
+										<td class="skin skin-flat" value="totalloanlist">{{#with ..}}{{__ "Total Loan List" setlang}}{{/with}}</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[totalloanlist][view]" data-row="0" class="main_access" data-for="custom_fields" value="total_loan_list_view" {{#ifCond role_data.role_db.access_type.totalloanlist.view "==" "total_loan_list_view"}} checked {{/ifCond}}>
+										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[totalloanlist][add]" class="custom_fields_0" value="total_loan_list_add" {{#ifCond role_data.role_db.access_type.totalloanlist.add "==" "total_loan_list_add"}} checked {{/ifCond}} >
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[totalloanlist][update]" class="custom_fields_0" value="total_loan_list_update" {{#ifCond role_data.role_db.access_type.totalloanlist.update "==" "total_loan_list_update"}} checked {{/ifCond}}  >
+										</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[totalloanlist][delete]" class="custom_fields_0" value="total_loan_list_delete" {{#ifCond role_data.role_db.access_type.totalloanlist.delete "==" "total_loan_list_delete"}} checked {{/ifCond}}>
+										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{!-- <td class="text-center skin skin-flat"></td>	 --}}
+										{{/ifCond}}
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[totalloanlist][owndata]" class="custom_fields_0" value="total_loan_list_owndata" {{#ifCond role_data.role_db.access_type.totalloanlist.owndata "==" "total_loan_list_owndata"}} checked {{/ifCond}} >
+										</td>
+									</tr>
+									<tr>
 										<td class="skin skin-flat" value="loanlist">{{#with ..}}{{__ "Loan List" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][view]" data-row="0" class="main_access" data-for="custom_fields" value="loan_list_view" {{#ifCond role_data.role_db.access_type.loanlist.view "==" "loan_list_view"}} checked {{/ifCond}}>
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][add]" class="custom_fields_0" value="loan_list_add" {{#ifCond role_data.role_db.access_type.loanlist.add "==" "loan_list_add"}} checked {{/ifCond}} >
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][update]" class="custom_fields_0" value="loan_list_update" {{#ifCond role_data.role_db.access_type.loanlist.update "==" "loan_list_update"}} checked {{/ifCond}}  >
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][delete]" class="custom_fields_0" value="loan_list_delete" {{#ifCond role_data.role_db.access_type.loanlist.delete "==" "loan_list_delete"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{!-- <td class="text-center skin skin-flat"></td>	 --}}
+										{{/ifCond}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[loanlist][owndata]" class="custom_fields_0" value="loan_list_owndata" {{#ifCond role_data.role_db.access_type.loanlist.owndata "==" "loan_list_owndata"}} checked {{/ifCond}} >
 										</td>
 									</tr>
@@ -102,13 +152,31 @@
 										<td class="skin skin-flat" value="disapproveloanlist" >{{#with ..}}{{__ "Disapproved Loan List" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][view]" data-row="0" class="main_access" data-for="custom_fields" value="disapproveloan_list_view" {{#ifCond role_data.role_db.access_type.disapproveloanlist.view "==" "disapproveloan_list_view"}} checked {{/ifCond}}>
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][add]" class="custom_fields_0" value="disapproveloan_list_add" {{#ifCond role_data.role_db.access_type.disapproveloanlist.add "==" "disapproveloan_list_add"}} checked {{/ifCond}} >
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][update]" class="custom_fields_0" value="disapproveloan_list_update" {{#ifCond role_data.role_db.access_type.disapproveloanlist.update "==" "disapproveloan_list_update"}} checked {{/ifCond}}  >
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][delete]" class="custom_fields_0" value="disapproveloan_list_delete" {{#ifCond role_data.role_db.access_type.disapproveloanlist.delete "==" "disapproveloan_list_delete"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{!-- <td class="text-center skin skin-flat"></td>	 --}}
+										{{/ifCond}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[disapproveloanlist][owndata]" class="custom_fields_0" value="disapproveloan_list_owndata" {{#ifCond role_data.role_db.access_type.disapproveloanlist.owndata "==" "disapproveloan_list_owndata"}} checked {{/ifCond}} >
+										</td>
+									</tr>
+									<!--Pending EMI List Access Rights -->
+									<tr>
+										<td class="skin skin-flat" value="pendingemilist" >{{#with ..}}{{__ "Pending EMI List" setlang}}{{/with}}</td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[pendingemilist][view]" data-row="0" class="main_access" data-for="custom_fields" value="pending_emi_view" {{#ifCond role_data.role_db.access_type.pendingemilist.view "==" "pending_emi_view"}} checked {{/ifCond}}>
+										</td>
+										<td class="text-center skin skin-flat"></td>
+										<td class="text-center skin skin-flat"></td>
+										<td class="text-center skin skin-flat"></td>
+										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[pendingemilist][owndata]" class="custom_fields_0" value="pending_emi_owndata" {{#ifCond role_data.role_db.access_type.pendingemilist.owndata "==" "pending_emi_owndata"}} checked {{/ifCond}} >
 										</td>
 									</tr>
 									<!-- Product Rights-->
@@ -116,6 +184,7 @@
 										<td class="skin skin-flat" value="product" >{{#with ..}}{{__ "Product" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[product][view]" data-row="0" class="main_access" data-for="custom_fields" value="product_view" {{#ifCond role_data.role_db.access_type.product.view "==" "product_view"}} checked {{/ifCond}}> 
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[product][add]" class="custom_fields_0" value="product_add" {{#ifCond role_data.role_db.access_type.product.add "==" "product_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[product][update]" class="custom_fields_0" value="product_update" {{#ifCond role_data.role_db.access_type.product.update "==" "product_update"}} checked {{/ifCond}}>
@@ -124,17 +193,30 @@
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[product][owndata]" class="custom_fields_0" value="product_owndata" {{#ifCond role_data.role_db.access_type.product.owndata "==" "product_owndata"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{/ifCond}}
 									</tr>									
 									<!--Rules and Regulation Access Rights -->
 									<tr>
 										<td class=" skin skin-flat" value="rulesandregulation" >{{#with ..}}{{__ "Rules and Regulation" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="customer_info" name="accessrights[rulesandregulation][view]" value="rules_and_regulation_view" {{#ifCond role_data.role_db.access_type.rulesandregulation.view "==" "rules_and_regulation_view"}} checked {{/ifCond}} >
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" class="customer_info_0" name="accessrights[rulesandregulation][add]" value="rules_and_regulation_add" {{#ifCond role_data.role_db.access_type.rulesandregulation.add "==" "rules_and_regulation_add"}} checked  {{/ifCond}} ></td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="customer_info_0" name="accessrights[rulesandregulation][update]" value="rules_and_regulation_update" {{#ifCond role_data.role_db.access_type.rulesandregulation.update "==" "rules_and_regulation_update"}} checked {{/ifCond}}></td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[rulesandregulation][delete]" class="custom_fields_0" value="rules_and_regulation_delete" {{#ifCond role_data.role_db.access_type.rulesandregulation.delete "==" "rules_and_regulation_delete"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[rulesandregulation][owndata]" class="customer_info_0" value="rules_and_regulation_owndata" {{#ifCond role_data.role_db.access_type.rulesandregulation.owndata "==" "rules_and_regulation_owndata"}} checked {{/ifCond}} ></td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{/ifCond}}
 									</tr> 
 									<!--Alerts Rights -->
 									<tr>
@@ -142,8 +224,12 @@
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="email_log" name="accessrights[alert][view]" value="view_alert" {{#ifCond role_data.role_db.access_type.alert.view "==" "view_alert"}} checked {{/ifCond}}></td>
 										<td class="text-center skin skin-flat"></td>
 										<td class="text-center skin skin-flat"></td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" class="email_log_0" name="accessrights[alert][delete]" value="clear_alert" {{#ifCond role_data.role_db.access_type.alert.delete "==" "clear_alert"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>
+										{{/ifCond}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[alert][owndata]" class="email_log_0" value="alert_owndata" {{#ifCond role_data.role_db.access_type.alert.owndata "==" "alert_owndata"}} checked {{/ifCond}}>
 										</td>
 									</tr>
@@ -162,6 +248,7 @@
 										<td class="skin skin-flat" value="service" >{{#with ..}}{{__ "Service" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[service][view]"  value="service_view" {{#ifCond role_data.role_db.access_type.service.view "==" "service_view"}} checked {{/ifCond}}>
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[service][add]" value="service_add" {{#ifCond role_data.role_db.access_type.service.add "==" "service_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[service][update]" value="service_update" {{#ifCond role_data.role_db.access_type.service.update "==" "service_update"}} checked {{/ifCond}}>
@@ -170,12 +257,19 @@
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[service][owndata]" class="notification_template_0" value="service_owndata" {{#ifCond role_data.role_db.access_type.service.owndata "==" "service_owndata"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{/ifCond}}
 									</tr>
 									<!--Category Access Rights -->
 									<tr>
 										<td class="skin skin-flat" value="category" >{{#with ..}}{{__ "Category" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[category][view]"  value="category_view" {{#ifCond role_data.role_db.access_type.category.view "==" "category_view"}} checked {{/ifCond}}>
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[category][add]" value="category_add" {{#ifCond role_data.role_db.access_type.category.add "==" "category_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[category][update]" value="category_update" {{#ifCond role_data.role_db.access_type.category.update "==" "category_update"}} checked {{/ifCond}}>
@@ -184,18 +278,30 @@
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[category][owndata]" class="notification_template_0" value="category_owndata" {{#ifCond role_data.role_db.access_type.category.owndata "==" "category_owndata"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{/ifCond}}
 									</tr>
 									<!--Events Access Rights -->
 									<tr>
 										<td class="skin skin-flat" value="events" >{{#with ..}}{{__ "Events" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[events][view]"  value="events_view" {{#ifCond role_data.role_db.access_type.events.view "==" "events_view"}} checked {{/ifCond}}>
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[events][add]" value="events_add" {{#ifCond role_data.role_db.access_type.events.add "==" "events_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[events][update]" value="events_update" {{#ifCond role_data.role_db.access_type.events.update "==" "events_update"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="email_log_0" name="accessrights[events][delete]" value="events_delete" {{#ifCond role_data.role_db.access_type.events.delete "==" "events_delete"}} checked {{/ifCond}}>
 										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{/ifCond}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[events][owndata]" class="notification_template_0" value="events_owndata" {{#ifCond role_data.role_db.access_type.events.owndata "==" "events_owndata"}} checked {{/ifCond}}>
 										</td>
 									</tr>
@@ -204,11 +310,19 @@
 										<td class="skin skin-flat" value="notification" >{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="notification_template" name="accessrights[notification][view]"  value="notifications_view" {{#ifCond role_data.role_db.access_type.notification.view "==" "notifications_view"}} checked {{/ifCond}}>
 										</td>
+										{{#ifCond role_data.role_slug '!==' "customer"}}
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[notification][add]" value="notifications_add" {{#ifCond role_data.role_db.access_type.notification.add "==" "notifications_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[notification][update]" value="notifications_update" {{#ifCond role_data.role_db.access_type.notification.update "==" "notifications_update"}} checked {{/ifCond}}>
 										</td>
-										<td class="text-center skin skin-flat"></td>
+										<td class="text-center skin skin-flat"><input type="checkbox" class="notification_template_0" name="accessrights[notification][delete]" value="notifications_delete" {{#ifCond role_data.role_db.access_type.notification.delete "==" "notifications_delete"}} checked {{/ifCond}}>
+										</td>
+										{{else}}
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										<td class="text-center skin skin-flat"></td>	
+										{{/ifCond}}
+										{{!-- <td class="text-center skin skin-flat"></td> --}}
 										<td class="text-center skin skin-flat"><input type="checkbox" name="accessrights[notification][owndata]" class="notification_template_0" value="notification_template_owndata" {{#ifCond role_data.role_db.access_type.notification.owndata "==" "notification_template_owndata"}} checked {{/ifCond}}>
 										</td>
 									</tr>
@@ -237,12 +351,16 @@
 										<td class="skin skin-flat" value="reminder" >{{#with ..}}{{__ "Reminders" setlang}}{{/with}}</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" data-row="0" class="main_access" data-for="reminder" name= "accessrights[reminder][view]" value="reminder_view" {{#ifCond role_data.role_db.access_type.reminder.view "==" "reminder_view"}} checked {{/ifCond}}>
 										</td>
-										<td class="text-center skin skin-flat"><input type="checkbox" class="reminder_0" name= "accessrights[reminder][add]" value="reminder_add" {{#ifCond role_data.role_db.access_type.reminder.add "==" "reminder_add"}} checked {{/ifCond}}>
+										{{!-- <td class="text-center skin skin-flat"><input type="checkbox" class="reminder_0" name= "accessrights[reminder][add]" value="reminder_add" {{#ifCond role_data.role_db.access_type.reminder.add "==" "reminder_add"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="reminder_0" name="accessrights[reminder][update]" value="reminder_edit" {{#ifCond role_data.role_db.access_type.reminder.update "==" "reminder_edit"}} checked {{/ifCond}}>
 										</td>
 										<td class="text-center skin skin-flat"><input type="checkbox" class="reminder_0" name="accessrights[reminder][delete]" value="reminder_delete" {{#ifCond role_data.role_db.access_type.reminder.delete "==" "reminder_delete"}} checked {{/ifCond}}>
-										</td>
+										</td> --}}
+										<td class="text-center skin skin-flat"></td>
+										<td class="text-center skin skin-flat"></td>
+										<td class="text-center skin skin-flat"></td>
+										
 										<td class="text-center skin skin-flat"><input type="checkbox" name= "accessrights[reminder][owndata]" class="reminder_0" value="reminder_owndata" {{#ifCond role_data.role_db.access_type.reminder.owndata "==" "reminder_owndata"}} checked {{/ifCond}}>
 										</td>
 									</tr> 
@@ -252,15 +370,12 @@
 											<button type="submit" class="btn btn-secondary">
 												<i class="fa fa-check-square-o"></i>{{#with ..}}{{__ "Submit" setlang}}{{/with}}
 											</button>
-											<button type="reset" class="btn btn-warning">
-												<i class="ft-refresh-cw"></i>{{#with ..}}{{__ "Reset" setlang}}{{/with}}
-											</button>
 										</div>
 							</div>
 						</form>
 									{{/ifCond}}
 						{{else}}
-						<form  action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
+						<form id="myForm" action="/accessrights/accessright" method="POST"  enctype="multipart/form-data">
 								<input type="hidden" name="id" value="{{role_data.role_db._id}}" id="{{role_data._id}}"> 
 								<input type="hidden" name="role_name" value="{{role_data.role_slug}}" id="{{role_data.role_slug}}"> 						
 								<div class="table-responsive">
@@ -477,7 +592,7 @@
 								</tbody>
 								</table>
 										<div class="form-actions left">
-											<button type="submit" class="btn btn-secondary" onclick="return ValidateExtension()">
+											<button type="submit" class="btn submit btn-secondary" onclick="return ValidateExtension()">
 												<i class="fa fa-check-square-o"></i>{{#with ..}}{{__ "Submit" setlang}}{{/with}}
 											</button>
 											<button type="reset" class="btn btn-warning">
@@ -540,6 +655,14 @@
             });
             $(role_data.role_db).iCheck("enable");
             $(role_data.role_db).attr("disabled", false);
-        }); 
+        });
+		$(document).ready(function() {
+        // Assuming your form has an id 'myForm'
+        $('#myForm').submit(function() {
+            // Reload the page when the form is submitted
+            location.reload();
+        });
+    });
+ 
     });
 </script> 

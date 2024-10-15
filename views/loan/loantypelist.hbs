@@ -1,54 +1,37 @@
-{{breadcrums 'Home' 'Loan Type List'}}
-<div class="app-content center-layout mt-2 mx-md-3 px-1 content-header row">
-	<div class="col-xl-12 col-lg-12 box-four-view">
-	<div class="card_boxnf">
-	<div class="card-content">
-	<div class="card-body pl-0 pr-0">
-		
+{{breadcrums (__ "Home") (__ "Loan Type List") }}
+
+<div class="app-content center-layout mt-2 mx-md-3 px-1">
 		<div class="row" style="">
-		<div class="col-lg-2 col-md-2 mb-2 custom_select">
-		
-		</div>
-		<div class="col-lg-2 col-md-2 mb-2">
-			
-		</div>
-		<div class=" col-lg-7 col-md-7 mb-7">
-		</div>
-		<div class=" col-lg-1 col-md-1 mb-1 heading-elements p-0">
+		<!-- <div class="col-lg-2 col-md-2 mb-2 custom_select"> -->
+		<!-- <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 181.156px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jzyt-container"><span class="select2-selection__rendered" id="select2-jzyt-container" title="Customer"> {{__ "Customer"}}</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span> -->
+		<!-- </div> -->
+		<!-- <div class="col-lg-2 col-md-2 mb-2"> -->
+			<!-- <div class="btn-group mr-1"> -->
+				<!-- <button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ "GO"}}</button> -->
+			<!-- </div> -->
+		<!-- </div> -->
+		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ews-heading">
 			<ul class="list-inline mb-0">
 			<li id="export">
 				<select class="select2 form-control export">
-					<option value="">{{__ "Export"}}</option> 
+					<option value="">{{__ "Export"}}</option>
 					<option value="csv">{{__ "XLSX"}}</option>
-					<option value="pdf">{{__ "PDF"}}</option> 
+					<option value="pdf">{{__ "PDF"}}</option>
 				</select>
 			</li>	
 			</ul>
 		</div>
 		</div>
 		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		
-<div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
 	 
 	<div class="card-content collpase show">
-			{{#if messages.error  }}
-			<script>
-					toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
-			{{#if messages.success }}
-				<script>
-					toastr.success("{{messages.success}}", "Sucess!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
+	 
 		<!-- Zero configuration table -->
         <section id="configuration">
         <div class="row">
@@ -56,15 +39,26 @@
              <div class="card">
                 
                 <div class="card-content collapse show">
+				
+				<!--{{log messages}}-->
+				{{#if messages.error  }}
+			<script>
+					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+				</script>
+			{{/if}}
+			{{#if messages.success }}
+				<script>
+					toastr.success("{{messages.success}}", "{{__ 'Sucess!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+				</script>
+			{{/if}}
                 <div class="card-body card-dashboard card-design">
 					
 					<section id="horizontal">
 						<div class="row">
 						<div class="col-12">
 						<div class="card">
-							
 							<div class="card-content collapse show" id="NF-datatable">
-							<div class="card-body">
+							<div class="card-body p-0">
 								<div id="grid"></div>
 								<div id="window"></div>
 								
@@ -104,38 +98,35 @@
 									<button class="swal-button swal-button--cancel btn" id="yesButton">{{{__ "YES"}}}</button>
 								</div>
 								</div>  
-								
-								
-							</script>
-
-	
+							</script> 
     <script >
        jQuery(document).ready(function() {
-	   
-	   
-			var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
-				$('body').on('change', '.export', function() {
-				var value = $(this).val();
-				if(value == 'csv')
-				{
-					$("#grid").getKendoGrid().saveAsExcel();
-				}else if(value == 'pdf')
-				{
-					$("#grid").getKendoGrid().saveAsPDF();
-				}
-			});
+	var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
+		$('body').on('change', '.export', function() {
+		var value = $(this).val();
+		if(value == 'csv')
+		{
+			$("#grid").getKendoGrid().saveAsExcel();
+		}else if(value == 'pdf')
+		{
+			$("#grid").getKendoGrid().saveAsPDF();
+		}
+	});
 		
 		
 		 var window1 = $("#window").kendoWindow({
-            title: " Warning !",
+            title: "{{__ 'Warning !'}}",
 			resizable: false,
             visible: false, //the window will not appear before its .open method is called
            
         }).data("kendoWindow");
 		
+		
 		var element=$("#grid").kendoGrid({
-			//var path='{{path}}';	
+			//var path='{{path}}';
+					
 				pdf: {
+					
 		allPages: true,
 		template: $("#page-template").html(),
 		avoidLinks: true,
@@ -144,7 +135,8 @@
 		margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
 		landscape: true,
 		repeatHeaders: true,
-		scale: 0.8
+		scale: 0.8,
+		
 		},
 		excel: {
 		fileName: "Loantype-list.xlsx",// Bug 277
@@ -152,26 +144,27 @@
 		},
 		scrollable: true,
 		pdfExport: function(e) {
+				
                   var grid = $("#grid").data("kendoGrid");
-					grid.hideColumn(6);
+                  <!-- grid.hideColumn(0); -->
+                  grid.hideColumn(2);
                   e.promise
                   .done(function() {
-                     grid.showColumn(6);
+                      <!-- grid.showColumn(0); -->
+                      grid.showColumn(2);
                   });
                 },
 				
 				dataSource: {
 				serverPaging: false,
-			serverSorting: false,
+			    serverSorting: false,
 				 transport: {
-				  read:{
-					url: '/ajxfun/loantypelist',
-					dataType: "json",
-				  },
-					
-					
-					  destroy:{
-							url: '/ajxfun',
+					read: {  
+						url: '/ajxfun/loantypelist',
+						dataType: "json",					
+					},
+					destroy:{
+							url: '/ajxfun/loantype/delete',
 							dataType: "json",
 							type:'get',
 							complete: function(e) {
@@ -201,7 +194,7 @@
                                 email: { validation: { required: true } },
                             }
                         }
-                    },
+                    },  
                     pageSize: 10,
 					batch: false,
 					requestEnd: function (e) {
@@ -216,18 +209,64 @@
                 groupable: true,
                 resizable: true,
                 filterable: {
-					mode: "row"
+					mode: "row",
+					 messages: {
+          info: "{{__ 'Show items with value that:'}}",
+		  isEqualTo: "{{__ 'Is equal to'}}",
+		  and: "{{__ 'And'}}",
+		  or: "{{__ 'Or'}}",
+		  clear: "{{__ 'Clear'}}",
+		  filter: "{{__ 'Filter'}}",
+		  isTrue: "{{__ 'is true'}}",
+      isFalse: "{{__ 'is false'}}",
+      isEmpty: "{{__ 'is empty'}}",
+      isNotEmpty: "{{__ 'is not empty'}}"
+        },
+		operators: {
+      string: {
+        eq: "{{__ 'is equal to'}}",
+        neq: "{{__ 'is not equal to'}}",
+        startswith: "{{__ 'starts with'}}",
+        contains: "{{__ 'contains'}}",
+        doesnotcontain: "{{__ 'does not contain'}}",
+        endswith: "{{__ 'ends with'}}",
+        isnull: "{{__ 'is null'}}",
+        isnotnull: "{{__ 'is not null'}}"
+      }
+    }
 				},
-                columnMenu: true,
-				pageable: {
+                columnMenu: {
+    messages: {
+      columns: "{{__ 'Columns'}}",
+	  filter : "{{__ 'Filter'}}",
+	  sortAscending: "{{__ 'Sort Ascending'}}", 
+	  sortDescending: "{{__ 'Sort Descending'}}", 
+    },
+  },
+												pageable: {
 					input: true,
 					numeric: false,
 					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100]
+					pageSizes: [10, 20, 25, 50, 100],
+					messages: {
+	  display: "{{__ '{0} - {1} of {2} items'}}",
+      empty: "{{__ 'No items to display'}}",
+      page: "{{__ 'Page'}}",
+	  of: "{{__ 'of {0}'}}", 
+      itemsPerPage: "{{__ 'items per page'}}",
+      first: "{{__ 'Go to the first page'}}",
+      previous: "{{__ 'Go to the previous page'}}",
+      next: "{{__ 'Go to the next page'}}",
+      last: "{{__ 'Go to the last page'}}",
+      refresh: "{{__ 'Refresh'}}"
+    }
 				},
-				noRecords: true,
+                noRecords: true,
+				messages: {
+            noRecords: "{{__ 'No records available.'}}"
+        },
                 columns: [
-				 
+					
 					{
                         field: "type",
                          title: "{{__ 'Type of loans'}}",
@@ -240,97 +279,105 @@
                     },
 					{
                         field: "loan_min_amount",
-                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Minimum Amount Range'}}",
+                         title: "{{{currencyList session.generaldata.currency}}} "+" {{__ 'Minimum Amount Range'}}",
                         width: 150
                     },
 					{
                         field: "loan_max_amount",
-                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Maximum Amount Range'}}",
+                         title: "{{{currencyList session.generaldata.currency}}} "+" {{__ 'Maximum Amount Range'}}",
                         width: 150
                     },
 					{
                         field: "interestrate",
-                         title: "{{__ 'Interest Rate'}}"+"%",
+                         title: "{{__ 'Interest Rate'}}"+" %",
                         width: 150
                     },
 					{
                         field: "latepaymentcharge",
-                        title:"{{{currencyList session.generaldata.currency}}}"+"{{__ 'Late Payment Charge'}}",
+                        title:"{{{currencyList session.generaldata.currency}}} "+" {{__ 'Late Payment Charge'}}",
 						hidden: true,
                         width: 100
                     },
-					{{#ifCond session.admin_access "==" 0}}
-					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}}
+								 
 					{
 						width: "150px",
-					
 						command:
 						[
 							{
-								template : "<center>"
+								template : "<center>" 
 							},
-							/* Edit action start */
-							{{#if accessrightdata.update }}
-							{ 
-								name: "pageEdit", text:"", className: "btn btn-icon color-blue btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "addloantype/"+id;
-								  return false;
-								} 
-							},
-							{{/if}}
-							{template : "&nbsp;" },
-							{template : "</center>" },
-							 
-							],
-							{{#if accessrightdata.add}}
-							title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ 'New'}}</button></a></center>"
-							{{/if}}
 							
-					}
-				{{/ifCondition}}
-				{{else}}
-					{
-						width: "150px",
-					
-						command:
-						[
-							{
-								template : "<center>"
-							},
-							/* Edit action start */
-							{ 
-								name: "pageEdit", text:"", className: "btn btn-icon color-blue btn-outline-light",iconClass:"fa fa-pencil",
+							  /* { 
+								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
 								click:function(e) 
 								{
 								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
 								 
 								  var id = clickedRow._id;
+								  window.location.href = "addrole/"+id;
+								  return false;
+								} 
+							},   */
+							{template : "&nbsp;" },
+							
+
+							/* Edit action start */
+							{{#ifCond accessrightdata.update "||" session.admin_access}}
+							 { 
+								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
+								click:function(e) 
+								{ 
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id; 
 								  window.location.href = "addloantype/"+id;
 								  return false;
 								} 
 							},
+							{{/ifCond}}
 							{template : "&nbsp;" },
+							{{#ifCond accessrightdata.delete "||" session.admin_access}}
+							{ 
+								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
+								click: function(e){  //add a click event listener on the delete button
+									e.preventDefault(); //prevent page scroll reset
+									var tr = $(e.target).closest("tr"); //get the row for deletion
+									var data = this.dataItem(tr); //get the row data so it can be referred later
+									window1.content(windowTemplate(data)); //send the row data object to the template and render it
+									window1.center().open();
+									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+									$("#yesButton").click(function(){
+										var grid = $("#grid").data("kendoGrid");
+										grid.dataSource.remove(data)  //prepare a "destroy" request
+										grid.dataSource.sync();  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
+										<!-- alert('Delete'); -->
+										window1.close();
+									})
+									$("#noButton").click(function(){
+										window1.close();
+									})
+								}	
+							},
+							{{/ifCond}}
+							
+							/* Delete action end */
+							
 							{template : "</center>" },
 							 
-							],
-							title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							], 
+							{{#ifCond accessrightdata.add "||" session.admin_access}}
+							
+							title: "{{__ "Action"}}", 
+							headerTemplate: "<center><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+							{{/ifCond}}
 					}
-				{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"
             }
             }); 
         });
-        </script>
-		
+        </script>  
 							</div>
 							</div>
 						</div>
@@ -348,4 +395,4 @@
 	</div>
 	</div>
 	</div>
-	</div>
+	</div> 

@@ -1,6 +1,5 @@
- {{breadcrums 'Home' 'Loan List'}}
+ {{breadcrums (__ 'Home') (__ 'Disapproved Loan List')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
-    <div class="content-wrapper">
 	<div class="content-header row">
 	<div class="col-xl-12 col-lg-12 box-four-view">
 	<div class="card_boxnf">
@@ -8,25 +7,25 @@
 	<div class="card-body pl-0 pr-0">
 		<fieldset class="form-group position-relative">
 		<div class="row">
-		<div class="col-lg-3 col-md-6 col-12">
+		{{!-- <div class="col-lg-3 col-md-6 col-12">
 		<div class="controls position-relative has-icon-right">
 			<input type="text" class="form-control square" value="{{__ 'All Loans'}}" placeholder="Addon To Right" readonly="readonly">
 			<div class="form-control-position ">
 				<span class="primary">{{this.count}}</span>
 			</div>
 		</div>
-		</div>
-		<div class="col-lg-3 col-md-6 col-12">
+		</div> --}}
+		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Total Loans'}}" placeholder="Addon To Right" readonly="readonly">
+				<input type="text" class="form-control square" value="{{__ 'All Loans'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
 					<span class="text-warning">
-						<a href="userlist" style="text-decoration: underline !important;">{{this.count}}</a>
+						<a href="totalloans" style="text-decoration: underline !important;">{{this.count}}</a>
 					</span>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6 col-12">
+		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
 				<input type="text" class="form-control square" value="{{__ 'Approved Loans'}}" placeholder="Addon To Right" readonly="readonly">
 					<div class="form-control-position">
@@ -36,7 +35,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6 col-12">
+		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
 				<input type="text" class="form-control square" value="{{__ 'Disapproved Loans'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
@@ -49,38 +48,47 @@
 		</div>
 		</fieldset>
 		<div class="row" style="">
-		<div class="col-lg-2 col-md-2 mb-2 custom_select">
-		<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 181.156px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jzyt-container"><span class="select2-selection__rendered" id="select2-jzyt-container" title="Customer">{{__ 'Customer'}}</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-		</div>
-		<div class="col-lg-2 col-md-2 mb-2">
-			<div class="btn-group mr-1">
-				<button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ 'GO'}}</button>
-			</div>
-		</div>
-		<div class=" col-lg-7 col-md-7 mb-7">
-		</div>
-		<div class=" col-lg-1 col-md-1 mb-1 heading-elements p-0">
-			<ul class="list-inline mb-0">
-			<li id="export">
-				<select class="select2 form-control export">
-					<option value="">{{__ "Export"}}</option>
-					<option value="csv">XLSX</option>
-					<option value="pdf">PDF</option>
-				</select>
-			</li>	
-			</ul>
-		</div>
-		</div>
-		</div>
+		<!-- <div class="col-lg-2 col-md-2 mb-2 custom_select"> -->
+		<!-- <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 181.156px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jzyt-container"><span class="select2-selection__rendered" id="select2-jzyt-container" title="Customer"> {{__ "Customer"}}</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span> -->
+		<!-- </div> -->
+		<!-- <div class="col-lg-2 col-md-2 mb-2"> -->
+			<!-- <div class="btn-group mr-1"> -->
+				<!-- <button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ "GO"}}</button> -->
+			<!-- </div> -->
+		<!-- </div> -->
+		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ews-heading">
+					<ul class="list-inline mb-0">
+					<li id="export">
+						<select class="select2 form-control export">
+							<option value="">{{__ "Export"}}</option>
+							<option value="csv">{{__ "XLSX"}}</option>
+							<option value="pdf">{{__ "PDF"}}</option>
+						</select>
+					</li>	
+					</ul>
+				</div>
 		</div>
 		</div>
 		</div>
 		</div>
+		</div>
+		</div>
+		</div>
+    <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
 	 
 	<div class="card-content collpase show">
+		<!-- Zero configuration table -->
+        <section id="configuration">
+        <div class="row">
+            <div class="col-12">
+             <div class="card">
+                
+                <div class="card-content collapse show">
 			{{#if messages.error  }}
 			<script>
 					toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
@@ -91,13 +99,6 @@
 					toastr.success("{{messages.success}}", "Sucess!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
-		<!-- Zero configuration table -->
-        <section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
                 <div class="card-body card-dashboard card-design">
 					
 					<section id="horizontal">
@@ -257,68 +258,114 @@
                 groupable: true,
                 resizable: true,
                 filterable: {
-					mode: "row"
+					mode: "row",
+					 messages: {
+          info: "{{__ 'Show items with value that:'}}",
+		  isEqualTo: "{{__ 'Is equal to'}}",
+		  and: "{{__ 'And'}}",
+		  or: "{{__ 'Or'}}",
+		  clear: "{{__ 'Clear'}}",
+		  filter: "{{__ 'Filter'}}",
+		  isTrue: "{{__ 'is true'}}",
+      isFalse: "{{__ 'is false'}}",
+      isEmpty: "{{__ 'is empty'}}",
+      isNotEmpty: "{{__ 'is not empty'}}"
+        },
+		operators: {
+      string: {
+        eq: "{{__ 'is equal to'}}",
+        neq: "{{__ 'is not equal to'}}",
+        startswith: "{{__ 'starts with'}}",
+        contains: "{{__ 'contains'}}",
+        doesnotcontain: "{{__ 'does not contain'}}",
+        endswith: "{{__ 'ends with'}}",
+        isnull: "{{__ 'is null'}}",
+        isnotnull: "{{__ 'is not null'}}"
+      }
+    }
 				},
-                columnMenu: true,
-				pageable: {
+                columnMenu: {
+    messages: {
+      columns: "{{__ 'Columns'}}",
+	  filter : "{{__ 'Filter'}}",
+	  sortAscending: "{{__ 'Sort Ascending'}}", 
+	  sortDescending: "{{__ 'Sort Descending'}}", 
+    },
+  },
+												pageable: {
 					input: true,
 					numeric: false,
 					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100]
+					pageSizes: [10, 20, 25, 50, 100],
+					messages: {
+	  display: "{{__ '{0} - {1} of {2} items'}}",
+      empty: "{{__ 'No items to display'}}",
+      page: "{{__ 'Page'}}",
+	  of: "{{__ 'of {0}'}}", 
+      itemsPerPage: "{{__ 'items per page'}}",
+      first: "{{__ 'Go to the first page'}}",
+      previous: "{{__ 'Go to the previous page'}}",
+      next: "{{__ 'Go to the next page'}}",
+      last: "{{__ 'Go to the last page'}}",
+      refresh: "{{__ 'Refresh'}}"
+    }
 				},
 				noRecords: true,
+				messages: {
+            noRecords: "{{__ 'No records available.'}}"
+        },
                 columns: [
-				 
+				{
+                        field: "loancount" ,
+                        title: "{{__ 'Loan No.'}}",
+                        width: 130
+                    }, 
 					{
                         field: "loan.type" ,
-                        title: "Loan Type",
+                        title: "{{__ 'Loan Type'}}",
                         width: 100
                     }, 
 					{
                         field: "user.firstname",
-                        title: "User Name",
+                        title: "{{__ 'User Name'}}", 
 						template : "#= user.firstname # #= user.lastname #",
                         width: 130
                     },
 					
 					{
                         field: "description",
-                        title: "Loan Description",
+                        title: "{{__ 'Loan Description'}}",
                         width: 270
                     },
 					{
                         field: "loanamount",
-                        title: "{{{currencyList session.generaldata.currency}}} "+"Loan Amount",
+                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Loan Amount'}}",
                         width: 130
                     },
 					{
-                        field: "approvestatus",
-                        title: "Approved Status",
-						template:'<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
-                        width: 120
-                    },
-					{
-                        field: "currency",
-                        title: "{{{currencyList session.generaldata.currency}}} "+"Currency",
-						hidden: true,
-                        width: 150
-                    },
-					{
                         field: "interestrate",
-                        title: "Interest Rate"+"%",
-						width: 130
-                    },
-					{
-                        field: "years",
-                        title: "Loan period in years",
-						<!-- template: "<div class='123'>{{getcountrybyid '#= country #' }}</div>", -->
-						hidden: true,
-                        width: 150
+                         title: "{{__ 'Interest Rate'}}"+" %",
+                        width: 130
                     },
 					
+						{{#isCustomer session.role_slug}}
+					{
+                        field: "approvestatus",
+                        title: "{{__ 'Approved Status'}}",
+						template: '<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
+						width: 130,
+                    },
+						    {{/isCustomer}}
+					{
+                        field: "years",
+                         title: "{{__ 'Loan period in years'}}",
+						 <!-- template: "<div class='123'>{{getcountrybyid '#= country #' }}</div>", -->
+	                   hidden: true,
+                        width: 150
+                    },
 					{
                         field: "startdate",
-                         title: "Start Date",
+                         title: "{{__ 'Start Date'}}",
 						 hidden: true,
                         width: 150
                     },
@@ -331,14 +378,16 @@
 					
 					
 					{
-						width: "150px",
+						width: "200px",
 					
 						command:
 						[
 							{
 								template : "<center>"
 							},
-							
+							{template : "&nbsp;" },
+
+							{{#ifCond accessrightdata.view "||" session.admin_access}}
 							{
 								name: "pageview", text:"", className: "btn btn-icon color-navy btn-outline-light",iconClass:"fa fa-eye",
 								click:function(e)
@@ -350,8 +399,10 @@
 								  return false;
 								}
 							},
+							{{/ifCond}}
 							{template : "&nbsp;" },
 							/* Edit action start */
+							{{#ifCond accessrightdata.update "||" session.admin_access}}
 							{ 
 								name: "pageEdit", text:"", className: "btn btn-icon color-blue btn-outline-light",iconClass:"fa fa-pencil",
 								click:function(e) 
@@ -363,10 +414,12 @@
 								  return false;
 								} 
 							},
+							{{/ifCond}}
 							{template : "&nbsp;" },
 						
 							
 							/* Delete action start */
+							{{#ifCond accessrightdata.delete "||" session.admin_access}}
 							{ 
 								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
 								click: function(e){  //add a click event listener on the delete button
@@ -388,14 +441,18 @@
 									})
 								}	
 							},
+							{{/ifCond}}
 							
 							
 							/* Delete action end */
 							
 							{template : "</center>" },
 							 
-							], title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='addloan'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
+							],
+							{{#ifCond accessrightdata.add "||" session.admin_access}}
+							 title: "{{__ "Action"}}", 
+							headerTemplate: "<center><a href='addloan'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+							{{/ifCond}}
 					}
                 ],
 				editable: {

@@ -1,4 +1,4 @@
-{{breadcrums 'Home' title}}
+{{breadcrums (__ 'Home') (__ title)}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 
@@ -299,21 +299,31 @@
 {{/ifCond}}
 {{#ifCond datafield.field_type "==" "file"}}
 	<div class="col-md-6">
-	<div class="form-group row">
-	<div class="col-md-12">
-		<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-		<input class="form-control border-light validimage"
-		{{#ifEqual datafield.validation "required"}}  data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-		{{#each ../customfield_value as |custome_value| }}
-			{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-				value="{{custome_value.customfield_value}}" 
+		<div class="form-group row">
+			<div class="col-md-12">
+				<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}{{#unless ../customfield_value}}{{else}}<span class="required red">*</span>{{/unless}}{{/ifEqual}}</label>
+				<input class="form-control border-light validimage"
+					{{#ifEqual datafield.validation "required"}}
+						{{#unless ../customfield_value}} data-validation-required-message="{{datafield.label}} is required" {{/unless}}
+					{{/ifEqual}}
+					{{#each ../customfield_value as |custome_value| }}
+						{{#ifCond custome_value.id_d "==" datafield.id_d}}			
+							value="{{custome_value.customfield_value}}" 
+						{{/ifCond}}
+					{{/each}}
+					name="{{datafield._id}}" type="file">
 				
-				{{/ifCond}}
-		{{/each}}
-		name="{{datafield._id}}" type="file">{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "==" datafield.id_d}}<p>{{custome_value.customfield_value}}</p><input class="form-control border-light edit_val"  name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden"  placeholder="" id="userinput5">{{/ifCond}}{{/each}}
-		<span class="required red notice"></span>
-	</div><div class="help-block"></div>
-	</div>
+				{{#each ../customfield_value as |custome_value| }}
+					{{#ifCond custome_value.id_d "==" datafield.id_d}}
+						<p>{{custome_value.customfield_value}}</p>
+						<input class="form-control border-light edit_val" name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden" placeholder="" id="userinput5">
+					{{/ifCond}}
+				{{/each}}
+
+				<span class="required red notice"></span>
+			</div>
+			<div class="help-block"></div>
+		</div>
 	</div>
 {{/ifCond}}
 {{/each}}
@@ -329,7 +339,8 @@
 					<i class="ft-refresh-cw"></i> {{__ "Reset"}}
 				</button>
 			</div>
-			
+			</div>
+			</div>
 		</form>
 		
 	<!-- space not allow -->
@@ -337,11 +348,9 @@
 	</div>
 	</div>
 	</div>
-	</div>
     </div>
 </div>
 </div>
-</div> 
 {{#each newfield as |customvalid|}}
 <script type="text/javascript">
        $('document').ready(function(){

@@ -1,41 +1,38 @@
-{{breadcrums 'Home' title}}
+{{breadcrums (__ 'Home') (__ title)}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 	<div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header p-0 border-bottom border-light">
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
 	<div class="card-content collpase show">
 	<div class="card-body">
 		<form method="POST" id="formID" action="/service/addservice"  class="needs-validation form form-horizontal" novalidate enctype="multipart/form-data">
 		{{#each data as |result|}}
-		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Basic Details"}}</p>
+		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Basic Details"}}{{/with}}</p>
 			<div class="form-body user_form">
 			<div class="row">
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}}>
-				<input type="text" id="userinput1" maxlength="50" data-validation-required-message="Service name is required" name="servicename" {{#if this.servicename}} value="{{this.servicename}}"{{/if}}>
-				<label for="userinput1">{{__ "Service Name"}}<span class="required red">*</span></label>
+				<input type="text" id="userinput1" maxlength="50" data-validation-required-message="{{#with ..}}{{__ "Service name is required" setlang}}{{/with}}" name="servicename" {{#if this.servicename}} value="{{this.servicename}}"{{/if}}>
+				<label for="userinput1">{{#with ..}}{{__ "Service Name" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-				<div class="heading-elements ">
+				<div class="">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					    <label class="ml-1 custom-top-label top" style="z-index:9">{{__ "Category Type"}}<span class="red">*</span></label>
-						<select class="select2 form-control export cate_type" data-validation-required-message="Category type is required" name="categorytypes" >
-							<option value="">Select Category Type</option>
-							{{#each ../category as |type|}}
-								<option value="{{type.categoryname}}" {{#ifCond type.categoryname '==' result.categorytypes}} selected {{/ifCond}}>{{type.categoryname}}</option>
-							{{/each}}
-						</select>
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Category Type"}}{{/with}}<span class="red">*</span></label>
+						<select class="select2 form-control export cate_type" data-validation-required-message="{{#with ..}}{{__ "Category type is required"}}{{/with}}" name="categorytypes">
+    <option value="">{{#with ..}}{{__ "Select Category Type" setlang}}{{/with}}</option>
+    {{#each ../category as |type|}}
+        <option value="{{type.categoryname}}" {{#ifCond type.categoryname '==' result.categorytypes}} selected{{/ifCond}}>{{type.categoryname}}</option>
+    {{/each}}
+</select>
 					</li>
 					</ul>
 				</div><div class="help-block"></div>
@@ -43,14 +40,14 @@
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-				<div class="heading-elements ">
+				<div class="">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					    <label class="ml-1 custom-top-label top" style="z-index:9">{{__ "Service for"}}<span class="red">*</span></label>
-						<select class="select2 form-control export cate_type" data-validation-required-message="Category type is required" name="servicefor" >
-							<option value="all" {{#ifCond result.servicefor "==" "all"}}selected{{/ifCond}} >All</option>
-							<option value="male" {{#ifCond result.servicefor "==" "male"}}selected{{/ifCond}}>Male</option>
-							<option value="female" {{#ifCond result.servicefor "==" "female"}}selected{{/ifCond}}>Female</option>
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Service for"}}{{/with}}<span class="red">*</span></label>
+						<select class="select2 form-control export cate_type" data-validation-required-message="{{#with ..}}{{__ "Category type is required"}}{{/with}}" name="servicefor" >
+							<option value="all" {{#ifCond result.servicefor "==" "all"}}selected{{/ifCond}} >{{#with ..}}{{__ "All"setlang}} {{/with}}</option>
+							<option value="male" {{#ifCond result.servicefor "==" "male"}}selected{{/ifCond}}>{{#with ..}}{{__ "Male"setlang}} {{/with}}</option>
+							<option value="female" {{#ifCond result.servicefor "==" "female"}}selected{{/ifCond}}>{{#with ..}}{{__ "Female"setlang}} {{/with}}</option>
 						</select>
 					</li>
 					</ul>
@@ -61,24 +58,27 @@
 			<div class="form-group input">
 			<div class="col-md-12" style="border: 1px solid #ddd;">
 			<div class="form-field">
-			<textarea name="description" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,300})" data-validation-regex-message="{{__ 'Enter valid description'}}" data-validation-required-message="{{__ 'Description is required'}}" {{#if this.description}} value="{{this.description}}"{{/if}}>{{this.description}}</textarea>
+			<textarea name="description" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,300})" data-validation-regex-message="{{#with ..}}{{__ 'Enter valid description'}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ 'Description is required'}}{{/with}}" {{#if this.description}} value="{{this.description}}"{{/if}} .../>{{this.description}}</textarea>
 				<span class="txt-title-label"></span>
-				<label class="text-area">{{__ "Description"}}<span class="required red">*</span></label>
+				<label class="text-area">{{#with ..}}{{__ "Description"}}{{/with}}<span class="required red">*</span></label>
 			</div>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
 			
-			<div class="col-md-5 add_element">
+			<div class="col-lg-12 col-xl-6 pb-1">
+			<div class="row">
+			<div class="col-lg-5 col-md-10 add_element">
 			{{#if this.uploadimages }}
 				{{#each this.uploadimages}}
 			<div class="col-md-12 p-0">
 				<div class="form-group">
 					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Upload Image" setlang}}{{/with}}<span class="required red">*</span></label>
-					<input class="form-control border-light fileUpload docfile" id="fileUpload" name="uploadimages" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="Document is required" {{/if}} type="file" multiple> 
+					<input class="form-control border-light fileUpload docfile" id="fileUpload" name="uploadimages" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
 					<span class="required red notice"></span>
 					{{#if this}}
-					<p>{{this}}</p> 
+                    <p class="d-inline-block mr-2">{{this}}</p>
+					<a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
 					<input class="form-control border-light fileUpload doc_old_in" name="image_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
 					{{/if}}
 				</div>
@@ -89,48 +89,52 @@
 				{{addimage 'nodata'}}
 			{{/if}}
 			</div>
-			<div class="col-md-1 p-0">
+			<div class="col-lg-1 col-md-2 p-0 padding-mobile">
 			<button type="button" id="add_doc" class="btn shover" style="background-color:#6badc2;color:#fff">
-				<i class="icon-plus4"></i>Add more
+				<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
             </button>
+			</div>
 			</div>			
-			<div class="col-md-6">
+			</div>			
+			<div class="col-lg-12 col-xl-6 pb-1">
 			<div class="row checkbox_cat">
 				<div class="col-md-10">
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light">
 							<input type="text" maxlength="30"  class="form-control c_label">
-							<label>Tag</label>
+							<label>{{#with ..}}{{__ "Tag"}}{{/with}}</label>
 						</div>
 					</div>
 				</div> 
-				<div class="col-md-2 p-0">
-					<input type="button" name="menu_web" class="btn btn-primary add_more_checkbox" value="Add Tag">
+				<div class="col-md-2 p-0 padding-mobile">
+					<input type="button" name="menu_web" class="btn btn-primary add_more_checkbox" value="{{#with ..}}{{__ "Add Tag"}}{{/with}}">
 				</div> 
 			</div>
 			<div class="row checkbox_cat">
 				<div class="col-md-12 checkbox_label">
-				{{#if result.tagname}}
-				{{#each  result.tagname as |tagdata|}}
+				{{#if this.tagname}}
+				{{#each  this.tagname as |tagdata|}}
+				{{#if tagdata}}
 				<div class="badge badge-warning label_checkbox custom-margin"  ><input type="hidden" value={{tagdata}}  name="tagname"><span>{{tagdata}}</span><a href="#"><i class="fa fa-trash font-medium-2 delete_c_label" aria-hidden="true"></i></a></div>
+				{{/if}}
 				{{/each}}
 				{{/if}}
 				</div>
 			</div>
 			</div>			
 			</div>			
-		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Pricing and Related Details"}}</p>
+		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Pricing and Related Details"}}{{/with}}</p>
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-lg-4 col-md-7">
 				<div class="form-group input">
-				<div class="col-md-12 form-control bordern">
-					<label for="userinput1">{{__ "Service Duration:"}}<span class="required red">*</span></label>
-					<input name="duration_hour" placeholder="1" class="inputnumber border-light duration_hour" type="number" min="1" max="100000 " data-validation-required-message="Service Duration is required" {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
+				<div class="col-md-12 pl-0 form-control bordern">
+					<label for="userinput1">{{#with ..}}{{__ "Service Duration:"}}{{/with}}<span class="required red">*</span></label>
+					<input name="duration_hour" class="inputnumber border-light duration_hour" type="number" min="1" max="100000 " data-validation-required-message="{{#with ..}}{{__ "Service Duration is required"}}{{/with}}" {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
 				</div><div class="help-block"></div>
 				</div>
 				</div>
-				<div class="form-group col-lg-2 p-0">
-					<label style="font-weight:100; margin-right:11px">Hour</label>
+				<div class="form-group col-lg-2 p-0 col-md-5 padding-mobile">
+					<label style="font-weight:100; margin-right:11px">{{#with ..}}{{__ "Hour"}}{{/with}}</label>
 					<label style="font-weight:100;">
 						<select class="form-control duration_minute" name="duration_minute">
 							<option value="00" {{#ifCond result.duration_minute "==" "00"}}selected{{/ifCond}}>00</option>
@@ -139,20 +143,20 @@
 							<option value="45" {{#ifCond result.duration_minute "==" "45"}}selected{{/ifCond}}>45</option>
 						</select>
 					</label>
-					<label style="font-weight:100;">Minute</label>
+					<label style="font-weight:100;">{{#with ..}}{{__ "Minute"}}{{/with}}</label>
 				</div>
 			<div class="col-md-6">
 			<div class="form-group">
 			<div class="col-md-12 form-control">
 			<div class="skin skin-flat row ">
 			<div class="input-group">
-			<label class="custom-control-label custom-top-label ml-2">{{__ "Price Type"}}</label>
+			<label class="custom-control-label custom-top-label ml-2">{{#with ..}}{{__ "Price Type"}}{{/with}}</label>
 				&nbsp;&nbsp;&nbsp;
 				<div class="d-inline-block custom-control custom-radio mr-1">			
 					<input type="radio" name="pricetype" class="custom-control-input" {{#ifCond this.pricetype '==' 'fixprice'}} checked="" {{/ifCond}} value="fixprice" id="yes">
-					<label class="custom-control-label mr-1" for="yes">{{__ "Fix Price"}}</label>
+					<label class="custom-control-label mr-1" for="yes">{{#with ..}}{{__ "Fix Price"}}{{/with}}</label>
 					<input type="radio" name="pricetype" class="custom-control-input" {{#ifCond this.pricetype '==' 'timebase'}} checked="" {{/ifCond}}  value="timebase" id="no">
-					<label class="custom-control-label" for="no">{{__ "Time Base"}}</label>
+					<label class="custom-control-label" for="no">{{#with ..}}{{__ "Time Base"}}{{/with}}</label>
 					&nbsp; &nbsp;&nbsp; &nbsp;
 					&nbsp; &nbsp;&nbsp; &nbsp;
 				</div>
@@ -166,7 +170,7 @@
                <div class="card-content">
                  <!-- <div class="card-body"> -->
 				<fieldset>
-				<label>{{__ "Service Price"}}<span class="required red">*</span></label>				
+				<label>{{#with ..}}{{__ "Service Price"}}{{/with}}<span class="required red">*</span></label>				
                      <div class="input-group touchspincolor">
 					  <input type="text" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="price" data-validation-required-message="{{__ 'Interest rate is required'}}" data-bts-step="500" {{#if this.price}} value="{{this.price}}" readonly {{else}} value="500"{{/if}} />
                      </div>
@@ -178,7 +182,7 @@
 			<div class="form-group input">
 				<div class="heading-elements ">
 					<ul class="list-inline mb-0">
-						<label>Assigned Staff</label>
+						<label>{{#with ..}}{{__ "Assigned Staff"}}{{/with}}</label>
 					<li class="col-md-12 p-0 form-control" id="export">
 						<select multiple id="staff_id" class="select2 form-control export cate_type" name="assigned_staff">
 						{{#each ../staff as |staffname|}}
@@ -193,13 +197,13 @@
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
-				<input type="text" id="userinput1" data-validation-required-message="User Capacity is required" name="user_capacity" {{#if this.user_capacity}} value="{{this.user_capacity}}"{{/if}}>
-				<label for="userinput1">{{__ "User Capacity"}}<span class="required red">*</span></label>
+				<input type="text" id="userinput1" data-validation-required-message="{{#with ..}}{{__ "User Capacity is required"}}{{/with}}" name="user_capacity" {{#if this.user_capacity}} value="{{this.user_capacity}}"{{/if}}>
+				<label for="userinput1">{{#with ..}}{{__ "User Capacity"}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
 			<div class="form-group ml-1">
-				<label style="float: left;line-height: 2.5;margin-right: 15px;">Enable Online Booking</label>
+				<label style="float: left;line-height: 2.5;margin-right: 15px;">{{#with ..}}{{__ "Enable Online Booking"}}{{/with}}</label>
 				<label class="switch">
 					<input type="checkbox" id="visable" data-toggle="toggle" value="1" name="enable_online_booking" checked>
 					<span class="slider round"></span>
@@ -208,73 +212,104 @@
 			</div>
 			
 			{{/each}}
-			{{#if note}}
-			<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Add 	Note"}}</p>
-			<div class="row">	
-			{{#each note}}
-					<div class="col-md-6" style="float:left">
-					<div class="row">
-					<div class="col-md-10 add_note">
-					{{#if this.note }}
-						{{#each this.note}}
-					<div class="col-md-12 p-0 mr-0">
-						<div class="form-group">
-							<label class="custom-control-label-date ml-2"  style="z-index: 9;">Add Note</label>
-							<textarea class="form-control custom-control" rows="4" name="note" style="resize:none" {{#if this}}value="{{this}}"{{/if}} >{{this}}</textarea>
-						<span class="required red notice"></span>
-						</div><div class="help-block"></div>
-					</div>
-					{{/each}}
-					{{else}}
-						{{addnote 'nodata'}}
-					{{/if}}
-					</div>
-					<div class="col-md-2 p-0">
-					<button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
-						<i class="icon-plus4"></i>Add more
-					</button>
-					</div>
-					</div>
-					</div>
-					
-					<div class="col-md-6" style="float:left">
-					<div class="row">
-					<div class="col-md-10 add_file">
-					{{#if this.fileattach }}
-					{{#each this.fileattach}}
-					{{log this}}
-						<div class="col-md-12 p-0">
-						<div class="form-group">
-							<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Attach File" setlang}}{{/with}}<span class="required red">*</span></label>
-							<input class="form-control border-light fileUpload att_file" id="fileUpload" name="attachfile" {{#if this}} value="{{this}}" {{/if}} type="file" multiple>
-							{{#if this}}
-							<p>{{this}}</p> 
-							<input class="form-control border-light fileUpload attach_file_old" name="attachfile_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
-							{{/if}}
-						</div>
-						<div class="help-block"></div>
-					</div>
-					{{/each}}
-					{{else}}
-						{{attachfile 'nodata'}}
-					{{/if}}
-					</div>
-					<div class="col-md-2 p-0">
-					<button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
-						<i class="icon-plus4"></i>Add more
-					</button>
-					</div>
-					</div>
-					</div>
-				{{/each}}
-				{{/if}}
-			</div>
+{{#if note}}
+    <p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Add Note"}}</p>
+    <div class="row">	
+        {{#each note}}
+            <div class="col-lg-12 col-xl-6 pb-1" style="float:left">
+                <div class="row">
+                    <div class="col-md-10 add_note">
+                        {{#if this.note }}
+                            {{#each this.note}}
+                                <div class="col-md-12 p-0 mr-0">
+                                    <div class="form-group">
+                                        <label class="custom-control-label-date ml-2" style="z-index: 9;">"{{#with ..}}{{__ "Add Note"}}{{/with}}"</label>
+                                        <textarea class="form-control custom-control" rows="4" name="note" style="resize:none" {{#if this}}value="{{this}}"{{/if}} >{{this}}</textarea>
+                                        <span class="required red notice"></span>
+                                    </div>
+                                    <div class="help-block"></div>
+                                </div>
+                            {{/each}}
+                        {{else}}
+                            {{addnote 'nodata'}}
+                        {{/if}}
+                    </div>
+                    <div class="col-md-2 p-0 padding-mobile">
+                        <button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
+                            <i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-xl-6 pb-1" style="float:left">
+                <div class="row">
+                    <div class="col-md-10 add_file">
+                        {{#if this.fileattach }}
+                            {{#each this.fileattach}}
+                                {{log this}}
+                                <div class="col-md-12 p-0">
+                                    <div class="form-group">
+                                        <label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Attach File" setlang}}{{/with}}<span class="required red">*</span></label>
+                                        <input class="form-control border-light fileUpload att_file" id="fileUpload" name="attachfile" {{#if this}} value="{{this}}" {{/if}} type="file" multiple>
+                                        {{#if this}}
+                                            <p class="d-inline-block mr-2">{{this}}</p>
+                                            <a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
+                                            <input class="form-control border-light fileUpload attach_file_old" name="attachfile_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
+                                        {{/if}}
+                                    </div>
+                                    <div class="help-block"></div>
+                                </div>
+                            {{/each}}
+                        {{else}}
+                            {{attachfile 'nodata'}}
+                        {{/if}}
+                    </div>
+                    <div class="col-md-2 p-0 padding-mobile">
+                        <button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
+                            <i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Add Note"}}</p>
+    <div class="row">
+        <div class="col-md-6" style="float:left">
+            <div class="row">
+                <div class="col-md-10 add_note">
+                    {{addnote 'nodata'}}
+                </div>
+                <div class="col-md-2 p-0 padding-mobile">
+                    <button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
+                        <i class="icon-plus4"></i>{{__ "Add more"}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="float:left">
+            <div class="row">
+                <div class="col-md-10 add_file">
+                    {{attachfile 'nodata'}}
+                </div>
+                <div class="col-md-2 p-0 padding-mobile">
+                    <button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
+                        <i class="icon-plus4"></i>{{__ "Add more"}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
 			
 <!-- Custome fields Start--> 
 {{#if newfield}}
 <p class="form-section text-bold-600 font-medium-2 border-light"><i class="fa fa-address-card-o" aria-hidden="true"></i> {{__ "Custom fields"}} </p>
 <div class="row">
 {{#each newfield as |datafield|}}
+<script>console.log({{data-validation-required-message}})</script>
 {{#ifCond datafield.field_type "==" "text"}}
 	<div class="col-md-6 notCustomerBlock">
 	<div class="form-group input">
@@ -470,39 +505,50 @@
 {{/ifCond}}
 {{#ifCond datafield.field_type "==" "file"}}
 	<div class="col-md-6">
-	<div class="form-group row">
-	<div class="col-md-12">
-		<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-		<input class="form-control border-light validimage"
-		{{#ifEqual datafield.validation "required"}}  data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-		{{#each ../customfield_value as |custome_value| }}
-			{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-				value="{{custome_value.customfield_value}}" 
+		<div class="form-group row">
+			<div class="col-md-12">
+				<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}{{#unless ../customfield_value}}{{else}}<span class="required red">*</span>{{/unless}}{{/ifEqual}}</label>
+				<input class="form-control border-light validimage"
+					{{#ifEqual datafield.validation "required"}}
+						{{#unless ../customfield_value}} data-validation-required-message="{{datafield.label}} is required" {{/unless}}
+					{{/ifEqual}}
+					{{#each ../customfield_value as |custome_value| }}
+						{{#ifCond custome_value.id_d "==" datafield.id_d}}			
+							value="{{custome_value.customfield_value}}" 
+						{{/ifCond}}
+					{{/each}}
+					name="{{datafield._id}}" type="file">
 				
-				{{/ifCond}}
-		{{/each}}
-		name="{{datafield._id}}" type="file">{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "==" datafield.id_d}}<p>{{custome_value.customfield_value}}</p><input class="form-control border-light edit_val"  name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden"  placeholder="" id="userinput5">{{/ifCond}}{{/each}}
-		<span class="required red notice"></span>
-	</div><div class="help-block"></div>
-	</div>
+				{{#each ../customfield_value as |custome_value| }}
+					{{#ifCond custome_value.id_d "==" datafield.id_d}}
+						<p class="d-inline-block mr-1">{{custome_value.customfield_value}}</p>
+						{{!-- <p class="d-inline-block mr-2">{{this}}</p> --}}
+					<a class="mr-2" href="/images/upload/{{custome_value.customfield_value}}" download="{{custome_value.customfield_value}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
+						<input class="form-control border-light edit_val" name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden" placeholder="" id="userinput5">
+					{{/ifCond}}
+				{{/each}}
+
+				<span class="required red notice"></span>
+			</div>
+			<div class="help-block"></div>
+		</div>
 	</div>
 {{/ifCond}}
 {{/each}}
 {{/if}}
+			</div>
+			{{!-- </div> --}}
 
 <!-- Custome fields End-->
 			<div class="form-actions left">
 				<button type="submit" class="btn btn-secondary">
-					<i class="fa fa-check-square-o"></i> Submit
+					<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
 				</button>
 				<button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
-					<i class="ft-refresh-cw"></i> Reset
+					<i class="ft-refresh-cw"></i> {{__ "Reset"}}
 				</button>
 			</div>
-			</div>
-			</div>
 		</form>
-			</div>
 			</div>
 	</div>
 	</div>
@@ -524,6 +570,7 @@ $(document).ready(function(){
 	$(this).data("DateTimePicker").maxDate(new Date());
 	});
 });
+
 </script>
 <script>
 function deleteParentElement(n){
@@ -613,5 +660,25 @@ $(document).ready(function(){
 			return false;
 			}
         });
+</script>
+<script>
+	$(document).ready(function () {
+        // Assuming you have included jQuery before this script
+
+        // Listen for the change event on the checkbox
+        $('#visible').change(function () {
+            // Check if the checkbox is checked
+            if ($(this).is(':checked')) {
+                // If checked, set the value to 1
+                $(this).val(1);
+            } else {
+                // If not checked, set the value to 0
+                $(this).val(0);
+            }
+
+            // You can optionally log the value to the console for debugging
+            console.log($(this).val());
+        });
+    });
 </script>
 {{/each}}

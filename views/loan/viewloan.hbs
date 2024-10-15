@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'View Loan'}}	
+{{breadcrums (__ 'Home') (__ 'View Loan')}}	
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
@@ -7,25 +7,25 @@
 	<section id="simple-user-cards" class="row pb-2">
 	<div class="col-xl-12 col-md-12 col-sm-12">
 	{{#each user}}
-		<h2> <i class="fa fa-user-circle-o"></i>{{this.firstname}} {{this.middlename}} {{this.lastname}}</h2>
+		<h2> <i class="fa fa-user-circle-o p-1"></i>{{this.firstname}} {{this.middlename}} {{this.lastname}}</h2>
 	{{/each}}
 	</div>
 	<div class="row" style="float:left; width:100%">
-		<div class="col-xl-3 col-md-6 col-sm-12 pl-0">
+		<div class="col-xl-3 col-md-12 col-sm-12 pl-0">
 		<div class="card-content123">
 			{{#each data}}
 				<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}}>
-				<div class="card-body text-center p-0 pt-1 pb-1">
+				<div class="card-body padding-mobile text-center p-0 pt-1 pb-1">
 					<h5 class="card-title"></h5>
 					
-					<div class="card-body text-center">
+					<div class="card-body text-center padding-mobile">
 					<h6 class="card-subtitle text-muted"><b>{{#with ..}}{{__ "Loan No. :" setlang}}{{/with}}</b> {{this.loancount}}</h6>
 					
 				</div>
 				</div>
 		</div>
 		</div>
-		<div class="col-xl-9 col-md-7 col-sm-12" style="padding-top: 2%;">
+		<div class="col-xl-9 col-md-12 col-sm-12" style="padding-top: 2%;">
 			<div id="card-drag-area">
 			<h5 class="card-title"></h5>
 				
@@ -33,15 +33,15 @@
 						<div class="row">
 							<div class="col-xl-12 col-md-12 col-12 col-sm-12 col-xs-12">
 								<div class="row">
-									<div class="col-xl-5 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
+									<div class="col-xl-5 col-md-12 col-12 col-sm-12 col-xs-12 card-content collapse show pb-1">
 										<h6><b>{{#with ..}}{{__ "Loan description:" setlang}}{{/with}}</b> {{this.description}}</h6>
 									</div>
-								<div class="col-xl-4 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
+								<div class="col-xl-4 col-md-6 col-12 col-sm-12 col-xs-12 card-content collapse show pb-1">
 									<h6>
 										<b>{{#with ..}}{{__ "Loan amount" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}}):</b> {{formatNumber this.loanamount 0 ','','}}
 									</h6>
 								</div>
-								<div class="col-xl-3 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
+								<div class="col-xl-3 col-md-6 col-12 col-sm-12 col-xs-12 card-content collapse show pb-1">
 										 <h6>
 										<b>{{#with ..}}{{__ "Interest Rate:" setlang}}{{/with}}</b> {{this.interestrate}}%
 										</h6>
@@ -70,8 +70,8 @@
 				<div class="row p-1">
 			    <div class="col-sm-6">
 			        <div class="row">
-						<div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Loan Number" setlang}}{{/with}}</div>
-						<div class="col-sm-6"> 
+						<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Loan Number" setlang}}{{/with}}</div>
+						<div class="col-sm-6 col-6"> 
 							<span class="colon">:</span>
 							<div class="tabletext">{{this.loancount}}</div>
 						</div>
@@ -79,8 +79,8 @@
 				</div>
 				 <div class="col-sm-6">
 			        <div class="row">
-						<div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</div>
-						<div class="col-sm-6"> 
+						<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</div>
+						<div class="col-sm-6 col-6"> 
 							<span class="colon">:</span>
 							{{#each ../type as |results|}}
 							<div class="tabletext">{{results.type}}</div>
@@ -92,9 +92,9 @@
 				<div class="row p-1">
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Years" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Years" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							 <div class="tabletext">{{this.years}}</div> 
 						  </div>
@@ -102,9 +102,9 @@
 				    </div> 
 					 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Work detail" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Work detail" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span> 
 							<div class="tabletext">{{this.workdetail}}</div>
 						  </div>
@@ -114,9 +114,9 @@
 				<div class="row p-1">
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold">{{#with ..}}{{__ "Loan Start Date" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold">{{#with ..}}{{__ "Loan Start Date" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{this.startdate}}</div>
 						  </div>
@@ -124,9 +124,9 @@
 				    </div>
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Loan End Date" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Loan End Date" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{this.enddate}}</div>
 						  </div>
@@ -136,9 +136,9 @@
 				<div class="row p-1">
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Total EMI months" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Total EMI months" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext"> {{this.totalemimonth}}</div> 
 						  </div>
@@ -148,9 +148,9 @@
 				
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Income per year" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Income per year" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{formatNumber this.incomeperyear 0 ','','}} </div> 
 						  </div>
@@ -160,9 +160,9 @@
 				<div class="row p-1">
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Income per month" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Income per month" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span> 
 							<div class="tabletext">{{formatNumber this.incomepermonth 0 ','','}}</div>
 						  </div>
@@ -171,11 +171,15 @@
                 
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Documents shown" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Documents shown" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{this.document}}</div> 
+							{{#each this.document}}
+							<div class="tabletext"><a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{this}}</a>
+							<input class="form-control border-light fileUpload" name="productimage_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
+							</div> 
+							{{/each}}
 						  </div>
 						</div>
 				    </div>
@@ -190,9 +194,9 @@
 		 <div class="row p-1">
 				     <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Colleague Name" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Colleague Name" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6">
+						  <div class="col-sm-6 col-6">
 						    <span class="colon">:</span> 
 							<div class="tabletext">{{this.colleague}}</div>
 						  </div>
@@ -200,9 +204,9 @@
 				 </div>    
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Address" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Address" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{this.address}}</div>  
 						  </div>
@@ -212,19 +216,19 @@
 				<div class="row p-1">
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Mobile" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Mobile" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							 <div class="tabletext">{{this.mobile}}</div> 
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 "> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Address Colleague" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Address Colleague" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext"> {{this.addtype}}</div>
 						  </div>
@@ -302,13 +306,14 @@ function myFunction() {
 									<div class="row">
 									<div class="col-12">
 										<div class="card">
-										<div id="tableBox">
+										<div id="tableBox" class="table-responsive">
 										<table class="table designtable">
 										<thead class="headcolor"><tr>
-										<th>{{__ 'No'}}</th>
+										<th>{{__ 'No.'}}</th>
 										<th>{{__ 'Date'}}</th>
 										<th>{{__ 'Principal'}}</th>
 										<th>{{__ 'Interest'}}</th>										
+										<th>{{__ 'Total Ammount'}}</th>										
 										<th>{{__ 'Remaining Balance'}}</th>									
 										<th>{{__ 'Status'}}</th></tr>
 										</thead>
@@ -318,13 +323,14 @@ function myFunction() {
 										
 									<tr class="colortr"> 
 									<td class="bordertop">{{result.month}}</td>
-									<td class="bordertop">{{ result.date}}</td>
-									<td class="bordertop">{{formatNumber result.principal 0 ','','}}</td>
-									<td class="bordertop">{{formatNumber result.interest}}</td>					
-									<td class="bordertop">{{formatNumber result.remainingBalance 0 ','','}}</td>
+									<td class="bordertop">{{result.date}}</td>
+									<td class="bordertop">{{formatNumber result.principal 2 '.' ','}}</td>
+									<td class="bordertop">{{formatNumber result.interest 2 '.' ','}}</td>					
+									<td class="bordertop">{{formatNumber result.totalpayment 2 '.' ','}}</td>					
+									<td class="bordertop">{{formatNumber result.remainingBalance 2 '.' ','}}</td>
 									<td class="bordertop"><a href="/loan/addemi/{{result._id}}">
-									{{#ifCond this.status '==' '0'}}<button type="button" class="btn btn-info">{{__ 'pending'}}</button>{{/ifCond}}</a>
-									{{#ifCond this.status '==' '1'}}<button type="button" disabled class="btn" style="background-color:#00c735; color:#fff">{{__ 'Completed'}}</button>{{/ifCond}}</td>  
+									{{#ifCond this.status '==' '0'}}<button type="button" class="btn btn-info">{{#with ..}}{{__ 'pending'}}{{/with}}</button>{{/ifCond}}</a>
+									{{#ifCond this.status '==' '1'}}<button type="button" disabled class="btn" style="background-color:#00c735; color:#fff">{{#with ..}}{{__ 'Completed'}}{{/with}}</button>{{/ifCond}}</td>  
 											</tr>
 											
 										{{/each}}										
@@ -369,11 +375,30 @@ function myFunction() {
 			</div>
 			</div>
                       </div>
-                      <div class="tab-pane" id="tabIcon13" aria-labelledby="baseIcon-tab3">
-                        <p>Biscuit ice cream halvah candy canes bear claw ice cream
-                          cake chocolate bar donut. Toffee cotton candy liquorice.
-                          Oat cake lemon drops gingerbread dessert caramels. Sweet
-                          dessert jujubes powder sweet sesame snaps.</p>
+                      <div class="tab-pane text-center" id="tabIcon13" aria-labelledby="baseIcon-tab3">
+                       {{!-- <h3><strong>{{__ "Coming Soon . . ."}}</strong></h3> --}}
+					    {{#if alert_data}}
+					  {{#each alert_data as |data_emi|}}
+                        
+							<div class="col-12 col-lg-8 view_alert mb-1">
+								<div class="row">
+									<div class="col-12 col-lg-8 p-1">
+										<i class="ft-alert-triangle"></i>
+										<div class="alert_details">
+											<h3>{{#with ..}}{{__ "Upcoming Emi Month"}}{{/with}}</h3>
+											<p>{{#with ..}}{{__ "You EMI month"}}{{/with}} {{data_emi.date}}. {{#with ..}}{{__ "Your EMI month payment is"}}{{/with}} {{formatNumber data_emi.totalpayment 2 '.' ','}}</p>
+										</div>
+									</div>
+									<div class="col-12 col-lg-4 p-1 float-right">
+										<p class="date_alert">{{data_emi.date}}</p>
+									</div>
+								</div>
+							</div>
+							
+						{{/each}}
+						{{else}}
+						<h4 class="mb-1 mt-1 ml-1">{{__ "No alert Found."}}</h4>
+						{{/if}}
                       </div>
 		    <!-- <div class="tab-pane" id="tabIcon15" aria-labelledby="baseIcon-tab3"> -->
 			        <!-- <a href="/loan/repayment/{{result._id}}"> -->
@@ -385,7 +410,7 @@ function myFunction() {
 					  <a href="/loan/repayment">  
 					<!-- <input type="hidden" id="userinput1" name="id" {{#if this.loan_id}} value="{{this.loan_id}}"{{/if}} >   -->
 					<!-- <p>{{this.id}}</p> --> 
-					<button type="button" class="btn btn-info">Add Repay Now</button></a>  
+					<button type="button" class="btn btn-info">{{__ "Add Repay Now"}}</button></a>  
 					<div class="app-content center-layout mt-2 mx-md-3 px-1">
 					<div class="content-wrapper"> 
 					<div class="row">
@@ -402,7 +427,7 @@ function myFunction() {
 									<div class="row">
 									<div class="col-12">
 										<div class="card">
-										<div id="tableBox">
+										<div id="tableBox" class="table-responsive">
 										<table class="table designtable">
 										<thead class="headcolor"><tr>
 										<th>{{__ 'No'}}</th>

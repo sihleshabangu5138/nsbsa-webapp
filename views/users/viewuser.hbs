@@ -1,4 +1,4 @@
- {{breadcrums 'Home' 'User details'}}
+ {{breadcrums (__ 'Home') (__ 'User details')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1 font-way">
 <div class="content-wrapper">
@@ -8,7 +8,7 @@
 		<div class="card-content123">
 			{{#each data}}
 				<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} >
-					<div class="col-12"><img class="roundimg" src="/images/upload/{{this.photo}}" alt="User image" data-pagespeed-url-hash="3236208173" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></div>
+					<div class="col-12 text-center"><img class="roundimg" src="/images/upload/{{this.photo}}" alt="User image" data-pagespeed-url-hash="3236208173" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></div>
 					<!-- <i class="fa fa-camera fa-2x upload_btn_css" data-toggle="modal" data-target="#image_upload" aria-hidden="true"></i> -->
 				<div class="card-body text-center p-0 pt-1 pb-1">
 					<h5 class="card-title"></h5>
@@ -21,12 +21,12 @@
 			<h5 class="card-title"></h5>
 			<p><h1 class="card-subtitle text-muted">{{this.firstname}} {{this.middlename}} {{this.lastname}}</h1></p>
 				<!-- <div class="row"> -->
-					<div class="col-md-12 col-sm-12 align-self-start profile_user leftDiv border-light">
+					<div class="col-md-12 col-sm-12 align-self-start profile_user leftDiv border-light ews-viewuser">
 						<div class="row">
 							<div class="col-xl-12 col-md-12 col-12 col-sm-12 col-xs-12">
 								<div class="row">
 								<div class="col-xl-4 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
-										<h5 class="card-text text-truncate">
+										<h5>
 										<i class="fa fa-envelope"></i> {{this.email}}
 										</h5>
 								</div>
@@ -65,88 +65,88 @@
 		<div class="h3 p-1 font-weight-bolder"><i class="fa fa-user " aria-hidden="true"></i> {{#with ..}}{{__ "Personal Information" setlang}}{{/with}}
 		</div>				  
 		<div class="container-fluid "> 
-		 <div class="row p-1"> 
-				    <div class="col-sm-6">
+		 <div class="row p-1 user-pedding"> 
+				    <div class="col-sm-6 user-sm-pedding">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "First Name" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "First Name" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.firstname}}</div>
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Middle Name" setlang}}{{/with}}        
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Middle Name" setlang}}{{/with}}        
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{this.middlename}}</div>  
 						  </div>
 						</div>  
 				 </div>    
                 </div>	
-				<div class="row p-1">
-				    <div class="col-sm-6"> 
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Last Name" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Last Name" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							 <div class="tabletext">{{this.lastname}}</div> 
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6 "> 
 						    <span class="colon">:</span>
 							<div class="tabletext"> {{this.occupation}}</div>
 						  </div>
 						</div>  
 				 </div>    
                 </div>
-				<div class="row p-1">
-				    <div class="col-sm-6"> 
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold">{{#with ..}}{{__ "Birth Date" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold">{{#with ..}}{{__ "Birth Date" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6  col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{getdate this.birthdate ../session.generaldata.date_format}} </div>
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Gender" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Gender" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{this.gender}} </div>
 						  </div>
 						</div>  
 				 </div>    
                 </div>
-				<div class="row p-1">
-				    <div class="col-sm-6"> 
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Email" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Email" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6" > 
 						    <span class="colon">:</span>
 							<div class="tabletext"> {{this.email}}</div> 
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Contact" setlang}}{{/with}}  
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Contact" setlang}}{{/with}}  
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6" > 
 						    <span class="colon">:</span> 
 							<div class="tabletext"><i class="ft-plus"></i> {{this.ccode}} {{this.mobile}}</div>
 						  </div>
@@ -159,66 +159,66 @@
 		        <i class="fa fa-home" aria-hidden="true"></i> {{#with ..}}{{__ "Residential Address" setlang}}{{/with}}
 		</div>
 		<div class="container-fluid"> 
-				<div class="row p-1">
-				    <div class="col-sm-6">
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Address" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Address" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6 "> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.address}}</div>
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Pin Code" setlang}}{{/with}}        
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Pin Code" setlang}}{{/with}}        
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{this.pincode}}</div>  
 						  </div>
 						</div>  
 				 </div>    
                 </div>	
-				<div class="row p-1">
-				    <div class="col-sm-6"> 
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "City" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "City" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							 <div class="tabletext">{{getcitybyid this.city}}</div> 
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "State" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "State" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{getstatebyid this.state}}</div>
 						  </div>
 						</div>  
 				 </div>    
                 </div>
-				<div class="row p-1">
-				    <div class="col-sm-6"> 
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Country" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Country" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{getcountrybyid this.country}} </div>
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
 						  <div class="col-sm-6 font-weight-bold "> 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 user-sm-pedding"> 
 						    <!-- <span class="colon">:</span> -->
 							<div class="tabletext"> </div>
 						  </div>
@@ -231,23 +231,23 @@
 		  <i class="fa fa-sign-in  " aria-hidden="true"></i> {{#with ..}}{{__ "Login Information" setlang}}{{/with}}
 		</div>
 		<div class="container-fluid"> 
-				<div class="row p-1">
-				    <div class="col-sm-6">
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "User Name" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "User Name" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.username}}</div>
 						  </div>
 						</div>
 				    </div>
 					{{#each ../role as |rolename|}}
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Role" setlang}}{{/with}}        
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Role" setlang}}{{/with}}        
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{rolename.role_nm}}</div>  
 						  </div>
@@ -263,56 +263,56 @@
 			 <i class="icon-users  " aria-hidden="true"></i> {{__ "Family Information"}} 
 	    </div>
 		<div class="container-fluid">
-		       <div class="row p-1">
-				    <div class="col-sm-6">
+		       <div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Family Member Name" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Family Member Name" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.familymember}}</div>
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}        
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}        
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{this.famoccupation}}</div>  
 						  </div>
 						</div>  
 				 </div>    
                 </div>	
-				<div class="row p-1">
-				    <div class="col-sm-6"> 
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Relationship" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Relationship" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							 <div class="tabletext">{{this.relationship}}</div> 
 						  </div>
 						</div>
 				    </div>
-				 <div class="col-sm-6"> 
+				 <div class="col-sm-6 user-sm-pedding"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Contact" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Contact" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{this.famcontact}}</div>
 						  </div>
 						</div>  
 				 </div>    
                 </div>
-				<div class="row p-1">
-				    <div class="col-sm-6"> 
+				<div class="row p-1 user-pedding">
+				    <div class="col-sm-6 user-sm-pedding">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Annual Income" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Annual Income" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext"> {{{currencyList ../session.generaldata.currency}}} {{this.income}} </div>
 						  </div>
@@ -447,24 +447,15 @@ function myFunction() {
                       </li>
                     </ul>
                     <div class="tab-content px-1 pt-1">
-                      <div role="tabpanel" class="tab-pane active" id="tabIcon11" aria-expanded="true"
+                      <div role="tabpanel" class="tab-pane active text-center" id="tabIcon11" aria-expanded="true"
                       aria-labelledby="baseIcon-tab11">
-                        <p>{{__ "Oat cake marzipan cake lollipop caramels wafer pie jelly
-                          beans. Icing halvah chocolate cake carrot cake. Jelly beans
-                          carrot cake marshmallow gingerbread chocolate cake. Gummies
-                          cupcake croissant."}}</p>
+						<h3><strong>{{__ "Coming Soon . . ."}}</strong></h3>
                       </div>
-                      <div class="tab-pane" id="tabIcon12" aria-labelledby="baseIcon-tab12">
-                        <p>{{__ "Sugar plum tootsie roll biscuit caramels. Liquorice brownie
-                          pastry cotton candy oat cake fruitcake jelly chupa chups.
-                          Pudding caramels pastry powder cake soufflé wafer caramels.
-                          Jelly-o pie cupcake."}}</p>
+                      <div class="tab-pane text-center" id="tabIcon12" aria-labelledby="baseIcon-tab12">
+						<h3><strong>{{__ "Coming Soon . . ."}}</strong></h3>
                       </div>
-                      <div class="tab-pane" id="tabIcon13" aria-labelledby="baseIcon-tab3">
-                        <p>{{__ "Biscuit ice cream halvah candy canes bear claw ice cream
-                          cake chocolate bar donut. Toffee cotton candy liquorice.
-                          Oat cake lemon drops gingerbread dessert caramels. Sweet
-                          dessert jujubes powder sweet sesame snaps."}}</p>
+                      <div class="tab-pane text-center" id="tabIcon13" aria-labelledby="baseIcon-tab3">
+						<h3><strong>{{__ "Coming Soon . . ."}}</strong></h3>
                       </div>
                     </div>
                   </div>

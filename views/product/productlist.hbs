@@ -1,25 +1,21 @@
-{{breadcrums 'Home' 'Product List'}}
+{{ breadcrums (__ 'Home') (__ 'Product List')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
-		<div class="col-lg-2 col-md-2 mb-2 custom_select">
-		
-		</div>
-		<div class="col-lg-2 col-md-2 mb-2">
-			
-		</div>
-		<div class=" col-lg-7 col-md-7 mb-7">
-		</div>
-		<div class=" col-lg-1 col-md-1 mb-1 heading-elements p-0">
-			<ul class="list-inline mb-0">
-			<li id="export">
-				<select class="select2 form-control export">
-					<option value="">{{__ "Export"}}</option>
-					<option value="csv">{{__ "XLSX"}}</option>
-					<option value="pdf">{{__ "PDF"}}</option>
-				</select>
-			</li>	
-			</ul>
+	
+		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ews-heading">
+					<ul class="list-inline mb-0">
+					<li id="export">
+						<select class="select2 form-control export">
+							<option value="">{{__ "Export"}}</option>
+							<option value="csv">{{__ "XLSX"}}</option>
+							<option value="pdf">{{__ "PDF"}}</option>
+						</select>
+					</li>	
+					</ul>
+				</div>
 		</div>
 		</div>
     <div class="content-wrapper">
@@ -54,8 +50,6 @@
 						<div class="row">
 						<div class="col-12">
 						<div class="card">
-							<div class="card-header px-0"><a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-						  </div>
 							<div class="card-content collapse show" id="NF-datatable">
 							<div class="card-body p-0">
 								<div id="grid"></div>
@@ -72,7 +66,7 @@
 								 <div class="page-template">
 									<div class="header">
 									   <div style="float: right"></div>
-									  Product List 
+									  {{{__ "Product List"}}}
 									</div>
 									<div class="footer">
 									 
@@ -208,105 +202,167 @@
                 groupable: true,
                 resizable: true,
                 filterable: {
-					mode: "row"
+					mode: "row",
+					 messages: {
+          info: "{{__ 'Show items with value that:'}}",
+		  isEqualTo: "{{__ 'Is equal to'}}",
+		  and: "{{__ 'And'}}",
+		  or: "{{__ 'Or'}}",
+		  clear: "{{__ 'Clear'}}",
+		  filter: "{{__ 'Filter'}}",
+		  isTrue: "{{__ 'is true'}}",
+      isFalse: "{{__ 'is false'}}",
+      isEmpty: "{{__ 'is empty'}}",
+      isNotEmpty: "{{__ 'is not empty'}}"
+        },
+		operators: {
+      string: {
+        eq: "{{__ 'is equal to'}}",
+        neq: "{{__ 'is not equal to'}}",
+        startswith: "{{__ 'starts with'}}",
+        contains: "{{__ 'contains'}}",
+        doesnotcontain: "{{__ 'does not contain'}}",
+        endswith: "{{__ 'ends with'}}",
+        isnull: "{{__ 'is null'}}",
+        isnotnull: "{{__ 'is not null'}}"
+      }
+    }
 				},
-                columnMenu: true,
-				pageable: {
+                columnMenu: {
+    messages: {
+      columns: "{{__ 'Columns'}}",
+	  filter : "{{__ 'Filter'}}",
+	  sortAscending: "{{__ 'Sort Ascending'}}", 
+	  sortDescending: "{{__ 'Sort Descending'}}", 
+    },
+  },
+												pageable: {
 					input: true,
 					numeric: false,
 					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100]
+					pageSizes: [10, 20, 25, 50, 100],
+					messages: {
+	  display: "{{__ '{0} - {1} of {2} items'}}",
+      empty: "{{__ 'No items to display'}}",
+      page: "{{__ 'Page'}}",
+	  of: "{{__ 'of {0}'}}", 
+      itemsPerPage: "{{__ 'items per page'}}",
+      first: "{{__ 'Go to the first page'}}",
+      previous: "{{__ 'Go to the previous page'}}",
+      next: "{{__ 'Go to the next page'}}",
+      last: "{{__ 'Go to the last page'}}",
+      refresh: "{{__ 'Refresh'}}"
+    }
 				},
                 noRecords: true,
+				messages: {
+            noRecords: "{{__ 'No records available.'}}"
+        },
                 columns: [
 					
 					{
                         field: "productname" ,
-                        title: "Service Name",
-						width: 150
+                        title: "{{__ 'Product Name'}}",
+						width: 150 
                     },
 					{
                         field: "categorytypes" ,
-                        title: "Category Type",
+                        title: "{{__ 'Category Type'}}",
 						width: 150
                     },
 					{
                         field: "productunit" ,
-                        title: "Product Unit",
+                        title: "{{__ 'Product Unit'}}",
 						width: 150
                     },
 					{
                         field: "description" ,
-                        title: "Description",
+                        title: "{{__ 'Description'}}",
 						width: 150
                     },
 					{
                         field: "productimage" ,
-                        title: "Product Images",
+                        title: "{{__ 'Product Images'}}",
 						 hidden: true,
+						 template: function(dataItem) {
+            // Assuming productimage is an array of image names
+            if (dataItem.productimage && dataItem.productimage.length > 0) {
+                // Display the first image (you can customize this based on your needs)
+                return dataItem.productimage[0];
+            } else {
+                return ""; // No images
+            }
+        },
 						width: 150
                     },
 					{
                         field: "tagname" ,
-                        title: "Tags",
+						title: "{{__ 'Tags'}}",
 						 hidden: true,
+						 template: function(dataItem) {
+            // Assuming tagname is an array of tag names
+            if (dataItem.tagname && dataItem.tagname.length > 0) {
+                // Display all tags (you can customize this based on your needs)
+                return dataItem.tagname.join(", ");
+            } else {
+                return ""; // No tags
+            }
+        },
 						width: 150
                     },
 					{
                         field: "warranty" ,
-                        title: "Warranty",
+						title: "{{__ 'Warranty'}}",
 						template:"#= warranty #"+" #= dur_type #",
 						width: 180
                     },
 					{
                         field: "skubarcode" ,
-                        title: "SKU/Barcode",
+						title: "{{__ 'SKU/Barcode'}}",
 						 hidden: true,
 						width: 120
                     },
 					{
                         field: "initialstock" ,
-                        title: "Initial Stock",
+						title: "{{__ 'Initial Stock'}}",
 						width: 150
                     },
 					{
                         field: "stockexpiry" ,
-                        title: "Stock Expiry",
+						title: "{{__ 'Stock Expiry'}}",
 						 hidden: true,
 						width: 150
                     },
 					{
                         field: "locationrack" ,
-                        title: "Location/Rack Number",
+						title: "{{__ 'Location/Rack Number'}}",
 						 hidden: true,
 						width: 150
                     },
 					{
                         field: "retailprice" ,
-                        title: "{{{currencyList session.generaldata.currency}}} "+"Retail Price",
+                        title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Retail Price'}}",
 						 hidden: true,
 						width: 150
                     },
 					{
                         field: "specialprice" ,
-                        title: "{{{currencyList session.generaldata.currency}}} "+"Special Price",
+						title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Special Price'}}",
 						 hidden: true,
 						width: 150
                     },
 					{
                         field: "supplyprice" ,
-                        title: "{{{currencyList session.generaldata.currency}}} "+"Supply Price",
+						title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Supply Price'}}",
 						 hidden: true,
 						width: 150
                     },
 					{
                         field: "commission" ,
-                        title: "{{{currencyList session.generaldata.currency}}} "+"Commission",
+						title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Commission'}}",
 						 hidden: true,
 						width: 150
                     },
-					{{#ifCond session.admin_access "==" 0}}
-					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}}
 					{
 						width: "200px",
 						command:
@@ -314,23 +370,40 @@
 							{
 								template : "<center>" 
 							},
-							{{#if accessrightdata.view}}
-							{ 
+							
+							  /* { 
 								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
 								click:function(e) 
 								{
 								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
 								 
 								  var id = clickedRow._id;
+								  window.location.href = "addrole/"+id;
+								  return false;
+								} 
+							},   */
+							{template : "&nbsp;" },
+							{{!-- console.log({{accessrightdata.update}}),
+							console.log({{accessrightdata.delete}}),
+							console.log({{accessrightdata.add}}), --}}
+
+							{{#ifCond accessrightdata.view "||" session.admin_access}}
+							 { 
+								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
+								click:function(e) 
+								{ 
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id; 
 								  window.location.href = "viewproduct/"+id;
 								  return false;
 								} 
-							}, 
-							{{/if}}
+							},
+							{{/ifCond}}
 							{template : "&nbsp;" },
-							
+
 							/* Edit action start */
-							{{#if accessrightdata.update}}
+							{{#ifCond accessrightdata.update "||" session.admin_access}}
 							 { 
 								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
 								click:function(e) 
@@ -342,12 +415,9 @@
 								  return false;
 								} 
 							},
-							{{/if}}
+							{{/ifCond}}
 							{template : "&nbsp;" },
-						
-							
-							/* Delete action start */
-							{{#if accessrightdata.delete}}
+							{{#ifCond accessrightdata.delete "||" session.admin_access}}
 							{ 
 								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
 								click: function(e){  //add a click event listener on the delete button
@@ -369,87 +439,19 @@
 									})
 								}	
 							},
-							{{/if}} 
+							{{/ifCond}}
 							
 							/* Delete action end */
 							
 							{template : "</center>" },
 							 
-							],
-							{{#if accessrightdata.add}}
+							], 
+							{{#ifCond accessrightdata.add "||" session.admin_access}}
+							
 							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addproduct'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
-							{{/if}}
+							headerTemplate: "<center><a href='addproduct'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+							{{/ifCond}}
 					}
-					{{/ifCondition}}
-					{{else}}
-						{
-						width: "200px",
-						command:
-						[
-							{
-								template : "<center>" 
-							},
-							{ 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "viewproduct/"+id;
-								  return false;
-								} 
-							}, 
-							{template : "&nbsp;" },
-							
-							/* Edit action start */
-							 { 
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "addproduct/"+id;
-								  return false;
-								} 
-							},
-							{template : "&nbsp;" },
-						
-							
-							/* Delete action start */
-							{ 
-								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
-								click: function(e){  //add a click event listener on the delete button
-									e.preventDefault(); //prevent page scroll reset
-									var tr = $(e.target).closest("tr"); //get the row for deletion
-									var data = this.dataItem(tr); //get the row data so it can be referred later
-									window1.content(windowTemplate(data)); //send the row data object to the template and render it
-									window1.center().open();
-									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-									$("#yesButton").click(function(){
-										var grid = $("#grid").data("kendoGrid");
-										grid.dataSource.remove(data)  //prepare a "destroy" request
-										grid.dataSource.sync();  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
-										<!-- alert('Delete'); -->
-										window1.close();
-									})
-									$("#noButton").click(function(){
-										window1.close();
-									})
-								}	
-							},
-							
-							/* Delete action end */
-							
-							{template : "</center>" },
-							 
-							],
-							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addproduct'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
-					}
-					{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"

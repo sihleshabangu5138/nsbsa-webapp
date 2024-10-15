@@ -4,10 +4,10 @@ body {
 
 body,html{
 		/* font-family:"Roboto", sans-serif; */
-		//background-color:#c5c5c5;
-		 background: rgba(0, 0, 0, 0) url("../../webroot/img/login/login-bg2.png") repeat scroll 0 0 / cover ;
-		//background-position: top center;
-		//background-repeat: repeat;	 
+		/* background-color:#c5c5c5;
+		background: rgba(0, 0, 0, 0) url("../../webroot/img/login/login-bg2.png") repeat scroll 0 0 / cover ;
+		background-position: top center;
+		background-repeat: repeat;	  */
 	}
 	.step-content{		
 		margin-top: 1%;
@@ -116,3 +116,4 @@ table tr{
 #mbstring-error,#version-error,#intl-error{
 	font-size : 0px;
 }
+  

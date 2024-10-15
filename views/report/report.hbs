@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Report'}}
+{{breadcrums (__ 'Home') (__ 'Report')}}
 <div class="app-content container center-layout mt-2">
 <div class="content-wrapper">
 <div class="content-body">
@@ -9,10 +9,10 @@
             <div class="col-md-12 col-sm-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Users </h4>
+                  <h4 class="card-title">{{__ "Users" setlang}} </h4>
                 </div>
-                <div class="card-content collapse show">
-                    <div id="piechart"></div>
+                <div class="card-content">
+                    <div id="piechart" class="chart-container-custom "></div>
                 </div>
               </div>
             </div>
@@ -26,10 +26,10 @@
             <div class="col-md-12 col-sm-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Loans </h4>
+                  <h4 class="card-title">{{__ "Loans" setlang}} </h4>
                 </div>
-                <div class="card-content collapse show">
-                    <div id="piechart2"></div>
+                <div class="card-content">
+                    <div id="piechart2" class="chart-container-custom"></div>
                 </div>
               </div>
             </div>
@@ -52,8 +52,8 @@ function drawChart() {
   var decount = '{{this.deactivecount}}'
   var data = google.visualization.arrayToDataTable([
   ['Task', 'Hours per Day'],
-  ['Active Users', parseInt(count)],
-  ['Deactive users', parseInt(decount)]
+  ['{{__ "Active Users" setlang}}', parseInt(count)],
+  ['{{__ "Deactive users" setlang}}', parseInt(decount)]
 ]);
 
   // Optional; add a title and set the width and height of the chart
@@ -75,8 +75,8 @@ function drawChart() {
   var deloan = '{{this.deloanno}}'
   var data = google.visualization.arrayToDataTable([
   ['Task', 'Hours per Day'],
-  ['Approved Loans', parseInt(loan)],
-  ['Disapproved Loans', parseInt(deloan)]
+  ['{{__ "Approved Loans"}}', parseInt(loan)],
+  ['{{__ "Disapproved Loans"}}', parseInt(deloan)]
 ]);
 
   // Optional; add a title and set the width and height of the chart

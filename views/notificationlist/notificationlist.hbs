@@ -1,0 +1,85 @@
+{{breadcrums (__ 'Home') (__ 'Notification')}}
+<div class="app-content center-layout mt-2 mx-md-3 px-1">
+<div class="content-wrapper">
+	<div class="content-body">
+	<section id="simple-user-cards" class="row pb-2">
+		<div class="col-xl-12 col-md-12 col-sm-12">
+		<div class="card-content">
+			<div class="row">	
+			<span id="dots"></span>
+			
+			<span class="col-xl-12 col-sm-12 col-12 app-content center-layout mt-2"> 
+			<div class=" col-12  bg-white p-0">					 
+		
+		<div class="container-fluid "> 
+		
+		<div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">{{__ 'No.'}}</th>
+                        <th scope="col">{{__ "Module Name"}}</th>
+                        <th scope="col">{{__ "Date"}}</th>
+                        <th scope="col">{{__ "Description"}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+					{{#each data}}
+					 {{#ifCond this.action "==" "New User"}}
+                      <tr>
+                        <th scope="row" class="index-col">1</th>
+                        <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "New User" }}!{{/with}}</h6></a></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td>{{#with ..}}{{__ "New account created." }}{{/with}} {{this.Name}} </td>
+                      </tr>
+					  {{/ifCond}}
+					  {{#ifCond this.action "==" "User Updated"}}
+                      <tr>
+                        <th scope="row" class="index-col">1</th>
+                        <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "User Updated"}}!{{/with}}</h6></a></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td>"{{this.Name}}" {{#with ..}}{{__ 'User'}}{{/with}} {{#with ..}}{{__ "is updated"}}{{/with}} </td>
+                      </tr>
+					  {{/ifCond}}
+					  {{#ifCond this.action "==" "New Loan Added"}}
+                      <tr>
+                        <th scope="row" class="index-col">1</th>
+                        <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "New Loan Added"}}!{{/with}}</h6></a></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td>"{{this.Name}}" {{#with ..}}{{__ 'Loan'}}{{/with}} {{#with ..}}{{__ "is added"}}{{/with}} </td>
+                      </tr>
+					  {{/ifCond}}
+					  {{#ifCond this.action "==" "Loan Updated"}}
+                      <tr>
+                        <th scope="row" class="index-col">1</th>
+                        <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "Loan Updated"}}!{{/with}}</h6></a></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td>"{{this.Name}}" {{#with ..}}{{__ 'Loan'}}{{/with}} {{#with ..}}{{__ "is updated"}}{{/with}} {{this.nameofuser.[0]}} {{this.nameofuser.[1]}} {{this.nameofuser.[2]}} </td>
+                      </tr>
+					  {{/ifCond}}
+                      {{/each}}
+					  
+                    </tbody>
+                  </table>
+                </div>
+		
+		</div>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+	</section>
+	</div>
+	</div>
+	</div>
+  
+<script>
+    // Add this script to dynamically add index numbers to the rows
+    $(document).ready(function () {
+        // Iterate through each row and set the index number
+        $('.index-col').each(function (index) {
+            $(this).text(index + 1);
+        });
+    });
+</script>

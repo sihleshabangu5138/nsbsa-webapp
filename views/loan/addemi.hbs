@@ -1,13 +1,9 @@
- {{breadcrums 'Home' 'Add EMI'}}
+ {{breadcrums (__ 'Home') (__ 'Add EMI')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header pb-0 border-bottom border-light">
-		
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
 	<div class="card-content collpase show">
 	<div class="card-body">
 	<script>
@@ -57,7 +53,7 @@
 				<div class="col-md-12 form-control border-light">
 				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
 					<input type="text" name="month_on" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.month}} value="{{this.month}}"{{/if}}>
-					<label for="userinput4">{{#with ..}}{{__ "This EMI Month"}} setlang}}{{/with}}</label>
+					<label for="userinput4">{{#with ..}}{{__ "This EMI Month" setlang}}{{/with}}</label>
 				</div><div class="help-block"></div>
 				</div>
 			</div>
@@ -122,7 +118,7 @@
 			<div class="row">
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
-					<div class="heading-elements ">
+					<div class="">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
 						<!-- <select class="select2 form-control export" name="paytype" > -->
@@ -180,7 +176,7 @@
 					<fieldset>
 				    <label>{{#with ..}}{{__ "Cheque Amount" setlang}}{{/with}}<span class=""></span></label> 
                      <div class="input-group touchspincolor">
-					  <input type="text" id="paymentamount" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="paymentamount"  data-bts-step="1000" {{#if this.paymentamount}} value="{{this.paymentamount}}"{{/if}} />
+					  <input type="text" id="paymentamount" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="paymentamount"  data-bts-step="1" {{#if this.paymentamount}} value="{{this.paymentamount}}"{{/if}} />
                      </div>
                     </fieldset>
 						</div>
@@ -392,21 +388,31 @@
 {{/ifCond}}
 {{#ifCond datafield.field_type "==" "file"}}
 	<div class="col-md-6">
-	<div class="form-group row">
-	<div class="col-md-12">
-		<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-		<input class="form-control border-light validimage"
-		{{#ifEqual datafield.validation "required"}}  data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-		{{#each ../customfield_value as |custome_value| }}
-			{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-				value="{{custome_value.customfield_value}}" 
+		<div class="form-group row">
+			<div class="col-md-12">
+				<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}{{#unless ../customfield_value}}{{else}}<span class="required red">*</span>{{/unless}}{{/ifEqual}}</label>
+				<input class="form-control border-light validimage"
+					{{#ifEqual datafield.validation "required"}}
+						{{#unless ../customfield_value}} data-validation-required-message="{{datafield.label}} is required" {{/unless}}
+					{{/ifEqual}}
+					{{#each ../customfield_value as |custome_value| }}
+						{{#ifCond custome_value.id_d "==" datafield.id_d}}			
+							value="{{custome_value.customfield_value}}" 
+						{{/ifCond}}
+					{{/each}}
+					name="{{datafield._id}}" type="file">
 				
-				{{/ifCond}}
-		{{/each}}
-		name="{{datafield._id}}" type="file">{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "==" datafield.id_d}}<p>{{custome_value.customfield_value}}</p><input class="form-control border-light edit_val"  name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden"  placeholder="" id="userinput5">{{/ifCond}}{{/each}}
-		<span class="required red notice"></span>
-	</div><div class="help-block"></div>
-	</div>
+				{{#each ../customfield_value as |custome_value| }}
+					{{#ifCond custome_value.id_d "==" datafield.id_d}}
+						<p>{{custome_value.customfield_value}}</p>
+						<input class="form-control border-light edit_val" name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden" placeholder="" id="userinput5">
+					{{/ifCond}}
+				{{/each}}
+
+				<span class="required red notice"></span>
+			</div>
+			<div class="help-block"></div>
+		</div>
 	</div>
 {{/ifCond}}
 {{/each}}

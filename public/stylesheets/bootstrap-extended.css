@@ -713,7 +713,7 @@ button, html [type='button'], [type='reset'], [type='submit'] {
   .header-navbar .navbar-container {
     padding: 0rem 18px;
     height: 4rem; 
-    transition: 300ms ease all;
+    /* transition: 300ms ease all; */
 	margin: 0px auto;
     /*background: inherit; */}
  
@@ -2021,3 +2021,7 @@ a:hover {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+
+    .nav-item .fa-clipboard {
+      margin-right: 0.2rem;
+    }

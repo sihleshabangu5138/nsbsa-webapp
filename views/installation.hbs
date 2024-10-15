@@ -3,25 +3,57 @@
 	<link rel="stylesheet" href="/stylesheets/jq-steps/main.css">	
 	<link rel="stylesheet" href="/stylesheets/jq-steps/jquery.steps.css">	
 	<link rel="stylesheet" href="/stylesheets/jq-steps/custom.css">	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Add this line to include Font Awesome CSS -->
+
 	
 	<script src="/js/jq-steps/modernizr-2.6.2.min.js"></script>	
 	<script src="/js/jq-steps/jquery-1.11.1.min.js"></script>	
 	<script src="/js/jq-steps/jquery.cookie-1.3.1.js"></script>	
 	<script src="/js/jq-steps/jquery.steps.js"></script>	
 	<script src="/js/jq-steps/jquery.validate.min.js"></script>
+
 </head>
 <body>
 <!--<div class="pg-header">
 	<h4 class="install_title"><span style="height:30px"><img  src="/images/Nifty-EWS.png" height="80%" /></span>Gym Master - GYM Management Installation Wizard</h4>
 </div>-->
+<div class="step-bg">
 <div class="step-content">
 	<Form id="install-form" class="form-horizontal" action="/installation" method="POST">
 		<div>
+			<h3>Verify Key</h3>
+			<section id="pkey-verify">
+    <h3>Verify Purchase Key</h3>
+    <div class="form-group">
+        <label class="control-label">Purchase Key<span class="text-danger">*</span></label>
+        <div class="col-md-12 p-0">
+            <div class="input text">
+                <input type="text" name="pkey" class="form-control required padding-css">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Email<span class="text-danger">*</span></label>
+        <div class="col-md-12 p-0">
+            <div class="input text">
+                <input type="text" id="email1" name="email1" class="form-control required email padding-css">
+            </div>
+        </div>
+    </div>
+	<div class="row" id="pkeyrow">
+						<div class="col-md-3">
+						<button type="button" id="checkPkeyBtn" class="btn btn-sm btn-primary align-self-start">Check Purchase Key</button>
+						</div>
+<div class="col-md-9" id="verificationStatus"></div>
+						{{!-- <p> (*) Fields are required.</p> --}}
+					</div>
+</section>
 			<h3>Database Setup</h3>
 				<section>
 					<h4>Database Setup</h4>
 					<hr/>
-					<div class="form-group">
+					<div class="form-group sub">
 						<label class="control-label">Database Name<span class="text-danger"> *</span></label>
 						<div class="col-md-12 p-0">
 						<div class="input text">
@@ -30,7 +62,7 @@
 						</div>
 					</div>
 					
-					<div class="form-group">
+					<div class="form-group sub">
 						<label class="control-label">Database Username<span class="text-danger">*</span></label>
 						<div class="col-md-12 p-0">
 						<div class="input text">
@@ -38,28 +70,44 @@
 						</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="control-label">Database Password</label>
-						<div class="col-md-12 p-0">
-						<div class="input text">
-						<input type="text" name="db_pass" class="form-control padding-css">
-						</div>
-						</div>
-					</div>
-					<div class="form-group">
+					<div class="form-group sub">
+    <label class="control-label">Database Password<span class="text-danger">*</span></label>
+    <div class="col-md-12 p-0">
+        <div class="input text">
+            <div class="password-input-container">
+                <input type="password" id="password1" name="db_pass" class="form-control padding-css required padding-css">
+                <span toggle="#password1" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+					<div class="form-group sub">
 						<label class="control-label">Host<span class="text-danger"> *</span></label>
 						<div class="col-md-12 p-0">
 						<div class="input text">
-						<input type="text" name="db_host" class="form-control required padding-css">
+						<input type="text" value="localhost:27017" name="db_host" class="form-control required padding-css">
 						</div>
 						</div>
 					</div>
-					<div class="col-md-offset-3">
-						<p> (*) Fields are required.</p>
+					{{!-- <div class="form-group">
+						<label class="control-label">Port<span class="text-danger"> *</span></label>
+						<div class="col-md-12 p-0">
+						<div class="input text">
+						<input type="text" value="localhost:27017" name="db_port" class="form-control required padding-css">
+						</div>
+						</div>
+					</div> --}}
+					<div class="row">
+						<div class="col-md-4">
+						<button type="button" id="checkConnectionBtn" class="btn btn-sm btn-primary align-self-start">Check Connection</button>
+						</div>
+<div class="col-md-8" id="connectionStatus"></div>
+						{{!-- <p> (*) Fields are required.</p> --}}
 					</div>
 				</section>
 			<h3>System Setting</h3>
-			<section> 
+			<section id="step-2"> 
 			  <h4>System Setting</h4>
 			  <hr/>
 			  <div class="form-group">
@@ -74,12 +122,12 @@
 					<label class="control-label">Email <span class="text-danger">*</span></label>
 					<div class="col-md-12 p-0">
 					<div class="input text">
-					<input type="text" name="email" class="form-control required email padding-css" value="">
+					<input type="text" id="email2" name="email" class="form-control required email padding-css">
 					</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label">Date Formate</label>
+					<label class="control-label">Date Format</label>
 					<div class="col-md-12 p-0">
 					<select name="date_format" class="form-control plan_list required">
 						<option value="m-d-Y">mm-dd-YYYY</option>
@@ -100,9 +148,7 @@
 						</select>				
 					</div>
 				</div> 
-				<div class="col-md-offset-3">
-						<p> (*) Fields are required.</p>
-				</div>
+				
 			</section>  
 			 <h3>Login Details</h3>
 			<section>
@@ -120,7 +166,10 @@
 						<label class="control-label">Password<span class="text-danger"> *</span></label>
 						<div class="col-md-12 p-0">
 						<div class="input text">
+							<div class="password-input-container">
 						<input type="password" id="password" name="password" class="form-control required password padding-css">
+						<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+						</div>
 						</div>
 						</div>
 					</div>
@@ -129,7 +178,10 @@
 						<label class="control-label">Confirm Password<span class="text-danger"> *</span></label>
 						<div class="col-md-12 p-0">
 						<div class="input text">
-						<input type="password" name="confirm" id="confirm" class="form-control required padding-css">
+							<div class="password-input-container">
+						<input type="password" name="confirm" id="cpass" class="form-control required padding-css">
+						<span toggle="#cpass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+						</div>
 						</div>
 						</div>
 					</div> 			
@@ -145,7 +197,7 @@
 					2. Do not refresh page after to you click on install button.
 				</p>
 				<p>
-					3. You will be acknowledge with success message once after installation finishes.
+					3. You will be redirected to the login page once after installation finishes.
 				</p>
 				<p>
 					4. Click on install to complete the installation.
@@ -161,20 +213,28 @@
 		</div>	
 	</Form>
 </div>
+</div>	
 </body>
 <script>
+	
 $(function ()
  {
-	
+		$(".actions").hide();
+	{{!-- $(".sub").hide(); --}}
+	$("#checkConnectionBtn").hide();
+
+
 var form = $("#install-form");
 form.validate({
-    errorPlacement: function errorPlacement(error, element) { element.before(error); },
+    errorPlacement: function errorPlacement(error, element) { error.addClass("text-danger"); // Add Bootstrap class for text color
+            error.insertAfter(element.closest('.form-group').find('.control-label')); },
     rules: {
         confirm: {
             equalTo: "#password"
         }
     }
 });
+
 form.children("div").steps({
 	 labels: {
         cancel: "Cancel",
@@ -188,10 +248,27 @@ form.children("div").steps({
     headerTag: "h3",
     bodyTag: "section",	
     transitionEffect: "slideLeft",
+	
+	
     onStepChanging: function (event, currentIndex, newIndex)
     {
+		if (newIndex > currentIndex) {
+        // Check the database connection for the next step
+        if (currentIndex === 1 && !$(".actions [href='#next']").hasClass('disabled')) {
+            // Only on the first step and if not disabled, check the database connection
+            checkDatabaseConnection();
+        }
+		if (newIndex === 1) {
+                $(".actions").hide();
+            } else {
+                $(".actions").show();
+            }
         form.validate().settings.ignore = ":disabled,:hidden";
         return form.valid();
+    } else {
+        // Allow moving to the previous step without validation
+        return true;
+    }
     },
     onFinishing: function (event, currentIndex)
     {
@@ -204,328 +281,179 @@ form.children("div").steps({
         form.submit();
     }
 });
+const emailField = $("#email1");
+
+  // Assuming the email field in the third step has the id 'email-step-3'
+  const emailStep3Field = $("#email2");
+
+  // Whenever the email field in the first step changes, update the email field in the third step
+  emailField.on("input", function () {
+    emailStep3Field.val($(this).val());
+  });
+ var nextStepButton = $(".actions");
+    nextStepButton.hide(); 
+  $("#checkConnectionBtn").on("click", function () {
+    // Manually trigger the form validation
+    form.validate().settings.ignore = ":disabled,:hidden";
+    if (form.valid()) {
+     $(this).prop("disabled", true);
+       $("#connectionStatus").html("<i class='fa fa-spinner fa-spin'></i> Checking connection...");
+      var connectionData = {
+        dbname: $("input[name='dbname']").val(),
+        db_username: $("input[name='db_username']").val(),
+        db_pass: $("input[name='db_pass']").val(),
+        db_host: $("input[name='db_host']").val(),
+      };
+      $.ajax({
+        type: "POST",
+        url: "/ajxfun/check-connection", // Replace with your server endpoint for checking connection
+        data: connectionData,
+success: function (response) {
+  var connectionStatus = $("#connectionStatus");
+  if (response.success) {
+    connectionStatus.html("<span class='text-success text-fade-in-out'>Connection successful!</span>");
+    // Enable the "Next Step" button
+    nextStepButton.show();
+    $("#checkConnectionBtn").hide();
+	 $(".actions").show();
+  } else {
+    connectionStatus.html("<span class='text-danger text-shake'><i class='fa-solid fa-triangle-exclamation errorcon'></i>Connection failed. " + response.message + "</span>");
+    // Disable the "Next Step" button
+    nextStepButton.hide();
+	$(".actions").hide();
+  }
+},
+error: function () {
+  var connectionStatus = $("#connectionStatus");
+  connectionStatus.html("<span class='text-danger' id='text-shake'><i class='fa-solid fa-triangle-exclamation errorcon'></i>Connection failed. Credentials are wrong.</span>");
+  // Disable the "Next Step" button
+  nextStepButton.hide();
+},
+ complete: function () {
+                    // Re-enable the button and hide loading spinner after 3 seconds
+                    setTimeout(function () {
+                        $("#checkConnectionBtn").prop("disabled", false);
+                        $("#connectionStatus").empty();
+                    }, 3000);
+                }
+      });
+    }
+  });
+function checkDatabaseConnection() {
+        // Make an AJAX request to the server-side script to check the database connection
+		if ($("input[name='dbname']").val() === '' || 
+        $("input[name='db_username']").val() === '' || 
+        $("input[name='db_pass']").val() === '' || 
+        $("input[name='db_host']").val() === '') {
+        
+        // Display an error message
+        alert("Please fill in all the database fields.");
+        return;
+    }
+        $.ajax({
+            type: "POST",
+            url: "/ajxfun/checkDatabaseConnection", // Replace with the actual route or endpoint for database connection check
+            data: form.serialize(), // Serialize form data
+            success: function (response) {
+                if (response.success) {
+                    // Database connection successful
+                    // Enable the next step
+                    $("#connectionStatus").hide();
+					 $("#step-2").show();
+                } else {
+                    // Database connection failed
+                    alert("Error connecting to the database: " + response.error);
+					{{!-- form.children("div").steps("setStep", 0); --}}
+                    $("#step-2").hide();
+                    $("#connectionStatus").show();
+                }
+            },
+            error: function (error) {
+                console.error("Error checking database connection:", error);
+				{{!-- form.children("div").steps("previous"); --}}
+				 $("#step-2").hide();
+				$("#connectionStatus").html("<i class='fa-solid fa-triangle-exclamation errorcon'></i>Credentials are wrong.").css('color', 'red').show();
+            }
+        });
+    }
+	
+// Function to compare two semver versions (e.g., "v14.17.6")
+$(".toggle-password").on("click", function() {
+    var passwordField = $($(this).attr("toggle"));
+    var fieldType = passwordField.attr("type");
+    if (fieldType === "password") {
+        passwordField.attr("type", "text");
+        $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+    } else {
+        passwordField.attr("type", "password");
+        $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+    }
+});
+ $("#checkPkeyBtn").on("click", function () { // Change event from blur to 
+    
+    // Show loading spinner
+ form.validate().settings.ignore = ":disabled,:hidden";
+        if (form.valid()) {
+  $(this).prop("disabled", true);
+    $("#verificationStatus").html("<i class='fa fa-spinner fa-spin'></i> Verifying purchase key...");
+        const pkey = $("input[name='pkey']").val();
+		const email1 = $("input[name='email1']").val();
+    if (pkey) {
+      // Make an AJAX request to the server to verify the pkey
+      $.ajax({
+        type: "POST",
+        url: "/ajxfun/verify-purchase-key",
+		data: { purchaseCode: pkey, email: email1 },
+        success: function (response) {
+          if (response.success) {
+            // Show a success message
+            $("#checkPkeyBtn").hide();
+            {{!-- $("#checkConnectionBtn").show(); --}}
+            showMessage("success", response.message);
+			
+          } else {
+            // Show an error message
+            showMessage("error", response.message);
+          }
+        },
+        error: function () {
+          // Show an error message
+          showMessage("error", "An error occurred while verifying the purchase key.");
+        },
+        complete: function () {
+                    // Re-enable the button and hide loading spinner after 3 seconds
+                    setTimeout(function () {
+                        $("#checkPkeyBtn").prop("disabled", false);
+                        $("#verificationStatus").empty();
+                    }, 3000);
+                }
+      });
+    }
+ }
+  });
+  function showMessage(type, message, icon = false) {
+  {{!-- const messageContainer = $("#verificationStatus"); --}}
+  const messageContainer = type === "success" ? $("#verificationStatus") : $("#verificationStatus");
+  messageContainer.empty();
+   const messageElement = $("<p>").text(message).addClass("font-weight-bold m-0");
+	if (type === "success") {
+        messageElement.addClass("text-success");
+		$(".actions").show();
+    } else {
+        messageElement.addClass("text-danger");
+    }
+	 messageElement.hide().fadeIn(500);
+  messageContainer.append(messageElement);
+  setTimeout(() => {
+    messageElement.fadeOut(1000, () => messageContainer.empty());
+  }, 3000);
+  if (type === "success") {
+            $("#checkConnectionBtn").show();
+        }
+}
+
 });
 
 </script>
 
 
-<!-- MultiStep Form -->
-<!-- <div class="row m-0"> -->
-<!-- <div class="container"> -->
-    <!-- <div class="col-md-12 col-md-offset-3"> -->
-        <!-- <form id="msform" action="/installation" class="needs-validation form form-horizontal" novalidate method="POST" id="install-form"> -->
-        <!-- <form id="msform" action="/installation" method="POST" id="install-form"> -->
-		<!-- <form autocomplete="off" id="msform" class="needs-validation form form-horizontal" novalidate method="post" action="/installation" enctype="multipart/form-data"> -->
-		<!-- <form autocomplete="off" id="msform" class="needs-validation form form-horizontal" novalidate method="post" action="/users/adduser" enctype="multipart/form-data"> -->
-            <!-- progressbar -->
-            <!-- <ul id="progressbar"> -->
-                <!-- <li class="active">Database Details</li> -->
-                <!-- <li>Login Detils</li> -->
-                <!-- <li>Finish</li> -->
-            <!-- </ul> -->
-            <!-- fieldsets -->
-			
-            <!-- <fieldset> -->
-                <!-- <h2 class="fs-title">Database Details</h2> -->
-                <!-- <h3 class="fs-subtitle">Enter your database details</h3> -->
-                <!-- <input type="text" name="dbname" placeholder="Database Name" id="dbname" onblur="validate(1)"/><span class="message"></span> -->
-                <!-- <input type="text" name="dbuname" placeholder="Database User Name" id="dbuname" onblur="validate(2)"/><span class="message2"></span> -->
-                <!-- <input type="password" name="dbpass" placeholder="Database Password" id="dbpass" onblur="validate(3)"/><span class="message3"></span> -->
-                <!-- <input type="text" name="host" placeholder="Host" id="host" onblur="validate(4)"/><span class="message4"></span> -->
-                <!-- <input type="button" name="next"  onclick="validate(0)" class="next action-button step1" value="Next"/> -->
-            <!-- </fieldset> -->
-            <!-- <fieldset> -->
-                <!-- <h2 class="fs-title">Login Detils</h2> -->
-                <!-- <h3 class="fs-subtitle">Fill in your credentials</h3> -->
-                <!-- <input type="text" name="email" placeholder="Username" id="uname" onblur="validation(5)"/><span class="message5"></span> -->
-                <!-- <input type="password" name="pass" placeholder="Password" id="passw" onblur="validation(6)"/><span class="message6"></span> -->
-                <!-- <input type="password" name="cpass" placeholder="Confirm Password" id="cpassw" onblur="validation(7)"/><span class="message7"></span> -->
-                <!-- <input type="button" name="previous" class="previous action-button-previous" value="Previous"/> -->
-                <!-- <input type="button" name="next"  onclick="validation(0)" class="nextab action-button" value="Next"/> -->
-            <!-- </fieldset> -->
-            <!-- <fieldset> -->
-               <!-- <h2 class="fs-title">Finish</h2> -->
-                <!-- <h3 class="fs-subtitle " style="float:left">Please Note:</h3> -->
-				<!-- <p class="fs-subtitle" style="float:left">1). It may take couple of minutes to set-up database.</p> -->
-                <!-- <p class="fs-subtitle" style="float:left">2). Do not refresh page after you click on install button.</p> -->
-                <!-- <p class="fs-subtitle" style="float:left">3). You will be acknowledged with success message once installation is finished</p> -->
-                <!-- <p class="fs-subtitle" style="float:left">4). Click on install to complete the installation</p> -->
-				
-                <!-- <input type="button" name="previous" class="previous action-button-previous" value="Previous"/> -->
-				<!-- <input type="submit" name="submit" class="submit action-button" value="Install"/> -->
-            <!-- </fieldset> -->
-        <!-- </form> -->
-    <!-- </div> -->
-    <!-- </div> -->
-<!-- </div> -->
-<!-- /.MultiStep Form -->
-
-<!-- <script> -->
-	
-<!-- //jQuery time -->
-<!-- var current_fs, next_fs, previous_fs; //fieldsets -->
-<!-- var left, opacity, scale; //fieldset properties which we will animate -->
-<!-- var animating; //flag to prevent quick multi-click glitches -->
-
-<!-- $(".previous").click(function(){ -->
-	<!-- if(animating) return false; -->
-	<!-- animating = true; -->
-	
-	<!-- current_fs = $(this).parent(); -->
-	<!-- previous_fs = $(this).parent().prev(); -->
-	
-	<!-- //de-activate current step on progressbar -->
-	<!-- $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active"); -->
-	
-	<!-- //show the previous fieldset -->
-	<!-- previous_fs.show();  -->
-	<!-- //hide the current fieldset with style -->
-	<!-- current_fs.animate({opacity: 0}, { -->
-		<!-- step: function(now, mx) { -->
-			<!-- //as the opacity of current_fs reduces to 0 - stored in "now" -->
-			<!-- //1. scale previous_fs from 80% to 100% -->
-			<!-- scale = 0.8 + (1 - now) * 0.2; -->
-			<!-- //2. take current_fs to the right(50%) - from 0% -->
-			<!-- left = ((1-now) * 50)+"%"; -->
-			<!-- //3. increase opacity of previous_fs to 1 as it moves in -->
-			<!-- opacity = 1 - now; -->
-			<!-- current_fs.css({'left': left}); -->
-			<!-- previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity}); -->
-		<!-- },  -->
-		<!-- duration: 800,  -->
-		<!-- complete: function(){ -->
-			<!-- current_fs.hide(); -->
-			<!-- animating = false; -->
-		<!-- },  -->
-		<!-- //this comes from the custom easing plugin -->
-		<!-- easing: 'easeInOutBack' -->
-	<!-- }); -->
-<!-- }); -->
-
-<!-- $(".submit").click(function(){ -->
-	<!-- return false; -->
-<!-- }) -->
-
-
-<!-- </script>  -->
-<!-- <script>  -->
-<!-- function validate(val) { -->
-	<!-- v1 = document.getElementById("dbname"); -->
-	<!-- v2 = document.getElementById("dbuname"); -->
-	<!-- v3 = document.getElementById("dbpass"); -->
-	<!-- v4 = document.getElementById("host"); -->
-
-	<!-- flag = true; -->
-
-	<!-- if(val>=1 || val==0) { -->
-		<!-- if(v1.value == "") { -->
-			<!-- v1.style.borderColor = "red"; -->
-			<!-- $('.message').html('Database name is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v1.style.borderColor = "green"; -->
-			<!-- $('.message').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-
-	<!-- if(val>=2 || val==0) { -->
-		<!-- if(v2.value == "") { -->
-			<!-- v2.style.borderColor = "red"; -->
-			<!-- $('.message2').html('Database user name is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v2.style.borderColor = "green"; -->
-			<!-- $('.message2').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- if(val>=3 || val==0) { -->
-		<!-- if(v3.value == "") { -->
-			<!-- v3.style.borderColor = "red"; -->
-			<!-- $('.message3').html('Database Password is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v3.style.borderColor = "green"; -->
-			<!-- $('.message3').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- if(val>=4 || val==0) { -->
-		<!-- if(v4.value == "") { -->
-			<!-- v4.style.borderColor = "red"; -->
-			<!-- $('.message4').html('Host is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v4.style.borderColor = "green"; -->
-			<!-- $('.message4').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- if(val>=5 || val==0) { -->
-		<!-- if(v5.value == "") { -->
-			<!-- v5.style.borderColor = "red"; -->
-			<!-- $('.message5').html('Username is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v5.style.borderColor = "green"; -->
-			<!-- $('.message5').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- if(val>=6 || val==0) { -->
-		<!-- if(v6.value == "") { -->
-			<!-- v6.style.borderColor = "red"; -->
-			<!-- $('.message6').html('Password is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v6.style.borderColor = "green"; -->
-			<!-- $('.message6').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- if(val>=7 || val==0) { -->
-		<!-- if(v7.value == "") { -->
-			<!-- v7.style.borderColor = "red"; -->
-			<!-- $('.message7').html('Confirm Password is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v7.style.borderColor = "green"; -->
-			<!-- $('.message7').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- return flag; -->
-<!-- if(flag==true){ -->
-		<!-- $(".next").click(function(){ -->
-		<!-- if(animating) return false; -->
-		<!-- animating = true; -->
-		
-		<!-- current_fs = $(this).parent(); -->
-		<!-- next_fs = $(this).parent().next(); -->
-		
-		<!-- //activate next step on progressbar using the index of next_fs -->
-		<!-- $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active"); -->
-		
-		<!-- //show the next fieldset -->
-		<!-- next_fs.show();  -->
-		<!-- //hide the current fieldset with style -->
-		<!-- current_fs.animate({opacity: 0}, { -->
-			<!-- step: function(now, mx) { -->
-				<!-- //as the opacity of current_fs reduces to 0 - stored in "now" -->
-				<!-- //1. scale current_fs down to 80% -->
-				<!-- scale = 1 - (1 - now) * 0.2; -->
-				<!-- //2. bring next_fs from the right(50%) -->
-				<!-- left = (now * 50)+"%"; -->
-				<!-- //3. increase opacity of next_fs to 1 as it moves in -->
-				<!-- opacity = 1 - now; -->
-				<!-- current_fs.css({ -->
-			<!-- 'transform': 'scale('+scale+')', -->
-			<!-- 'position': 'absolute' -->
-		  <!-- }); -->
-				<!-- next_fs.css({'left': left, 'opacity': opacity}); -->
-			<!-- },  -->
-			<!-- duration: 800,  -->
-			<!-- complete: function(){ -->
-				<!-- current_fs.hide(); -->
-				<!-- animating = false; -->
-			<!-- },  -->
-			<!-- //this comes from the custom easing plugin -->
-			<!-- easing: 'easeInOutBack' -->
-		<!-- }); -->
-	<!-- }); -->
-<!-- } -->
-<!-- } -->
-<!-- function validation(val) { -->
-	<!-- v5 = document.getElementById("uname"); -->
-	<!-- v6 = document.getElementById("passw"); -->
-	<!-- v7 = document.getElementById("cpassw"); -->
-	<!-- if(val>=5 || val==0) { -->
-		<!-- if(v5.value == "") { -->
-			<!-- v5.style.borderColor = "red"; -->
-			<!-- $('.message5').html('Username is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v5.style.borderColor = "green"; -->
-			<!-- $('.message5').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- if(val>=6 || val==0) { -->
-		<!-- if(v6.value == "") { -->
-			<!-- v6.style.borderColor = "red"; -->
-			<!-- $('.message6').html('Password is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v6.style.borderColor = "green"; -->
-			<!-- $('.message6').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- if(val>=7 || val==0) { -->
-		<!-- if(v7.value == "") { -->
-			<!-- v7.style.borderColor = "red"; -->
-			<!-- $('.message7').html('Confirm Password is required.'); -->
-			<!-- flag = false; -->
-		<!-- } -->
-		<!-- else { -->
-			<!-- v7.style.borderColor = "green"; -->
-			<!-- $('.message7').html(''); -->
-			<!-- flag = true; -->
-		<!-- } -->
-	<!-- } -->
-	<!-- var password = $("#passw").val(); -->
-	<!-- var confirmPassword = $("#cpassw").val(); -->
-	<!-- if (password != confirmPassword) { -->
-		<!-- flag = false; -->
-	<!-- } -->
-	<!-- if(flag==true){ -->
-		<!-- $(".nextab").click(function(){ -->
-			<!-- if(animating) return false; -->
-			<!-- animating = true; -->
-			
-			<!-- current_fs = $(this).parent(); -->
-			<!-- next_fs = $(this).parent().next(); -->
-			
-			<!-- //activate next step on progressbar using the index of next_fs -->
-			<!-- $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active"); -->
-			
-			<!-- //show the next fieldset -->
-			<!-- next_fs.show();  -->
-			<!-- //hide the current fieldset with style -->
-			<!-- current_fs.animate({opacity: 0}, { -->
-				<!-- step: function(now, mx) { -->
-					<!-- //as the opacity of current_fs reduces to 0 - stored in "now" -->
-					<!-- //1. scale current_fs down to 80% -->
-					<!-- scale = 1 - (1 - now) * 0.2; -->
-					<!-- //2. bring next_fs from the right(50%) -->
-					<!-- left = (now * 50)+"%"; -->
-					<!-- //3. increase opacity of next_fs to 1 as it moves in -->
-					<!-- opacity = 1 - now; -->
-					<!-- current_fs.css({ -->
-				<!-- 'transform': 'scale('+scale+')', -->
-				<!-- 'position': 'absolute' -->
-			  <!-- }); -->
-					<!-- next_fs.css({'left': left, 'opacity': opacity}); -->
-				<!-- },  -->
-				<!-- duration: 800,  -->
-				<!-- complete: function(){ -->
-					<!-- current_fs.hide(); -->
-					<!-- animating = false; -->
-				<!-- },  -->
-				<!-- //this comes from the custom easing plugin -->
-				<!-- easing: 'easeInOutBack' -->
-			<!-- }); -->
-		<!-- }); -->
-	<!-- } -->
-<!-- } -->
-<!-- </script>  -->

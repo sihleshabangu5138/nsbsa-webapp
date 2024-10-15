@@ -1,22 +1,18 @@
-{{breadcrums 'Home' 'Add Re-Payment'}}
+{{breadcrums (__ 'Home') (__ 'Add Re-Payment')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header pb-0 border-bottom border-light">
-		
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
+	
 	<div class="card-content collpase show">
 	<div class="card-body">  
      <form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/repayment" >  
 	   <!-- <input type="" id="userinput1" name="id" {{#if this.loan_id}} value="{{this.loan_id}}"{{/if}} > -->
 			<!-- <p>{{this._id}}</p> -->
 			 
-               <p class="form-section text-bold-600 font-medium-3"><i class="ft-user font-medium-2 mr-1"></i>Re-Payment</p> 
-			   {{log loan}} 
-			   {{log "2222222222222222222222"}} 
+               <p class="form-section text-bold-600 font-medium-3"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ Re-Payment}}{{/with}}</p> 
+			   
     <div class="form-body user_form">
 	<div class="row"> 
 			 <!-- <div class="col-xl-6 col-lg-6 col-md-12" style="float:right"> -->
@@ -61,7 +57,7 @@
 			<div class="form-group row">
 			   <div class="col-md-12"> 
 			    <label class="custom-control-label-date ml-2">{{__ "Payment Date"}}<span class="required red">*</span></label>
-			    <input autocomplete="off" type='text'  class="form-control  brithdate dateformat" data-validation-required-message="Birth Date is required" name="date" {{#if this.date}} value="{{getdate this.date ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false" >
+			    <input autocomplete="off" type='text'  class="form-control  brithdate dateformat" data-validation-required-message="{{#with ..}}{{__ "Birth Date is required"}}{{/with}}" name="date" {{#if this.date}} value="{{getdate this.date ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false" >
 				<i class="ft-calendar icon-care"></i>
                </div><div class="help-block"></div>
 			</div>
@@ -72,17 +68,17 @@
 		<div class="row">
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
-					<div class="heading-elements ">
+					<div class="">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">Select your payment mode<span class="required red">*</span></label>
+					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">{{#with ..}}{{__ "Select your payment mode"}}{{/with}}<span class="required red">*</span></label>
 					<select id="payment_type" class="select2 form-control dropdown_change"  name="payment_type" >
-						<option value="">Select Input Type</option>
-						<option value="cash" name="payment_type" {{#ifCond this.payment_type '==' 'cash'}} selected {{/ifCond}}>Cash</option>
-						<option value="creditcard" name="payment_type" {{#ifCond this.payment_type '==' 'creditcard'}} selected {{/ifCond}}>Credit Card</option>
-						<option value="debitcard" name="payment_type" {{#ifCond this.payment_type '==' 'debitcard'}} selected {{/ifCond}}>Debit Card</option>
-						<option value="netbanking" name="payment_type" {{#ifCond this.payment_type '==' 'netbanking'}} selected {{/ifCond}}>Net Banking</option>
-						<option value="cheque" name="cheque_detail" {{#ifCond this.cheque_detail '==' 'cheque'}} selected {{/ifCond}}>Cheque</option>
+						<option value="">{{__ "Select Input Type"}}</option>
+						<option value="cash" name="payment_type" {{#ifCond this.payment_type '==' 'cash'}} selected {{/ifCond}}>{{__ "Cash"}}</option>
+						<option value="creditcard" name="payment_type" {{#ifCond this.payment_type '==' 'creditcard'}} selected {{/ifCond}}>{{__ "Credit Card"}}</option>
+						<option value="debitcard" name="payment_type" {{#ifCond this.payment_type '==' 'debitcard'}} selected {{/ifCond}}>{{__ "Debit Card"}}</option>
+						<option value="netbanking" name="payment_type" {{#ifCond this.payment_type '==' 'netbanking'}} selected {{/ifCond}}>{{__ "Net Banking"}}</option>
+						<option value="cheque" name="cheque_detail" {{#ifCond this.cheque_detail '==' 'cheque'}} selected {{/ifCond}}>{{__ "Cheque"}}</option>
 					</select>
 					</li>	
 					</ul>
@@ -123,7 +119,7 @@
 					  <fieldset>
 				      <label>{{__ "Cheque Amount"}}<span class=""></span></label> 
                       <div class="input-group touchspincolor">
-					  <input type="text" id="paymentamount" class="touchspin " data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"  name="paymentamount"  data-bts-step="1000" {{#if this.paymentamount}} value="{{this.paymentamount}}"{{/if}} />
+					  <input type="text" id="paymentamount" class="touchspin " data-bts-postfix="{{{currencyList session.generaldata.currency}}}"  name="paymentamount"  data-bts-step="1000" {{#if this.paymentamount}} value="{{this.paymentamount}}"{{/if}} />
                       </div>
                       </fieldset> 
 				    </div>

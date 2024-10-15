@@ -1,25 +1,20 @@
-{{breadcrums 'Home' 'Service List'}}
+{{breadcrums (__ 'Home') (__ 'Service List')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
-		<div class="col-lg-2 col-md-2 mb-2 custom_select">
-		
-		</div>
-		<div class="col-lg-2 col-md-2 mb-2">
-			
-		</div>
-		<div class=" col-lg-7 col-md-7 mb-7">
-		</div>
-		<div class=" col-lg-1 col-md-1 mb-1 heading-elements p-0">
-			<ul class="list-inline mb-0">
-			<li id="export">
-				<select class="select2 form-control export">
-					<option value="">{{__ "Export"}}</option>
-					<option value="csv">{{__ "XLSX"}}</option>
-					<option value="pdf">{{__ "PDF"}}</option>
-				</select>
-			</li>	
-			</ul>
+		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ews-heading">
+					<ul class="list-inline mb-0">
+					<li id="export">
+						<select class="select2 form-control export">
+							<option value="">{{__ "Export"}}</option>
+							<option value="csv">{{__ "XLSX"}}</option>
+							<option value="pdf">{{__ "PDF"}}</option>
+						</select>
+					</li>	
+					</ul>
+				</div>
 		</div>
 		</div>
     <div class="content-wrapper">
@@ -54,8 +49,6 @@
 						<div class="row">
 						<div class="col-12">
 						<div class="card">
-							<div class="card-header px-0"><a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-						  </div>
 							<div class="card-content collapse show" id="NF-datatable">
 							<div class="card-body p-0">
 								<div id="grid"></div>
@@ -208,93 +201,149 @@
                 groupable: true,
                 resizable: true,
                 filterable: {
-					mode: "row"
+					mode: "row",
+					 messages: {
+          info: "{{__ 'Show items with value that:'}}",
+		  isEqualTo: "{{__ 'Is equal to'}}",
+		  and: "{{__ 'And'}}",
+		  or: "{{__ 'Or'}}",
+		  clear: "{{__ 'Clear'}}",
+		  filter: "{{__ 'Filter'}}",
+		  isTrue: "{{__ 'is true'}}",
+      isFalse: "{{__ 'is false'}}",
+      isEmpty: "{{__ 'is empty'}}",
+      isNotEmpty: "{{__ 'is not empty'}}"
+        },
+		operators: {
+      string: {
+        eq: "{{__ 'is equal to'}}",
+        neq: "{{__ 'is not equal to'}}",
+        startswith: "{{__ 'starts with'}}",
+        contains: "{{__ 'contains'}}",
+        doesnotcontain: "{{__ 'does not contain'}}",
+        endswith: "{{__ 'ends with'}}",
+        isnull: "{{__ 'is null'}}",
+        isnotnull: "{{__ 'is not null'}}"
+      }
+    }
 				},
-                columnMenu: true,
-				pageable: {
+                columnMenu: {
+    messages: {
+      columns: "{{__ 'Columns'}}",
+	  filter : "{{__ 'Filter'}}",
+	  sortAscending: "{{__ 'Sort Ascending'}}", 
+	  sortDescending: "{{__ 'Sort Descending'}}", 
+    },
+  },
+												pageable: {
 					input: true,
 					numeric: false,
 					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100]
+					pageSizes: [10, 20, 25, 50, 100],
+					messages: {
+	  display: "{{__ '{0} - {1} of {2} items'}}",
+      empty: "{{__ 'No items to display'}}",
+      page: "{{__ 'Page'}}",
+	  of: "{{__ 'of {0}'}}", 
+      itemsPerPage: "{{__ 'items per page'}}",
+      first: "{{__ 'Go to the first page'}}",
+      previous: "{{__ 'Go to the previous page'}}",
+      next: "{{__ 'Go to the next page'}}",
+      last: "{{__ 'Go to the last page'}}",
+      refresh: "{{__ 'Refresh'}}"
+    }
 				},
                 noRecords: true,
+				messages: {
+            noRecords: "{{__ 'No records available.'}}"
+        },
                 columns: [
 					
 					{
                         field: "servicename" ,
-                        title: "Service Name",
+						title: "{{__ 'Service Name'}}",
 						width: 150
                     },
 					{
                         field: "categorytypes" ,
-                        title: "Category Type",
+						title: "{{__ 'Category Type'}}",
 						width: 150
                     },
 					{
                         field: "servicefor" ,
-                        title: "Service for",
+						title: "{{__ 'Service for'}}",
 						width: 150
                     },
 					{
                         field: "description" ,
-                        title: "Description",
+						title: "{{__ 'Description'}}",
 						width: 150
                     },
 					{
                         field: "uploadimages" ,
-                        title: "Images",
+						title: "{{__ 'Images'}}",
 						 hidden: true,
+						  template: function (dataItem) {
+        return dataItem.uploadimages.join(', '); // Display tags separated by commas
+    },
 						width: 150
                     },
 					{
                         field: "tagname" ,
-                        title: "Tags",
+						title: "{{__ 'Tags'}}",
 						 hidden: true,
+						  template: function (dataItem) {
+        return dataItem.tagname.join(', '); // Display tags separated by commas
+    },
 						width: 150
                     },
 					{
                         field: "duration_hour" ,
-                        title: "Duration",
+						title: "{{__ 'Duration'}}",
 						template:"#= duration_hour #"+" hours"+" #= duration_minute #"+" minutes",
 						width: 180
                     },
 					{
                         field: "pricetype" ,
-                        title: "Price Type",
+						title: "{{__ 'Price Type'}}",
 						 hidden: true,
 						width: 120
                     },
 					{
                         field: "price" ,
-                        title: "{{{currencyList session.generaldata.currency}}} "+"Price",
+                        title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Price'}}",
 						width: 150
                     },
 					{
                         field: "assigned_staff" ,
-                        title: "Assigned staff",
+						title: "{{__ 'Assigned staff'}}",
 						 hidden: true,
+						   template: function (dataItem) {
+                                                    var usernames = dataItem.assigned_staff.map(function (staff) {
+                                                        return staff.username;
+                                                    });
+                                                    return usernames.join(', '); // Display usernames separated by commas
+                                                },
 						width: 150
                     },
 					{
                         field: "user_capacity" ,
-                        title: "User Capacity",
+						title: "{{__ 'User Capacity'}}",
 						 hidden: true,
 						width: 150
                     },
 					{
                         field: "enable_online_booking" ,
-                        title: "Online booking",
+						title: "{{__ 'Online booking'}}",
 						 hidden: true,
 						width: 150
                     },
-					{{#ifCond session.admin_access "==" 0}}
-					{{#ifCondition accessrightdata.add "||" accessrightdata.delete "||" accessrightdata.update}}
 					{
 						width: "200px",
 						command:
 						[
 							{
-								template : "<center>"
+								template : "<center>" 
 							},
 							
 							  /* { 
@@ -309,9 +358,10 @@
 								} 
 							},   */
 							{template : "&nbsp;" },
-							
+
+
 							/* Edit action start */
-							{{#if accessrightdata.update}}
+							{{#ifCond accessrightdata.update "||" session.admin_access}}
 							 { 
 								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
 								click:function(e) 
@@ -323,12 +373,9 @@
 								  return false;
 								} 
 							},
-							{{/if}}
+							{{/ifCond}}
 							{template : "&nbsp;" },
-						
-							
-							/* Delete action start */
-							{{#if accessrightdata.delete }}
+							{{#ifCond accessrightdata.delete "||" session.admin_access}}
 							{ 
 								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
 								click: function(e){  //add a click event listener on the delete button
@@ -350,88 +397,19 @@
 									})
 								}	
 							},
-							{{/if}}
+							{{/ifCond}}
 							
 							/* Delete action end */
 							
 							{template : "</center>" },
 							 
 							], 
-							{{#if accessrightdata.add }}
+							{{#ifCond accessrightdata.add "||" session.admin_access}}
+							
 							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addservice'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
-							{{/if}}
+							headerTemplate: "<center><a href='addservice	'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+							{{/ifCond}}
 					}
-				{{/ifCondition}}
-				{{else}}
-					{
-						width: "200px",
-						command:
-						[
-							{
-								template : "<center>"
-							},
-							
-							  /* { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "addrole/"+id;
-								  return false;
-								} 
-							},   */
-							{template : "&nbsp;" },
-							
-							/* Edit action start */
-							 { 
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "addservice/"+id;
-								  return false;
-								} 
-							},
-							{template : "&nbsp;" },
-						
-							
-							/* Delete action start */
-							{ 
-								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
-								click: function(e){  //add a click event listener on the delete button
-									e.preventDefault(); //prevent page scroll reset
-									var tr = $(e.target).closest("tr"); //get the row for deletion
-									var data = this.dataItem(tr); //get the row data so it can be referred later
-									window1.content(windowTemplate(data)); //send the row data object to the template and render it
-									window1.center().open();
-									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-									$("#yesButton").click(function(){
-										var grid = $("#grid").data("kendoGrid");
-										grid.dataSource.remove(data)  //prepare a "destroy" request
-										grid.dataSource.sync();  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
-										<!-- alert('Delete'); -->
-										window1.close();
-									})
-									$("#noButton").click(function(){
-										window1.close();
-									})
-								}	
-							},
-							
-							/* Delete action end */
-							
-							{template : "</center>" },
-							 
-							], 
-							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addservice'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
-					}
-				{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"

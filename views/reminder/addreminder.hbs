@@ -1,13 +1,10 @@
-  {{breadcrums 'Home' title}}
+  {{breadcrums (__ 'Home') (__ title)}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <!-- <h1>{{__ "text to test"}}</h1> -->
     <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header pb-0 border-bottom border-light">
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
 	<div class="card-content collpase show">
 	<div class="card-body">
 	<script>
@@ -32,50 +29,55 @@
         <div class="col-md-12">
         <div class="form-group input">
         <div class="col-md-12 form-control border-light"> 
-			<input type="text" id="userinput1" data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Reminder Title is required" name="reminder_nm" {{#if this.reminder_nm}} value="{{this.reminder_nm}}" {{/if}}>
+			<input type="text" id="userinput1" data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})" data-validation-regex-message="{{#with ..}}{{__ "Only Characters, no numbers"}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Reminder Title is required"}}{{/with}}" name="reminder_nm" {{#if this.reminder_nm}} value="{{this.reminder_nm}}" {{/if}}>
              <label for="userinput1">{{#with ..}}{{__ "Reminder Title" setlang}}{{/with}}<span class="required red">*</span></label>
         </div><div class="help-block"></div>
         </div>
         </div>
 		<div class="col-md-6">
 			<div class="form-group input">
-			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements ">
+				<div class="">
 				<label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{#with ..}}{{__ "Reminder Type" setlang}}{{/with}}<span class="required red">*</span></label> 
-						<select id="reminder_type" class="select2 form-control export" data-validation-required-message="Reminder Type is required" name="reminder_type" >
-						<option value="">Reminder Type</option>
-						<option value="charged_failed" {{#ifCond this.reminder_type '==' 'charged_failed'}} selected {{/ifCond}}> Subscription Payment Failed</option>
-						 <option value="upcoming_invoice" {{#ifCond this.reminder_type '==' 'upcoming_invoice'}} selected {{/ifCond}}> Upcoming Invoice</option>
-						 <option value="invoice_pending" {{#ifCond this.reminder_type '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
-						 <option value="customer_subscription_deleted" {{#ifCond this.reminder_type '==' 'customer_subscription_deleted'}} selected {{/ifCond}}> Subscription End</option>
-						 <option value="customer_source_expiring" {{#ifCond this.reminder_type '==' 'customer_source_expiring'}} selected {{/ifCond}}> Card Expiring</option>
-						 <option value="customer_registration_failed" {{#ifCond this.reminder_type '==' 'customer_registration_failed'}} selected {{/ifCond}}> Registration Payment Failed</option>
-						 <option value="customer_unvisited" {{#ifCond this.reminder_type '==' 'customer_unvisited'}} selected {{/ifCond}}> Customer Unvisited</option>
-						 <option value="new_customer_guidance" {{#ifCond this.reminder_type '==' 'new_customer_guidance'}} selected {{/ifCond}}> New Customer Guidance</option>
-						 <option value="trial_to_paid" {{#ifCond this.reminder_type '==' 'trial_to_paid'}} selected {{/ifCond}}> Trial To Paid</option>
-						 <option value="coupon_code_for_trial" {{#ifCond this.reminder_type '==' 'coupon_code_for_trial'}} selected {{/ifCond}}> Coupon Code For Trial Or Canceled Users</option>
+						<select id="reminder_type" class="select2 form-control export" data-validation-required-message="{{#with ..}}{{__ "Reminder Type is required"}}{{/with}}" name="reminder_type" >
+						<option value="">{{#with ..}}{{__ "Reminder Type" setlang}}{{/with}}</option>
+						<option value="charged_failed" {{#ifCond this.reminder_type '==' 'charged_failed'}} selected {{/ifCond}}> {{#with ..}}{{__ "Subscription Payment Failed" setlang}}{{/with}}</option>
+						 <option value="upcoming_invoice" {{#ifCond this.reminder_type '==' 'upcoming_invoice'}} selected {{/ifCond}}> {{#with ..}}{{__ "Upcoming Invoice" setlang}}{{/with}}</option>
+						 <option value="invoice_pending" {{#ifCond this.reminder_type '==' 'invoice_pending'}} selected {{/ifCond}}> {{#with ..}}{{__ "Invoice Pending" setlang}}{{/with}}</option>
+						 <option value="customer_subscription_deleted" {{#ifCond this.reminder_type '==' 'customer_subscription_deleted'}} selected {{/ifCond}}> {{#with ..}}{{__ "Subscription End" setlang}}{{/with}}</option>
+						 <option value="customer_source_expiring" {{#ifCond this.reminder_type '==' 'customer_source_expiring'}} selected {{/ifCond}}> {{#with ..}}{{__ "Card Expiring" setlang}}{{/with}}</option>
+						 <option value="customer_registration_failed" {{#ifCond this.reminder_type '==' 'customer_registration_failed'}} selected {{/ifCond}}> {{#with ..}}{{__ "Registration Payment Failed" setlang}}{{/with}}</option>
+						 <option value="customer_unvisited" {{#ifCond this.reminder_type '==' 'customer_unvisited'}} selected {{/ifCond}}> {{#with ..}}{{__ "Customer Unvisited" setlang}}{{/with}}</option>
+						 <option value="new_customer_guidance" {{#ifCond this.reminder_type '==' 'new_customer_guidance'}} selected {{/ifCond}}> {{#with ..}}{{__ "New Customer Guidance" setlang}}{{/with}}</option>
+						 <option value="trial_to_paid" {{#ifCond this.reminder_type '==' 'trial_to_paid'}} selected {{/ifCond}}> {{#with ..}}{{__ "Trial To Paid" setlang}}{{/with}}</option>
+						 <option value="coupon_code_for_trial" {{#ifCond this.reminder_type '==' 'coupon_code_for_trial'}} selected {{/ifCond}}> {{#with ..}}{{__ "Coupon Code For Trial Or Canceled Users" setlang}}{{/with}}</option>
 						</select> 
 				</div><div class="help-block"></div>
 			</div>
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements ">
+				<div class="">
 				<label class="custom-control-label-date ml-2" id="export" style="z-index:99">{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}<span class="required red">*</span></label> 
-						<select id="reminder_template" class="select2 form-control export" data-validation-required-message="Notification Template is required" name="reminder_template" >
-						<option value="">Notification Template</option>
-						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>
-						<option value="profile_update" {{#ifCond this.reminder_template '==' 'profile_update'}} selected {{/ifCond}}> User Profile Update</option>
-						<option value="account_delete" {{#ifCond this.reminder_template '==' 'account_delete'}} selected {{/ifCond}}> Account Delete</option>
-						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>Signup</option>
-						<option value="add_notice" {{#ifCond this.reminder_template '==' 'add_notice'}} selected {{/ifCond}}>Add EMI</option>
-						<option value="update_notice" {{#ifCond this.reminder_template '==' 'update_notice'}} selected {{/ifCond}}> Update EMI</option>
-						<option value="add_invoice" {{#ifCond this.reminder_template '==' 'add_invoice'}} selected {{/ifCond}}> Add Invoice</option>
-						<option value="add_support" {{#ifCond this.reminder_template '==' 'add_support'}} selected {{/ifCond}}> Add Support Ticket</option>
-						<option value="registration_failed" {{#ifCond this.reminder_template '==' 'registration_failed'}} selected {{/ifCond}}> Registration Failed</option>
-						<option value="invoice_pending" {{#ifCond this.reminder_template '==' 'invoice_pending'}} selected {{/ifCond}}> Invoice Pending</option>
+				<select id="reminder_template" class="select2 form-control export" data-validation-required-message="Notification Template is required" name="reminder_template" >
+						<option value="">{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}</option>
+						{{#each ../notification_tem as |data2| }}
+						<option {{#if this.slug}}{{#ifCond this.slug '==' result.reminder_template}} selected {{/ifCond}}{{/if}} value="{{this.slug}}">{{this.templatetitle}}</option>
+						{{/each}}
+						
 						</select> 
+						{{!-- <select id="reminder_template" class="select2 form-control export" data-validation-required-message="{{#with ..}}{{__ "Notification Template is required"}}{{/with}}" name="reminder_template" >
+						<option value="">{{#with ..}}{{__ "Notification Template" setlang}}{{/with}}</option>
+						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>{{#with ..}}{{__ "Signup" setlang}}{{/with}}</option>
+						<option value="profile_update" {{#ifCond this.reminder_template '==' 'profile_update'}} selected {{/ifCond}}> {{#with ..}}{{__ "User Profile Update" setlang}}{{/with}}</option>
+						<option value="account_delete" {{#ifCond this.reminder_template '==' 'account_delete'}} selected {{/ifCond}}> {{#with ..}}{{__ "Account Delete" setlang}}{{/with}}</option>
+						<option value="signup" {{#ifCond this.reminder_template '==' 'signup'}} selected {{/ifCond}}>{{#with ..}}{{__ "Signup" setlang}}{{/with}}</option>
+						<option value="add_notice" {{#ifCond this.reminder_template '==' 'add_notice'}} selected {{/ifCond}}>{{#with ..}}{{__ "Add EMI" setlang}}{{/with}}</option>
+						<option value="update_notice" {{#ifCond this.reminder_template '==' 'update_notice'}} selected {{/ifCond}}> {{#with ..}}{{__ "Update EMI" setlang}}{{/with}}</option>
+						<option value="add_invoice" {{#ifCond this.reminder_template '==' 'add_invoice'}} selected {{/ifCond}}> {{#with ..}}{{__ "Add Invoice" setlang}}{{/with}}</option>
+						<option value="add_support" {{#ifCond this.reminder_template '==' 'add_support'}} selected {{/ifCond}}> {{#with ..}}{{__ "Add Support Ticket" setlang}}{{/with}}</option>
+						<option value="registration_failed" {{#ifCond this.reminder_template '==' 'registration_failed'}} selected {{/ifCond}}> {{#with ..}}{{__ "Registration Failed" setlang}}{{/with}}</option>
+						<option value="invoice_pending" {{#ifCond this.reminder_template '==' 'invoice_pending'}} selected {{/ifCond}}> {{#with ..}}{{__ "Invoice Pending" setlang}}{{/with}}</option>
+						</select>  --}}
 				</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -84,7 +86,7 @@
         <div class="col-md-12 form-control border-light textarea_css">
              <div class="form-field">
                  <input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}" {{/if}}>
-                 <textarea name="reminder_desc" data-validation-regex-regex="([A-Za-z_, `.'^-]{1,250})" data-validation-regex-message='{{__ "Only Characters, no numbers"}}' {{#if this.reminder_desc}} value="{{this.reminder_desc}}" {{/if}}>{{this.reminder_desc}}</textarea>
+                 <textarea name="reminder_desc" data-validation-regex-regex="([A-Za-z_, `.'^-]{1,250})" data-validation-regex-message='{{#with ..}}{{__ "Only Characters, no numbers"}}{{/with}}' {{#if this.reminder_desc}} value="{{this.reminder_desc}}" {{/if}}>{{this.reminder_desc}}</textarea>
                   <span class="txt-title-label"></span>
                   <label class="text-area address">{{#with ..}}{{__ "Description" setlang}}{{/with}}</label>
               </div>
@@ -95,7 +97,7 @@
 	<p class="form-section text-bold-600 font-medium-3 border-light"><i class="ft-clock font-medium-2 mr-1"></i>{{#with ..}}{{__ "Reminder Time" setlang}}{{/with}}</p>	
       <div class="addTime">
         <div class="row reminder_div ">         	
- 		<div class="col-md-3">
+ 		<div class="col-md-4 col-lg-3">
           <div class="form-group">
           <div class="col-md-12 form-control">
           <div class="skin skin-flat row">
@@ -112,32 +114,32 @@
 		</div>
 		</div>
 		</div>	 
-				<div class="form-group col-md-9 mb-2 contact-repeater pl-0">
+				<div class="form-group col-md-8 col-lg-9 mb-2 contact-repeater pl-0">
 					<div data-repeater-list="reminderdata">
 					{{#each this.reminderdata}}
 						<div class="row" data-repeater-item> 
 							<div class="col-md-4 ">
 							<div class="col-12"> 
 							<div class="controls">
-								  <input type="number" name="number" class="form-control" required="" data-validation-required-message="This field is required" minlength="1" maxlength="20" placeholder="Enter number between 1 - 20" aria-invalid="false"  name="number" {{#if this.number}} value="{{this.number}}" {{/if}}>
+								  <input type="number" name="number" class="form-control" required="" data-validation-required-message="{{#with ..}}{{__ "This field is required"}}{{/with}}" minlength="1" maxlength="20" placeholder="{{#with ..}}{{__ "Enter number between 1 - 20"}}{{/with}}" aria-invalid="false"  name="number" {{#if this.number}} value="{{this.number}}" {{/if}}>
 								<div class="help-block"></div>
 							</div>
 							</div>
 							</div>
-							<div class="col-md-4 ">
+							<div class="col-md-5 padding-top-m ">
 							   <div class="col-12 ">
 								<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Select Days" setlang}}{{/with}}<span class="required red">*</span></label> 
 								<select class="select1 form-control t_t valid  mb-2" name="recurense"  id="recurense"> 	
 									
-									<option value="">Select Days</option>
-									<option value="days"  {{#ifCond this.recurense '==' 'days'}} value="{{this.recurense}}" selected {{/ifCond}}>Day(s)</option>
-									<option value="week" {{#ifCond this.recurense '==' 'week'}} value="{{this.recurense}}" selected {{/ifCond}}>Week(s)</option>
-									<option value="months" {{#ifCond this.recurense '==' 'months'}} value="{{this.recurense}}" selected {{/ifCond}}>Month(s)</option>
-									<option  value="years" {{#ifCond this.recurense '==' 'years'}} value="{{this.recurense}}" selected {{/ifCond}}>Year(s)</option> 
+									<option value="">{{#with ..}}{{__ "Select Days"}}{{/with}}</option>
+									<option value="days"  {{#ifCond this.recurense '==' 'days'}} value="{{this.recurense}}" selected {{/ifCond}}>{{#with ..}}{{__ "Day(s)"}}{{/with}}</option>
+									<option value="week" {{#ifCond this.recurense '==' 'week'}} value="{{this.recurense}}" selected {{/ifCond}}>{{#with ..}}{{__ "Week(s)"}}{{/with}}</option>
+									<option value="months" {{#ifCond this.recurense '==' 'months'}} value="{{this.recurense}}" selected {{/ifCond}}>{{#with ..}}{{__ "Month(s)"}}{{/with}}</option>
+									<option  value="years" {{#ifCond this.recurense '==' 'years'}} value="{{this.recurense}}" selected {{/ifCond}}>{{#with ..}}{{__ "Year(s)"}}{{/with}}</option> 
 								</select>
 							  </div>	
 					        </div>  
-							<div class="col-md-4 notCustomerBlock"> 
+							<div class="col-md-3 notCustomerBlock"> 
 							    <div class="col-12">
 								  <div class="input-group-append"> 
 								  <span class="input-group-btn" id="button-addon2">
@@ -358,21 +360,31 @@
 {{/ifCond}}
 {{#ifCond datafield.field_type "==" "file"}}
 	<div class="col-md-6">
-	<div class="form-group row">
-	<div class="col-md-12">
-		<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-		<input class="form-control border-light validimage"
-		{{#ifEqual datafield.validation "required"}}  data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-		{{#each ../customfield_value as |custome_value| }}
-			{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-				value="{{custome_value.customfield_value}}" 
+		<div class="form-group row">
+			<div class="col-md-12">
+				<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}{{#unless ../customfield_value}}{{else}}<span class="required red">*</span>{{/unless}}{{/ifEqual}}</label>
+				<input class="form-control border-light validimage"
+					{{#ifEqual datafield.validation "required"}}
+						{{#unless ../customfield_value}} data-validation-required-message="{{datafield.label}} is required" {{/unless}}
+					{{/ifEqual}}
+					{{#each ../customfield_value as |custome_value| }}
+						{{#ifCond custome_value.id_d "==" datafield.id_d}}			
+							value="{{custome_value.customfield_value}}" 
+						{{/ifCond}}
+					{{/each}}
+					name="{{datafield._id}}" type="file">
 				
-				{{/ifCond}}
-		{{/each}}
-		name="{{datafield._id}}" type="file">{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "==" datafield.id_d}}<p>{{custome_value.customfield_value}}</p><input class="form-control border-light edit_val"  name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden"  placeholder="" id="userinput5">{{/ifCond}}{{/each}}
-		<span class="required red notice"></span>
-	</div><div class="help-block"></div>
-	</div>
+				{{#each ../customfield_value as |custome_value| }}
+					{{#ifCond custome_value.id_d "==" datafield.id_d}}
+						<p>{{custome_value.customfield_value}}</p>
+						<input class="form-control border-light edit_val" name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden" placeholder="" id="userinput5">
+					{{/ifCond}}
+				{{/each}}
+
+				<span class="required red notice"></span>
+			</div>
+			<div class="help-block"></div>
+		</div>
 	</div>
 {{/ifCond}}
 {{/each}}
@@ -440,15 +452,16 @@
 			}
 		});
 		$('.validimage').on('change', function() {
-		if("{{customvalid.field_type}}" == "file"){
-			var size = (this.files[0].size/1024/1024).toFixed(2);
-			var limit="{{customvalid.filesize}}";
-			if(size > limit){
-				alert("size should be less than or equal to {{customvalid.filesize}} mb");
-				$('.validimage').val("");
-			}
-		}
-		});
+  if("{{customvalid.field_type}}" == "file"){
+    var size = (this.files[0].size / 1024 / 1024).toFixed(2);
+    var limit = parseFloat("{{customvalid.filesize}}"); // Parse the string to a float
+
+    if(size > limit){
+      alert("Size should be less than or equal to " + limit + " MB");
+      $('.validimage').val("");
+    }
+  }
+});
 			if(m>0){
 			return false;
 			}

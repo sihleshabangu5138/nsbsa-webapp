@@ -688,7 +688,39 @@ table {
 .header-navbar .navbar-wrapper{
 	z-index: 99999!important;
 }
-
+.loader {
+ 
+	width: 270px;
+	height: 56px;
+	/* background-image:url("/images/upload/generalsetting/Nifty-EWS.png"); */
+	animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+	  0% {opacity: 0.3;}
+	 100% {opacity: 1;}
+  }
+  .notifiction_ul{
+	overflow-y:scroll;
+	height:500px;
+}
+  .loader_c{
+	  position: absolute;
+	  top: 50%;
+	  left: 43%;
+	  margin-left: -15px;
+	  margin-top: -15px;
+	  z-index: 50;
+  }
+  .body-overlay{
+	  z-index: 99999 !important;
+	  background: rgba(255,255,255,0.7);
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+  }
 .user_created_time {
     margin: 0px;
     font-size: 11px;
@@ -737,4 +769,81 @@ table {
 #grid > .k-grid-content > table
 {
    width: 100% !important;
+}
+.EMI-CAL .loan_amount input{
+	max-width:100%;
+}
+.EMI-CAL .loan_amount,.EMI-CAL .Interest_Rate,.EMI-CAL .Loan_Term {
+	margin-top:20px;
+}
+.remider_list .bg-info{
+	background-color :#c07d05 !important;
+}
+.remider_list.notice_list .bg-info{
+	background-color :#3a7e12 !important;
+}
+.remider_list .bs-callout-info h4,.remider_list p{
+	color :#fff !important;
+}
+.remider_list .icon_reminder  i{
+	margin-top:11px;
+}
+.remider_list .bg-info p{
+	margin-top:7px;
+}
+.remider_list .bg-info p i{
+	padding-right:7px;
+}
+.remider_list .bs-callout-info{
+	background-color :#f9a715 !important;
+}
+.remider_list.notice_list .bs-callout-info{
+	background-color :#5fb22e !important;
+}
+.remider_list .bs-callout-info,.remider_list .bs-callout-info.callout-transparent {
+    display: block;
+    border-color: #c07d05!important;
+    border-radius: .25rem;
+}
+.remider_list.notice_list .bs-callout-info,.remider_list.notice_list .bs-callout-info.callout-transparent {
+    display: block;
+    border-color: #3a7e12!important;
+    border-radius: .25rem;
+}
+.heading-elements.visible.ews-heading {
+	background: #fff;
+	width: 75%;
+	transition: 300ms ease all;
+	top: 0px;
+	left: 50px;
+	margin: 0px auto;
+}
+.view_alert{
+	box-shadow: 0 10px 40px 0 rgb(62 57 107 / 10%), 0 2px 9px 0 rgb(62 57 107 / 10%);
+	border-left: 3px solid #047CC2;
+	border-radius:6px;
+}
+.view_alert i,.view_alert h3{
+	width:auto;
+	float:left;
+}
+.view_alert p{
+	width:auto;
+	float:left;
+}
+.view_alert i{
+	font-size:32px;
+	color:#047CC2;
+	padding-top:12px;
+}
+.view_alert .alert_details{
+	margin-left:50px;
+}
+.view_alert .date_alert{
+	float: right;
+    text-align: right;
+    padding: 3px 10px;
+    background: #16D39A;
+    width: auto;
+    color: #fff;
 }

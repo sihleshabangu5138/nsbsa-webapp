@@ -1,4 +1,4 @@
- {{breadcrums 'Home' 'Product details'}}
+ {{breadcrums (__ 'Home') (__ 'Product details')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
@@ -17,9 +17,9 @@
 				<div class="row p-1"> 
 				    <div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Product name" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Product name" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.productname}}</div>
 						  </div>
@@ -27,9 +27,9 @@
 				    </div>	 
 					<div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Category Types" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Category Types" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.categorytypes}}</div>
 						  </div>
@@ -39,9 +39,9 @@
 				<div class="row p-1"> 
 					<div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Product unit" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Product unit" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.productunit}}</div>
 						  </div>
@@ -49,9 +49,9 @@
 				    </div>	 
 					<div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Description" setlang}}{{/with}}
-						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Description" setlang}}{{/with}}
+						  </div> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.description}}</div>
 						  </div>
@@ -59,23 +59,28 @@
 				    </div>	 
 				    </div>	 
 				<div class="row p-1"> 
-					<div class="col-sm-6">
+					<div class="col-sm-6 ">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Product Images" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Product Images" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  {{#each this.productimage}}
 							<img class="existing_user_image update_time_team_image" src="/images/upload/{{this}}">
+							<a href="/images/upload/{{this}}" download="{{this}}">
+                    <button type="button" class="btn btn-info">
+                        {{#with ..}}{{__ "Download"}}{{/with}}
+                    </button>
+                </a>
 						  {{/each}}
 						  </div>
 						</div>
 				    </div>	 
 					<div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Warranty" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Warranty" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.warranty}} {{this.dur_type}}</div>
 						  </div>
@@ -85,9 +90,9 @@
 				<div class="row p-1"> 
 					<div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Tags" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Tags" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.tagname}}</div>
 						  </div>
@@ -95,9 +100,9 @@
 				    </div>	  
 					<div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "SKU/Barcode" setlang}}{{/with}}
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "SKU/Barcode" setlang}}{{/with}}
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.skubarcode}}</div>
 						  </div>
@@ -113,9 +118,9 @@
 				<div class="row p-1">				   
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Initial Stock" setlang}}{{/with}}        
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Initial Stock" setlang}}{{/with}}        
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{this.initialstock}}</div>  
 						  </div>
@@ -123,9 +128,9 @@
 				 </div> 
 				    <div class="col-sm-6"> 
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Stock Expiry Date" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Stock Expiry Date" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							 <div class="tabletext">{{this.stockexpiry}}</div> 
 						  </div>
@@ -135,9 +140,9 @@
 				<div class="row p-1">
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Stock Location/Rack Number" setlang}}{{/with}} 
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Stock Location/Rack Number" setlang}}{{/with}} 
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
 							<div class="tabletext">{{this.locationrack}}</div>
 						  </div>
@@ -152,9 +157,9 @@
 				<div class="row p-1">
 				    <div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Retail Price" setlang}}{{/with}}({{{currencyList ../session.generaldata.currency}}})
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Retail Price" setlang}}{{/with}}({{{currencyList ../session.generaldata.currency}}})
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6 "> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.retailprice}}</div>
 						  </div>
@@ -162,9 +167,9 @@
 				    </div>
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Special Price" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})       
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Special Price" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})       
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{this.specialprice}}</div>  
 						  </div>
@@ -174,9 +179,9 @@
 				<div class="row p-1">
 				    <div class="col-sm-6">
 				        <div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Supply Price" setlang}}{{/with}}({{{currencyList ../session.generaldata.currency}}})
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Supply Price" setlang}}{{/with}}({{{currencyList ../session.generaldata.currency}}})
 						  </div>
-						  <div class="col-sm-6 "> 
+						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  <div class="tabletext">{{this.supplyprice}}</div>
 						  </div>
@@ -184,10 +189,10 @@
 				    </div>
 				 <div class="col-sm-6"> 
 						<div class="row">
-						  <div class="col-sm-6 font-weight-bold ">{{#with ..}}{{__ "Commission" setlang}}{{/with}}({{{currencyList ../session.generaldata.currency}}})
+						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Commission" setlang}}{{/with}}({{{currencyList ../session.generaldata.currency}}})
 						  
 						  </div>
-						  <div class="col-sm-6"> 
+						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
 						  <div class="tabletext">{{#if this.commission}}{{this.commission}} {{else}}No Commission{{/if}}</div>  
 						  </div>

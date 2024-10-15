@@ -1,39 +1,22 @@
-{{breadcrums 'Home' 'Notification Template Listing'}}
-<div class="app-content center-layout mt-2 mx-md-3 px-1 content-header row">
-	<div class="col-xl-12 col-lg-12 box-four-view">
-	<div class="card_boxnf">
-	<div class="card-content">
-	<div class="card-body pl-0 pr-0">
-		
-		<div class="row" style="">
-		<div class="col-lg-2 col-md-2 mb-2 custom_select">
-		
-		</div>
-		<div class="col-lg-2 col-md-2 mb-2">
-			
-		</div>
-		<div class=" col-lg-7 col-md-7 mb-7">
-		</div>
-		<div class=" col-lg-1 col-md-1 mb-1 heading-elements p-0">
-			<ul class="list-inline mb-0">
-			<li id="export">
-				<select class="select2 form-control export">
-					<option value="">{{__ "Export"}}</option>
-					<option value="csv">{{__ "XLSX"}}</option>
-					<option value="pdf">{{__ "PDF"}}</option>
-				</select>
-			</li>	
-			</ul>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		
-
+{{breadcrums (__ 'Home') (__ 'Notification Template Listing')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
+	<div class="row" style="">
+	
+		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ews-heading">
+					<ul class="list-inline mb-0">
+					<li id="export">
+						<select class="select2 form-control export">
+							<option value="">{{__ "Export"}}</option>
+							<option value="csv">{{__ "XLSX"}}</option>
+							<option value="pdf">{{__ "PDF"}}</option>
+						</select>
+					</li>	
+					</ul>
+				</div>
+		</div>
+		</div>
     <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
@@ -52,12 +35,12 @@
 				<!--{{log messages}}-->
 				{{#if messages.error  }}
 			<script>
-					toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
 			{{#if messages.success }}
 				<script>
-					toastr.success("{{messages.success}}", "Sucess!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.success("{{messages.success}}","{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
                 <div class="card-body card-dashboard card-design">
@@ -172,6 +155,24 @@
 						url: '/ajxfun/notificationtemplate',
 						dataType: "json", 
 					},
+					destroy:{
+							url: '/ajxfun/notificationtemplate/delete',
+							dataType: "json",
+							type:'get',
+							complete: function(e) {
+								$("#grid").data("kendoGrid").dataSource.read(); 
+								console.log(e.responseText);
+								if(e.responseText=="true"){
+									
+									toastr.success("{{__ "Deleted! Notification deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									
+								}else{
+									
+									 toastr.error("{{__ " Error! Notification can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 
+								}
+							}
+						},
 				 }, 
 				schema: {
                         model: {
@@ -197,16 +198,62 @@
                 groupable: true,
                 resizable: true,
                 filterable: {
-					mode: "row"
+					mode: "row",
+					 messages: {
+          info: "{{__ 'Show items with value that:'}}",
+		  isEqualTo: "{{__ 'Is equal to'}}",
+		  and: "{{__ 'And'}}",
+		  or: "{{__ 'Or'}}",
+		  clear: "{{__ 'Clear'}}",
+		  filter: "{{__ 'Filter'}}",
+		  isTrue: "{{__ 'is true'}}",
+      isFalse: "{{__ 'is false'}}",
+      isEmpty: "{{__ 'is empty'}}",
+      isNotEmpty: "{{__ 'is not empty'}}"
+        },
+		operators: {
+      string: {
+        eq: "{{__ 'is equal to'}}",
+        neq: "{{__ 'is not equal to'}}",
+        startswith: "{{__ 'starts with'}}",
+        contains: "{{__ 'contains'}}",
+        doesnotcontain: "{{__ 'does not contain'}}",
+        endswith: "{{__ 'ends with'}}",
+        isnull: "{{__ 'is null'}}",
+        isnotnull: "{{__ 'is not null'}}"
+      }
+    }
 				},
-                columnMenu: true,
-				pageable: {
+                columnMenu: {
+    messages: {
+      columns: "{{__ 'Columns'}}",
+	  filter : "{{__ 'Filter'}}",
+	  sortAscending: "{{__ 'Sort Ascending'}}", 
+	  sortDescending: "{{__ 'Sort Descending'}}", 
+    },
+  },
+								pageable: {
 					input: true,
 					numeric: false,
 					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100]
+					pageSizes: [10, 20, 25, 50, 100],
+					messages: {
+	  display: "{{__ '{0} - {1} of {2} items'}}",
+      empty: "{{__ 'No items to display'}}",
+      page: "{{__ 'Page'}}",
+	  of: "{{__ 'of {0}'}}", 
+      itemsPerPage: "{{__ 'items per page'}}",
+      first: "{{__ 'Go to the first page'}}",
+      previous: "{{__ 'Go to the previous page'}}",
+      next: "{{__ 'Go to the next page'}}",
+      last: "{{__ 'Go to the last page'}}",
+      refresh: "{{__ 'Refresh'}}"
+    }
 				},
                 noRecords: true,
+				messages: {
+            noRecords: "{{__ 'No records available.'}}"
+        },
                 columns: [
 					
 					{
@@ -233,8 +280,6 @@
                          title: "{{__ "Content"}}",
                         width: 350
                     },	
-					{{#ifCond session.admin_access "==" 0}}
-					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}} 
 					{
 						width: "100px",
 						command:
@@ -243,61 +288,72 @@
 								template : "<center>" 
 							},
 							
+							  /* { 
+								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
+								click:function(e) 
+								{
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id;
+								  window.location.href = "addrole/"+id;
+								  return false;
+								} 
+							},   */
 							{template : "&nbsp;" },
+							{{!-- console.log({{accessrightdata.update}}),
+							console.log({{accessrightdata.delete}}),
+							console.log({{accessrightdata.add}}), --}}
+
+							/* Edit action start */
+							{{#ifCond accessrightdata.update "||" session.admin_access}}
+							 { 
+								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
+								click:function(e) 
+								{ 
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id; 
+								  window.location.href = "addnotificationtemplate/"+id;
+								  return false;
+								} 
+							},
+							{{/ifCond}}
+							{template : "&nbsp;" },
+							{{#ifCond accessrightdata.delete "||" session.admin_access}}
+							{ 
+								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
+								click: function(e){  //add a click event listener on the delete button
+									e.preventDefault(); //prevent page scroll reset
+									var tr = $(e.target).closest("tr"); //get the row for deletion
+									var data = this.dataItem(tr); //get the row data so it can be referred later
+									window1.content(windowTemplate(data)); //send the row data object to the template and render it
+									window1.center().open();
+									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+									$("#yesButton").click(function(){
+										var grid = $("#grid").data("kendoGrid");
+										grid.dataSource.remove(data)  //prepare a "destroy" request
+										grid.dataSource.sync();  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
+										<!-- alert('Delete'); -->
+										window1.close();
+									})
+									$("#noButton").click(function(){
+										window1.close();
+									})
+								}	
+							},
+							{{/ifCond}}
 							
-							/* Edit action start */
-							{{#if accessrightdata.update }}
-							 { 	
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "addnotificationtemplate/"+id;
-								  return false;
-								} 
-							},
-							{{/if}}
-							{template : "&nbsp;" },
+							/* Delete action end */
+							
 							{template : "</center>" },
 							 
-							],
-							{{#if accessrightdata.add }}
-							title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i>{{__ "New"}}</button></a></center>"
-							{{/if}}
+							], 
+							{{#ifCond accessrightdata.add "||" session.admin_access}}
+							
+							title: "{{__ "Action"}}", 
+							headerTemplate: "<center><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+							{{/ifCond}}
 					}
-					{{/ifCondition}}
-					{{else}}
-						{
-						width: "100px",
-						command:
-						[
-							{
-								template : "<center>" 
-							},
-							{template : "&nbsp;" },
-							/* Edit action start */
-							 { 	
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "addnotificationtemplate/"+id;
-								  return false;
-								} 
-							},
-							{template : "&nbsp;" },
-							{template : "</center>" },
-							 
-							],
-							title: "Action", 
-							headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'><i class='fa fa-search light'>&nbsp;&nbsp;</i></a></b><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>"
-					}
-					{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"

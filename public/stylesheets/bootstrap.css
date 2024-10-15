@@ -5869,3 +5869,24 @@ a.text-dark:focus, a.text-dark:hover {
 .tabletext{
 	word-break: break-all;
 }
+.prrr-2{
+  padding-right: 1.1rem !important;
+}
+.pr-md{
+  margin-left: 1.5rem !important;
+}
+@media (max-width: 768px) {
+  .pr-md{
+    margin-left: 0rem !important;
+    margin-right: 1rem !important;
+  }
+  .prr-mdd{
+    margin-right: 1rem !important;
+  }
+  .user-pedding{
+    padding: 0 1rem !important;
+  }
+  .user-sm-pedding{
+    padding: 0.5rem !important;
+  }
+}

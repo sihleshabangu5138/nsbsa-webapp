@@ -1,0 +1,86 @@
+{{breadcrums (__ 'Home') (__ 'Loan Reports')}}
+<div class="app-content center-layout mt-2 mx-md-3 px-1">
+<div class="content-wrapper">
+	<div class="content-body">
+	<section id="simple-user-cards" class="row pb-2">
+		<div class="col-xl-12 col-md-12 col-sm-12">
+		<div class="card-content">
+			<div class="row">	
+			<span id="dots"></span>
+			
+			<span class="col-xl-12 col-sm-12 col-12 app-content center-layout mt-2"> 
+			<div class=" col-12  bg-white p-0">					 
+		
+		<div class="container-fluid"> 
+		<div class="h3 p-1 font-weight-bolder"><i class="fa fa-newspaper-o" aria-hidden="true" style="padding-right: 7px;"></i>{{__ "EMI Pending Reports"}}
+		</div>
+		<div class="table-responsive">
+                  <table id="loanReportsTable" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">{{__ "No."}}</th>
+                        <th scope="col">{{__ "User Name"}}</th>
+                        <th scope="col">{{__ "Loan No"}}</th>
+                        <th scope="col">{{__ "EMI month"}}</th>
+                        <th scope="col">{{__ "EMI Date"}}</th>
+                        <th scope="col">{{__ "EMI Ammount"}}</th>
+                        <th scope="col">{{__ "Loan Amount"}}</th>
+                        <th scope="col">{{__ "InterestRate"}}</th>
+                        <th scope="col">{{__ "Phone"}}</th>
+                        <th scope="col">{{__ "Email"}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+					{{#each data}}
+					 
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>{{this.user.firstname}}</td>
+                        <td>{{ this.loan.loancount}}</td>
+                        <td>{{this.month}}</td>
+                        <td>{{this.date}}</td>
+                        <td>{{formatNumber this.monthly_payment 2 '.' ','}}</td>
+                        <td>{{this.loan.loanamount}}</td>
+                        <td>{{this.loan.interestrate}}</td>
+                        <td>{{this.user.mobile}}</td>
+                        <td>{{this.user.email}}</td>
+                      </tr>
+					{{/each}}
+                    </tbody>
+                  </table>
+                </div>
+		
+		</div>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+	</section>
+	</div>
+	</div>
+	</div>
+  <script>
+    $(document).ready(function () {
+       {{!-- var emiRows = $('.loan-row');
+        
+        emiRows.click(function () {
+            var loanCount = $(this).data('loan-count');
+            var rowsToToggle = $('.loan-row[data-loan-count="' + loanCount + '"]').not(this);
+
+            rowsToToggle.slideToggle();
+        }); --}}
+
+ $('#loanReportsTable').DataTable({
+            "paging": true
+        });
+        // Get all rows in the table body
+        var rows = $('.table tbody  tr');
+
+        // Loop through each row and set the index
+        rows.each(function (index) {
+            // Find the <th> element in the current row and set its text to the index + 1
+            $(this).find('th').text(index + 1);
+        });
+    });
+</script>

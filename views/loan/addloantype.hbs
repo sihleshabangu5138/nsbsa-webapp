@@ -1,4 +1,4 @@
-{{breadcrums 'Home' title}}
+{{breadcrums (__ 'Home') (__ title)}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 
@@ -6,9 +6,6 @@
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header p-0 border-bottom border-light">
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
 	<div class="card-content collpase show">
 	<div class="card-body">
 	<script>
@@ -78,7 +75,7 @@
 			<div class="form-group input">
 			<div class="heading-elements "> 
 			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Maximum Range of Amount" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span></label>
-			 <select class="select2 form-control export" id="export" maxlength="50" data-validation-required-message="Maximum Range of Amount is required" name="loan_max_amount" aria-hidden="true" aria-invalid="true"> 
+			 <select class="select2 form-control export" id="export" maxlength="50" data-validation-required-message="{{#with ..}}{{__ "Maximum Range of Amount is required"}}{{/with}}" name="loan_max_amount" aria-hidden="true" aria-invalid="true"> 
 			 
 						<option value="">{{#with ..}}{{__ "Select Maximum Range of Amount" setlang}}{{/with}}</option>
 						
@@ -98,9 +95,9 @@
              <div class="card">
                <div class="card-content">
 				<fieldset>
-				<label>{{#with ..}}{{__ "Interest Rate" setlang}}{{/with}}</label>
+				<label>{{#with ..}}{{__ "Interest Rate" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}<span class="required red">*</span></label>
                      <div class="input-group touchspincolor">
-					 <input type="text" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="interestrate" data-validation-required-message="{{#with ..}}{{__ 'Interest rate is required' setlang}}{{/with}}"  {{#if this.interestrate}} value="{{this.interestrate}}" {{else}} value="1.00" {{/if}}/>
+					 <input type="text" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" data-bts-max="100" name="interestrate" data-validation-required-message="{{#with ..}}{{__ 'Interest rate is required' setlang}}{{/with}}" {{#if this.interestrate}} value="{{this.interestrate}}" {{else}} value="1.00" {{/if}}/>
                      </div>
                    </fieldset>
                  </div><div class="help-block"></div>
@@ -110,9 +107,9 @@
              <div class="card">
                <div class="card-content">
 				<fieldset>
-				<label>{{#with ..}}{{__ "Late Payment Charges" setlang}}{{/with}}</label>
+				<label>{{#with ..}}{{__ "Late Payment Charges" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}<span class="required red">*</span></label>
                      <div class="input-group touchspincolor">
-					 <input type="text" class="touchspin " name="latepaymentcharge" data-validation-required-message="{{#with ..}}{{__ 'Late Payment Charges are required' setlang}}{{/with}}"  data-bts-step="500" {{#if this.latepaymentcharge}} value="{{this.latepaymentcharge}}" {{else}} value="500" {{/if}}/>
+					 <input type="text" class="touchspin " name="latepaymentcharge" data-validation-required-message="{{#with ..}}{{__ 'Late Payment Charges are required' setlang}}{{/with}}"  {{#if this.latepaymentcharge}} value="{{this.latepaymentcharge}}" {{else}} value="0" {{/if}}/>
                      </div>
                    </fieldset>
                  </div><div class="help-block"></div>
@@ -125,7 +122,7 @@
 				<fieldset>
 				<label>{{#with ..}}{{__ "Processing Fees" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span> </label>
                      <div class="input-group touchspincolor">
-					 <input type="text" class="touchspin " name="processingfee" {{#if this.processingfee}} value="{{this.processingfee}}"{{/if}} value="500" data-bts-step="100"/>
+					 <input type="text" class="touchspin " name="processingfee" {{#if this.processingfee}} value="{{this.processingfee}}"{{/if}} value="0" />
                      </div>
                    </fieldset>
                  </div><div class="help-block"></div>
@@ -335,21 +332,31 @@
 {{/ifCond}}
 {{#ifCond datafield.field_type "==" "file"}}
 	<div class="col-md-6">
-	<div class="form-group row">
-	<div class="col-md-12">
-		<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-		<input class="form-control border-light validimage"
-		{{#ifEqual datafield.validation "required"}}  data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-		{{#each ../customfield_value as |custome_value| }}
-			{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-				value="{{custome_value.customfield_value}}" 
+		<div class="form-group row">
+			<div class="col-md-12">
+				<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}{{#unless ../customfield_value}}{{else}}<span class="required red">*</span>{{/unless}}{{/ifEqual}}</label>
+				<input class="form-control border-light validimage"
+					{{#ifEqual datafield.validation "required"}}
+						{{#unless ../customfield_value}} data-validation-required-message="{{datafield.label}} is required" {{/unless}}
+					{{/ifEqual}}
+					{{#each ../customfield_value as |custome_value| }}
+						{{#ifCond custome_value.id_d "==" datafield.id_d}}			
+							value="{{custome_value.customfield_value}}" 
+						{{/ifCond}}
+					{{/each}}
+					name="{{datafield._id}}" type="file">
 				
-				{{/ifCond}}
-		{{/each}}
-		name="{{datafield._id}}" type="file">{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "==" datafield.id_d}}<p>{{custome_value.customfield_value}}</p><input class="form-control border-light edit_val"  name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden"  placeholder="" id="userinput5">{{/ifCond}}{{/each}}
-		<span class="required red notice"></span>
-	</div><div class="help-block"></div>
-	</div>
+				{{#each ../customfield_value as |custome_value| }}
+					{{#ifCond custome_value.id_d "==" datafield.id_d}}
+						<p>{{custome_value.customfield_value}}</p>
+						<input class="form-control border-light edit_val" name="customphoto_old" value="{{custome_value.customfield_value}}" type="hidden" placeholder="" id="userinput5">
+					{{/ifCond}}
+				{{/each}}
+
+				<span class="required red notice"></span>
+			</div>
+			<div class="help-block"></div>
+		</div>
 	</div>
 {{/ifCond}}
 {{/each}}

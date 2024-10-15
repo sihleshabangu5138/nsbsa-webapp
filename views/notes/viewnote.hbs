@@ -1,9 +1,9 @@
- {{breadcrums 'Home' 'Product details'}}
+ {{breadcrums (__ 'Home') (__ 'Product details')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
 	<div class="content-body">
 	<section id="simple-user-cards" class="row pb-2">
-		<div class="col-xl-12 col-md-6 col-sm-12">
+		<div class="col-xl-12 col-md-12 col-sm-12">
 		<div class="card-content123">
 			<div class="row">	
 			<span id="dots"></span>
@@ -38,7 +38,9 @@
 						  <div class="col-sm-9"> 						  
 						  {{#each this.fileattach}}
 						  <span class="colon">:</span>
-							<div class="tabletext ">{{this}}</div><br>
+							<div class="tabletext ">{{this}}</div>
+							<a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
+							<br>
 						  {{/each}}
 						  </div>
 						</div>

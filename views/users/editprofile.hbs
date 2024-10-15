@@ -4,10 +4,6 @@
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header pb-0 border-bottom border-light">
-		
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
 	<div class="card-content collpase show">
 	<div class="card-body">
 		<form id="formID" class="needs-validation form form-horizontal" novalidate method="post" action="/users/editprofile" enctype="multipart/form-data">
@@ -125,7 +121,7 @@
 				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Image" setlang}}{{/with}}<span class="required red">*</span></label>
 				<input class="form-control border-light imageUpload"  name="photo" {{#if this.photo}} value="{{this.photo}}" {{else}} data-validation-required-message="{{__ 'Profile Image is required'}}" {{/if}} type="file" id="userinput5" >
 				<span class="required red notice"></span>
-				{{#if this.photo}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.photo}}">
+				{{#if this.photo}} <img class="existing_user_image update_time_team_image mt-1" src="/images/upload/{{this.photo}}">
 				<input class="form-control border-light"  name="photo_old" value="{{this.photo}}" type="hidden"  placeholder="" id="userinput_5" > {{/if}}
 			</div><div class="help-block"></div>
 			</div>
@@ -220,8 +216,7 @@
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements "> 
+				<div class=""> 
 					 <select class="select2 form-control export" data-validation-required-message="country is required" name="country" maxlength="50" id="country" {{#if this.country}} value="{{this.country}}"{{/if}}> 
 						<option value="">Select Country</option>
 
@@ -236,8 +231,7 @@
 			</div>
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
-				<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements "> 
+				<div class=""> 
 					 	<select class="select2 form-control export" maxlength="50" data-validation-required-message="State is required" name="state" id="state" {{#if this.state}} value="{{this.state}}"{{/if}} >
 						<option value="">Select State</option> 
 						</select>
@@ -276,10 +270,9 @@
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements "> 
+				<div class=""> 
 					<select class="select2 form-control export" data-validation-required-message="role name is required" name="role" {{#ifCond ../session.admin_access "==" 0}}disabled{{/ifCond}}>
-						<option value="">Select Role</option> 
+						<option value="">{{#with ..}}{{__ "Select Role" setlang}}{{/with}}</option> 
 						{{#each ../role as |role_nm| }}
 							<option {{#if this.id_d}}{{#ifCond this.id_d '==' result.id_d}} selected {{/ifCond}} {{/if}} value="{{this._id}}" >{{this.role_nm}}</option>
 						{{/each}}
@@ -326,7 +319,6 @@
 	</div>
 	</div>
     </div>
-</div>
 </div>
 </div>
 <script>

@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'General Settings'}}
+{{breadcrums (__ 'Home') (__ 'General Settings')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 		<div class="row">
@@ -144,7 +144,7 @@
 										<div class="form-group input">
 											<div class="col-md-12 form-control border-light">
  
-												 <input type="text" id="userinput_email" class="form-control" maxlength="50" required {{#if this.com_email}} value="{{this.com_email}}" {{/if}}  name="com_email" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Enter Valid Email" aria-invalid="true">
+												 <input type="text" id="userinput_email" class="form-control" maxlength="50" required {{#if this.com_email}} value="{{this.com_email}}" {{/if}}  name="com_email" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="{{#with ..}}{{__ "Enter Valid Email"}}{{/with}}" aria-invalid="true">
 												<label >{{#with ..}}{{__ "Company Email" setlang}}{{/with}}<span class="required red">*</span></label> 
  
 											</div>	<div class="help-block"></div>	
@@ -170,7 +170,7 @@
 											
 											<div class="pos_mobile plusi form-control-position" style='float:left'><i class="ft-plus"></i>
 											</div>
-						<input type="text" required name="country_code" class="form-control"  minlength="2" maxlength="3" data-validation-required-message="Country code is required" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false" id="userinput_c_code"  {{#if this.country_code}} value="{{this.country_code}}" {{/if}} style="margin-left: 14px;"> 
+						<input type="text" required name="country_code" id="ccode" class="form-control"  minlength="2" maxlength="3" data-validation-required-message="{{#with ..}}{{__ "Country code is required"}}{{/with}}" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" id="userinput_c_code"  {{#if this.country_code}} value="{{this.country_code}}" {{/if}} style="margin-left: 14px;"> 
 						<label >{{#with ..}}{{__ "Country code" setlang}}{{/with}}<span class="required red">*</span></label>
 					    </div><div class="help-block"></div>  
 										</div>
@@ -180,7 +180,7 @@
 									<div class="col-md-4">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light"> 
-					<input type="text" name="phone" class="form-control" minlength="10" maxlength="15" required data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false" id="userinput_num" {{#if this.phone}} value="{{this.phone}}"{{/if}}>
+					<input type="text" name="phone" class="form-control" minlength="10" maxlength="15" required data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" id="userinput_num" {{#if this.phone}} value="{{this.phone}}"{{/if}}>
 					<label >{{#with ..}}{{__ "Contact Number" setlang}}{{/with}}<span class="required red">*</span></label> 
 				    </div><div class="help-block"></div>
 											</div>
@@ -189,7 +189,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input type="text" name="vat_no" class="form-control"  minlength="3" maxlength="6" required="" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false" {{#if this.vat_no}} value="{{this.vat_no}}"{{/if}}><label>{{#with ..}}{{__ "Vat Number" setlang}}{{/with}}<span class="required red">*</span></label>
+											<input type="text" name="vat_no" class="form-control"  minlength="3" maxlength="6" required="" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" {{#if this.vat_no}} value="{{this.vat_no}}"{{/if}}><label>{{#with ..}}{{__ "Vat Number" setlang}}{{/with}}<span class="required red">*</span></label>
 											 
 										</div>		<div class="help-block"></div>				   
 									</div>
@@ -198,7 +198,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light"> 
-											<input type="text" required id="userinput4" {{#if this.gst_no}} value="{{this.gst_no}}" {{/if}} maxlength="15" data-validation-containsnumber-regex="([0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[Z]{1}[0-9]{1})" data-validation-containsnumber-message="only Characters and Numbers" aria-invalid="false" name="gst_no">
+											<input type="text" required id="userinput4" {{#if this.gst_no}} value="{{this.gst_no}}" {{/if}} maxlength="15" data-validation-containsnumber-regex="([0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[Z]{1}[0-9]{1})" placeholder="Format : 12WQQWQ1212A4Z1" data-validation-containsnumber-message="{{#with ..}}{{__ "only Characters and Numbers"}}{{/with}}" aria-invalid="false" name="gst_no">
 											<label>{{#with ..}}{{__ "GST no" setlang}}{{/with}}<span class="required red">*</span></label> 
 										</div>		<div class="help-block"></div>				   
 									</div>
@@ -207,7 +207,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light"> 
-											<input type="text" id="userinput3" class="form-control" required="" name="email_bcc" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Enter Valid Email" aria-invalid="true"  {{#if this.email_bcc}} value="{{this.email_bcc}}" {{/if}} id="userinput3">
+											<input type="text" id="userinput3" class="form-control" required="" name="email_bcc" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="{{#with ..}}{{__ "Enter Valid Email"}}{{/with}}" aria-invalid="true"  {{#if this.email_bcc}} value="{{this.email_bcc}}" {{/if}} id="userinput3">
 											<label >{{#with ..}}{{__ "Email BCC" setlang}}{{/with}}<span class="required red">*</span></label> 
 										</div>	<div class="help-block"></div>	
 									</div>
@@ -361,7 +361,7 @@
 						<div class="col-md-6">
 							<div class="form-group input">  
 							  <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Select Country" setlang}}{{/with}}<span class="red">*</span></label>
-									<select required class="select2 form-control export" data-validation-required-message="This field is required" name="country" id="country">
+									<select required class="select2 form-control export" data-validation-required-message="{{#with ..}}{{__ "This field is required"}}{{/with}}" name="country" id="country">
 						<option value="">{{#with ..}}{{__ "Select Country" setlang}}{{/with}}</option> 
 						{{#each ../country as |id| }}
 							 	<option {{#ifCond this.id '===' result.country}} selected {{/ifCond}} value="{{this.id}}">{{this.name}}</option>
@@ -375,8 +375,8 @@
 											 <div class="col-md-6">
 												<div class="form-group input">  
 												  <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Select State" setlang}}{{/with}}<span class="red">*</span></label>
-														<select required class="select2 form-control export" maxlength="50" data-validation-required-message="This Field is required" name="state" id="state" {{#if this.state}} value="{{this.state}}"{{/if}} >
-															<option value="">Select State</option> 
+														<select required class="select2 form-control export" maxlength="50" data-validation-required-message="{{#with ..}}{{__ "This Field is required"}}{{/with}}" name="state" id="state" {{#if this.state}} value="{{this.state}}"{{/if}} >
+															<option value="">"{{#with ..}}{{__ "Select State"}}{{/with}}"</option> 
 															</select>
 													</div><div class="help-block"></div>
 													 
@@ -384,8 +384,8 @@
 											 <div class="col-md-6">
 												<div class="form-group input"> 
 												  <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Select City" setlang}}{{/with}}<span class="red">*</span></label>
-													<select required class="select2 form-control export" maxlength="50" data-validation-required-message="This field is required" name="city" id="city" {{#if this.city}} value="{{this.city}}"{{/if}} >
-													<option value="">Select City</option> 
+													<select required class="select2 form-control export" maxlength="50" data-validation-required-message="{{#with ..}}{{__ "This field is required"}}{{/with}}" name="city" id="city" {{#if this.city}} value="{{this.city}}"{{/if}} >
+													<option value="">"{{#with ..}}{{__ "Select City"}}{{/with}}"</option> 
 													</select><div class="help-block"></div>
 												</div>
 											</div>  
@@ -396,7 +396,7 @@
 												<!--<textarea id="userinput8" rows="6" class="form-control border-light" name="bio"></textarea>
 												<label class="col-md-2" for="userinput8">About Project</label>-->
 												<div class="form-field">
-													<textarea name="com_addr" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message={{__ "Only Characters, no numbers"}} data-validation-required-message={{__ "Address is required"}}>{{#if this.com_addr}} {{this.com_addr}} {{/if}}</textarea>
+													<textarea name="com_addr" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message={{#with ..}}{{__ "Only Characters, no numbers"}}{{/with}} data-validation-required-message={{#with ..}}{{__ "Address is required"}}{{/with}}>{{#if this.com_addr}} {{this.com_addr}} {{/if}}</textarea>
 													<span class="txt-title-label"></span>
 													<label class="text-area">{{#with ..}}{{__ "Address" setlang}}{{/with}}<span class="required red">*</span></label>
 												</div>
@@ -407,7 +407,7 @@
 									<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input type="text" required id="userinput3"   maxlength="10" required data-validation-containsnumber-regex="(\d)+"data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false" {{#if this.zipcode}} value="{{this.zipcode}}" {{/if}} name="zipcode">
+											<input type="text" required id="userinput3"   maxlength="10" required data-validation-containsnumber-regex="(\d)+"data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" {{#if this.zipcode}} value="{{this.zipcode}}" {{/if}} name="zipcode">
 											<label for="userinput3">{{#with ..}}{{__ "zip code" setlang}}{{/with}}<span class="required red">*</span></label>
 										</div>	<div class="help-block"></div>	
 									</div>
@@ -515,14 +515,16 @@
 								<div class="skin skin-flat row px-1">
 									<div class="input-group">
 									<label for="userinput3">{{#with ..}}{{__ "Image File Type:" setlang}}{{/with}}&nbsp;</label>
-								<input type="checkbox" data-toggle="toggle" id="userinput3" {{#if this.imgtype_jpg	}} checked {{/if}} value="jpg" name="imgtype_jpg">
-								<label for="userinput3">{{#with ..}}{{__ "jpg" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+										<div class="row">								
+								<div class="col-lg-12 col-md-12 col-12 pr-0">
+								<input type="checkbox" id="userinput3" {{#if this.imgtype_jpg	}} checked {{/if}} value="jpg" name="imgtype_jpg">
+								<label for="userinput3 mr-2">{{#with ..}}{{__ "jpg" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="checkbox" data-toggle="toggle" id="userinput3" {{#if this.imgtype_png}} checked {{/if}} value="png" name="imgtype_png">
-								<label for="userinput3">{{#with ..}}{{__ "png" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="userinput3 mr-2">{{#with ..}}{{__ "png" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="checkbox" data-toggle="toggle" id="userinput3" {{#if this.imgtype_jpeg}} checked {{/if}} value="jpeg" name="imgtype_jpeg">
-								<label for="userinput3">{{#with ..}}{{__ "jpeg" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+								<label for="userinput3 mr-2">{{#with ..}}{{__ "jpeg" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
 								
-								</div>	<div class="help-block"></div>	
+								</div></div></div>	<div class="help-block"></div>	
 									</div>
 									</div>
 									</div>
@@ -539,7 +541,8 @@
 									<div class="input-group">
 									
 								<label>{{#with ..}}{{__ "Document File Type:" setlang}}{{/with}}&nbsp;</label>		
-								
+								<div class="row">								
+								<div class="col-lg-12 col-md-12 col-12 pr-0">
 								<input type="checkbox" data-toggle="toggle" {{#if this.doctype_Pdf}} checked {{/if}} value="pdf" name="doctype_Pdf">
 								<label for="userinput3">{{#with ..}}{{__ "Pdf" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
 								
@@ -557,14 +560,14 @@
 								
 								<input type="checkbox" data-toggle="toggle" {{#if this.doctype_Docx}} checked {{/if}} value="docx" name="doctype_Docx">
 								<label for="userinput3">{{#with ..}}{{__ "Docx" setlang}}{{/with}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
-								</div>	<div class="help-block"></div>	
+								</div></div></div>	<div class="help-block"></div>	
 									</div>
 									</div> </div>
 									</div> 					
 									<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input type="text" required id="userinput3" {{#if this.imgupload_size}} value="{{this.imgupload_size}}" {{/if}} name="imgupload_size" minlength="1" maxlength="5" required="" data-validation-regex-regex="(\d)+" data-validation-regex-message="The Image upload size is must be a number.">
+											<input type="text" required id="userinput3" {{#if this.imgupload_size}} value="{{this.imgupload_size}}" {{/if}} name="imgupload_size" minlength="1" maxlength="5" required="" data-validation-regex-regex="(\d)+" data-validation-regex-message="{{#with ..}}{{__ "The Image upload size is must be a number."}}{{/with}}">
 											
 					
 											<label for="userinput3">{{#with ..}}{{__ "image upload size(MB)" setlang}}{{/with}} <span class="required red">*</span></label>
@@ -577,7 +580,7 @@
 					<div class="col-md-6">
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light"> 
-							<input type="text" required id="userinput3" {{#if this.docupload_size}} value="{{this.docupload_size}}" {{/if}} name="docupload_size" minlength="1" maxlength="5" data-validation-regex-regex="(\d)+"  data-validation-regex-message="The Documents upload size is must be a number.">
+							<input type="text" required id="userinput3" {{#if this.docupload_size}} value="{{this.docupload_size}}" {{/if}} name="docupload_size" minlength="1" maxlength="5" data-validation-regex-regex="(\d)+"  data-validation-regex-message="{{#with ..}}{{__ "The Documents upload size is must be a number."}}{{/with}}">
 							<label for="userinput3">{{#with ..}}{{__ "Documents Upload size(MB)" setlang}}{{/with}}<span class="required red">*</span></label> 
 						</div>	<div class="help-block"></div>	
 					</div>
@@ -597,7 +600,7 @@
 								<button type="submit" name="companybtn" value="companybtn" onclick="return ValidateExtension()" class="btn btn-secondary">
 									<i class="fa fa-check-square-o"></i> {{#with ..}}{{__ "Submit" setlang}}{{/with}}
 								</button>
-							<button type="reset" class="btn btn-warning">
+							<button type="reset" onclick="resetWindow()" class="btn btn-warning">
 								<i class="ft-refresh-cw"></i> {{#with ..}}{{__ "Reset" setlang}}{{/with}}
 							</button>
 							</div>
@@ -635,8 +638,8 @@
 								<div class="col-md-6 mb-1"> 
 								<label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Time Format" setlang}}{{/with}}<span class="red">*</span></label>
 								<select name="time_format" id="time_format" required class="form-control select2 valid" data-none-selected-text="Nothing selected" tabindex="-98" aria-describedby="time_format-error" aria-invalid="false">
-								<option {{#ifCond this.time_format '==' '24'}} selected {{/ifCond}} value="24">24 hours</option>
-								<option {{#ifCond this.time_format '==' '12'}} selected {{/ifCond}}  value="12">12 hours</option>
+								<option {{#ifCond this.time_format '==' '24'}} selected {{/ifCond}} value="24">{{#with ..}}{{__ "24 hours"}}{{/with}}</option>
+								<option {{#ifCond this.time_format '==' '12'}} selected {{/ifCond}}  value="12">{{#with ..}}{{__ "12 hours"}}{{/with}}</option>
 								</select>
 							<span id="time_format-error" class="invalid-feedback" style="display: inline;"></span> 
 								<div class="help-block"></div>
@@ -654,13 +657,13 @@
 						</select>-->
 					 <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Select Currency" setlang}}{{/with}}<span class="red">*</span></label>
 				 	<select class="w-100 valid select2 export col-12" id="currency" required name="currency" aria-describedby="currency-error" aria-invalid="false">
-		<option {{#ifCond this.currency '==' 'INR'}} selected {{/ifCond}} value="INR">Rupee(₹)</option>
-		<option {{#ifCond this.currency '==' 'USD'}} selected {{/ifCond}} value="USD">Dollar($)</option>
-		<option {{#ifCond this.currency '==' 'BYN'}} selected {{/ifCond}} value="BYN">Ruble(₽)</option>
-		<option {{#ifCond this.currency '==' 'GIP'}} selected {{/ifCond}} value="GIP">Pound(£)</option>
-		<option {{#ifCond this.currency '==' 'IRL'}} selected {{/ifCond}} value="IRL">Rial(﷼)</option>
-		<option {{#ifCond this.currency '==' 'JPY'}} selected {{/ifCond}} value="JPY">Yen(‎¥)</option>
-		<option {{#ifCond this.currency '==' 'MXN'}} selected {{/ifCond}} value="MXN">peso(₱)</option>
+		<option {{#ifCond this.currency '==' 'INR'}} selected {{/ifCond}} value="INR">{{#with ..}}{{__ "Rupee(₹)"}}{{/with}}</option>
+		<option {{#ifCond this.currency '==' 'USD'}} selected {{/ifCond}} value="USD">{{#with ..}}{{__ "Dollar($)"}}{{/with}}</option>
+		<option {{#ifCond this.currency '==' 'BYN'}} selected {{/ifCond}} value="BYN">{{#with ..}}{{__ "Ruble(₽)"}}{{/with}}</option>
+		<option {{#ifCond this.currency '==' 'GIP'}} selected {{/ifCond}} value="GIP">{{#with ..}}{{__ "Pound(£))"}}{{/with}}</option>
+		<option {{#ifCond this.currency '==' 'IRL'}} selected {{/ifCond}} value="IRL">{{#with ..}}{{__ "Rial(﷼))"}}{{/with}}</option>
+		<option {{#ifCond this.currency '==' 'JPY'}} selected {{/ifCond}} value="JPY">{{#with ..}}{{__ "Yen(‎¥))"}}{{/with}}</option>
+		<option {{#ifCond this.currency '==' 'MXN'}} selected {{/ifCond}} value="MXN">{{#with ..}}{{__ "peso(₱))"}}{{/with}}</option>
 		<!--<option {{#ifCond this.currency '==' 'AED'}} selected {{/ifCond}} value="AED">AED</option>
 		<option {{#ifCond this.currency '==' 'AFN'}} selected {{/ifCond}} value="AFN">AFN</option>
 		<option {{#ifCond this.currency '==' 'ALL'}} selected {{/ifCond}} value="ALL">ALL</option>
@@ -749,10 +752,10 @@
 		<div class="col-md-6 mb-1">
 		<label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Languages" setlang}}{{/with}}<span class="red">*</span></label>
 		<select name="language" class="form-control select2" required>
-		<option {{#ifCond this.language '==' 'en'}} selected {{/ifCond}} value="en">English</option>
-		<option {{#ifCond this.language '==' 'hi'}} selected {{/ifCond}} value="hi">Hindi</option>
-		<option {{#ifCond this.language '==' 'fr'}} selected {{/ifCond}} value="fr">French</option>
-		<option {{#ifCond this.language '==' 'sp'}} selected {{/ifCond}} value="sp">Spanish</option>
+		<option {{#ifCond this.language '==' 'en'}} selected {{/ifCond}} value="en">{{#with ..}}{{__ "English"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'hi'}} selected {{/ifCond}} value="hi">{{#with ..}}{{__ "Hindi"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'fr'}} selected {{/ifCond}} value="fr">{{#with ..}}{{__ "French"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sp'}} selected {{/ifCond}} value="sp">{{#with ..}}{{__ "Spanish"}}{{/with}}</option>
 		<!-- <option {{#ifCond this.language '==' 'de'}} selected {{/ifCond}} value="de">German</option> -->
 		<!-- <option {{#ifCond this.language '==' 'pl'}} selected {{/ifCond}} value="pl">Polish</option> -->
 		<!-- <option {{#ifCond this.language '==' 'nl'}} selected {{/ifCond}} value="nl">Dutch</option> -->
@@ -809,8 +812,8 @@
 								 	<div class="col-md-6 mb-1"> 
 								 <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Decimal Separator" setlang}}{{/with}}<span class="red">*</span></label>
 								<select name="decimal_separator" required class="select2 form-control valid">
-									<option {{#if this.decimal_separator}} selected value="," {{/if}}>,</option>
-									<option {{#if this.decimal_separator}} selected value="." {{/if}}>.</option>
+									<option {{#ifCond this.decimal_separator '==' ','}} selected {{/ifCond}} value=",">,</option>
+									<option {{#ifCond this.decimal_separator '==' '.'}} selected {{/ifCond}} value=".">.</option>
 								</select>
 								<div class="help-block"></div>
 								</div>
@@ -854,7 +857,7 @@
 						<div class="col-md-12 form-control"> 
 							<div class="skin skin-flat row px-1">
 								<div class="input-group">
-									&nbsp;<input type="checkbox" data-toggle="toggle" name="tax_item" {{#if this.tax_item}} checked {{/if}} value="1"> 
+									&nbsp;<input type="checkbox" data-toggle="toggle" name="tax_item" {{#ifCond this.tax_item "==" 1}} checked value="1" {{/ifCond}}> 
 									<label class="custom-control-label">{{#with ..}}{{__ "Tax per item" setlang}}{{/with}}</label>
 								</div> 
 							</div> 
@@ -872,16 +875,16 @@
 								<div class="help-block"></div>
 								</div>
 								
-								<div class="col-md-6"> 
-						<div class="col-md-12 form-control"> 
-							<div class="skin skin-flat row px-1">
-								<div class="input-group">
-									&nbsp;<input type="checkbox" data-toggle="toggle" name="auto_round_off" {{#if this.auto_round_off}} checked {{/if}} value="1"> 
-									<label class="custom-control-label">{{#with ..}}{{__ "Auto Round OFF" setlang}}{{/with}}</label>
-								</div> 
-							</div> 
-						</div>
-					</div> 
+<div class="col-md-6"> 
+    <div class="col-md-12 form-control"> 
+        <div class="skin skin-flat row px-1">
+            <div class="input-group">
+                <input type="checkbox" id="autoRoundOffCheckbox" data-toggle="toggle" name="auto_round_off" {{#ifCond this.auto_round_off "==" 1}} checked value="1" {{/ifCond}}> 
+                <label for="autoRoundOffCheckbox" class="custom-control-label">{{#with ..}}{{__ "Auto Round OFF" setlang}}{{/with}}</label>
+            </div> 
+        </div> 
+    </div>
+</div>
 								 </div> 
 								</div>  
 							<div class="form-actions left">
@@ -913,7 +916,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" type="text" name="invoice_prefix" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,20})" data-validation-required-message="Invoice Prefix is required"  data-validation-regex-message={{__ "Only Characters, no numbers and"}} {{#if this.invoice_prefix}}  value="{{this.invoice_prefix}}" {{/if}}>
+											<input id="userinput1" class="form-control" type="text" name="invoice_prefix" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,20})" data-validation-required-message="{{#with ..}}{{__ "Invoice Prefix is required"}}{{/with}}"  data-validation-regex-message="{{#with ..}}{{__ "Only Characters, no numbers and"}}{{/with}}" {{#if this.invoice_prefix}}  value="{{this.invoice_prefix}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Invoice Prefix" setlang}}{{/with}}<span class="red">*</span></label>
 										</div>
 									</div>
@@ -957,7 +960,7 @@
 							<div class="col-md-6">
 								<div class="form-group input">
 								<div class="col-md-12 form-control border-light">
-								<input id="number_length" class="form-control" data-validation-required-message="Number Length is required" type="text" name="number_length" minlength="1" maxlength="5" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message={{__ "No Characters, Only Numbers"}} {{#if this.number_length}} value="{{this.number_length}}" {{/if}} >
+								<input id="number_length" class="form-control" data-validation-required-message="{{#with ..}}{{__ "Number Length is required"}}{{/with}}" type="text" name="number_length" minlength="1" maxlength="5" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" {{#if this.number_length}} value="{{this.number_length}}" {{/if}} >
 								<label for="number_length" class="active">{{#with ..}}{{__ "Number Length" setlang}}{{/with}}<span class="red">*</span></label>
 								</div> <div class="help-block"></div> 									</div>
 							    </div>
@@ -985,7 +988,7 @@
 						<div class="form-group input">
 							<div class="col-md-12 form-control border-light">
 								<div class="form-field">
-									<textarea name="bank_details" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Bank Details is required" class="valid" aria-invalid="false">{{this.bank_details}}</textarea>
+									<textarea name="bank_details" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{#with ..}}{{__ "Only Characters, no numbers"}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Bank Details is required"}}{{/with}}" class="valid" aria-invalid="false">{{this.bank_details}}</textarea>
 										<span class="txt-title-label"></span>
 										<label class="text-area active">{{#with ..}}{{__ "Bank Details" setlang}}{{/with}}<span class="red">*</span></label>
 								</div>
@@ -995,7 +998,7 @@
 							    <div class="form-group input">
 								<div class="col-md-12 form-control border-light">
 								<div class="form-field">
-									<textarea name="invoice_client_note" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Invoice Client Note is required">{{this.invoice_client_note}}</textarea>
+									<textarea name="invoice_client_note" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{#with ..}}{{__ "Only Characters, no numbers"}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Invoice Client Note is required"}}{{/with}}">{{this.invoice_client_note}}</textarea>
 										<span class="txt-title-label"></span>
 									    <label class="text-area active">{{#with ..}}{{__ "Invoice Client Note" setlang}}{{/with}}<span class="red">*</span></label>
 								</div>
@@ -1005,7 +1008,7 @@
 									<div class="form-group input">
 									<div class="col-md-12 form-control border-light">
 										<div class="form-field">
-										<textarea name="invoice_predefined_terms" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="Only Characters, no numbers" data-validation-required-message="Invoice Predefined Terms is required">{{this.invoice_predefined_terms}}</textarea>
+										<textarea name="invoice_predefined_terms" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{#with ..}}{{__ "Only Characters, no numbers"}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Invoice Predefined Terms is required"}}{{/with}}">{{this.invoice_predefined_terms}}</textarea>
 										<span class="txt-title-label"></span>
 										<label class="text-area active">{{#with ..}}{{__ "Invoice Predefined Terms" setlang}}{{/with}}<span class="red">*</span></label>
 										</div>
@@ -1051,8 +1054,9 @@
 									<div class="form-group input">
 										 <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "PDF Font" setlang}}{{/with}}<span class="red">*</span></label>
 										<select name="pdf_font" class="select2">
-											<option {{#ifCond this.pdf_font '==' 'NEW_TIMES'}} selected {{/ifCond}} value="NEW_TIMES">Select pdf Font</option>
-											<option {{#ifCond this.pdf_font '==' 'NEW_TIMES'}} selected {{/ifCond}} value="NEW_TIMES">new times</option><option {{#ifCond this.pdf_font '==' 'NEW_TIMES'}} selected {{/ifCond}} value="OPEN_SANS">Open sans</option>
+											<option value="">{{#with ..}}{{__ "Select pdf Font"}}{{/with}}</option>
+											<option {{#ifCond this.pdf_font '==' 'NEW_TIMES'}} selected {{/ifCond}} value="NEW_TIMES">{{#with ..}}{{__ "New times"}}{{/with}}</option>
+											<option {{#ifCond this.pdf_font '==' 'OPEN_SANS'}} selected {{/ifCond}} value="OPEN_SANS">{{#with ..}}{{__ "Open sans"}}{{/with}}</option>
 										</select>
 										   
 									</div>
@@ -1061,7 +1065,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" type="text" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-regex-message= "Only Characters, no numbers" data-validation-required-message="Table Head Color is required" name="tbl_head_color" {{#if this.tbl_head_color}} value="{{this.tbl_head_color}}" {{/if}}>
+											<input id="userinput1" class="form-control" type="text" data-validation-regex-regex="(^#(?:[0-9a-fA-F]{3}){1,2}$)" data-validation-required-message="{{#with ..}}{{__ "Table Head Color is required"}}{{/with}}" name="tbl_head_color" {{#if this.tbl_head_color}} value="{{this.tbl_head_color}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Table Head Color" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1070,7 +1074,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-required-message="Font Size is required" type="text" name="font_size" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" {{#if this.font_size}} value="{{this.font_size}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-required-message="{{#with ..}}{{__ "Font Size is required"}}{{/with}}" type="text" name="font_size" placeholder="ex: 12 px, pc, %..." data-validation-regex-regex="(^[1-9]\d*\s*(\.\d+)?(px|em|rem|%|vw|vh|pt|pc|mm|cm|in)?$)" {{#if this.font_size}} value="{{this.font_size}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Font Size" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1078,7 +1082,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-required-message= "Table Head Text Color is required" type="text"  data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" name="tbl_head_txt_color" {{#if this.tbl_head_txt_color}} value="{{this.tbl_head_txt_color}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-required-message= "{{#with ..}}{{__ "Table Head Text Color is required"}}{{/with}}" type="text"  data-validation-regex-regex="(^#(?:[0-9a-fA-F]{3}){1,2}$)" name="tbl_head_txt_color" {{#if this.tbl_head_txt_color}} value="{{this.tbl_head_txt_color}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "Table Head Text Color" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1086,7 +1090,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-required-message= "pdf logo url is required" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,150})"
+											<input id="userinput1" class="form-control" data-validation-required-message= "{{#with ..}}{{__ "pdf logo url is required"}}{{/with}}" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,150})"
 											type="text" name="pdf_logo_url" {{#if this.pdf_logo_url}} value="{{this.pdf_logo_url}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "pdf logo url" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
@@ -1096,7 +1100,7 @@
 								<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input id="userinput1" class="form-control" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,50})" data-validation-required-message="logo width is required" type="text"   name="pdf_logo_width" {{#if this.pdf_logo_width}} value="{{this.pdf_logo_width}}" {{/if}}>
+											<input id="userinput1" class="form-control" data-validation-regex-regex="(^[1-9]\d*\s*(\.\d+)?(px|em|rem|%|vw|vh|pt|pc|mm|cm|in)?$)" placeholder="ex: 12 px, pc, %..." data-validation-required-message="{{#with ..}}{{__ "logo width is required"}}{{/with}}" type="text"   name="pdf_logo_width" {{#if this.pdf_logo_width}} value="{{this.pdf_logo_width}}" {{/if}}>
 											<label for="userinput1">{{#with ..}}{{__ "logo width" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
@@ -1106,13 +1110,13 @@
 								<div class="col-md-12 form-control">
 									<div class="skin skin-flat row">
 										<fieldset class="ml-1">
-												 <input type="checkbox" id="visable1" data-toggle="toggle" {{#if this.show_transaction}} checked {{/if}} value="1" name="show_transaction"><label class="custom-control-label mr-1">{{#with ..}}{{__ "Show Credit Applied" setlang}}{{/with}}</label>
+												 <input type="checkbox" id="visable1" data-toggle="toggle" {{#ifCond this.show_transaction "==" 1 }} checked value="1" {{/ifCond}} name="show_transaction"><label class="custom-control-label mr-1">{{#with ..}}{{__ "Show Credit Applied" setlang}}{{/with}}</label>
 										</fieldset>
 										<fieldset class="ml-1">
-												<input type="checkbox" id="visable2" data-toggle="toggle" value="1" {{#if this.show_pdf_signature_invoice}} checked {{/if}} name="show_pdf_signature_invoice"><label class="custom-control-label mr-1">{{#with ..}}{{__ "Show Total Paid Amount" setlang}}{{/with}}</label>
+												<input type="checkbox" id="visable2" data-toggle="toggle" {{#ifCond this.show_pdf_signature_invoice "==" 1 }} checked value="1" {{/ifCond}} name="show_pdf_signature_invoice"><label class="custom-control-label mr-1">{{#with ..}}{{__ "Show Total Paid Amount" setlang}}{{/with}}</label>
 										</fieldset>
 										<fieldset class="ml-1">
-												<input type="checkbox" id="visable3" data-toggle="toggle" value="1" {{#if this.show_pdf_signature_creditnote}} checked {{/if}} name="show_pdf_signature_creditnote" >	<label class="custom-control-label mr-1">{{#with ..}}{{__ "Show Due Amount" setlang}}{{/with}}</label>
+												<input type="checkbox" id="visable3" data-toggle="toggle" 	{{#ifCond this.show_pdf_signature_creditnote "==" 1 }} checked value="1" {{/ifCond}} name="show_pdf_signature_creditnote" >	<label class="custom-control-label mr-1">{{#with ..}}{{__ "Show Due Amount" setlang}}{{/with}}</label>
 										</fieldset>
 									</div>
 								</div>
@@ -1122,9 +1126,9 @@
 						<div class="col-md-6 mb-2 input">
 						<label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "A4 Landscape" setlang}}{{/with}}<span class="red">*</span></label>
 						<select name="pdf_format" id="pdf_format" class="form-control select2 valid" aria-invalid="false">
-						<option {{#ifCond this.pdf_format '==' 'A4-LANDSCAPE'}} selected {{/ifCond}} value="A4-LANDSCAPE" >A4 Landscape</option>
-						<option  {{#ifCond this.pdf_format '==' 'LETTER-PORTRAIT'}} selected {{/ifCond}} value="LETTER-PORTRAIT">Letter Portrait</option>
-						<option  {{#ifCond this.pdf_format '==' 'LETTER-LANDSCAPE'}}  selected {{/ifCond}} value="LETTER-LANDSCAPE">Letter Landscape</option>
+						<option {{#ifCond this.pdf_format '==' 'A4-LANDSCAPE'}} selected {{/ifCond}} value="A4-LANDSCAPE" >{{#with ..}}{{__ "A4 Landscape"}}{{/with}}</option>
+						<option  {{#ifCond this.pdf_format '==' 'LETTER-PORTRAIT'}} selected {{/ifCond}} value="LETTER-PORTRAIT">{{#with ..}}{{__ "Letter Portrait"}}{{/with}}</option>
+						<option  {{#ifCond this.pdf_format '==' 'LETTER-LANDSCAPE'}}  selected {{/ifCond}} value="LETTER-LANDSCAPE">{{#with ..}}{{__ "Letter Landscape"}}{{/with}}</option>
 						</select>	
 						<!--<label class="ml-1 custom-top-label top" for="userinput7">Pdf Format<span class="red">*</span></label>-->
 							</div>
@@ -1133,7 +1137,7 @@
 							<div class="form-group row">
 								<div class="col-md-12 input">
 								<label class="ml-1 custom-top-label top" for="userinput7">{{#with ..}}{{__ "signature Image for pdf" setlang}}{{/with}}<span class="red">*</span></label> 
-								<input class="form-control border-light" id="company_logo1" type="file" name="company_logo" {{#if this.signature_image}} value="{{this.signature_image}}" {{else}} data-validation-required-message="Profile Image is required" {{/if}}  id="userinput5">
+								<input class="form-control border-light" id="company_logo1" type="file" name="company_logo" {{#if this.signature_image}} value="{{this.signature_image}}" {{else}} data-validation-required-message={{#with ..}}{{__ "Profile Image is required"}}{{/with}} {{/if}}  id="userinput5">
 								{{#if this.signature_image}} <br/><img class="existing_user_image update_time_team_image" src="/images/upload/generalsetting/{{this.signature_image}}"> 
 								<input class="form-control border-light" name="sig_photo_old" value="{{this.signature_image}}" type="hidden" id="userinput5"> {{/if}}
 							</div>
@@ -1196,7 +1200,37 @@
     </div>
     </div>
     </div>
-	
+	<script>
+$(document).ready(function(){
+	$("body").on("change", "#country", function (e) {
+
+			var countryId= $(this).val()
+			if(countryId!=''){
+			$.ajax({
+						type: 'POST',
+						url: '/ajxfun/countrycode/',
+						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+						data : {countryId:countryId},
+						success: function (response)
+						{
+							var countrycode = response.country;
+							var selectedCountry = countrycode.find(country => country.id == countryId);
+						$('#ccode').val(selectedCountry.phoneCode);
+						console.log('Selected Country ID:', selectedCountry.phoneCode);
+							<!-- console.log(response.state); -->
+						},
+						error: function(e)
+						{
+							console.log(e);
+						}
+					});
+			}else{
+				$('#city').empty().append("<option value=''>{{#with ..}}{{__ "Select City"}}{{/with}}</option>");
+				$('#state').empty().append("<option value=''>{{#with ..}}{{__ "Select State"}}{{/with}}</option>");
+			}
+		});
+		});
+	</script>
 {{#each data as |geninfom|}}
 <script type="text/javascript">
         function ValidateExtension(){
@@ -1235,3 +1269,9 @@
 </script>
 {{/each}} 
   
+<script>
+    function resetWindow() {
+        // Reload the current page
+        location.reload();
+    }
+</script>

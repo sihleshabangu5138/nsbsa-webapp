@@ -1,4 +1,4 @@
-{{breadcrums 'Home' 'Deactivateuser'}}
+{{breadcrums (__ 'Home') (__ 'Deactivate User')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="content-header row">
@@ -8,25 +8,23 @@
 	<div class="card-body pl-0 pr-0">
 		<fieldset class="form-group position-relative">
 		<div class="row">
-		<div class="col-lg-3 col-md-6 col-12">
+		{{!-- <div class="col-lg-3 col-md-6 col-12">
 		<div class="controls position-relative has-icon-right">
 			<input type="text" class="form-control square" value="{{__ 'All Users'}}" placeholder="Addon To Right" readonly="readonly">
 			<div class="form-control-position ">
 				<span class="primary">{{this.count}}</span>
 			</div>
 		</div>
-		</div>
-		<div class="col-lg-3 col-md-6 col-12">
+		</div> --}}
+		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
 				<input type="text" class="form-control square" value="{{__ 'Total Customer'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
-					<span class="text-warning">
-						<a href="#" style="text-decoration: underline !important;">{{this.count}}</a>
-					</span>
+					<span class="primary">{{this.count}}</span>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6 col-12">
+		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
 				<input type="text" class="form-control square" value="{{__ 'Active Customers'}}" placeholder="Addon To Right" readonly="readonly">
 					<div class="form-control-position">
@@ -36,7 +34,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-6 col-12">
+		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
 				<input type="text" class="form-control square" value="{{__ 'Deactivated users'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
@@ -50,7 +48,9 @@
 		</fieldset>
 		<div class="row" style="">
 		
-			<div class=" col-lg-12 col-md-12 mb-1 pr-2 heading-elements p-0 text-right" >
+			<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ews-heading">
 			<ul class="list-inline mb-0">
 			<li id="export">
 				<select class="select2 form-control export">
@@ -60,6 +60,7 @@
 				</select>
 			</li>	
 			</ul>
+		</div>
 		</div>
 		</div>
 		</div>
@@ -217,21 +218,67 @@
                 groupable: true,
                 resizable: true,
                 filterable: {
-					mode: "row"
+					mode: "row",
+					 messages: {
+          info: "{{__ 'Show items with value that:'}}",
+		  isEqualTo: "{{__ 'Is equal to'}}",
+		  and: "{{__ 'And'}}",
+		  or: "{{__ 'Or'}}",
+		  clear: "{{__ 'Clear'}}",
+		  filter: "{{__ 'Filter'}}",
+		  isTrue: "{{__ 'is true'}}",
+      isFalse: "{{__ 'is false'}}",
+      isEmpty: "{{__ 'is empty'}}",
+      isNotEmpty: "{{__ 'is not empty'}}"
+        },
+		operators: {
+      string: {
+        eq: "{{__ 'is equal to'}}",
+        neq: "{{__ 'is not equal to'}}",
+        startswith: "{{__ 'starts with'}}",
+        contains: "{{__ 'contains'}}",
+        doesnotcontain: "{{__ 'does not contain'}}",
+        endswith: "{{__ 'ends with'}}",
+        isnull: "{{__ 'is null'}}",
+        isnotnull: "{{__ 'is not null'}}"
+      }
+    }
 				},
-                columnMenu: true,
-				pageable: {
+                columnMenu: {
+    messages: {
+      columns: "{{__ 'Columns'}}",
+	  filter : "{{__ 'Filter'}}",
+	  sortAscending: "{{__ 'Sort Ascending'}}", 
+	  sortDescending: "{{__ 'Sort Descending'}}", 
+    },
+  },
+												pageable: {
 					input: true,
 					numeric: false,
 					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100]
+					pageSizes: [10, 20, 25, 50, 100],
+					messages: {
+	  display: "{{__ '{0} - {1} of {2} items'}}",
+      empty: "{{__ 'No items to display'}}",
+      page: "{{__ 'Page'}}",
+	  of: "{{__ 'of {0}'}}", 
+      itemsPerPage: "{{__ 'items per page'}}",
+      first: "{{__ 'Go to the first page'}}",
+      previous: "{{__ 'Go to the previous page'}}",
+      next: "{{__ 'Go to the next page'}}",
+      last: "{{__ 'Go to the last page'}}",
+      refresh: "{{__ 'Refresh'}}"
+    }
 				},
 				noRecords: true,
+				messages: {
+            noRecords: "{{__ 'No records available.'}}"
+        },
                 columns: [
 				 
 					{
                         field: "firstname" ,
-                        title: "User Name",
+                        title:  "{{__ 'Username'}}",
 						template:"<left>" + "<div class='customer-photo'" + 
 						"style='background-image:url(/images/upload/#=photo #);'></div> "+ "#= firstname # #= middlename # #= lastname #",
                         field: "photo" ,
@@ -239,51 +286,51 @@
                     }, 
 					{
                         field: "email",
-                         title: "Email Address",
+                         title:  "{{__ 'Email Address'}}",
                         width: 150
                     },
 					{
                         field: "birthdate",
-                         title: "Birth Date",
+                         title: "{{__ 'Birth Date'}}",
                         width: 150
                     },
 					{
                         field: "occupation",
-                         title: "Occupation",
+                         title: "{{__ 'Occupation'}}",
                         width: 150
                     },
 					{
                         field: "mobile",
-                         title: "Contact",
+                         title: "{{__ 'Contact'}}",
                         width: 150
                     },
 					{
                         field: "address",
-                         title: "Address",
+                         title: "{{__ 'Address'}}",
 						 hidden: true,
                         width: 150
                     },
 					{
                         field: "country",
-                         title: "Country",
+                         title: "{{__ 'Country'}}",
 						 hidden: true,
                         width: 150
                     },
 					{
                         field: "state",
-                         title: "State",
+                         title: "{{__ 'State'}}",
 						 hidden: true,
                         width: 150
                     },
 					{
                         field: "city",
-                         title: "City",
+                         title: "{{__ 'City'}}",
 						 hidden: true,
                         width: 150
                     },
 					{
                         field: "pincode",
-                         title: "Pincode",
+                         title: "{{__ 'Pincode'}}",
 						 hidden: true,
                         width: 150
                     },
@@ -335,7 +382,7 @@
 							 
 							],
 							<!-- title: "Action",  -->
-							<!-- headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='adduser'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> New</button></a></center>" -->
+							<!-- headerTemplate: "<center><b><a href='javascript:void(0)' class='enable_filter'>&nbsp;&nbsp;</i></a></b><a href='adduser'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>" -->
 					}
                 ],
 				editable: {

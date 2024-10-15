@@ -1,13 +1,11 @@
-{{breadcrums 'Home' title}}
+{{breadcrums (__ 'Home') (__ title)}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 	<div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header p-0 border-bottom border-light">
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
+
 	
 	<div class="card-content collpase show">
 	<div class="card-body">
@@ -63,7 +61,7 @@
 				<div class="d-inline-block custom-control custom-checkbox mr-1 margin_left_custom_field">
 					
 					<label class="checkbox-inline mr-2"> 
-					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'nullable'}}  {{/ifEquals}}{{/if}} value="nullable" class="nullable_rule" checked><span>{{#with ..}}{{__ "Nullable" setlang}}{{/with}}</span>
+					<input type="checkbox" name="validation" {{#if this.validation}}{{#ifEquals this.validation 'nullable'}}  {{/ifEquals}}{{/if}} value="nullable" class="nullable_rule"><span>{{#with ..}}{{__ "Nullable" setlang}}{{/with}}</span>
 					</label>
 					
 					<label class="checkbox-inline mr-2">
@@ -152,14 +150,16 @@
 					</div>
 				</div> 
 				<div class="col-md-2">
-					<input type="button"  name="menu_web" class="btn btn-primary add_more_checkbox" value="Add More">
+					<input type="button"  name="menu_web" class="btn btn-primary add_more_checkbox" value="{{#with ..}}{{__ "Add Tag"}}{{/with}}">
 				</div> 
 			</div>
 			<div class="row checkbox_cat">
 				<div class="col-md-12 checkbox_label">
 				{{#if this.c_label}}
-				{{#each this.c_label as |checkdata|}}
+				{{#each  this.c_label as |checkdata|}}
+				{{#if checkdata}}
 				<div class="badge badge-warning label_checkbox custom-margin"  ><input type="hidden" value={{checkdata}}  name="c_label"><span>{{checkdata}}</span><a href="#"><i class="fa fa-trash font-medium-2 delete_c_label" aria-hidden="true"></i></a></div>
+				{{/if}}
 				{{/each}}
 				{{/if}}
 				</div>
@@ -225,7 +225,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" style="margin-top: 20px;"><!--Row Div--> 
+			<div class="row"><!--Row Div--> 
 				<div class="col-md-6">
 					<div class="form-group">
 						<div class="col-md-12 form-control">

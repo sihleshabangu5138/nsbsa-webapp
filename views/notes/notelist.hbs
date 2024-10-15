@@ -1,23 +1,20 @@
-{{breadcrums 'Home' 'Notes List'}}
+{{breadcrums (__ 'Home') (__ 'Notes List')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
-		<div class="col-lg-2 col-md-2 mb-2 custom_select">		
-		</div>
-		<div class="col-lg-2 col-md-2 mb-2">			
-		</div>
-		<div class=" col-lg-7 col-md-7 mb-7">
-		</div>
-		<div class=" col-lg-1 col-md-1 mb-1 heading-elements p-0">
-			<ul class="list-inline mb-0">
-			<li id="export">
-				<select class="select2 form-control export">
-					<option value="">{{__ "Export"}}</option>
-					<option value="csv">{{__ "XLSX"}}</option>
-					<option value="pdf">{{__ "PDF"}}</option>
-				</select>
-			</li>	
-			</ul>
+<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
+		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+				<div class="heading-elements ews-heading">
+					<ul class="list-inline mb-0">
+					<li id="export">
+						<select class="select2 form-control export">
+							<option value="">{{__ "Export"}}</option>
+							<option value="csv">{{__ "XLSX"}}</option>
+							<option value="pdf">{{__ "PDF"}}</option>
+						</select>
+					</li>	
+					</ul>
+				</div>
 		</div>
 		</div>
     <div class="content-wrapper">
@@ -52,8 +49,7 @@
 						<div class="row">
 						<div class="col-12">
 						<div class="card">
-							<div class="card-header px-0"><a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-						  </div>
+							
 							<div class="card-content collapse show" id="NF-datatable">
 							<div class="card-body p-0">
 								<div id="grid"></div>
@@ -207,16 +203,62 @@
                 groupable: true,
                 resizable: true,
                 filterable: {
-					mode: "row"
+					mode: "row",
+					 messages: {
+          info: "{{__ 'Show items with value that:'}}",
+		  isEqualTo: "{{__ 'Is equal to'}}",
+		  and: "{{__ 'And'}}",
+		  or: "{{__ 'Or'}}",
+		  clear: "{{__ 'Clear'}}",
+		  filter: "{{__ 'Filter'}}",
+		  isTrue: "{{__ 'is true'}}",
+      isFalse: "{{__ 'is false'}}",
+      isEmpty: "{{__ 'is empty'}}",
+      isNotEmpty: "{{__ 'is not empty'}}"
+        },
+		operators: {
+      string: {
+        eq: "{{__ 'is equal to'}}",
+        neq: "{{__ 'is not equal to'}}",
+        startswith: "{{__ 'starts with'}}",
+        contains: "{{__ 'contains'}}",
+        doesnotcontain: "{{__ 'does not contain'}}",
+        endswith: "{{__ 'ends with'}}",
+        isnull: "{{__ 'is null'}}",
+        isnotnull: "{{__ 'is not null'}}"
+      }
+    }
 				},
-                columnMenu: true,
-				pageable: {
+                columnMenu: {
+    messages: {
+      columns: "{{__ 'Columns'}}",
+	  filter : "{{__ 'Filter'}}",
+	  sortAscending: "{{__ 'Sort Ascending'}}", 
+	  sortDescending: "{{__ 'Sort Descending'}}", 
+    },
+  },
+												pageable: {
 					input: true,
 					numeric: false,
 					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100]
+					pageSizes: [10, 20, 25, 50, 100],
+					messages: {
+	  display: "{{__ '{0} - {1} of {2} items'}}",
+      empty: "{{__ 'No items to display'}}",
+      page: "{{__ 'Page'}}",
+	  of: "{{__ 'of {0}'}}", 
+      itemsPerPage: "{{__ 'items per page'}}",
+      first: "{{__ 'Go to the first page'}}",
+      previous: "{{__ 'Go to the previous page'}}",
+      next: "{{__ 'Go to the next page'}}",
+      last: "{{__ 'Go to the last page'}}",
+      refresh: "{{__ 'Refresh'}}"
+    }
 				},
                 noRecords: true,
+				messages: {
+            noRecords: "{{__ 'No records available.'}}"
+        },
                 columns: [
 					
 					{
@@ -234,8 +276,6 @@
                         title: "{{__ "Module"}}",
 						width: 150
                     },
-					{{#ifCond session.admin_access "==" 0}}
-					{{#ifCondition accessrightdata.view "||" accessrightdata.delete "||" accessrightdata.update}}
 					{
 						width: "200px",
 						command:
@@ -243,54 +283,40 @@
 							{
 								template : "<center>" 
 							},
-							{{#if accessrightdata.view }}
-							  { 
+							
+							  /* { 
 								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
 								click:function(e) 
 								{
 								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
 								 
 								  var id = clickedRow._id;
+								  window.location.href = "addrole/"+id;
+								  return false;
+								} 
+							},   */
+							{template : "&nbsp;" },
+							{{!-- console.log({{accessrightdata.update}}),
+							console.log({{accessrightdata.delete}}),
+							console.log({{accessrightdata.add}}), --}}
+
+							/* Edit action start */
+							{{#ifCond accessrightdata.view "||" session.admin_access}}
+							 { 
+								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-eye",
+								click:function(e) 
+								{ 
+								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+								 
+								  var id = clickedRow._id; 
 								  window.location.href = "viewnote/"+id;
 								  return false;
 								} 
-							},  
-							{{/if}}
-							
-							{template : "</center>" },
-							 
-							], title: "{{__ "Action"}}", 
-					}
-					{{/ifCondition}}
-					{{else}}
-						{
-						width: "200px",
-						command:
-						[
-							{
-								template : "<center>" 
 							},
-							  { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "viewnote/"+id;
-								  return false;
-								} 
-							},  
-							{template : "&nbsp;" },
-							
-							{template : "&nbsp;" },
-						
-							
-							{template : "</center>" },
+							{{/ifCond}}
 							 
-							], title: "{{__ "Action"}}",
+						], 
 					}
-					{{/ifCond}}
                 ],
 				editable: {
                 mode: "inline"

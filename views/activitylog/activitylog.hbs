@@ -1,13 +1,20 @@
-{{breadcrums "Home" "Activity Log"}}
+{{breadcrums (__ "Home") (__ "Activity Log")}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="row">
 	<div class="col-md-12">
 	<div class="card">
-	<div class="card-header pb-0 border-bottom border-light">
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-	</div>
 	<div class="card-content collpase show">
+		{{#if messages.error  }}
+			<script>
+					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+				</script>
+			{{/if}}
+			{{#if messages.success }}
+				<script>
+					toastr.success("{{messages.success}}","{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+				</script>
+			{{/if}}
 	<div class="card-body">
 		<div class="app-content center-layout  mx-md-3 px-1">
 					<div class="content-wrapper">
@@ -24,7 +31,7 @@
 									<!-- {{#each activity}} -->
 										<!-- <button type="button" {{#ifCond this.module "==" "Log"}}style="display:none"{{else}}{{/ifCond}} class="btn btn-danger m-1" id="clearlog">Clear log</button> -->
 									<!-- {{/each}} -->
-									<button type="button" class="btn btn-danger m-1" style="float:right" id="clearlog">{{__ "Clear log"}}</button>
+									<button type="button" class="btn btn-danger my-1" style="float:right" id="clearlog">{{__ "Clear log"}}</button>
 									</div>
 									<div class="col-12">
 										<div class="card">
@@ -69,12 +76,27 @@
 	</div>
 <script>
 $(document).ready(function(){
-$("body").on("click", "#clearlog", function (e) {
-	alert("123");
-	$.ajax({
-		type: "POST",
-		url: '/ajxfun/clearlog',
-	});
-});
+    $("body").on("click", "#clearlog", function (e) {
+        // Display a confirmation dialog
+        var isConfirmed = confirm("{{__ "Are you sure you want to clear the log?"}}");
+        
+        // If the user clicks OK, proceed with clearing the log
+        if (isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: '/ajxfun/clearlog',
+                success: function(data) {
+                    // Handle success, e.g., refresh the page or update the UI
+					location.reload();
+                   toastr.success("{{__ 'Log cleared successfully!'}}", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+
+                },
+                error: function(error) {
+                    // Handle error, e.g., show an error message
+                    toastr.error("{{__ 'Error clearing log. Please try again.'}}", "{{__ 'Error!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+                }
+            });
+        }
+    });
 });
 </script>
