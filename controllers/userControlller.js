@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 const Role = require('../models/Role');
 const FamilyData = require('../models/Familydata');
-const GenralSettings = require('../models/GeneralSetting');
+const Generalsetting = require('../models/GeneralSetting');
 const Customfields = require('../models/Customfields');
 const CustomFieldMeta = require('../models/CustomFieldMeta');
 const NotificationTemplate = require('../models/Notificationtemplate');
@@ -251,7 +251,7 @@ exports.getAddUser = async function (req, res) {
 
     } else {
       const roleNames = await Role.find({}).lean();
-      const settings = await GenralSettings.find({}).lean();
+      const settings = await Generalsetting.find({}).lean();
       const customFields = await Customfields.find({ $and: [{ "module_name": "user" }, { "field_visibility": 1 }] }).lean();
 
       const news = [{ 'userid': '-1' }];
@@ -814,7 +814,38 @@ async function fetchDataFromAPI() {
 
 
 ////////////////////////////////////  user list  ///////////////////////////////////////////
-
+exports.getTotalUserList = async (req, res, next) => {
+  try {
+    let access_data = [];
+    const access = await AccessRights.find({ rolename: req.session.role_slug },{ access: 1 }).lean();
+    for (const [key, value] of Object.entries(access)) {
+      for (const [key1, value1] of Object.entries(value['access_type'])) {
+        if (key1 === "user") {
+          access_data = value;
+        }
+      }
+    }
+    if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {
+      const query = {
+         _id: new mongoose.Types.ObjectId(req.session.user_id)
+       };
+       const numOfDocs = await User.countDocuments(query);
+     const activeuser = await User.countDocuments({ status: 1,_id: new mongoose.Types.ObjectId(req.session.user_id) });
+     const deactiveuser = await User.countDocuments({ status: 0,_id: new mongoose.Types.ObjectId(req.session.user_id) });
+     res.render('users/totaluser', { title: 'User List', session: req.session, count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, accessrightdata: access_data, messages: req.flash() });
+     } else {
+       // Use a more generic query if user has broader access
+      // Add additional conditions if needed
+       const numOfDocs = await User.countDocuments({});
+       const activeuser = await User.countDocuments({ status: 1 });
+       const deactiveuser = await User.countDocuments({ status: 0 });
+       res.render('users/totaluser', { title: 'User List', session: req.session, count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, accessrightdata: access_data, messages: req.flash() });
+     }
+    
+  } catch (error) {
+    next(error);
+  }
+}
 exports.getUserList = async (req, res, next) => {
   try {
     let access_data = [];

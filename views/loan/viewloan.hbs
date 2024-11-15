@@ -328,8 +328,20 @@ function myFunction() {
 									<td class="bordertop">{{formatNumber result.interest 2 '.' ','}}</td>					
 									<td class="bordertop">{{formatNumber result.totalpayment 2 '.' ','}}</td>					
 									<td class="bordertop">{{formatNumber result.remainingBalance 2 '.' ','}}</td>
-									<td class="bordertop"><a href="/loan/addemi/{{result._id}}">
-									{{#ifCond this.status '==' '0'}}<button type="button" class="btn btn-info">{{#with ..}}{{__ 'pending'}}{{/with}}</button>{{/ifCond}}</a>
+									<td class="bordertop"><a href="/loan/addemi/{{this._id}}"> 
+									{{!-- change here that if status is approved then only pending button is being able to click --}}
+											{{#ifCond this.status '==' '0'}}
+											{{#ifCond ../approvedstatus '==' '0'}}
+											<button type="button" class="btn btn-info pending_button" disabled>
+												{{#with ..}}{{__ 'pending'}}{{/with}}
+											</button>
+											{{else}}
+											<button type="button" class="btn btn-info pending_button">
+												{{#with ..}}{{__ 'pending'}}{{/with}}
+											</button>
+											{{/ifCond}}
+											{{/ifCond}}
+										</a>
 									{{#ifCond this.status '==' '1'}}<button type="button" disabled class="btn" style="background-color:#00c735; color:#fff">{{#with ..}}{{__ 'Completed'}}{{/with}}</button>{{/ifCond}}</td>  
 											</tr>
 											

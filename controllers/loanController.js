@@ -20,6 +20,9 @@ const Repayment = require('../models/RePayment');
 const Mail = require('../config/email');
 const Role = require('../models/Role');
 const Reminder = require('../models/Reminder');
+const Stripe = require('stripe');
+const { Session } = require('express-session');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 // const __basedir = path.resolve(__dirname, '../..');
 
 exports.getLoanTypeList = async function (req, res, next) {
@@ -275,6 +278,132 @@ exports.postAddLoanType = async (req, res) => {
 exports.getLoanList = async function (req, res, next) {
     try {
         let access_data = [];
+        const session_id = req.query.session_id; // Get the session_id from query params
+        const failstatus = req.query.status;
+
+        if (session_id) {
+          try {
+            // Step 1: Verify the session_id from Stripe to check if payment was successful
+            const stripesession = await stripe.checkout.sessions.retrieve(session_id);
+            if (stripesession.payment_status === "paid") {
+
+
+                const paymentIntentId = stripesession.payment_intent;
+                console.log('paymentIntentId:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::', paymentIntentId);
+
+                // Retrieve payment details using paymentIntentId
+                const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+                // you can get via payment intent(id , amount , currency , status);
+
+              // Step 2: Perform your database update logic
+              const emi_id = stripesession.metadata.emi_id;
+              const loanno = stripesession.metadata.loanno;
+              const myquery = { _id: new mongoose.Types.ObjectId(emi_id) };
+
+              // Update the EmiDetails collection with the paid status
+              const updateResult = await EmiDetails.updateOne(myquery, {
+                $set: { status: 1 , paymentid: paymentIntent.id , paymentamount: paymentIntent.amount/100  , payment_type: paymentIntent.payment_method_types[0]},
+              });
+
+              if (updateResult.modifiedCount > 0) {
+                console.log("EmiDetails document updated successfully");
+              } else {
+                console.log("No EmiDetails document found or update failed");
+                req.flash(
+                  "error",
+                  res.__("Failed to update EMI details. Please try again.")
+                );
+                return res.redirect("/loan/loanlist"); // Stop further execution if update fails
+              }
+              // Step 3: Delete the session
+              // await Session.deleteOne({ session_id: session_id });
+              const formatdate = moment().format("YYYY-MM-DD");
+
+              const myobj = {
+                date: formatdate,
+                module: "EMI",
+                action: "updated EMI",
+                user: new mongoose.Types.ObjectId(req.session.user_id),
+                item: loanno,
+                status: 0,
+              };
+
+              await ActivityLog.create(myobj);
+
+              const rr = await EmiDetails.findOne(myquery);
+              const notificationTemplates = await NotificationTemplate.find({
+                templatetitle: "Emi Paid",
+              }).lean();
+
+              const result1 = await Users.find(rr.user_id).lean();
+              const loandetails = await LoanDetails.findOne(rr.loan_id);
+              const typeloans = await Loantype.findOne(loandetails.loantype);
+              const remian = await EmiDetails.countDocuments({
+                loan_id: rr.loan_id,
+                status: 0,
+              });
+              for (const notification of notificationTemplates) {
+                const message = notification.content;
+                const subject = notification.subject;
+
+                const Obj = {
+                  _USERFIRSTNAME_: result1[0].firstname,
+                  _USERLASTNAME_: result1[0].lastname,
+                  _LOANTYPE_: typeloans.type,
+                  _datetime_: formatdate,
+                  _EMI_: remian,
+                  _LOANENDDATE_: loandetails.enddate,
+                  _newline_: "<br>",
+                  _tab_: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+                  _systemname_: req.session.generaldata.com_name,
+                };
+
+                const trans = message.replace(
+                  /_USERFIRSTNAME_|_USERLASTNAME_|_LOANTYPE_|_newline_|_tab_|_EMI_|_systemname_|_datetime_|_LOANSTARTDATE_|_LOANENDDATE_/gi,
+                  (matched) => {
+                    return Obj[matched];
+                  }
+                );
+
+                const subtrans = subject.replace(
+                  /_USERFIRSTNAME_|_USERLASTNAME_|_LOANTYPE_|_newline_|_tab_|_systemname_/gi,
+                  (matched) => {
+                    return Obj[matched];
+                  }
+                );
+
+                await Mail.sendMail(result1[0].email, subtrans, trans);
+              }
+
+              // Flash success message and redirect to loan list page
+              req.flash("success", res.__("EMI paid successfully."));
+              res.redirect("/loan/loanlist");
+            } else {
+              // If payment wasn't successful, flash an error message
+              req.flash(
+                "error",
+                res.__("Payment not successful. Please try again.")
+              );
+              res.redirect("/loan/disapprovedloanlist");
+            }
+          } catch (err) {
+            console.error(err);
+            req.flash(
+              "error",
+              res.__(
+                "An error occurred while processing your payment. Please try again. error from catch"
+              )
+            );
+            res.redirect("/loan/loanlist");
+          }
+        }
+
+        if (failstatus) {
+            if (failstatus === "failed") {
+                req.flash('error', res.__('Payment failed. Please try again.'));
+                res.redirect('/loan/loanlist');
+            }
+        }
 
         const myquery = { "rolename": req.session.role_slug };
         const access = await AccessRights.find(myquery).lean();
@@ -1077,11 +1206,11 @@ exports.getDisapproveLoanDelete = async (req, res) => {
 exports.getViewLoan = async (req, res) => {
     try {
         const id = req.params.id;
-        // let result_data = [];
 
         if (id) {
             const result = await LoanDetails.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
             // result_data = result;
+            const approvedstatus = result[0].approvestatus;
             // result_data[0].id_d = new mongoose.Types.ObjectId(result_data[0].user).toString();
 
             const loanquery = { "_id": result[0].loantype };
@@ -1168,9 +1297,9 @@ exports.getViewLoan = async (req, res) => {
                 user: result1,  
                 id: id,
                 session: req.session,
-                alert_data: alert_data
+                alert_data: alert_data,
+                approvedstatus: approvedstatus
             });
-            console.log(emilist);
         } else {
             const news = [{ 'userid': '-1' }];
             res.render('loan/viewloan', { title: "View Loan", data: news, family: news, session: req.session });
@@ -1192,6 +1321,9 @@ exports.getEmiDetails = async (req, res) => {
             const typeofloan = await Loantype.find({ _id: loanlist[0].loantype }).lean();
             const customfield = await CustomField.find({ $and: [{ 'module_name': 'emi' }, { 'field_visibility': 1 }] }).lean();
 
+            const usersrole = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
+            const rolename = usersrole.role_slug;
+
             for (const [key, value] of Object.entries(customfield)) {
                 customfield.forEach(element => {
                     customfield[key].id_d = new mongoose.Types.ObjectId(value._id).toString();
@@ -1202,7 +1334,7 @@ exports.getEmiDetails = async (req, res) => {
                 customfield_value[key].id_d = new mongoose.Types.ObjectId(value.custom_field_id).toString();
             }
 
-            res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value });
+            res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value , stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY , role:rolename});
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
@@ -1211,7 +1343,7 @@ exports.getEmiDetails = async (req, res) => {
         const news = [{ 'userid': '-1' }];
         try {
             const customfield = await CustomField.find({ $and: [{ 'module_name': 'emi' }, { 'field_visibility': 1 }] }).lean();
-            res.render('loan/addemi', { title: 'Add EMI', data: news, family: news, session: req.session, newfield: customfield });
+            res.render('loan/addemi', { title: 'Add EMI', data: news, family: news, session: req.session, newfield: customfield , stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY});
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
@@ -1326,8 +1458,7 @@ exports.postEmiDetails = async (req, res) => {
             req.flash('error', res.__('Error occurred.'));
             res.redirect('/loan/loanlist');
         }
-    }
-};
+    }};
 
 exports.getRepayment = async (req, res) => {
     try {
@@ -1359,9 +1490,6 @@ exports.postRepayment = async (req, res) => {
         res.redirect('/loan/loanlist');
     }
 }
-
-
-
 
 exports.getTotalLoanCountList = async (req, res) => {
     try {

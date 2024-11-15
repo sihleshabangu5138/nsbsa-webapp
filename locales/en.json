@@ -1109,5 +1109,14 @@
 	"EMI Date": "EMI Date",
 	"EMI Ammount": "EMI Ammount",
 	"Error occurred in Settings.": "Error occurred in Settings.",
-	"Select city": "Select city"
+	"Select city": "Select city",
+	"An error occurred while processing your payment. Please try again.": "An error occurred while processing your payment. Please try again.",
+	"An error occurred while processing your payment. Please try again. error from catch                            :::::::::::::::::::::::::": "An error occurred while processing your payment. Please try again. error from catch                            :::::::::::::::::::::::::",
+	"An error occurred while processing your payment. Please try again. error from catch": "An error occurred while processing your payment. Please try again. error from catch",
+	"EMI paid successfully.": "EMI paid successfully.",
+	"You cannot impersonate yourself.": "You cannot impersonate yourself.",
+	"Pay Now": "Pay Now",
+	"Failed to update EMI details. Please try again.": "Failed to update EMI details. Please try again.",
+	"Pay now": "Pay now",
+	"Payment failed. Please try again.": "Payment failed. Please try again."
 }

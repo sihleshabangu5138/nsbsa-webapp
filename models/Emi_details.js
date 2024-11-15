@@ -17,6 +17,7 @@ const emiDetailsSchema = new mongoose.Schema({
   monthly_payment: Number,
   date: String,
   status: Number,
+  paymentid:String,
   cheque_accountno: String,
   cheque_date: String,
   cheque_name: String,
