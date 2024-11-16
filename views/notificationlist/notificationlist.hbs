@@ -29,7 +29,7 @@
                       <tr>
                         <th scope="row" class="index-col">1</th>
                         <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "New User" }}!{{/with}}</h6></a></td>
-                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{getdate this.date ../session.generaldata.date_format}}</span></td>
                         <td>{{#with ..}}{{__ "New account created." }}{{/with}} {{this.Name}} </td>
                       </tr>
 					  {{/ifCond}}
@@ -37,7 +37,7 @@
                       <tr>
                         <th scope="row" class="index-col">1</th>
                         <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "User Updated"}}!{{/with}}</h6></a></td>
-                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{getdate this.date ../session.generaldata.date_format}}</span></td>
                         <td>"{{this.Name}}" {{#with ..}}{{__ 'User'}}{{/with}} {{#with ..}}{{__ "is updated"}}{{/with}} </td>
                       </tr>
 					  {{/ifCond}}
@@ -45,7 +45,7 @@
                       <tr>
                         <th scope="row" class="index-col">1</th>
                         <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "New Loan Added"}}!{{/with}}</h6></a></td>
-                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{getdate this.date ../session.generaldata.date_format}}</span></td>
                         <td>"{{this.Name}}" {{#with ..}}{{__ 'Loan'}}{{/with}} {{#with ..}}{{__ "is added"}}{{/with}} </td>
                       </tr>
 					  {{/ifCond}}
@@ -53,7 +53,7 @@
                       <tr>
                         <th scope="row" class="index-col">1</th>
                         <td><a href="/users/viewuser/{{this.user}}"><input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} /><h6 class="media-heading">{{#with ..}}{{__ "Loan Updated"}}!{{/with}}</h6></a></td>
-                        <td><span class="notification-tag badge badge-default badge-warning ">{{this.date}}</span></td>
+                        <td><span class="notification-tag badge badge-default badge-warning ">{{getdate this.date ../session.generaldata.date_format}}</span></td>
                         <td>"{{this.Name}}" {{#with ..}}{{__ 'Loan'}}{{/with}} {{#with ..}}{{__ "is updated"}}{{/with}} {{this.nameofuser.[0]}} {{this.nameofuser.[1]}} {{this.nameofuser.[2]}} </td>
                       </tr>
 					  {{/ifCond}}

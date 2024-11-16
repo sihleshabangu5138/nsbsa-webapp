@@ -8,6 +8,7 @@ const functions = require('../helpers/function');
 const moment = require('moment');
 const axios = require('axios');
 const dotenv = require('dotenv');
+dotenv.config();
 const Users = require('../models/User');
 const NotificationTemplate = require('../models/Notificationtemplate');
 const LoanDetails = require('../models/LoanDetails');
@@ -34,7 +35,8 @@ const { connectToDatabase } = require('../config/config');
 const { checkConnection } = require('../config/config');
 const { MongoClient } = require('mongodb');
 const AmortizeJS = require('amortizejs').Calculator;
-
+const Stripe = require('stripe');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 /* GET users listing. */
 exports.getViewUser = async (req, res, next) => {
 	try {
@@ -103,6 +105,17 @@ exports.getViewUser = async (req, res, next) => {
 	}
 };
 
+exports.getTotalUserList = async (req, res, next) => {
+	try 
+		{
+		const result = await Users.find().lean();
+
+		res.json(result);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'An error occurred' });
+	}
+}
 exports.getDeactivateUser = async (req, res, next) => {
 	try {
 		// const query = { status: 0 };
@@ -1722,7 +1735,7 @@ MAIL_PASS=
 
 exports.postCheckdbConnect = async (req, res) => {
 	const { dbname, db_username, db_pass, db_host } = req.body;
-	console.log(dbname, db_username, db_pass, db_host);
+	// console.log(dbname, db_username, db_pass, db_host);
 
 	try {
 		// Connect to MongoDB
@@ -1852,4 +1865,34 @@ exports.verifyPurchaseKey = async (req, res) => {
 		console.error('Error verifying purchase key:', error);
 		return res.status(500).json({ success: false, message: 'Internal server error' });
 	}
+};
+
+exports.createCheckoutSession = async (req, res) => {
+    const { amount ,emiid } = req.body; // Amount in cents
+	
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [{
+                price_data: {
+                    currency: 'INR',
+                    product_data: {
+                        name: 'EMI Payment',
+                    },
+                    unit_amount: amount * 100, // Convert to cents
+                },
+                quantity: 1,
+            }],
+            mode: 'payment',
+            success_url: `${req.protocol}://${req.get('host')}/loan/loanlist?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${req.protocol}://${req.get('host')}/loan/loanlist?status=failed`,
+			metadata: {
+				emi_id:emiid
+			}
+        });
+        res.json({ id: session.id });
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+        res.status(500).send('Internal Server Error');
+    }
 };

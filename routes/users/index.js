@@ -43,6 +43,7 @@ function isAuthenticated4(req, res, next) {
 
 router.get('/users/alluserlist', isAuthenticated1, Users.getAllUser);
 router.get('/users/userlist', isAuthenticated1, Users.getUserList);
+router.get("/users/totaluser", isAuthenticated1, Users.getTotalUserList);
 router.get('/users/viewuser/:id?', isAuthenticated1,Users.getViewUser);
 router.route('/users/adduser/:id?').get(isAuthenticated2, Users.getAddUser).post(upload.any(), isAuthenticated2, Users.postAddUser);
 router.get('/users/deactivateuser', isAuthenticated3, Users.getDeactivateUser);

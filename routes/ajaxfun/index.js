@@ -35,7 +35,7 @@ function isAuthenticated(req, res, next) {
 };
 
 router.get('/ajxfun', isAuthenticated, AjaxFun.getViewUser);
-router.get('/ajxfun/allusers', isAuthenticated, AjaxFun.getAllUser);
+router.get('/ajxfun/totaluser', isAuthenticated, AjaxFun.getTotalUserList);
 router.get('/ajxfun/deactivateuser', isAuthenticated, AjaxFun.getDeactivateUser);
 router.get('/ajxfun/delete/', isAuthenticated, AjaxFun.getDelete);
 router.get('/ajxfun/deleteloan/', isAuthenticated, AjaxFun.getDeleteLoan);
@@ -87,6 +87,7 @@ router.post('/ajxfun/checkDatabaseConnection', AjaxFun.connectDatabase);
 router.post('/ajxfun/check-connection', AjaxFun.postCheckdbConnect);
 router.post('/ajxfun/emi_calculator', AjaxFun.postEmiCalculator);
 router.post('/ajxfun/verify-purchase-key', AjaxFun.verifyPurchaseKey);
+router.post('/ajaxfun/create-checkout-session', AjaxFun.createCheckoutSession);
 
 
 module.exports = router;
