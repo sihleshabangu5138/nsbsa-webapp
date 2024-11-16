@@ -38,7 +38,12 @@ const AmortizeJS = require('amortizejs').Calculator;
 /* GET users listing. */
 exports.getViewUser = async (req, res, next) => {
 	try {
-		let matchQuery;
+		let matchQuery={};
+		if (req.session.admin_access === 1) {
+			matchQuery={}
+		} else {
+			
+	
 		if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {
 			matchQuery = { $and: [{ status: 1, _id: new mongoose.Types.ObjectId(req.session.user_id) }] }
 		}
@@ -49,6 +54,7 @@ exports.getViewUser = async (req, res, next) => {
 			if (req.session.admin_access !== 1) {
 				// If admin access is 0, hide users with admin role
 				matchQuery['role_nm.role_slug'] = { $ne: 'admin' };
+			}
 			}
 		}
 		const tt = await Users.findOne(matchQuery);
@@ -101,8 +107,13 @@ exports.getDeactivateUser = async (req, res, next) => {
 	try {
 		// const query = { status: 0 };
 		let matchQuery;
-		if (req.session.access_rights && req.session.access_rights.deactiveuser && req.session.access_rights.deactiveuser.owndata) {
-			matchQuery = { $and: [{ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }] }
+
+		if (req.session.admin_access !== 1) {
+			if (req.session.access_rights && req.session.access_rights.deactiveuser && req.session.access_rights.deactiveuser.owndata) {
+				
+			
+				matchQuery = { $and: [{ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }] }
+			}
 		}
 		else {
 			matchQuery = {
@@ -113,7 +124,94 @@ exports.getDeactivateUser = async (req, res, next) => {
 
 		// const result = await Users.findOne(query);
 		const result = await Users.find(matchQuery).lean();
+		const result_final = result.map((user) => {
+			user.birthdate = functions.getdate(user.birthdate, req.session.generaldata.date_format);
+			// const country = countriesData.countries.find(c => c.id === user.country);
+			// user.country = country ? country.name : '';
 
+			// Replace state ID with its name
+			// const stateId = user.state ? user.state.toString() : ''; // Ensure state is a string
+			// const state = statesData.states.find(s => s.id === stateId);
+			// user.state = state ? state.name : '';
+
+			// // Replace city ID with its name
+			// const cityId = user.city ? user.city.toString() : ''; // Ensure city is a string
+			// const city = citiesData.cities.find(c => c.id === cityId);
+			// user.city = city ? city.name : '';
+
+			return user;
+		});
+		res.json(result_final);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'An error occurred' });
+	}
+};
+
+exports.getAllUser = async (req, res, next) => {
+	
+	try {
+	
+		let matchQuery={};
+		if (req.session.admin_access == 1) {
+			matchQuery = {}
+			
+			
+		} else {
+			if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {
+				matchQuery = { _id: new mongoose.Types.ObjectId(req.session.user_id) }
+			}
+			else {
+				matchQuery = {};
+					
+				if (req.session.admin_access !== 1) {
+					
+					// If admin access is 0, hide users with admin role
+					matchQuery['role_nm.role_slug'] = { $ne: 'admin' };
+				}
+			}
+		}
+		const users = await Users.aggregate([
+			{
+				$lookup: {
+					from: Role.collection.name,
+					localField: 'role',
+					foreignField: '_id',
+					as: 'role_nm',
+				},
+			},
+			{
+				$unwind: '$role_nm',
+			},
+			{
+				$match: matchQuery,
+			},
+		]);
+		const result = users.map((user) => {
+			user.birthdate = functions.getdate(user.birthdate, req.session.generaldata.date_format);
+			const country = countriesData.countries.find(c => c.id === user.country);
+			user.country = country ? country.name : '';
+
+			// Replace state ID with its name
+			// const stateId = user.state ? user.state.toString() : ''; // Ensure state is a string
+			// const state = statesData.states.find(s => s.id === stateId);
+			// user.state = state ? state.name : '';
+
+			// // Replace city ID with its name
+			// const cityId = user.city ? user.city.toString() : ''; // Ensure city is a string
+			// const city = citiesData.cities.find(c => c.id === cityId);
+			// user.city = city ? city.name : '';
+
+			return user;
+		});
+		
+		// // const result = await Users.findOne(query);
+		// const result = await Users.find(matchQuery).lean();
+
+		// let users = result.map((user) => {
+		// 	user.birthdate = functions.getdate(user.birthdate, req.session.generaldata.date_format);
+		// 	return user;
+		// })
 		res.json(result);
 	} catch (err) {
 		console.error(err);
@@ -257,7 +355,18 @@ exports.getCustomFields = async (req, res) => {
 
 exports.getCategory = async (req, res) => {
 	try {
-		const result = await Category.find({}).lean();
+		let query;
+		if (req.session.admin_access !== 1) { 
+			if (req.session.access_rights && req.session.access_rights.category && req.session.access_rights.category.owndata) { 
+				query = {"addedby":req.session.user_id}
+			} else {
+				query ={}
+			}
+
+		} else {
+			query = {}
+		}
+		const result  = await Category.find( query ).lean();
 		res.json(result);
 	} catch (err) {
 		console.error(err);
@@ -266,14 +375,47 @@ exports.getCategory = async (req, res) => {
 };
 
 exports.getService = async (req, res) => {
+	// try {
+	// 	const result_final = [];
+	// 	let result;
+	// 	if (req.session.admin_access === 0) {
+	// 		if (req.session.access_rights && req.session.access_rights.service && req.session.access_rights.service.owndata) {
+	// 			console.log("seervise own data ---------------------")
+	// 			result = await Service.find({ "addedby": req.session.user_id });
+	// 			console.log("servise own -------",result)
+	// 			for (const value of result) {
+	// 				const userIdObject = new mongoose.Types.ObjectId(req.session.user_id);
+	// 				if (value.assigned_staff && Array.isArray(value.assigned_staff) && value.assigned_staff.some(id => id && id.equals && id.equals(userIdObject))) {
+	// 					result_final.push(value);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// 	else {
+	// 		// result_final.push(...result);
+	// 		console.log("admin access data ---------------------")
+	// 		result = await Service.find({}).populate('assigned_staff', 'username').lean();
+	// 		result_final.push(result)
+	// 	}
+	// 	// console.log("rF-----------------", result_final)
+	// 	res.json(result_final);
+	// } catch (err) {
+	// 	console.error(err);
+	// 	res.status(500).json({ error: 'An error occurred' });
+	// }
+
 	try {
 		const result_final = [];
 		const result = await Service.find({}).populate('assigned_staff', 'username').lean();
-		if (req.session.access_rights && req.session.access_rights.service && req.session.access_rights.service.owndata) {
-			for (const value of result) {
-				const userIdObject = new mongoose.Types.ObjectId(req.session.user_id);
-				if (value.assigned_staff && Array.isArray(value.assigned_staff) && value.assigned_staff.some(id => id && id.equals && id.equals(userIdObject))) {
-					result_final.push(value);
+		if (req.session.admin_access === 0) {
+			if (req.session.access_rights && req.session.access_rights.service && req.session.access_rights.service.owndata) {
+				for (const value of result) {
+					console.log(value)
+					const userIdObject = new mongoose.Types.ObjectId(req.session.user_id);
+					if (value.assigned_staff && Array.isArray(value.assigned_staff) && value.assigned_staff.some(staff => staff?._id?.equals(userIdObject))) {
+						result_final.push(value);
+					}
+				
 				}
 			}
 		}
@@ -287,9 +429,20 @@ exports.getService = async (req, res) => {
 	}
 };
 
+
 exports.getProduct = async (req, res) => {
 	try {
-		const result = await Product.find({}).lean();
+		let result;
+		if (req.session.admin_access !== 1) {
+			if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
+				result = await Product.find({
+					"addedby": new mongoose.Types.ObjectId(req.session.user_id)  })
+			}
+			
+		} else {
+			 result = await Product.find({}).lean();
+			
+		}
 		res.json(result);
 	} catch (err) {
 		console.error(err);
@@ -298,6 +451,7 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.getEvents = async (req, res) => {
+
   try {
     const result_final = [];
     const result = await Event.find({}).populate("addedby", "username").lean();
@@ -306,43 +460,79 @@ exports.getEvents = async (req, res) => {
         req.session.access_rights &&
         req.session.access_rights.events &&
         req.session.access_rights.events.owndata
-      ) {
-        for (const value of result) {
+	  ) {
+		  
+		  
+		  for (const value of result) {
+		
           const role = await Role.findOne(
             new mongoose.Types.ObjectId(req.session.role)
           );
-          if (role.role_nm == "Staff") {
-            if (
-              value.eventfor == "all" ||
-              value.eventfor.equals(
-                new mongoose.Types.ObjectId(req.session.role)
-              ) ||
-              (value.addedby &&
-                value.addedby.equals(
-                  new mongoose.Types.ObjectId(req.session.user_id)
-                ))
-            ) {
-              result_final.push(value);
-            }
-          } else {
-            if (
-              value.eventfor == "all" ||
-              value.eventfor.equals(
-                new mongoose.Types.ObjectId(req.session.role)
-              )
-            ) {
-              result_final.push(value);
-            }
-          }
+			  if (role.role_nm == "Staff") {
+
+				  if (value.eventfor == "all") {
+					 
+					  result_final.push(value);
+				  } else if (value.eventfor.equals(new mongoose.Types.ObjectId(req.session.role))) {
+					
+					  result_final.push(value);
+				  } else if (value.addedby && value.addedby?.["_id"].equals(new mongoose.Types.ObjectId(req.session.user_id))) {
+					 
+					  result_final.push(value);
+				  }
+			  } else {
+				  if (
+					  value.eventfor == "all" ||
+					  value.eventfor.equals(
+						  new mongoose.Types.ObjectId(req.session.role)
+					  )
+				  ) {
+					  
+					  result_final.push(value);
+				  }
+			  }
         }
-      } else {
+	  } else {
+		 
         result_final.push(...result);
       }
-    } else {
+	} else {
+	
+		
       result_final.push(...result);
-    }
+	  }
 
-    res.json(result_final);
+	  const generalDateFormate = req.session.generaldata.date_format
+	  let originalDateFormate;
+	  let dates = {
+		  'm/d/Y': 'MM/DD/YYYY',
+		  'm-d-Y': 'MM-DD-YYYY',
+		  "d-m-Y": 'DD-MM-YYYY',
+		  "d/m/Y": 'DD/MM/YYYY',
+		  "Y-m-d": 'YYYY-MM-DD',
+		  "F j, Y": 'MMMM D, YYYY'
+	  }
+	  if (dates[generalDateFormate]) {
+		  originalDateFormate = dates[generalDateFormate];
+	  } 
+	//   let finalResult = result_final.map((result) => {
+		
+	// 	  result.startdate = moment(result.startdate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+	// 	  result.enddate = moment(result.enddate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+
+		 
+
+	// 	  return result
+	//   });
+	  let InputdateFormate = ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']
+	  let formateDateToGenerelData = result_final.map((result) => {	
+		  
+		  result.startdate = moment(result.startdate,InputdateFormate).format(originalDateFormate);
+		  result.enddate = moment(result.enddate,InputdateFormate).format(originalDateFormate);
+ 			return result
+	  });
+	  
+	  res.json(formateDateToGenerelData );
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "An error occurred" });
@@ -350,6 +540,7 @@ exports.getEvents = async (req, res) => {
 };
 
 exports.getMapEvents = async (req, res) => {
+	
   try {
     // if(req.session.admin_access === "1" || req.session.access_rights && req.session.access_rights.events && req.session.access_rights.events.view){
     const result_final = [];
@@ -415,24 +606,79 @@ exports.getMapEvents = async (req, res) => {
       }
     } else {
       result_final.push(...result);
-    }
-    const data = result_final.map((element) => {
-      // Assuming element.enddate is a string in a valid date format
-      const endDate = new Date(element.enddate);
+	  }
+	  
+	  const generalDateFormate = req.session.generaldata.date_format
+	  let originalDateFormate;
+	  let dates = {
+		  'm/d/Y':'MM/DD/YYYY',
+		  'm-d-Y':'MM-DD-YYYY',
+		 "d-m-Y":'DD-MM-YYYY',
+		 "d/m/Y": 'DD/MM/YYYY',
+		 "Y-m-d": 'YYYY-MM-DD', 
+		 "F j, Y": 'MMMM D, YYYY' 
+	  }
+	  if(dates[generalDateFormate]){
+		  originalDateFormate = dates[generalDateFormate];
+	  } 
+    // const data = result_final.map((element) => {
+	// 	console.log("st=",element.startdate, "end=",element.enddate);
+    //   // Assuming element.enddate is a string in a valid date format
+    // //   const endDate = new Date(element.enddate);
+		
+    // //   // Add one day to the end date
+    // //   endDate.setDate(endDate.getDate() +1);
 
-      // Add one day to the end date
-      endDate.setDate(endDate.getDate() + 1);
+    // //   return {
+    // //     title: element.eventtitle,
+    // //     start: element.startdate,
+	// // 	  end: endDate, // Format as ISO8601
+    // //     color: "darkcyan",
+	// 	//   };
+	// 	const startDate = moment(element.startdate);  // Convert startdate to moment object
+	// 	const endDate = moment(element.enddate);      // Convert enddate to moment object
 
-      return {
-        title: element.eventtitle,
-        start: element.startdate,
-        end: endDate, // Format as ISO8601
-        color: "darkcyan",
-      };
-    });
+	// 	// Format dates to 'YYYY-MM-DD'
+	// 	const formattedStartDate = startDate.format('YYYY-MM-DD');  // Format start date
+	// 	endDate.add(1, 'days');  // Add one day to end date
+
+	// 	const formattedEndDate = endDate.format('YYYY-MM-DD');  // Format end date
+
+	// 	return {
+	// 		title: element.eventtitle,
+	// 		start: formattedStartDate,
+	// 		end: formattedEndDate,
+	// 		color: "darkcyan",
+	// 	};
+    // });
+	  const data = result_final.map((element) => {
+		  console.log("st=", element.startdate, "end=", element.enddate,generalDateFormate);
+
+		//   const startDate = moment(element.startdate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']);
+		//   const endDate = moment(element.enddate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']);
+		  const startDate = moment(element.startdate, [originalDateFormate, 'DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'],true);
+		  const endDate = moment(element.enddate, [originalDateFormate, 'DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'],true);
+
+		  // Check if dates are valid after parsing
+		//   if (!startDate.isValid() || !endDate.isValid()) {
+		// 	  console.error("Invalid date format for:", element);
+		// 	  return null;  // Skip invalid dates
+		//   }
+
+		  const formattedStartDate = startDate.format('YYYY-MM-DD');
+		  endDate.add(1, 'days');  // Add one day to end date
+		  const formattedEndDate = endDate.format('YYYY-MM-DD');
+
+		  return {
+			  title: element.eventtitle,
+			  start: formattedStartDate,
+			  end: formattedEndDate,
+			  color: "darkcyan",
+		  };
+	  }).filter(Boolean);
 
     res.json(data);
-    console.log("data", data);
+    // console.log("data", data);
     // }
   } catch (err) {
     console.error(err);
@@ -474,7 +720,15 @@ exports.getLoanTypeList = async (req, res) => {
 
 exports.getRules = async (req, res) => {
 	try {
-		const result = await Rule.find({}).lean();
+		let result;
+		if (req.session.admin_access !== 1) {
+			if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
+				result = await Rule.find({ "addedby": req.session.user_id })
+			}
+		} else {
+			
+			result = await Rule.find({}).lean();
+		}
 		res.json(result);
 	} catch (err) {
 		console.error(err);
@@ -771,24 +1025,28 @@ exports.postClearLog = async (req, res) => {
 	try {
 		const date = Date(Date.now());
 		const formatdate = moment(date).format("YYYY-MM-DD");
+		if (req.session.admin_access == 1) {
+			await ActivityLog.deleteMany({});
 
-		await ActivityLog.deleteMany({});
+			const myobjs = {
+				module: "Log",
+				date: formatdate,
+				action: "cleared",
+				user: new mongoose.Types.ObjectId(req.session.user_id),
+				item: "activitylog",
+			};
 
-		const myobjs = {
-			module: "Log",
-			date: formatdate,
-			action: "cleared",
-			user: new mongoose.Types.ObjectId(req.session.user_id),
-			item: "activitylog",
-		};
+			const result = await ActivityLog.create(myobjs);
 
-		const result = await ActivityLog.create(myobjs);
-
-		if (result.insertedCount === 1) {
-			res.json(true);
+			if (result.insertedCount === 1) {
+				res.json(true);
+			} else {
+				res.json(false);
+			}
 		} else {
 			res.json(false);
 		}
+		
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ error: 'An error occurred' });
@@ -868,15 +1126,16 @@ exports.getLoanList = async (req, res) => {
 	try {
 		const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
 		let query;
-		if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
-			console.log(role.role_nm);
-			// query = { $and: [{ status: 1, approvestatus: 1,user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-			if (role.role_nm === "Staff") {
-				query = { $and: [{ status: 1, approvestatus: 1, createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
-				console.log("rr");
-			} else {
-				query = { $and: [{ status: 1, approvestatus: 1, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-				console.log("aa");
+		if (req.session.admin_access !== 1) {
+			if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
+				// query = { $and: [{ status: 1, approvestatus: 1,user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+				if (role.role_nm === "Staff") {
+					query = { $and: [{ status: 1, approvestatus: 1, createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+					console.log("rr");
+				} else {
+					query = { $and: [{ status: 1, approvestatus: 1, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+					console.log("aa");
+				}
 			}
 		} else {
 			query = { $and: [{ status: 1, approvestatus: 1 }] };
@@ -938,7 +1197,7 @@ exports.getLoanList = async (req, res) => {
 				},
 			},
 		]);
-		console.log(result);
+	
 		res.json(result);
 	} catch (err) {
 		console.error(err);
@@ -949,12 +1208,14 @@ exports.getTotalLoan = async (req, res, next) => {
 	try {
 		let query;
 		const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
-		if (req.session.access_rights && req.session.access_rights.totalloanlist && req.session.access_rights.totalloanlist.owndata) {
-			if (role.role_nm === "Staff") {
-				query = { $and: [{ status: 1, createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
-			}
-			else {
-				query = { $and: [{ status: 1, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+		if (req.session.admin_access !== 1) {
+			if (req.session.access_rights && req.session.access_rights.totalloanlist && req.session.access_rights.totalloanlist.owndata) {
+				if (role.role_nm === "Staff") {
+					query = { $and: [{ status: 1, createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+				}
+				else {
+					query = { $and: [{ status: 1, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+				}
 			}
 		} else {
 			query = { $and: [{ status: 1 }] };
@@ -1000,12 +1261,14 @@ exports.getDisApproveLoan = async (req, res, next) => {
 	try {
 		let query;
 		const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
-		if (req.session.access_rights && req.session.access_rights.disapproveloanlist && req.session.access_rights.disapproveloanlist.owndata) {
-			if (role.role_nm === "Staff") {
-				query = { $and: [{ status: 1, approvestatus: 0, createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
-			}
-			else {
-				query = { $and: [{ status: 1, approvestatus: 0, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+		if (req.session.admin_access !== 1) {
+			if (req.session.access_rights && req.session.access_rights.disapproveloanlist && req.session.access_rights.disapproveloanlist.owndata) {
+				if (role.role_nm === "Staff") {
+					query = { $and: [{ status: 1, approvestatus: 0, createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+				}
+				else {
+					query = { $and: [{ status: 1, approvestatus: 0, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+				}
 			}
 		}
 		else {
@@ -1252,6 +1515,7 @@ exports.postAddRole = async (req, res) => {
 	}
 };
 exports.postApproveLoan = async (req, res) => {
+	console.log("-------------------------")
 	try {
 		const id = req.body.id;
 		if (id) {
@@ -1304,6 +1568,7 @@ exports.postApproveLoan = async (req, res) => {
 			}
 		}
 	} catch (err) {
+		console.log(err)
 		req.flash('error', res.__('Error occurred.'));
 		res.redirect('/loan/loanlist');
 
@@ -1462,7 +1727,8 @@ exports.postCheckdbConnect = async (req, res) => {
 	try {
 		// Connect to MongoDB
 		// const mongoURI = `mongodb://${db_host}`;
-		const mongoURI = `mongodb://${db_username}:${db_pass}@${db_host}`;
+		// const mongoURI = `mongodb://${db_username}:${db_pass}@${db_host}`;
+		const mongoURI = `mongodb://127.0.0.1:27017/${dbname}`;
 		const client = new MongoClient(mongoURI);
 		console.log('Connecting to MongoDB...');
 		await client.connect();
@@ -1513,11 +1779,12 @@ exports.postEmiCalculator = async (req, res) => {
 	const { periodicPayment: monthly_emi, totalPayment: total_payment, totalInterest } = mortgage;
 
 	const result = {
-		loan_amount,
-		monthly_emi,
-		total_payment,
-		totalInterest
+		loan_amount: Math.round(loan_amount),
+		monthly_emi: Math.round(monthly_emi),
+		total_payment: Math.round(total_payment),
+		totalInterest: Math.round(totalInterest)
 	};
+
 
 	res.json({
 		data: result

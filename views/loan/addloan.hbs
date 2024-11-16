@@ -538,7 +538,7 @@
 		</div>
 	{{/ifCond}}
 	{{#ifCond datafield.field_type "==" "date"}}
-		<div class="col-md-6">
+		{{!-- <div class="col-md-6">
 		<div class="form-group row">
 		<div class="col-md-12">
 			<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
@@ -572,6 +572,30 @@
 			<i class="ft-calendar icon-care"></i>
 		</div><div class="help-block"></div>
 		</div>
+		</div> --}}
+		<div class="col-md-6">
+			<div class="form-group row">
+				<div class="col-md-12">
+					<label class="custom-control-label-date ml-2">
+						{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span
+							class="required red">*</span>{{/ifEqual}}
+					</label>
+					<input type="text" class="form-control dateformat" name="customfields[{{datafield._id}}]"
+						aria-invalid="false" {{!-- Loop through validation array --}} {{#each datafield.validation as
+						|validationType|}} {{#ifEqual validationType "required" }}
+						data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#ifEqual
+						validationType "before_or_equal:today" }} class="form-control beforedate dateformat" {{/ifEqual}}
+						{{#ifEqual validationType "after_or_equal:today" }} class="form-control afterdate dateformat"
+						{{/ifEqual}} {{#ifEqual validationType "date_equals:today" }} class="form-control today dateformat"
+						{{/ifEqual}} {{/each}} {{!-- Check if customfield_value exists for this field --}} {{#each
+						../customfield_value as |custome_value|}} {{#ifCond custome_value.id_d "==" datafield.id_d}}
+						value="{{custome_value.customfield_value}}" {{else}}
+						value="{{getdate "" ../session.generaldata.date_format}}" {{/ifCond}} {{/each}}>
+		
+					<i class="ft-calendar icon-care"></i>
+				</div>
+				<div class="help-block"></div>
+			</div>
 		</div>
 	{{/ifCond}}
 	{{#ifCond datafield.field_type "==" "radio"}}

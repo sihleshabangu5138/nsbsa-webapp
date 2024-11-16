@@ -31,7 +31,10 @@
 									<!-- {{#each activity}} -->
 										<!-- <button type="button" {{#ifCond this.module "==" "Log"}}style="display:none"{{else}}{{/ifCond}} class="btn btn-danger m-1" id="clearlog">Clear log</button> -->
 									<!-- {{/each}} -->
+									{{#if (eq session.admin_access 1)}}
 									<button type="button" class="btn btn-danger my-1" style="float:right" id="clearlog">{{__ "Clear log"}}</button>
+									
+									{{/if}}
 									</div>
 									<div class="col-12">
 										<div class="card">

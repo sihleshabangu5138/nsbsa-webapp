@@ -20,6 +20,7 @@ const Repayment = require('../models/RePayment');
 const Mail = require('../config/email');
 const Role = require('../models/Role');
 const Reminder = require('../models/Reminder');
+const functions = require('../helpers/function');
 // const __basedir = path.resolve(__dirname, '../..');
 
 exports.getLoanTypeList = async function (req, res, next) {
@@ -287,41 +288,44 @@ exports.getLoanList = async function (req, res, next) {
             }
         };
         // const role = await Role.findOne({ "rolename": req.session.role_slug }).lean();
-        if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
-            console.log('access_dataaaaaa', access_data);
-            const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
-            let query, approvedQuery, disapprovedQuery;
-            if (role.role_nm == "Staff") {
-                query = {
-                    $and: [{ status: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }]
-                };
-                approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
-                disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
 
+        if (req.session.admin_access !== 1) {
+            if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
+                console.log('access_dataaaaaa', access_data);
+                const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
+                let query, approvedQuery, disapprovedQuery;
+                if (role.role_nm == "Staff") {
+                    query = {
+                        $and: [{ status: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }]
+                    };
+                    approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+                    disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+
+                }
+                else {
+                    query = {
+                        $and: [{ status: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }]
+                    };
+                    approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+                    disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+
+                }
+                const numOfDocs = await LoanDetails.countDocuments(query);
+                // const approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 },{user: new mongoose.Types.ObjectId(req.session.user_id)}] };
+                // const disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 },{user: new mongoose.Types.ObjectId(req.session.user_id)}] };
+
+                const approveloan = await LoanDetails.countDocuments(approvedQuery);
+                const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
+                res.render('loan/loanlist', {
+                    title: 'Loans',
+                    session: req.session,
+                    count: numOfDocs,
+                    approveloan: approveloan,
+                    disapproveloan: disapproveloan,
+                    accessrightdata: access_data,
+                    messages: req.flash()
+                });
             }
-            else {
-                query = {
-                    $and: [{ status: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }]
-                };
-                approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-                disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-
-            }
-            const numOfDocs = await LoanDetails.countDocuments(query);
-            // const approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 },{user: new mongoose.Types.ObjectId(req.session.user_id)}] };
-            // const disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 },{user: new mongoose.Types.ObjectId(req.session.user_id)}] };
-
-            const approveloan = await LoanDetails.countDocuments(approvedQuery);
-            const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
-            res.render('loan/loanlist', {
-                title: 'Loans',
-                session: req.session,
-                count: numOfDocs,
-                approveloan: approveloan,
-                disapproveloan: disapproveloan,
-                accessrightdata: access_data,
-                messages: req.flash()
-            });
         }
         else {
             const numOfDocs = await LoanDetails.countDocuments({ $and: [{ status: 1 }] });
@@ -422,6 +426,7 @@ exports.getAddLoan = async function (req, res) {
 }
 
 exports.postAddLoan = async (req, res) => {
+
     try {
         const id = req.body.id;
         const data = [];
@@ -507,13 +512,18 @@ exports.postAddLoan = async (req, res) => {
             const myquery = { "_id": new mongoose.Types.ObjectId(id) };
             const datas = await LoanDetails.find(myquery).lean();
             const existingLoan = await LoanDetails.findOne(datas[0]._id);
-            console.log(existingLoan);
+      
             const userid = req.body.user;
             const loanid = req.body.loantype;
             const iduser = new mongoose.Types.ObjectId(userid);
             const idloan = new mongoose.Types.ObjectId(loanid);
-            const startdate = moment(req.body.startdate).format("YYYY-MM-DD");
-            const enddate = moment(req.body.enddate).format("YYYY-MM-DD");
+            
+            // const st = momenet(req.body.startdate).format("YYYY-MM-DD");
+            // const startdate = moment(req.body.startdate).format("YYYY-MM-DD");
+            // const enddate = moment(req.body.enddate).format("YYYY-MM-DD");
+            const startdate = moment(req.body.startdate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+            const enddate = moment(req.body.enddate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+            console.log(startdate, "--------------------------", enddate)
 
             const savedLoan = await LoanDetails.findByIdAndUpdate(
                 { "_id": new mongoose.Types.ObjectId(id) },
@@ -543,15 +553,15 @@ exports.postAddLoan = async (req, res) => {
                 },
             );
 
-            console.log('1', existingLoan.totalemimonth);
-            console.log('2', req.body.totalemimonth);
+            // console.log('1', existingLoan.totalemimonth);
+            // console.log('2', req.body.totalemimonth);
             // Check if any of the relevant parameters have changed
             const loanParametersChanged =
                 existingLoan.startdate !== startdate ||
                 existingLoan.totalemimonth !== req.body.totalemimonth ||
                 existingLoan.loanamount !== req.body.loanamount ||
                 existingLoan.interestrate !== req.body.interestrate;
-            console.log('result', loanParametersChanged);
+            console.log('result--', loanParametersChanged);
             if (loanParametersChanged) {
                 // console.log("Loan Parameters Changed");
                 // Recalculate and update EMI details
@@ -563,7 +573,7 @@ exports.postAddLoan = async (req, res) => {
                     loanTerm: req.body.totalemimonth,
                     startDate: req.body.startdate,
                 });
-                console.log('Mortgage Schedule:', mortgage.schedule);
+                // console.log('Mortgage Schedule:', mortgage.schedule);
 
                 const emiData = [];
                 let index_id = 1;
@@ -588,7 +598,7 @@ exports.postAddLoan = async (req, res) => {
                     console.log(emiDetails)
                     emiData.push(emiDetails);
                 });
-                console.log('EMI Data:', emiData);
+                // console.log('EMI Data:', emiData);
                 // Delete existing EMI details and insert the new ones
                 await EmiDetails.insertMany(emiData);
             }
@@ -615,7 +625,7 @@ exports.postAddLoan = async (req, res) => {
             if (noteData.length > 0) {
                 for (const value of noteData) {
                     const nquery = { "_id": new mongoose.Types.ObjectId(value._id) };
-                    console.log(nquery);
+                    // console.log(nquery);
                     if (req.body.note || req.files) {
                         const this_data = {
                             $set: {
@@ -652,7 +662,7 @@ exports.postAddLoan = async (req, res) => {
                     for (const [keys, values] of Object.entries(metadata)) {
                         const findquery = { "_id": values.custom_field_id };
                         const finddata = await CustomField.find(findquery).lean();
-                        console.log("FindData", finddata);
+                        // console.log("FindData", finddata);
                         for (const [keysdata, valuesdata] of Object.entries(finddata)) {
                             if (valuesdata.field_type == 'file') {
                                 for (const [key, value] of Object.entries(req.files)) {
@@ -757,34 +767,36 @@ exports.postAddLoan = async (req, res) => {
 
             const noquery = { "user": new mongoose.Types.ObjectId(req.session.user_id) };
             const querys = { $and: [{ status: 1 }, { "user": new mongoose.Types.ObjectId(req.session.user_id) }] };
+            console.log("Query for activenoti:", JSON.stringify(querys, null, 2));
 
             await NotificationBadges.create(myobj1);
-
             const notiresult = await NotificationBadges.find(noquery).lean();
             const adminnoti = await NotificationBadges.find().lean();
-            const activenoti = await NotificationBadges.count(querys);
-            const adminnoticount = await NotificationBadges.count({});
+            const activenoti = await NotificationBadges.countDocuments(querys);
+            const adminnoticount = await NotificationBadges.countDocuments({});
 
             if (req.session.admin_access == 1) {
-                req.session.noti = adminnoti;
+               req.session.noti = adminnoti;
                 req.session.noticount = adminnoticount;
             } else {
                 req.session.noti = notiresult;
                 req.session.noticount = activenoti;
             }
             const resultes = await LoanDetails.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
-            console.log(resultes[0].approvestatus);
+     
             if (resultes[0].approvestatus == 1) {
                 req.flash('success', res.__('Loan Updated Successfully.'));
                 res.redirect('/loan/loanlist');
             }
             else {
+   
                 req.flash('success', res.__('Loan Updated Successfully.'));
                 res.redirect('/loan/disapproveloan');
             }
             // req.flash('success', 'Loan Updated Successfully.');
             // res.redirect('/loan/loanlist');
-        } else {
+
+        } else { // add new loan
             const userid = req.body.user;
             const iduser = new mongoose.Types.ObjectId(userid);
             const type = req.body.loantype;
@@ -991,41 +1003,43 @@ exports.getDisapproveLoanCountList = async (req, res) => {
                 }
             }
         };
-        if (req.session.access_rights && req.session.access_rights.disapproveloanlist && req.session.access_rights.disapproveloanlist.owndata) {
-            const role = await Role.findOne({ _id: req.session.role });
-            let query, approvedQuery, disapprovedQuery;
-            if (role.role_nm == "Staff") {
-                query = {
-                    $and: [{ status: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }]
-                };
-                approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
-                disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+        if (req.session.admin_access !== 1) {
+            if (req.session.access_rights && req.session.access_rights.disapproveloanlist && req.session.access_rights.disapproveloanlist.owndata) {
+                const role = await Role.findOne({ _id: req.session.role });
+                let query, approvedQuery, disapprovedQuery;
+                if (role.role_nm == "Staff") {
+                    query = {
+                        $and: [{ status: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }]
+                    };
+                    approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+                    disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
 
+                }
+                else {
+                    query = {
+                        $and: [{ status: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }]
+                    };
+                    approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+                    disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+
+                }
+                const numOfDocs = await LoanDetails.countDocuments(query);
+
+                const approveloan = await LoanDetails.countDocuments(approvedQuery);
+
+                const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
+                const userRole = req.session.role;
+                res.render('loan/disapproveloan', {
+                    title: 'Disapproved Loans',
+                    count: numOfDocs,
+                    approveloan: approveloan,
+                    disapproveloan: disapproveloan,
+                    session: req.session,
+                    messages: req.flash(),
+                    accessrightdata: access_data,
+                    role: userRole,
+                });
             }
-            else {
-                query = {
-                    $and: [{ status: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }]
-                };
-                approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-                disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-
-            }
-            const numOfDocs = await LoanDetails.countDocuments(query);
-
-            const approveloan = await LoanDetails.countDocuments(approvedQuery);
-
-            const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
-            const userRole = req.session.role;
-            res.render('loan/disapproveloan', {
-                title: 'Disapproved Loans',
-                count: numOfDocs,
-                approveloan: approveloan,
-                disapproveloan: disapproveloan,
-                session: req.session,
-                messages: req.flash(),
-                accessrightdata: access_data,
-                role: userRole,
-            });
         } else {
             const numOfDocs = await LoanDetails.countDocuments({ $and: [{ status: 1 }] });
 
@@ -1157,12 +1171,18 @@ exports.getViewLoan = async (req, res) => {
         if (value1.loan.approvestatus == 1 || value1.loan.status == 0) {
             alert_data.push(value1);
         }
-    }
-
+            }
+            // const emiChangeDateFormate = emilist.map((emi) => {
+            //    emi.date = functions.getdate(emi.daate, req.session.generaldata.date_format);
+            //     return emi
+            // })
+           
+            console.log("data =", result[0]['approvestatus']);
             res.render('loan/viewloan', {
                 title: "View Loan",
                 emi: emilist,
                 type: typeofloan,
+                approve: result[0]['approvestatus'],
                 repayment: repayment,
                 data: result,
                 user: result1,  
@@ -1170,7 +1190,8 @@ exports.getViewLoan = async (req, res) => {
                 session: req.session,
                 alert_data: alert_data
             });
-            console.log(emilist);
+        
+       
         } else {
             const news = [{ 'userid': '-1' }];
             res.render('loan/viewloan', { title: "View Loan", data: news, family: news, session: req.session });
@@ -1201,7 +1222,7 @@ exports.getEmiDetails = async (req, res) => {
             for (const [key, value] of Object.entries(customfield_value)) {
                 customfield_value[key].id_d = new mongoose.Types.ObjectId(value.custom_field_id).toString();
             }
-
+            console.log("loan approval=",loanlist[0]['approvestatus']);
             res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value });
         } catch (err) {
             console.error(err);
@@ -1351,10 +1372,12 @@ exports.postRepayment = async (req, res) => {
             date: req.body.date,
             addedby: new mongoose.Types.ObjectId(req.session.user_id),
         });
+ 
         await newRePayment.save();
         req.flash('success', res.__('Extra Re_payments Successfully.'));
         res.redirect('/loan/loanlist');
     } catch (err) {
+        console.log(err)
         req.flash('error', res.__('Error occurred.'));
         res.redirect('/loan/loanlist');
     }
@@ -1375,40 +1398,42 @@ exports.getTotalLoanCountList = async (req, res) => {
                 }
             }
         };
-        if (req.session.access_rights && req.session.access_rights.totalloanlist && req.session.access_rights.totalloanlist.owndata) {
-            const role = await Role.findOne({ _id: req.session.role });
-            let query, approvedQuery, disapprovedQuery;
-            if (role.role_nm == "Staff") {
-                query = {
-                    $and: [{ status: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }]
-                };
-                approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
-                disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+        if (req.session.admin_access !== 1) {
+            if (req.session.access_rights && req.session.access_rights.totalloanlist && req.session.access_rights.totalloanlist.owndata) {
+                const role = await Role.findOne({ _id: req.session.role });
+                let query, approvedQuery, disapprovedQuery;
+                if (role.role_nm == "Staff") {
+                    query = {
+                        $and: [{ status: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }]
+                    };
+                    approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
+                    disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
 
+                }
+                else {
+                    query = {
+                        $and: [{ status: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }]
+                    };
+                    approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+                    disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
+
+                }
+                const numOfDocs = await LoanDetails.countDocuments(query);
+
+                const approveloan = await LoanDetails.countDocuments(approvedQuery);
+
+                const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
+
+                res.render('loan/totalloans', {
+                    title: 'All Loans',
+                    count: numOfDocs,
+                    approveloan: approveloan,
+                    disapproveloan: disapproveloan,
+                    session: req.session,
+                    messages: req.flash(),
+                    accessrightdata: access_data,
+                });
             }
-            else {
-                query = {
-                    $and: [{ status: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }]
-                };
-                approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-                disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-
-            }
-            const numOfDocs = await LoanDetails.countDocuments(query);
-
-            const approveloan = await LoanDetails.countDocuments(approvedQuery);
-
-            const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
-
-            res.render('loan/totalloans', {
-                title: 'All Loans',
-                count: numOfDocs,
-                approveloan: approveloan,
-                disapproveloan: disapproveloan,
-                session: req.session,
-                messages: req.flash(),
-                accessrightdata: access_data,
-            });
         } else {
             const numOfDocs = await LoanDetails.countDocuments({ $and: [{ status: 1 }] });
 

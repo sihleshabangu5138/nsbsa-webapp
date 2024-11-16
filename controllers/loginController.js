@@ -54,7 +54,7 @@ exports.postLogin = async (req, res) => {
           req.session.user_id = userResult[0]._id;
           req.session.role = userResult[0].role;
 
-          const noquery = { "user": new mongoose.Types.ObjectId(req.session.user_id), status:1 };
+          const noquery = { "user": new mongoose.Types.ObjectId(req.session.user_id), status: 1 };
           const query = { "user": new mongoose.Types.ObjectId(req.session.user_id), status: 1 };
 
           const generalSettingResult1 = await GeneralSetting.findOne({ "id": req.body._id });
@@ -67,7 +67,7 @@ exports.postLogin = async (req, res) => {
           const activeNotiCount = await NotificationBadge.countDocuments(query);
           const adminNotiCount = await NotificationBadge.countDocuments({ status: 1 });
           console.log('notiresult', notiResult);
-  console.log('adminnoti', adminNotiResult);
+          console.log('adminnoti', adminNotiResult);
 
           const accessData = await AccessRight.find({ "rolename": roleData.role_slug }).lean()
           // console.log("accessData", accessData);
@@ -118,6 +118,7 @@ exports.postLogin = async (req, res) => {
           res.redirect('/dashboard');
         } else {
           req.flash('error', res.__('You are not allowed to login. Enter correct username or password.'));
+          
           res.render('login', { title: 'NiftyEWS', layout: "loginlayout" });
         }
       } else {
@@ -127,6 +128,7 @@ exports.postLogin = async (req, res) => {
     } else {
       req.flash('error', res.__('Invalid username or password.'));
       res.render('login', { title: 'NiftyEWS', layout: "loginlayout" });
+      
     }
   } catch (error) {
     console.error(error);

@@ -137,6 +137,7 @@ $(document).ready(function ()
 	
 	$(".oneday").on('ifChecked', function (event) 
 	{
+		$('#getdate').val($('#setdate').val());
 		$('.startdates').fadeIn(1000);
 		$('.enddates').fadeOut(1000);
 	});

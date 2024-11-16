@@ -65,7 +65,9 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
+						  
 						  {{#each this.productimage}}
+						
 							<img class="existing_user_image update_time_team_image" src="/images/upload/{{this}}">
 							<a href="/images/upload/{{this}}" download="{{this}}">
                     <button type="button" class="btn btn-info">
@@ -91,10 +93,10 @@
 					<div class="col-sm-6">
 				        <div class="row">
 						  <div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Tags" setlang}}{{/with}}
-						  </div>
+						  </div> 
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.tagname}}</div>
+						  <div class="tabletext">{{checkLengthAndDiaplayNA this.tagname}}</div>
 						  </div>
 						</div>
 				    </div>	  
@@ -144,7 +146,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{this.locationrack}}</div>
+							<div class="tabletext">{{displayOrNA this.locationrack}}</div>
 						  </div>
 						</div>  
 				 </div>    

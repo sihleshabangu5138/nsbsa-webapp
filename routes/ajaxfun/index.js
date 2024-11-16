@@ -35,6 +35,7 @@ function isAuthenticated(req, res, next) {
 };
 
 router.get('/ajxfun', isAuthenticated, AjaxFun.getViewUser);
+router.get('/ajxfun/allusers', isAuthenticated, AjaxFun.getAllUser);
 router.get('/ajxfun/deactivateuser', isAuthenticated, AjaxFun.getDeactivateUser);
 router.get('/ajxfun/delete/', isAuthenticated, AjaxFun.getDelete);
 router.get('/ajxfun/deleteloan/', isAuthenticated, AjaxFun.getDeleteLoan);

@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Deactivate User')}}
+{{breadcrums (__ 'Home') (__ 'Total Users')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="content-header row">
@@ -20,7 +20,9 @@
 			<div class="controls position-relative has-icon-right">
 				<input type="text" class="form-control square" value="{{__ 'Total Users'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
-					<span class="primary"><a href="alluserlist" style="text-decoration: underline !important;">{{this.count}}</a></span>
+										<span class="primary"><a href="alluserlist" style="text-decoration: underline !important;">{{this.count}}</a></span>
+
+
 				</div>
 			</div>
 		</div>
@@ -188,11 +190,11 @@
 			serverSorting: false,
 				 transport: {
 				  read:{
-					url: '/ajxfun/deactivateuser',
+					url: '/ajxfun/allusers',
 					dataType: "json",
 				  },					
 				 }, 
-				schema: {
+				schema: {   
                         model: {
 							id: "_id",
                             fields: {
@@ -282,22 +284,22 @@
 						template:"<left>" + "<div class='customer-photo'" + 
 						"style='background-image:url(/images/upload/#=photo #);'></div> "+ "#= firstname # #= middlename # #= lastname #",
                         field: "photo" ,
-                        width: 180
+                        width: 200
                     }, 
 					{
                         field: "email",
                          title:  "{{__ 'Email Address'}}",
-                        width: 150
+                        width: 200
                     },
 					{
                         field: "birthdate",
                          title: "{{__ 'Birth Date'}}",
-                        width: 150
+                        width: 100
                     },
 					{
                         field: "occupation",
                          title: "{{__ 'Occupation'}}",
-                        width: 150
+                        width: 100
                     },
 					{
                         field: "mobile",

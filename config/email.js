@@ -13,8 +13,8 @@ async function sendMail(to, subject, message) {
   // Check if mailtrapUser and mailtrapPass are not empty
   if (mailtrapUser && mailtrapPass) {
     var transporter = nodemailer.createTransport({
-      host: "smtp.mailtrap.io",
-      port: 2525,
+      host: "smtp.gmail.com",
+      port: 587,
       auth: {
         user: mailtrapUser,
         pass: mailtrapPass

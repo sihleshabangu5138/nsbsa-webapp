@@ -7,7 +7,10 @@
 	
 	<div class="card-content collpase show">
 	<div class="card-body">  
-     <form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/repayment" >  
+     <form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/repayment" > 
+	 <script>
+
+	 </script> 
 	   <!-- <input type="" id="userinput1" name="id" {{#if this.loan_id}} value="{{this.loan_id}}"{{/if}} > -->
 			<!-- <p>{{this._id}}</p> -->
 			 
@@ -32,9 +35,9 @@
             <div class="card">
                 <div class="card-content">
                     <fieldset>
-					<label>{{__ "Actual Number Of Payments"}}<span class="required red">*</span></label>
+					<label>{{__ "Actual Number Of Payments"}}<span class="required red"></span></label>
                       <div class="input-group bootstrap-touchspin touchspincolor">
-                       <input type="text" class="touchspin form-control" name="repayments" {{#if this.repayments}} value="{{this.repayments}}"{{/if}} value="1" style="display: block;"><div class="input-group-append"><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
+                       <input type="text" class="touchspin form-control" name="repayments" {{#if this.repayments}} value="{{this.repayments}}"{{/if}} value="1"  style="display: block;"><div class="input-group-append" ><span class="input-group-text bootstrap-touchspin-postfix" style="display: none;"></span></div>
                       </div>
                     </fieldset>
                 </div>
@@ -45,19 +48,22 @@
                <div class="card-content">
                  <!-- <div class="card-body"> -->
 				<fieldset>
-				<label>{{__ "Extra Payment Of Amount"}}<span class="required red">*</span></label> 
+				<label>{{__ "Extra Payment Of Amount"}}<span class="required red"></span></label> 
                      <div class="input-group touchspincolor">
-					  <input type="text" id="repaymentamount" value="0" class="touchspin "  name="repaymentamount" data-validation-required-message="{{__ 'Interest rate is required'}}" data-bts-step="1000" {{#if this.paymentamount}} value="{{this.repaymentamount}}"{{/if}} />
+					  <input type="text" id="repaymentamount" value="0" class="touchspin form-control"  name="repaymentamount" data-validation-required-message="{{__ 'This is required' setlang}}"data-bts-step="1000" {{#if this.paymentamount}} value="{{this.repaymentamount}}"{{/if}} />
                      </div>
                 </fieldset>
                 </div>
+				<div class="help-block"></div>
             </div>
         </div>
+		</div>
+		
 		<div class="col-md-6">
 			<div class="form-group row">
 			   <div class="col-md-12"> 
 			    <label class="custom-control-label-date ml-2">{{__ "Payment Date"}}<span class="required red">*</span></label>
-			    <input autocomplete="off" type='text'  class="form-control  brithdate dateformat" data-validation-required-message="{{#with ..}}{{__ "Birth Date is required"}}{{/with}}" name="date" {{#if this.date}} value="{{getdate this.date ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false" >
+			    <input autocomplete="off" type='text'  class="form-control  brithdate dateformat" data-validation-required-message="{{__ "Birth Date is required"}}" name="date" {{#if this.date}} value="{{getdate this.date ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false" >
 				<i class="ft-calendar icon-care"></i>
                </div><div class="help-block"></div>
 			</div>
@@ -72,7 +78,7 @@
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
 					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">{{#with ..}}{{__ "Select your payment mode"}}{{/with}}<span class="required red">*</span></label>
-					<select id="payment_type" class="select2 form-control dropdown_change"  name="payment_type" >
+					<select id="payment_type" class="select2 form-control dropdown_change"  name="payment_type" data-validation-required-message="{{__ "Payment mode required"}}" >
 						<option value="">{{__ "Select Input Type"}}</option>
 						<option value="cash" name="payment_type" {{#ifCond this.payment_type '==' 'cash'}} selected {{/ifCond}}>{{__ "Cash"}}</option>
 						<option value="creditcard" name="payment_type" {{#ifCond this.payment_type '==' 'creditcard'}} selected {{/ifCond}}>{{__ "Credit Card"}}</option>
@@ -82,6 +88,7 @@
 					</select>
 					</li>	
 					</ul>
+					<div class="help-block"></div>
 				</div>
 				</div>
 			</div>

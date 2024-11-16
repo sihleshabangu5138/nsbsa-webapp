@@ -399,30 +399,37 @@ module.exports = {
 		
 		getdate: function(date,format) {
 			// THIS USE ONLY HBS DATE FORMATE
-			if(date!=''){
-						 var date1=date;
-					}
-					else{
-						var date1=new Date();
-					}
-			if(format!=undefined){
-						 var str=format;
-					}
-					else{
-						var str='Y-m-d';
-					}
-					var Obj = {
-						Y: "yyyy", 
-						m: "mm", 
-						d: "dd", 
-						j: "dd", 
-						F: "mmmm", 
-					}; 
-					var trans=str.replace(/Y|m|d|j|F/gi, function(matched){ 
-						return Obj[matched];  
-					});  
-			//return dateFormat(date1, trans);
-			return dateFormat(date1, trans); 
+			try {
+				if(date!=''){
+							 var date1=date;
+						}
+						else{
+							var date1=new Date();
+						}
+				if(format!=undefined){
+							 var str=format;
+						}
+						else{
+							var str='Y-m-d';
+						}
+						var Obj = {
+							Y: "yyyy", 
+							m: "mm", 
+							d: "dd", 
+							j: "dd", 
+							F: "mmmm", 
+						}; 
+						var trans=str.replace(/Y|m|d|j|F/gi, function(matched){ 
+							return Obj[matched];  
+						});  
+				//return dateFormat(date1, trans);
+				return dateFormat(date1, trans); 
+			} catch (error) {
+				console.log(error)
+			}
+	},
+		jsonS: function(str) {
+			return JSON.stringify(str);
 		},
 		humanize: function(str) {
 			// THIS USE ONLY HBS DATE FORMATE
@@ -437,7 +444,16 @@ module.exports = {
 				 //return new Date().getTime();
 				 return Math.round(new Date().getTime()/1000);
 			
-		},
+	},
+	displayOrNA: function (value) {
+		return value && value.trim() !== '' ? value : 'NA';
+	},
+	checkLengthAndDiaplayNA: function (value) {
+		if(value.length <= 0){
+			return 'NA';
+		}
+		return value;
+	},
 		currencyList:function(key, options){
 		
 			var currency_symbols = {

@@ -95,7 +95,6 @@ exports.postAddEvent = async function (req, res) {
         eventfor,
         eventdetail,
       } = req.body;
-
       let newvalues;
       if (req.body.duration === "one day") {
         newvalues = {
@@ -274,7 +273,7 @@ exports.postAddEvent = async function (req, res) {
         eventvenue,
         duration,
         startdate,
-        enddate,
+        enddate: (!enddate ) ? enddate=startdate : enddate,
         eventfor: (eventfor === 'all') ? 'all' : new mongoose.Types.ObjectId(eventfor),
         eventdetail,
         addedby: new mongoose.Types.ObjectId(req.session.user_id),

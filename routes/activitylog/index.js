@@ -15,6 +15,7 @@ router.use(session({
 
 router.use(flash());
 
+
 const isAuthenticated = viewAccessMiddleware('activitylog');
 
 router.get('/activitylog/activitylog', isAuthenticated, ActivityLogController.getActivitylog);

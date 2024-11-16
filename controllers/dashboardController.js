@@ -17,12 +17,14 @@ const { sendMail } = require('../config/email');
 router.use(cookieParser());
 const moment = require('moment');
 const NotificationBadges = require('../models/Notification_badges');
-
+const functions = require('../helpers/function')
 // Your Mongoose connection code (assumes you have set up Mongoose earlier)
 
 /* GET home page. */
 exports.getDashboard = async (req, res, next) => {
+  // console.log(req.session);
   try {
+    const generalDateFormate = req.session.generaldata.date_format
     const notificationTypes = ['upcoming_emi', 'emi_pending'];
         const reminders = await Reminder.find({ reminder_type: notificationTypes }).lean();
         // console.log("rem",reminders)
@@ -165,10 +167,17 @@ exports.getDashboard = async (req, res, next) => {
         } else {
           result_final.push(...result);
         }
+
+      
+
+        console.log(functions.formatDatesToGeneralData(result_final, generalDateFormate),"=================")
+
         const reminder = await Reminder.find({}).lean();
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
+       
+
         res.render('index', {
           title: 'Dashboard',
           session: req.session,
@@ -243,6 +252,8 @@ exports.getDashboard = async (req, res, next) => {
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
+        
+
         res.render('index', {
           title: 'Dashboard',
           session: req.session,
@@ -317,6 +328,8 @@ exports.getDashboard = async (req, res, next) => {
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
+    
+
         res.render('index', {
           title: 'Dashboard',
           session: req.session,
@@ -397,6 +410,8 @@ exports.getDashboard = async (req, res, next) => {
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
+     
+
         res.render('index', {
           title: 'Dashboard',
           session: req.session,
@@ -453,6 +468,8 @@ exports.getDashboard = async (req, res, next) => {
       const generalSettings = await GeneralSetting.find({}).lean();
       const userLanguage = generalSettings[0].language;
       // console.log(userLanguage);
+     
+
       res.render('index', {
         title: 'Dashboard',
         session: req.session,

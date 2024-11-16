@@ -48,7 +48,7 @@
 									<input type="hidden" id="addusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
 										<div class="media-body">
 											<h6 class="media-heading">{{#with ..}}{{__ "New User" }}{{/with}}!</h6>
-											<span class="notification-tag badge badge-default badge-warning float-right m-0">{{this.date}}</span>
+											<span class="notification-tag badge badge-default badge-warning float-right m-0">{{getdate this.date ../session.generaldata.date_format}}</span>
 											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{#with ..}}{{__ "New account created." }}{{/with}} {{this.Name}} </p>
 										</div>
 									</div>
@@ -63,7 +63,7 @@
 									<input type="hidden" id="upusernoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
 										<div class="media-body">
 											<h6 class="media-heading">{{#with ..}}{{__ "User Updated"}}{{/with}}!</h6>
-											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{this.date}}</span>
+											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{getdate this.date ../session.generaldata.date_format}}</span>
 											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{this.Name}} {{#with ..}}{{__ "is updated"}}{{/with}}</p>
 										</div>
 									</div>
@@ -78,7 +78,7 @@
 									<input type="hidden" id="addloanoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
 										<div class="media-body">
 											<h6 class="media-heading">{{#with ..}}{{__ "New Loan Added"}}{{/with}}!</h6>
-											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{this.date}}</span>
+											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{getdate this.date ../session.generaldata.date_format}}</span>
 											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{this.Name}} {{#with ..}}{{__ "is added"}}{{/with}}</p>
 										</div>
 									</div>
@@ -93,7 +93,7 @@
 									<input type="hidden" id="uploanoti" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
 										<div class="media-body">
 											<h6 class="media-heading">{{#with ..}}{{__ "Loan Updated"}}{{/with}}!</h6>
-											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{this.date}}</span>
+											<span class="notification-tag badge badge-default badge-warning float-right 	m-0">{{getdate this.date ../session.generaldata.date_format}}</span>
 											<p class="notification-text font-small-3 text-muted" style="word-break: normal;">{{this.Name}} {{#with ..}}{{__ "is updated"}}{{/with}} {{this.nameofuser.[0]}} {{this.nameofuser.[1]}} {{this.nameofuser.[2]}}</p>
 										</div>
 									</div>

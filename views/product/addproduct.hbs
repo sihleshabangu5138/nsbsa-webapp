@@ -16,8 +16,8 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input type="hidden" id="userinput1" name="id" {{#if this._id}} maxlength="25" value="{{this._id}}"{{/if}}>
-				<input type="text" id="userinput1" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,25})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Product name is required"}}{{/with}}" name="productname" {{#if this.productname}} value="{{this.productname}}"{{/if}}>
-				<label for="userinput1">{{#with ..}}{{__ "Product Name" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input type="text" id="productname" data-validation-regex-regex="([A-Za-z_ ,`.'^-]{1,25})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Product name is required"}}{{/with}}" name="productname" {{#if this.productname}} value="{{this.productname}}"{{/if}}>
+				<label for="productname">{{#with ..}}{{__ "Product Name" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -102,7 +102,7 @@
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="text" id="warranty" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "Only Numbers"}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Warranty is required"}}{{/with}}"  minlength="1" maxlength="3" name="warranty" {{#if this.warranty}} value="{{this.warranty}}"{{/if}}>
-					<label for="userinput1">{{#with ..}}{{__ "Warranty" setlang}}{{/with}}<span class="required red">*</span></label>
+					<label for="warranty">{{#with ..}}{{__ "Warranty" setlang}}{{/with}}<span class="required red">*</span></label>
 				</div><div class="help-block"></div><span class="message"></span>
 				</div>
 				</div>
@@ -177,10 +177,10 @@
 			</div>
 			</div>	
 			<div class="col-md-6 padding-top-m">
-			<div class="form-group input">
+			<div class="form-group input">	
 			<div class="col-md-12 form-control border-light">
-				<input type="text" id="userinput1" maxlength="8" minlength="6" data-validation-regex-regex="([A-Z0-9_,` .'^-]{6,8})" data-validation-regex-message="{{#with ..}}{{__ 'SKU/Barcode must contain capital letters and numeric value'}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "SKU/Barcode is required"}}{{/with}}" class="form-control skubarcode" name="skubarcode" aria-invalid="true" {{#if this.skubarcode}} value="{{this.skubarcode}}"{{/if}}>
-				<label for="userinput1">{{#with ..}}{{__ "SKU/Barcode" setlang}}{{/with}}<span class="required red">*</span></label>
+				<input type="text" id="userinput8" maxlength="8" minlength="6" data-validation-regex-regex="([A-Z0-9_,` .'^-]{6,8})" data-validation-regex-message="{{#with ..}}{{__ 'SKU/Barcode must contain capital letters and numeric value'}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "SKU/Barcode is required"}}{{/with}}" class="form-control skubarcode" name="skubarcode" aria-invalid="true" {{#if this.skubarcode}} value="{{this.skubarcode}}"{{/if}}>
+				<label for="userinput8">{{#with ..}}{{__ "SKU/Barcode" setlang}}{{/with}}<span class="required red">*</span></label>
 			</div><span class="required red skubarcode" style="font-size:11px"></span><div class="help-block skubarcode"></div>
 			</div>
 			</div>
@@ -366,10 +366,13 @@
     </div>
 {{/if}}
 <!-- Custome fields Start--> 
+
 {{#if newfield}}
 <p class="form-section text-bold-600 font-medium-2 border-light"><i class="fa fa-address-card-o" aria-hidden="true"></i> {{__ "Custom fields"}} </p>
 <div class="row">
+
 {{#each newfield as |datafield|}}
+
 {{#ifCond datafield.field_type "==" "text"}}
 	<div class="col-md-6 notCustomerBlock">
 	<div class="form-group input">
@@ -491,11 +494,32 @@
 	</div>
 	</div>
 {{/ifCond}}
+<script>
+	console.log("data", {{{ jsonS datafield }}});
+	
+</script>
 {{#ifCond datafield.field_type "==" "date"}}
-	<div class="col-md-6">
+	{{!-- <div class="col-md-6">
 	<div class="form-group row">
 	<div class="col-md-12">
 		<label class="custom-control-label-date ml-2">{{datafield.label}}<span class="required red">*</span></label>
+
+		{{#ifEqual datafield.validation "null"}}
+		<input type='text' class="form-control  dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false" {{#each
+			../customfield_value as |custome_value| }}
+			
+			 {{#ifCond custome_value.id_d "==" datafield.id_d}}
+			value="{{custome_value.customfield_value}}" {{else}} value="{{gtdate "" ../session.generaldata.date_format}}"
+			{{/ifCond}} {{/each}}>
+		{{/ifEqual}}
+		{{#ifEqual datafield.validation "required"}}
+		<input type='text' class="form-control  dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false" {{#each
+			../customfield_value as |custome_value| }} {{#ifCond custome_value.id_d "==" datafield.id_d}}
+			value="{{custome_value.customfield_value}}" {{else}} value="{{getdate "" ../session.generaldata.date_format}}"
+			{{/ifCond}} {{/each}}>
+		{{/ifEqual}}
+		
+		
 		{{#ifEqual datafield.validation "before_or_equal:today"}}
 			<input type='text' class="form-control beforedate dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false" 
 			{{#each ../customfield_value as |custome_value| }}
@@ -511,16 +535,45 @@
 		{{/each}}>
 		{{/ifEqual}}
 		{{#ifEqual datafield.validation "date_equals:today"}}
+
 		<input type='text' class="form-control today dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false" 
 		{{#each ../customfield_value as |custome_value| }}
 				{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
 					value="{{custome_value.customfield_value}}"  {{/ifCond}}
 		{{/each}}>
 		{{/ifEqual}}
+		
+
+		
 		<i class="ft-calendar icon-care"></i>
 	</div><div class="help-block"></div>
 	</div>
+	</div> --}}
+
+<div class="col-md-6">
+	<div class="form-group row">
+		<div class="col-md-12">
+			<label class="custom-control-label-date ml-2">
+				{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}
+			</label>
+	<input type="text" class="form-control dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false"
+	 {{!-- Loop through validation array --}} {{#each datafield.validation as
+	|validationType|}} {{#ifEqual validationType "required" }}
+	data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#ifEqual
+	validationType "before_or_equal:today" }} class="form-control beforedate dateformat" {{/ifEqual}} {{#ifEqual
+	validationType "after_or_equal:today" }} class="form-control afterdate dateformat" {{/ifEqual}} {{#ifEqual
+	validationType "date_equals:today" }} class="form-control today dateformat" {{/ifEqual}} {{/each}} {{!-- Check if
+	customfield_value exists for this field --}} {{#each ../customfield_value as |custome_value|}} {{#ifCond
+	custome_value.id_d "==" datafield.id_d}} value="{{custome_value.customfield_value}}" {{else}}
+	value="{{getdate "" ../session.generaldata.date_format}}" {{/ifCond}} {{/each}}>
+
+			<i class="ft-calendar icon-care"></i>
+		</div>
+		<div class="help-block"></div>
 	</div>
+</div>
+
+
 {{/ifCond}}
 {{#ifCond datafield.field_type "==" "radio"}}
 	<div class="col-md-6">
@@ -666,7 +719,7 @@ $(document).ready(function(){
 	});
 
 	var skubarcode_state = false;
- var userId = $('#userinput1').val();
+ var userId = $('#userinput8').val();
  $('.skubarcode').on('input', function(){
   var skubarcode = $('.skubarcode').val();
   if (skubarcode == '') {

@@ -11,6 +11,7 @@ import('dateformat').then((module) => {
 const User = require('../models/User');
 const LoanType = require('../models/Loantype');
 const Role = require('../models/Role');
+const moment = require('moment');
 
 module.exports = {
   getuserdata: async function (id, fieldname, callback) {
@@ -93,4 +94,27 @@ module.exports = {
     const trans = str.replace(/Y|m|d|j|F/gi, matched => obj[matched]);
     return dateFormat(date1, trans);
   },
+   formatDatesToGeneralData:function (results,generalDateFormate) {
+  
+  let originalDateFormate;
+  let dates = {
+    'm/d/Y': 'MM/DD/YYYY',
+    'm-d-Y': 'MM-DD-YYYY',
+    "d-m-Y": 'DD-MM-YYYY',
+    "d/m/Y": 'DD/MM/YYYY',
+    "Y-m-d": 'YYYY-MM-DD',
+    "F j, Y": 'MMMM D, YYYY'
+  }
+  if (dates[generalDateFormate]) {
+    originalDateFormate = dates[generalDateFormate];
+  }
+  let InputdateFormate = ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']
+   results.map((result) => {
+
+    result.startdate = moment(result.startdate, InputdateFormate).format(originalDateFormate);
+    result.enddate = moment(result.enddate, InputdateFormate).format(originalDateFormate);
+return result
+  });
+
+}
 };

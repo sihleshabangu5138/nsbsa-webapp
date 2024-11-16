@@ -10,6 +10,9 @@ const initialzeRoutes = require('./routes');
 const flash = require('express-flash');
 const createError = require('http-errors');
 
+const { connectToDatabase } = require('./config/config');
+connectToDatabase();
+
 app.use(flash());
 
 app.set('view engine', 'hbs');
@@ -49,6 +52,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(initialzeRoutes);
 app.use(function (req, res, next) {

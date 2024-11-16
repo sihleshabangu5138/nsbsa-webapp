@@ -97,8 +97,9 @@ exports.getAddProduct = async (req, res) => {
 
       const category = await Category.find(query).lean();
       const unitcategory = await Category.find(unit_query).lean();
-
+      console.log(customfield);
       res.render('product/addproduct', { title: "Add Product", data: news, session: req.session, category, unit: unitcategory, newfield: customfield, customfield_value: customfield_value, note: news });
+     
     }
   } catch (err) {
     console.error(err);

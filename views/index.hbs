@@ -308,9 +308,9 @@
 
 <tr onclick="redirectToEvent('/events/viewevent/{{this._id}}')" {{#if isAddedByLoggedInUser}} style="background-color: #16D39A;" {{/if}}>
     <td class="text-truncate">{{this.eventtitle}}</td>
-    <td class="text-truncate">{{this.eventdetail}}</td>
-    <td class="text-truncate">{{this.startdate}}</td>
-    <td class="text-truncate">{{this.enddate}}</td>
+    <td class="text-truncate">{{displayOrNA this.eventdetail}}</td>
+    <td class="text-truncate">{{ this.startdate}}</td>
+    <td class="text-truncate">{{ this.enddate}}</td>
     {{!-- {{#if isAddedByLoggedInUser}}
             <td class="text-truncate"><i class="fa fa-user"></i></td>
         {{else}}
@@ -337,7 +337,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-12 Buyers">
+          <div class="col-xl-4 col-lg-12 Buyers d-flex flex-column justify-content-between">
             {{#hiddenmodules session.access_rights.user.view session.admin_access}}
             <div class="card">
               <div class="card-header border-bottom border-light">
