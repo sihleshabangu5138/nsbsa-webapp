@@ -84,6 +84,8 @@ exports.postIns = async (req, res) => {
       doctype_Xls: "xls",
       doctype_Xlsx: "xlsx",
       doctype_Zip: "zip",
+      stripe_secret_key: null,
+      stripe_publishable_key: null,
     });
 
     await generalSetting.save();

@@ -51,8 +51,13 @@
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-				<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Minimum Range of Amount" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span></label>
 				<div class="heading-elements ">
+				<ul class="list-inline mb-0">
+					<li class=" p-0 form-control">
+
+					
+				
+				<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Minimum Range of Amount" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span></label>
 					  
 				<select class="select2 form-control export" id="export" data-validation-required-message="{{#with ..}}{{__ 'Minimum Range of Amount is required' setlang}}{{/with}}" name="loan_min_amount" aria-hidden="true" aria-invalid="true"> 
 						<option value="" >{{#with ..}}{{__ "Select Minimum Range of Amount" setlang}}{{/with}}</option>
@@ -66,14 +71,16 @@
 						
 						<option value="10000000"{{#ifCond this.loan_min_amount '==' '10000000'}} selected {{/ifCond}}>{{#with ..}}{{__ "More Than 1,00,00,000" setlang}}{{/with}}</option>
 				</select>
-			 
+			</li>
+			</ul>
 			</div><div class="help-block"></div>
 			</div>	
 			</div>	
 			
 			<div class="col-md-6">
 			<div class="form-group input">
-			<div class="heading-elements "> 
+			<div class="heading-elements"> 
+				<div class=" form-control p-0">
 			<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Maximum Range of Amount" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span></label>
 			 <select class="select2 form-control export" id="export" maxlength="50" data-validation-required-message="{{#with ..}}{{__ "Maximum Range of Amount is required"}}{{/with}}" name="loan_max_amount" aria-hidden="true" aria-invalid="true"> 
 			 
@@ -87,7 +94,7 @@
 						
 						<option value="10000000"{{#ifCond this.loan_max_amount '==' '10000000'}} selected {{/ifCond}}>{{#with ..}}{{__ "More Than 1,00,00,000" setlang}}{{/with}}</option>
 				</select>
-				
+				</div>
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -130,12 +137,12 @@
              </div>
 		</div>
 		{{/each}}
-
-
+	
 <!-- Custome fields Start--> 
 {{#if newfield}}
 <p class="form-section text-bold-600 font-medium-2 border-light"><i class="fa fa-address-card-o" aria-hidden="true"></i> {{__ "Custom fields"}} </p>
 <div class="row">
+	
 {{#each newfield as |datafield|}}
 {{#ifCond datafield.field_type "==" "text"}}
 	<div class="col-md-6 notCustomerBlock">
@@ -168,7 +175,7 @@
 {{#ifCond datafield.field_type "==" "textarea"}}
 <div class="col-md-6">
 <div class="form-group input">
-<div class="col-md-12" style="border: 1px solid #ddd;">
+<div class="col-md-12 form-control border-light textarea_css" style="border: 1px solid #ddd;">
 <div class="form-field">
 <textarea name="customfields[{{datafield._id}}]"
 	{{#ifEqual datafield.validation "nullable"}}{{/ifEqual}}
@@ -219,9 +226,11 @@
 						<label class="custom-control-label" for="colorCheck1">{{this}}</label>
 					</div>
 					{{/each}}
+					
 				</div>
+				
 			</div>
-		</div>
+		</div><div class="help-block"></div>
 	</div>
 	</div>
 {{/ifCond}}
@@ -259,60 +268,24 @@
 	</div>
 {{/ifCond}}
 {{#ifCond datafield.field_type "==" "date"}}
-	{{!-- <div class="col-md-6">
-	<div class="form-group row">
-	<div class="col-md-12">
-		<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-		{{#ifEqual datafield.validation "before_or_equal:today"}}
-			<input type='text' class="form-control beforedate dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false"
-			{{#ifEqual datafield.validation "nullable"}}{{/ifEqual}}
-			{{#ifEqual datafield.validation "required"}} data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-			{{#each ../customfield_value as |custome_value| }}
-					{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-						value="{{custome_value.customfield_value}}"  {{/ifCond}}
-			{{/each}}>
-		{{/ifEqual}}
-		{{#ifEqual datafield.validation "after_or_equal:today"}}
-		<input type='text' class="form-control afterdate dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false"
-		{{#ifEqual datafield.validation "nullable"}}{{/ifEqual}}
-		{{#ifEqual datafield.validation "required"}} data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-		{{#each ../customfield_value as |custome_value| }}
-				{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-					value="{{custome_value.customfield_value}}"  {{/ifCond}}
-		{{/each}}>
-		{{/ifEqual}}
-		{{#ifEqual datafield.validation "date_equals:today"}}
-		<input type='text' class="form-control today dateformat" name="customfields[{{datafield._id}}]" aria-invalid="false" 
-		{{#ifEqual datafield.validation "nullable"}}{{/ifEqual}}
-		{{#ifEqual datafield.validation "required"}} data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
-		{{#each ../customfield_value as |custome_value| }}
-				{{#ifCond  custome_value.id_d "==" datafield.id_d}}			
-					value="{{custome_value.customfield_value}}"  {{/ifCond}}
-		{{/each}}>
-		{{/ifEqual}}
-		<i class="ft-calendar icon-care"></i>
-	</div><div class="help-block"></div>
-	</div>
-	</div> --}}
+
+
 	<div class="col-md-6">
 		<div class="form-group row">
 			<div class="col-md-12">
 				<label class="custom-control-label-date ml-2">
-					{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span
-						class="required red">*</span>{{/ifEqual}}
-				</label>
-				<input type="text" class="form-control dateformat" name="customfields[{{datafield._id}}]"
-					aria-invalid="false" {{!-- Loop through validation array --}} {{#each datafield.validation as
-					|validationType|}} {{#ifEqual validationType "required" }}
-					data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#ifEqual
-					validationType "before_or_equal:today" }} class="form-control beforedate dateformat" {{/ifEqual}}
-					{{#ifEqual validationType "after_or_equal:today" }} class="form-control afterdate dateformat"
-					{{/ifEqual}} {{#ifEqual validationType "date_equals:today" }} class="form-control today dateformat"
-					{{/ifEqual}} {{/each}} {{!-- Check if customfield_value exists for this field --}} {{#each
-					../customfield_value as |custome_value|}} {{#ifCond custome_value.id_d "==" datafield.id_d}}
-					value="{{custome_value.customfield_value}}" {{else}}
-					value="{{getdate "" ../session.generaldata.date_format}}" {{/ifCond}} {{/each}}>
-	
+					{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}
+				</label>		
+			
+					<input type="text"  name="customfields[{{datafield._id}}]" aria-invalid="false" class="form-control dateformat {{#ifEqual datafield.validation "before_or_equal:today"}}beforedate{{/ifEqual}} {{#ifEqual datafield.validation "after_or_equal:today" }}afterdate{{/ifEqual}} {{#ifEqual datafield.validation "date_equals:today" }}today{{/ifEqual}}"
+														
+							   {{#ifEqual datafield.validation "required" }} data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}}
+							   
+								{{#each ../customfield_value as |custome_value|}} 
+								{{#ifCond custome_value.id_d "==" datafield.id_d}}
+									value="{{custome_value.customfield_value}}" 
+									{{/ifCond}} {{/each}}>
+
 				<i class="ft-calendar icon-care"></i>
 			</div>
 			<div class="help-block"></div>
@@ -348,9 +321,10 @@
 			&nbsp; &nbsp;&nbsp; &nbsp;
 		</div>
 		{{/each}}
+		
 	</div>
 	</div>
-	</div>
+	</div><div class="help-block"></div>
 	</div>
 	</div>
 {{/ifCond}}
@@ -384,8 +358,8 @@
 	</div>
 {{/ifCond}}
 {{/each}}
-{{/if}}
 </div>
+{{/if}}
 
 <!-- Custome fields End--> 
 		<div class="form-actions left">

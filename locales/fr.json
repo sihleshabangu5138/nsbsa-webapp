@@ -806,5 +806,10 @@
 	"Loan Term": "Loan Term",
 	"Monthly EMI": "Monthly EMI",
 	"Interest Payable": "Interest Payable",
-	"Total Amount Payable": "Total Amount Payable"
+	"Total Amount Payable": "Total Amount Payable",
+	"Stripe": "Stripe",
+	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
+	"Stripe secret key": "Stripe secret key",
+	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
+	"Stripe public key": "Stripe public key"
 }

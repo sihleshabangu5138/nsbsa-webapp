@@ -55,199 +55,229 @@ exports.getGeneralSettings = async (req, res) => {
 
 
 exports.postGeneralSettings = async (req, res) => {
+    console.log("-------------", req.body);
   const id1 = req.body.id;
-        if (id1) {
-            const updt_id = {
-                "_id":new mongoose.Types.ObjectId(id1)
-            };
-            const loc = req.body.localization;
-            const finance = req.body.finance;
-            const invoice = req.body.invoice;
-            const pdf_settings = req.body.pdf_settings;
-
-            if (req.body.companybtn) {
-                if (req.file != undefined) {
-                    var logo = req.file.filename;
-                } else {
-                    var logo = req.body.compan_old_images;
-                }
-                req.session.company_logo = logo;
-                const newvalues = {
-                    $set: {
-                        com_name: req.body.com_name,
-                        com_email: req.body.com_email,
-                        com_addr: req.body.com_addr,
-                        company_logo: logo,
-                        business_type: req.body.business_type,
-                        country_code: req.body.country_code,
-                        phone: req.body.phone,
-                        footer_text: req.body.footer_text,
-                        vat_no: req.body.vat_no,
-                        gst_no: req.body.gst_no,
-                        email_bcc: req.body.email_bcc,
-                        zipcode: req.body.zipcode,
-                        imgtype_jpg: req.body.imgtype_jpg,
-                        imgtype_png: req.body.imgtype_png,
-                        imgtype_jpeg: req.body.imgtype_jpeg,
-                        doctype: req.body.doctype,
-                        imgupload_size: req.body.imgupload_size,
-                        docupload_size: req.body.docupload_size,
-                        country: parseInt(req.body.country, 10),
-                        state: parseInt(req.body.state, 10),
-                        city: parseInt(req.body.city, 10),
-                        doctype_Pdf: req.body.doctype_Pdf,
-                        doctype_Xlsx: req.body.doctype_Xlsx,
-                        doctype_Xls: req.body.doctype_Xls,
-                        doctype_Zip: req.body.doctype_Zip,
-                        doctype_Doc: req.body.doctype_Doc,
-                        doctype_Docx: req.body.doctype_Docx,
-                    }
-                };
-                try {
-                    await GeneralSetting.updateOne(updt_id, newvalues);
-                    const data1 = await GeneralSetting.find(updt_id).lean();
-                    req.session.company_logo = logo;
-                    req.session.generaldata = data1[0];
-                    req.flash('success', res.__('Company Details Updated Successfully.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                } catch (err) {
-                    req.flash('error', res.__('Error occurred in Settings.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                }
-            }
-
-            if (loc) {
-                const newvalues = {
-                    $set: {
-                        date_format: req.body.date_format,
-                        time_format: req.body.time_format,
-                        currency: req.body.currency,
-                        language: req.body.language
-                    }
-                };
-                try {
-                    await GeneralSetting.updateOne(updt_id, newvalues);
-                    const data1 = await GeneralSetting.find(updt_id).lean();
-                    req.session.company_logo = data1[0].company_logo;
-                    req.session.generaldata = data1[0];
-                    res.cookie('locale', data1[0].language, {
-                        maxAge: 90000000,
-                        httpOnly: true
-                    });
-                    req.flash('success', res.__('Localization Updated Successfully.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                } catch (err) {
-                    req.flash('error', res.__('Error occurred in Settings.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                }
-            }
-
-            if (finance) {
-                const name1 = req.body.tax_item;
-                const name2 = req.body.auto_round_off
-              
-                const value1 = name1 === 'on' ? 1 : 0;
-                const value2 = name2 === 'on' ? 1 : 0;
-                const fin = {
-                    $set: {
-                        decimal_separator: req.body.decimal_separator,
-                        thousand_separator: req.body.thousand_separator,
-                        currency_set: req.body.currency_set,
-                        tax_item: parseInt(value1),
-                        Default_tax: req.body.Default_tax,
-                        auto_round_off: parseInt(value2),
-                    }
-                };
-                try {
-                    await GeneralSetting.updateOne(updt_id, fin);
-                    const data1 = await GeneralSetting.find(updt_id).lean();
-                    req.session.company_logo = data1[0].company_logo;
-                    req.session.generaldata = data1[0];
-                    req.flash('success', res.__('Finance Updated Successfully.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                } catch (err) {
-                    req.flash('error', res.__('Error occurred in Settings.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                }
-            }
-
-            if (invoice) {
-                const inv = {
-                    $set: {
-                        invoice_prefix: req.body.invoice_prefix,
-                        invoice_number_format: req.body.invoice_number_format,
-                        number_length: req.body.number_length,
-                        bank_details: req.body.bank_details,
-                        invoice_client_note: req.body.invoice_client_note,
-                        invoice_predefined_terms: req.body.invoice_predefined_terms,
-                    }
-                };
-                try {
-                    await GeneralSetting.updateOne(updt_id, inv);
-                    const data1 = await GeneralSetting.find(updt_id).lean();
-                    req.session.company_logo = data1[0].company_logo;
-                    req.session.generaldata = data1[0];
-                    req.flash('success', res.__('Invoice Updated Successfully.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                } catch (err) {
-                    req.flash('error', res.__('Error occurred in Settings.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                }
-            }
-
-            if (pdf_settings) {
-                if (req.file != undefined) {
-                    var logo1 = req.file.filename;
-                } else {
-                    var logo1 = req.body.sig_photo_old;
-                }
-                const name1 = req.body.show_transaction;
-  const name2 = req.body.show_pdf_signature_invoice;
-  const name3 = req.body.show_pdf_signature_creditnote
-
-                const value1 = name1 === 'on' ? 1 : 0;
-  const value2 = name2 === 'on' ? 1 : 0;
-  const value3 = name3 === 'on' ? 1 : 0;
-                console.log("1:",value1);
-                console.log("2:",value2);
-                const updatedFields = {
-                    pdf_font: req.body.pdf_font,
-                    tbl_head_color: req.body.tbl_head_color,
-                    font_size: req.body.font_size,
-                    tbl_head_txt_color: req.body.tbl_head_txt_color,
-                    pdf_logo_url: req.body.pdf_logo_url,
-                    pdf_logo_width: req.body.pdf_logo_width,
-                    pdf_format: req.body.pdf_format,
-                    signature_image: logo1,
-                };
-            
-                // Update only if the values are different
-                if (parseInt(value1) !== pdf_settings.show_transaction) {
-                    updatedFields.show_transaction = parseInt(value1);
-                }
-            
-                if (parseInt(value2) !== pdf_settings.show_pdf_signature_invoice) {
-                    updatedFields.show_pdf_signature_invoice = parseInt(value2);
-                }
-            
-                if (parseInt(value3) !== pdf_settings.show_pdf_signature_creditnote) {
-                    updatedFields.show_pdf_signature_creditnote = parseInt(value3);
-                }
-            
-                const pdf = { $set: updatedFields };
-                try {
-                    await GeneralSetting.updateOne(updt_id, pdf);
-                    const data1 = await GeneralSetting.find(updt_id).lean();
-                    req.session.company_logo = data1[0].company_logo;
-                    req.session.generaldata = data1[0];
-                    req.flash('success', res.__('PDF Settings Updated Successfully.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                } catch (err) {
-                    req.flash('error', res.__('Error occurred in Settings.'));
-                    res.redirect('/generalsettings/generalsetting/' + id1);
-                }
-            }
-        }
+       try {
+         if (id1) {
+             const updt_id = {
+                 "_id":new mongoose.Types.ObjectId(id1)
+             };
+             const loc = req.body.localization;
+             const finance = req.body.finance;
+             const invoice = req.body.invoice;
+             const pdf_settings = req.body.pdf_settings;
+             const stripe = req.body.stripe;
+ 
+             if (req.body.companybtn) {
+                 if (req.file != undefined) {
+                     var logo = req.file.filename;
+                 } else {
+                     var logo = req.body.compan_old_images;
+                 }
+                 req.session.company_logo = logo;
+                 const newvalues = {
+                     $set: {
+                         com_name: req.body.com_name,
+                         com_email: req.body.com_email,
+                         com_addr: req.body.com_addr,
+                         company_logo: logo,
+                         business_type: req.body.business_type,
+                         country_code: req.body.country_code,
+                         phone: req.body.phone,
+                         footer_text: req.body.footer_text,
+                         vat_no: req.body.vat_no,
+                         gst_no: req.body.gst_no,
+                         email_bcc: req.body.email_bcc,
+                         zipcode: req.body.zipcode,
+                         imgtype_jpg: req.body.imgtype_jpg,
+                         imgtype_png: req.body.imgtype_png,
+                         imgtype_jpeg: req.body.imgtype_jpeg,
+                         doctype: req.body.doctype,
+                         imgupload_size: req.body.imgupload_size,
+                         docupload_size: req.body.docupload_size,
+                         country: parseInt(req.body.country, 10),
+                         state: parseInt(req.body.state, 10),
+                         city: parseInt(req.body.city, 10),
+                         doctype_Pdf: req.body.doctype_Pdf,
+                         doctype_Xlsx: req.body.doctype_Xlsx,
+                         doctype_Xls: req.body.doctype_Xls,
+                         doctype_Zip: req.body.doctype_Zip,
+                         doctype_Doc: req.body.doctype_Doc,
+                         doctype_Docx: req.body.doctype_Docx,
+                     }
+                 };
+                 try {
+                     await GeneralSetting.updateOne(updt_id, newvalues);
+                     const data1 = await GeneralSetting.find(updt_id).lean();
+                     req.session.company_logo = logo;
+                     req.session.generaldata = data1[0];
+                     req.flash('success', res.__('Company Details Updated Successfully.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 } catch (err) {
+                     req.flash('error', res.__('Error occurred in Settings.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 }
+             }
+ 
+             if (loc) {
+                 const newvalues = {
+                     $set: {
+                         date_format: req.body.date_format,
+                         time_format: req.body.time_format,
+                         currency: req.body.currency,
+                         language: req.body.language
+                     }
+                 };
+                 try {
+                     await GeneralSetting.updateOne(updt_id, newvalues);
+                     const data1 = await GeneralSetting.find(updt_id).lean();
+                     req.session.company_logo = data1[0].company_logo;
+                     req.session.generaldata = data1[0];
+                     res.cookie('locale', data1[0].language, {
+                         maxAge: 90000000,
+                         httpOnly: true
+                     });
+                     req.flash('success', res.__('Localization Updated Successfully.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 } catch (err) {
+                     req.flash('error', res.__('Error occurred in Settings.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 }
+             }
+ 
+             if (finance) {
+                 const name1 = req.body.tax_item;
+                 const name2 = req.body.auto_round_off
+               
+                 const value1 = name1 === 'on' ? 1 : 0;
+                 const value2 = name2 === 'on' ? 1 : 0;
+                 const fin = {
+                     $set: {
+                         decimal_separator: req.body.decimal_separator,
+                         thousand_separator: req.body.thousand_separator,
+                         currency_set: req.body.currency_set,
+                         tax_item: parseInt(value1),
+                         Default_tax: req.body.Default_tax,
+                         auto_round_off: parseInt(value2),
+                     }
+                 };
+                 try {
+                     await GeneralSetting.updateOne(updt_id, fin);
+                     const data1 = await GeneralSetting.find(updt_id).lean();
+                     req.session.company_logo = data1[0].company_logo;
+                     req.session.generaldata = data1[0];
+                     req.flash('success', res.__('Finance Updated Successfully.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 } catch (err) {
+                     req.flash('error', res.__('Error occurred in Settings.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 }
+             }
+ 
+             if (invoice) {
+                 const inv = {
+                     $set: {
+                         invoice_prefix: req.body.invoice_prefix,
+                         invoice_number_format: req.body.invoice_number_format,
+                         number_length: req.body.number_length,
+                         bank_details: req.body.bank_details,
+                         invoice_client_note: req.body.invoice_client_note,
+                         invoice_predefined_terms: req.body.invoice_predefined_terms,
+                     }
+                 };
+                 try {
+                     await GeneralSetting.updateOne(updt_id, inv);
+                     const data1 = await GeneralSetting.find(updt_id).lean();
+                     req.session.company_logo = data1[0].company_logo;
+                     req.session.generaldata = data1[0];
+                     req.flash('success', res.__('Invoice Updated Successfully.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 } catch (err) {
+                     req.flash('error', res.__('Error occurred in Settings.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 }
+             }
+ 
+             if (pdf_settings) {
+                 if (req.file != undefined) {
+                     var logo1 = req.file.filename;
+                 } else {
+                     var logo1 = req.body.sig_photo_old;
+                 }
+                 const name1 = req.body.show_transaction;
+   const name2 = req.body.show_pdf_signature_invoice;
+   const name3 = req.body.show_pdf_signature_creditnote
+ 
+                 const value1 = name1 === 'on' ? 1 : 0;
+   const value2 = name2 === 'on' ? 1 : 0;
+   const value3 = name3 === 'on' ? 1 : 0;
+                 console.log("1:",value1);
+                 console.log("2:",value2);
+                 const updatedFields = {
+                     pdf_font: req.body.pdf_font,
+                     tbl_head_color: req.body.tbl_head_color,
+                     font_size: req.body.font_size,
+                     tbl_head_txt_color: req.body.tbl_head_txt_color,
+                     pdf_logo_url: req.body.pdf_logo_url,
+                     pdf_logo_width: req.body.pdf_logo_width,
+                     pdf_format: req.body.pdf_format,
+                     signature_image: logo1,
+                 };
+             
+                 // Update only if the values are different
+                 if (parseInt(value1) !== pdf_settings.show_transaction) {
+                     updatedFields.show_transaction = parseInt(value1);
+                 }
+             
+                 if (parseInt(value2) !== pdf_settings.show_pdf_signature_invoice) {
+                     updatedFields.show_pdf_signature_invoice = parseInt(value2);
+                 }
+             
+                 if (parseInt(value3) !== pdf_settings.show_pdf_signature_creditnote) {
+                     updatedFields.show_pdf_signature_creditnote = parseInt(value3);
+                 }
+             
+                 const pdf = { $set: updatedFields };
+                 try {
+                     await GeneralSetting.updateOne(updt_id, pdf);
+                     const data1 = await GeneralSetting.find(updt_id).lean();
+                     req.session.company_logo = data1[0].company_logo;
+                     req.session.generaldata = data1[0];
+                     req.flash('success', res.__('PDF Settings Updated Successfully.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 } catch (err) {
+                     req.flash('error', res.__('Error occurred in Settings.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 }
+             }
+             if (stripe) {
+                 const newvalues = {
+                     $set: {
+                         stripe_secret_key: req.body.stripe_secret_key,
+                         stripe_publishable_key: req.body.stripe_publishable_key,
+                     
+                     }
+                 };
+                 try {
+                     await GeneralSetting.updateOne(updt_id, newvalues);
+                     const data1 = await GeneralSetting.find(updt_id).lean();
+                     req.session.company_logo = data1[0].company_logo;
+                     req.session.generaldata = data1[0];
+                     res.cookie('locale', data1[0].language, {
+                         maxAge: 90000000,
+                         httpOnly: true
+                     });
+                     req.flash('success', res.__('Stripe Updated Successfully.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 } catch (err) {
+                     req.flash('error', res.__('Error occurred in Settings.'));
+                     res.redirect('/generalsettings/generalsetting/' + id1);
+                 }
+             }
+         }
+       } catch (error) {
+        console.log(error)
+       }
   // try {
   //   const id = req.body.id;
   //   const updateData = {};

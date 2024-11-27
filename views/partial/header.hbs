@@ -13,7 +13,7 @@
 					<a href="/" class="navbar-brand">
 					{{!-- <img alt="niffty admin logo" src="/images/Nifty-EWS.png"class="brand-logo nifty-logo"> --}}
 					  <img alt="niffty admin logo" src="/images/upload/generalsetting/{{session.company_logo}}"class="brand-logo nifty-logo"> 
-					<h2 class="brand-text">NiftyCRM</h2>
+					{{!-- <h2 class="brand-text">NiftyCRM</h2> --}}
 					</a>
 				</li>
 				<li class="nav-item d-md-none">
@@ -39,6 +39,7 @@
 									<span class="notification-tag badge badge-default badge-danger float-right m-0 noticount">{{session.noticount}} {{__ "New"}}</span>
 								</h6>
 							</li>
+						
 							{{#each session.noti}}
 							{{#ifCond this.action "==" "New User"}}
 							<li class="scrollable-container media-list" id="clickonevent">
@@ -342,38 +343,105 @@ $(document).ready(function(){
 	});
 });
 </script>
+
 <script>
 $(document).ready(function(){
-	$('body').on('click', '#click_event', function() {
-	var notivalue = $('#uploanoti').val();
+	$('body').on('click', '#click_event', function(e) {
+		e.preventDefault();
+		const notiItem = $(this);
+		const notivalue = notiItem.find('input[name="id"]').val();
+		const href = notiItem.find('a').attr('href');
 		$.ajax({
 			type: "GET",
 			url: '/ajxfun/deletenoti',
-			data: {"notivalue" : notivalue}
+			data: {"notivalue" : notivalue},
+			 success: function (response) {
+				if (response) {
+
+					notiItem.remove();
+
+					// Redirect to the notification's href link
+					window.location.href = href;
+				} else {
+					console.error('Failed to delete notification');
+					// Redirect anyway if deletion fails
+					window.location.href = href;
+				}
+			},
 		});
 	});
-	$('body').on('click', '#clickevent', function() {
-		var notivalue = $('#addloanoti').val();
+	$('body').on('click', '#clickevent', function(e) {
+		e.preventDefault();
+		const notiItem = $(this);
+		const notivalue = notiItem.find('input[name="id"]').val();
+		const href = notiItem.find('a').attr('href');
 			$.ajax({
 				type: "GET",
 				url: '/ajxfun/deletenoti',
-				data: {"notivalue" : notivalue}
+				data: {"notivalue" : notivalue},
+				 success: function (response) {
+					if (response) {
+
+						notiItem.remove();
+
+						// Redirect to the notification's href link
+						window.location.href = href;
+					} else {
+						console.error('Failed to delete notification');
+						// Redirect anyway if deletion fails
+						window.location.href = href;
+					}
+				},
 			});
 		});
-	$('body').on('click', '#onclickevent', function() {
-		var notivalue = $('#upusernoti').val();
+	$('body').on('click', '#onclickevent', function(e) {
+		 e.preventDefault();
+		   const notiItem = $(this); 
+		const notivalue = notiItem.find('input[name="id"]').val(); 
+		const href = notiItem.find('a').attr('href');
+		
 			$.ajax({
 				type: "GET",
 				url: '/ajxfun/deletenoti',
-				data: {"notivalue" : notivalue}
+				data: {"notivalue" : notivalue},
+				 success: function (response) {
+					if (response) {
+					
+						notiItem.remove();
+
+						// Redirect to the notification's href link
+						window.location.href = href;
+					} else {
+						console.error('Failed to delete notification');
+						// Redirect anyway if deletion fails
+						window.location.href = href;
+					}
+				},
 			});
 		});
-	$('body').on('click', '#clickonevent', function() {
-		var notivalue = $('#addusernoti').val();
+	$('body').on('click', '#clickonevent', function(e) {
+		 e.preventDefault();
+		const notiItem = $(this);
+		const notivalue = notiItem.find('input[name="id"]').val();
+		const href = notiItem.find('a').attr('href');
+		
 			$.ajax({
 				type: "GET",
 				url: '/ajxfun/deletenoti',
-				data: {"notivalue" : notivalue}
+				data: {"notivalue" : notivalue},
+				 success: function (response) {
+					if (response) {
+
+						notiItem.remove();
+
+						// Redirect to the notification's href link
+						window.location.href = href;
+					} else {
+						console.error('Failed to delete notification');
+						// Redirect anyway if deletion fails
+						window.location.href = href;
+					}
+				},
 			});
 		});
 });

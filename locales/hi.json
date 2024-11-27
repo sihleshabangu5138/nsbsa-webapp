@@ -837,5 +837,12 @@
 	".No": ".No",
 	"Upcoming EMI Payment of": "आने वाले ईएमआई का भुगतान",
 	"for loan No is": "ऋण नंबर है",
-	"Reminder List": "अनुस्मारक सूची"
+	"Reminder List": "अनुस्मारक सूची",
+	"Stripe": "Stripe",
+	" Secret Key is required": " गुप्त कुंजी आवश्यक है",
+	"Stripe secret key": "Stripe गुप्त कुंजी",
+	"Public Key is required": "सार्वजनिक कुंजी आवश्यक है",
+	"Stripe public key": "Stripe सार्वजनिक कुंजी",
+	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
+	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired"
 }

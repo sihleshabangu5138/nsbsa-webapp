@@ -136,7 +136,7 @@
 										</div>
 										<div class="col-sm-6 col-6">
 											<span class="colon">:</span>
-											<div class="tabletext">{{this.startdate}}</div>
+											<div class="tabletext">{{getdate this.startdate ../session.generaldata.date_format}}</div>
 										</div>
 									</div>
 								</div>
@@ -147,7 +147,7 @@
 										</div>
 										<div class="col-sm-6 col-6">
 											<span class="colon">:</span>
-											<div class="tabletext">{{this.enddate}}</div>
+											<div class="tabletext">{{getdate this.enddate ../session.generaldata.date_format}}</div>
 										</div>
 									</div>
 								</div>
@@ -390,7 +390,7 @@
 																											</td>
 																											<td
 																												class="bordertop">
-																												{{result.date}}
+																												{{getdate result.date ../session.generaldata.date_format}}
 																											</td>
 																											<td
 																												class="bordertop">

@@ -37,6 +37,7 @@ exports.postLogin = async (req, res) => {
     //   connectToDatabase();
     //   console.log('Connected to the database with stored credentials');
     // }
+    console.log("---------", req.body.username, req.body.password)
     const myquery = { "username": req.body.username };
     const userResult = await User.find(myquery).lean();
     // console.log(userResult);
@@ -117,23 +118,27 @@ exports.postLogin = async (req, res) => {
           req.session.impersondata = '';
           res.redirect('/dashboard');
         } else {
+         
           req.flash('error', res.__('You are not allowed to login. Enter correct username or password.'));
           
-          res.render('login', { title: 'NiftyEWS', layout: "loginlayout" });
+          res.render('login', { title: 'NiftyEWS', layout: "loginlayout",messages:req.flash() });
         }
       } else {
+       
         req.flash('error', res.__('You are not allowed to login.'));
-        res.render('login', { title: 'NiftyEWS', layout: "loginlayout" });
+        res.render('login', { title: 'NiftyEWS', layout: "loginlayout", messages: req.flash() });
       }
     } else {
+     
       req.flash('error', res.__('Invalid username or password.'));
-      res.render('login', { title: 'NiftyEWS', layout: "loginlayout" });
+      res.render('login', { title: 'NiftyEWS', layout: "loginlayout", messages: req.flash() });
       
     }
   } catch (error) {
     console.error(error);
+   
     req.flash('error', res.__('An error occurred while processing your request.'));
-    res.render('login', { title: 'NiftyEWS', layout: "loginlayout" });
+    res.render('login', { title: 'NiftyEWS', layout: "loginlayout", messages: req.flash() });
   }
 };
 

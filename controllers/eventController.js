@@ -11,6 +11,7 @@ const ActivityLog = require('../models/Activitylog');
 const NotificationTemplate = require('../models/Notificationtemplate');
 const moment = require('moment');
 const Mail = require('../config/email');
+const functions = require('../helpers/function');
 
 exports.getEventList = async (req, res, next) => {
   try {
@@ -38,7 +39,7 @@ exports.getEventList = async (req, res, next) => {
 exports.getAddEvent = async (req, res) => {
   // const languages = lang.getLocale();
   const id = req.params.id;
-
+  let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
   try {
     if (id) {
       const myquery = { "_id": new mongoose.Types.ObjectId(id) };
@@ -52,6 +53,11 @@ exports.getAddEvent = async (req, res) => {
           events[key].eventforid_d = new mongoose.Types.ObjectId(value.eventfor).toString();
         }
       }
+      events.forEach((ele) => {
+        ele.startdate = moment(ele.startdate, "YYYY-MM-DD").format(currentDateFormate);
+        ele.enddate = moment(ele.enddate, "YYYY-MM-DD").format(currentDateFormate);
+        return ele
+      });
       const roles = await Role.find(rolequery).lean();
 
       for (const role of roles) {
@@ -83,6 +89,8 @@ exports.getAddEvent = async (req, res) => {
 exports.postAddEvent = async function (req, res) {
   try {
     const id = req.body.id;
+    let currentDateFormat = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
+
     if (id) {
       const myquery = { "_id": new mongoose.Types.ObjectId(id) };
       const {
@@ -95,6 +103,8 @@ exports.postAddEvent = async function (req, res) {
         eventfor,
         eventdetail,
       } = req.body;
+      let formatStartDate = moment(startdate, currentDateFormat).format('YYYY-MM-DD');
+      let formatEndDate = moment(enddate, currentDateFormat).format('YYYY-MM-DD');
       let newvalues;
       if (req.body.duration === "one day") {
         newvalues = {
@@ -102,11 +112,12 @@ exports.postAddEvent = async function (req, res) {
           eventtitle,
           eventvenue,
           duration,
-          startdate,
+          startdate: formatStartDate,
+          enddate: formatStartDate,
           eventfor: (eventfor === 'all') ? 'all' : new mongoose.Types.ObjectId(eventfor),
           eventdetail,
           addedby: new mongoose.Types.ObjectId(req.session.user_id),
-          $unset: { enddate: 1 },
+         
         };
       } else {
         newvalues = {
@@ -114,8 +125,8 @@ exports.postAddEvent = async function (req, res) {
           eventtitle,
           eventvenue,
           duration,
-          startdate,
-          enddate,
+          startdate: formatStartDate,
+          enddate:  formatEndDate,
           eventfor: (eventfor === 'all') ? 'all' : new mongoose.Types.ObjectId(eventfor),
           eventdetail,
           addedby: new mongoose.Types.ObjectId(req.session.user_id),
@@ -266,14 +277,15 @@ exports.postAddEvent = async function (req, res) {
         eventfor,
         eventdetail,
       } = req.body;
-
+      let formatStartDate = moment(startdate, currentDateFormat).format('YYYY-MM-DD');
+      let formatEndDate = moment(enddate, currentDateFormat).format('YYYY-MM-DD');
       const eventObj = {
         eventtype,
         eventtitle,
         eventvenue,
         duration,
-        startdate,
-        enddate: (!enddate ) ? enddate=startdate : enddate,
+        startdate:formatStartDate,
+        enddate: (!enddate ) ? enddate=formatStartDate : formatEndDate,
         eventfor: (eventfor === 'all') ? 'all' : new mongoose.Types.ObjectId(eventfor),
         eventdetail,
         addedby: new mongoose.Types.ObjectId(req.session.user_id),
@@ -434,6 +446,7 @@ exports.postAddEvent = async function (req, res) {
       res.redirect('/events/eventlist');
     }
   } catch (err) {
+    console.log(err);
     req.flash('error', res.__('Error occurred.'));
     res.redirect('/events/eventlist');
   }

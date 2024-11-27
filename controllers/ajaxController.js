@@ -36,13 +36,14 @@ const { checkConnection } = require('../config/config');
 const { MongoClient } = require('mongodb');
 const AmortizeJS = require('amortizejs').Calculator;
 const Stripe = require('stripe');
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+
 /* GET users listing. */
 exports.getViewUser = async (req, res, next) => {
 	try {
 		let matchQuery={};
 		if (req.session.admin_access === 1) {
-			matchQuery={}
+			matchQuery={status: 1};
 		} else {
 			
 	
@@ -106,63 +107,6 @@ exports.getViewUser = async (req, res, next) => {
 };
 
 exports.getTotalUserList = async (req, res, next) => {
-	try 
-		{
-		const result = await Users.find().lean();
-
-		res.json(result);
-	} catch (err) {
-		console.error(err);
-		res.status(500).json({ error: 'An error occurred' });
-	}
-}
-exports.getDeactivateUser = async (req, res, next) => {
-	try {
-		// const query = { status: 0 };
-		let matchQuery;
-
-		if (req.session.admin_access !== 1) {
-			if (req.session.access_rights && req.session.access_rights.deactiveuser && req.session.access_rights.deactiveuser.owndata) {
-				
-			
-				matchQuery = { $and: [{ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }] }
-			}
-		}
-		else {
-			matchQuery = {
-				status: 0
-			};
-
-		}
-
-		// const result = await Users.findOne(query);
-		const result = await Users.find(matchQuery).lean();
-		const result_final = result.map((user) => {
-			user.birthdate = functions.getdate(user.birthdate, req.session.generaldata.date_format);
-			// const country = countriesData.countries.find(c => c.id === user.country);
-			// user.country = country ? country.name : '';
-
-			// Replace state ID with its name
-			// const stateId = user.state ? user.state.toString() : ''; // Ensure state is a string
-			// const state = statesData.states.find(s => s.id === stateId);
-			// user.state = state ? state.name : '';
-
-			// // Replace city ID with its name
-			// const cityId = user.city ? user.city.toString() : ''; // Ensure city is a string
-			// const city = citiesData.cities.find(c => c.id === cityId);
-			// user.city = city ? city.name : '';
-
-			return user;
-		});
-		res.json(result_final);
-	} catch (err) {
-		console.error(err);
-		res.status(500).json({ error: 'An error occurred' });
-	}
-};
-
-exports.getAllUser = async (req, res, next) => {
-	
 	try {
 	
 		let matchQuery={};
@@ -230,7 +174,40 @@ exports.getAllUser = async (req, res, next) => {
 		console.error(err);
 		res.status(500).json({ error: 'An error occurred' });
 	}
+}
+exports.getDeactivateUser = async (req, res, next) => {
+	try {
+		// const query = { status: 0 };
+		let matchQuery;
+
+		if (req.session.admin_access !== 1) {
+			if (req.session.access_rights && req.session.access_rights.deactiveuser && req.session.access_rights.deactiveuser.owndata) {
+				
+			
+				matchQuery = { $and: [{ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }] }
+			}
+		}
+		else {
+			matchQuery = {
+				status: 0
+			};
+
+		}
+
+		// const result = await Users.findOne(query);
+		const result = await Users.find(matchQuery).lean();
+		const result_final = result.map((user) => {
+			user.birthdate = functions.getdate(user.birthdate, req.session.generaldata.date_format);
+		
+			return user;
+		});
+		res.json(result_final);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'An error occurred' });
+	}
 };
+
 
 exports.getDelete = async (req, res) => {
 	try {
@@ -318,23 +295,22 @@ exports.getDeleteNotification = async (req, res) => {
 			}
 		};
 
-		await NotificationBadges.updateOne(myquery, newvalues);
+		await NotificationBadges.findByIdAndDelete(myquery);
+		const noquery = { "user": new mongoose.Types.ObjectId(req.session.user_id) };
+		const querys = { $and: [{ status: 1 }, { "user": new mongoose.Types.ObjectId(req.session.user_id) }] };
+		const notiresult = await NotificationBadges.find(noquery).sort({ createdAt: -1 }).lean();
+		const adminnoti = await NotificationBadges.find().sort({ createdAt: -1 }).lean();
+		const activenoti = await NotificationBadges.countDocuments(querys);
+		const adminnoticount = await NotificationBadges.countDocuments({});
 
-		const activeNotiCount = await NotificationBadges.countDocuments({
-			$and: [{
-				status: 1
-			}, {
-				"user": new mongoose.Types.ObjectId(req.session.user_id)
-			}]
-		});
-
-		const adminNotiCount = await NotificationBadges.countDocuments({
-			status: 1
-		});
-
-		req.session.noticount = req.session.admin_access === 1 ? adminNotiCount : activeNotiCount;
-
-		res.json(req.session.noticount);
+		if (req.session.admin_access == 1) {
+			req.session.noti = adminnoti;
+			req.session.noticount = adminnoticount;
+		} else {
+			req.session.noti = notiresult;
+			req.session.noticount = activenoti;
+		}
+		res.json(true);
 	} catch (err) {
 		console.error(err);
 		res.json(false);
@@ -681,7 +657,7 @@ exports.getMapEvents = async (req, res) => {
 		  const formattedStartDate = startDate.format('YYYY-MM-DD');
 		  endDate.add(1, 'days');  // Add one day to end date
 		  const formattedEndDate = endDate.format('YYYY-MM-DD');
-
+			console.log(formattedStartDate,"------------------", formattedEndDate);
 		  return {
 			  title: element.eventtitle,
 			  start: formattedStartDate,
@@ -1869,8 +1845,8 @@ exports.verifyPurchaseKey = async (req, res) => {
 
 exports.createCheckoutSession = async (req, res) => {
     const { amount ,emiid } = req.body; // Amount in cents
-	
-    try {
+	try {
+		const stripe = Stripe(req.session.generaldata.stripe_secret_key);
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [{
@@ -1891,8 +1867,12 @@ exports.createCheckoutSession = async (req, res) => {
 			}
         });
         res.json({ id: session.id });
-    } catch (error) {
-        console.error('Error creating checkout session:', error);
-        res.status(500).send('Internal Server Error');
+	} catch (error) {
+		
+        console.error('Error creating checkout session:', error.message);
+		const errorMessage = res.__(error.message);
+		return res.status(500).json({ error: errorMessage });
+		
+		
     }
 };

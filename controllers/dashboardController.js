@@ -24,7 +24,7 @@ const functions = require('../helpers/function')
 exports.getDashboard = async (req, res, next) => {
   // console.log(req.session);
   try {
-    const generalDateFormate = req.session.generaldata.date_format
+    let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
     const notificationTypes = ['upcoming_emi', 'emi_pending'];
         const reminders = await Reminder.find({ reminder_type: notificationTypes }).lean();
         // console.log("rem",reminders)
@@ -168,16 +168,18 @@ exports.getDashboard = async (req, res, next) => {
           result_final.push(...result);
         }
 
-      
-
-        console.log(functions.formatDatesToGeneralData(result_final, generalDateFormate),"=================")
-
         const reminder = await Reminder.find({}).lean();
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
+        
+        result_final.forEach((ele) => {
+          ele.startdate = moment(ele.startdate, "YYYY-MM-DD").format(currentDateFormate);
+          ele.enddate = moment(ele.enddate, "YYYY-MM-DD").format(currentDateFormate);
+          return ele
+        })
+        
        
-
         res.render('index', {
           title: 'Dashboard',
           session: req.session,
@@ -252,7 +254,11 @@ exports.getDashboard = async (req, res, next) => {
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
-        
+        result_final.forEach((ele) => {
+          ele.startdate = moment(ele.startdate, "YYYY-MM-DD").format(currentDateFormate);
+          ele.enddate = moment(ele.enddate, "YYYY-MM-DD").format(currentDateFormate);
+          return ele
+        })
 
         res.render('index', {
           title: 'Dashboard',
@@ -328,7 +334,11 @@ exports.getDashboard = async (req, res, next) => {
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
-    
+        result_final.forEach((ele) => {
+          ele.startdate = moment(ele.startdate, "YYYY-MM-DD").format(currentDateFormate);
+          ele.enddate = moment(ele.enddate, "YYYY-MM-DD").format(currentDateFormate);
+          return ele
+        })
 
         res.render('index', {
           title: 'Dashboard',
@@ -410,7 +420,11 @@ exports.getDashboard = async (req, res, next) => {
         const generalSettings = await GeneralSetting.find({}).lean();
         const userLanguage = generalSettings[0].language;
         // console.log(userLanguage);
-     
+        result_final.forEach((ele) => {
+          ele.startdate = moment(ele.startdate, "YYYY-MM-DD").format(currentDateFormate);
+          ele.enddate = moment(ele.enddate, "YYYY-MM-DD").format(currentDateFormate);
+          return ele
+        })
 
         res.render('index', {
           title: 'Dashboard',
@@ -468,7 +482,11 @@ exports.getDashboard = async (req, res, next) => {
       const generalSettings = await GeneralSetting.find({}).lean();
       const userLanguage = generalSettings[0].language;
       // console.log(userLanguage);
-     
+      result_final.forEach((ele) => {
+        ele.startdate = moment(ele.startdate, "YYYY-MM-DD").format(currentDateFormate);
+        ele.enddate = moment(ele.enddate, "YYYY-MM-DD").format(currentDateFormate);
+        return ele
+      })
 
       res.render('index', {
         title: 'Dashboard',
@@ -496,8 +514,8 @@ exports.getDashboard = async (req, res, next) => {
 
 
 exports.getNotiBadge = async (req, res, next) => {
-  // let data = [];
-  const mysort = { date: -1 };
+  let data = [];
+  const mysort = { createdAt: -1 };
   const noquery = { "user": new mongoose.Types.ObjectId(req.session.user_id), status: 1 };
   const notiresult = await NotificationBadges.find(noquery).lean().sort(mysort);
   const adminnoti = await NotificationBadges.find({ status: 1 }).lean().sort(mysort);
@@ -517,7 +535,7 @@ exports.getNotiBadge = async (req, res, next) => {
   }else{
     data = notiresult;
   };
-  console.log('req.session.admin_access', req.session.admin_access);
+  // console.log('req.session.admin_access', req.session.admin_access);
   console.log('Data',data);
   res.render('notificationlist/notificationlist', {
     title: 'Notificationlist',

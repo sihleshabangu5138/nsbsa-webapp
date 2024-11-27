@@ -94,7 +94,7 @@ module.exports = {
     const trans = str.replace(/Y|m|d|j|F/gi, matched => obj[matched]);
     return dateFormat(date1, trans);
   },
-   formatDatesToGeneralData:function (results,generalDateFormate) {
+   formatDatesToGeneralData:function (generalDateFormate) {
   
   let originalDateFormate;
   let dates = {
@@ -108,13 +108,23 @@ module.exports = {
   if (dates[generalDateFormate]) {
     originalDateFormate = dates[generalDateFormate];
   }
-  let InputdateFormate = ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']
-   results.map((result) => {
-
-    result.startdate = moment(result.startdate, InputdateFormate).format(originalDateFormate);
-    result.enddate = moment(result.enddate, InputdateFormate).format(originalDateFormate);
-return result
-  });
-
-}
+     return originalDateFormate;
+ 
+  },
+  handleInputDateOrValue: function (value, InputDateFormat, to = "db") {
+   
+    if (moment(value, to=="db"? InputDateFormat :"", true).isValid()) {
+      if (to === "db") {
+        
+        return moment(value, InputDateFormat).format("YYYY-MM-DD");
+        
+      } else {
+       
+        return moment(value, "YYYY-MM-DD").format(InputDateFormat)
+      }
+    } else {
+      console.log("Invalid date format");
+      return value
+     }
+   }
 };

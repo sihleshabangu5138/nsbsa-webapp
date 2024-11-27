@@ -41,7 +41,6 @@ function isAuthenticated4(req, res, next) {
   }
 }
 
-router.get('/users/alluserlist', isAuthenticated1, Users.getAllUser);
 router.get('/users/userlist', isAuthenticated1, Users.getUserList);
 router.get("/users/totaluser", isAuthenticated1, Users.getTotalUserList);
 router.get('/users/viewuser/:id?', isAuthenticated1,Users.getViewUser);

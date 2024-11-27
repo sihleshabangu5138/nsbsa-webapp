@@ -23,7 +23,7 @@ const Reminder = require('../models/Reminder');
 const functions = require('../helpers/function');
 const Stripe = require('stripe');
 const { Session } = require('express-session');
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
 // const __basedir = path.resolve(__dirname, '../..');
 
 exports.getLoanTypeList = async function (req, res, next) {
@@ -44,7 +44,10 @@ exports.getLoanTypeList = async function (req, res, next) {
 };
 
 exports.getAddLoanType = async (req, res) => {
+       
     try {
+        let currentDateFormat = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
+
         const languages = lang.getLocale();
         const id = req.params.id;
         if (id) {
@@ -57,7 +60,11 @@ exports.getAddLoanType = async (req, res) => {
             const customfield_value = await CustomFieldMeta.find({ "reference_id": id }).lean();
             customfield_value.forEach(element => {
                 element.id_d = new mongoose.Types.ObjectId(element.custom_field_id).toString();
+                element.customfield_value[0] = functions.handleInputDateOrValue(element.customfield_value[0],currentDateFormat,"toFrontend");
+                console.log(element.customfield_value[0])
             });
+
+            // console.log(customfield_value,"---------------");
             res.render('loan/addloantype', { title: "Edit Loan Types", data: result, id: id, session: req.session, setlang: languages, newfield: customfield, customfield_value: customfield_value });
         } else {
             const news = [{ 'userid': '-1' }];
@@ -71,6 +78,8 @@ exports.getAddLoanType = async (req, res) => {
 };
 
 exports.postAddLoanType = async (req, res) => {
+    let currentDateFormat = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
+    
     try {
         const id = req.body.id;
         if (id) {
@@ -136,7 +145,7 @@ exports.postAddLoanType = async (req, res) => {
                     for (const [keys1, values1] of Object.entries(req.body.customfields)) {
                         const this_data = {
                             custom_field_id: new mongoose.Types.ObjectId(keys1),
-                            customfield_value: values1,
+                            customfield_value: functions.handleInputDateOrValue(values1, currentDateFormat),
                             module: "loantype",
                             user_id: new mongoose.Types.ObjectId(req.session.user_id),
                             reference_id: new mongoose.Types.ObjectId(id),
@@ -181,7 +190,7 @@ exports.postAddLoanType = async (req, res) => {
                     for (const [key, value] of Object.entries(req.body.customfields)) {
                         const thisData = {
                             custom_field_id: new mongoose.Types.ObjectId(key),
-                            customfield_value: value,
+                            customfield_value: functions.handleInputDateOrValue(value, currentDateFormat),
                             module: 'loantype',
                             user_id: new mongoose.Types.ObjectId(req.session.user_id),
                             reference_id: new mongoose.Types.ObjectId(id),
@@ -242,7 +251,7 @@ exports.postAddLoanType = async (req, res) => {
                 for (const [key, value] of Object.entries(req.body.customfields)) {
                     const this_data = {
                         custom_field_id: new mongoose.Types.ObjectId(key),
-                        customfield_value: value,
+                        customfield_value: functions.handleInputDateOrValue(value,currentDateFormat),
                         module: "loantype",
                         user_id: new mongoose.Types.ObjectId(req.session.user_id),
                         reference_id: result._id,
@@ -281,9 +290,15 @@ exports.getLoanList = async function (req, res, next) {
         let access_data = [];
         const session_id = req.query.session_id; // Get the session_id from query params
         const failstatus = req.query.status;
-
+        // const stripe = Stripe(req.session.generaldata.stripe_secret_key || '');
+        let stripe;
+        if (req.session.generaldata?.stripe_secret_key) {
+            stripe = require('stripe')(req.session.generaldata.stripe_secret_key);
+        }
+       
         if (session_id) {
-          try {
+            try {
+              
             // Step 1: Verify the session_id from Stripe to check if payment was successful
             const stripesession = await stripe.checkout.sessions.retrieve(session_id);
             if (stripesession.payment_status === "paid") {
@@ -474,7 +489,9 @@ exports.getLoanList = async function (req, res, next) {
             });
         }
     } catch (error) {
+        console.log(error)
         next(error);
+
     }
 }
 
@@ -562,6 +579,7 @@ exports.postAddLoan = async (req, res) => {
         let attachfiles = [];
         // const addnote = [];
         let i = 0;
+        let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
 
         // Notes and Attach file start
         // const note = req.body.note;
@@ -650,8 +668,10 @@ exports.postAddLoan = async (req, res) => {
             // const st = momenet(req.body.startdate).format("YYYY-MM-DD");
             // const startdate = moment(req.body.startdate).format("YYYY-MM-DD");
             // const enddate = moment(req.body.enddate).format("YYYY-MM-DD");
-            const startdate = moment(req.body.startdate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
-            const enddate = moment(req.body.enddate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+            // const startdate = moment(req.body.startdate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+            // const enddate = moment(req.body.enddate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+            const startdate = moment(req.body.startdate, currentDateFormate).format("YYYY-MM-DD");
+            const enddate = moment(req.body.enddate, currentDateFormate).format("YYYY-MM-DD");
             console.log(startdate, "--------------------------", enddate)
 
             const savedLoan = await LoanDetails.findByIdAndUpdate(
@@ -899,8 +919,8 @@ exports.postAddLoan = async (req, res) => {
             console.log("Query for activenoti:", JSON.stringify(querys, null, 2));
 
             await NotificationBadges.create(myobj1);
-            const notiresult = await NotificationBadges.find(noquery).lean();
-            const adminnoti = await NotificationBadges.find().lean();
+        const notiresult = await NotificationBadges.find(noquery).sort({ createdAt: -1 }).lean();
+            const adminnoti = await NotificationBadges.find().sort({ createdAt: -1 }).lean();
             const activenoti = await NotificationBadges.countDocuments(querys);
             const adminnoticount = await NotificationBadges.countDocuments({});
 
@@ -930,9 +950,9 @@ exports.postAddLoan = async (req, res) => {
             const iduser = new mongoose.Types.ObjectId(userid);
             const type = req.body.loantype;
             const loantype = new mongoose.Types.ObjectId(type);
-            const startdate = moment(req.body.startdate).format("YYYY-MM-DD");
-            const enddate = moment(req.body.enddate).format("YYYY-MM-DD");
-            console.log(req.body.years);
+            const startdate = moment(req.body.startdate, currentDateFormate).format("YYYY-MM-DD");
+            const enddate = moment(req.body.enddate, currentDateFormate).format("YYYY-MM-DD");
+          
 
             const myLoan = {
                 loancount: req.body.loancount,
@@ -1011,26 +1031,25 @@ exports.postAddLoan = async (req, res) => {
                 apr: req.body.interestrate,
                 balance: req.body.loanamount,
                 loanTerm: req.body.totalemimonth,
-                startDate: req.body.startdate,
+                startDate: startdate,
             });
 
             const emiData = [];
             let index_id = 1;
             mortgage.schedule.forEach((element) => {
                 const datefr = moment(element.date).format("YYYY-MM-DD");
-                console.log(element.date);
-                console.log(date1);
                 const totalpayment = element.interest + element.principal;
                 const monthly_payment = mortgage.periodicPayment;
+
                 const emiDetails = {
                     loan_id: resultes._id,
                     user_id: iduser,
                     month: index_id,
-                    interest: element.interest,
-                    principal: element.principal,
-                    totalpayment: totalpayment,
-                    remainingBalance: element.remainingBalance,
-                    monthly_payment: monthly_payment,
+                    interest: Math.round(element.interest),
+                    principal: Math.round(element.principal),
+                    totalpayment: Math.round(totalpayment),
+                    remainingBalance: Math.round(element.remainingBalance),
+                    monthly_payment: Math.round(monthly_payment),
                     date: datefr,
                     status: 0,
                     mail_noti: 0,
@@ -1098,8 +1117,8 @@ exports.postAddLoan = async (req, res) => {
             const noquery = { "user": new mongoose.Types.ObjectId(req.session.user_id) };
             const query = { $and: [{ status: 1 }, { "user": new mongoose.Types.ObjectId(req.session.user_id) }] };
 
-            const notiResult = await NotificationBadges.find(noquery).lean();
-            const adminNotiResult = await NotificationBadges.find().lean();
+            const notiResult = await NotificationBadges.find(noquery).sort({ createdAt: -1 }).lean();
+            const adminNotiResult = await NotificationBadges.find().sort({ createdAt: -1 }).lean();
             const activenoti = await NotificationBadges.countDocuments(query);
             const adminnoticount = await NotificationBadges.countDocuments({});
 
@@ -1333,7 +1352,7 @@ exports.getViewLoan = async (req, res) => {
 }
 
 exports.getEmiDetails = async (req, res) => {
-
+    
     const id = req.params.id;
 
     if (id) {
@@ -1355,10 +1374,10 @@ exports.getEmiDetails = async (req, res) => {
             for (const [key, value] of Object.entries(customfield_value)) {
                 customfield_value[key].id_d = new mongoose.Types.ObjectId(value.custom_field_id).toString();
             }
-
-            res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value , stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY , role:rolename});
+           
+            res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value, stripePublishableKey: req.session.generaldata.stripe_publishable_key , role:rolename});
             console.log("loan approval=",loanlist[0]['approvestatus']);
-            res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value });
+            // res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value });
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
@@ -1367,7 +1386,7 @@ exports.getEmiDetails = async (req, res) => {
         const news = [{ 'userid': '-1' }];
         try {
             const customfield = await CustomField.find({ $and: [{ 'module_name': 'emi' }, { 'field_visibility': 1 }] }).lean();
-            res.render('loan/addemi', { title: 'Add EMI', data: news, family: news, session: req.session, newfield: customfield , stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY});
+            res.render('loan/addemi', { title: 'Add EMI', data: news, family: news, session: req.session, newfield: customfield, stripePublishableKey: req.session.generaldata.stripe_publishable_key });
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
@@ -1619,31 +1638,33 @@ exports.getPendingEMI = async (req, res) => {
     try {
         const date = moment().format("YYYY-MM-DD");
         let query;
-        if (req.session.access_rights && req.session.access_rights.pendingemilist && req.session.access_rights.pendingemilist.owndata) {
-            const role = await Role.findOne({ _id: req.session.role });
-            if (role.role_nm == "Staff") {
-                query = {
-                    $and: [{
-                        date: {
-                            $lt: date
-                        }
-                    }, {
-                        status: 0, createdby: new mongoose.Types.ObjectId(req.session.user_id)
-                    }]
-                };
+        if (req.session.admin_access !== 1) {
+            if (req.session.access_rights && req.session.access_rights.pendingemilist && req.session.access_rights.pendingemilist.owndata) {
+                const role = await Role.findOne({ _id: req.session.role });
+                if (role.role_nm == "Staff") {
+                    query = {
+                        $and: [{
+                            date: {
+                                $lt: date
+                            }
+                        }, {
+                            status: 0, createdby: new mongoose.Types.ObjectId(req.session.user_id)
+                        }]
+                    };
+                }
+                else {
+                    query = {
+                        $and: [{
+                            date: {
+                                $lt: date
+                            }
+                        }, {
+                            status: 0, user_id: new mongoose.Types.ObjectId(req.session.user_id)
+                        }]
+                    };
+                }
+                console.log("own data");
             }
-            else {
-                query = {
-                    $and: [{
-                        date: {
-                            $lt: date
-                        }
-                    }, {
-                        status: 0, user_id: new mongoose.Types.ObjectId(req.session.user_id)
-                    }]
-                };
-            }
-            console.log("own data");
         } else {
             query = {
                 $and: [{

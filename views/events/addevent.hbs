@@ -35,7 +35,7 @@
 			</div>
 			<div class="col-md-6">	
 			<div class="form-group input">
-			<div class="col-md-12" style="border: 1px solid #ddd;">
+			<div class="col-md-12 form-control border-light" style="border: 1px solid #ddd;">
 			<div class="form-field">
 			<textarea name="eventvenue"  data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})" data-validation-regex-message="{{#with ..}}{{__ "Event venue may only contain characters, numbers, space and _,`.'^-"}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Event venue is required"}}{{/with}}" {{#if this.eventvenue}} value="{{this.eventvenue}}"{{/if}}>{{this.eventvenue}}</textarea>
 				<span class="txt-title-label"></span>
@@ -82,6 +82,16 @@
 			    </div><div class="help-block"></div>
 			    </div>
 			 </div>
+			 <script>
+				$(document).ready(function() {
+					   if ($(".oneday").is(':checked')) {
+						$('#getdate').val($('#setdate').val());
+				
+						$('.enddates').fadeOut(1);
+					}
+
+				})
+			 </script>
 			<div class="row">	
 				<div class="col-md-6">
 				<div class="form-group input">

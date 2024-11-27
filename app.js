@@ -10,10 +10,13 @@ const initialzeRoutes = require('./routes');
 const flash = require('express-flash');
 const createError = require('http-errors');
 
+const session = require("express-session");
+const MongoStore = require("connect-mongo");//sotre session on db
+
 const { connectToDatabase } = require('./config/config');
 connectToDatabase();
 
-app.use(flash());
+// app.use(flash());
 
 app.set('view engine', 'hbs');
 global.__basedir = __dirname;
@@ -53,6 +56,31 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// session store on db start ----------------------------------
+const store = MongoStore.create({
+  mongoUrl: `mongodb://127.0.0.1:27017/${process.env.DB_DATABASE}`,
+  touchAfter: 24 * 3600 //in second
+});
+
+store.on("error", () => {
+  console.log("error is ", error);
+})
+
+const sessionoption = {
+  store: store,
+  secret: '222222',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
+
+app.use(session(sessionoption));
+app.use(flash());
+// session store on db end -------------------------------
 
 app.use(initialzeRoutes);
 app.use(function (req, res, next) {
