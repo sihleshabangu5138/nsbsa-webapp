@@ -4,7 +4,18 @@ const router = express.Router();
 const i18n = require('i18n');
 
 i18n.configure({
-  locales: ['en', 'fr', 'hi', 'sp'],
+  locales: [
+    'en', 'zh', 'hi', 'es', 'ar', 'bn', 'pt', 'ru',
+    'ja', 'pa', 'de', 'ko', 'fr', 'tr', 'te', 'mr',
+    'ta', 'ur', 'gu', 'th', 'ml', 'it', 'pl', 'uk',
+    'bg', 'el', 'hu', 'nl', 'id', 'tl', 'sw', 'sr',
+    'sk', 'sl', 'hy', 'mn', 'ky', 'kk', 'ku', 'tg',
+    'af', 'az', 'rw', 'mg', 'ms', 'ne', 'ny', 'sd',
+    'st', 'zu', 'xh', 'tk', 'ka', 'kan', 'nb','sq',
+    'sv', 'be', 'lv', 'ga', 'lb', 'bs', 'ht', 'or',
+    'hr', 'fi', 'et', 'da', 'ca', 'cs', 'gl', 'gd',
+    'mt', 'cy', 'sm', 'fy', 'is', 'yo', 'qu', 'mk',
+    'km', 'ps', 'ro', 'he', 'lt'],
   cookie: 'locale',
   directory: "./locales",
   register: global,

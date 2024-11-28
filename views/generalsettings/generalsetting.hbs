@@ -753,23 +753,91 @@
 		<label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Languages" setlang}}{{/with}}<span class="red">*</span></label>
 		<select name="language" class="form-control select2" required>
 		<option {{#ifCond this.language '==' 'en'}} selected {{/ifCond}} value="en">{{#with ..}}{{__ "English"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'zh'}} selected {{/ifCond}} value="zh">{{#with ..}}{{__ "Chinese"}}{{/with}}</option>
 		<option {{#ifCond this.language '==' 'hi'}} selected {{/ifCond}} value="hi">{{#with ..}}{{__ "Hindi"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'es'}} selected {{/ifCond}} value="es">{{#with ..}}{{__ "Spanish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ar'}} selected {{/ifCond}} value="ar">{{#with ..}}{{__ "Arabic"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'bn'}} selected {{/ifCond}} value="bn">{{#with ..}}{{__ "Bengali"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'pt'}} selected {{/ifCond}} value="pt">{{#with ..}}{{__ "Portuguese"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ru'}} selected {{/ifCond}} value="ru">{{#with ..}}{{__ "Russian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ja'}} selected {{/ifCond}} value="ja">{{#with ..}}{{__ "Japanese"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'pa'}} selected {{/ifCond}} value="pa">{{#with ..}}{{__ "Punjabi"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'de'}} selected {{/ifCond}} value="de">{{#with ..}}{{__ "German"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ko'}} selected {{/ifCond}} value="ko">{{#with ..}}{{__ "Korean"}}{{/with}}</option>
 		<option {{#ifCond this.language '==' 'fr'}} selected {{/ifCond}} value="fr">{{#with ..}}{{__ "French"}}{{/with}}</option>
-		<option {{#ifCond this.language '==' 'sp'}} selected {{/ifCond}} value="sp">{{#with ..}}{{__ "Spanish"}}{{/with}}</option>
-		<!-- <option {{#ifCond this.language '==' 'de'}} selected {{/ifCond}} value="de">German</option> -->
-		<!-- <option {{#ifCond this.language '==' 'pl'}} selected {{/ifCond}} value="pl">Polish</option> -->
-		<!-- <option {{#ifCond this.language '==' 'nl'}} selected {{/ifCond}} value="nl">Dutch</option> -->
-		<!-- <option {{#ifCond this.language '==' 'pt'}} selected {{/ifCond}} value="pt">Portuguese</option> -->
-		<!-- <option {{#ifCond this.language '==' 'tr'}} selected {{/ifCond}} value="tr">Turkish</option> -->
-		<!-- <option {{#ifCond this.language '==' 'it'}} selected {{/ifCond}} value="it">Italian</option> -->
-		<!-- <option {{#ifCond this.language '==' 'id'}} selected {{/ifCond}} value="id">Indonesia</option> -->
-		<!-- <option {{#ifCond this.language '==' 'es'}} selected {{/ifCond}} value="es">Spanish</option> -->
-		<!-- <option {{#ifCond this.language '==' 'zh'}} selected {{/ifCond}} value="zh">Chinese</option> -->
-		<!-- <option {{#ifCond this.language '==' 'ru'}} selected {{/ifCond}} value="ru">Russian</option> -->
-		<!-- <option {{#ifCond this.language '==' 'ja'}} selected {{/ifCond}} value="ja">Japanese</option> -->
-		
-		 
-		</select>
+		<option {{#ifCond this.language '==' 'tr'}} selected {{/ifCond}} value="tr">{{#with ..}}{{__ "Turkish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'te'}} selected {{/ifCond}} value="te">{{#with ..}}{{__ "Telugu"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'mr'}} selected {{/ifCond}} value="mr">{{#with ..}}{{__ "Marathi"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ta'}} selected {{/ifCond}} value="ta">{{#with ..}}{{__ "Tamil"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ur'}} selected {{/ifCond}} value="ur">{{#with ..}}{{__ "Urdu"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'gu'}} selected {{/ifCond}} value="gu">{{#with ..}}{{__ "Gujarati"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'th'}} selected {{/ifCond}} value="th">{{#with ..}}{{__ "Thai"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ml'}} selected {{/ifCond}} value="ml">{{#with ..}}{{__ "Malayalam"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'it'}} selected {{/ifCond}} value="it">{{#with ..}}{{__ "Italian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'pl'}} selected {{/ifCond}} value="pl">{{#with ..}}{{__ "Polish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'uk'}} selected {{/ifCond}} value="uk">{{#with ..}}{{__ "Ukrainian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'bg'}} selected {{/ifCond}} value="bg">{{#with ..}}{{__ "Bulgarian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'el'}} selected {{/ifCond}} value="el">{{#with ..}}{{__ "Greek"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'hu'}} selected {{/ifCond}} value="hu">{{#with ..}}{{__ "Hungarian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'nl'}} selected {{/ifCond}} value="nl">{{#with ..}}{{__ "Dutch"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'id'}} selected {{/ifCond}} value="id">{{#with ..}}{{__ "Indonesian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'tl'}} selected {{/ifCond}} value="tl">{{#with ..}}{{__ "Filipino"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sw'}} selected {{/ifCond}} value="sw">{{#with ..}}{{__ "Swahili"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sr'}} selected {{/ifCond}} value="sr">{{#with ..}}{{__ "Serbian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sk'}} selected {{/ifCond}} value="sk">{{#with ..}}{{__ "Slovak"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sl'}} selected {{/ifCond}} value="sl">{{#with ..}}{{__ "Slovenian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'hy'}} selected {{/ifCond}} value="hy">{{#with ..}}{{__ "Armenian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'mn'}} selected {{/ifCond}} value="mn">{{#with ..}}{{__ "Mongolian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ky'}} selected {{/ifCond}} value="ky">{{#with ..}}{{__ "Kyrgyz"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'kk'}} selected {{/ifCond}} value="kk">{{#with ..}}{{__ "Kazakh"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ku'}} selected {{/ifCond}} value="ku">{{#with ..}}{{__ "Kurdish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'tg'}} selected {{/ifCond}} value="tg">{{#with ..}}{{__ "Tajik"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'af'}} selected {{/ifCond}} value="af">{{#with ..}}{{__ "Afrikaans"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'az'}} selected {{/ifCond}} value="az">{{#with ..}}{{__ "Azerbaijani"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'rw'}} selected {{/ifCond}} value="rw">{{#with ..}}{{__ "Kinyarwanda"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'mg'}} selected {{/ifCond}} value="mg">{{#with ..}}{{__ "Malagasy"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ms'}} selected {{/ifCond}} value="ms">{{#with ..}}{{__ "Malay"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ne'}} selected {{/ifCond}} value="ne">{{#with ..}}{{__ "Nepali"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ny'}} selected {{/ifCond}} value="ny">{{#with ..}}{{__ "Chichewa"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sd'}} selected {{/ifCond}} value="sd">{{#with ..}}{{__ "Sindhi"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'st'}} selected {{/ifCond}} value="st">{{#with ..}}{{__ "Sotho"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'zu'}} selected {{/ifCond}} value="zu">{{#with ..}}{{__ "Zulu"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'xh'}} selected {{/ifCond}} value="xh">{{#with ..}}{{__ "Xhosa"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'tk'}} selected {{/ifCond}} value="tk">{{#with ..}}{{__ "Turkmen"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ka'}} selected {{/ifCond}} value="ka">{{#with ..}}{{__ "Georgian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'kn'}} selected {{/ifCond}} value="kn">{{#with ..}}{{__ "Kannada"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'nb'}} selected {{/ifCond}} value="nb">{{#with ..}}{{__ "Norwegian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sq'}} selected {{/ifCond}} value="sq">{{#with ..}}{{__ "Albanian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sv'}} selected {{/ifCond}} value="sv">{{#with ..}}{{__ "Swedish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'be'}} selected {{/ifCond}} value="be">{{#with ..}}{{__ "Belarusian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'lv'}} selected {{/ifCond}} value="lv">{{#with ..}}{{__ "Latvian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ga'}} selected {{/ifCond}} value="ga">{{#with ..}}{{__ "Irish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'lb'}} selected {{/ifCond}} value="lb">{{#with ..}}{{__ "Luxembourgish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'bs'}} selected {{/ifCond}} value="bs">{{#with ..}}{{__ "Bosnian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ht'}} selected {{/ifCond}} value="ht">{{#with ..}}{{__ "Haitian Creole"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'or'}} selected {{/ifCond}} value="or">{{#with ..}}{{__ "Odia"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'hr'}} selected {{/ifCond}} value="hr">{{#with ..}}{{__ "Croatian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'fi'}} selected {{/ifCond}} value="fi">{{#with ..}}{{__ "Finnish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'et'}} selected {{/ifCond}} value="et">{{#with ..}}{{__ "Estonian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'da'}} selected {{/ifCond}} value="da">{{#with ..}}{{__ "Danish"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ca'}} selected {{/ifCond}} value="ca">{{#with ..}}{{__ "Catalan"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'cs'}} selected {{/ifCond}} value="cs">{{#with ..}}{{__ "Czech"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'gl'}} selected {{/ifCond}} value="gl">{{#with ..}}{{__ "Galician"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'gd'}} selected {{/ifCond}} value="gd">{{#with ..}}{{__ "Scottish Gaelic"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'mt'}} selected {{/ifCond}} value="mt">{{#with ..}}{{__ "Maltese"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'cy'}} selected {{/ifCond}} value="cy">{{#with ..}}{{__ "Welsh"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'sm'}} selected {{/ifCond}} value="sm">{{#with ..}}{{__ "Samoan"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'fy'}} selected {{/ifCond}} value="fy">{{#with ..}}{{__ "Frisian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'is'}} selected {{/ifCond}} value="is">{{#with ..}}{{__ "Icelandic"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'yo'}} selected {{/ifCond}} value="yo">{{#with ..}}{{__ "Yoruba"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'qu'}} selected {{/ifCond}} value="qu">{{#with ..}}{{__ "Quechua"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'mk'}} selected {{/ifCond}} value="mk">{{#with ..}}{{__ "Macedonian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'km'}} selected {{/ifCond}} value="km">{{#with ..}}{{__ "Khmer"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ps'}} selected {{/ifCond}} value="ps">{{#with ..}}{{__ "Pashto"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'ro'}} selected {{/ifCond}} value="ro">{{#with ..}}{{__ "Romanian"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'he'}} selected {{/ifCond}} value="he">{{#with ..}}{{__ "Hebrew"}}{{/with}}</option>
+		<option {{#ifCond this.language '==' 'lt'}} selected {{/ifCond}} value="lt">{{#with ..}}{{__ "Lithuanian"}}{{/with}}</option>
+				</select>
 							<span id="time_format-error" class="invalid-feedback" style="display: inline;"></span> 
 								<div class="help-block"></div>
 								</div> 
