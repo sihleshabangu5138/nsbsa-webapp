@@ -134,7 +134,7 @@
 									</span>
 								</div>
 								<div class="swal-title">{{{__ "Delete !"}}}</div>
-								<div class="swal-text">{{{__ "Are You sure wan't to delete this role ?"}}}</div>
+								<div class="swal-text">{{{__ "Are You sure wan't to delete this loan ?"}}}</div>
 								<div class="swal-footer">
 								<div class="swal-button-container nobutton">
 									<button class="swal-button swal-button--confirm btn btn-secondary" id="noButton">{{{__ "NO"}}}</button>
@@ -150,7 +150,7 @@
        jQuery(document).ready(function() {
 	   
 	   
-			var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
+				var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
 				$('body').on('change', '.export', function() {
 				var value = $(this).val();
 				if(value == 'csv')
@@ -174,7 +174,7 @@
 		allPages: true,
 		template: $("#page-template").html(),
 		avoidLinks: true,
-		fileName: "Loan-list.pdf",// Bug 277	
+		fileName: "Loan-list.pdf",
 		paperSize: "A4",
 		margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
 		landscape: true,
@@ -182,7 +182,7 @@
 		scale: 0.8
 		},
 		excel: {
-		fileName: "AllLoan-list.xlsx",// Bug 277
+		fileName: "AllLoan-list.xlsx",
 		allPages:true
 		},
 		scrollable: true,
@@ -328,7 +328,7 @@
 					{
                         field: "description",
                         title: "{{__ 'Loan Description'}}",
-                        width: 270
+                        width: 220
                     },
 					{
                         field: "loanamount",

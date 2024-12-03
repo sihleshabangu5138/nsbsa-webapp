@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const lang = require('../config/languageconfig');
 const AccessRight = require('../models/AccessRights'); // Assuming you have a Mongoose model for AccessRight
-const Role = require('../models/Role')
+const Role = require('../models/Role');
 
 exports.getAccessRight = async (req, res) => {
   try {
@@ -40,6 +40,7 @@ exports.getAccessRight = async (req, res) => {
       session: req.session,
       accessrightdata: access,
       setlang: languages,
+      messages: req.flash()
     });
   } catch (err) {
     // Handle errors here
@@ -52,6 +53,7 @@ exports.postAccessRight = async (req, res) => {
   try {
     const id = req.body.id;
     const { role_name, accessrights } = req.body;
+    
     if (id) {
       const myquery = { "rolename": req.body.role_name };
       const newvalues = {

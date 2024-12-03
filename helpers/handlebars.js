@@ -187,23 +187,42 @@ module.exports = {
 				}
 			}
 		}, 
+
 		ifEqual:function (array, v1, options)
 		{
-			if(array!= undefined){
-				for(var i = 0 ; i< array.length; i++)
+		
+			if (array != undefined) {
+				
+				for(let i = 0 ; i< array.length; i++)
 				{
-					if(array[i] == v1){						
+					// console.log(`${array[i]}`);
+					if (array[i] == v1) {		
 					return (v1) ? options.fn(this) : options.inverse(this);
 					}
 				} 
 			}
+			// if (!Array.isArray(array)) {
+			// 	console.error("ifEqual Error: Expected an array but got:", array);
+			// 	return options.inverse(this); // Handle invalid input gracefully
+			// }
+
+			// console.log("Checking array:", array, "for value:", v1);
+
+			// if (array.includes(v1)) {
+			// 	console.log("Match found for:", v1, "in array:", array);
+			// 	return options.fn(this);
+			// }
+
+			// console.log("No match for:", v1, "in array:", array);
+			// return options.inverse(this);
 		},		 
 		regexlimit:function(options)
 		{
 			var limit = "{1,5000}";
 			return new hbs.SafeString(limit);
 		},
-	   ifCond:function(v1, operator, v2, options){
+	ifCond: function (v1, operator, v2, options) {
+		   console.log(v1,operator,v2)
 		switch (operator) {
 			case '==':
 				return (v1 == v2) ? options.fn(this) : options.inverse(this);
@@ -399,30 +418,38 @@ module.exports = {
 		
 		getdate: function(date,format) {
 			// THIS USE ONLY HBS DATE FORMATE
-			if(date!=''){
-						 var date1=date;
-					}
-					else{
-						var date1=new Date();
-					}
-			if(format!=undefined){
-						 var str=format;
-					}
-					else{
-						var str='Y-m-d';
-					}
-					var Obj = {
-						Y: "yyyy", 
-						m: "mm", 
-						d: "dd", 
-						j: "dd", 
-						F: "mmmm", 
-					}; 
-					var trans=str.replace(/Y|m|d|j|F/gi, function(matched){ 
-						return Obj[matched];  
-					});  
-			//return dateFormat(date1, trans);
-			return dateFormat(date1, trans); 
+			try {
+				if(date!=''){
+							 var date1=date;
+						}
+						else{
+							var date1=new Date();
+						}
+				if(format!=undefined){
+							 var str=format;
+						}
+						else{
+							var str='Y-m-d';
+						}
+						var Obj = {
+							Y: "yyyy", 
+							m: "mm", 
+							d: "dd", 
+							j: "dd", 
+							F: "mmmm", 
+						}; 
+						var trans=str.replace(/Y|m|d|j|F/gi, function(matched){ 
+							return Obj[matched];  
+						});  
+				//return dateFormat(date1, trans);
+				return dateFormat(date1, trans); 
+			} catch (error) {
+				console.log(error)
+			}
+	},
+	jsonS: function (str) {
+			
+			return JSON.stringify(str);
 		},
 		humanize: function(str) {
 			// THIS USE ONLY HBS DATE FORMATE
@@ -437,7 +464,16 @@ module.exports = {
 				 //return new Date().getTime();
 				 return Math.round(new Date().getTime()/1000);
 			
-		},
+	},
+	displayOrNA: function (value) {
+		return value && value.trim() !== '' ? value : 'NA';
+	},
+	checkLengthAndDiaplayNA: function (value) {
+		if(value.length <= 0){
+			return 'NA';
+		}
+		return value;
+	},
 		currencyList:function(key, options){
 		
 			var currency_symbols = {

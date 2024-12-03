@@ -18,7 +18,7 @@
 		</div> --}}
 		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Total Customer'}}" placeholder="Addon To Right" readonly="readonly">
+				<input type="text" class="form-control square" value="{{__ 'Total Users'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
 						<span class="red">
 							<a href="totaluser" style="text-decoration: underline !important;">{{this.count}}</a>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Active Customers'}}" placeholder="Addon To Right" readonly="readonly">
+				<input type="text" class="form-control square" value="{{__ 'Active Users'}}" placeholder="Addon To Right" readonly="readonly">
 					<div class="form-control-position">
 						<span class="red">
 							<a href="userlist" style="text-decoration: underline !important;">{{this.activecount}}</a>
@@ -304,6 +304,7 @@
 					{
                         field: "mobile",
                          title: "{{__ 'Contact'}}",
+						 template: "+ #= ccode # #= mobile #",
                         width: 150
                     },
 					{

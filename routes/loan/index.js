@@ -5,7 +5,6 @@ const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const Loan = require('../../controllers/loanController');
 const lang = require('../../config/languageconfig');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const multer = require('multer');
 router.use(session({

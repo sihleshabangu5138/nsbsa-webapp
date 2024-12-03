@@ -7,7 +7,8 @@ const connectToDatabase = async(db_username, db_pass, db_host, dbname) => {
 
   let mongoDbUrl;
   if (db_username && db_pass && db_host && dbname) {
-    mongoDbUrl = `mongodb://localhost:27017/${dbname}`;
+    // mongoDbUrl = `mongodb://${db_username}:${db_pass}@${db_host}/${dbname}?authSource=admin`;
+    mongoDbUrl = `mongodb://127.0.0.1:27017/${dbname}`;
   } else {
     const {
       DB_USERNAME,
@@ -17,7 +18,7 @@ const connectToDatabase = async(db_username, db_pass, db_host, dbname) => {
     } = process.env;
 
     // mongoDbUrl = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}?authSource=admin`;
-    mongoDbUrl = `mongodb://localhost:27017/${DB_DATABASE}`;
+    mongoDbUrl = `mongodb://127.0.0.1:27017/${DB_DATABASE}`;
   }
   try {
     await mongoose.connect(mongoDbUrl, {
@@ -58,7 +59,8 @@ const connectToDatabase = async(db_username, db_pass, db_host, dbname) => {
 };
 const checkConnection = async(db_username, db_pass, db_host, dbname) => {
   try {
-    const mongoDbUrl = `mongodb://localhost:27017/${dbname}`;
+    // const mongoDbUrl = `mongodb://${db_username}:${db_pass}@${db_host}/${dbname}?authSource=admin`
+    const mongoDbUrl = `mongodb://127.0.0.1:27017/${dbname}`
     await mongoose.connect(mongoDbUrl, {
       // useNewUrlParser: true,
       // useUnifiedTopology: true,

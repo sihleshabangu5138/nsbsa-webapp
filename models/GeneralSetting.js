@@ -57,6 +57,8 @@ const generalsettingSchema = new mongoose.Schema({
   doctype_Xls: String,
   doctype_Xlsx: String,
   doctype_Zip: String,
+  stripe_secret_key: String,
+  stripe_publishable_key: String,
 });
 
 const Generalsetting = mongoose.model('generalsetting', generalsettingSchema, 'generalsettings');

@@ -24,6 +24,10 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <script>
+                        console.log({{jsonS data}})
+                      </script>
+                      {{#if data.length}}
 					{{#each data}}
 					 {{#ifCond this.action "==" "New User"}}
                       <tr>
@@ -58,6 +62,11 @@
                       </tr>
 					  {{/ifCond}}
                       {{/each}}
+                    {{else}}
+                    <tr>
+                      <td colspan="4" class="text-center">No notifications available.</td>
+                    </tr>
+                    {{/if}}
 					  
                     </tbody>
                   </table>

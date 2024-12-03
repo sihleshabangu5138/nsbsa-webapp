@@ -39,6 +39,10 @@
                         <a class="nav-link" id="MyTask-tab1" data-toggle="tab" href="#pdf_settings" aria-controls="pdf_settings"
                         aria-expanded="false"><i class="fa fa-file-pdf-o"></i> {{__ "Invoice Pdf"}}</a>
                       </li> 
+                      <li class="nav-item">
+                        <a class="nav-link" id="MyTask-tab1" data-toggle="tab" href="#stripe" aria-controls="stripe"
+                        aria-expanded="false"> {{__ "Stripe"}}</a>
+                      </li> 
 					   
 				
                     </ul>
@@ -625,8 +629,8 @@
 								<select name="date_format" id="date_format" required class="form-control valid select2">
 										<option {{#ifCond this.date_format '==' 'm-d-Y'}} selected {{/ifCond}} value="m-d-Y">mm-dd-YYYY</option>
 									<option {{#ifCond this.date_format '==' 'm/d/Y'}} selected {{/ifCond}} value="m/d/Y">mm/dd/YYYY</option> 
-									<!-- <option {{#ifCond this.date_format '==' 'd-m-Y'}} selected {{/ifCond}} value="d-m-Y">dd-mm-YYYY</option> -->
-									<!-- <option {{#ifCond this.date_format '==' 'd/m/Y'}} selected {{/ifCond}} value="d/m/Y">dd/mm/YYYY</option>  -->
+									 <option {{#ifCond this.date_format '==' 'd-m-Y'}} selected {{/ifCond}} value="d-m-Y">dd-mm-YYYY</option> 
+									 <option {{#ifCond this.date_format '==' 'd/m/Y'}} selected {{/ifCond}} value="d/m/Y">dd/mm/YYYY</option> 
 									<option {{#ifCond this.date_format '==' 'Y-m-d'}} selected {{/ifCond}} value="Y-m-d">YYYY-mm-dd</option>
 									<option {{#ifCond this.date_format '==' 'F j, Y'}} selected {{/ifCond}} value="F j, Y">Month D, YYYY</option>
 								</select>
@@ -1258,8 +1262,72 @@
 						{{/each}}
 		   </div>				 
             </div> 
-			</div>
-                      </div>		
+						</div>
+				</div>	
+					<div role="tabpanel" class="tab-pane" id="stripe" aria-labelledby="stripe-tab1" aria-expanded="true">
+						<div class="card-content">
+							<div class="card-body p-0">
+								{{#each data}}
+								<form id="formID" class="form form-horizontal" novalidate action="/generalsettings/generalsetting"
+									method="post" name="stripe_details">
+									<input type="hidden" name="id" {{#if this._id}} value="{{this._id}}" {{/if}} />
+									<div class="form-body user_form">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group input">
+													<div class="col-md-12 form-control border-light">
+														<input id="userinput1" class="form-control" type="text" name="stripe_secret_key"
+															
+															data-validation-required-message="{{#with ..}}{{__ " Secret Key is
+															required"}}{{/with}}" {{#if this.stripe_secret_key}}
+															value="{{this.stripe_secret_key}}" {{/if}}>
+														<label for="userinput1">{{#with ..}}{{__ "Stripe secret key" setlang}}{{/with}}<span
+																class="red">*</span></label>
+													</div>
+													<div class="help-block"></div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group input">
+													<div class="col-md-12 form-control border-light">
+														<input id="userinput2" class="form-control" type="text" name="stripe_publishable_key"
+															
+															data-validation-required-message="{{#with ..}}{{__ "Public Key is
+															required"}}{{/with}}" {{#if this.stripe_publishable_key}}
+															value="{{this.stripe_publishable_key}}" {{/if}}>
+														<label for="userinput2">{{#with ..}}{{__ "Stripe public key" setlang}}{{/with}}<span
+																class="red">*</span></label>
+													</div>
+												<div class="help-block"></div>
+												</div>
+											</div>
+																	
+											
+										</div>
+					
+					
+									</div>
+					
+									<div class="form-actions left">
+										<button type="submit" name="stripe" value="stripe" class="btn btn-secondary">
+											<i class="fa fa-check-square-o"></i> {{#with ..}}{{__ "Submit" setlang}}{{/with}}
+										</button>
+					
+										<button type="reset" class="btn btn-warning">
+											<i class="ft-refresh-cw"></i> {{#with ..}}{{__ "Reset" setlang}}{{/with}}
+										</button>
+									</div>
+					
+								</form>
+								{{/each}}
+					
+					
+							</div>
+					
+					
+						</div>
+					
+					</div>
 					</div>
 					</div>
 				</div>

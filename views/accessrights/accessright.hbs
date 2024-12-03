@@ -11,6 +11,16 @@
 				</li>
 			{{/each}}	
 		</ul>
+		{{#if messages.error }}
+		<script>
+			toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+		</script>
+		{{/if}}
+		{{#if messages.success }}
+		<script>
+			toastr.success("{{messages.success}}", "{{__ 'Success!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+		</script>
+		{{/if}}
 		<div class="card-content" id="left-handles">  
 		<div id="card-drag-title-area">
 			<div class="tab-content pt-1">

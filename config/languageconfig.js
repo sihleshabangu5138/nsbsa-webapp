@@ -11,7 +11,7 @@ i18n.configure({
     'bg', 'el', 'hu', 'nl', 'id', 'tl', 'sw', 'sr',
     'sk', 'sl', 'hy', 'mn', 'ky', 'kk', 'ku', 'tg',
     'af', 'az', 'rw', 'mg', 'ms', 'ne', 'ny', 'sd',
-    'st', 'zu', 'xh', 'tk', 'ka', 'kan', 'nb','sq',
+    'st', 'zu', 'xh', 'tk', 'ka', 'kn', 'nb','sq',
     'sv', 'be', 'lv', 'ga', 'lb', 'bs', 'ht', 'or',
     'hr', 'fi', 'et', 'da', 'ca', 'cs', 'gl', 'gd',
     'mt', 'cy', 'sm', 'fy', 'is', 'yo', 'qu', 'mk',

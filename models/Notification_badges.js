@@ -10,7 +10,7 @@ const notificationBadgesSchema = new mongoose.Schema({
   Name: String,
   date: String,
   status: Number,
-});
+},{timestamps:true});
 
 const NotificationBadges = mongoose.model('notification_badges', notificationBadgesSchema,'notification_badges');
 

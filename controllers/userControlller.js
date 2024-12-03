@@ -20,6 +20,7 @@ const lang = require('../config/languageconfig');
 const Mail = require('../config/email');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
+const functions = require('../helpers/function');
 // router.use(lang.init)
 
 exports.getEditUser = async (req, res) => {
@@ -28,21 +29,21 @@ exports.getEditUser = async (req, res) => {
 
   if (id) {
     try {
-      console.log("role_session",req.session.role)
+      console.log("role_session", req.session.role)
       let result_data = [];
       const result = await User.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
       // const result_data = await User.find({"_id":new mongoose.Types.ObjectId(id)}).lean();
       result_data = result;
       result_data[0].id_d = new mongoose.Types.ObjectId(result[0].role).toString();
 
-      console.log("result_data:",result_data[0].id_d)
+      console.log("result_data:", result_data[0].id_d)
       const role_name = await Role.find({}).lean();
       for (const [key, value] of Object.entries(role_name)) {
         role_name[key].id_d = new mongoose.Types.ObjectId(value._id).toString();
-        console.log("role_name:",role_name[key].id_d);
+        console.log("role_name:", role_name[key].id_d);
       };
-      console.log("role_name1:",result[0].role);
-      const settings = await Generalsetting.find().lean();
+      console.log("role_name1:", result[0].role);
+      const settings = await Generalsetting.find().lean(); 
       const jsonData = fs.readFileSync('public/data/countries.json', 'utf8');
       const jsonParsed = JSON.parse(jsonData);
 
@@ -98,12 +99,14 @@ exports.postEditUser = async function (req, res) {
     if (req.file != undefined) {
       photo = req.file.filename;
     }
-    
+
 
     if (req.body.password != '') {
       pass = md5(req.body.password);
     }
 
+    let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
+    const birthdate = moment(req.body.birthdate, currentDateFormate).format("YYYY-MM-DD");
     const newvalues = {
       $set: {
         firstname: req.body.firstname,
@@ -114,7 +117,7 @@ exports.postEditUser = async function (req, res) {
         ccode: req.body.ccode,
         mobile: req.body.mobile,
         occupation: req.body.occupation,
-        birthdate: req.body.birthdate,
+        birthdate: birthdate,
         gender: req.body.gender,
         username: req.body.username,
         // role: idrole,
@@ -241,13 +244,13 @@ exports.getAddUser = async function (req, res) {
         newfield: customfield,
         customfield_value: customfield_value
       });
-      console.log("id", id)
-      console.log('result_data', result);
-      console.log('role_name', role_name);
-      console.log('family_data', familyData);
-      console.log('setting', settings);
-      console.log('customfield', customfield);
-      console.log('customfield_value', customfield_value);
+      // console.log("id", id)
+      // console.log('result_data', result);
+      // console.log('role_name', role_name);
+      // console.log('family_data', familyData);
+      // console.log('setting', settings);
+      // console.log('customfield', customfield);
+      // console.log('customfield_value', customfield_value);
 
     } else {
       const roleNames = await Role.find({}).lean();
@@ -267,7 +270,7 @@ exports.getAddUser = async function (req, res) {
         setting: settings,
         newfield: customFields
       });
-      console.log("Names", customFields)
+      // console.log("Names", customFields)
 
     }
   } catch (error) {
@@ -278,6 +281,7 @@ exports.getAddUser = async function (req, res) {
 
 
 exports.postAddUser = async (req, res) => {
+
   try {
     const id = req.body.id;
     // let pass;
@@ -288,7 +292,7 @@ exports.postAddUser = async (req, res) => {
     if (id) {
       for (const [key, value] of Object.entries(req.files)) {
         if (value.fieldname == "photo") {
-          var img = value.filename;
+          var img = value?.filename;
         }
       }
       const {
@@ -325,8 +329,9 @@ exports.postAddUser = async (req, res) => {
 
       const roleid = new mongoose.Types.ObjectId(req.body.role);
 
-
-      const birthdate = moment(req.body.birthdate).format("YYYY-MM-DD");
+      let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
+      const birthdate = moment(req.body.birthdate, currentDateFormate).format("YYYY-MM-DD");
+      // const birthdate = moment(req.body.birthdate).format("YYYY-MM-DD");
 
       const newValues = {
         firstname,
@@ -357,6 +362,8 @@ exports.postAddUser = async (req, res) => {
       }
       console.log('newValues', newValues);
       const result = await User.findByIdAndUpdate({ "_id": new mongoose.Types.ObjectId(id) }, newValues);
+
+   
 
       const date = moment().format('YYYY-MM-DD');
 
@@ -544,8 +551,8 @@ exports.postAddUser = async (req, res) => {
       const noquery = { user: new mongoose.Types.ObjectId(req.session.user_id) };
       const query1 = { $and: [{ status: 1 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
 
-      const notiresult = await NotificationBadges.find(noquery);
-      const adminnoti = await NotificationBadges.find();
+      const notiresult = await NotificationBadges.find(noquery).sort({ createdAt: -1 });
+      const adminnoti = await NotificationBadges.find().sort({ createdAt: -1 });
       const activenoti = await NotificationBadges.countDocuments(query1);
       const adminnoticount = await NotificationBadges.countDocuments();
 
@@ -573,7 +580,7 @@ exports.postAddUser = async (req, res) => {
           var img = value.filename;
         }
       }
-      if(img == undefined){
+      if (img == undefined) {
         img = "default.png";
       }
       const { firstname, middlename, lastname, email, ccode, mobile, occupation, gender, username, password, address, country, state, city, pincode, accountnumber, pannumber, status, family, customfields } = req.body;
@@ -586,8 +593,14 @@ exports.postAddUser = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Format the birthdate
-      const birthdate = moment(req.body.birthdate).format("YYYY-MM-DD");
+      // const birthdate = moment(req.body.birthdate).format("YYYY-MM-DD");
+      // const birthdate = moment(req.body.birthdate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
+      let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
 
+
+      const birthdate = moment(req.body.birthdate, currentDateFormate).format("YYYY-MM-DD");
+
+      
       // Create the user object
       const user = new User({
         firstname,
@@ -629,7 +642,7 @@ exports.postAddUser = async (req, res) => {
       await activityLog.save();
 
       // Send notification email
-      const roles = await Role.findOne({"_id": roleid});
+      const roles = await Role.findOne({ "_id": roleid });
       const notificationTemplates = await NotificationTemplate.find({ templatetitle: "Added User" });
       for (const notification of notificationTemplates) {
         const message = notification.content;
@@ -698,7 +711,7 @@ exports.postAddUser = async (req, res) => {
       const myobj = {
         action: "New User",
         desc: "New account created.",
-        user: new mongoose.Types.ObjectId(req.session.user_id),
+        user:savedUser._id,
         Name: req.body.username,
         date: formatdate,
         status: user1.status
@@ -711,8 +724,8 @@ exports.postAddUser = async (req, res) => {
       const query = { $and: [{ status: 1 }, { "user": new mongoose.Types.ObjectId(req.session.user_id) }] };
 
 
-      const notiresult = await NotificationBadges.find(noquery).lean();
-      const adminnoti = await NotificationBadges.find().lean();
+      const notiresult = await NotificationBadges.find(noquery).sort({ createdAt: -1 }).lean();
+      const adminnoti = await NotificationBadges.find().lean().sort({ createdAt: -1 });
 
       const activenoti = await NotificationBadges.countDocuments(query);
       const adminnoticount = await NotificationBadges.countDocuments({});
@@ -725,7 +738,7 @@ exports.postAddUser = async (req, res) => {
         req.session.noticount = activenoti;
       }
 
-      req.flash('success', res.__('User Inserted Successfully.'));
+      req.flash('success', res.__('User Added Successfully.'));
       res.redirect('/users/userlist');
 
     }
@@ -744,7 +757,7 @@ exports.getViewUser = async (req, res) => {
       const result = await User.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
       // result_data = result;
       // result_data[0].id_d = new mongoose.Types.ObjectId(result[0].role).toString();
-      const role ={ "_id" : new mongoose.Types.ObjectId(result[0].role).toString() };
+      const role = { "_id": new mongoose.Types.ObjectId(result[0].role).toString() };
 
       const role_name = await Role.find(role).lean();
       for (const [key, value] of Object.entries(role_name)) {
@@ -816,32 +829,38 @@ async function fetchDataFromAPI() {
 ////////////////////////////////////  user list  ///////////////////////////////////////////
 exports.getTotalUserList = async (req, res, next) => {
   try {
-    let access_data = [];
-    const access = await AccessRights.find({ rolename: req.session.role_slug },{ access: 1 }).lean();
-    for (const [key, value] of Object.entries(access)) {
-      for (const [key1, value1] of Object.entries(value['access_type'])) {
-        if (key1 === "user") {
-          access_data = value;
-        }
+    if (req.session.admin_access !== 1) {
+
+
+      if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {
+        const query = {
+          _id: new mongoose.Types.ObjectId(req.session.user_id)
+        };
+        const numOfDocs = await User.countDocuments(query).lean();
+        const activeuser = await User.countDocuments({ status: 1, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
+        const deactiveuser = await User.countDocuments({ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
+        res.render('users/totaluser', {
+          title: 'All Users',
+          count: numOfDocs,
+          activecount: activeuser,
+          deactivecount: deactiveuser,
+          session: req.session,
+          messages: req.flash()
+        });
       }
+    } else {
+      const numOfDocs = await User.countDocuments().lean();
+      const activeuser = await User.countDocuments({ status: 1 }).lean();
+      const deactiveuser = await User.countDocuments({ status: 0 }).lean();
+      res.render('users/totaluser', {
+        title: 'All Users',
+        count: numOfDocs,
+        activecount: activeuser,
+        deactivecount: deactiveuser,
+        session: req.session,
+        messages: req.flash()
+      });
     }
-    if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {
-      const query = {
-         _id: new mongoose.Types.ObjectId(req.session.user_id)
-       };
-       const numOfDocs = await User.countDocuments(query);
-     const activeuser = await User.countDocuments({ status: 1,_id: new mongoose.Types.ObjectId(req.session.user_id) });
-     const deactiveuser = await User.countDocuments({ status: 0,_id: new mongoose.Types.ObjectId(req.session.user_id) });
-     res.render('users/totaluser', { title: 'User List', session: req.session, count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, accessrightdata: access_data, messages: req.flash() });
-     } else {
-       // Use a more generic query if user has broader access
-      // Add additional conditions if needed
-       const numOfDocs = await User.countDocuments({});
-       const activeuser = await User.countDocuments({ status: 1 });
-       const deactiveuser = await User.countDocuments({ status: 0 });
-       res.render('users/totaluser', { title: 'User List', session: req.session, count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, accessrightdata: access_data, messages: req.flash() });
-     }
-    
   } catch (error) {
     next(error);
   }
@@ -859,17 +878,19 @@ exports.getUserList = async (req, res, next) => {
     }
 
     // Check if user has access_rights and user, and owndata properties exist
-    if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {
-     const query = {
+    if (req.session.admin_access !== 1) {
+      if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {  
+        const query = {
         _id: new mongoose.Types.ObjectId(req.session.user_id)
       };
       const numOfDocs = await User.countDocuments(query);
-    const activeuser = await User.countDocuments({ status: 1,_id: new mongoose.Types.ObjectId(req.session.user_id) });
-    const deactiveuser = await User.countDocuments({ status: 0,_id: new mongoose.Types.ObjectId(req.session.user_id) });
-    res.render('users/userlist', { title: 'User List', count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, session: req.session, accessrightdata: access_data, messages: req.flash() });
+      const activeuser = await User.countDocuments({ status: 1, _id: new mongoose.Types.ObjectId(req.session.user_id) });
+      const deactiveuser = await User.countDocuments({ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) });
+      res.render('users/userlist', { title: 'User List', count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, session: req.session, accessrightdata: access_data, messages: req.flash() });
+      }
     } else {
       // Use a more generic query if user has broader access
-     // Add additional conditions if needed
+      // Add additional conditions if needed
       const numOfDocs = await User.countDocuments({});
       const activeuser = await User.countDocuments({ status: 1 });
       const deactiveuser = await User.countDocuments({ status: 0 });
@@ -881,40 +902,44 @@ exports.getUserList = async (req, res, next) => {
   }
 };
 
+
 exports.getDeactivateUser = async function (req, res, next) {
   try {
-    if (req.session.access_rights && req.session.access_rights.deactiveuser && req.session.access_rights.deactiveuser.owndata) {
-      const query = {
-         _id: new mongoose.Types.ObjectId(req.session.user_id)
-       };
-    const numOfDocs = await User.countDocuments(query).lean();
-    const activeuser = await User.countDocuments({ status: 1,_id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
-    const deactiveuser = await User.countDocuments({ status: 0,_id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
-    res.render('users/deactivateuser', {
-      title: 'Deactivate Users',
-      count: numOfDocs,
-      activecount: activeuser,
-      deactivecount: deactiveuser,
-      session: req.session,
-      messages: req.flash()
-    });
-  } else{
-    const numOfDocs = await User.countDocuments().lean();
-    const activeuser = await User.countDocuments({ status: 1}).lean();
-    const deactiveuser = await User.countDocuments({ status: 0}).lean();
-    res.render('users/deactivateuser', {
-      title: 'Deactivate Users',
-      count: numOfDocs,
-      activecount: activeuser,
-      deactivecount: deactiveuser,
-      session: req.session,
-      messages: req.flash()
-    });
-  }
+    if (req.session.admin_access !== 1) {
+      if (req.session.access_rights && req.session.access_rights.deactiveuser && req.session.access_rights.deactiveuser.owndata) {
+        const query = {
+          _id: new mongoose.Types.ObjectId(req.session.user_id)
+        };
+        const numOfDocs = await User.countDocuments(query).lean();
+        const activeuser = await User.countDocuments({ status: 1, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
+        const deactiveuser = await User.countDocuments({ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
+        res.render('users/deactivateuser', {
+          title: 'Deactivate Users',
+          count: numOfDocs,
+          activecount: activeuser,
+          deactivecount: deactiveuser,
+          session: req.session,
+          messages: req.flash()
+        });
+      }
+    } else {
+      const numOfDocs = await User.countDocuments().lean();
+      const activeuser = await User.countDocuments({ status: 1 }).lean();
+      const deactiveuser = await User.countDocuments({ status: 0 }).lean();
+      res.render('users/deactivateuser', {
+        title: 'Deactivate Users',
+        count: numOfDocs,
+        activecount: activeuser,
+        deactivecount: deactiveuser,
+        session: req.session,
+        messages: req.flash()
+      });
+    }
   } catch (error) {
     next(error);
   }
 };
+
 
 exports.getDeactivateUserList = async (req, res, next) => {
   try {

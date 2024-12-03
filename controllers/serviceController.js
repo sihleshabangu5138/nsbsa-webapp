@@ -28,7 +28,6 @@ exports.getServiceList = async (req, res, next) => {
         }
       }
     };
-
     res.render('service/servicelist', {
       title: 'Services',
       session: req.session,

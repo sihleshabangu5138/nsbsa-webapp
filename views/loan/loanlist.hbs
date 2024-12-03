@@ -133,7 +133,7 @@
 									</span>
 								</div>
 								<div class="swal-title">{{{__ "Delete !"}}}</div>
-								<div class="swal-text">{{{__ "Are You sure wan't to delete this role ?"}}}</div>
+								<div class="swal-text">{{{__ "Are You sure wan't to delete this loan ?"}}}</div>
 								<div class="swal-footer">
 								<div class="swal-button-container nobutton">
 									<button class="swal-button swal-button--confirm btn btn-secondary" id="noButton">{{{__ "NO"}}}</button>
@@ -161,7 +161,7 @@
 				}
 			});
 		 var window1 = $("#window").kendoWindow({
-            title: "{{__ 'Warning !'}}",
+            title: "{{__ 'Alert !'}}",
 			resizable: false,
             visible: false, //the window will not appear before its .open method is called
            
@@ -504,9 +504,12 @@
 						data : {id:id,approvestatus:value,name:'approvestatus'},
 						success: function (response)
 						{		 //alert(response);
+							toastr.success("Loan approved successfully!", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 }); 
+
 						},
 						error: function(e) 
 						{		
+							
 							console.log(e);
 						}
 					});
@@ -522,10 +525,10 @@
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						data : {id:id,approvestatus:value,name:'approvestatus'},
 						success: function (response)
-						{		 //alert(response);
+				 //alert(response); 
 						},
 						error: function(e) 
-						{	//console.log(e);
+						{	console.log(e);
 						}
 					});
 			}

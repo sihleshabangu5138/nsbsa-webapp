@@ -10,7 +10,9 @@ const Category = require('../models/Category');
 const CustomField = require('../models/Customfields');
 const CustomFieldMeta = require('../models/CustomFieldMeta');
 const ActivityLog = require('../models/Activitylog');
+const functions = require('../helpers/function');
 const moment = require('moment');
+const { getProductDelete } = require('./ajaxController');
 
 exports.getProductList = async (req, res, next) => {
   try {
@@ -54,7 +56,10 @@ exports.getAddProduct = async (req, res) => {
       for (const field of customfield_value) {
         field.id_d = new mongoose.Types.ObjectId(field.custom_field_id).toString();
       }
+      let currentDateFormat = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
 
+      product[0].stockexpiry = moment(product[0].stockexpiry, "YYYY-MM-DD").format(currentDateFormat);
+      console.log(product,"------------")
       res.render('product/addproduct', {
         title: 'Edit Product',
         session: req.session,
@@ -97,8 +102,9 @@ exports.getAddProduct = async (req, res) => {
 
       const category = await Category.find(query).lean();
       const unitcategory = await Category.find(unit_query).lean();
-
+      console.log(customfield);
       res.render('product/addproduct', { title: "Add Product", data: news, session: req.session, category, unit: unitcategory, newfield: customfield, customfield_value: customfield_value, note: news });
+     
     }
   } catch (err) {
     console.error(err);
@@ -114,6 +120,8 @@ exports.postAddProduct = async (req, res) => {
   const id = req.body.id;
   let productimg = [];
   let attachfiles = [];
+  let currentDateFormat = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
+
   // Process product images
   const upimg = req.body.productimage_old;
   if (upimg !== undefined) {
@@ -163,6 +171,7 @@ exports.postAddProduct = async (req, res) => {
     addnote.push(note);
   }
   const stockExpiry = req.body.stockexpiry || null;
+  let stockExpiryFormatDate = moment(stockExpiry, currentDateFormat).format("YYYY-MM-DD");
 
   if (id) {
     try {
@@ -179,7 +188,7 @@ exports.postAddProduct = async (req, res) => {
           tagname: tagValue,
           skubarcode: req.body.skubarcode,
           initialstock: req.body.initialstock,
-          stockexpiry: stockExpiry,
+          stockexpiry: stockExpiryFormatDate,
           locationrack: req.body.locationrack,
           retailprice: req.body.retailprice,
           specialprice: req.body.specialprice,
@@ -347,6 +356,7 @@ exports.postAddProduct = async (req, res) => {
   }
   else {
     try {
+     
       const productData = {
         productname: req.body.productname,
         categorytypes: req.body.categorytypes,
@@ -358,7 +368,7 @@ exports.postAddProduct = async (req, res) => {
         tagname: tagValue,
         skubarcode: req.body.skubarcode,
         initialstock: req.body.initialstock,
-        stockexpiry: stockExpiry,
+        stockexpiry: stockExpiryFormatDate,
         locationrack: req.body.locationrack,
         retailprice: req.body.retailprice,
         specialprice: req.body.specialprice,

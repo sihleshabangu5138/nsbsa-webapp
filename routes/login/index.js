@@ -11,6 +11,7 @@ const Login = require('../../controllers/loginController');
 const Setting = require("../../models/Settings");
 const { connectToDatabase } = require("../../config/config");
 const { verifyLoginPurchaseKey } = require('../../utils/middleware/verifyLoginKey');
+const path = require('path');
 
 dotenv.config();
 
@@ -25,6 +26,13 @@ router.use(
 
 router.use(flash());
 function reloadEnv() {
+  const envFilePath = path.resolve(process.cwd(), '.env'); // Get the .env file path
+  
+  // Check if .env file exists
+  if (!fs.existsSync(envFilePath)) {
+    console.error('.env file not found at:', envFilePath);
+    return;
+  }
   const envContent = fs.readFileSync('.env', 'utf8');
   const envLines = envContent.split('\n');
 

@@ -17,7 +17,7 @@
 		</div>
 		</div>
 		<div class="col-xl-10 col-md-7 col-sm-12" style="padding-top: 2%;">
-			<div id="card-drag-area">
+			<div id="card">
 			<h5 class="card-title"></h5>
 			<p><h1 class="card-subtitle text-muted">{{this.firstname}} {{this.middlename}} {{this.lastname}}</h1></p>
 				<!-- <div class="row"> -->
@@ -32,12 +32,12 @@
 								</div>
 								<div class="col-xl-3 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
 										 <h5>
-										<i class="fa fa-phone"> </i> {{this.mobile}}
+										<i class="fa fa-phone"> </i> +{{this.ccode}} {{this.mobile}}
 										</h5>
 								</div>
 								<div class="col-xl-5 col-md-4 col-12 col-sm-12 col-xs-12 card-content collapse show">
 										<h5 class="card-text">
-											<i class="fa fa-map-marker"> </i> {{this.address}},
+											<i class="fa fa-map-marker"> </i> {{ this.address}},
 											<span>{{getcitybyid this.city}},</span>
 											<span>{{getstatebyid this.state}},</span>
 											<span>{{getcountrybyid this.country}}.</span>
@@ -82,7 +82,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">{{this.middlename}}</div>  
+						  <div class="tabletext">{{displayOrNA this.middlename}}</div>  
 						  </div>
 						</div>  
 				 </div>    
@@ -126,7 +126,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{this.gender}} </div>
+							<div class="tabletext">{{displayOrNA this.gender}} </div>
 						  </div>
 						</div>  
 				 </div>    
@@ -176,7 +176,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">{{this.pincode}}</div>  
+						  <div class="tabletext">{{displayOrNA this.pincode}}</div>  
 						  </div>
 						</div>  
 				 </div>    
@@ -188,7 +188,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							 <div class="tabletext">{{getcitybyid this.city}}</div> 
+							 <div class="tabletext">{{displayOrNA (getcitybyid this.city)}}</div> 
 						  </div>
 						</div>
 				    </div>
@@ -198,7 +198,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{getstatebyid this.state}}</div>
+							<div class="tabletext">{{displayOrNA (getstatebyid this.state)}}</div>
 						  </div>
 						</div>  
 				 </div>    
@@ -210,7 +210,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{getcountrybyid this.country}} </div>
+							<div class="tabletext">{{ displayOrNA (getcountrybyid this.country)}} </div>
 						  </div>
 						</div>
 				    </div>
