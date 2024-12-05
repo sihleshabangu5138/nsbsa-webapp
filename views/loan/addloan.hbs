@@ -230,16 +230,19 @@
 				{{#each this.document}}
 				<div class="col-md-6">
 					<div class="form-group"> 
+						<div>
+							
+						</div>
 						<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Upload Document" setlang}}{{/with}}<span class="required red">*</span></label>
-						<input class="form-control border-light fileUpload docfile" id="fileUpload" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
+						<input class="form-control border-light fileUpload docfile" id="fileUpload" onchange="return ValidateExtension()" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
 						<span class="required red notice"></span>
 						{{#if this}}
 						<p class="d-inline-block mr-2">{{this}}</p>
 						<a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
 						<input class="form-control border-light fileUpload doc_old_in" name="doc_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
 						{{/if}}
-					</div>
 					<div class="help-block"></div>
+					</div>
 				</div>
 				{{/each}}
 				<div class="row col-md-12 add_element">
@@ -1035,7 +1038,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 						$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
 					}
 					else{
-						$(this).siblings('.notice').html();
+						$(this).siblings('.notice').html("");
 					}
 				}
 			});

@@ -1,4 +1,4 @@
- {{breadcrums (__ 'Home') (__ 'Disapproved Loan List')}}
+ {{breadcrums (__ 'Home') (__ 'Disapproved Loans')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 	<div class="content-header row">
 	<div class="col-xl-12 col-lg-12 box-four-view">
@@ -17,7 +17,7 @@
 		</div> --}}
 		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'All Loans'}}" placeholder="Addon To Right" readonly="readonly">
+				<input type="text" class="form-control square" value="{{__ 'Total Loans'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
 					<span class="text-warning">
 						<a href="totalloans" style="text-decoration: underline !important;">{{this.count}}</a>
@@ -83,13 +83,7 @@
 	 
 	<div class="card-content collpase show">
 		<!-- Zero configuration table -->
-        <section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
-			{{#if messages.error  }}
+		{{#if messages.error  }}
 			<script>
 					toastr.error("{{messages.error}}","Error!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
@@ -99,6 +93,13 @@
 					toastr.success("{{messages.success}}", "Sucess!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
+        <section id="configuration">
+        <div class="row">
+            <div class="col-12">
+             <div class="card">
+                
+                <div class="card-content collapse show">
+			
                 <div class="card-body card-dashboard card-design">
 					
 					<section id="horizontal">
@@ -219,15 +220,14 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									 toastr.success("Loan deleted successfully!", "Success!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
-								}
-								else{
-									
-									 toastr.error("Loan can not be deleted!", "Error!", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
-			
-									
-								}		
+									toastr.success("{{__ "Loan Deleted Successfully!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+
+								} else {
+
+									toastr.error("{{__ " Error! Loan Can Not Be Deleted!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+
+								}	
 							}
 						},
 					

@@ -169,10 +169,15 @@
                                 <span>{{__ "Using Account Details"}}</span>
                             </p>
                             <div class="card-body NF_login">
-                                {{#if messages.error}}
-                                	   <script>
-                                        toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-                                    </script>
+                                {{#if messages.error }}
+                                <script>
+                                    toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+                                </script>
+                                {{/if}}
+                                {{#if messages.success }}
+                                <script>
+                                    toastr.success("{{messages.success}}", "{{__ 'Success!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+                                </script>
                                 {{/if}}
                                 <form  id="formID" class="needs-validation form form-horizontal" novalidate action="/" method="post" >
                           

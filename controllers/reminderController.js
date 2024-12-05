@@ -364,7 +364,7 @@ exports.postAddReminder = async (req, res) => {
           await CustomFieldMeta.create(this_data);
         }
       }
-      req.flash('success', res.__('Reminder Inserted Successfully.'));
+      req.flash('success', res.__('Reminder Added Successfully.'));
       res.redirect('/reminder/reminders');
     } catch (error) {
       console.error(error);

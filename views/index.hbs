@@ -3,19 +3,20 @@
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
         <div class="content-body">
+     
         <!-- Stats -->
         <div class="row">
           <div class="col-xl-3 col-lg-6 col-12 block_four">
             <div class="card">
               <div class="card-content">
-			  <a href="/users/userlist">
+			  <a href="/users/totaluser">
                 <div class="media align-items-stretch">
                   <div class="p-1 text-center block_first bg-darken-2">
                     <i class="icon-camera font-large-1 white"></i>
 					 
                   </div>
                   <div class="p-1 block_first white media-body">
-                    <h5 class="text-uppercase">{{__ "Total Customer"}}</h5>
+                    <h5 class="text-uppercase">{{__ "Total User"}}</h5>
                     <h5 >{{this.activecount}}</h5>
                     <div class="progress mt-0 mb-1" style="height: 2px;">
                             <div class="progress-bar" role="progressbar" style="width: {{this.activecount}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -97,8 +98,18 @@
         <div class="row match-height" id="calendar">
           <div class="col-12 col-md-12 col-lg-12 EMI-CAL">
 		<div class="card">
+      {{#if messages.error }}
+      <script>
+        toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+      </script>
+      {{/if}}
+      {{#if messages.success }}
+      <script>
+        toastr.success("{{messages.success}}", "{{__ 'Success!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+      </script>
+      {{/if}}
 		  <div class="card-header border-bottom border-light">
-			<h4 class="card-title text-capitalize">{{__ "calcultor"}}</h4>
+			<h4 class="card-title text-capitalize">{{__ "Calculator"}}</h4>
 			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
 		  </div>
 		  <div class="card-content px-1">
@@ -214,6 +225,7 @@
 						</section>
         <!-- // Full calendar basic example section end -->
        </div>
+
        {{!-- {{#ifCond session.admin_access "==" 1}}  --}}
 			{{#hiddenmodules session.access_rights.reminder.view session.admin_access}}
 		<div role="tabpanel" class="tab-pane" id="aboutIcon11" aria-labelledby="MyTask-tab1"
@@ -424,7 +436,7 @@
                 <h4 class="card-title text-capitalize">{{__ "Users"}}</h4>
                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                 <div class="heading-elements">
-                    <a href="/users/userlist" title="{{__ "View New Customer"}}"><i class="ft-external-link"></i></a>
+                    <a href="/users/totaluser" title="{{__ "View New Users"}}"><i class="ft-external-link"></i></a>
                 </div>
             </div>
             <div class="card-content">

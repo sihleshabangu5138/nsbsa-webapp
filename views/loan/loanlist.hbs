@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Loan List')}}
+{{breadcrums (__ 'Home') (__ 'Approved Loans')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="content-header row">
@@ -18,7 +18,7 @@
 		</div> --}}
 		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'All Loans'}}" placeholder="Addon To Right" readonly="readonly">
+				<input type="text" class="form-control square" value="{{__ 'Total Loans'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
 					<span class="text-warning">
 						<a href="totalloans" style="text-decoration: underline !important;">{{this.count}}</a>
@@ -75,16 +75,13 @@
 	<div class="card"> 
 	<div class="card-content collpase show">
 			{{#if messages.error  }}
-			<script>
-					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-\			{{else if messages.Eroor_doc }}
 				<script>
-					toastr.error("{{messages.Eroor_doc}}", "{{__ 'Error!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.error("{{messages.error}}","{{__ 'Error!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
-			{{else if messages.success }}
+			{{/if}}
+			{{#if messages.success }}
 				<script>
-					toastr.success("{{messages.success}}", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+					toastr.success("{{messages.success}}","{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
 		<!-- Zero configuration table -->
@@ -213,11 +210,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Loan deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Loan Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Loan can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Loan Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}
@@ -344,8 +341,8 @@
 					{
                         field: "approvestatus",
                         title: "{{__ 'Approved Status'}}",
-						template:'<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
-                        width: 130
+						template: '<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
+						width: 130,
                     },
 					{{/isCustomer}}
 					{
@@ -405,9 +402,22 @@
 								click:function(e) 
 								{ 
 								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
+								 console.log(clickedRow,"---------");
 								  var id = clickedRow._id; 
-								  window.location.href = "viewloan/"+id;
+										console.log({{{jsonS session}}})
+										console.log("{{session.role_slug }}");
+								  	if("{{ session.role_slug }}" == "customer"){
+										let loanUser = clickedRow.user._id;
+										let currentUser = "{{session.user_id}}";
+										if(loanUser == currentUser){
+								  			window.location.href = "viewloan/"+id;
+										} else {
+											toastr.error("{{__ 'You do not have permission to view this loan.'}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+											{{!-- $(e.currentTarget).hide(); --}}
+										}
+									} else{
+										window.location.href = "viewloan/"+id;
+									}
 								  return false;
 								} 
 							},
@@ -489,10 +499,11 @@
 	</div>
 	</div>
 	</div>
-<script type="text/javascript">  
+{{!-- <script type="text/javascript">  
        $('body').on('click', '#approvestatus', function(e) 
 		{		
 			if($(this).prop("checked") == true)
+			console.log("checked");
 				{
 					var id = $(this).val(); 
 					var value = "checked"; 
@@ -516,6 +527,7 @@
 					
 				}
 			else if($(this).prop("checked") == false) {
+				console.log("unchecked");
 				var id = $(this).val(); 
 					var value = null; 
 					<!-- alert("checked"); -->
@@ -533,5 +545,54 @@
 					});
 			}
 		});
-    </script>
+    </script> --}}
+	<script type="text/javascript">  
+       $('body').on('click', '#approvestatus', function(e) 
+		{		
+			if($(this).prop("checked") == true)
+				{
+					var id = $(this).val(); 
+					var value = "checked"; 
+					<!-- alert(value); -->
+					$.ajax({
+						type: 'POST',
+						url: '/ajxfun/approveloan/',
+						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+						data : {id:id,approvestatus:value,name:'approvestatus'},
+						success: function (response)
+						{		
+						console.log("1")
+							window.location.replace('/loan/loanlist'); 
+						},
+						error: function(e) 
+						{		
+							console.log(e);
+						}
+					});
+					
+				}
+			else if($(this).prop("checked") == false) {
+				var id = $(this).val(); 
+					var value = null; 
+					<!-- alert("checked"); -->
+					$.ajax({
+						type: 'POST',
+						url: '/ajxfun/approveloan/',
+						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+						data : {id:id,approvestatus:value,name:'approvestatus'},
+						success: function (response)
+						{		 
+							console.log("2")
+						{{!-- toastr.success("Loan Disapproved Successfully!", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); --}}
+						window.location.replace('/loan/loanlist'); 
+						},
+						error: function(e) 
+						{	
+							console.log(e)
+							toastr.error("Error!", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+						}
+					});
+			}
+		});
+    </script> 
 	

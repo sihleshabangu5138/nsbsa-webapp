@@ -1,4 +1,4 @@
-{{ breadcrums (__ 'Home') (__ 'Product List')}}
+{{ breadcrums (__ 'Home') (__ 'Products')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
@@ -165,11 +165,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Product deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Deleted! Product Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Product can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Product Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}
@@ -263,21 +263,25 @@
 					{
                         field: "productname" ,
                         title: "{{__ 'Product Name'}}",
+						 template: "#= productname && productname.trim() !== '' ? productname : 'N/A' #",
 						width: 150 
                     },
 					{
                         field: "categorytypes" ,
                         title: "{{__ 'Category Type'}}",
+						 template: "#= categorytypes && categorytypes.trim() !== '' ? categorytypes : 'N/A' #",
 						width: 150
                     },
 					{
                         field: "productunit" ,
                         title: "{{__ 'Product Unit'}}",
+						 template: "#= productunit && productunit.trim() !== '' ? productunit : 'N/A' #",
 						width: 150
                     },
 					{
                         field: "description" ,
                         title: "{{__ 'Description'}}",
+						 template: "#= description && description.trim() !== '' ? description : 'N/A' #",
 						width: 150
                     },
 					{
@@ -290,7 +294,7 @@
                 // Display the first image (you can customize this based on your needs)
                 return dataItem.productimage[0];
             } else {
-                return ""; // No images
+                return "N/A"; // No images
             }
         },
 						width: 150
@@ -305,7 +309,7 @@
                 // Display all tags (you can customize this based on your needs)
                 return dataItem.tagname.join(", ");
             } else {
-                return ""; // No tags
+                return "N/A"; // No tags
             }
         },
 						width: 150
@@ -325,17 +329,20 @@
 					{
                         field: "initialstock" ,
 						title: "{{__ 'Initial Stock'}}",
+						template:"#= initialstock && initialstock.trim() !== '' ? initialstock : 'N/A' #",
 						width: 150
                     },
 					{
                         field: "stockexpiry" ,
 						title: "{{__ 'Stock Expiry'}}",
+						 template: "#= stockexpiry && stockexpiry.trim() !== '' ? stockexpiry : 'N/A' #",
 						 hidden: true,
 						width: 150
                     },
 					{
                         field: "locationrack" ,
 						title: "{{__ 'Location/Rack Number'}}",
+						 template: "#= locationrack && locationrack.trim() !== '' ? locationrack : 'N/A' #",
 						 hidden: true,
 						width: 150
                     },
@@ -343,6 +350,7 @@
                         field: "retailprice" ,
                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Retail Price'}}",
 						 hidden: true,
+						 
 						width: 150
                     },
 					{

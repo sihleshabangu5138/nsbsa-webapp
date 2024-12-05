@@ -298,7 +298,7 @@ exports.postAddRole = async (req, res) => {
     console.log("user_id", new mongoose.Types.ObjectId(req.session.user_id))
     console.log("reference_id", savedRole._id);
 
-    req.flash('success', res.__('Role Inserted Successfully.'));
+    req.flash('success', res.__('Role Added Successfully.'));
     res.redirect('/role/roles');
   }
 };

@@ -346,7 +346,7 @@ exports.postAddService = async (req, res) => {
         servicefor: req.body.servicefor,
         description: req.body.description,
         uploadimages: uploadimg,
-        tagname: tag.length > 0 ? tag : undefined,
+        tagname: tag.length > 0 ? tag : null,
         duration_hour: req.body.duration_hour,
         duration_minute: req.body.duration_minute,
         pricetype: req.body.pricetype,
@@ -420,7 +420,7 @@ exports.postAddService = async (req, res) => {
         await notes.save();
       }
 
-      req.flash('success', res.__('Service Inserted Successfully.'));
+      req.flash('success', res.__('Service Added Successfully.'));
       res.redirect('/service/servicelist');
     }
   } catch (error) {

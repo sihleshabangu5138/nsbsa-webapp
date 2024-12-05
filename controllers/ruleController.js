@@ -297,7 +297,7 @@ exports.postAddRule = async (req, res) => {
         }
       }
 
-      req.flash('success', res.__('Rule Inserted Successfully.'));
+      req.flash('success', res.__('Rule Added Successfully.'));
       res.redirect('/rule/rules');
     }
   } catch (err) {

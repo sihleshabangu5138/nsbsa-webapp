@@ -158,7 +158,7 @@ exports.postAddProduct = async (req, res) => {
   const tags = req.body.tagname;
   const tag = Array.isArray(tags) ? tags : [tags];
   console.log("tag :",tag);
-  const tagValue = tag.length > 0 && tag[0] !== undefined ? tag : 'N/A';
+  const tagValue = tag.length > 0 && tag[0] !== undefined ? tag : null;
   console.log("tagValue",tagValue);
 
   // Process notes and attach files
@@ -451,7 +451,7 @@ exports.postAddProduct = async (req, res) => {
       }
 
 
-      req.flash('success', res.__('Product Inserted Successfully.'));
+      req.flash('success', res.__('Product Added Successfully.'));
       res.redirect('/product/productlist');
     } catch (error) {
       req.flash('error', res.__('Error occurred.'));

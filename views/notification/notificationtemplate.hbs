@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Notification Template Listing')}}
+{{breadcrums (__ 'Home') (__ 'Notification Templates')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 	<div class="row" style="">
 	
@@ -23,17 +23,7 @@
 	<div class="card">
 	 
 	<div class="card-content collpase show">
-	 
-		<!-- Zero configuration table -->
-        <section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
-				
-				<!--{{log messages}}-->
-				{{#if messages.error  }}
+	 {{#if messages.error  }}
 			<script>
 					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
@@ -43,6 +33,16 @@
 					toastr.success("{{messages.success}}","{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
+		<!-- Zero configuration table -->
+        <section id="configuration">
+        <div class="row">
+            <div class="col-12">
+             <div class="card">
+                
+                <div class="card-content collapse show">
+				
+		
+				
                 <div class="card-body card-dashboard card-design">
 					
 					<section id="horizontal">
@@ -164,11 +164,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Notification deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ " Notification Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Notification can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Notification Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}

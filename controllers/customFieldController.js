@@ -21,7 +21,7 @@ exports.getCustomFieldList = async (req, res, next) => {
     }
 
     res.render('customfields/customfieldlist', {
-      title: 'Custom Field List',
+      title: 'Custom Fields',
       session: req.session,
       messages: req.flash(),
       accessrightdata: access_data
@@ -46,10 +46,10 @@ exports.getAddCustomField = async (req, res, next) => {
     const myquery = { "_id": new mongoose.Types.ObjectId(id) };
     const result = await CustomField.find(myquery).lean();
     console.log(result);
-    res.render('customfields/addcustomfields', { title: "Edit Custom Fields", data: result, id: id, session: req.session, messages: req.flash() });
+    res.render('customfields/addcustomfields', { title: "Edit Custom Field", data: result, id: id, session: req.session, messages: req.flash() });
   } else {
     const news = [{ userid: '-1' }];
-    res.render('customfields/addcustomfields', { title: "Add Custom Fields", data: news, id: id, session: req.session });
+    res.render('customfields/addcustomfields', { title: "Add Custom Field", data: news, id: id, session: req.session });
   }
 }
 

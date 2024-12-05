@@ -89,7 +89,7 @@ exports.postAddNotificationTemplate = async (req, res) => {
 
             await ActivityLog.create(activityLog);
 
-            req.flash('success', res.__('Notification Template Inserted Successfully.'));
+            req.flash('success', res.__('Notification Template Added Successfully.'));
             res.redirect('/notification/notificationtemplate');
         }
     } catch (error) {

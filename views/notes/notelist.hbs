@@ -167,7 +167,7 @@
                         
 								if(e.responseText=="true"){
 									
-									<!-- toastr.success("('Role deleted successfully!')", "('Success!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
+									<!-- toastr.success("('Role Deleted Successfully!')", "('Success!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
 									
 								}else{
 									
@@ -264,16 +264,19 @@
 					{
                         field: "obj" ,
                         title: "{{__ "Notes"}}",
+						template:"#= obj && obj.trim() !== '' ? obj : 'N/A' #",
 						width: 150
                     },
 					{
                         field: "object" ,
                         title: "{{__ "Files attached"}}",
+						template:"#= object && object.trim() !== '' ? object : 'N/A' #",
 						width: 150
                     },
 					{
                         field: "module" ,
                         title: "{{__ "Module"}}",
+						template:"#= module && module.trim() !== '' ? module : 'N/A' #",
 						width: 150
                     },
 					{

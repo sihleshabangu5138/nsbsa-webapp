@@ -1,4 +1,4 @@
- {{breadcrums (__ 'Home') (__ 'User details')}}
+ {{breadcrums (__ 'Home') (__ 'View User')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1 font-way">
 <div class="content-wrapper">
@@ -94,7 +94,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							 <div class="tabletext">{{this.lastname}}</div> 
+							 <div class="tabletext">{{displayOrNA this.lastname}}</div> 
 						  </div>
 						</div>
 				    </div>
@@ -104,7 +104,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6 "> 
 						    <span class="colon">:</span>
-							<div class="tabletext"> {{this.occupation}}</div>
+							<div class="tabletext"> {{displayOrNA this.occupation}}</div>
 						  </div>
 						</div>  
 				 </div>    
@@ -138,7 +138,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6" > 
 						    <span class="colon">:</span>
-							<div class="tabletext"> {{this.email}}</div> 
+							<div class="tabletext"> {{displayOrNA this.email}}</div> 
 						  </div>
 						</div>
 				    </div>
@@ -148,7 +148,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6" > 
 						    <span class="colon">:</span> 
-							<div class="tabletext"><i class="ft-plus"></i> {{this.ccode}} {{this.mobile}}</div>
+							<div class="tabletext"><i class="ft-plus"></i> {{displayOrNA this.ccode}} {{this.mobile}}</div>
 						  </div>
 						</div>  
 				 </div>    
@@ -166,7 +166,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6 "> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.address}}</div>
+						  <div class="tabletext">{{displayOrNA this.address}}</div>
 						  </div>
 						</div>
 				    </div>
@@ -238,7 +238,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.username}}</div>
+						  <div class="tabletext">{{displayOrNA this.username}}</div>
 						  </div>
 						</div>
 				    </div>
@@ -270,7 +270,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.familymember}}</div>
+						  <div class="tabletext">{{displayOrNA this.familymember}}</div>
 						  </div>
 						</div>
 				    </div>
@@ -280,7 +280,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">{{this.famoccupation}}</div>  
+						  <div class="tabletext">{{displayOrNA this.famoccupation}}</div>  
 						  </div>
 						</div>  
 				 </div>    
@@ -292,7 +292,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							 <div class="tabletext">{{this.relationship}}</div> 
+							 <div class="tabletext">{{displayOrNA this.relationship}}</div> 
 						  </div>
 						</div>
 				    </div>
@@ -302,7 +302,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext">{{this.famcontact}}</div>
+							<div class="tabletext">{{displayOrNA this.famcontact}}</div>
 						  </div>
 						</div>  
 				 </div>    
@@ -314,7 +314,8 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							<div class="tabletext"> {{{currencyList ../session.generaldata.currency}}} {{this.income}} </div>
+							
+							<div class="tabletext">{{#if this.income}} {{{currencyList ../session.generaldata.currency}}} {{/if}} {{ displayOrNA this.income}} </div>
 						  </div>
 						</div>
 				    </div>

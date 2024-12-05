@@ -291,7 +291,7 @@ border-right: 1px solid #d5d5d5 !important;
 	border-collapse: separate;
     border-spacing: 0 9px;
 	border: 1px solid #d5d5d5;
-    padding: 0px 20px 20px 20px;
+    padding: 0px 20px 0px 20px;
 }
 .colortr{
 	background-color: #F5F7FA;
@@ -747,3 +747,4 @@ body {
 	.media-list .media-sm{
 		padding: 1.10rem !important;
 	}
+

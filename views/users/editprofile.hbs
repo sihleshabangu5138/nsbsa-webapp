@@ -85,6 +85,33 @@
 				$('#state').empty().append("<option value=''></option>");
 			}
 	});
+	$(document).ready(function () {
+			$("body").on("change", "#country", function (e) {
+
+				var countryId = $(this).val()
+				if (countryId != '') {
+					$.ajax({
+						type: 'POST',
+						url: '/ajxfun/countrycode/',
+						headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+						data: { countryId: countryId },
+						success: function (response) {
+							var countrycode = response.country;
+							var selectedCountry = countrycode.find(country => country.id == countryId);
+							$('#ccode').val(selectedCountry.phoneCode);
+							console.log('Selected Country ID:', selectedCountry.phoneCode);
+							
+						},
+						error: function (e) {
+							console.log(e,"er");
+						}
+					});
+				} else {
+					$('#city').empty().append("<option value=''>{{__ "Select City"}}</option>");
+					$('#state').empty().append("<option value=''>{{__ "Select State"}}</option>");
+				}
+			});
+		});
 	</script>
 		
 		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>  {{#with ..}}{{__ "Personal Information" setlang}}{{/with}}</p>
@@ -119,9 +146,9 @@
 			<div class="form-group row">
 			<div class="col-md-12">
 				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Image" setlang}}{{/with}}<span class="required red"></span></label>
-				<input class="form-control border-light imageUpload"  name="photo" {{#if this.photo}} value="{{this.photo}}" {{else}} data-validation-required-message="{{__ 'Profile Image is required'}}" {{/if}} type="file" id="userinput5" >
+				<input class="form-control border-light imageUpload" onchange="return ValidateExtension()"  name="photo" {{#if this.photo}} value="{{this.photo}}" {{else}} data-validation-required-message="{{__ 'Profile Image is required'}}" {{/if}} type="file" id="userinput5" >
 				<span class="required red notice"></span>
-				{{#if this.photo}} <img class="existing_user_image update_time_team_image mt-1" src="/images/upload/{{this.photo}}">
+				{{#if this.photo}} <img class="existing_user_image update_time_team_image mt-1" id="previewselectedlogo" src="/images/upload/{{this.photo}}">
 				<input class="form-control border-light"  name="photo_old" value="{{this.photo}}" type="hidden"  placeholder="" id="userinput_5" > {{/if}}
 			</div><div class="help-block"></div>
 			</div>
@@ -142,10 +169,10 @@
 						<i class="ft-plus"></i>
 					</div>
 					<div class="col-md-12 form-control border-light"> 
-						<input type="text" name="ccode" style="margin-left:12px" class="form-control" minlength="2" maxlength="5" required="" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false" {{#if this.ccode}} value="{{this.ccode}}"{{/if}}>
+						<input type="text" name="ccode" style="margin-left:12px" id="ccode" readonly class="form-control" minlength="2" maxlength="5" required="" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false" {{#if this.ccode}} value="{{this.ccode}}"{{/if}}>
 						<label for="userinput4" style="margin-left:12px">{{#with ..}}{{__ "Country code" setlang}}{{/with}}<span class="required red">*</span></label> 
-					<div class="help-block"></div>
 					</div>
+					<div class="help-block"></div>
 				</div>
 				</div>
 				<div class="col-md-4">
@@ -216,7 +243,7 @@
 			</div>
 			<div class="col-md-6">
 			<div class="form-group input">
-				<div class=""> 
+				<div class="form-control p-0"> 
 					 <select class="select2 form-control export" data-validation-required-message="country is required" name="country" maxlength="50" id="country" {{#if this.country}} value="{{this.country}}"{{/if}}> 
 						<option value="">Select Country</option>
 
@@ -226,35 +253,35 @@
 						</select>
 					 
 				</div>
-			</div>
 			<div class="help-block"></div>
+			</div>
 			</div>
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
-				<div class=""> 
+				<div class="form-control p-0"> 
 					 	<select class="select2 form-control export" maxlength="50" data-validation-required-message="State is required" name="state" id="state" {{#if this.state}} value="{{this.state}}"{{/if}} >
 						<option value="">Select State</option> 
 						</select>
 				</div>
-				</div>
 				<div class="help-block"></div>
+				</div>
 			</div>
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
-				<div class="heading-elements "> 
+				<div class="heading-elements form-control p-0"> 
 					<select class="select2 form-control export" maxlength="50" data-validation-required-message="City name is required" name="city" id="city" {{#if this.city}} value="{{this.city}}"{{/if}} >
 						<option value="">Select City</option> 
 						</select>
 				</div>
-				</div>
 				<div class="help-block"></div>
+				</div>
 			</div>
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light"> 
-					<input type="text" id="pincode" class="" name="pincode" data-validation-required-message="Address is required" data-validation-regex-regex="([0-9]{1,50})" data-validation-regex-message="Only numbers, no characters" {{#if this.pincode}} value="{{this.pincode}}"{{/if}}>
+					<input type="text" id="pincode" class="" name="pincode"  data-validation-regex-regex="([0-9]{1,50})" minlength="4" maxlength="12" data-validation-regex-message="Only numbers, no characters" {{#if this.pincode}} value="{{this.pincode}}"{{/if}}>
 					<label for="pincode" class="pincode">{{#with ..}}{{__ "Pincode" setlang}}{{/with}}</label> 
-				</div>
+				</div><div class="help-block"></div>
 				</div>
 			</div>
 			</div>
@@ -286,7 +313,7 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light"> 
 				<input type="password" id="userinput_2" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="Password must be of 6 to 12 digits" {{#if this.password}} {{else}} required data-validation-required-message="This field is required"  {{/if}}>
-				<label for="userinput2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">*</span></label> 
+				<label for="userinput2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}} *{{/if}}</span></label> 
 				
 				{{#if this.password}} 
 				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput24" > {{/if}}
@@ -298,7 +325,7 @@
 			<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="password" id="userinput25" class="" name="confirmpassword"  data-validation-match-match="password"  {{#if this.confirmpassword}} {{/if}}>
-					<label for="userinput2">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">*</span></label>
+					<label for="userinput2">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}} *{{/if}}</span></label>
 				</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -404,6 +431,7 @@
 		<!-- alert("123"); -->
 		m=0;
 		$('.imageUpload').each(function(){
+			  let files = this.files;
 			if($(this).val() != '') {
 				var imageUpload=$(this).val();
 				var allowedFiles = [];
@@ -421,12 +449,33 @@
 				}
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
-					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
+					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
+					$(this).val("");
 					m++;
 				}
 				else{
-					$(this).siblings('.notice').html();
+					$(this).siblings('.notice').html("");
+				var size = (this.files[0].size / 1024 / 1024).toFixed(2);
+					var limit = "{{geninfom.imgupload_size}}";
+					if (size > limit) {
+						alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
+						$('.imageUpload').val("");
+						return false;
+					}
+					
+					  let file = files[0];				
+					 if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+						
+                        $('#previewselectedlogo')
+                            .attr('src', event.target.result)
+                            .show(); 
+                    };
+                    reader.readAsDataURL(file);
 				}
+				}
+				
 			}
 		});
 			if(m>0){
@@ -435,3 +484,5 @@
         }
 </script>
 {{/each}}
+
+	
