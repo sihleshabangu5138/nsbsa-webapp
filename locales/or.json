@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "ଗୋପନୀୟ କି ଆବଶ୍ୟକ",
 	"Stripe secret key": "ଷ୍ଟ୍ରିପ୍ ଗୋପନୀୟ କି",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "ସର୍ବସାଧାରଣ କି ଆବଶ୍ୟକ",
-	"Stripe public key": "ଷ୍ଟ୍ରିପ୍ ସର୍ବସାଧାରଣ କି"
+	"Stripe public key": "Stripe ପବ୍ଲିକ୍ କୀ",
+	"Payment Type is required": "ପେମେଣ୍ଟ ଟାଇପ୍ ଆବଶ୍ୟକ",
+	"Total User": "ମୋଟ୍ ବ୍ୟବହାରକାରୀ",
+	"No loans available at the moment.": "ଏହି ସମୟରେ କୋନସି ଋଣ ଉପଲବ୍ଧ ନାହିଁ।",
+	"Deactive Users": "ନିଷ୍କ୍ରିୟ ବ୍ୟବହାରକାରୀ",
+	"EMI Reports List": "EMI ରିପୋର୍ଟ ତାଲିକା",
+	"Loan not approved": "ଋଣ ଅନୁମୋଦିତ ହୋଇନାହିଁ",
+	"Event deleted successfully!": "ଇଭେଣ୍ଟ ସଫଳତାର ସହିତ ହଟାଇ ଦିଆଯାଇଛି!",
+	"Approved ! Loan Approved successfully!": "ମଞ୍ଜୁର! ଋଣ ସଫଳତାର ସହିତ ଅନୁମୋଦିତ ହେଲା!",
+	"Loan disapproved successfully!": "ଋଣ ସଫଳତାର ସହିତ ଅନୁମୋଦିତ ହେଲା!",
+	"Loan approved successfully!": "ଋଣ ସଫଳତାର ସହିତ ଅନୁମୋଦିତ ହେଲା!"
 }

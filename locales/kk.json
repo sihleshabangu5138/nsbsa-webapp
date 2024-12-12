@@ -1076,5 +1076,15 @@
 	"Access Rights": "Қол жеткізу құқықтары",
 	"Impersonate": "Елестету",
 	"Custom Fields": "Теңшелетін өрістер",
-	"Copyright &copy; 2024": "Авторлық құқық &copy; 2024"
+	"Copyright &copy; 2024": "Авторлық құқық &copy; 2024",
+      "Payment Type is required": "Төлем түрі қажет",
+      "Total User": "Жалпы пайдаланушы",
+      "No loans available at the moment.": "Қазіргі уақытта несие қолжетімді емес.",
+      "Deactive Users": "Белсенді емес пайдаланушылар",
+      "EMI Reports List": "EMI есептер тізімі",
+      "Loan not approved": "Несие мақұлданбады",
+      "Event deleted successfully!": "Іс-шара сәтті жойылды!",
+      "Approved ! Loan Approved successfully!": "Мақұлданды! Несие сәтті мақұлданды!",
+      "Loan disapproved successfully!": "Несие сәтті мақұлданбады!",
+      "Loan approved successfully!": "Несие сәтті мақұлданды!"
 }

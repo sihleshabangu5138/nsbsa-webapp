@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " คีย์ลับจำเป็น",
 	"Stripe secret key": "คีย์ลับของ Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " คีย์สาธารณะจำเป็น",
-	"Stripe public key": "คีย์สาธารณะของ Stripe"
+	"Stripe public key": "คีย์สาธารณะของ Stripe",
+	"Payment Type is required": "ต้องระบุประเภทการชำระเงิน",
+	"Total User": "ผู้ใช้ทั้งหมด",
+	"No loans available at the moment.": "ขณะนี้ไม่มีเงินกู้ที่สามารถใช้ได้",
+	"Deactive Users": "ผู้ใช้ที่ไม่สามารถใช้งานได้",
+	"EMI Reports List": "รายการรายงาน EMI",
+	"Loan not approved": "สินเชื่อไม่ผ่านการอนุมัติ",
+	"Event deleted successfully!": "ลบกิจกรรมสำเร็จ!",
+	"Approved ! Loan Approved successfully!": "ได้รับการอนุมัติ! สินเชื่อได้รับการอนุมัติเรียบร้อยแล้ว!",
+	"Loan disapproved successfully!": "สินเชื่อไม่ผ่านการอนุมัติเรียบร้อยแล้ว!",
+	"Loan approved successfully!": "สินเชื่อได้รับการอนุมัติเรียบร้อยแล้ว!"
 }

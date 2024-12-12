@@ -888,7 +888,7 @@ $('document').ready(function(){
 {{#each setting as |geninfom|}}
 <script type="text/javascript">
         function ValidateExtension(){
-		m=0;
+		var m=0;
 		$('.imageUpload').each(function(){
 			if($(this).val() != '') {
 				var imageUpload=$(this).val();
@@ -911,7 +911,7 @@ $('document').ready(function(){
 					m++;
 				}
 				else{
-					$(this).siblings('.notice').html();
+					$(this).siblings('.notice').html("");
 				}
 			}
 		});
@@ -919,6 +919,11 @@ $('document').ready(function(){
 			return false;
 			}
         }
+         
+		 // Attach change event listener to file inputs
+        $('.imageUpload').on('change', function() {
+            ValidateExtension(); // Call the validation function on file selection
+        });
 </script>
 {{/each}}
 {{#each newfield as |customvalid|}}

@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "비밀 키가 필요합니다",
 	"Stripe secret key": "스트라이프 비밀 키",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "공개 키가 필요합니다",
-	"Stripe public key": "스트라이프 공개 키"
+	"Stripe public key": "Stripe 공개 키",
+      "Payment Type is required": "결제 유형이 필요합니다",
+      "Total User": "총 사용자",
+      "No loans available at the moment.": "현재 이용 가능한 대출이 없습니다.",
+      "Deactive Users": "비활성 사용자",
+      "EMI Reports List": "EMI 보고서 목록",
+      "Loan not approved": "대출이 승인되지 않았습니다",
+      "Event deleted successfully!": "이벤트가 성공적으로 삭제되었습니다!",
+      "Approved ! Loan Approved successfully!": "승인됨! 대출이 성공적으로 승인되었습니다!",
+      "Loan disapproved successfully!": "대출이 성공적으로 거부되었습니다!",
+      "Loan approved successfully!": "대출이 성공적으로 승인되었습니다!"
 }

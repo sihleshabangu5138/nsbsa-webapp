@@ -122,7 +122,7 @@
 					
 		allPages: true,
 		template: $("#page-template").html(),
-		avoidLinks: true,
+		avoidLinks: false,
 		fileName: "note-list.pdf",// Bug 277	
 		paperSize: "A4",
 		margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
@@ -167,11 +167,11 @@
                         
 								if(e.responseText=="true"){
 									
-									<!-- toastr.success("('Role deleted successfully!')", "('Success!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
+									//<!-- toastr.success("('Role deleted successfully!')", "('Success!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
 									
 								}else{
 									
-									<!-- toastr.error("('Role can not be deleted!')", "'Error!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
+									//<!-- toastr.error("('Role can not be deleted!')", "'Error!')", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); -->
 								}		
 							}
 						},
@@ -269,7 +269,14 @@
 					{
                         field: "object" ,
                         title: "{{__ "Files attached"}}",
-						width: 150
+						width: 150,
+						template: function(dataItem) {
+                            if (dataItem.object) {
+                                return "<a href='/images/upload/" + dataItem.object + "' download='" + dataItem.object + "' target='_blank'>" + dataItem.object + "</a>";
+                            } else {
+                                return "N/A";
+                            }
+                        }
                     },
 					{
                         field: "module" ,
@@ -334,7 +341,7 @@
 				</div>
 			</div>
 			</div>
-		</div>
+		    </div>
 		</section>
 	</div>
 	</div>

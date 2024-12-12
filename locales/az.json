@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Gizli Açar tələb olunur",
 	"Stripe secret key": "Stripe gizli açarı",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "İctimai Açar tələb olunur", 
-	"Stripe public key": "Stripe ictimai açarı"
+	"Stripe public key": "Stripe ictimai açarı",
+	"Payment Type is required": "Ödəniş növü tələb olunur",
+	"Total User": "Ümumi İstifadəçi",
+	"No loans available at the moment.": "Bu anda heç bir kredit mövcud deyil.",
+	"Deactive Users": "Aktiv olmayan İstifadəçilər",
+	"EMI Reports List": "EMI Hesabatları Siyahısı",
+	"Loan not approved": "Kredit təsdiqlənməyib",
+	"Event deleted successfully!": "Hadisə uğurla silindi!",
+	"Approved ! Loan Approved successfully!": "Təsdiqləndi ! Kredit uğurla təsdiqləndi!",
+	"Loan disapproved successfully!": "Kredit uğurla təsdiqlənmədi!",
+	"Loan approved successfully!": "Kredit uğurla təsdiqləndi!"
 }

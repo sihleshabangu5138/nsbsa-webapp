@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
 	"Stripe secret key": "Stripe secret key",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
-	"Stripe public key": "Stripe public key"
+	"Stripe public key": "Senotlolo sa Stripe",
+      "Payment Type is required": "Mofuta oa tefo o hlokahala",
+      "Total User": "Sebapali se seholo",
+      "No loans available at the moment.": "Hajoale ha ho na likoloto tse fumanehang.",
+      "Deactive Users": "Basebelisi ba se nang mosebetsi",
+      "EMI Reports List": "Lipalangoang tsa EMI",
+      "Loan not approved": "Koloto e sa lumelloang",
+      "Event deleted successfully!": "Ketsahalo e tlositsoe ka katleho!",
+      "Approved ! Loan Approved successfully!": "E lumelletsoe! Koloto e lumelletsoe ka katleho!",
+      "Loan disapproved successfully!": "Koloto e sa lumelloang ka katleho!",
+      "Loan approved successfully!": "Koloto e lumelletsoe ka katleho!"
 }

@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "מפתח סודי נדרש",
 	"Stripe secret key": "מפתח סודי של סטרייפ",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "מפתח ציבורי נדרש",
-	"Stripe public key": "מפתח ציבורי של סטרייפ"
+	"Stripe public key": "מפתח ציבורי של Stripe",
+        "Payment Type is required": "סוג תשלום נדרש",
+        "Total User": "משתמש כולל",
+        "No loans available at the moment.": "אין הלוואות זמינות כרגע.",
+        "Deactive Users": "משתמשים לא פעילים",
+        "EMI Reports List": "רשימת דוחות EMI",
+        "Loan not approved": "הלוואה לא אושרה",
+        "Event deleted successfully!": "האירוע נמחק בהצלחה!",
+        "Approved ! Loan Approved successfully!": "אושר! הלוואה אושרה בהצלחה!",
+        "Loan disapproved successfully!": "הלוואה נדחתה בהצלחה!",
+        "Loan approved successfully!": "הלוואה אושרה בהצלחה!"
 }

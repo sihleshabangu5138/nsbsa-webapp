@@ -15,7 +15,7 @@
 					 
                   </div>
                   <div class="p-1 block_first white media-body">
-                    <h5 class="text-uppercase">{{__ "Total Customer"}}</h5>
+                    <h5 class="text-uppercase">{{__ "Total User"}}</h5>
                     <h5 >{{this.activecount}}</h5>
                     <div class="progress mt-0 mb-1" style="height: 2px;">
                             <div class="progress-bar" role="progressbar" style="width: {{this.activecount}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -443,7 +443,15 @@
                 </div>
             </div>
             <div class="card-content">
-                <div id="piechart2" class="chart-container"></div>
+              {{#if this.loanno}}
+              <div id="piechart2" class="chart-container"></div>
+              {{else if this.num_of_disloan}}
+              <div id="piechart2" class="chart-container"></div>
+              {{else}}
+              <div class="no-loans-message d-flex justify-content-center align-items-center" style="height:300px; width:100;"> 
+                <h5>{{__ "No loans available at the moment."}}</h5>
+              </div>
+              {{/if}}
             </div>
         </div>
     </div>
@@ -705,7 +713,7 @@ function drawChart() {
   var data = google.visualization.arrayToDataTable([
   ['Task', 'Hours per Day'],
   ['{{__ "Active Users" setlang}}', parseInt(count)],
-  ['{{__ "Deactive users" setlang}}', parseInt(decount)]
+  ['{{__ "Deactive Users" setlang}}', parseInt(decount)]
 ]);
 
   // Optional; add a title and set the width and height of the chart

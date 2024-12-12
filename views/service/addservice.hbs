@@ -45,9 +45,9 @@
 					<li class="col-md-12 p-0 form-control" id="export">
 					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Service for"}}{{/with}}</label>
 						<select class="select2 form-control export cate_type" data-validation-required-message="{{#with ..}}{{__ "This  is required"}}{{/with}}" name="servicefor" >
-							<option value="all" {{#ifCond result.servicefor "==" "all"}}selected{{/ifCond}} >{{#with ..}}{{__ "All"setlang}} {{/with}}</option>
-							<option value="male" {{#ifCond result.servicefor "==" "male"}}selected{{/ifCond}}>{{#with ..}}{{__ "Male"setlang}} {{/with}}</option>
-							<option value="female" {{#ifCond result.servicefor "==" "female"}}selected{{/ifCond}}>{{#with ..}}{{__ "Female"setlang}} {{/with}}</option>
+							<option value="All" {{#ifCond result.servicefor "==" "All"}}selected{{/ifCond}} >{{#with ..}}{{__ "All"setlang}} {{/with}}</option>
+							<option value="Male" {{#ifCond result.servicefor "==" "Male"}}selected{{/ifCond}}>{{#with ..}}{{__ "Male"setlang}} {{/with}}</option>
+							<option value="Female" {{#ifCond result.servicefor "==" "Female"}}selected{{/ifCond}}>{{#with ..}}{{__ "Female"setlang}} {{/with}}</option>
 						</select>
 					</li>
 					</ul>
@@ -69,7 +69,7 @@
 			
 			<div class="col-lg-12 col-xl-6 pb-1">
 			<div class="row">
-			<div class="col-lg-5 col-md-10 add_element">
+			<div class="col-lg-8 col-md-10 add_element">
 			{{#if this.uploadimages }}
 				{{#each this.uploadimages}}
 			<div class="col-md-12 p-0">
@@ -90,8 +90,8 @@
 				{{addimage 'nodata'}}
 			{{/if}}
 			</div>
-			<div class="col-lg-1 col-md-2 p-0 padding-mobile">
-			<button type="button" id="add_doc" class="btn shover" style="background-color:#6badc2;color:#fff">
+			<div class="col-lg-3 col-md-2 p-0 padding-mobile">
+			<button type="button" id="add_doc" class="btn shover p-1" style="background-color:#6badc2;color:#fff">
 				<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
             </button>
 			</div>
@@ -129,15 +129,15 @@
 				<div class="col-lg-4 col-md-7">
 				<div class="form-group input">
 				<div class="col-md-12 pl-0 form-control bordern">
-					<label for="userinput1">{{#with ..}}{{__ "Service Duration:"}}{{/with}}<span class="required red">*</span></label>
-					<input name="duration_hour" class="inputnumber border-light duration_hour" type="number" min="1" max="100000 " data-validation-required-message="{{#with ..}}{{__ "Service Duration is required"}}{{/with}}" {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
-				</div><div class="help-block"></div>
+					<label for="userinput1">{{#with ..}}{{__ "Service Duration:"}}{{/with}}<span class="required red">*</span><div class="help-block"></div></label>
+						<input name="duration_hour" class="inputnumber border-light duration_hour" type="number" min="1" max="100000 " data-validation-required-message="{{#with ..}}{{__ "Service Duration is required"}}{{/with}}" {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
 				</div>
 				</div>
-				<div class="form-group col-lg-2 p-0 col-md-5 padding-mobile">
+				</div>
+				<div class="form-group col-lg-2 p-0 col-md-5 padding-mobile ">
 					<label style="font-weight:100; margin-right:11px">{{#with ..}}{{__ "Hour"}}{{/with}}</label>
-					<label style="font-weight:100;">
-						<select class="form-control duration_minute" name="duration_minute">
+					<label style="font-weight:100; margin-bottom:0px">
+						<select class="form-control duration_minute m-0" name="duration_minute">
 							<option value="00" {{#ifCond result.duration_minute "==" "00"}}selected{{/ifCond}}>00</option>
 							<option value="15" {{#ifCond result.duration_minute "==" "15"}}selected{{/ifCond}}>15</option>
 							<option value="30" {{#ifCond result.duration_minute "==" "30"}}selected{{/ifCond}}>30</option>

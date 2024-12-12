@@ -1172,5 +1172,15 @@
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Изисква се публичен ключ",
 	"Stripe public key": "Публичен ключ на Stripe",
 	"EMI Reports": "EMI отчети",
-	"Copyright &copy; 2024": "Авторско право &copy; 2024"
+	"Copyright &copy; 2024": "Авторско право &copy; 2024",
+	"Payment Type is required": "Тип на плащане е задължителен",
+	"Total User": "Общо потребители",
+	"No loans available at the moment.": "В момента няма налични кредити.",
+	"Deactive Users": "Неактивни потребители",
+	"EMI Reports List": "Списък на отчетите за EMI",
+	"Loan not approved": "Кредитът не е одобрен",
+	"Event deleted successfully!": "Събитието е изтрито успешно!",
+	"Approved ! Loan Approved successfully!": "Одобрено ! Кредитът е одобрен успешно!",
+	"Loan disapproved successfully!": "Кредитът е отхвърлен успешно!",
+	"Loan approved successfully!": "Кредитът е одобрен успешно!"
 }

@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tsy maintsy misy ny teny miafina",
 	"Stripe secret key": "Teny miafina Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tsy maintsy misy ny fanalahidy ho an'ny besinimaro",
-	"Stripe public key": "Fanalahidy ho an'ny besinimaro Stripe"
+	"Stripe public key": "Stripe fanalahidy ampahibemaso",
+	"Payment Type is required": "Karazana fandoavam-bola dia ilaina",
+	"Total User": "Mpampiasa Total",
+	"No loans available at the moment.": "Tsy misy trosa azo ampiasaina amin'izao fotoana izao.",
+	"Deactive Users": "Mpampiasa tsy miasa",
+	"EMI Reports List": "Lisitry ny tatitra EMI",
+	"Loan not approved": "Trosa tsy nekena",
+	"Event deleted successfully!": "Zava-nitranga voafafa soa aman-tsara!",
+	"Approved ! Loan Approved successfully!": "Neñeka! Trosa nekena soa aman-tsara!",
+	"Loan disapproved successfully!": "Trosa nesorina soa aman-tsara!",
+	"Loan approved successfully!": "Trosa nekena soa aman-tsara!"
 }

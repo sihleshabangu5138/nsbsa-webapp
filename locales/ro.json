@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Cheia secretă este necesară",
 	"Stripe secret key": "Cheie secretă Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Cheia publică este necesară",
-	"Stripe public key": "Cheie publică Stripe"
+	"Stripe public key": "Cheie publică Stripe",
+	"Payment Type is required": "Tipul de plată este necesar",
+	"Total User": "Total utilizatori",
+	"No loans available at the moment.": "Nu sunt împrumuturi disponibile în acest moment.",
+	"Deactive Users": "Utilizatori inactivi",
+	"EMI Reports List": "Listă de rapoarte EMI",
+	"Loan not approved": "Împrumutul nu a fost aprobat",
+	"Event deleted successfully!": "Evenimentul a fost șters cu succes!",
+	"Approved ! Loan Approved successfully!": "Aprobat! Împrumutul a fost aprobat cu succes!",
+	"Loan disapproved successfully!": "Împrumutul a fost respins cu succes!",
+	"Loan approved successfully!": "Împrumutul a fost aprobat cu succes!"
 }

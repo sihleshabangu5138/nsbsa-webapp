@@ -894,5 +894,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "需要密钥",
 	"Stripe secret key": "Stripe密钥",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "需要公钥",
-	"Stripe public key": "Stripe公钥"
+	"Stripe public key": "Stripe 公钥",
+      "Payment Type is required": "需要支付方式",
+      "Total User": "总用户",
+      "No loans available at the moment.": "目前没有可用的贷款。",
+      "Deactive Users": "停用用户",
+      "EMI Reports List": "EMI 报告列表",
+      "Loan not approved": "贷款未批准",
+      "Event deleted successfully!": "事件已成功删除！",
+      "Approved ! Loan Approved successfully!": "批准！贷款成功批准！",
+      "Loan disapproved successfully!": "贷款成功被拒绝！",
+      "Loan approved successfully!": "贷款成功批准！"
 }

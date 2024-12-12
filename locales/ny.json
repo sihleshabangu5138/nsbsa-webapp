@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kiyi Yachinsinsi\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\timafunika",
 	"Stripe secret key": "Kiyi yachinsinsi ya Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kiyi Yawonse\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\timafunika",
-	"Stripe public key": "Kiyi yawonse ya Stripe"
+	"Stripe public key": "Stripe mfulu wachinsinsi",
+      "Payment Type is required": "Mtundu wa malipiro akufunika",
+      "Total User": "Wogwiritsa ntchito Wanthawi Zonse",
+      "No loans available at the moment.": "Palibe mloan pamenezi.",
+      "Deactive Users": "Otsutsa osagwira ntchito",
+      "EMI Reports List": "EMI Zotsatira Zosiyanasiyana",
+      "Loan not approved": "Mloan sichivomerezedwa",
+      "Event deleted successfully!": "Chimodzimodzinso mchitikizo chachilimbichi!",
+      "Approved ! Loan Approved successfully!": "Kuvomerezeka! Mloan wachotsedwa nthawi iliyonse!",
+	  "Loan disapproved successfully!": "Leningen succesvol afgewezen!",
+	"Loan approved successfully!": "Leningen succesvol goedgekeurd!"
 }

@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "La clau secreta és\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequerida",
 	"Stripe secret key": "Clau secreta de Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "La clau pública és\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequerida", 
-	"Stripe public key": "Clau pública de Stripe"
+	"Stripe public key": "Clau pública de Stripe",
+	"Payment Type is required": "El tipus de pagament és obligatori",
+	"Total User": "Nombre total d'usuaris",
+	"No loans available at the moment.": "En aquest moment no hi ha préstecs disponibles.",
+	"Deactive Users": "Usuaris desactivats",
+	"EMI Reports List": "Llista de informes EMI",
+	"Loan not approved": "El préstec no està aprovat",
+	"Event deleted successfully!": "Esdeveniment eliminat amb èxit!",
+	"Approved ! Loan Approved successfully!": "Aprovat ! Préstec aprovat amb èxit!",
+	"Loan disapproved successfully!": "Préstec desaprovat amb èxit!",
+	"Loan approved successfully!": "Préstec aprovat amb èxit!"
 }

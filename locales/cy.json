@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Mae angen Allwedd Gyfrinachol",
 	"Stripe secret key": "Allwedd gyfrinachol Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Mae angen Allwedd Gyhoeddus",
-	"Stripe public key": "Allwedd gyhoeddus Stripe"
+	"Stripe public key": "Allwedd gyhoeddus Stripe",
+	"Payment Type is required": "Mae angen math talu",
+	"Total User": "Cyfanswm Defnyddiwr",
+	"No loans available at the moment.": "Dim benthyciadau ar gael ar hyn o bryd.",
+	"Deactive Users": "Defnyddwyr Anweithredol",
+	"EMI Reports List": "Rhestr Adroddiadau EMI",
+	"Loan not approved": "Nid yw'r benthyciad wedi'i gymeradwyo",
+	"Event deleted successfully!": "Dilëwyd y digwyddiad yn llwyddiannus!",
+	"Approved ! Loan Approved successfully!": "Cymeradwywyd ! Benthyciad wedi'i gymeradwyo'n llwyddiannus!",
+	"Loan disapproved successfully!": "Wedi'i wrthod y benthyciad yn llwyddiannus!",
+	"Loan approved successfully!": "Wedi'i gymeradwyo'r benthyciad yn llwyddiannus!"
 }

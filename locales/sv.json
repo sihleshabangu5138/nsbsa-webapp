@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Hemlig nyckel är\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tkrävd",
 	"Stripe secret key": "Stripe hemlig nyckel",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Offentlig nyckel är\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tkrävd",
-	"Stripe public key": "Stripe offentlig nyckel"
+	"Stripe public key": "Stripe offentlig nyckel",
+	"Payment Type is required": "Betalningstyp är obligatorisk",
+	"Total User": "Totalt antal användare",
+	"No loans available at the moment.": "Inga lån tillgängliga för tillfället.",
+	"Deactive Users": "Deaktiverade användare",
+	"EMI Reports List": "EMI rapportlista",
+	"Loan not approved": "Lån inte godkänt",
+	"Event deleted successfully!": "Händelse raderades framgångsrikt!",
+	"Approved ! Loan Approved successfully!": "Godkänd! Lån godkänt framgångsrikt!",
+	"Loan disapproved successfully!": "Lån avvisades framgångsrikt!",
+	"Loan approved successfully!": "Lån godkänt framgångsrikt!"	
 }

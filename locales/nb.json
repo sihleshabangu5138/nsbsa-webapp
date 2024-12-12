@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Hemmelig nøkkel er påkrevd",
 	"Stripe secret key": "Stripe hemmelig nøkkel",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Offentlig nøkkel er påkrevd",
-	"Stripe public key": "Stripe offentlig nøkkel"
+	"Stripe public key": "Stripe offentlig nøkkel",
+      "Payment Type is required": "Betalingsmåte er påkrevd",
+      "Total User": "Totalt antall brukere",
+      "No loans available at the moment.": "Ingen lån tilgjengelig for øyeblikket.",
+      "Deactive Users": "Deaktiverte brukere",
+      "EMI Reports List": "EMI rapportliste",
+      "Loan not approved": "Lån ikke godkjent",
+      "Event deleted successfully!": "Hendelse slettet vellykket!",
+      "Approved ! Loan Approved successfully!": "Godkjent! Lån godkjent vellykket!",
+      "Loan disapproved successfully!": "Lån avvist vellykket!",
+      "Loan approved successfully!": "Lån godkjent vellykket!"
 }

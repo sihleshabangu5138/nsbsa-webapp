@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tá Eochair Rúnda\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tde dhíth",
 	"Stripe secret key": "Eochair rúnda Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tá Eochair Phoiblí\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tde dhíth",
-	"Stripe public key": "Eochair phoiblí Stripe"
+	"Stripe public key": "Eochair phoiblí Stripe",
+        "Payment Type is required": "Tá Cineál Íocaíochta riachtanach",
+        "Total User": "Úsáideoir Iomlán",
+        "No loans available at the moment.": "Níl aon iasachtaí ar fáil faoi láthair.",
+        "Deactive Users": "Úsáideoirí Díghníomhacha",
+        "EMI Reports List": "Liosta Tuarascálacha EMI",
+        "Loan not approved": "Níor cheadaíodh an iasacht",
+        "Event deleted successfully!": "Imeacht scriosta go rathúil!",
+        "Approved ! Loan Approved successfully!": "Ceadaithe! Iasacht ceadaithe go rathúil!",
+        "Loan disapproved successfully!": "Iasacht neamhcheadaithe go rathúil!",
+        "Loan approved successfully!": "Iasacht ceadaithe go rathúil!"
 }

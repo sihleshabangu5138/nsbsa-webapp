@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kunci Rahsia diperlukan",
 	"Stripe secret key": "Kunci rahsia Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kunci Awam diperlukan",
-	"Stripe public key": "Kunci awam Stripe"
+	"Stripe public key": "Kunci awam Stripe",
+	"Payment Type is required": "Jenis Pembayaran diperlukan",
+	"Total User": "Pengguna Jumlah",
+	"No loans available at the moment.": "Tiada pinjaman tersedia buat masa ini.",
+	"Deactive Users": "Pengguna Tidak Aktif",
+	"EMI Reports List": "Senarai Laporan EMI",
+	"Loan not approved": "Pinjaman tidak diluluskan",
+	"Event deleted successfully!": "Acara berjaya dipadam!",
+	"Approved ! Loan Approved successfully!": "Diluluskan! Pinjaman berjaya diluluskan!",
+	"Loan disapproved successfully!": "Pinjaman berjaya ditolak!",
+	"Loan approved successfully!": "Pinjaman berjaya diluluskan!"
 }

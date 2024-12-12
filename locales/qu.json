@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Pakasqa llave nisqa necesitakun",
 	"Stripe secret key": "Stripe pakasqa llave",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Llapan runakunapaq llave necesitakun",
-	"Stripe public key": "Stripe llapan runakunapaq llave"
+	"Stripe public key": "Llave pública de Stripe",
+      "Payment Type is required": "Tipo de pago es obligatorio",
+      "Total User": "Usuario total",
+      "No loans available at the moment.": "No hay préstamos disponibles en este momento.",
+      "Deactive Users": "Usuarios desactivados",
+      "EMI Reports List": "Lista de informes de EMI",
+      "Loan not approved": "Préstamo no aprobado",
+      "Event deleted successfully!": "¡Evento eliminado con éxito!",
+      "Approved ! Loan Approved successfully!": "¡Aprobado! ¡Préstamo aprobado con éxito!",
+      "Loan disapproved successfully!": "¡Préstamo desaprobado con éxito!",
+      "Loan approved successfully!": "¡Préstamo aprobado con éxito!"
 }

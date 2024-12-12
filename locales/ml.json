@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "രഹസ്യ കീ ആവശ്യമാണ്",
 	"Stripe secret key": "സ്ട്രൈപ്പ് രഹസ്യ കീ",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "പബ്ലിക് കീ ആവശ്യമാണ്",
-	"Stripe public key": "സ്ട്രൈപ്പ് പബ്ലിക് കീ"
+	"Stripe public key": "സ്ട്രൈപ്പ് പബ്ലിക് കീ",
+      "Payment Type is required": "പേമന്റ് ടൈപ്പ് ആവശ്യമാണ്",
+      "Total User": "ആകെ ഉപയോക്താവ്",
+      "No loans available at the moment.": "ഈ സമയം എത്രയും ഇല്ലാത്ത വായ്പകൾ.",
+      "Deactive Users": "സജീവമല്ലാത്ത ഉപയോക്താക്കൾ",
+      "EMI Reports List": "EMI റിപ്പോർട്ടുകൾ ലിസ്റ്റ്",
+      "Loan not approved": "വായ്പ അവലോകനം ചെയ്തില്ല",
+      "Event deleted successfully!": "ഇവന്റ് വിജയകരമായി ഇല്ലാതാക്കി!",
+      "Approved ! Loan Approved successfully!": "അംഗീകൃതം! വായ്പ വിജയകരമായി അംഗീകൃതം!",
+      "Loan disapproved successfully!": "വായ്പ വിജയകരമായി നിരസിച്ചു!",
+      "Loan approved successfully!": "വായ്പ വിജയകരമായി അംഗീകൃതം!"
 }

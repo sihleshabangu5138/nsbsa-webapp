@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "پټه کیلي اړینه ده",
 	"Stripe secret key": "د سټرایپ پټه کیلي",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "عامه کیلي اړینه ده",
-	"Stripe public key": "د سټرایپ عامه کیلي"
+	"Stripe public key": "د Stripe عام کلي",
+      "Payment Type is required": "د تادیې ډول اړین دی",
+      "Total User": "ټول کارونکي",
+      "No loans available at the moment.": "په دې وخت کې هیڅ پور نه دی موجود.",
+      "Deactive Users": "غیرفعاله کارونکي",
+      "EMI Reports List": "د EMI راپورونو لیست",
+      "Loan not approved": "پور تایید نه شو",
+      "Event deleted successfully!": "پیښه بریالۍ توګه حذف شوه!",
+      "Approved ! Loan Approved successfully!": "منظور شو! پور بریالۍ توګه تایید شو!",
+      "Loan disapproved successfully!": "پور بریالۍ توګه رد شو!",
+      "Loan approved successfully!": "پور بریالۍ توګه تایید شو!"
 }

@@ -61,12 +61,12 @@
 				<!-- Modal content-->
 				<div class="modal-content" >
 					<div class="modal-header">
-						<h4 class="modal-title">{{#with ..}}{{__ "Add Category Type"}}{{/with}}</h4>
+						<h4 class="modal-title">Add Category Type</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>{{#with ..}}{{__ "Enter Category Type"}}{{/with}}</label>
+							<label>Enter Category Type<span class="red">*</span></label>
 							<input  class="form-control" name="cate_type_ajax" id="cateType" >
 							<p><span class="emsg hidden" style="color:#e30b0b">{{#with ..}}{{__ "The category type name may only contain alphabets, space and _ ,`'.^-"}}{{/with}}</span></p>
 						</div>

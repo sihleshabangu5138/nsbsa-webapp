@@ -893,5 +893,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kunci Rahasia diperlukan",
 	"Stripe secret key": "Kunci rahasia Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kunci Publik diperlukan",
-	"Stripe public key": "Kunci publik Stripe"
+	"Stripe public key": "Kunci publik Stripe",
+	"Payment Type is required": "Jenis Pembayaran diperlukan",
+	"Total User": "Total Pengguna",
+	"No loans available at the moment.": "Tidak ada pinjaman yang tersedia saat ini.",
+	"Deactive Users": "Pengguna Tidak Aktif",
+	"EMI Reports List": "Daftar Laporan EMI",
+	"Loan not approved": "Pinjaman tidak disetujui",
+	"Event deleted successfully!": "Acara berhasil dihapus!",
+	"Approved ! Loan Approved successfully!": "Disetujui! Pinjaman berhasil disetujui!",
+	"Loan disapproved successfully!": "Pinjaman berhasil ditolak!",
+	"Loan approved successfully!": "Pinjaman berhasil disetujui!"
 }

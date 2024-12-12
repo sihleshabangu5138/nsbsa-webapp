@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Salajane võti on nõutav",
 	"Stripe secret key": "Stripe'i salajane võti",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Avalik võti on nõutav",
-	"Stripe public key": "Stripe'i avalik võti"
+	"Stripe public key": "Stripe'i avalik võti",
+	"Payment Type is required": "ચુકવણીનો પ્રકાર જરૂરી છે",
+	"Total User": "કુલ વપરાશકર્તા",
+	"No loans available at the moment.": "આ સમયે કોઈ લોન ઉપલબ્ધ નથી.",
+	"Deactive Users": "અક્ષમ વપરાશકર્તાઓ",
+	"EMI Reports List": "EMI રિપોર્ટ્સ યાદી",
+	"Loan not approved": "લોન મંજૂર કરવામાં આવી નથી",
+	"Event deleted successfully!": "ઇવેન્ટ સફળતાપૂર્વક કાઢી નાખવામાં આવી!",
+	"Approved ! Loan Approved successfully!": "મંજૂર ! લોન સફળતાપૂર્વક મંજૂર કરવામાં આવી!",
+	"Loan disapproved successfully!": "લોન સફળતાપૂર્વક અમંજૂર કરવામાં આવી!",
+	"Loan approved successfully!": "લોન સફળતાપૂર્વક મંજૂર કરવામાં આવી!"
 }

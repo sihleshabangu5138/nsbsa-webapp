@@ -102,9 +102,9 @@
              <div class="card">
                <div class="card-content">
 				<fieldset>
-				<label>{{#with ..}}{{__ "Interest Rate" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}<span class="required red">*</span></label>
+				<label>{{#with ..}}{{__ "Interest Rate" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}</label>
                      <div class="input-group touchspincolor">
-					 <input type="text" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" data-bts-max="100" name="interestrate" data-validation-required-message="{{#with ..}}{{__ 'Interest rate is required' setlang}}{{/with}}" {{#if this.interestrate}} value="{{this.interestrate}}" {{else}} value="1.00" {{/if}}/>
+					 <input type="text" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" data-bts-max="100" name="interestrate" data-validation-required-message="{{#with ..}}{{__ 'Interest rate is required' setlang}}{{/with}}" value="{{#if this.interestrate}}{{this.interestrate}}{{else}}1.00{{/if}}" />
                      </div>
                    </fieldset>
                  </div><div class="help-block"></div>
@@ -114,7 +114,7 @@
              <div class="card">
                <div class="card-content">
 				<fieldset>
-				<label>{{#with ..}}{{__ "Late Payment Charges" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}<span class="required red">*</span></label>
+				<label>{{#with ..}}{{__ "Late Payment Charges" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}</label>
                      <div class="input-group touchspincolor">
 					 <input type="text" class="touchspin " name="latepaymentcharge" data-validation-required-message="{{#with ..}}{{__ 'Late Payment Charges are required' setlang}}{{/with}}"  {{#if this.latepaymentcharge}} value="{{this.latepaymentcharge}}" {{else}} value="0" {{/if}}/>
                      </div>
@@ -127,7 +127,7 @@
                <div class="card-content">
                  <!-- <div class="card-body"> -->
 				<fieldset>
-				<label>{{#with ..}}{{__ "Processing Fees" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span> </label>
+				<label>{{#with ..}}{{__ "Processing Fees" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}  </label>
                      <div class="input-group touchspincolor">
 					 <input type="text" class="touchspin " name="processingfee" {{#if this.processingfee}} value="{{this.processingfee}}"{{/if}} value="0" />
                      </div>

@@ -893,5 +893,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Geheimer Schlüssel ist erforderlich",
 	"Stripe secret key": "Stripe Geheimer Schlüssel",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Öffentlicher Schlüssel ist erforderlich",
-	"Stripe public key": "Stripe Öffentlicher Schlüssel"
+	"Stripe public key": "Stripe Öffentlicher Schlüssel",
+	"Payment Type is required": "Zahlungstyp ist erforderlich",
+	"Total User": "Gesamtbenutzer",
+	"No loans available at the moment.": "Im Moment keine Kredite verfügbar.",
+	"Deactive Users": "Inaktive Benutzer",
+	"EMI Reports List": "EMI-Berichtsliste",
+	"Loan not approved": "Kredit nicht genehmigt",
+	"Event deleted successfully!": "Ereignis erfolgreich gelöscht!",
+	"Approved ! Loan Approved successfully!": "Genehmigt ! Kredit erfolgreich genehmigt!",
+	"Loan disapproved successfully!": "Kredit erfolgreich abgelehnt!",
+	"Loan approved successfully!": "Kredit erfolgreich genehmigt!"
 }

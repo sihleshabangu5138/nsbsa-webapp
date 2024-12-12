@@ -1163,5 +1163,15 @@
 	"is added": "додано",
 	"New account created.": "Створено новий обліковий запис.",
 	"EMI Reports": "Звіти EMI",
-	"Copyright &copy; 2024": "Авторське право &copy; 2024"
+	"Copyright &copy; 2024": "Авторське право &copy; 2024",
+      "Payment Type is required": "Тип оплати обов'язковий",
+      "Total User": "Загальна кількість користувачів",
+      "No loans available at the moment.": "На даний момент немає доступних кредитів.",
+      "Deactive Users": "Неактивні користувачі",
+      "EMI Reports List": "Список звітів EMI",
+      "Loan not approved": "Кредит не затверджено",
+      "Event deleted successfully!": "Подія успішно видалена!",
+      "Approved ! Loan Approved successfully!": "Затверджено! Кредит успішно затверджено!",
+      "Loan disapproved successfully!": "Кредит успішно відхилено!",
+      "Loan approved successfully!": "Кредит успішно затверджено!"
 }

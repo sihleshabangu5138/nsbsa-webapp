@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tajni ključ je obavezan",
 	"Stripe secret key": "Stripe tajni ključ",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Javni ključ je obavezan",
-	"Stripe public key": "Stripe javni ključ"
+	"Stripe public key": "Stripe javni ključ",
+	"Payment Type is required": "Tip plaćanja je obavezan",
+	"Total User": "Ukupan korisnik",
+	"No loans available at the moment.": "Trenutno nema dostupnih kredita.",
+	"Deactive Users": "Neaktivni korisnici",
+	"EMI Reports List": "Lista izvješća EMI",
+	"Loan not approved": "Kredit nije odobren",
+	"Event deleted successfully!": "Događaj uspješno izbrisan!",
+	"Approved ! Loan Approved successfully!": "Odobreno ! Kredit uspješno odobren!",
+	"Loan disapproved successfully!": "Kredit uspješno odbijen!",
+	"Loan approved successfully!": "Kredit uspješno odobren!"
 }

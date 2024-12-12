@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Reikalingas slaptas raktas",
 	"Stripe secret key": "Stripe slaptas raktas", 
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Reikalingas viešasis raktas",
-	"Stripe public key": "Stripe viešasis raktas"
+	"Stripe public key": "Stripe viešasis raktas",
+      "Payment Type is required": "Reikalingas apmokėjimo tipas",
+      "Total User": "Bendras vartotojas",
+      "No loans available at the moment.": "Šiuo metu paskolos nėra prieinamos.",
+      "Deactive Users": "Neaktyvūs vartotojai",
+      "EMI Reports List": "EMI ataskaitų sąrašas",
+      "Loan not approved": "Paskola nepatvirtinta",
+      "Event deleted successfully!": "Įvykis sėkmingai ištrintas!",
+      "Approved ! Loan Approved successfully!": "Patvirtinta! Paskola sėkmingai patvirtinta!",
+      "Loan disapproved successfully!": "Paskola sėkmingai atmesta!",
+      "Loan approved successfully!": "Paskola sėkmingai patvirtinta!"
 }

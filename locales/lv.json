@@ -1197,5 +1197,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Slepenā atslēga ir\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tnepieciešama",
 	"Stripe secret key": "Stripe slepenā atslēga",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Publiskā atslēga ir\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tnepieciešama", 
-	"Stripe public key": "Stripe publiskā atslēga"
+	"Stripe public key": "Stripe publiskā atslēga",
+      "Payment Type is required": "Nepieciešams maksājuma veids",
+      "Total User": "Kopējais lietotājs",
+      "No loans available at the moment.": "Šobrīd nav pieejami aizdevumi.",
+      "Deactive Users": "Deaktivizētie lietotāji",
+      "EMI Reports List": "EMI ziņojumu saraksts",
+      "Loan not approved": "Aizdevums nav apstiprināts",
+      "Event deleted successfully!": "Notikums veiksmīgi izdzēsts!",
+      "Approved ! Loan Approved successfully!": "Apstiprināts! Aizdevums veiksmīgi apstiprināts!",
+      "Loan disapproved successfully!": "Aizdevums veiksmīgi noraidīts!",
+      "Loan approved successfully!": "Aizdevums veiksmīgi apstiprināts!"
 }

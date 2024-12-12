@@ -899,5 +899,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Geheime sleutel is vereist",
 	"Stripe secret key": "Stripe geheime sleutel",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Publieke sleutel is vereist", 
-	"Stripe public key": "Stripe publieke sleutel"
+	"Stripe public key": "Stripe openbare sleutel",
+	"Payment Type is required": "Betalingswijze is verplicht",
+	"Total User": "Totaal aantal gebruikers",
+	"No loans available at the moment.": "Momenteel geen leningen beschikbaar.",
+	"Deactive Users": "Deactieve gebruikers",
+	"EMI Reports List": "EMI-rapportenlijst",
+	"Loan not approved": "Leningen niet goedgekeurd",
+	"Event deleted successfully!": "Evenement succesvol verwijderd!",
+	"Approved ! Loan Approved successfully!": "Goedgekeurd! Leningen succesvol goedgekeurd!",
+	"Loan disapproved successfully!": "Leningen succesvol afgewezen!",
+	"Loan approved successfully!": "Leningen succesvol goedgekeurd!"
 }

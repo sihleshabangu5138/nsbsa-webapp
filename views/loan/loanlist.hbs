@@ -315,13 +315,21 @@
 					{
                         field: "loan.type" ,
                         title: "{{__ 'Loan Type'}}",
-                        width: 130
+                        width: 130,
+						template: function(dataItem) {
+                        return dataItem.loan && dataItem.loan.type ? dataItem.loan.type : "N/A"; // Check for loan type
+                        }
                     }, 
 					{
                         field: "user.firstname",
                         title: "{{__ 'User Name'}}", 
-						template : "#= user.firstname # #= user.lastname #",
-                        width: 130
+						
+						template : function(dataItem) {
+                         return (dataItem.user && dataItem.user.firstname && dataItem.user.lastname) 
+                                ? dataItem.user.firstname + " " + dataItem.user.lastname 
+                                : "N/A"; // Check for user name
+                        },
+                         width: 130
                     },
 					
 					{
@@ -503,8 +511,11 @@
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						data : {id:id,approvestatus:value,name:'approvestatus'},
 						success: function (response)
-						{		 //alert(response);
-							toastr.success("Loan approved successfully!", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 }); 
+						{		
+							toastr.success("{{__ "Approved ! Loan Approved successfully!"}}", "Success!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+							setTimeout(function() {
+								window.location.replace('/loan/loanlist'); 
+							}, 1500);
 
 						},
 						error: function(e) 
@@ -520,12 +531,16 @@
 					var value = null; 
 					<!-- alert("checked"); -->
 					$.ajax({
-						type: 'POST',
-						url: '/ajxfun/approveloan/',
+						type: 'get',
+						url: '/ajxfun/disapproveloan',
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						data : {id:id,approvestatus:value,name:'approvestatus'},
-						success: function (response)
-				 //alert(response); 
+						success: function (response){
+						 toastr.success("Loan Disapproved successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 }); 
+							setTimeout(function() {
+								window.location.replace('/loan/disapproveloan'); 
+							}, 1500);
+
 						},
 						error: function(e) 
 						{	console.log(e);

@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "गोप्य कुञ्जी आवश्यक छ",
 	"Stripe secret key": "स्ट्राइप गोप्य कुञ्जी",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "सार्वजनिक कुञ्जी आवश्यक छ",
-	"Stripe public key": "स्ट्राइप सार्वजनिक कुञ्जी"
+	"Stripe public key": "Stripe सार्वजनिक कुञ्जी",
+	"Payment Type is required": "भुक्तानी प्रकार आवश्यक छ",
+	"Total User": "कुल प्रयोगकर्ता",
+	"No loans available at the moment.": "हालको समयमा कुनै ऋण उपलब्ध छैन।",
+	"Deactive Users": "निष्क्रिय प्रयोगकर्ताहरू",
+	"EMI Reports List": "EMI रिपोर्टहरूको सूची",
+	"Loan not approved": "ऋण अनुमोदन गरिएको छैन",
+	"Event deleted successfully!": "घटना सफलतापूर्वक मेटाइयो!",
+	"Approved ! Loan Approved successfully!": "स्वीकृत! ऋण सफलतापूर्वक स्वीकृत!",
+	"Loan disapproved successfully!": "ऋण सफलतापूर्वक अस्वीकृत!",
+	"Loan approved successfully!": "ऋण सफलतापूर्वक स्वीकृत!"
 }

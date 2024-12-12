@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Geheime Schlëssel ass\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\terfuerderlech",
 	"Stripe secret key": "Stripe geheime Schlëssel",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Ëffentleche Schlëssel ass\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\terfuerderlech",
-	"Stripe public key": "Stripe ëffentleche Schlëssel"
+	"Stripe public key": "Stripe ëffentleche Schlëssel",
+      "Payment Type is required": "Zuelabepeng ass erfuerderlech",
+      "Total User": "Gesamt Benotzer",
+      "No loans available at the moment.": "Keng Kreditten verfügbar am Moment.",
+      "Deactive Users": "Deaktivéiert Benotzer",
+      "EMI Reports List": "EMI Berichter Lëscht",
+      "Loan not approved": "Kredit net approvéiert",
+      "Event deleted successfully!": "Evenement erfollegräich geläscht!",
+      "Approved ! Loan Approved successfully!": "Genehmigt! Kredit erfollegräich genehmegt!",
+      "Loan disapproved successfully!": "Kredit erfollegräich net genehmegt!",
+      "Loan approved successfully!": "Kredit erfollegräich genehmegt!"
 }

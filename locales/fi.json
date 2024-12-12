@@ -320,7 +320,7 @@
 	"Duration": "Käyttäjä päivitetty onnistuneesti.",
 	"Finance Updated Successfully.": "Perheenjäsenen nimi",
 	"Localization Updated Successfully.": "Tapahtuman tiedot",
-	"Company Details Updated Successfully.": "Kesto",
+	"Company Details Updated Successfully.": "Yrityksen tiedot päivitetty onnistuneesti.",
 	"Access_Rights Updated Successfully.": "Moduuli",
 	"Access Rights Updated Successfully.": "Rahoitus päivitetty onnistuneesti.",
 	"Category Updated Successfully.": "Lokalisointi päivitetty onnistuneesti.",
@@ -1189,5 +1189,15 @@
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Julkinen avain vaaditaan",
 	"Stripe public key": "Stripe julkinen avain",
 	"EMI Reports": "EMI-raportit",
-	"Copyright &copy; 2024": "Tekijänoikeus &copy; 2024"
+	"Copyright &copy; 2024": "Tekijänoikeus &copy; 2024",
+	"Payment Type is required": "Maksutyyppi vaaditaan",
+	"Total User": "Kokonaisten käyttäjien määrä",
+	"No loans available at the moment.": "Tällä hetkellä lainoja ei ole saatavilla.",
+	"Deactive Users": "Aktiivittomat käyttäjät",
+	"EMI Reports List": "EMI-raporttien luettelo",
+	"Loan not approved": "Lainaa ei ole hyväksytty",
+	"Event deleted successfully!": "Tapahtuma poistettu onnistuneesti!",
+	"Approved ! Loan Approved successfully!": "Hyväksytty ! Laina hyväksytty onnistuneesti!",
+	"Loan disapproved successfully!": "Laina hylätty onnistuneesti!",
+	"Loan approved successfully!": "Laina hyväksytty onnistuneesti!"
 }

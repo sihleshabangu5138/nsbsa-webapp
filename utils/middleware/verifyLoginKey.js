@@ -6,7 +6,7 @@ exports.verifyLoginPurchaseKey = async (req, res, next) => {
     const hostname = req.get("host");
     const parsedUrl = new URL("http://" + hostname);
     const domainName = parsedUrl.hostname;
-    if (domainName === "ews.niftysol.com" || domainName === "localhost") {
+    if (domainName === "ews.niftysol.com" || domainName === "localhost" || domainName === "192.168.1.39") {
       // If the request is from 'ews.niftysol.com', send a success response directly
       req.purchaseData = { data: "4" }; // Assuming the data is '4' for success
       return next();

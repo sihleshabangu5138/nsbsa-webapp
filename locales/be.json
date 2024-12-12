@@ -1147,5 +1147,15 @@
 	"is added": "дададзены",
 	"New account created.": "Створаны новы ўліковы запіс.",
 	"EMI Reports": "Справаздачы EMI",
-	"Copyright &copy; 2024": "Аўтарскае права &copy; 2024"
+	"Copyright &copy; 2024": "Аўтарскае права &copy; 2024",
+	"Payment Type is required": "Платежный тип обязателен",
+	"Total User": "Общий пользователь",
+	"No loans available at the moment.": "В данный момент нет доступных кредитов.",
+	"Deactive Users": "Неактивные пользователи",
+	"EMI Reports List": "Список отчетов EMI",
+	"Loan not approved": "Кредит не утвержден",
+	"Event deleted successfully!": "Событие успешно удалено!",
+	"Approved ! Loan Approved successfully!": "Утверждено ! Кредит успешно утвержден!",
+	"Loan disapproved successfully!": "Кредит успешно не утвержден!",
+	"Loan approved successfully!": "Кредит успешно утвержден!"
 }

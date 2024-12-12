@@ -1198,5 +1198,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " راز ڪي آهي\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tلازم آهي",
 	"Stripe secret key": "ستريپ راز ڪي",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "عوامي ڪي آهي\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tلازم آهي",
-	"Stripe public key": "ستريپ عوامي ڪي"
+	"Stripe public key": "اسٽرايپ پبلڪ ڪِي",
+      "Payment Type is required": "ادائيگي جو قسم ضروري آهي",
+      "Total User": "مجموعي صارف",
+      "No loans available at the moment.": "هن وقت ڪا به قرض موجود ناهي.",
+      "Deactive Users": "غير فعال صارف",
+      "EMI Reports List": "EMI رپورٽن جي فهرست",
+      "Loan not approved": "قرض منظور نه ٿيو",
+      "Event deleted successfully!": "واقعي کي ڪاميابي سان حذف ڪيو ويو!",
+      "Approved ! Loan Approved successfully!": "منظور ڪيو ويو! قرض ڪاميابي سان منظور ڪيو ويو!",
+      "Loan disapproved successfully!": "قرض ڪاميابي سان رد ڪيو ويو!",
+      "Loan approved successfully!": "قرض ڪاميابي سان منظور ڪيو ويو!"
 }

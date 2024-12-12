@@ -893,5 +893,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Wymagany jest klucz tajny",
 	"Stripe secret key": "Tajny klucz Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Wymagany jest klucz publiczny",
-	"Stripe public key": "Klucz publiczny Stripe"
+	"Stripe public key": "Klucz publiczny Stripe",
+      "Payment Type is required": "Typ płatności jest wymagany",
+      "Total User": "Łączna liczba użytkowników",
+      "No loans available at the moment.": "Brak dostępnych pożyczek w tej chwili.",
+      "Deactive Users": "Dezaktywowani użytkownicy",
+      "EMI Reports List": "Lista raportów EMI",
+      "Loan not approved": "Pożyczka niezatwierdzona",
+      "Event deleted successfully!": "Zdarzenie zostało pomyślnie usunięte!",
+      "Approved ! Loan Approved successfully!": "Zatwierdzone! Pożyczka pomyślnie zatwierdzona!",
+      "Loan disapproved successfully!": "Pożyczka pomyślnie odrzucona!",
+      "Loan approved successfully!": "Pożyczka pomyślnie zatwierdzona!"
 }

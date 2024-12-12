@@ -892,5 +892,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "シークレットキーが必要です",
 	"Stripe secret key": "Stripeシークレットキー",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "公開キーが必要です",
-	"Stripe public key": "Stripe公開キー"
+	"Stripe public key": "ストライプの公開鍵",
+      "Payment Type is required": "支払いタイプが必要です",
+      "Total User": "合計ユーザー",
+      "No loans available at the moment.": "現在、利用可能なローンはありません。",
+      "Deactive Users": "非アクティブユーザー",
+      "EMI Reports List": "EMIレポートリスト",
+      "Loan not approved": "ローンが承認されませんでした",
+      "Event deleted successfully!": "イベントが正常に削除されました！",
+      "Approved ! Loan Approved successfully!": "承認済み！ローンが正常に承認されました！",
+      "Loan disapproved successfully!": "ローンが正常に却下されました！",
+      "Loan approved successfully!": "ローンが正常に承認されました！"
 }

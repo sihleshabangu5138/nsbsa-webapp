@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Απαιτείται μυστικό κλειδί",
 	"Stripe secret key": "Μυστικό κλειδί Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Απαιτείται δημόσιο κλειδί",
-	"Stripe public key": "Δημόσιο κλειδί Stripe"
+	"Stripe public key": "Δημόσιο κλειδί Stripe",
+	"Payment Type is required": "Ο τύπος πληρωμής είναι απαραίτητος",
+	"Total User": "Σύνολο Χρηστών",
+	"No loans available at the moment.": "Δεν υπάρχουν δανεικά διαθέσιμα αυτή τη στιγμή.",
+	"Deactive Users": "Ανενεργοί Χρήστες",
+	"EMI Reports List": "Λίστα Αναφορών EMI",
+	"Loan not approved": "Το δανείο δεν εγκρίθηκε",
+	"Event deleted successfully!": "Το συμβάν διαγράφηκε επιτυχώς!",
+	"Approved ! Loan Approved successfully!": "Εγκρίθηκε ! Το δανείο εγκρίθηκε επιτυχώς!",
+	"Loan disapproved successfully!": "Το δανείο δεν εγκρίθηκε επιτυχώς!",
+	"Loan approved successfully!": "Το δανείο εγκρίθηκε επιτυχώς!"
 }

@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " రహస్య కీ ఉన్నది\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tఅవసరము",
 	"Stripe secret key": "స్ట్ర్ప్ రహస్య కీ",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " పబ్లిక్ కీ ఉన్నది\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tఅవసరము",
-	"Stripe public key": "స్ట్ర్ప్ పబ్లిక్ కీ"
+	"Stripe public key": "స్ట్రైప్ పబ్లిక్ కీ",
+	"Payment Type is required": "పేమెంట్ రకం అవసరం",
+	"Total User": "మొత్తం వినియోగదారులు",
+	"No loans available at the moment.": "ఈ సమయానికి ఎటువంటి రుణాలు లేవు.",
+	"Deactive Users": "సక్రియం కాని వినియోగదారులు",
+	"EMI Reports List": "EMI రిపోర్టుల జాబితా",
+	"Loan not approved": "ఋణం ఆమోదించలేదు",
+	"Event deleted successfully!": "ఈవెంట్ విజయవంతంగా తీసివేయబడింది!",
+	"Approved ! Loan Approved successfully!": "ఆమోదించబడింది! ఋణం విజయవంతంగా ఆమోదించబడింది!",
+	"Loan disapproved successfully!": "ఋణం విజయవంతంగా తిరస్కరించబడింది!",
+	"Loan approved successfully!": "ఋణం విజయవంతంగా ఆమోదించబడింది!"
 }

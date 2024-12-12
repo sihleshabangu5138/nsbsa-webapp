@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Fa'atauga Fa'atauga\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
 	"Stripe secret key": "Fa'atauga Fa'atauga",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Fa'atauga Fa'atauga\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
-	"Stripe public key": "Fa'atauga Fa'atauga"
+	"Stripe public key": "Ki laupepa la Stripe",
+      "Payment Type is required": "O le ituaiga o totogi e manaʻomia",
+      "Total User": "Total o tagata faʻaoga",
+      "No loans available at the moment.": "O le a leai ni nonogatupe i le taimi nei.",
+      "Deactive Users": "Tagata faʻaaoga naʻo i latou naʻo",
+      "EMI Reports List": "Lisi o lipoti EMI",
+      "Loan not approved": "O le nonogatupe e leʻi faʻauluina",
+      "Event deleted successfully!": "Na faʻafouina le mea na tupu!",
+      "Approved ! Loan Approved successfully!": "Mālamalama! Na faʻamaonia le nonogatupe!",
+      "Loan disapproved successfully!": "Na oʻo i le faʻamaoniga!",
+      "Loan approved successfully!": "Nonogatupe auili na faigatu!"
 }

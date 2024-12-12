@@ -893,5 +893,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
 	"Stripe secret key": "Stripe secret key",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
-	"Stripe public key": "Stripe public key"
+	"Stripe public key": "Stripe genel anahtarı",
+    "Payment Type is required": "Ödeme tipi gereklidir",
+    "Total User": "Toplam Kullanıcı",
+    "No loans available at the moment.": "Şu anda kullanılabilir kredi yok.",
+    "Deactive Users": "Pasif Kullanıcılar",
+    "EMI Reports List": "EMI Raporları Listesi",
+    "Loan not approved": "Kredi onaylanmadı",
+    "Event deleted successfully!": "Etkinlik başarıyla silindi!",
+    "Approved ! Loan Approved successfully!": "Onaylandı! Kredi başarıyla onaylandı!",
+    "Loan disapproved successfully!": "Kredi başarıyla reddedildi!",
+    "Loan approved successfully!": "Kredi başarıyla onaylandı!"
 }

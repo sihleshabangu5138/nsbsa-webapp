@@ -1108,5 +1108,16 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Нууц түлхүүр\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tшаардлагатай",
 	"Stripe secret key": "Страйп нууц түлхүүр",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Нийтийн түлхүүр\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tшаардлагатай",
-	"Stripe public key": "Страйп нийтийн түлхүүр"
+	"Stripe public key": "Stripe нийтийн түлхүүр",
+      "Payment Type is required": "Төлбөрийн төрөл шаардлагатай",
+      "Total User": "Нийт хэрэглэгч",
+      "No loans available at the moment.": "Одоогоор зээлийн үйлчилгээ байхгүй.",
+      "Deactive Users": "Идэвхигүй хэрэглэгчид",
+      "EMI Reports List": "EMI тайлангийн жагсаалт",
+      "Loan not approved": "Зээлийг батламжилсангүй",
+      "Event deleted successfully!": "Үйл явдал амжилттай устгагдлаа!",
+      "Approved ! Loan Approved successfully!": "Батлагдсан! Зээл амжилттай батлагдлаа!",
+      "Loan disapproved successfully!": "Зээл амжилттай татгалзав!",
+      "Loan approved successfully!": "Зээл амжилттай батлагдлаа!"
+	
 }

@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kọkọrọ aṣiri jẹ dandan",
 	"Stripe secret key": "Bọtini aṣiri Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kọkọrọ gbangba jẹ dandan",
-	"Stripe public key": "Bọtini gbangba Stripe"
+	"Stripe public key": "Bọtini ọha ti Stripe",
+      "Payment Type is required": "Iru owo sanwo nilo",
+      "Total User": "Apapọ Olumulo",
+      "No loans available at the moment.": "Ko si awin ti o wa lọwọlọwọ.",
+      "Deactive Users": "Awọn olumulo ti ko ni iṣẹ",
+      "EMI Reports List": "Atokọ Iroyin EMI",
+      "Loan not approved": "Awin ko ti fọwọsi",
+      "Event deleted successfully!": "Ise na ti paarẹ ni aṣeyọri!",
+      "Approved ! Loan Approved successfully!": "Fọwọsi! Awin ti fọwọsi ni aṣeyọri!",
+      "Loan disapproved successfully!": "Awin ti kọ ni aṣeyọri!",
+      "Loan approved successfully!": "Awin ti fọwọsi ni aṣeyọri!"
 }

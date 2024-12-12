@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Çelësi Sekret është i nevojshëm",
 	"Stripe secret key": "Çelësi Sekret i Shirit",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Çelësi Publik është i nevojshëm",
-	"Stripe public key": "Çelësi Publik i Shirit"
+	"Stripe public key": "Çelësi publik i Stripe",
+      "Payment Type is required": "Lloji i pagesës është i detyrueshëm",
+      "Total User": "Përdoruesit e totalit",
+      "No loans available at the moment.": "Nuk ka huaja në dispozicion në këtë moment.",
+      "Deactive Users": "Përdorues të çaktivizuar",
+      "EMI Reports List": "Lista e raporteve EMI",
+      "Loan not approved": "Kredi nuk është miratuar",
+      "Event deleted successfully!": "Ngjarja u fshi me sukses!",
+      "Approved ! Loan Approved successfully!": "Miratuar! Kredi u miratua me sukses!",
+      "Loan disapproved successfully!": "Kredi u refuzua me sukses!",
+      "Loan approved successfully!": "Kredi u miratua me sukses!"
 }

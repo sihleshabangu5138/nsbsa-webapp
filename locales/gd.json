@@ -1199,6 +1199,16 @@
 	"Lithuanian": "Liotuainis",
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Tha feum air Iuchair Dìomhair",
 	"Stripe secret key": "Iuchair dìomhair stiall",
-	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tha feum air Iuchair Phoblach",
-	"Stripe public key": "Iuchair phoblach stiall"
+	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tá Eochair Phoiblí de dhíth",
+	"Stripe public key": "Iuchair phoblach Stripe",
+	"Payment Type is required": "Tha Seòrsa Pàighidh a dhìth",
+	"Total User": "Iomlan Cleachdaiche",
+	"No loans available at the moment.": "Chan eil iasadan ri fhaighinn an-dràsta.",
+	"Deactive Users": "Cleachdaichean Neo-ghnìomhach",
+	"EMI Reports List": "Liosta Aithisgean EMI",
+	"Loan not approved": "Iasad gun aontachadh",
+	"Event deleted successfully!": "Tachartas air a sguabadh às gu soirbheachail!",
+	"Approved ! Loan Approved successfully!": "Air aontachadh! Iasad air aontachadh gu soirbheachail!",
+	"Loan disapproved successfully!": "Iasad gun aontachadh gu soirbheachail!",
+	"Loan approved successfully!": "Iasad air aontachadh gu soirbheachail!"
 }

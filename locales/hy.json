@@ -1082,5 +1082,15 @@
 	"Access Rights": "Մուտքի իրավունքներ",
 	"Impersonate": "Կեղծել",
 	"Custom Fields": "Հատուկ դաշտեր",
-	"Copyright &copy; 2024": "Հեղինակային իրավունք &copy; 2024"
+	"Copyright &copy; 2024": "Հեղինակային իրավունք &copy; 2024",
+        "Payment Type is required": "Վճարման տեսակը պարտադիր է",
+        "Total User": "Ընդհանուր Օգտագործող",
+        "No loans available at the moment.": "Ներկայումս ոչ մի վարկ հասանելի չէ։",
+        "Deactive Users": "Անգործ Օգտագործողներ",
+        "EMI Reports List": "EMI Զեկույցների Ցանկ",
+        "Loan not approved": "Վարկը չի հաստատվել",
+        "Event deleted successfully!": "Իրադարձությունը հաջողությամբ ջնջվեց!",
+        "Approved ! Loan Approved successfully!": "Հաստատված է! Վարկը հաջողությամբ հաստատվեց!",
+        "Loan disapproved successfully!": "Վարկը հաջողությամբ մերժվեց!",
+        "Loan approved successfully!": "Վարկը հաջողությամբ հաստատվեց!"
 }

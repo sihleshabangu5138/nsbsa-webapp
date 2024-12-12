@@ -1150,5 +1150,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "المفتاح السري مطلوب",
 	"Stripe secret key": "مفتاح سترايب السري",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "المفتاح العام مطلوب",
-	"Stripe public key": "مفتاح سترايب العام"
+	"Stripe public key": "مفتاح سترايب العام",
+	"Payment Type is required": "نوع الدفع مطلوب",
+	"Total User": "إجمالي المستخدمين",
+	"No loans available at the moment.": "لا توجد قروض متاحة في الوقت الحالي.",
+	"Deactive Users": "المستخدمون غير النشطين",
+	"EMI Reports List": "قائمة تقارير EMI",
+	"Loan not approved": "القرض غير موافق عليه",
+	"Event deleted successfully!": "تم حذف الحدث بنجاح!",
+	"Approved ! Loan Approved successfully!": "تمت الموافقة! تمت الموافقة على القرض بنجاح!",
+	"Loan disapproved successfully!": "تم رفض القرض بنجاح!",
+	"Loan approved successfully!": "تمت الموافقة على القرض بنجاح!"
 }

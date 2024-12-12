@@ -1163,5 +1163,13 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Mifteya Veşartî\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tpêwîst e",
 	"Stripe secret key": "Mifteya veşartî ya Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Mifteya Giştî\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tpêwîst e",
-	"Stripe public key": "Mifteya giştî ya Stripe"
+	"Stripe public key": "Stripe کاشەی گشتی",
+      "Payment Type is required": "جۆری پارەدان پێویستە",
+      "Total User": "مجموعەی بەکارهێنەر",
+      "No loans available at the moment.": "ئێستا هیچ قەرزیەکی دavailableە",
+      "Deactive Users": "بەکارهێنەرە بەرەوپەڕەکان",
+      "EMI Reports List": "فهرستی ڕاپۆرتەکانی EMI",
+      "Loan not approved": "قەرز بەشێوەیەکی تایبەتی نییە",
+      "Event deleted successfully!": "بەشێوەیەکی تایبەتی پاکە ئەو چوارچۆبە بەپەیامی هەڵە مەنا",
+      "Approved ! Loan Approved successfully!": "ئیشکرا! قەرزییە تایبەتی ثبت کرا!بby"
 }

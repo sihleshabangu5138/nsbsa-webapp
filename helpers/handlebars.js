@@ -366,7 +366,7 @@ module.exports = {
 		addelement:function(v1, options){
 			var translatedLabel = __("Upload Document");
 			if(v1=="data"){
-				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>';	
+				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>';	
 			}
 			else{
 				// console.log('v1',v1);
@@ -378,7 +378,7 @@ module.exports = {
 		addimage:function(v1, options){	
 			var translatedLabel = __("Upload Image");
 			if(v1=="data"){
-				var add = '<div id="addedimage" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="uploadimages" type="file" multiple><span class="required red notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedimage()"><i class=" ft-x"></i></button></div>';
+				var add = '<div id="addedimage" class="col-xxl-12 d-flex"><div class="form-group" style="float:left; width: 90%; margin-right: 9px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="uploadimages" type="file" multiple><span class="required red notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedimage()"><i class=" ft-x"></i></button></div>';
 			}
 			else{
 				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="uploadimages"  data-validation-required-message="Image is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
@@ -388,7 +388,10 @@ module.exports = {
 		addnote:function(v1, options){
 			var translatedLabel = __("Add Note");	
 			if(v1=="data"){
-				var add = '<div id="addednote" class="col-md-12 p-0 mr-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2"  style="z-index: 9;">'+translatedLabel+'</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><button style="margin-bottom: 72px;" class="btn" type="button" onclick="deleteaddednote()"><i class=" ft-x"></i></button></div>'; 		
+				var add =
+          '<div id="addednote" class="col-md-12 p-0 mr-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2"  style="z-index: 9;">' +
+          translatedLabel +
+          '</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><button style="margin-bottom: 72px;" class="btn" type="button" onclick="deleteaddednote()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
 				var add= '<div class="col-md-12 p-0 mr-0"><div class="form-group"><label class="custom-control-label-date ml-2"  style="z-index: 9;">'+translatedLabel+'</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><div class="help-block"></div></div>';

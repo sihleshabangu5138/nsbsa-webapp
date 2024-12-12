@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Geheime sleutel is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tvereis",
 	"Stripe secret key": "Stripe geheime sleutel",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Openbare sleutel is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tvereis",
-	"Stripe public key": "Stripe openbare sleutel"
+	"Stripe public key": "Clave pública de Stripe",
+	"Payment Type is required": "Tipe van betaling is verpligtend",
+	"Total User": "Totale gebruiker",
+	"No loans available at the moment.": "Geen lenings beskikbaar op die oomblik.",
+	"Deactive Users": "Onaktiewe gebruikers",
+	"EMI Reports List": "Lys van EMI-verslae",
+	"Loan not approved": "Lening nie goedgekeur nie",
+	"Event deleted successfully!": "Gebeurtenis suksesvol verwyder!",
+	"Approved ! Loan Approved successfully!": "Goedgekeur ! Lening suksesvol goedgekeur!",
+	"Loan disapproved successfully!": "Lening suksesvol afgekeur!",
+	"Loan approved successfully!": "Lening suksesvol goedgekeur!"
 }

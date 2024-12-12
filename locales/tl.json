@@ -1204,5 +1204,15 @@
     "Secret Key is required": "Kinakailangan ang Lihim na Susi",
     "Stripe secret key": "Lihim na Susi ng Stripe",
     "Public Key is required": "Kinakailangan ang Pampublikong Susi",
-    "Stripe public key": "Pampublikong Susi ng Stripe"
+	"Stripe public key": "Pampublikong susi ng Stripe",
+    "Payment Type is required": "Kinakailangan ang Uri ng Pagbabayad",
+    "Total User": "Kabuuang User",
+    "No loans available at the moment.": "Walang mga pautang na magagamit sa ngayon.",
+    "Deactive Users": "Hindi aktibong mga User",
+    "EMI Reports List": "Listahan ng EMI na Ulat",
+    "Loan not approved": "Hindi inaprubahan ang Pautang",
+    "Event deleted successfully!": "Matagumpay na natanggal ang kaganapan!",
+    "Approved ! Loan Approved successfully!": "Naaprubahan! Matagumpay na naaprubahan ang pautang!",
+    "Loan disapproved successfully!": "Matagumpay na tinanggihan ang pautang!",
+    "Loan approved successfully!": "Matagumpay na naaprubahan ang pautang!"
 }

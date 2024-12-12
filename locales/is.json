@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Leynilykill er nauðsynlegur",
 	"Stripe secret key": "Stripe leynilykill",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Opinber lykill er nauðsynlegur",
-	"Stripe public key": "Stripe opinber lykill"
+	"Stripe public key": "Opinbert lykilorð Stripe",
+        "Payment Type is required": "Tegund greiðslu er nauðsynleg",
+        "Total User": "Heildarnotandi",
+        "No loans available at the moment.": "Engin lán eru í boði eins og er.",
+        "Deactive Users": "Óvirkir Notendur",
+        "EMI Reports List": "EMI Skýrslulisti",
+        "Loan not approved": "Lán ekki samþykkt",
+        "Event deleted successfully!": "Viðburður eytt með góðum árangri!",
+        "Approved ! Loan Approved successfully!": "Samþykkt! Lán samþykkt með góðum árangri!",
+        "Loan disapproved successfully!": "Lán ekki samþykkt með góðum árangri!",
+        "Loan approved successfully!": "Lán samþykkt með góðum árangri!"
 }

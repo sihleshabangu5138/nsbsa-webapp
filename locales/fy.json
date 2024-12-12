@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Geheime kaai is fereaske",
 	"Stripe secret key": "Stripe geheime kaai",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Publike kaai is fereaske",
-	"Stripe public key": "Stripe publike kaai"
+	"Stripe public key": "Stripe publike kaai",
+	"Payment Type is required": "Betellingssoart is fereaske",
+	"Total User": "Totaal brûkers",
+	"No loans available at the moment.": "Gjin lieningen beskikber op dit stuit.",
+	"Deactive Users": "Deaktivearre brûkers",
+	"EMI Reports List": "EMI-rapportenlist",
+	"Loan not approved": "Liening net goedkard",
+	"Event deleted successfully!": "Evenemint suksesfol fuortdien!",
+	"Approved ! Loan Approved successfully!": "Goedkard ! Liening suksesfol goedkard!",
+	"Loan disapproved successfully!": "Liening ôfwiisd suksesfol!",
+	"Loan approved successfully!": "Liening suksesfol goedkard!"
 }

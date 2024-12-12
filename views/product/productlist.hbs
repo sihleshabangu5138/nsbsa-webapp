@@ -290,7 +290,7 @@
                 // Display the first image (you can customize this based on your needs)
                 return dataItem.productimage[0];
             } else {
-                return ""; // No images
+                return "N/A"; // No images
             }
         },
 						width: 150
@@ -305,7 +305,7 @@
                 // Display all tags (you can customize this based on your needs)
                 return dataItem.tagname.join(", ");
             } else {
-                return ""; // No tags
+                return "N/A"; // No tags
             }
         },
 						width: 150
@@ -337,7 +337,8 @@
                         field: "locationrack" ,
 						title: "{{__ 'Location/Rack Number'}}",
 						 hidden: true,
-						width: 150
+						width: 150,
+						template: function(dataItem) {return dataItem.locationrack ? dataItem.locationrack : "N/A";}
                     },
 					{
                         field: "retailprice" ,

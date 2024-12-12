@@ -231,7 +231,7 @@
 				<div class="col-md-6">
 					<div class="form-group"> 
 						<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Upload Document" setlang}}{{/with}}<span class="required red">*</span></label>
-						<input class="form-control border-light fileUpload docfile" id="fileUpload" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
+						<input class="form-control border-light fileUpload docfile propertydoc" id="fileUpload" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
 						<span class="required red notice"></span>
 						{{#if this}}
 						<p class="d-inline-block mr-2">{{this}}</p>
@@ -348,7 +348,7 @@
 						</div>
 						</div>
 						
-						<div class="col-md-12 col-xl-6" style="float:left">
+						<div class="col-md-12 col-xl-5" style="float:left">
 						<div class="row">
 						<div class="col-md-10 add_file">
 						{{#if this.fileattach }}
@@ -383,25 +383,25 @@
 				{{else}}
     <p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Add Note"}}</p>
     <div class="row">
-        <div class="col-md-6" style="float:left">
+        <div class="col-xxl-6" style="float:left">
             <div class="row">
-                <div class="col-md-10 add_note">
+                <div class="col-xxl-8 add_note">
                     {{addnote 'nodata'}}
                 </div>
-                <div class="col-md-2 p-0 padding-mobile">
+                <div class="col-xxl-4 p-0 padding-mobile">
                     <button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
                         <i class="icon-plus4"></i>{{__ "Add more"}}
                     </button>
                 </div>
             </div>
         </div>
-        <div class="col-md-6" style="float:left">
+        <div class="col-xxl-6" style="float:left">
             <div class="row">
                 <div class="col-md-10 add_file">
                     {{attachfile 'nodata'}}
                 </div>
-                <div class="col-md-2 p-0 padding-mobile">
-                    <button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
+                <div class="col-md-3 p-0 padding-mobile">
+                    <button type="button" id="add_file" class="btn shover " style="background-color:#6badc2;color:#fff;magin-right:10px">
                         <i class="icon-plus4"></i>{{__ "Add more"}}
                     </button>
                 </div>
@@ -934,6 +934,13 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 			}
 			//return false;
 			}
+			 
+			 
+        // Attach change event listener to file inputs
+        $('.fileUpload').on('change', function() {
+            ValidateExtension(); // Call the validation function on file selection
+        });
+    
 	</script>
 	{{/each}}
 	<script>

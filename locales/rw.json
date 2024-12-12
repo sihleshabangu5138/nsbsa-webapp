@@ -1202,5 +1202,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Urufunguzo rw'ibanga rurakenewe",
 	"Stripe secret key": "Urufunguzo rw'ibanga rwa Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Urufunguzo rusange rurakenewe",
-	"Stripe public key": "Urufunguzo rusange rwa Stripe"
+	"Stripe public key": "Urufunguzo rusanzwe rwa Stripe",
+	"Payment Type is required": "Ubwoko bwishyura burakenewe",
+	"Total User": "Umubare wose w'abakoresha",
+	"No loans available at the moment.": "Nta nguzanyo ziboneka muri iki gihe.",
+	"Deactive Users": "Abakoresha batabasha",
+	"EMI Reports List": "Urutonde rw'ibisubizo bya EMI",
+	"Loan not approved": "Inyungu ntabwo yemerewe",
+	"Event deleted successfully!": "Igenamigambi ryakuweho neza!",
+	"Approved ! Loan Approved successfully!": "Byemewe! Inyungu yemewe neza!",
+	"Loan disapproved successfully!": "Inyungu yahakanywe neza!",
+	"Loan approved successfully!": "Inyungu yemewe neza!"
 }

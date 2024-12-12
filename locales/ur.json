@@ -1118,5 +1118,15 @@
 	"is added": "شامل کر دیا گیا ہے",
 	"New account created.": "نیا اکاؤنٹ بنایا گیا۔",
 	"EMI Reports": "ای ایم آئی رپورٹس",
-	"Copyright &copy; 2024": "کاپی رائٹ © 2024"
+	"Copyright &copy; 2024": "کاپی رائٹ © 2024",
+      "Payment Type is required": "ادائیگی کی قسم ضروری ہے",
+      "Total User": "مجموعی صارف",
+      "No loans available at the moment.": "اس وقت کوئی قرض دستیاب نہیں ہے۔",
+      "Deactive Users": "غیرفعال صارفین",
+      "EMI Reports List": "ای ایم آئی رپورٹس کی فہرست",
+      "Loan not approved": "قرض کی منظوری نہیں ہوئی",
+      "Event deleted successfully!": "ایونٹ کامیابی کے ساتھ حذف کر دیا گیا!",
+      "Approved ! Loan Approved successfully!": "منظور! قرض کامیابی سے منظور کر لیا گیا!",
+      "Loan disapproved successfully!": "قرض کامیابی سے مسترد کر دیا گیا!",
+      "Loan approved successfully!": "قرض کامیابی سے منظور کر لیا گیا!"
 }

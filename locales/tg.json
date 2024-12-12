@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Секретный ключ необходим\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
 	"Stripe secret key": "Секретный ключ Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Публичный ключ необходим\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-	"Stripe public key": "Публичный ключ Stripe"
+	"Stripe public key": "Калиди умумии Stripe",
+	"Payment Type is required": "Навъи пардохт зарур аст",
+	"Total User": "Тамоми корбарон",
+	"No loans available at the moment.": "Ҳоло қарзҳо дастрас нестанд.",
+	"Deactive Users": "Корбарони ғайрифаъол",
+	"EMI Reports List": "Рӯйхати ҳисоботҳои EMI",
+	"Loan not approved": "Қарз тасдиқ нашуд",
+	"Event deleted successfully!": "Ҳодиса бо муваффақият ҳазф шуд!",
+	"Approved ! Loan Approved successfully!": "Тасдиқ шуд! Қарз бо муваффақият тасдиқ шуд!",
+	"Loan disapproved successfully!": "Қарз бо муваффақият рад шуд!",
+	"Loan approved successfully!": "Қарз бо муваффақият тасдиқ шуд!"
 }

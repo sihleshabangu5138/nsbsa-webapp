@@ -1199,5 +1199,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "A titkos kulcs kötelező",
 	"Stripe secret key": "Stripe titkos kulcs",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "A nyilvános kulcs kötelező",
-	"Stripe public key": "Stripe nyilvános kulcs"
+	"Stripe public key": "Stripe nyilvános kulcs",
+	"Payment Type is required": "Fizetési típus szükséges",
+	"Total User": "Összes Felhasználó",
+	"No loans available at the moment.": "Jelenleg nincs elérhető kölcsön.",
+	"Deactive Users": "Inaktív Felhasználók",
+	"EMI Reports List": "EMI Jelentések Listája",
+	"Loan not approved": "Kölcsön nincs jóváhagyva",
+	"Event deleted successfully!": "Esemény sikeresen törölve!",
+	"Approved ! Loan Approved successfully!": "Jóváhagyva! Kölcsön sikeresen jóváhagyva!",
+	"Loan disapproved successfully!": "Kölcsön sikeresen elutasítva!",
+	"Loan approved successfully!": "Kölcsön sikeresen jóváhagyva!"
 }

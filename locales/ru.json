@@ -893,5 +893,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Секретный ключ\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tобязателен",
 	"Stripe secret key": "Секретный ключ Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Публичный ключ\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tобязателен",
-	"Stripe public key": "Публичный ключ Stripe"
+	"Stripe public key": "Публичный ключ Stripe",
+	"Payment Type is required": "Необходим тип платежа",
+	"Total User": "Общее количество пользователей",
+	"No loans available at the moment.": "В данный момент нет доступных займов.",
+	"Deactive Users": "Неактивные пользователи",
+	"EMI Reports List": "Список отчетов EMI",
+	"Loan not approved": "Займ не одобрен",
+	"Event deleted successfully!": "Событие успешно удалено!",
+	"Approved ! Loan Approved successfully!": "Одобрено! Займ успешно одобрен!",
+	"Loan disapproved successfully!": "Займ успешно отклонен!",
+	"Loan approved successfully!": "Займ успешно одобрен!"
 }

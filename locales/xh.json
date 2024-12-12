@@ -1168,5 +1168,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Ukhiye Oyimfihlo\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tuyafuneka",
 	"Stripe secret key": "Ukhiye oyimfihlo weStripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Ukhiye Womphakathi\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tuyafuneka",
-	"Stripe public key": "Ukhiye womphakathi weStripe"
+	"Stripe public key": "Iphini lomphosa ye-Stripe",
+      "Payment Type is required": "Uhlobo lweintlawulo lul required",
+      "Total User": "Umsebenzisi opheleleyo",
+      "No loans available at the moment.": "Asikho isikweletu esitholakalayo ngeli xesha.",
+      "Deactive Users": "Abasebenzisi abavukwayo",
+      "EMI Reports List": "Uluhlu lwezibhengezo ze-EMI",
+      "Loan not approved": "Isikweletu asiqinisekiswanga",
+      "Event deleted successfully!": "Isiganeko sisonjululwe ngempumelelo!",
+      "Approved ! Loan Approved successfully!": "Ivumelekile! Isikweletu siqinisekisiwe ngempumelelo!",
+      "Loan disapproved successfully!": "Isikweletu sikhishwe ngempumelelo!",
+      "Loan approved successfully!": "Isikweletu siqinisekiswe ngempumelelo!"
 }

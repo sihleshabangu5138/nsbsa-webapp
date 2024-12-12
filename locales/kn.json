@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "ರಹಸ್ಯ ಕೀ ಅಗತ್ಯವಿದೆ",
 	"Stripe secret key": "ಸ್ಟ್ರೈಪ್ ರಹಸ್ಯ ಕೀ",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "ಸಾರ್ವಜನಿಕ ಕೀ ಅಗತ್ಯವಿದೆ",
-	"Stripe public key": "ಸ್ಟ್ರೈಪ್ ಸಾರ್ವಜನಿಕ ಕೀ"
+	"Stripe public key": "ಸ್ಟ್ರೈಪ್ ಸಾರ್ವಜನಿಕ ಕೀ",
+	"Payment Type is required": "ಪಾವತಿ ಪ್ರಕಾರ ಅಗತ್ಯವಿದೆ",
+	"Total User": "ಒಟ್ಟು ಬಳಕೆದಾರರು",
+	"No loans available at the moment.": "ಈ ಸಮಯದಲ್ಲಿ ಯಾವುದೇ ಸಾಲಗಳು ಲಭ್ಯವಿಲ್ಲ.",
+	"Deactive Users": "ನಿಷ್ಕ್ರಿಯ ಬಳಕೆದಾರರು",
+	"EMI Reports List": "EMI ವರದಿ ಪಟ್ಟಿ",
+	"Loan not approved": "ಸಾಲವನ್ನು ಮಂಜೂರು ಮಾಡಲಾಗಿಲ್ಲ",
+	"Event deleted successfully!": "ಘಟನೆ ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ!",
+	"Approved ! Loan Approved successfully!": "ಮಂಜೂರು! ಸಾಲ ಯಶಸ್ವಿಯಾಗಿ ಮಂಜೂರು ಮಾಡಲಾಗಿದೆ!",
+	"Loan disapproved successfully!": "ಸಾಲ ಯಶಸ್ವಿಯಾಗಿ ಮಂಜೂರು ಮಾಡಲಾಯಿತು!",
+	"Loan approved successfully!": "ಸಾಲ ಯಶಸ್ವಿಯಾಗಿ ಮಂಜೂರು ಮಾಡಲಾಗಿದೆ!"
 }

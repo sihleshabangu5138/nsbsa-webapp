@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Ċavetta Sigrieta hija\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tmeħtieġa",
 	"Stripe secret key": "Ċavetta sigrieta ta' Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Ċavetta Pubblika hija\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tmeħtieġa",
-	"Stripe public key": "Ċavetta pubblika ta' Stripe"
+	"Stripe public key": "Stripe ċavetta pubblika",
+      "Payment Type is required": "It-tip ta' ħlas huwa meħtieġ",
+      "Total User": "Utent Totali",
+      "No loans available at the moment.": "M'hemm l-ebda self disponibbli bħalissa.",
+      "Deactive Users": "Utenti Inattivi",
+      "EMI Reports List": "Lista tar-Rapporti EMI",
+      "Loan not approved": "Self mhux approvat",
+      "Event deleted successfully!": "Attività eliminata b'suċċess!",
+      "Approved ! Loan Approved successfully!": "Approvata! Self approvat b'suċċess!",
+      "Loan disapproved successfully!": "Self miċħud b'suċċess!",
+      "Loan approved successfully!": "Self approvat b'suċċess!"
 }

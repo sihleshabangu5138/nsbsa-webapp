@@ -1185,6 +1185,16 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kle sekrè obligatwa",
 	"Stripe secret key": "Kle sekrè Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Kle piblik obligatwa",
+	"EMI Reports": "Rapò EMI",
 	"Stripe public key": "Kle piblik Stripe",
-	"EMI Reports": "Rapò EMI"
+	"Payment Type is required": "Kalifikasyon Peman obligatwa",
+	"Total User": "Total Itilizatè",
+	"No loans available at the moment.": "Pa gen prè ki disponib kounye a.",
+	"Deactive Users": "Itilizatè Dezaktive",
+	"EMI Reports List": "Lis Rapò EMI",
+	"Loan not approved": "Prè pa apwouve",
+	"Event deleted successfully!": "Evènman efase avèk siksè!",
+	"Approved ! Loan Approved successfully!": "Apwouve! Prè apwouve avèk siksè!",
+	"Loan disapproved successfully!": "Prè pa apwouve avèk siksè!",
+	"Loan approved successfully!": "Prè apwouve avèk siksè!"
 }

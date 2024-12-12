@@ -1198,5 +1198,15 @@
 	"Hebrew": "ஹீப்ரூ",
 	"Lithuanian": "லிதுவேனியன்",
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " ரகசிய கீ உள்ளது\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tதேவைப்படுகிறது",
-	"Stripe secret key": "ஸ்ட்ரைப் ரகசிய கீ"
+	"Stripe public key": "ஸ்டிரைப் பொது விசை",
+	"Payment Type is required": "பணம் செலுத்தும் வகை தேவையானது",
+	"Total User": "மொத்த பயனாளர்",
+	"No loans available at the moment.": "தற்போதைய நிலையில் எந்தவொரு கடனும் கிடைக்கவில்லை.",
+	"Deactive Users": "செயலற்ற பயனாளர்கள்",
+	"EMI Reports List": "EMI அறிக்கை பட்டியல்",
+	"Loan not approved": "கடன் அங்கீகாரம் அளிக்கப்பட்டது இல்லை",
+	"Event deleted successfully!": "நிகழ்வு வெற்றிகரமாக நீக்கப்பட்டது!",
+	"Approved ! Loan Approved successfully!": "அங்கீகாரம் பெற்றது! கடன் வெற்றிகரமாக அங்கீகரிக்கப்பட்டது!",
+	"Loan disapproved successfully!": "கடன் வெற்றிகரமாக நிராகரிக்கப்பட்டது!",
+	"Loan approved successfully!": "கடன் வெற்றிகரமாக அங்கீகரிக்கப்பட்டது!"
 }

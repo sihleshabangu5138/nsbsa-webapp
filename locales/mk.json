@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Потребен е таен клуч",
 	"Stripe secret key": "Таен клуч на Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Потребен е јавен клуч",
-	"Stripe public key": "Јавен клуч на Stripe"
+	"Stripe public key": "Јавен клуч на Stripe",
+      "Payment Type is required": "Типот на плаќање е потребен",
+      "Total User": "Вкупно корисници",
+      "No loans available at the moment.": "Во моментов нема достапни заеми.",
+      "Deactive Users": "Неактивни корисници",
+      "EMI Reports List": "Листа на EMI извештаи",
+      "Loan not approved": "Заемот не е одобрен",
+      "Event deleted successfully!": "Настанот успешно е избришан!",
+      "Approved ! Loan Approved successfully!": "Одобрено! Заемот е успешно одобрен!",
+      "Loan disapproved successfully!": "Заемот успешно е одбиен!",
+      "Loan approved successfully!": "Заемот успешно е одобрен!"
 }

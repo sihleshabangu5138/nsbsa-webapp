@@ -1204,5 +1204,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Жашыруун ачкыч талап кылынат",
 	"Stripe secret key": "Stripe жашыруун ачкычы",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Ачык ачкыч талап кылынат",
-	"Stripe public key": "Stripe ачык ачкычы"
+	"Stripe public key": "Stripe жалпы ачкычы",
+	"Payment Type is required": "Төлөм түрү талап кылынат",
+	"Total User": "Жалпы колдонуучу",
+	"No loans available at the moment.": "Азырынча насыялар жеткиликтүү эмес.",
+	"Deactive Users": "Активдүү эмес колдонуучулар",
+	"EMI Reports List": "EMI отчетторунун тизмеси",
+	"Loan not approved": "Насыя жактырылган жок",
+	"Event deleted successfully!": "Окуя ийгиликтүү жок кылынды!",
+	"Approved ! Loan Approved successfully!": "Жактырылды! Насыя ийгиликтүү жактырылды!",
+	"Loan disapproved successfully!": "Насыя ийгиликтүү баш тартылды!",
+	"Loan approved successfully!": "Насыя ийгиликтүү жактырылды!"
 }

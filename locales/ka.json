@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "საიდუმლო გასაღები\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tსავალდებულოა",
 	"Stripe secret key": "Stripe-ის საიდუმლო გასაღები",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "საჯარო გასაღები\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tსავალდებულოა",
-	"Stripe public key": "Stripe-ის საჯარო გასაღები"
+	"Stripe public key": "სტრაიპის საჯარო გასაღები",
+      "Payment Type is required": "გადახდის ტიპი აუცილებელია",
+      "Total User": "ჯამური მომხმარებელი",
+      "No loans available at the moment.": "ამჟამად სესხი არ არის ხელმისაწვდომი.",
+      "Deactive Users": "გამორთული მომხმარებლები",
+      "EMI Reports List": "EMI ანგარიშების სია",
+      "Loan not approved": "სესხი არ დამტკიცდა",
+      "Event deleted successfully!": "ღონისძიება წარმატებით წაიშალა!",
+      "Approved ! Loan Approved successfully!": "დამტკიცდა! სესხი წარმატებით დამტკიცდა!",
+      "Loan disapproved successfully!": "სესხი წარმატებით არ დამტკიცდა!",
+      "Loan approved successfully!": "სესხი წარმატებით დამტკიცდა!"
 }

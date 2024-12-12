@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": " Mwanzo wa Siri ni\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
 	"Stripe secret key": "Mwanzo wa Siri wa Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Mwanzo wa Umma ni\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired",
-	"Stripe public key": "Mwanzo wa Umma wa Stripe"
+	"Stripe public key": "Key ya umma ya Stripe",
+	"Payment Type is required": "Aina ya malipo inahitajika",
+	"Total User": "Jumla ya watumiaji",
+	"No loans available at the moment.": "Hakuna mikopo inapatikana kwa sasa.",
+	"Deactive Users": "Watumiaji wasioweza",
+	"EMI Reports List": "Orodha ya Ripoti za EMI",
+	"Loan not approved": "Mkopo haujapokelewa",
+	"Event deleted successfully!": "Tukio limefutwa kwa mafanikio!",
+	"Approved ! Loan Approved successfully!": "Imezuiwa! Mkopo umepokelewa kwa mafanikio!",
+	"Loan disapproved successfully!": "Mkopo umekataliwa kwa mafanikio!",
+	"Loan approved successfully!": "Mkopo umepokelewa kwa mafanikio!"
 }

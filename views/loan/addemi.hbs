@@ -138,13 +138,13 @@
 			</div>
 
 			<div id="userside" style="display: none;">
-						<div class="col-md-12 form-group p-0">
-							
-								<button type="submit" class="btn btn-secondary" id="checkout-button">
-									{{__ "Pay now"}}
-								</button>
-						
-						</div>
+				<div class="col-md-12 form-group p-0">
+			
+					<button type="submit" class="btn btn-secondary" id="checkout-button-user">
+						{{__ "Pay now"}}
+					</button>
+			
+				</div>
 			</div>
 			<div id="adminside" style="display: none;">
 				<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Payment Method" setlang}}{{/with}}</p>
@@ -575,14 +575,11 @@ $('body').on('change', '.dropdown_change', function ()
 {{!-- // intergration stripe payment gateway --}}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-	
     var stripe = Stripe(`{{stripePublishableKey}}`); // Access to public stripe key
 	 var payment_type = $('#payment_type');
 	
-
 	$(document).ready(async () =>{ 
-
-		$('#formID').on('submit', async function (event) {
+		$('#checkout-button-user').on('click', async function (event) {
 			 var payment_type = $('#payment_type');
 			 
 			// Prevent the default form submission
@@ -617,6 +614,10 @@ $('body').on('change', '.dropdown_change', function ()
 					toastr.error(error.responseJSON.error,"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 	
 			}
+		
 		});
 	}); 
+
+	
 </script>
+{{!-- interfratoin of payment gateway is over --}}

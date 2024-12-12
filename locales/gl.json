@@ -1199,6 +1199,16 @@
 	"Lithuanian": "lituano",
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Requírese a clave secreta",
 	"Stripe secret key": "Clave secreta de Stripe",
-	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Requírese a clave pública",
-	"Stripe public key": "Clave pública de Stripe"
+	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tá Eochair Phoiblí de dhíth",
+	"Stripe public key": "Clave pública de Stripe",
+	"Payment Type is required": "Tipo de pago necesario",
+	"Total User": "Usuario Total",
+	"No loans available at the moment.": "Non hai préstamos dispoñibles neste momento.",
+	"Deactive Users": "Usuarios Inactivos",
+	"EMI Reports List": "Lista de Informes EMI",
+	"Loan not approved": "Préstamo non aprobado",
+	"Event deleted successfully!": "Evento eliminado con éxito!",
+	"Approved ! Loan Approved successfully!": "Aprobado! Préstamo aprobado con éxito!",
+	"Loan disapproved successfully!": "Préstamo desaprobado con éxito!",
+	"Loan approved successfully!": "Préstamo aprobado con éxito!"
 }

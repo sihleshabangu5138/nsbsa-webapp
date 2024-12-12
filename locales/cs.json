@@ -1200,5 +1200,15 @@
 	" Secret Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Tajný klíč je\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tpovinný",
 	"Stripe secret key": "Tajný klíč Stripe",
 	"Public Key is\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\trequired": "Veřejný klíč je\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tpovinný",
-	"Stripe public key": "Veřejný klíč Stripe"
+	"Stripe public key": "Veřejný klíč Stripe",
+	"Payment Type is required": "Typ platby je povinný",
+	"Total User": "Celkový uživatel",
+	"No loans available at the moment.": "V tuto chvíli nejsou k dispozici žádné půjčky.",
+	"Deactive Users": "Neaktivní uživatelé",
+	"EMI Reports List": "Seznam EMI zpráv",
+	"Loan not approved": "Půjčka nebyla schválena",
+	"Event deleted successfully!": "Událost úspěšně smazána!",
+	"Approved ! Loan Approved successfully!": "Schváleno ! Půjčka byla úspěšně schválena!",
+	"Loan disapproved successfully!": "Půjčka byla úspěšně zamítnuta!",
+	"Loan approved successfully!": "Půjčka byla úspěšně schválena!"
 }
