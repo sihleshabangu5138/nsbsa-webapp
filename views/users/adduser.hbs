@@ -130,8 +130,8 @@
 				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Image" setlang}}{{/with}}</label>
 				<input class="form-control border-light imageUpload" onchange="return ValidateExtension()"  name="photo" {{#if this.photo}} value="{{this.photo}}"{{/if}} type="file" id="userinput5" >
 				<span class="required red notice"></span>
-				{{#if this.photo}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.photo}}">
-				<input class="form-control border-light"  name="photo_old" value="{{this.photo}}" type="hidden"  placeholder="" id="userinput57" > {{/if}}
+				{{#if this.photo}} <img class="existing_user_image update_time_team_image" id="previewselectedlogo"   src="/images/upload/{{this.photo}}">
+				<input class="form-control border-light" name="photo_old" value="{{this.photo}}" type="hidden"  placeholder=""  > {{/if}}
 			</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -897,8 +897,10 @@ $('document').ready(function(){
 
 <script type="text/javascript">
         function ValidateExtension(){
-		var m=0;
+		<!-- alert("123"); -->
+		m=0;
 		$('.imageUpload').each(function(){
+			  let files = this.files;
 			if($(this).val() != '') {
 				var imageUpload=$(this).val();
 				var allowedFiles = [];
@@ -917,24 +919,32 @@ $('document').ready(function(){
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
+					$(this).val("");
 					m++;
-					$('.imageUpload').val("");
-					
 				}
 				else{
 					$(this).siblings('.notice').html("");
+				var size = parseFloat((this.files[0].size / 1024 / 1024).toFixed(2));				
+					var limit = parseFloat("{{geninfom.imgupload_size}}");
+					if (size > limit) {
+						alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
+						$('.imageUpload').val();
+						return false;
+					}
 					
+					  let file = files[0];				
+					 if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+						
+                        $('#previewselectedlogo')
+                            .attr('src', event.target.result)
+                            .show(); 
+                    };
+                    reader.readAsDataURL(file);
 				}
-					$('.imageUpload').on('change', function () {
-					
-						var size = (this.files[0].size / 1024 / 1024).toFixed(2);
-						var limit ="{{geninfom.imgupload_size}}";
-						if (size > limit) {
-							alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
-							$('.imageUpload').val("");
-						}
-					
-				});
+				}
+				
 			}
 		});
 			if(m>0){

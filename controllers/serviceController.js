@@ -11,6 +11,7 @@ const User = require('../models/User');
 const CustomFieldMeta = require('../models/CustomFieldMeta');
 const CustomField = require('../models/Customfields');
 const ActivityLog = require('../models/Activitylog');
+const Generalsetting = require('../models/GeneralSetting');
 const moment = require('moment');
 
 
@@ -51,6 +52,7 @@ exports.getAddService = async (req, res) => {
       staff.forEach((element, key) => {
         staff[key].id_d = new mongoose.Types.ObjectId(element._id).toString();
       });
+      const settings = await Generalsetting.find({}).lean();
 
       const customfield = await CustomField.find({ $and: [{ module_name: "service" }, { field_visibility: 1 }] }).lean();
 
@@ -64,7 +66,7 @@ exports.getAddService = async (req, res) => {
         customfield_value[key].id_d = new mongoose.Types.ObjectId(element.custom_field_id).toString();
       });
 
-      res.render('service/addservice', { title: 'Edit Service', session: req.session, messages: req.flash(), category, staff, data: service, newfield: customfield, customfield_value, note: notes });
+      res.render('service/addservice', { title: 'Edit Service', session: req.session, messages: req.flash(), category, staff,setting: settings, data: service, newfield: customfield, customfield_value, note: notes });
     } else {
       const query = { categorytypes: "service" };
       const staffquery = { role: new mongoose.Types.ObjectId("5d5ce97225a26b1fb45236ba") };
@@ -75,6 +77,7 @@ exports.getAddService = async (req, res) => {
         User.find(staffquery).lean(),
         CustomField.find({ $and: [{ module_name: "service" }, { field_visibility: 1 }] }).lean(),
       ]);
+      const settings = await Generalsetting.find({}).lean();
 
       staff.forEach((element, key) => {
         staff[key].id_d = new mongoose.Types.ObjectId(element._id).toString();
@@ -95,6 +98,7 @@ exports.getAddService = async (req, res) => {
         newfield: customfield,
         customfield_value,
         note: news,
+        setting: settings,
       });
     }
   } catch (err) {

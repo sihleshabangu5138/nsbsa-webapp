@@ -1208,6 +1208,118 @@ exports.getLoanList = async (req, res) => {
 		res.status(500).json({ error: 'An error occurred' });
 	}
 };
+
+exports.emiPendingReport = async (req, res) => {
+    try {
+		const date = moment().format("YYYY-MM-DD");
+		let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
+        let query;
+        if (req.session.admin_access !== 1) {
+            if (req.session.access_rights && req.session.access_rights.pendingemilist && req.session.access_rights.pendingemilist.owndata) {
+                const role = await Role.findOne({ _id: req.session.role });
+                if (role.role_nm == "Staff") {
+                    query = {
+                        $and: [{
+                            date: {
+                                $lt: date
+                            }
+                        }, {
+                            status: 0, createdby: new mongoose.Types.ObjectId(req.session.user_id)
+                        }]
+                    };
+                }
+                else {
+                    query = {
+                        $and: [{
+                            date: {
+                                $lt: date
+                            }
+                        }, {
+                            status: 0, user_id: new mongoose.Types.ObjectId(req.session.user_id)
+                        }]
+                    };
+                }
+                console.log("own data");
+            } else {
+                query = {
+                    $and: [{
+                        date: {
+                            $lt: date
+                        }
+                    }, {
+                        status: 0
+                    }]
+                };
+                console.log("view data")
+            };
+        } else {
+            query = {
+                $and: [{
+                    date: {
+                        $lt: date
+                    }
+                }, {
+                    status: 0
+                }]
+            };
+            console.log("no data")
+        };
+        const emiDetails = await EmiDetails.aggregate([
+            {
+                $lookup: {
+                    from: LoanDetails.collection.name,
+                    localField: "loan_id",
+                    foreignField: "_id",
+                    as: "loan"
+                }
+            },
+            {
+                $unwind: "$loan"
+            },
+            {
+                $lookup: {
+                    from: Users.collection.name,
+                    localField: "user_id",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: "$user"
+            },
+            {
+                $lookup: {
+                    from: LoanDetails.collection.name,
+                    localField: "loan_id",
+                    foreignField: "_id",
+                    as: "loanDetails"
+                }
+            },
+            {
+                $unwind: "$loanDetails"
+            },
+            {
+                $addFields: {
+                    "createdby": "$loanDetails.createdby"
+                }
+            },
+            {
+                $match: query
+            }
+		]);
+		
+		emiDetails.forEach((ele) => {
+				ele.date = moment(ele.date, "YYYY-MM-DD").format(currentDateFormate);
+			return ele;
+			})
+		
+       
+       res.json(emiDetails)
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+}
 exports.getTotalLoan = async (req, res, next) => {
 	try {
 		let query;

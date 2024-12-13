@@ -60,8 +60,8 @@ exports.getAddRule = async (req, res) => {
     } else {
       const news = [{ 'userid': '-1' }];
       const customfield = await CustomField.find({ module_name: 'rule', field_visibility: 1 }).lean();
-
-      res.render('rule/addrule', { title: "Add Rule", data: news, session: req.session, newfield: customfield });
+      const geninfo = await Generalsetting.find().lean();
+      res.render('rule/addrule', { title: "Add Rule", data: news,geninfo: geninfo, session: req.session, newfield: customfield });
     }
   } catch (err) {
     console.error(err);

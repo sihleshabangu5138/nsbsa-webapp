@@ -88,6 +88,7 @@
 			{{/each}}
 			{{else}}
 				{{addimage 'nodata'}}
+				
 			{{/if}}
 			</div>
 			<div class="col-lg-3 col-md-2 p-0 padding-mobile">
@@ -617,61 +618,67 @@ $(document).ready(function(){
 {{#each setting as |geninfom|}}
 
 <script type="text/javascript">
-	function ValidateExtension() {
-		m = 0;
-		$('.docfile').each(function () {
-			if ($(this).val() != '') {
-				var docfile = $(this).val();
+        function ValidateExtension(){
+		<!-- alert("123"); -->
+		m=0;
+		$('.imageUpload').each(function(){
+			  let files = this.files;
+			if($(this).val() != '') {
+				var imageUpload=$(this).val();
 				var allowedFiles = [];
-				var doc = "{{geninfom.doctype_Doc}}";
-				var docx = "{{geninfom.doctype_Docx}}";
-				var pdf = "{{geninfom.doctype_Pdf}}";
-				var xls = "{{geninfom.doctype_Xls}}";
-				var xlsx = "{{geninfom.doctype_Xlsx}}";
-				if (doc != '') {
-					allowedFiles.push('{{geninfom.doctype_Doc}}');
+				var jpeg="{{geninfom.imgtype_jpeg}}";
+				var jpg="{{geninfom.imgtype_jpg}}";
+				var png="{{geninfom.imgtype_png}}";
+				if(jpeg!=''){
+					allowedFiles.push('{{geninfom.imgtype_jpeg}}');
 				}
-				if (docx != '') {
-					allowedFiles.push('{{geninfom.doctype_Docx}}');
+				if(jpg!=''){
+					allowedFiles.push('{{geninfom.imgtype_jpg}}');
 				}
-				if (pdf != '') {
-					allowedFiles.push('{{geninfom.doctype_Pdf}}');
-				}
-				if (xls != '') {
-					allowedFiles.push('{{geninfom.doctype_Xls}}');
-				}
-				if (xlsx != '') {
-					allowedFiles.push('{{geninfom.doctype_Xlsx}}');
+				if(png!=''){
+					allowedFiles.push('{{geninfom.imgtype_png}}');
 				}
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
-				if (!regex.test(docfile.toLowerCase())) {
+				if (!regex.test(imageUpload.toLowerCase())) {
 					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
+					$(this).val("");
 					m++;
-					$('.docfile').val("");
-
 				}
-				else {
+				else{
 					$(this).siblings('.notice').html("");
-
-				}
-				$('.docfile').on('change', function () {
-
-					var size = (this.files[0].size / 1024 / 1024).toFixed(2);
-					var limit = "{{geninfom.docupload_size}}";
+				var size = parseFloat((this.files[0].size / 1024 / 1024).toFixed(2));
+				
+					var limit = parseFloat("{{geninfom.imgupload_size}}");
+					
 					if (size > limit) {
-						alert("Too large file Size. Only file smaller than {{geninfom.docupload_size}}MB can be uploaded.");
-						$('.docfile').val("");
+						alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
+						$('.imageUpload').val("");
+						return false;
 					}
-
-				});
+					
+					  let file = files[0];				
+					 if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+						
+                        $('#previewselectedlogo')
+                            .attr('src', event.target.result)
+                            .show(); 
+                    };
+                    reader.readAsDataURL(file);
+				}
+				}
+				
 			}
 		});
-		if (m > 0) {
+			if(m>0){
 			return false;
-		}
-	}
+			}
+        }
+			
 </script>
 {{/each}}
+
 {{#each newfield as |customvalid|}}
 <script type="text/javascript">
        $('document').ready(function(){

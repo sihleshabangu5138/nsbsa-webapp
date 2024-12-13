@@ -234,7 +234,7 @@
 							
 						</div>
 						<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Upload Document" setlang}}{{/with}}<span class="required red">*</span></label>
-						<input class="form-control border-light fileUpload docfile" id="fileUpload" onchange="return ValidateExtension()" name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
+						<input class="form-control border-light fileUpload docfile" onchange="return ValidateExtension()"  id="fileUpload"  name="document" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
 						<span class="required red notice"></span>
 						{{#if this}}
 						<p class="d-inline-block mr-2">{{this}}</p>
@@ -889,62 +889,65 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 	</script>
 	{{#each geninfo as |geninfom|}}
 	<script type="text/javascript">
-			function ValidateExtension() {
-			var m=0;
-			$('.fileUpload').each(function(){
-			//alert(m);
-				if($(this).val() != '') {
-					var fileUpload=$(this).val();
-					var allowedFiles = [];
-					var pdf="{{geninfom.doctype_Pdf}}";
-					var doc="{{geninfom.doctype_Doc}}";
-					var docx="{{geninfom.doctype_Docx}}";
-					var xls="{{geninfom.doctype_Xls}}";
-					var zip="{{geninfom.doctype_Zip}}";
-					var xlsx="{{geninfom.doctype_Xlsx}}";
-					if(pdf!=''){
-						allowedFiles.push('{{geninfom.doctype_Pdf}}');
-					}
-					if(doc!=''){
-						allowedFiles.push('{{geninfom.doctype_Doc}}');
-					}
-					if(docx!=''){
-						allowedFiles.push('{{geninfom.doctype_Docx}}');
-					}
-					if(xls!=''){
-						allowedFiles.push('{{geninfom.doctype_Xls}}');
-					}	
-					if(zip!=''){
-						allowedFiles.push('{{geninfom.doctype_Zip}}');
-					}	
-					if(xlsx!=''){
-						allowedFiles.push('{{geninfom.doctype_Xlsx}}');
-					}	
-					
-					var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
-					if (!regex.test(fileUpload.toLowerCase())) {
-						
-						m++;
-						$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
-					}
-					else{
-						$(this).siblings('.notice').html('');
-					}
-				}
-			});
-			if(m>0){
-				return false;
-			}
-			//return false;
-			}
-			 
-			 
-        // Attach change event listener to file inputs
-        $('.fileUpload').on('change', function() {
-            ValidateExtension(); // Call the validation function on file selection
+    function ValidateExtension() {
+       
+        let errorCount = 0;
+
+        
+        $('.fileUpload').each(function () {
+            const fileInput = $(this);
+
+           
+            if (fileInput.val() !== '') {
+                const fileUpload = fileInput.val();
+                const allowedFiles = [];
+
+                const pdf = "{{geninfom.doctype_Pdf}}";
+                const doc = "{{geninfom.doctype_Doc}}";
+                const docx = "{{geninfom.doctype_Docx}}";
+                const xls = "{{geninfom.doctype_Xls}}";
+                const zip = "{{geninfom.doctype_Zip}}";
+                const xlsx = "{{geninfom.doctype_Xlsx}}";
+
+            
+                if (pdf) allowedFiles.push(pdf);
+                if (doc) allowedFiles.push(doc);
+                if (docx) allowedFiles.push(docx);
+                if (xls) allowedFiles.push(xls);                
+                if (xlsx) allowedFiles.push(xlsx);
+
+              
+                const regex = new RegExp(
+                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
+                    "i"
+                );
+
+                if (!regex.test(fileUpload)) {
+                    errorCount++;
+                    alert(`Only ${allowedFiles.join(', ')} formats are allowed.`);
+                    fileInput.val(""); // Reset the input field
+                } else {
+                    fileInput.siblings('.notice').html(""); // Clear any existing notices
+
+                  
+                    const size = parseFloat((fileInput[0].files[0].size / 1024 / 1024).toFixed(2));
+                    const limit = parseFloat("{{geninfom.docupload_size}}");
+
+                    if (size > limit) {
+                        alert(`Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
+                        fileInput.val(""); // Reset the input field
+                        return false;
+                    }
+                }
+            }
         });
-    
-	</script>
+
+        if (errorCount > 0) {
+            return false; // Validation failed
+        }
+    }
+</script>
+
 	{{/each}}
 	<script>
 	$(document).ready(function(){

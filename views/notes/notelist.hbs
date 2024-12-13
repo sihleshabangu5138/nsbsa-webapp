@@ -270,14 +270,16 @@
 					{
                         field: "object" ,
                         title: "{{__ "Files attached"}}",
-						width: 150,
-						template: function(dataItem) {
-                            if (dataItem.object) {
-                                return "<a href='/images/upload/" + dataItem.object + "' download='" + dataItem.object + "' target='_blank'>" + dataItem.object + "</a>";
-                            } else {
-                                return "N/A";
-                            }
-                        }
+						template: `
+							# if (object && object.trim() !== '') { #
+								<a href="/images/upload/#= object #" download="#= object #" target="_blank">
+									#= object #  <!-- This will show the file name -->
+								</a>
+							# } else { #
+								N/A
+							# } #
+						`,
+						width: 150
                     },
 					{
                         field: "module" ,

@@ -851,9 +851,48 @@ exports.getTotalUserList = async (req, res, next) => {
           messages: req.flash()
         });
       }else {
-        const numOfDocs = await User.countDocuments().lean();
-        const activeuser = await User.countDocuments({ status: 1 }).lean();
-        const deactiveuser = await User.countDocuments({ status: 0 }).lean();
+        
+        const matchQuery = { 'role_nm.role_slug': { $ne: 'admin' } };
+
+        const userAggregationPipeline = [
+          {
+            $lookup: {
+              from: 'roles', // Name of the Role collection
+              localField: 'role', // Field in Users collection
+              foreignField: '_id', // Field in Role collection
+              as: 'role_nm',
+            },
+          },
+          {
+            $unwind: '$role_nm', // Flatten the role_nm array
+          },
+          {
+            $match: matchQuery, // Exclude users with role_slug: 'admin'
+          },
+        ];
+
+        // Total users excluding admins
+        const totalUsers = await User.aggregate([...userAggregationPipeline, { $count: 'total' }]);
+
+        // Active users excluding admins
+        const activeUsers = await User.aggregate([
+          ...userAggregationPipeline,
+          { $match: { status: 1 } },
+          { $count: 'active' },
+        ]);
+
+        // Deactivated users excluding admins
+        const deactiveUsers = await User.aggregate([
+          ...userAggregationPipeline,
+          { $match: { status: 0 } },
+          { $count: 'deactive' },
+        ]);
+
+        // Extract counts or set default to 0 if no results
+        const numOfDocs = totalUsers[0]?.total || 0;
+        const activeuser = activeUsers[0]?.active || 0;
+        const deactiveuser = deactiveUsers[0]?.deactive || 0;
+
         res.render('users/totaluser', {
           title: 'All Users',
           count: numOfDocs,
@@ -905,9 +944,49 @@ exports.getUserList = async (req, res, next) => {
       res.render('users/userlist', { title: 'User List', count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, session: req.session, accessrightdata: access_data, messages: req.flash() });
       }
       else {
-        const numOfDocs = await User.countDocuments({});
-      const activeuser = await User.countDocuments({ status: 1 });
-      const deactiveuser = await User.countDocuments({ status: 0 });
+      
+
+        const matchQuery = { 'role_nm.role_slug': { $ne: 'admin' } };
+
+        const userAggregationPipeline = [
+          {
+            $lookup: {
+              from: 'roles', // Name of the Role collection
+              localField: 'role', // Field in Users collection
+              foreignField: '_id', // Field in Role collection
+              as: 'role_nm',
+            },
+          },
+          {
+            $unwind: '$role_nm', // Flatten the role_nm array
+          },
+          {
+            $match: matchQuery, // Exclude users with role_slug: 'admin'
+          },
+        ];
+
+        // Total users excluding admins
+        const totalUsers = await User.aggregate([...userAggregationPipeline, { $count: 'total' }]);
+
+        // Active users excluding admins
+        const activeUsers = await User.aggregate([
+          ...userAggregationPipeline,
+          { $match: { status: 1 } },
+          { $count: 'active' },
+        ]);
+
+        // Deactivated users excluding admins
+        const deactiveUsers = await User.aggregate([
+          ...userAggregationPipeline,
+          { $match: { status: 0 } },
+          { $count: 'deactive' },
+        ]);
+
+        // Extract counts or set default to 0 if no results
+        const numOfDocs = totalUsers[0]?.total || 0;
+        const activeuser = activeUsers[0]?.active || 0;
+        const deactiveuser = deactiveUsers[0]?.deactive || 0;
+
       res.render('users/userlist', { title: 'User List', count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, session: req.session, accessrightdata: access_data, messages: req.flash() });
       }
     } else {
@@ -945,9 +1024,48 @@ exports.getDeactivateUser = async function (req, res, next) {
           messages: req.flash()
         });
       }else {
-        const numOfDocs = await User.countDocuments().lean();
-        const activeuser = await User.countDocuments({ status: 1 }).lean();
-        const deactiveuser = await User.countDocuments({ status: 0 }).lean();
+        
+        const matchQuery = { 'role_nm.role_slug': { $ne: 'admin' } };
+
+        const userAggregationPipeline = [
+          {
+            $lookup: {
+              from: 'roles', // Name of the Role collection
+              localField: 'role', // Field in Users collection
+              foreignField: '_id', // Field in Role collection
+              as: 'role_nm',
+            },
+          },
+          {
+            $unwind: '$role_nm', // Flatten the role_nm array
+          },
+          {
+            $match: matchQuery, // Exclude users with role_slug: 'admin'
+          },
+        ];
+
+        // Total users excluding admins
+        const totalUsers = await User.aggregate([...userAggregationPipeline, { $count: 'total' }]);
+
+        // Active users excluding admins
+        const activeUsers = await User.aggregate([
+          ...userAggregationPipeline,
+          { $match: { status: 1 } },
+          { $count: 'active' },
+        ]);
+
+        // Deactivated users excluding admins
+        const deactiveUsers = await User.aggregate([
+          ...userAggregationPipeline,
+          { $match: { status: 0 } },
+          { $count: 'deactive' },
+        ]);
+
+        // Extract counts or set default to 0 if no results
+        const numOfDocs = totalUsers[0]?.total || 0;
+        const activeuser = activeUsers[0]?.active || 0;
+        const deactiveuser = deactiveUsers[0]?.deactive || 0;
+
         res.render('users/deactivateuser', {
           title: 'Deactivate Users',
           count: numOfDocs,

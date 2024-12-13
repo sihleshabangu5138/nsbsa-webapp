@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Services')}}
+{{breadcrums (__ 'Home') (__ 'EMI Pending Reports')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
@@ -65,35 +65,17 @@
 								 <div class="page-template">
 									<div class="header">
 									   <div style="float: right"></div>
-									  Service List 
+									  EMI Pending Reports 
 									</div>
 									<div class="footer">
 									 
 									</div>
 								</div>
 							</script>
-							<script type="text/x-kendo-template" id="windowTemplate">
-								
-								
-								<div class="swal-modal">
-									<span class="swal-icon--warning__body">
-										<span class="swal-icon--warning__dot"></span>
-									</span>
-								</div>
-								<div class="swal-title">{{{__ "Delete !"}}}</div>
-								<div class="swal-text">{{{__ "Are You sure wan't to delete this service ?"}}}</div>
-								<div class="swal-footer">
-								<div class="swal-button-container nobutton">
-									<button class="swal-button swal-button--confirm btn btn-secondary" id="noButton">{{{__ "NO"}}}</button>
-								</div>
-								<div class="swal-button-container yesbutton">
-									<button class="swal-button swal-button--cancel btn" id="yesButton">{{{__ "YES"}}}</button>
-								</div>
-								</div>  
-							</script> 
+						
     <script >
        jQuery(document).ready(function() {
-	var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
+	
 		$('body').on('change', '.export', function() {
 		var value = $(this).val();
 		if(value == 'csv')
@@ -115,8 +97,7 @@
 		
 		
 		var element=$("#grid").kendoGrid({
-			//var path='{{path}}';
-					
+						
 				pdf: {
 					
 		allPages: true,
@@ -152,7 +133,7 @@
 			    serverSorting: false,
 				 transport: {
 					read: {  
-						url: '/ajxfun/service',
+						url: '/ajxfun/emipendingreport',
 						dataType: "json",					
 					},
 					destroy:{
@@ -259,174 +240,58 @@
         },
                 columns: [
 					
-					{
-                        field: "servicename" ,
-						title: "{{__ 'Service Name'}}",
-						width: 150
-                    },
-					{
-                        field: "categorytypes" ,
-						title: "{{__ 'Category Type'}}",
-						width: 150
-                    },
-					{
-                        field: "servicefor" ,
-						title: "{{__ 'Service for'}}",
-						width: 150
-                    },
-					{
-                        field: "description" ,
-						title: "{{__ 'Description'}}",
-						width: 150
-                    },
-					{
-                        field: "uploadimages" ,
-						title: "{{__ 'Images'}}",
-						 hidden: true,
-						  template: function (dataItem) {
-							console.log((dataItem.uploadimages),"{}")
-							console.log(Array.isArray(dataItem.uploadimages),"{}")
-        const uploadImagesArray = Array.isArray(dataItem.uploadimages)
-        ? dataItem.uploadimages
-        : Object.values(dataItem.uploadimages).filter(item => typeof item === 'string'); // Filter to keep only string (file name) values
-  const downloadLinks = uploadImagesArray.map(fileName => {
-        return `<a href="/images/upload/${fileName}" download="${fileName}" target="_blank">${fileName}</a>`;
-    });
-
-    // Join the links into a comma-separated string or show 'N/A' if no files
-    return downloadLinks.length > 0
-        ? downloadLinks.join(', ')
-        : 'N/A';
+    
+    {
+        field: "user.firstname",
+        title: "{{__ 'User Name'}}",
+        width: 150
     },
-						width: 150
-                    },
-					{
-                        field: "tagname" ,
-						title: "{{__ 'Tags'}}",
-						 hidden: true,
-						  template: function (dataItem) {
-							
-							if(dataItem?.tagname[0] == null){
-								return "N/A"
-								
-							}else{
-								return dataItem?.tagname?.join(', ');
-							}
+    {
+        field: "loan.loancount",
+        title: "{{__ 'Loan No'}}",
+        width: 100
     },
-						width: 150
-                    },
-					{
-                        field: "duration_hour" ,
-						title: "{{__ 'Duration'}}",
-						template:"#= duration_hour #"+" hours"+" #= duration_minute #"+" minutes",
-						width: 180
-                    },
-					{
-                        field: "pricetype" ,
-						title: "{{__ 'Price Type'}}",
-						 hidden: true,
-						width: 120
-                    },
-					{
-                        field: "price" ,
-                        title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Price'}}",
-						width: 150
-                    },
-					{
-                        field: "assigned_staff" ,
-						title: "{{__ 'Assigned staff'}}",
-						 hidden: true,
-						   template: function (dataItem) {
-                                                    var usernames = dataItem?.assigned_staff?.map(function (staff) {
-
-                                                        return staff.username;
-                                                    });
-													
-													if(usernames[0] == null){
-														return "N/A"
-													}else{
-
-                                                    return usernames.join(', '); 
-													}
-                                                },
-						width: 150
-                    },
-					{
-                        field: "user_capacity" ,
-						title: "{{__ 'User Capacity'}}",
-						 hidden: true,
-						width: 150
-                    },
-					{
-                        field: "enable_online_booking" ,
-						title: "{{__ 'Online booking'}}",
-						 hidden: true,
-						width: 150
-                    },
-					{
-						width: "200px",
-						command:
-						[
-							{
-								template : "<center>" 
-							},
-							
-							  /* { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "addrole/"+id;
-								  return false;
-								} 
-							},   */
-							{template : "&nbsp;" },
+    {
+        field: "month",
+        title: "{{__ 'EMI Month'}}",
+        width: 100
+    },
+    {
+        field: "date",
+        title: "{{__ 'EMI Date'}}",
+        
+        width: 100
+    },
+    {
+        field: "monthly_payment",
+        title: "{{__ 'EMI Amount'}}",
+        width: 120,
+        format: "{0:n2}" // Format to display numbers with 2 decimal places
+    },
+    {
+        field: "loan.loanamount",
+        title: "{{__ 'Loan Amount'}}",
+        width: 120
+    },
+    {
+        field: "loan.interestrate",
+        title: "{{__ 'Interest Rate'}}",
+        width: 100,
+        hidden:true
+    },
+    {
+        field: "user.mobile",
+        title: "{{__ 'Phone'}}",
+        width: 120,
+        hidden: true
+    },
+    {
+        field: "user.email",
+        title: "{{__ 'Email'}}",
+        width: 150
+    }
 
 
-							/* Edit action start */
-							{{#ifCond accessrightdata.update "||" session.admin_access}}
-							 { 
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "addservice/"+id;
-								  return false;
-								} 
-							},
-							{{/ifCond}}
-							{template : "&nbsp;" },
-							{{#ifCond accessrightdata.delete "||" session.admin_access}}
-							{
-									name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
-										click: function(e) {
-											e.preventDefault();
-											var tr = $(e.target).closest("tr");
-											var data = this.dataItem(tr);
-											if (confirm(`{{__ "Are You sure wan't to delete this service ?"}}`)) {
-												var grid = $("#grid").data("kendoGrid");
-												grid.dataSource.remove(data)
-												grid.dataSource.sync();
-											}
-										}
-								},
-							{{/ifCond}}
-							
-							/* Delete action end */
-							
-							{template : "</center>" },
-							 
-							], 
-							{{#ifCond accessrightdata.add "||" session.admin_access}}
-							
-							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><a href='addservice	'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
-							{{/ifCond}}
-					}
                 ],
 				editable: {
                 mode: "inline"
