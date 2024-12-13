@@ -113,7 +113,7 @@
 									   </td>
 										 <td class="font-weight-bold pl-4">Pin Code</td>
 										 <td  class="tabletd"><span class="colon">:</span>
-										 <div class="tabletext"> {{this.pincode}}</div></td>	
+										 <div class="tabletext"> {{displayOrNA this.pincode}}</div></td>	
 									 </tr> 
 									 <tr>  
 									      <!--<td class="font-weight-bold pl-5">Country</td>
@@ -164,25 +164,25 @@
 									  	
 									 <tr>  						 
 										<td class="font-weight-bold pl-4">Family Member Name</td>  
-										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{this.familymember}}</div></td>	  
+										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{displayOrNA this.familymember}}</div></td>	  
 										 
 										  <td class="font-weight-bold pl-4">Occupation</td>
-										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{this.famoccupation}}</div></td> 
+										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{displayOrNA this.famoccupation}}</div></td> 
                                      </tr>										 
 									  
 									 
 									  	
 									 <tr>   
 										 <td class="font-weight-bold pl-4">Relationship</td>
-										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{this.relationship}}</div></td> 
+										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{displayOrNA this.relationship}}</div></td> 
 										 
 										 <td class="font-weight-bold pl-4">Contact</td>
-										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{this.famcontact}}</div></td>
+										 <td class="tabletd" value=""><span class="colon">:</span> <div class="tabletext">{{displayOrNA this.famcontact}}</div></td>
 									 </tr> 
 									 <tr>   
 										 <td class="font-weight-bold pl-4">Income</td>
 										 <td class="tabletd" value=""><span class="colon">:</span>
-										 <div class="tabletext">{{this.income}}</div></td> 
+										 <div class="tabletext">{{displayOrNA this.income}}</div></td> 
 									 </tr> 
 							</tbody>
 							{{/each}}

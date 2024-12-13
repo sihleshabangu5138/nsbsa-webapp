@@ -181,11 +181,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Custom field deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Custom Field Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Custom Field can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Custom Field Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}
@@ -294,6 +294,13 @@
 					{
                         field: "valids",
                          title: '{{__ "Validations"}}',
+						template: function (dataItem) {
+							if (dataItem.valids && dataItem.valids[0] !== null) {
+								return dataItem.valids.replace(",", ", ");
+							} else {
+								return "N/A";
+							}
+						},
                         width: 150
                     },	
 					{
@@ -306,6 +313,20 @@
                          field: "d_label",
                           title: '{{__ "Dropdown labels"}}',
 						  hidden:true,
+						 template: function (dataItem) {
+							 if (dataItem.d_label && dataItem.d_label[0] !== null) {
+								const filtered = Object.keys(dataItem.d_label)
+									 .filter(key => !isNaN(key)) // Check if the key is numeric
+									 .reduce((acc, key) => {
+										 acc[key] = dataItem.d_label[key];
+										 return acc;
+									 }, {});								
+								 const values = Object.values(filtered);
+								 return values.join(", ");
+							 }else {
+								 return "N/A"
+							 }
+						 },
 						 width: 150
                      },
 					// {

@@ -21,10 +21,10 @@ exports.getGeneralSettings = async (req, res) => {
     if (id) {
 
       const result = await GeneralSetting.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
-
       const data = await fs.promises.readFile('public/data/countries.json');
       const jsonParsed = JSON.parse(data);
-
+      req.session.company_logo = result[0].company_logo;
+      req.session.generaldata = result[0]; 
       const customfield = await CustomField.find({}).lean();
 
       res.render('generalsettings/generalsetting', {
@@ -55,7 +55,6 @@ exports.getGeneralSettings = async (req, res) => {
 
 
 exports.postGeneralSettings = async (req, res) => {
-    console.log("-------------", req.body);
   const id1 = req.body.id;
        try {
          if (id1) {
@@ -69,10 +68,12 @@ exports.postGeneralSettings = async (req, res) => {
              const stripe = req.body.stripe;
  
              if (req.body.companybtn) {
+                 let logo;
                  if (req.file != undefined) {
-                     var logo = req.file.filename;
+                      logo = req.file.filename;
+
                  } else {
-                     var logo = req.body.compan_old_images;
+                      logo = req.body.compan_old_images;
                  }
                  req.session.company_logo = logo;
                  const newvalues = {
@@ -89,28 +90,30 @@ exports.postGeneralSettings = async (req, res) => {
                          gst_no: req.body.gst_no,
                          email_bcc: req.body.email_bcc,
                          zipcode: req.body.zipcode,
-                         imgtype_jpg: req.body.imgtype_jpg,
-                         imgtype_png: req.body.imgtype_png,
-                         imgtype_jpeg: req.body.imgtype_jpeg,
+                         imgtype_jpg: req.body.imgtype_jpg === undefined ? null : req.body.imgtype_jpg,
+                         imgtype_png: req.body.imgtype_png === undefined ? null : req.body.imgtype_png,
+                         imgtype_jpeg: req.body.imgtype_jpeg === undefined ? null : req.body.imgtype_jpeg,
                          doctype: req.body.doctype,
                          imgupload_size: req.body.imgupload_size,
                          docupload_size: req.body.docupload_size,
                          country: parseInt(req.body.country, 10),
                          state: parseInt(req.body.state, 10),
                          city: parseInt(req.body.city, 10),
-                         doctype_Pdf: req.body.doctype_Pdf,
-                         doctype_Xlsx: req.body.doctype_Xlsx,
-                         doctype_Xls: req.body.doctype_Xls,
-                         doctype_Zip: req.body.doctype_Zip,
-                         doctype_Doc: req.body.doctype_Doc,
-                         doctype_Docx: req.body.doctype_Docx,
+                         doctype_Pdf: req.body.doctype_Pdf === undefined ? null : req.body.doctype_Pdf,
+                         doctype_Xlsx: req.body.doctype_Xlsx === undefined ? null : req.body.doctype_Xlsx,
+                         doctype_Xls: req.body.doctype_Xls === undefined ? null : req.body.doctype_Xls,
+                         doctype_Doc: req.body.doctype_Doc === undefined ? null : req.body.doctype_Pdf,
+                         doctype_Docx: req.body.doctype_Docx === undefined ? null : req.body.doctype_Pdf,
                      }
                  };
                  try {
+                   
                      await GeneralSetting.updateOne(updt_id, newvalues);
                      const data1 = await GeneralSetting.find(updt_id).lean();
+                   
                      req.session.company_logo = logo;
-                     req.session.generaldata = data1[0];
+                     req.session.generaldata = data1[0];  
+                       
                      req.flash('success', res.__('Company Details Updated Successfully.'));
                      res.redirect('/generalsettings/generalsetting/' + id1);
                  } catch (err) {

@@ -1,4 +1,4 @@
- {{breadcrums (__ 'Home') (__ 'Event details')}}
+ {{breadcrums (__ 'Home') (__ 'View Event')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
 	<div class="content-body">
@@ -20,7 +20,7 @@
 						  </div>
 						  <div class="col-sm-6">
 						  <span class="colon">:</span>
-							<div class="tabletext ">{{this.eventtype}}</div>
+							<div class="tabletext ">{{displayOrNA this.eventtype}}</div>
 						  </div>
 						</div>
 				    </div>
@@ -32,7 +32,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						  <span class="colon">:</span>
-							<div class="tabletext ">{{this.eventtitle}}</div>
+							<div class="tabletext ">{{displayOrNA this.eventtitle}}</div>
 						  </div>
 						</div>
 				    </div>
@@ -44,7 +44,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						  <span class="colon">:</span>
-							<div class="tabletext ">{{this.eventvenue}}</div><br>
+							<div class="tabletext ">{{displayOrNA this.eventvenue}}</div><br>
 						  </div>
 						</div>
 				    </div>
@@ -56,7 +56,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						  <span class="colon">:</span>
-							<div class="tabletext ">{{this.duration}}</div><br>
+							<div class="tabletext ">{{displayOrNA this.duration}}</div><br>
 						  </div>
 						</div>
 				    </div>
@@ -95,7 +95,7 @@
 						  </div>
 						  <div class="col-sm-6"> 
 						  <span class="colon">:</span>
-							<div class="tabletext ">{{this.eventdetail}}</div><br>
+							<div class="tabletext ">{{displayOrNA this.eventdetail}}</div><br>
 						  </div>
 						</div>
 				    </div>

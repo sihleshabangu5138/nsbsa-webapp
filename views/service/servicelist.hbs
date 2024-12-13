@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Service List')}}
+{{breadcrums (__ 'Home') (__ 'Services')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
@@ -164,11 +164,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Service deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Service Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Service can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Service Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}
@@ -286,7 +286,7 @@
 						  template: function (dataItem) {
           return Array.isArray(dataItem.uploadimages)
 								  ? dataItem.uploadimages.join(', ')
-								  : '';  // Display tags separated by commas
+								  : 'N/A';  // Display tags separated by commas
     },
 						width: 150
                     },
@@ -295,7 +295,13 @@
 						title: "{{__ 'Tags'}}",
 						 hidden: true,
 						  template: function (dataItem) {
-        return dataItem?.tagname?.join(', '); // Display tags separated by commas
+							
+							if(dataItem?.tagname[0] == null){
+								return "N/A"
+								
+							}else{
+								return dataItem?.tagname?.join(', ');
+							}
     },
 						width: 150
                     },
@@ -322,9 +328,16 @@
 						 hidden: true,
 						   template: function (dataItem) {
                                                     var usernames = dataItem?.assigned_staff?.map(function (staff) {
+
                                                         return staff.username;
                                                     });
-                                                    return usernames.join(', '); // Display usernames separated by commas
+													
+													if(usernames[0] == null){
+														return "N/A"
+													}else{
+
+                                                    return usernames.join(', '); 
+													}
                                                 },
 						width: 150
                     },

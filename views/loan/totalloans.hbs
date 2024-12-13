@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'All Loan List')}}
+{{breadcrums (__ 'Home') (__ 'Total Loans')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="content-header row">
@@ -18,7 +18,7 @@
 		</div> --}}
 		<div class="col-lg-4 col-md-6 col-12 pb-1">
 			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'All Loans'}}" placeholder="Addon To Right" readonly="readonly">
+				<input type="text" class="form-control square" value="{{__ 'Total Loans'}}" placeholder="Addon To Right" readonly="readonly">
 				<div class="form-control-position">
 					<span class="text-warning">
 						<a href="totalloans" style="text-decoration: underline !important;">{{this.count}}</a>
@@ -214,11 +214,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Loan deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Loan Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Loan can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Loan Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}

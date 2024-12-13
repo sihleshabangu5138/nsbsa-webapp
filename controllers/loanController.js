@@ -65,11 +65,11 @@ exports.getAddLoanType = async (req, res) => {
             });
 
             // console.log(customfield_value,"---------------");
-            res.render('loan/addloantype', { title: "Edit Loan Types", data: result, id: id, session: req.session, setlang: languages, newfield: customfield, customfield_value: customfield_value });
+            res.render('loan/addloantype', { title: "Edit Loan Type", data: result, id: id, session: req.session, setlang: languages, newfield: customfield, customfield_value: customfield_value, messages: req.flash() });
         } else {
             const news = [{ 'userid': '-1' }];
             const customfield = await CustomField.find({ $and: [{ "module_name": "loantype" }, { "field_visibility": 1 }] }).lean();
-            res.render('loan/addloantype', { title: "Add Loan Types", data: news, session: req.session, newfield: customfield });
+            res.render('loan/addloantype', { title: "Add Loan Type", data: news, session: req.session, newfield: customfield, messages: req.flash() });
         }
     } catch (error) {
         console.error(error);
@@ -275,7 +275,7 @@ exports.postAddLoanType = async (req, res) => {
                 }
             }
 
-            req.flash('success', res.__('Loan Type Inserted Successfully.'));
+            req.flash('success', res.__('Loan Type Added Successfully.'));
             res.redirect('/loan/loantypelist');
         }
     } catch (err) {
@@ -286,6 +286,7 @@ exports.postAddLoanType = async (req, res) => {
 };
 
 exports.getLoanList = async function (req, res, next) {
+    console.log(req.session.flash,"req.session.flash 1");
     try {
         let access_data = [];
         const session_id = req.query.session_id; // Get the session_id from query params
@@ -457,6 +458,22 @@ exports.getLoanList = async function (req, res, next) {
                 const numOfDocs = await LoanDetails.countDocuments(query);
                 // const approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 },{user: new mongoose.Types.ObjectId(req.session.user_id)}] };
                 // const disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 },{user: new mongoose.Types.ObjectId(req.session.user_id)}] };
+
+                const approveloan = await LoanDetails.countDocuments(approvedQuery);
+                const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
+                res.render('loan/loanlist', {
+                    title: 'Loans',
+                    session: req.session,
+                    count: numOfDocs,
+                    approveloan: approveloan,
+                    disapproveloan: disapproveloan,
+                    accessrightdata: access_data,
+                    messages: req.flash()
+                });
+            } else {
+                const numOfDocs = await LoanDetails.countDocuments({ $and: [{ status: 1 }] });
+                const approvedQuery = { $and: [{ status: 1 }, { approvestatus: 1 }] };
+                const disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }] };
 
                 const approveloan = await LoanDetails.countDocuments(approvedQuery);
                 const disapproveloan = await LoanDetails.countDocuments(disapprovedQuery);
@@ -1130,7 +1147,7 @@ exports.postAddLoan = async (req, res) => {
                 req.session.noticount = activenoti;
             }
 
-            req.flash('success', res.__('Loan Inserted Successfully.'));
+            req.flash('success', res.__('Loan Added Successfully.'));
             res.redirect('/loan/disapproveloan');
         }
     } catch (error) {
@@ -1186,6 +1203,21 @@ exports.getDisapproveLoanCountList = async (req, res) => {
                     messages: req.flash(),
                     accessrightdata: access_data,
                     role: userRole,
+                });
+            } else {
+                const numOfDocs = await LoanDetails.countDocuments({ $and: [{ status: 1 }] });
+
+                const approveloan = await LoanDetails.countDocuments({ $and: [{ status: 1 }, { approvestatus: 1 }] });
+
+                const disapproveloan = await LoanDetails.countDocuments({ $and: [{ status: 1 }, { approvestatus: 0 }] });
+                res.render('loan/disapproveloan', {
+                    title: 'Disapproved Loans',
+                    count: numOfDocs,
+                    approveloan: approveloan,
+                    disapproveloan: disapproveloan,
+                    session: req.session,
+                    messages: req.flash(),
+                    accessrightdata: access_data,
                 });
             }
         } else {
@@ -1568,6 +1600,7 @@ exports.getTotalLoanCountList = async (req, res) => {
                     disapprovedQuery = { $and: [{ status: 1 }, { approvestatus: 0 }, { user: new mongoose.Types.ObjectId(req.session.user_id) }] };
 
                 }
+                
                 const numOfDocs = await LoanDetails.countDocuments(query);
 
                 const approveloan = await LoanDetails.countDocuments(approvedQuery);
@@ -1583,6 +1616,24 @@ exports.getTotalLoanCountList = async (req, res) => {
                     messages: req.flash(),
                     accessrightdata: access_data,
                 });
+            } else {
+                const numOfDocs = await LoanDetails.countDocuments({ $and: [{ status: 1 }] });
+
+                const approveloan = await LoanDetails.countDocuments({ $and: [{ status: 1 }, { approvestatus: 1 }] });
+
+                const disapproveloan = await LoanDetails.countDocuments({ $and: [{ status: 1 }, { approvestatus: 0 }] });
+
+                res.render('loan/totalloans', {
+                    title: 'All Loans',
+                    count: numOfDocs,
+                    approveloan: approveloan,
+                    disapproveloan: disapproveloan,
+                    session: req.session,
+                    messages: req.flash(),
+                    accessrightdata: access_data,
+                });
+
+                
             }
         } else {
             const numOfDocs = await LoanDetails.countDocuments({ $and: [{ status: 1 }] });
@@ -1664,7 +1715,18 @@ exports.getPendingEMI = async (req, res) => {
                     };
                 }
                 console.log("own data");
-            }
+            } else {
+                query = {
+                    $and: [{
+                        date: {
+                            $lt: date
+                        }
+                    }, {
+                        status: 0
+                    }]
+                };
+                console.log("view data")
+            };
         } else {
             query = {
                 $and: [{
@@ -1725,6 +1787,7 @@ exports.getPendingEMI = async (req, res) => {
             title: 'Loans',
             session: req.session,
             data: emiDetails
+
         });
     } catch (err) {
         console.error(err);

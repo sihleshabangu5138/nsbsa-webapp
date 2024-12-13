@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Event List')}}
+{{breadcrums (__ 'Home') (__ 'Events')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
@@ -164,11 +164,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Event deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Event Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Event can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Event Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}
@@ -292,8 +292,9 @@
                     },
 					{
                         field: "eventdetail" ,
-                        {{!-- title: "Event detail", --}}
+                        
 						title: "{{__ 'Event detail'}}",
+						template:"#= eventdetail && eventdetail.trim() !== '' ? v : 'NA' #",
 						 hidden: true,
 						width: 150
                     },

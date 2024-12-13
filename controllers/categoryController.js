@@ -107,7 +107,7 @@ exports.postAddCategory = async (req, res) => {
       };
       await ActivityLog.create(myobj);
 
-      req.flash('success', res.__('Category Inserted Successfully.'));
+      req.flash('success', res.__('Category Added Successfully.'));
       res.redirect('/category/categorylist');
     }
   } catch (err) {

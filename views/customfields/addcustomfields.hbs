@@ -14,21 +14,37 @@
 		<div class="form-body user_form"> <!--Card Body div-->                       
 			<div class="row"><!--Row Div--> 								
 			<div class="col-md-6 mb-2 input">
-				<input type="hidden" id="userinput1"name="id" {{#if this._id}} value="{{this._id}}"{{/if}} > 
-				<label class="ml-1 custom-top-label top" style="z-index:99" for="module_name">{{#with ..}}{{__ "Module Name" setlang}}{{/with}}<span class="required red">*</span></label>
-				<select id="module_name" class="select2 form-control"  name="module_name" >
-				<option value="">{{#with ..}}{{__ "Select Module" setlang}}{{/with}}</option>
-				<option value="user" {{#ifCond this.module_name '==' 'user'}} selected {{/ifCond}}>{{#with ..}}{{__ "User" setlang}}{{/with}}</option>
-				<option value="loan" {{#ifCond this.module_name '==' 'loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Loan" setlang}}{{/with}}</option>
-				<option value="loantype" {{#ifCond this.module_name '==' 'loantype'}} selected {{/ifCond}}>{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</option>
-				<option value="emi" {{#ifCond this.module_name '==' 'emi'}} selected {{/ifCond}}>{{#with ..}}{{__ "EMI" setlang}}{{/with}}</option>
-				<option value="role" {{#ifCond this.module_name '==' 'role'}} selected {{/ifCond}}>{{#with ..}}{{__ "Role" setlang}}{{/with}}</option>
-				<option value="rule"{{#ifCond this.module_name '==' 'rule'}} selected {{/ifCond}} >{{#with ..}}{{__ "Rules and Regulations" setlang}}{{/with}}</option>
-				<option value="reminder" {{#ifCond this.module_name '==' 'reminder'}} selected {{/ifCond}}>{{#with ..}}{{__ "Reminder" setlang}}{{/with}}</option>
-				<option value="service" {{#ifCond this.module_name '==' 'service'}} selected {{/ifCond}}>{{#with ..}}{{__ "Service" setlang}}{{/with}}</option>	
-				<option value="product" {{#ifCond this.module_name '==' 'product'}} selected {{/ifCond}}>{{#with ..}}{{__ "Product" setlang}}{{/with}}</option>	
-				</select>
-			</div>					  
+				<div class="form-group">
+					<div class="col-md-12 form-control p-0 border-light">
+						<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}" {{/if}}>
+						<label class="ml-1 custom-top-label top" style="z-index:99" for="module_name">{{#with ..}}{{__ "Module Name"
+							setlang}}{{/with}}<span class="required red">*</span></label>
+						<select id="module_name" class="select2 form-control" name="module_name"
+							data-validation-required-message="{{#with ..}}{{__ " Module Name is required"}}{{/with}}">
+							<option value="">{{#with ..}}{{__ "Select Module" setlang}}{{/with}}</option>
+							<option value="user" {{#ifCond this.module_name '==' 'user' }} selected {{/ifCond}}>{{#with ..}}{{__ "User"
+								setlang}}{{/with}}</option>
+							<option value="loan" {{#ifCond this.module_name '==' 'loan' }} selected {{/ifCond}}>{{#with ..}}{{__ "Loan"
+								setlang}}{{/with}}</option>
+							<option value="loantype" {{#ifCond this.module_name '==' 'loantype' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"Loan Type" setlang}}{{/with}}</option>
+							<option value="emi" {{#ifCond this.module_name '==' 'emi' }} selected {{/ifCond}}>{{#with ..}}{{__ "EMI"
+								setlang}}{{/with}}</option>
+							<option value="role" {{#ifCond this.module_name '==' 'role' }} selected {{/ifCond}}>{{#with ..}}{{__ "Role"
+								setlang}}{{/with}}</option>
+							<option value="rule" {{#ifCond this.module_name '==' 'rule' }} selected {{/ifCond}}>{{#with ..}}{{__ "Rules
+								and Regulations" setlang}}{{/with}}</option>
+							<option value="reminder" {{#ifCond this.module_name '==' 'reminder' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"Reminder" setlang}}{{/with}}</option>
+							<option value="service" {{#ifCond this.module_name '==' 'service' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"Service" setlang}}{{/with}}</option>
+							<option value="product" {{#ifCond this.module_name '==' 'product' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"Product" setlang}}{{/with}}</option>
+						</select>
+					</div>
+					<div class="help-block"></div>
+				</div>
+			</div>			  
 			<div class="col-md-6">
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
@@ -37,27 +53,40 @@
 			</div><div class="help-block"></div>
 			</div>
 			</div>	
-			<div class="col-md-6">	
-				<div class="mb-2 input">	
-					<label class="ml-1 custom-top-label top" style="z-index:99" for="type">{{#with ..}}{{__ "Type" setlang}}{{/with}}<span class="required red">*</span></label>
-					<select id="field_type" class="select2 form-control dropdown_change"  name="field_type" >
-						<option value="">{{#with ..}}{{__ "Select Input Type" setlang}}{{/with}}</option>
-						<option value="text" {{#ifCond this.field_type '==' 'text'}} selected {{/ifCond}}>{{#with ..}}{{__ "Text Box" setlang}}{{/with}}</option>
-						<option value="textarea" {{#ifCond this.field_type '==' 'textarea'}} selected {{/ifCond}}>{{#with ..}}{{__ "Textarea" setlang}}{{/with}}</option>
-						<option value="dropdown" {{#ifCond this.field_type '==' 'dropdown'}} selected {{/ifCond}}>{{#with ..}}{{__ "Dropdown" setlang}}{{/with}}</option>
-						<option value="date" {{#ifCond this.field_type '==' 'date'}} selected {{/ifCond}}>{{#with ..}}{{__ "Date Field" setlang}}{{/with}}</option>
-						<option value="checkbox" {{#ifCond this.field_type '==' 'checkbox'}} selected {{/ifCond}}>{{#with ..}}{{__ "Checkbox" setlang}}{{/with}}</option>
-						<option value="radio" {{#ifCond this.field_type '==' 'radio'}} selected {{/ifCond}}>{{#with ..}}{{__ "Radio" setlang}}{{/with}}</option>
-						<option value="file" {{#ifCond this.field_type '==' 'file'}} selected {{/ifCond}}>{{#with ..}}{{__ "File" setlang}}{{/with}}</option>
-					</select>
-				</div>								
+			<div class="col-md-6 mb-2 input">
+				<div class="form-group">
+			
+					<div class="col-md-12 form-control p-0 border-light">
+						<label class="ml-1 custom-top-label top" style="z-index:99" for="type">{{#with ..}}{{__ "Type"
+							setlang}}{{/with}}<span class="required red">*</span></label>
+						<select id="field_type" class="select2 form-control dropdown_change" name="field_type" data-validation-required-message="{{#with ..}}{{__ "Type is required"}}{{/with}}">
+							<option value="">{{#with ..}}{{__ "Select Input Type" setlang}}{{/with}}</option>
+							<option value="text" {{#ifCond this.field_type '==' 'text' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"Text Box" setlang}}{{/with}}</option>
+							<option value="textarea" {{#ifCond this.field_type '==' 'textarea' }} selected {{/ifCond}}>{{#with
+								..}}{{__ "Textarea" setlang}}{{/with}}</option>
+							<option value="dropdown" {{#ifCond this.field_type '==' 'dropdown' }} selected {{/ifCond}}>{{#with
+								..}}{{__ "Dropdown" setlang}}{{/with}}</option>
+							<option value="date" {{#ifCond this.field_type '==' 'date' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"Date Field" setlang}}{{/with}}</option>
+							<option value="checkbox" {{#ifCond this.field_type '==' 'checkbox' }} selected {{/ifCond}}>{{#with
+								..}}{{__ "Checkbox" setlang}}{{/with}}</option>
+							<option value="radio" {{#ifCond this.field_type '==' 'radio' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"Radio" setlang}}{{/with}}</option>
+							<option value="file" {{#ifCond this.field_type '==' 'file' }} selected {{/ifCond}}>{{#with ..}}{{__
+								"File" setlang}}{{/with}}</option>
+						</select>
+					</div>
+			
+					<div class="help-block"></div>
+				</div>
 			</div>
 			<div class="col-md-6">
 			<div class="form-group">
 			<div class="col-md-12 form-control">
 			<div class="skin skin-flat row">
 			<div class="input-group">
-				<label class="ml-1 custom-top-label">{{#with ..}}{{__ "Validation" setlang}}{{/with}}<span class="red">*</span></label>
+				<label class="ml-1 custom-top-label">{{#with ..}}{{__ "Validation" setlang}}{{/with}}<span class="red"></span></label>
 				<div class="d-inline-block custom-control custom-checkbox mr-1 margin_left_custom_field">
 					
 					<label class="checkbox-inline mr-2"> 

@@ -469,10 +469,12 @@ module.exports = {
 			
 	},
 	displayOrNA: function (value) {
-		return value && value.trim() !== '' ? value : 'NA';
+	
+		return value && value.trim() !== '' ? value : 'N/A';
 	},
 	checkLengthAndDiaplayNA: function (value) {
-		if(value.length <= 0){
+
+		if( value == null || value.length <= 0 || value == undefined){
 			return 'NA';
 		}
 		return value;

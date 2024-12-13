@@ -35,14 +35,14 @@
 					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}<span class="red">*</span></label>
 						<select class="select2 form-control export" data-validation-required-message="{{#with ..}}{{__ "Loan Type is required"}}{{/with}}" name="loantype">
 							<option value="">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</option>
-							<option value="PersonalLoan" {{#ifCond this.loantype '==' 'PersonalLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Personal Loan" setlang}}{{/with}}</option>
-							<option value="ShortTermLoan" {{#ifCond this.loantype '==' 'ShortTermLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Short Term Loan" setlang}}{{/with}}</option>
-							<option value="HomeLoan"{{#ifCond this.loantype '==' 'HomeLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Home Loan" setlang}}{{/with}}</option>
-							<option value="CarLoan"{{#ifCond this.loantype '==' 'CarLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Car Loan" setlang}}{{/with}}</option>
-							<option value="TwoWheelerLoan"{{#ifCond this.loantype '==' 'TwoWheelerLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Two Wheeler Loan" setlang}}{{/with}}</option>
-							<option value="UsedcarLoan"{{#ifCond this.loantype '==' 'UsedcarLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Used Car Loan" setlang}}{{/with}}</option>
-							<option value="EducationLoan"{{#ifCond this.loantype '==' 'EducationLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Education Loan" setlang}}{{/with}}</option>
-							<option value="BusinessLoan"{{#ifCond this.loantype '==' 'BusinessLoan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Business Loan" setlang}}{{/with}}</option>
+							<option value="Personal Loan" {{#ifCond this.loantype '==' 'Personal Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Personal Loan" setlang}}{{/with}}</option>
+							<option value="Short Term Loan" {{#ifCond this.loantype '==' 'Short Term Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Short Term Loan" setlang}}{{/with}}</option>
+							<option value="Home Loan"{{#ifCond this.loantype '==' 'Home Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Home Loan" setlang}}{{/with}}</option>
+							<option value="Car Loan"{{#ifCond this.loantype '==' 'Car Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Car Loan" setlang}}{{/with}}</option>
+							<option value="Two Wheeler Loan"{{#ifCond this.loantype '==' 'Two Wheeler Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Two Wheeler Loan" setlang}}{{/with}}</option>
+							<option value="Used car Loan"{{#ifCond this.loantype '==' 'Used car Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Used Car Loan" setlang}}{{/with}}</option>
+							<option value="Education Loan"{{#ifCond this.loantype '==' 'Education Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Education Loan" setlang}}{{/with}}</option>
+							<option value="Business Loan"{{#ifCond this.loantype '==' 'Business Loan'}} selected {{/ifCond}}>{{#with ..}}{{__ "Business Loan" setlang}}{{/with}}</option>
 						</select>
 					</li>
 					</ul>
@@ -99,7 +99,7 @@
   <div class="form-group row">
     <div class="col-md-12">
       <label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Document For Rule" setlang}}{{/with}}</label>
-      <input class="form-control border-light imageUpload" name="rule_image" {{#if this.rule_image}} value="{{this.rule_image}}" {{/if}} type="file" id="userinput5">
+      <input class="form-control border-light imageUpload" onchange="return ValidateExtension()" name="rule_image" {{#if this.rule_image}} value="{{this.rule_image}}" {{/if}} type="file" id="userinput5">
       <span class="required red notice"></span>
       {{#if this.rule_image}}
         <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.rule_image}}" alt="Rule Image">
@@ -406,12 +406,23 @@
 				}
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
-					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
+						alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
 					m++;
+					$('.imageUpload').val("");
 				}
 				else{
-					$(this).siblings('.notice').html();
+					$(this).siblings('.notice').html("");
 				}
+				$('.imageUpload').on('change', function () {
+
+					var size = (this.files[0].size / 1024 / 1024).toFixed(2);
+					var limit = "{{geninfom.imgupload_size}}";
+					if (size > limit) {
+						alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
+						$('.imageUpload').val("");
+					}
+
+				});
 			}
 		});
 			if(m>0){
@@ -462,10 +473,9 @@ $(document).ready(function(){
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					m++;
-					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
-				}
+					alert("Only {{customvalid.filetype}} formats are allowed.");				}
 				else{
-					$(this).siblings('.notice').html();
+					$(this).siblings('.notice').html("");
 				}
 			}
 		});
@@ -474,7 +484,7 @@ $(document).ready(function(){
 			var size = (this.files[0].size/1024/1024).toFixed(2);
 			var limit="{{customvalid.filesize}}";
 			if(size > limit){
-				alert("size should be less than or equal to {{customvalid.filesize}} mb");
+				alert("Too large file Size. Only file smaller than {{customvalid.filesize}}MB can be uploaded.");
 				$('.validimage').val("");
 			}
 		}

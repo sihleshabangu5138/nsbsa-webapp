@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Reminder')}}
+{{breadcrums (__ 'Home') (__ 'Reminders')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 
@@ -24,16 +24,7 @@
 	<div class="card">
 	 
 	<div class="card-content collpase show">
-	 
-		<!-- Zero configuration table -->
-        <section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
-				
-				<!--{{log messages}}-->
+	 <!--{{log messages}}-->
 				{{#if messages.error  }}
 			<script>
 					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
@@ -44,6 +35,15 @@
 					toastr.success("{{messages.success}}", "{{__ 'Sucess!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
+		<!-- Zero configuration table -->
+        <section id="configuration">
+        <div class="row">
+            <div class="col-12">
+             <div class="card">
+                
+                <div class="card-content collapse show">
+				
+				
                 <div class="card-body card-dashboard card-design">
 					
 					<section id="horizontal">
@@ -51,9 +51,7 @@
 						<div class="col-12">
 						<div class="card">
 							<div class="card-header px-0">
-				   
-							<h4 class="text-bold-500">{{__ "Reminder Listing"}}</h4>
-							
+				   							
 						  </div>
 							<!--<div class="card-header">
 								<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
@@ -188,11 +186,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Reminder deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Reminder Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Reminder can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Reminder Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}

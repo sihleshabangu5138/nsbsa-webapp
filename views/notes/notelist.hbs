@@ -264,6 +264,7 @@
 					{
                         field: "obj" ,
                         title: "{{__ "Notes"}}",
+						template:"#= obj && obj.trim() !== '' ? obj : 'N/A' #",
 						width: 150
                     },
 					{
@@ -281,6 +282,7 @@
 					{
                         field: "module" ,
                         title: "{{__ "Module"}}",
+						template:"#= module && module.trim() !== '' ? module : 'N/A' #",
 						width: 150
                     },
 					{

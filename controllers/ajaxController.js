@@ -185,6 +185,10 @@ exports.getDeactivateUser = async (req, res, next) => {
 				
 			
 				matchQuery = { $and: [{ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }] }
+			} else {
+				matchQuery = {
+					status: 0
+				};
 			}
 		}
 		else {
@@ -212,8 +216,9 @@ exports.getDeactivateUser = async (req, res, next) => {
 exports.getDelete = async (req, res) => {
 	try {
 		const id = req.query._id;
+		
 		if (id === "65731827d0b92a5bcb33cfb7") {
-			return res.json({ result: "deep", message: "Admin can not be deleted!" });
+			return res.json({ result: "deep", message: "Admin Can Not be Deleted!" });
 		}
 		const myquery = { "_id": new mongoose.Types.ObjectId(id) };
 
@@ -406,6 +411,8 @@ exports.getService = async (req, res) => {
 					}
 				
 				}
+			}else {
+				result_final.push(...result);
 			}
 		}
 		else {
@@ -426,12 +433,15 @@ exports.getProduct = async (req, res) => {
 			if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
 				result = await Product.find({
 					"addedby": new mongoose.Types.ObjectId(req.session.user_id)  })
+			} else {
+				result = await Product.find({}).lean();
 			}
 			
 		} else {
 			 result = await Product.find({}).lean();
 			
 		}
+		console.log(result)
 		res.json(result);
 	} catch (err) {
 		console.error(err);
@@ -713,6 +723,9 @@ exports.getRules = async (req, res) => {
 		if (req.session.admin_access !== 1) {
 			if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
 				result = await Rule.find({ "addedby": req.session.user_id })
+			} else {
+
+				result = await Rule.find({}).lean();
 			}
 		} else {
 			
@@ -1125,10 +1138,12 @@ exports.getLoanList = async (req, res) => {
 					query = { $and: [{ status: 1, approvestatus: 1, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
 					console.log("aa");
 				}
+			} else {
+				query = { $and: [{ status: 1, approvestatus: 1 }] };
+				
 			}
 		} else {
 			query = { $and: [{ status: 1, approvestatus: 1 }] };
-			console.log("bb");
 		}
 		// const query = { $and: [{ status: 1 }, { approvestatus: 1 }] };
 
@@ -1205,6 +1220,8 @@ exports.getTotalLoan = async (req, res, next) => {
 				else {
 					query = { $and: [{ status: 1, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
 				}
+			} else {
+				query = { $and: [{ status: 1 }] };
 			}
 		} else {
 			query = { $and: [{ status: 1 }] };
@@ -1258,6 +1275,8 @@ exports.getDisApproveLoan = async (req, res, next) => {
 				else {
 					query = { $and: [{ status: 1, approvestatus: 0, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
 				}
+			} else {
+				query = { $and: [{ status: 1, approvestatus: 0 }] };
 			}
 		}
 		else {
@@ -1504,7 +1523,6 @@ exports.postAddRole = async (req, res) => {
 	}
 };
 exports.postApproveLoan = async (req, res) => {
-	console.log("-------------------------")
 	try {
 		const id = req.body.id;
 		if (id) {
@@ -1543,8 +1561,11 @@ exports.postApproveLoan = async (req, res) => {
 
 						Mail.sendMail(resultuser.email, subject, trans);
 					};
+					
 				} else {
 					value = 0;
+					
+
 				}
 				const newValues = {
 					$set: {
@@ -1552,7 +1573,9 @@ exports.postApproveLoan = async (req, res) => {
 					}
 				};
 				await LoanDetails.updateOne(myquery, newValues);
-				req.flash('success', res.__('Loan Updated Successfully.'));
+				console.log('Session before:', req.session.flash);
+				 req.flash('success', res.__(value == 1 ? 'Loan Approved Successfully.' : 'Loan Disapproved Successfully.'));
+				 console.log('Session After:', req.session.flash);
 				res.redirect('/loan/loanlist');
 			}
 		}

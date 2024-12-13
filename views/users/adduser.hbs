@@ -128,7 +128,7 @@
 			<div class="form-group row">
 			<div class="col-md-12">
 				<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Image" setlang}}{{/with}}</label>
-				<input class="form-control border-light imageUpload"  name="photo" {{#if this.photo}} value="{{this.photo}}"{{/if}} type="file" id="userinput5" >
+				<input class="form-control border-light imageUpload" onchange="return ValidateExtension()"  name="photo" {{#if this.photo}} value="{{this.photo}}"{{/if}} type="file" id="userinput5" >
 				<span class="required red notice"></span>
 				{{#if this.photo}} <img class="existing_user_image update_time_team_image" src="/images/upload/{{this.photo}}">
 				<input class="form-control border-light"  name="photo_old" value="{{this.photo}}" type="hidden"  placeholder="" id="userinput57" > {{/if}}
@@ -284,9 +284,10 @@
 			<div class="col-md-6 notCustomerBlock">
 				<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
-					<input type="text" id="pincode" class="" name="pincode" data-validation-regex-regex="([0-9]{1,50})" data-validation-regex-message="{{#with ..}}{{__ "Only numbers, no characters"}}{{/with}}" {{#if this.pincode}} value="{{this.pincode}}"{{/if}}>
+					<input type="text" id="pincode" class="" name="pincode" data-validation-regex-regex="([0-9]{1,13})" minlength="4" maxlength="12" data-validation-regex-message="{{#with ..}}{{__ "Only numbers, no characters"}}{{/with}}" {{#if this.pincode}} value="{{this.pincode}}"{{/if}}>
 					<label for="pincode" class="pincode">{{#with ..}}{{__ "Pincode" setlang}}{{/with}}</label>
 				</div>
+				<div class="help-block"></div>
 				</div>
 			</div>
 			</div>
@@ -326,7 +327,7 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input type="password" id="userinput_2" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="{{#with ..}}{{__ "Password must be of 6 to 12 digits"}}{{/with}}" {{#if this.password}} {{else}} required data-validation-required-message="{{#with ..}}{{__ "Password is required"}}{{/with}}"  {{/if}}>
-				<label for="userinput_2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">*</span></label>
+				<label for="userinput_2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}} *{{/if}}</span></label>
 				{{#if this.password}}
 				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput52" > {{/if}}
 
@@ -337,7 +338,7 @@
 			<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="password" id="userinput21" class="" name="confirmpassword"  data-validation-match-match="password"  {{#if this.confirmpassword}} {{/if}}>
-					<label for="userinput21">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">*</span></label>
+					<label for="userinput21">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}} *{{/if}}</span></label>
 				</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -601,8 +602,9 @@
 								<div class="form-group input">
 									<div class="col-md-12 form-control border-light">
 										<input type="text" data-validation-regex-regex="([A-Za-z_,.'^ -]{1,50})" data-validation-regex-message="Only Characters, no numbers" id="familymember" class="" name="familymember"  {{#if this.familymember}} value="{{this.familymember}}" {{/if}}>
-										<label for="familymember" class="familymember">{{#with ..}}{{__ "Family member name" setlang}}{{/with}}</label>
+										<label for="familymember" class="familymember">{{#with ..}}{{__ "Family Member Name" setlang}}{{/with}}</label>
 									</div>
+									<div class="help-block"></div>
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-2 notCustomerBlock">
@@ -611,6 +613,7 @@
 									<input type="text" id="relationship" data-validation-regex-regex="([A-Za-z_,.'^ -]{1,50})" data-validation-regex-message="Only Characters, no numbers" class="" name="relationship" {{#if this.relationship}} value="{{this.relationship}}"{{/if}}>
 									<label for="relationship" class="relationship">{{#with ..}}{{__ "Relationship" setlang}}{{/with}}</label>
 								</div>
+								<div class="help-block"></div>
 							</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-2 notCustomerBlock">
@@ -619,6 +622,7 @@
 									<input type="text" id="occupation" data-validation-regex-regex="([A-Za-z_,.'^ -]{1,50}) " data-validation-regex-message="Only Characters, no numbers" class="" name="famoccupation" {{#if this.famoccupation}} value="{{this.famoccupation}}"{{/if}}>
 									<label for="occupation" class="occupation">{{#with ..}}{{__ "Occupation" setlang}}{{/with}}</label>
 								</div>
+								<div class="help-block"></div>
 							</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-2 notCustomerBlock">
@@ -627,6 +631,7 @@
 									<input type="text" id="contact"  class="" name="famcontact" minlength="10" maxlength="16" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false" {{#if this.famcontact}} value="{{this.famcontact}}"{{/if}}>
 									<label for="contact" class="contact">{{#with ..}}{{__ "Contact" setlang}}{{/with}}</label>
 								</div>
+								<div class="help-block"></div>
 							</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-2 notCustomerBlock">
@@ -635,6 +640,7 @@
 									<input type="text" id="income" class="" name="income"  data-validation-regex-regex="([0-9]{1,10})" data-validation-regex-message="Only Characters, no numbers" {{#if this.income}} value="{{this.income}}"{{/if}}>
 									<label for="income" class="income"> {{{currencyList ../session.generaldata.currency}}} {{#with ..}}{{__ "Annual Income" setlang}}{{/with}}</label>
 								</div>
+								<div class="help-block"></div>
 							</div>
 							</div>
 
@@ -885,7 +891,10 @@ $('document').ready(function(){
 		});
 		});
 </script>
+
+
 {{#each setting as |geninfom|}}
+
 <script type="text/javascript">
         function ValidateExtension(){
 		var m=0;
@@ -907,12 +916,25 @@ $('document').ready(function(){
 				}
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
-					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
+					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
 					m++;
+					$('.imageUpload').val("");
+					
 				}
 				else{
 					$(this).siblings('.notice').html("");
+					
 				}
+					$('.imageUpload').on('change', function () {
+					
+						var size = (this.files[0].size / 1024 / 1024).toFixed(2);
+						var limit ="{{geninfom.imgupload_size}}";
+						if (size > limit) {
+							alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
+							$('.imageUpload').val("");
+						}
+					
+				});
 			}
 		});
 			if(m>0){
@@ -927,6 +949,7 @@ $('document').ready(function(){
 </script>
 {{/each}}
 {{#each newfield as |customvalid|}}
+
 <script type="text/javascript">
        $('document').ready(function(){
 	    $('.validimage').on('change', function() {
@@ -943,10 +966,12 @@ $('document').ready(function(){
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					m++;
-					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
+					{{!-- $(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only."); --}}
+					alert("Only {{customvalid.filetype}} formats are allowed.");
+					$('.validimage').val("");
 				}
 				else{
-					$(this).siblings('.notice').html();
+					$(this).siblings('.notice').html("");
 				}
 			}
 		});
@@ -955,7 +980,7 @@ $('document').ready(function(){
 			var size = (this.files[0].size/1024/1024).toFixed(2);
 			var limit="{{customvalid.filesize}}";
 			if(size > limit){
-				alert("size should be less than or equal to {{customvalid.filesize}} mb");
+				alert("Too large file Size. Only file smaller than {{customvalid.filesize}}MB can be uploaded.");
 				$('.validimage').val("");
 			}
 		}

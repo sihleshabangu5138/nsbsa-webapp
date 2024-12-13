@@ -198,7 +198,12 @@
 											setlang}}{{/with}}
 										</div>
 										<div class="col-sm-6 col-6">
-											<span class="colon">:</span>
+											<div class="row">
+												<div class="col-1">
+													<span class="colon">:</span>
+												</div>
+											
+											<div class="col pl-0">
 											{{#each this.document}}
 											<div class="tabletext"><a href="/images/upload/{{this}}" download="{{this}}"
 													target="_blank">{{this}}</a>
@@ -207,6 +212,9 @@
 													placeholder="" id="userinput5">
 											</div>
 											{{/each}}
+											</div>
+											
+											</div>
 										</div>
 									</div>
 								</div>
@@ -262,7 +270,14 @@
 										</div>
 										<div class="col-sm-6 col-6">
 											<span class="colon">:</span>
-											<div class="tabletext"> {{displayOrNA this.addtype}}</div>
+											<div class="tabletext">
+												{{#if (eq this.addtype "Select colleague address type")}}
+												N/A
+												{{else}}
+												{{displayOrNA this.addtype}}
+												{{/if}}
+											</div>
+
 
 										</div>
 									</div>

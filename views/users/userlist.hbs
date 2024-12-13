@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'User List')}}  
+{{breadcrums (__ 'Home') (__ 'Active Users')}}  
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
     <div class="content-wrapper">
 	<div class="content-header row">
@@ -211,11 +211,11 @@
     var response = JSON.parse(e.responseText);
 
     if (e.responseText=="true") {
-      toastr.success("{{__ "Deleted! User deleted successfully!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+      toastr.success("{{__ "User Deleted Successfully!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
     } else if (response.result === "deep") {
       toastr.error(response.message, { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
     } else {
-      toastr.error("{{__ 'Error! User can not be deleted!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+      toastr.error("{{__ 'Error! User Can Not Be Deleted!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
     }
   }
 }
@@ -366,6 +366,7 @@
 					{
                         field: "pincode",
                          title: "{{__ 'Pincode'}}",
+						 template:"#= pincode && pincode.trim() !== '' ? pincode : 'N/A' #",
 						 hidden: true,
                         width: 100
                     },

@@ -1,4 +1,4 @@
- {{breadcrums (__ 'Home') (__ 'Product details')}}
+ {{breadcrums (__ 'Home') (__ 'View Product')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="content-wrapper">
@@ -21,7 +21,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.productname}}</div>
+						  <div class="tabletext">{{displayOrNA this.productname}}</div>
 						  </div>
 						</div>
 				    </div>	 
@@ -31,7 +31,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.categorytypes}}</div>
+						  <div class="tabletext">{{displayOrNA this.categorytypes}}</div>
 						  </div>
 						</div>
 				    </div>	 
@@ -43,7 +43,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.productunit}}</div>
+						  <div class="tabletext">{{displayOrNA this.productunit}}</div>
 						  </div>
 						</div>
 				    </div>	 
@@ -53,7 +53,7 @@
 						  </div> 
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.description}}</div>
+						  <div class="tabletext">{{displayOrNA this.description}}</div>
 						  </div>
 						</div>
 				    </div>	 
@@ -66,15 +66,18 @@
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
 						  
-						  {{#each this.productimage}}
-						
-							<img class="existing_user_image update_time_team_image" src="/images/upload/{{this}}">
-							<a href="/images/upload/{{this}}" download="{{this}}">
-                    <button type="button" class="btn btn-info">
-                        {{#with ..}}{{__ "Download"}}{{/with}}
-                    </button>
-                </a>
-						  {{/each}}
+						{{#if this.productimage}}
+						{{#each this.productimage}}
+						<img class="existing_user_image update_time_team_image" src="/images/upload/{{this}}">
+						<a href="/images/upload/{{this}}" download="{{this}}">
+							<button type="button" class="btn btn-info">
+								{{#with ..}}{{__ "Download"}}{{/with}}
+							</button>
+						</a>
+						{{/each}}
+						{{else}}
+						<div>N/A</div>
+						{{/if}}
 						  </div>
 						</div>
 				    </div>	 
@@ -84,7 +87,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.warranty}} {{this.dur_type}}</div>
+						  <div class="tabletext">{{displayOrNA this.warranty}} {{displayOrNA this.dur_type}}</div>
 						  </div>
 						</div>
 				    </div>	 
@@ -106,7 +109,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						  <span class="colon">:</span>
-						  <div class="tabletext">{{this.skubarcode}}</div>
+						  <div class="tabletext">{{displayOrNA this.skubarcode}}</div>
 						  </div>
 						</div>
 				    </div>					
@@ -124,7 +127,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						   <span class="colon">:</span>
-						  <div class="tabletext">{{this.initialstock}}</div>  
+						  <div class="tabletext">{{displayOrNA this.initialstock}}</div>  
 						  </div>
 						</div>  
 				 </div> 
@@ -134,7 +137,7 @@
 						  </div>
 						  <div class="col-sm-6 col-6"> 
 						    <span class="colon">:</span>
-							 <div class="tabletext">{{getdate this.stockexpiry ../session.generaldata.date_format}}</div> 
+							 <div class="tabletext">{{displayOrNA (getdate this.stockexpiry ../session.generaldata.date_format)}}</div> 
 						  </div>
 						</div>
 				    </div>

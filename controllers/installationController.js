@@ -83,7 +83,6 @@ exports.postIns = async (req, res) => {
       doctype_Pdf: "pdf",
       doctype_Xls: "xls",
       doctype_Xlsx: "xlsx",
-      doctype_Zip: "zip",
       stripe_secret_key: null,
       stripe_publishable_key: null,
     });
@@ -131,7 +130,7 @@ exports.postIns = async (req, res) => {
       },
       {
         _id: new mongoose.Types.ObjectId("5dca8556a33db915988ba532"),
-        role_nm: "customer",
+        role_nm: "Customer",
         role_slug: "customer",
         role_desc: "customer",
         admin_access: 0,

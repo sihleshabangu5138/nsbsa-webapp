@@ -23,8 +23,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-router.use(flash());
 router.use(cookieParser());
+router.use(flash());
 router.use(lang.init);
 
 const viewAccessMiddleware = require('../../utils/middleware/viewRights');

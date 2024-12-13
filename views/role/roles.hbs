@@ -1,4 +1,4 @@
-{{breadcrums (__ 'Home') (__ 'Role Information')}}
+{{breadcrums (__ 'Home') (__ 'Roles')}}
 
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 <div class="row" style="">
@@ -23,17 +23,7 @@
 	<div class="card">
 	 
 	<div class="card-content collpase show">
-	 
-		<!-- Zero configuration table -->
-        <section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
-				
-				<!--{{log messages}}-->
-				{{#if messages.error  }}
+	 {{#if messages.error  }}
 			<script>
 					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
@@ -43,6 +33,16 @@
 					toastr.success("{{messages.success}}", "{{__ 'Sucess!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
 				</script>
 			{{/if}}
+		<!-- Zero configuration table -->
+        <section id="configuration">
+        <div class="row">
+            <div class="col-12">
+             <div class="card">
+                
+                <div class="card-content collapse show">
+				
+				<!--{{log messages}}-->
+				
                 <div class="card-body card-dashboard card-design">
 					
 					<section id="horizontal">
@@ -51,7 +51,7 @@
 						<div class="card">
 							<div class="card-header px-0">
 				   
-							<h4 class="text-bold-500">{{__ "Role Listing"}}</h4>
+							
 							
 						  </div>
 							<!--<div class="card-header">
@@ -190,11 +190,11 @@
 								console.log(e.responseText);
 								if(e.responseText=="true"){
 									
-									toastr.success("{{__ "Deleted! Role deleted successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									toastr.success("{{__ "Role Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									
 								}else{
 									
-									 toastr.error("{{__ " Error! Role can not be deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
+									 toastr.error("{{__ " Error! Role Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
 									 
 								}
 							}
@@ -534,8 +534,7 @@
 						{		 //alert(response);
 						},
 						error: function(e) 
-						{		alert("errr ma jay 66666.....");
-							//alert("An error occurred: " + e.responseText);
+						{	alert("An error occurred: " + e.responseText);
 							console.log(e);
 						}
 					});

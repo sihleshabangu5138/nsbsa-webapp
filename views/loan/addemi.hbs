@@ -476,9 +476,9 @@
 					<button type="submit" class="btn btn-secondary" id="checkout-button">
 						<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
 					</button>
-					<button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
+					{{!-- <button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
 						<i class="ft-refresh-cw"></i> {{__ "Reset"}}
-					</button>
+					</button> --}}
 				</div>
 			</div>
 </form>	
@@ -537,7 +537,7 @@ $('body').on('change', '.dropdown_change', function ()
 					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
 				}
 				else{
-					$(this).siblings('.notice').html();
+					$(this).siblings('.notice').html("");
 				}
 			}
 		});
@@ -561,13 +561,14 @@ $('body').on('change', '.dropdown_change', function ()
 <script>
 	$(document).ready(async ()=>{
 		var rolle = "{{role}}";
-		if(rolle == "customer"){
-			$('#userside').css("display" , "block");
-			$('#adminside').css("display" , "none");
-			$('.sight').css("display" , "none")
-		}else{
-			$('#userside').css("display" , "none");
-			$('#adminside').css("display" , "block");
+	
+		if (rolle === "customer") {
+			$('#userside').css("display", "block");
+			$('#adminside').remove(); // Removes the element entirely from the DOM
+			$('.sight').remove();     // Removes the elements with the class "sight"
+		} else {
+			$('#userside').remove();  // Removes the "userside" element entirely
+			$('#adminside').css("display", "block");
 		}
 	})
 </script>
@@ -591,6 +592,7 @@ $('body').on('change', '.dropdown_change', function ()
 			const emiid = $('#userinput1').val();
 			const loan_no = $('.loan_no').val();
 			const payableamount = principalamount + interestamount;
+			console.log(payableamount,"--------");
 			try {
 				// Make a request to your backend to create a Checkout Session using fetch
 				const data = await $.ajax({

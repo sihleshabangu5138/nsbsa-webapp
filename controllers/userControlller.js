@@ -55,6 +55,7 @@ exports.getEditUser = async (req, res) => {
         session: req.session,
         country: jsonParsed.countries,
         setting: settings,
+        messages:req.flash()
       });
       console.log("id", id)
 
@@ -74,6 +75,8 @@ exports.getEditUser = async (req, res) => {
         role: role_name,
         session: req.session,
         country: jsonParsed.countries,
+        messages: req.flash()
+
       });
     } catch (err) {
       console.error(err);
@@ -178,7 +181,7 @@ exports.postEditUser = async function (req, res) {
       req.session.username = req.body.username;
       req.session.photo = photo;
       // req.session.role = idrole;
-      req.flash('success', res.__('User Inserted Successfully.'));
+      req.flash('success', res.__('User Added Successfully.'));
       res.redirect('/dashboard');
     } catch (err) {
       console.error(err);
@@ -847,6 +850,18 @@ exports.getTotalUserList = async (req, res, next) => {
           session: req.session,
           messages: req.flash()
         });
+      }else {
+        const numOfDocs = await User.countDocuments().lean();
+        const activeuser = await User.countDocuments({ status: 1 }).lean();
+        const deactiveuser = await User.countDocuments({ status: 0 }).lean();
+        res.render('users/totaluser', {
+          title: 'All Users',
+          count: numOfDocs,
+          activecount: activeuser,
+          deactivecount: deactiveuser,
+          session: req.session,
+          messages: req.flash()
+        });
       }
     } else {
       const numOfDocs = await User.countDocuments().lean();
@@ -862,6 +877,7 @@ exports.getTotalUserList = async (req, res, next) => {
       });
     }
   } catch (error) {
+    console.error(error);
     next(error);
   }
 }
@@ -882,10 +898,16 @@ exports.getUserList = async (req, res, next) => {
       if (req.session.access_rights && req.session.access_rights.user && req.session.access_rights.user.owndata) {  
         const query = {
         _id: new mongoose.Types.ObjectId(req.session.user_id)
-      };
+      }; 
       const numOfDocs = await User.countDocuments(query);
       const activeuser = await User.countDocuments({ status: 1, _id: new mongoose.Types.ObjectId(req.session.user_id) });
       const deactiveuser = await User.countDocuments({ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) });
+      res.render('users/userlist', { title: 'User List', count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, session: req.session, accessrightdata: access_data, messages: req.flash() });
+      }
+      else {
+        const numOfDocs = await User.countDocuments({});
+      const activeuser = await User.countDocuments({ status: 1 });
+      const deactiveuser = await User.countDocuments({ status: 0 });
       res.render('users/userlist', { title: 'User List', count: numOfDocs, activecount: activeuser, deactivecount: deactiveuser, session: req.session, accessrightdata: access_data, messages: req.flash() });
       }
     } else {
@@ -898,6 +920,7 @@ exports.getUserList = async (req, res, next) => {
     }
     // console.log("userlist : ",access_data)
   } catch (error) {
+    console.error(error);
     next(error);
   }
 };
@@ -913,6 +936,18 @@ exports.getDeactivateUser = async function (req, res, next) {
         const numOfDocs = await User.countDocuments(query).lean();
         const activeuser = await User.countDocuments({ status: 1, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
         const deactiveuser = await User.countDocuments({ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
+        res.render('users/deactivateuser', {
+          title: 'Deactivate Users',
+          count: numOfDocs,
+          activecount: activeuser,
+          deactivecount: deactiveuser,
+          session: req.session,
+          messages: req.flash()
+        });
+      }else {
+        const numOfDocs = await User.countDocuments().lean();
+        const activeuser = await User.countDocuments({ status: 1 }).lean();
+        const deactiveuser = await User.countDocuments({ status: 0 }).lean();
         res.render('users/deactivateuser', {
           title: 'Deactivate Users',
           count: numOfDocs,

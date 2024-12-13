@@ -65,7 +65,7 @@ exports.getAddEvent = async (req, res) => {
       }
 
       res.render('events/addevent', {
-        title: 'Edit event',
+        title: 'Edit Event',
         session: req.session,
         messages: req.flash(),
         data: events,
@@ -442,7 +442,7 @@ exports.postAddEvent = async function (req, res) {
         }
       }
 
-      req.flash('success', res.__('Event Inserted Successfully.'));
+      req.flash('success', res.__('Event Added Successfully.'));
       res.redirect('/events/eventlist');
     }
   } catch (err) {

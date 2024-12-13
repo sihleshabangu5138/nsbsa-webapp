@@ -137,7 +137,7 @@ exports.getDashboard = async (req, res, next) => {
     console.log("data",userOwnData,loanListOwnData);
       // if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata == undefined && req.session.access_rights.user.owndata === 'user_owndata') {
       if (userOwnData && !loanListOwnData) {
-        console.log("DASHBOARD by 2");
+        console.log("DASHBOARD by 2---------------------cUSTOMER");
         const activeuser = await User.countDocuments({ status: 1, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
         const deactiveuser = await User.countDocuments({ status: 0, _id: new mongoose.Types.ObjectId(req.session.user_id) }).lean();
         const totalloan = await LoanDetails.countDocuments({ status: 1 }).lean();
@@ -202,7 +202,7 @@ exports.getDashboard = async (req, res, next) => {
       //   req.session.access_rights.user &&
       //   req.session.access_rights.user.owndata === undefined) {
       else if (!userOwnData && loanListOwnData) {
-        console.log("DASHBOARD by 3");
+        console.log("DASHBOARD by 3","----------------------");
         const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
         let query, approvedQuery, disapprovedQuery;
         if (role.role_nm == "Staff") {
@@ -279,7 +279,7 @@ exports.getDashboard = async (req, res, next) => {
         });
       }
       else if (userOwnData && loanListOwnData) {
-        console.log("DASHBOARD by all");
+        console.log("DASHBOARD by all,--------------------");
         const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
         let query, approvedQuery, disapprovedQuery;
         if (role.role_nm == "Staff") {
@@ -359,7 +359,7 @@ exports.getDashboard = async (req, res, next) => {
         });
       }
       else {
-        console.log("DASHBOARD by 4");
+        console.log("DASHBOARD by 4-------------------------");
         const role = await Role.find({ "role_slug": "customer" }).lean();
         // console.log( "Roledata",role);
         const activecount = await User.countDocuments({ role: role[0]._id }).lean();
@@ -446,9 +446,12 @@ exports.getDashboard = async (req, res, next) => {
       }
     }
     else {
+      console.log("DASHBOARD by 5-------------------------Admin");
       const role = await Role.find({ "role_slug": "customer" }).exec();
-      // console.log( "Roledata",role);
-      const activecount = await User.countDocuments({ role: role[0]._id }).lean();
+      console.log( "Roledata",role);
+      // const activecount = await User.countDocuments({ role: role[0]._id }).lean();
+      const activecount = await User.countDocuments().lean();
+      console.log("activecount", activecount);
       const activeuser = await User.countDocuments({ status: 1 }).lean();
       const deactiveuser = await User.countDocuments({ status: 0 }).lean();
       const totalloan = await LoanDetails.countDocuments({ $and: [{ status: 1 }] }).lean();
@@ -504,10 +507,12 @@ exports.getDashboard = async (req, res, next) => {
         num_of_disloan: num_of_disloan,
         loans: totalloan,
         calendar_data: userLanguage,
+        messages: req.flash(),
       });
     };
 
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
@@ -536,7 +541,7 @@ exports.getNotiBadge = async (req, res, next) => {
     data = notiresult;
   };
   // console.log('req.session.admin_access', req.session.admin_access);
-  console.log('Data',data);
+ 
   res.render('notificationlist/notificationlist', {
     title: 'Notificationlist',
     session: req.session,
