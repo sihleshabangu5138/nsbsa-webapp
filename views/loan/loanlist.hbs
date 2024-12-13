@@ -569,11 +569,15 @@
 						data : {id:id,approvestatus:value,name:'approvestatus'},
 						success: function (response)
 						{		
-						console.log("1")
-							window.location.replace('/loan/loanlist'); 
+							toastr.success("{{__ "Approved ! Loan Approved Successfully!"}}", "Success!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+							setTimeout(function() {
+								window.location.replace('/loan/loanlist'); 
+							}, 1500);
+
 						},
 						error: function(e) 
 						{		
+							
 							console.log(e);
 						}
 					});
@@ -588,16 +592,15 @@
 						url: '/ajxfun/approveloan/',
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						data : {id:id,approvestatus:value,name:'approvestatus'},
-						success: function (response)
-						{		 
-							console.log("2")
-						{{!-- toastr.success("Loan Disapproved Successfully!", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); --}}
-						window.location.replace('/loan/loanlist'); 
+						success: function (response){
+						 toastr.success("Loan Disapproved Successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 }); 
+							setTimeout(function() {
+								window.location.replace('/loan/disapproveloan'); 
+							}, 1500);
+
 						},
 						error: function(e) 
-						{	
-							console.log(e)
-							toastr.error("Error!", "{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
+						{	console.log(e);
 						}
 					});
 			}
