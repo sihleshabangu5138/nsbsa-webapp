@@ -10,6 +10,7 @@ const Category = require('../models/Category');
 const CustomField = require('../models/Customfields');
 const CustomFieldMeta = require('../models/CustomFieldMeta');
 const ActivityLog = require('../models/Activitylog');
+const Generalsetting = require('../models/GeneralSetting');
 const functions = require('../helpers/function');
 const moment = require('moment');
 const { getProductDelete } = require('./ajaxController');
@@ -47,6 +48,7 @@ exports.getAddProduct = async (req, res) => {
       const notes = await Note.find({ "module_id": new mongoose.Types.ObjectId(id) }).lean();
       const product = await Product.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
       const customfield = await CustomField.find({ "module_name": 'product', "field_visibility": "1" }).lean();
+      const settings = await Generalsetting.find({}).lean();
       const customfield_value = await CustomFieldMeta.find({ reference_id: new mongoose.Types.ObjectId(id) }).lean();
 
       for (const field of customfield) {
@@ -69,6 +71,7 @@ exports.getAddProduct = async (req, res) => {
         data: product,
         newfield: customfield,
         customfield_value: customfield_value,
+        setting: settings,
         note: notes
       });
     } else {
@@ -91,7 +94,7 @@ exports.getAddProduct = async (req, res) => {
 
       const myquery1 = { "reference_id": new mongoose.Types.ObjectId(id) };
       const customfield_value = await CustomFieldMeta.find(myquery1).lean();
-
+      const settings = await Generalsetting.find({}).lean();
       // customfield_value.forEach((element, key) => {
       //   customfield_value[key].id_d = ObjectId(element.custom_field_id).toString();
       // });
@@ -103,7 +106,7 @@ exports.getAddProduct = async (req, res) => {
       const category = await Category.find(query).lean();
       const unitcategory = await Category.find(unit_query).lean();
       console.log(customfield);
-      res.render('product/addproduct', { title: "Add Product", data: news, session: req.session, category, unit: unitcategory, newfield: customfield, customfield_value: customfield_value, note: news });
+      res.render('product/addproduct', { title: "Add Product", data: news, session: req.session, category, unit: unitcategory, newfield: customfield,setting: settings, customfield_value: customfield_value, note: news });
      
     }
   } catch (err) {

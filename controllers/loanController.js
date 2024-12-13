@@ -902,19 +902,19 @@ exports.postAddLoan = async (req, res) => {
                     }
                 }
 
-                if (req.files) {
-                    for (const [key, value] of Object.entries(req.files)) {
-                        const this_data = {
-                            custom_field_id: new mongoose.Types.ObjectId(value.fieldname),
-                            customfield_value: value.filename,
-                            module: "loan",
-                            user_id: new mongoose.Types.ObjectId(req.session.user_id),
-                            reference_id: new mongoose.Types.ObjectId(id),
-                            updated_at: formatdate,
-                        };
-                        await CustomFieldMeta.create(this_data);
-                    }
-                }
+                // if (req.files) {
+                //     for (const [key, value] of Object.entries(req.files)) {
+                //         const this_data = {
+                //             custom_field_id: new mongoose.Types.ObjectId(value.fieldname),
+                //             customfield_value: value.filename,
+                //             module: "loan",
+                //             user_id: new mongoose.Types.ObjectId(req.session.user_id),
+                //             reference_id: new mongoose.Types.ObjectId(id),
+                //             updated_at: formatdate,
+                //         };
+                //         await CustomFieldMeta.create(this_data);
+                //     }
+                // }
             }
 
 
@@ -1151,6 +1151,7 @@ exports.postAddLoan = async (req, res) => {
             res.redirect('/loan/disapproveloan');
         }
     } catch (error) {
+        console.log(error)
         req.flash('error', res.__('Error occurred.'));
         // res.redirect('/loan/loanlist');
     }
@@ -1687,110 +1688,23 @@ exports.getTotalLoanDelete = async (req, res) => {
 
 exports.getPendingEMI = async (req, res) => {
     try {
-        const date = moment().format("YYYY-MM-DD");
-        let query;
-        if (req.session.admin_access !== 1) {
-            if (req.session.access_rights && req.session.access_rights.pendingemilist && req.session.access_rights.pendingemilist.owndata) {
-                const role = await Role.findOne({ _id: req.session.role });
-                if (role.role_nm == "Staff") {
-                    query = {
-                        $and: [{
-                            date: {
-                                $lt: date
-                            }
-                        }, {
-                            status: 0, createdby: new mongoose.Types.ObjectId(req.session.user_id)
-                        }]
-                    };
-                }
-                else {
-                    query = {
-                        $and: [{
-                            date: {
-                                $lt: date
-                            }
-                        }, {
-                            status: 0, user_id: new mongoose.Types.ObjectId(req.session.user_id)
-                        }]
-                    };
-                }
-                console.log("own data");
-            } else {
-                query = {
-                    $and: [{
-                        date: {
-                            $lt: date
-                        }
-                    }, {
-                        status: 0
-                    }]
-                };
-                console.log("view data")
-            };
-        } else {
-            query = {
-                $and: [{
-                    date: {
-                        $lt: date
-                    }
-                }, {
-                    status: 0
-                }]
-            };
-            console.log("no data")
-        };
-        const emiDetails = await EmiDetails.aggregate([
-            {
-                $lookup: {
-                    from: LoanDetails.collection.name,
-                    localField: "loan_id",
-                    foreignField: "_id",
-                    as: "loan"
-                }
-            },
-            {
-                $unwind: "$loan"
-            },
-            {
-                $lookup: {
-                    from: Users.collection.name,
-                    localField: "user_id",
-                    foreignField: "_id",
-                    as: "user"
-                }
-            },
-            {
-                $unwind: "$user"
-            },
-            {
-                $lookup: {
-                    from: LoanDetails.collection.name,
-                    localField: "loan_id",
-                    foreignField: "_id",
-                    as: "loanDetails"
-                }
-            },
-            {
-                $unwind: "$loanDetails"
-            },
-            {
-                $addFields: {
-                    "createdby": "$loanDetails.createdby"
-                }
-            },
-            {
-                $match: query
+        const myquery = { "rolename": req.session.role_slug };
+        let access_data = [];
+    
+        const access = await AccessRights.find(myquery).lean();
+    
+        for (const [key, value] of Object.entries(access)) {
+          for (const [key1, value1] of Object.entries(value['access_type'])) {
+            if (key1 == "emipendingreport") {
+              access_data = value1;
             }
-        ]);
-        console.log(emiDetails)
-        res.render('loan/loanreports', {
-            title: 'Loans',
-            session: req.session,
-            data: emiDetails
-
-        });
-    } catch (err) {
+          }
+        };
+    
+        res.render('loan/emipendingreport', { title: 'Emi Pending Reports', session: req.session, messages: req.flash(), accessrightdata: access_data });
+      } catch (err) {
+        // Handle errors appropriately, e.g., log the error and render an error page.
         console.error(err);
-        res.status(500).send('Internal Server Error');
-    }
+        next(err);
+      }
 }

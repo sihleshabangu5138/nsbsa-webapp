@@ -842,5 +842,10 @@
 	"Edit Rule": "Edit Rule",
 	"Edit Reminder": "Edit Reminder",
 	"View Note": "View Note",
-	"Add Custom Field": "Add Custom Field"
+	"Add Custom Field": "Add Custom Field",
+	"EMI Month": "EMI Month",
+	"Add Loan Type": "Add Loan Type",
+	"EMI Amount": "EMI Amount",
+	"Event Added Successfully.": "Event Added Successfully.",
+	"Category Added Successfully.": "Category Added Successfully."
 }

@@ -270,7 +270,15 @@
 					{
                         field: "object" ,
                         title: "{{__ "Files attached"}}",
-						template:"#= object && object.trim() !== '' ? object : 'N/A' #",
+						template: `
+							# if (object && object.trim() !== '') { #
+								<a href="/images/upload/#= object #" download="#= object #" target="_blank">
+									#= object #  <!-- This will show the file name -->
+								</a>
+							# } else { #
+								N/A
+							# } #
+						`,
 						width: 150
                     },
 					{

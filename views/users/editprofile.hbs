@@ -455,8 +455,8 @@
 				}
 				else{
 					$(this).siblings('.notice').html("");
-				var size = (this.files[0].size / 1024 / 1024).toFixed(2);
-					var limit = "{{geninfom.imgupload_size}}";
+				var size = parseFloat((this.files[0].size / 1024 / 1024).toFixed(2));
+					var limit = parseFloat("{{geninfom.imgupload_size}}");
 					if (size > limit) {
 						alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
 						$('.imageUpload').val("");

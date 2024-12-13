@@ -1299,7 +1299,6 @@ $(document).ready(function(){
 		});
 	</script>
 {{#each data as |geninfom|}}
-
 <script type="text/javascript">
         function ValidateExtension(){
 		<!-- alert("123"); -->
@@ -1323,19 +1322,21 @@ $(document).ready(function(){
 				}
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
-					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
+					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
+					$(this).val("");
 					m++;
 				}
 				else{
 					$(this).siblings('.notice').html("");
-					var size = (this.files[0].size / 1024 / 1024).toFixed(2);
-					var limit = "{{geninfom.imgupload_size}}";
+				var size = parseFloat((this.files[0].size / 1024 / 1024).toFixed(2));				
+					var limit = parseFloat("{{geninfom.imgupload_size}}");
 					if (size > limit) {
 						alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
-						$('.imageUpload').val("");
+						$('.imageUpload').val();
 						return false;
 					}
-					  let file = files[0];									
+					
+					  let file = files[0];				
 					 if (file) {
                     const reader = new FileReader();
                     reader.onload = function (event) {
@@ -1345,10 +1346,9 @@ $(document).ready(function(){
                             .show(); 
                     };
                     reader.readAsDataURL(file);
-                } else {
-                     
-                }
 				}
+				}
+				
 			}
 		});
 			if(m>0){

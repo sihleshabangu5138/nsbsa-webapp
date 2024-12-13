@@ -77,8 +77,8 @@
 				{{#each this.productimage}}
 			<div class="col-md-12 p-0">
 				<div class="form-group">
-					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Product Image" setlang}}{{/with}}<span class="required red">*</span></label>
-					<input class="form-control border-light fileUpload productfile" id="fileUpload" name="productimage" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Product Image" setlang}}{{/with}}<span class="required red"></span></label>
+					<input class="form-control border-light imageUpload productfile" onchange="return ValidateExtension()"  name="productimage" {{#if this}} value="{{this}}" {{else}} data-validation-required-message="{{#with ..}}{{__ "Document is required"}}{{/with}}" {{/if}} type="file" multiple> 
 					<span class="required red notice"></span>
 					{{#if this}}
 					<p class="d-inline-block mr-2">{{this}}</p>
@@ -611,6 +611,72 @@
 	</div>
 	</div>
 </div>
+{{#each setting as |geninfom|}}
+
+<script type="text/javascript">
+        function ValidateExtension(){
+		<!-- alert("123"); -->
+		m=0;
+		$('.imageUpload').each(function(){
+			  let files = this.files;
+			if($(this).val() != '') {
+				var imageUpload=$(this).val();
+				var allowedFiles = [];
+				var jpeg="{{geninfom.imgtype_jpeg}}";
+				var jpg="{{geninfom.imgtype_jpg}}";
+				var png="{{geninfom.imgtype_png}}";
+				if(jpeg!=''){
+					allowedFiles.push('{{geninfom.imgtype_jpeg}}');
+				}
+				if(jpg!=''){
+					allowedFiles.push('{{geninfom.imgtype_jpg}}');
+				}
+				if(png!=''){
+					allowedFiles.push('{{geninfom.imgtype_png}}');
+				}
+				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				if (!regex.test(imageUpload.toLowerCase())) {
+					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
+					$(this).val("");
+					m++;
+				}
+				else{
+					$(this).siblings('.notice').html("");
+				var size = parseFloat((this.files[0].size / 1024 / 1024).toFixed(2));
+				
+					var limit = parseFloat("{{geninfom.imgupload_size}}");
+					
+					if (size > limit) {
+						alert("Too large file Size. Only file smaller than {{geninfom.imgupload_size}}MB can be uploaded.");
+						$('.imageUpload').val("");
+						return false;
+					}
+					
+					  let file = files[0];				
+					 if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+						
+                        $('#previewselectedlogo')
+                            .attr('src', event.target.result)
+                            .show(); 
+                    };
+                    reader.readAsDataURL(file);
+				}
+				}
+				
+			}
+		});
+			if(m>0){
+			return false;
+			}
+        }
+			
+</script>
+{{/each}}
+<script>
+
+</script>
 <script>
 function deleteaddedfile(n){
 	$("#addedfile").remove();

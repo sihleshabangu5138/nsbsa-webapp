@@ -366,12 +366,12 @@ module.exports = {
 		addelement:function(v1, options){
 			var translatedLabel = __("Upload Document");
 			if(v1=="data"){
-				var add = '<div id="addeddiv" class="col-md-6"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>';	
+				var add = '<div id="addeddiv" class="col-md-6 d-flex align-items-start justify-content-between"><div class="form-group" style="float:left; width: 92%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload" onchange="return ValidateExtension()"  name="document" type="file" multiple><span class="required red notice"></span></div><button class="btn" type="button" onclick="deleteParentElement()"><i class=" ft-x"></i></button></div>';	
 			}
 			else{
 				// console.log('v1',v1);
 				// console.log('translatedLabel', translatedLabel);
-				var add= '<div class="col-md-6"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="document"  data-validation-required-message="Document is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-6"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="document" onchange="return ValidateExtension()"  data-validation-required-message="Document is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
 			return new hbs.SafeString(add);
 		},		
@@ -381,14 +381,14 @@ module.exports = {
 				var add = '<div id="addedimage" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="uploadimages" type="file" multiple><span class="required red notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedimage()"><i class=" ft-x"></i></button></div>';
 			}
 			else{
-				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="uploadimages"  data-validation-required-message="Image is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'<span class="required red">*</span></label><input class="form-control border-light fileUpload imageUpload"  onchange="return ValidateExtension()" id="fileUpload" name="uploadimages"  data-validation-required-message="Image is required" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
 			return new hbs.SafeString(add);			
 		},	
 		addnote:function(v1, options){
 			var translatedLabel = __("Add Note");	
 			if(v1=="data"){
-				var add = '<div id="addednote" class="col-md-12 p-0 mr-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2"  style="z-index: 9;">'+translatedLabel+'</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><button style="margin-bottom: 72px;" class="btn" type="button" onclick="deleteaddednote()"><i class=" ft-x"></i></button></div>'; 		
+				var add = '<div id="addednote" class="col-md-12 p-0 mr-0 d-flex justify-content-between"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2"  style="z-index: 9;">'+translatedLabel+'</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><button style="margin-bottom: 72px;" class="btn" type="button" onclick="deleteaddednote()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
 				var add= '<div class="col-md-12 p-0 mr-0"><div class="form-group"><label class="custom-control-label-date ml-2"  style="z-index: 9;">'+translatedLabel+'</label><textarea class="form-control custom-control" rows="4" name="note" style="resize:none"></textarea></div><div class="help-block"></div></div>';
@@ -398,7 +398,7 @@ module.exports = {
 		attachfile:function(v1, options){
 			var translatedLabel = __("Attach file");	
 			if(v1=="data"){
-				var add = '<div id="attachfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light"  name="attachfile" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
+				var add = '<div id="attachfile" class="col-md-12 p-0 d-flex justify-content-between"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light"  name="attachfile" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
 				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light  docfile" id="fileupload" name="attachfile" type="file" multiple></div><div class="help-block"></div></div>';
@@ -408,10 +408,10 @@ module.exports = {
 		productimage:function(v1, options){
 			var translatedLabel = __("Product Image");	
 			if(v1=="data"){
-				var add = '<div id="addedfile" class="col-md-12 p-0"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload"  name="productimage" type="file" multiple><span class="notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedfile()"><i class=" ft-x"></i></button></div>'; 	
+				var add = '<div id="addedfile" class="col-md-12 p-0 d-flex justify-content-between"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload imageUpload " onchange="return ValidateExtension()"  name="productimage" type="file" multiple><span class="notice"></span></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteaddedfile()"><i class=" ft-x"></i></button></div>'; 	
 			}
 			else{
-				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload docfile" id="fileUpload" name="productimage" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-12 p-0 "><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload imageUpload"  id="fileUpload" name="productimage" onchange="return ValidateExtension()" type="file" multiple><span class="required red notice"></span></div><div class="help-block"></div></div>';
 			}
 			return new hbs.SafeString(add);
 		},

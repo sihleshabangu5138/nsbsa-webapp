@@ -67,6 +67,7 @@ router.get('/ajxfun/roles/delete', isAuthenticated, AjaxFun.getRolesDelete);
 router.get('/ajxfun/reminder/delete', isAuthenticated, AjaxFun.getReminderDelete);
 router.get('/ajxfun/totalloans', isAuthenticated, AjaxFun.getTotalLoan);
 router.get('/ajxfun/loanlist', isAuthenticated, AjaxFun.getLoanList);
+router.get('/ajxfun/emipendingreport', isAuthenticated, AjaxFun.emiPendingReport);
 router.get('/ajxfun/disapproveloan', isAuthenticated, AjaxFun.getDisApproveLoan);
 router.get('/ajxfun/loanlist/delete', isAuthenticated, AjaxFun.getLoanListDelete);
 router.get('/ajxfun/notificationtemplate/delete', isAuthenticated, AjaxFun.getNotificationDelete);
