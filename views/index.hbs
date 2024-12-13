@@ -468,6 +468,39 @@
 {{!-- <script src="/js/scripts/extensions/lang-all.js"></script> --}}
 <script type="text/javascript" src="/js/loader.js"></script>
 
+{{!-- modal for event popup script  --}}
+<script type="text/x-kendo-template" id="eventModalTemplate">
+  <div class="swal-modal p-1 rounded shadow-sm">
+    <!-- Title -->
+    <div class="swal-title text-center fw-bold mb-1">
+      <h4>#: Title #</h4>
+    </div>
+
+    <!-- Event Details -->
+    <div class="swal-text d-flex flex-column align-items-start mt-2  bg-light border rounded">
+      <div class="mb-1 d-flex ">
+        <strong>{{__ "Start Date:"}} </strong>
+        <p class="text-muted">#: kendo.toString(new Date(StartDate), "MM/dd/yyyy") #</p>
+      </div>
+      <div class="mb-1 d-flex">
+        <strong>{{__ "End Date:"}}</strong>
+        <p class="text-muted">#: kendo.toString(new Date(EndDate), "MM/dd/yyyy") #</p>
+      </div>
+      <div class="mb-1 d-flex ">
+        <strong>{{__ "Description:"}}</strong>
+        <p class="text-muted">#: Description ? kendo.toString(Description) : "N/A" #</p>
+      </div>
+    </div>
+
+    <!-- Footer with Close Button -->
+    <div class="swal-footer text-center">
+      <div class="swal-button-container mt-2 mb-1 mx-auto">
+        <button class="swal-button swal-button--confirm btn btn-primary" id="closeButton">{{{__ "Close"}}}</button>
+      </div>
+    </div>
+  </div>
+</script>
+
 <script>
 function emi_chart(loanAmount, totalInterest, monthlyEMI) {
     // Load the Google Charts library
@@ -553,23 +586,54 @@ $(document).ready(function(){
 				}
 			});
 var data = $('#calendar_data').val();
-$('#dashboard_calendar').fullCalendar({		
-			defaultDate: new Date(),
-			businessHours: true, // display business hours
-			editable: false,
-			displayEventTime : false ,
-			events : "/ajxfun/mapevents",
-			eventRender: function(eventObj, $el) {
-			  $el.popover({
-				title: eventObj.title,
-				content: eventObj.description,
-				trigger: 'hover',
-				placement: 'top',
-				container: 'body'
-			  });
-			},
-      lang: data,			
-		});
+$('#dashboard_calendar').fullCalendar({
+  defaultDate: new Date(),
+  businessHours: true,
+  editable: false,
+  displayEventTime: false,
+  events: "/ajxfun/mapevents",
+  eventRender: function (eventObj, $el) {
+    $el.popover({
+      title: eventObj.title,
+      content: eventObj.description,
+      trigger: 'hover',
+      placement: 'top',
+      container: 'body',
+    });
+  },
+  eventClick: function (event) {
+    // Prepare event data
+    var eventData = {
+      Title: event.title,
+      Description: event.description,
+      StartDate: event.start,
+      EndDate: event.end,
+    };
+
+    // Check if the Kendo Window exists, if not, create it
+    if (!window.window1) {
+      window.window1 = $("<div />").kendoWindow({
+        title: "{{__ 'Event Details'}}",
+        actions: ["Close"],
+        modal: true,
+        visible: false,
+        resizable: false,
+        width: "400px", // Adjust as needed
+        height: "auto", // Adjust as needed
+      }).data("kendoWindow");
+    }
+    
+    // Set the content of the window using the template
+    var template = kendo.template($("#eventModalTemplate").html());
+    window1.content(template(eventData));
+    window1.center().open();
+
+    // Close logic (if the Close button is present in the modal)
+    $(document).on("click", "#closeButton", function () {
+      window1.close();
+    });
+  },
+});
     /* EMI CALCULATOR */
 		loanamountSlider = document.getElementById('snap');
 		Interest_Rate_idSlider = document.getElementById('Interest_Rate_id');

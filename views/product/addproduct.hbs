@@ -29,7 +29,7 @@
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
 					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Category Type" setlang}}{{/with}}</label>
-						<select class="select2 form-control export cate_type" name="categorytypes" >
+						<select class="select2 form-control export cate_type" name="categorytypes" required>
 							<option value="">{{#with ..}}{{__ "Select Category Type"setlang}} {{/with}}</option>
 							{{#each ../category as |type|}}
 								<option value="{{type.categoryname}}" {{#ifCond type.categoryname '==' result.categorytypes}} selected {{/ifCond}}>{{type.categoryname}}</option>
@@ -327,7 +327,7 @@
 					{{/each}}
 					{{else}}
 						{{attachfile 'nodata'}}
-					{{/if}}
+					{{/if}}	
 					</div>
 					<div class="col-md-2 p-0 padding-mobile">
 					<button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">

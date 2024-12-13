@@ -170,12 +170,12 @@
 												<option value="">{{#with ..}}{{__ "Select Input Type" setlang}}{{/with}}</option>
 												<option value="cash" name="payment_type" {{#ifCond this.payment_type '==' 'cash' }}
 													selected {{/ifCond}}>{{#with ..}}{{__ "Cash" setlang}}{{/with}}</option>
-												<option value="creditcard" name="payment_type" {{#ifCond
+												{{!-- <option value="creditcard" name="payment_type" {{#ifCond
 													this.payment_type '==' 'creditcard' }} selected {{/ifCond}}>{{#with ..}}{{__
 													"Credit Card" setlang}}{{/with}}</option>
 												<option value="debitcard" name="payment_type" {{#ifCond
 													this.payment_type '==' 'debitcard' }} selected {{/ifCond}}>{{#with ..}}{{__
-													"Debit Card" setlang}}{{/with}}</option>
+													"Debit Card" setlang}}{{/with}}</option> --}}
 												<option value="netbanking" name="payment_type" {{#ifCond
 													this.payment_type '==' 'netbanking' }} selected {{/ifCond}}>{{#with ..}}{{__
 													"Net Banking" setlang}}{{/with}}</option>

@@ -419,27 +419,19 @@
 							{{/ifCond}}
 							{template : "&nbsp;" },
 							{{#ifCond accessrightdata.delete "||" session.admin_access}}
-							{ 
-								name: "Delete", text:"", className: "btn btn-icon color-red delete_role btn-outline-light",iconClass:"fa fa-trash",
-								click: function(e){  //add a click event listener on the delete button
-									e.preventDefault(); //prevent page scroll reset
-									var tr = $(e.target).closest("tr"); //get the row for deletion
-									var data = this.dataItem(tr); //get the row data so it can be referred later
-									window1.content(windowTemplate(data)); //send the row data object to the template and render it
-									window1.center().open();
-									var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-									$("#yesButton").click(function(){
-										var grid = $("#grid").data("kendoGrid");
-										grid.dataSource.remove(data)  //prepare a "destroy" request
-										grid.dataSource.sync();  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
-										<!-- alert('Delete'); -->
-										window1.close();
-									})
-									$("#noButton").click(function(){
-										window1.close();
-									})
-								}	
-							},
+							{
+									name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
+										click: function(e) {
+											e.preventDefault();
+											var tr = $(e.target).closest("tr");
+											var data = this.dataItem(tr);
+											if (confirm(`{{__ "Are You sure wan't to delete this product ?"}}`)) {
+												var grid = $("#grid").data("kendoGrid");
+												grid.dataSource.remove(data)
+												grid.dataSource.sync();
+											}
+										}
+								},
 							{{/ifCond}}
 							
 							/* Delete action end */
