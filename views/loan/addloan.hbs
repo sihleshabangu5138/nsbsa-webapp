@@ -934,7 +934,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
                     const limit = parseFloat("{{geninfom.docupload_size}}");
 
                     if (size > limit) {
-                        alert(`Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
+                        alert(__ `Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
                         fileInput.val(""); // Reset the input field
                         return false;
                     }
