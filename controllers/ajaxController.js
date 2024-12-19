@@ -620,49 +620,11 @@ exports.getMapEvents = async (req, res) => {
 	  if(dates[generalDateFormate]){
 		  originalDateFormate = dates[generalDateFormate];
 	  } 
-    // const data = result_final.map((element) => {
-	// 	console.log("st=",element.startdate, "end=",element.enddate);
-    //   // Assuming element.enddate is a string in a valid date format
-    // //   const endDate = new Date(element.enddate);
-		
-    // //   // Add one day to the end date
-    // //   endDate.setDate(endDate.getDate() +1);
 
-    // //   return {
-    // //     title: element.eventtitle,
-    // //     start: element.startdate,
-	// // 	  end: endDate, // Format as ISO8601
-    // //     color: "darkcyan",
-	// 	//   };
-	// 	const startDate = moment(element.startdate);  // Convert startdate to moment object
-	// 	const endDate = moment(element.enddate);      // Convert enddate to moment object
-
-	// 	// Format dates to 'YYYY-MM-DD'
-	// 	const formattedStartDate = startDate.format('YYYY-MM-DD');  // Format start date
-	// 	endDate.add(1, 'days');  // Add one day to end date
-
-	// 	const formattedEndDate = endDate.format('YYYY-MM-DD');  // Format end date
-
-	// 	return {
-	// 		title: element.eventtitle,
-	// 		start: formattedStartDate,
-	// 		end: formattedEndDate,
-	// 		color: "darkcyan",
-	// 	};
-    // });
 	  const data = result_final.map((element) => {
-		  console.log("st=", element.startdate, "end=", element.enddate,generalDateFormate);
 
-		//   const startDate = moment(element.startdate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']);
-		//   const endDate = moment(element.enddate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD']);
 		  const startDate = moment(element.startdate, [originalDateFormate, 'DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'],true);
 		  const endDate = moment(element.enddate, [originalDateFormate, 'DD-MM-YYYY', 'MM-DD-YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'],true);
-
-		  // Check if dates are valid after parsing
-		//   if (!startDate.isValid() || !endDate.isValid()) {
-		// 	  console.error("Invalid date format for:", element);
-		// 	  return null;  // Skip invalid dates
-		//   }
 
 		  const formattedStartDate = startDate.format('YYYY-MM-DD');
 		  endDate.add(1, 'days');  // Add one day to end date
@@ -673,6 +635,10 @@ exports.getMapEvents = async (req, res) => {
 			  start: formattedStartDate,
 			  end: formattedEndDate,
 			  color: "darkcyan",
+			  description: element.eventdetail,
+			  venue:element.eventvenue,
+			  event_id:element._id
+			
 		  };
 	  }).filter(Boolean);
 
@@ -741,7 +707,9 @@ exports.getRules = async (req, res) => {
 exports.getNotes = async (req, res) => {
 	try {
 		const result = await Notes.find({}).lean();
+		
 		for (const [key, value] of Object.entries(result)) {
+			
 			result[key].obj = value.note.toString();
 			if (value.fileattach === "") {
 				result[key].object = "No files attached";
@@ -1979,7 +1947,8 @@ exports.verifyPurchaseKey = async (req, res) => {
 };
 
 exports.createCheckoutSession = async (req, res) => {
-    const { amount ,emiid } = req.body; // Amount in cents
+	const { amount, emiid } = req.body; // Amount in cents
+	console.log("amount sdfsafsaf")
 	try {
 		const stripe = Stripe(req.session.generaldata.stripe_secret_key);
         const session = await stripe.checkout.sessions.create({
@@ -2004,7 +1973,15 @@ exports.createCheckoutSession = async (req, res) => {
         res.json({ id: session.id });
 	} catch (error) {
 		
-        console.error('Error creating checkout session:', error.message);
+		console.error('Error creating checkout session:', error.message);
+		console.log(error.message.includes("Invalid API Key provided"),"1")
+		console.log(error.message == ("Invalid API Key provided"),"2")
+		if (error.message.includes("Invalid API Key provided")) {
+			req.flash("error","Please enter a valid Stripe Secret key.");
+			
+		} else {
+			req.flash("error",error.message);
+		}
 		const errorMessage = res.__(error.message);
 		return res.status(500).json({ error: errorMessage });
 		

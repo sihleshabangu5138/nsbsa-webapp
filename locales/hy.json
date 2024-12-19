@@ -465,7 +465,7 @@
 	" Error! Notification can not be deleted!": "Սխալ: Ծանուցումը հնարավոր չէ ջնջել",
 	"An error occurred while processing your request.": "Ձեր հարցումը մշակելիս սխալ է տեղի ունեցել",
 	"Add EMI": "Ավելացնել EMI",
-	"Emi paid successfully.": "Էմին հաջողությամբ վճարեց",
+	"Emi Paid Successfully.": "Էմին հաջողությամբ վճարեց",
 	"Total Ammount": "Ընդհանուր գումարը",
 	"Select State first": "Նախ ընտրեք պետությունը",
 	"Add Tag": "Ավելացնել պիտակ",

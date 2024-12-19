@@ -1,124 +1,135 @@
-{{breadcrums (__ 'Home') (__ 'Active Users')}}  
+{{breadcrums (__ 'Home') (__ 'Active Users')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
-    <div class="content-wrapper">
-	<div class="content-header row">
-	<div class="col-xl-12 col-lg-12 box-four-view">
-	<div class="card_boxnf">
-	<div class="card-content">
-	<div class="card-body pl-0 pr-0">
-		<fieldset class="form-group position-relative">
-		<div class="row">
-		{{!-- <div class="col-lg-3 col-md-6 col-12">
-		<div class="controls position-relative has-icon-right">
-			<input type="text" class="form-control square" value="{{__ 'All Users'}}" placeholder="Addon To Right" readonly="readonly">
-			<div class="form-control-position ">
-				<span class="primary">{{this.count}}</span>
-			</div>
-		</div>
-		</div> --}}
-		<div class="col-lg-4 col-md-6 col-12 pb-1">
-			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Total Users'}}" placeholder="Addon To Right" readonly="readonly">
-				<div class="form-control-position">
-                        <span class="red">
-							<a href="totaluser" style="text-decoration: underline !important;">{{this.count}}</a>
-						</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12 pb-1">
-			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Active Users'}}" placeholder="Addon To Right" readonly="readonly">
-					<div class="form-control-position">
-						<span class="red">
-							<a href="userlist" style="text-decoration: underline !important;">{{this.activecount}}</a>
-						</span>
-					</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12 pb-1">
-			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Deactivated users'}}" placeholder="Addon To Right" readonly="readonly">
-				<div class="form-control-position">
-					<span class="success">
-						<a href="deactivateuser" style="text-decoration: underline !important;">{{this.deactivecount}}</a>	
-					</span>
-				</div>
-			</div>
-		</div>
-		</div>
-		</fieldset>
-		<div class="row" style="">
-		<!-- <div class="col-lg-2 col-md-2 mb-2 custom_select"> -->
-		<!-- <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 181.156px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jzyt-container"><span class="select2-selection__rendered" id="select2-jzyt-container" title="Customer"> {{__ "Customer"}}</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span> -->
-		<!-- </div> -->
-		<!-- <div class="col-lg-2 col-md-2 mb-2"> -->
-			<!-- <div class="btn-group mr-1"> -->
-				<!-- <button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ "GO"}}</button> -->
-			<!-- </div> -->
-		<!-- </div> -->
-		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements ews-heading">
-			<ul class="list-inline mb-0">
-			<li id="export">
-				<select class="select2 form-control export">
-					<option value="">{{__ "Export"}}</option>
-					<option value="csv">{{__ "XLSX"}}</option>
-					<option value="pdf">{{__ "PDF"}}</option>
-				</select>
-			</li>	
-			</ul>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-	<div class="row">
-	<div class="col-md-12">
-	<div class="card">
-	 
-	<div class="card-content collpase show">
-			{{#if messages.error  }}
-				<script>
-					toastr.error("{{messages.error}}","{{__ 'Error!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
-			{{#if messages.success }}
-				<script>
-					toastr.success("{{messages.success}}","{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
-		<!-- Zero configuration table -->
-		<section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
-                <div class="card-body card-dashboard card-design">
-					
-					<section id="horizontal">
-						<div class="row">
-						<div class="col-12">
-						<div class="card">
-							<div class="card-content collapse show" id="NF-datatable">
-							<div class="card-body">
-								<div id="grid"></div>
-								<div id="window"></div>
-								
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="col-xl-12 col-lg-12 box-four-view">
+				<div class="card_boxnf">
+					<div class="card-content">
+						<div class="card-body pl-0 pr-0">
+							<fieldset class="form-group position-relative">
+								<div class="row">
+									{{!-- <div class="col-lg-3 col-md-6 col-12">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square" value="{{__ 'All Users'}}"
+												placeholder="Addon To Right" readonly="readonly">
+											<div class="form-control-position ">
+												<span class="primary">{{this.count}}</span>
+											</div>
+										</div>
+									</div> --}}
+									<div class="col-lg-4 col-md-6 col-12 pb-1">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square" value="{{__ 'Total Users'}}"
+												placeholder="Addon To Right" readonly="readonly">
+											<div class="form-control-position">
+												<span class="red">
+													<a href="totaluser"
+														style="text-decoration: underline !important;">{{this.count}}</a>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6 col-12 pb-1">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square" value="{{__ 'Active Users'}}"
+												placeholder="Addon To Right" readonly="readonly">
+											<div class="form-control-position">
+												<span class="red">
+													<a href="userlist"
+														style="text-decoration: underline !important;">{{this.activecount}}</a>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6 col-12 pb-1">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square"
+												value="{{__ 'Deactivated users'}}" placeholder="Addon To Right"
+												readonly="readonly">
+											<div class="form-control-position">
+												<span class="success">
+													<a href="deactivateuser"
+														style="text-decoration: underline !important;">{{this.deactivecount}}</a>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<div class="row" style="">
+								<!-- <div class="col-lg-2 col-md-2 mb-2 custom_select"> -->
+								<!-- <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 181.156px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jzyt-container"><span class="select2-selection__rendered" id="select2-jzyt-container" title="Customer"> {{__ "Customer"}}</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span> -->
+								<!-- </div> -->
+								<!-- <div class="col-lg-2 col-md-2 mb-2"> -->
+								<!-- <div class="btn-group mr-1"> -->
+								<!-- <button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ "GO"}}</button> -->
+								<!-- </div> -->
+								<!-- </div> -->
+								<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right">
+									<a class="heading-elements-toggle"><i
+											class="fa fa-ellipsis-v font-medium-3"></i></a>
+									<div class="heading-elements ews-heading">
+										<ul class="list-inline mb-0">
+											<li id="export">
+												<select class="select2 form-control export">
+													<option value="">{{__ "Export"}}</option>
+													<option value="csv">{{__ "XLSX"}}</option>
+													<option value="pdf">{{__ "PDF"}}</option>
+												</select>
+											</li>
+										</ul>
+									</div>
+								</div>
 							</div>
 						</div>
-							
-							<div class="card-content collapse show">
-							<div class="card-body card-dashboard">
-							
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
 
-							<script type="x/kendo-template" id="page-template">
-							
+					<div class="card-content collpase show">
+						{{#if messages.error }}
+							<script>
+								toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+							</script>
+						{{/if}}
+						{{#if messages.success }}
+							<script>
+								toastr.success("{{messages.success}}", "{{__ 'Success!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+							</script>
+						{{/if}}
+						<!-- Zero configuration table -->
+						<section id="configuration">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+
+										<div class="card-content collapse show">
+											<div class="card-body card-dashboard card-design">
+
+												<section id="horizontal">
+													<div class="row">
+														<div class="col-12">
+															<div class="card">
+																<div class="card-content collapse show"
+																	id="NF-datatable">
+																	<div class="card-body">
+																		<div id="grid"></div>
+																		<div id="window"></div>
+
+																	</div>
+																</div>
+
+																<div class="card-content collapse show">
+																	<div class="card-body card-dashboard">
+
+
+																		<script type="x/kendo-template"
+																			id="page-template">
+
 								 <div class="page-template">
 									<div class="header">
 									
@@ -130,353 +141,357 @@
 									</div>
 								</div>
 							</script>
-							<script type="text/x-kendo-template" id="windowTemplate">
-								
-								
-								
+																		<script type="text/x-kendo-template"
+																			id="windowTemplate">
+
+
+
 							</script>
-						 
-				 
-    <script>
-       jQuery(document).ready(function() {
-	    
-			var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
-				$('body').on('change', '.export', function() {
-				var value = $(this).val();
-				if(value == 'csv')
-				{
-					$("#grid").getKendoGrid().saveAsExcel();
-				}else if(value == 'pdf')
-				{
-					$("#grid").getKendoGrid().saveAsPDF();
-				}
-			});
-		
-		
-		 var window1 = $("#window").kendoWindow({
-            title: "{{__ 'Alert !'}}",
-			resizable: false,
-            visible: false, //the window will not appear before its .open method is called
-           
-        }).data("kendoWindow");
-		
-		var element=$("#grid").kendoGrid({
-			//var path='{{path}}';	
-		pdf: {
-		 headerBackground: "#567",
-         headerColor: "#fff",
-         evenBackground: "#eee",		
-		allPages: true,
-		template: $("#page-template").html(),
-		avoidLinks: true,
-		fileName: "User-list.pdf",// Bug 277	
-		paperSize: "A4",
-		
-		margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
-		landscape: true,
-		repeatHeaders: true,
-		scale: 0.8,
-		 
-		},
-		excel: {
-		fileName: "User-list.xlsx",// Bug 277
-		allPages:true
-		},
-		scrollable: true,
-		pdfExport: function(e) {
-                  var grid = $("#grid").data("kendoGrid");
-					grid.hideColumn(11);
-                  e.promise
-                  .done(function() {
-                     grid.showColumn(11);
-                  });
-                },
-				
-				dataSource: {
-				serverPaging: false,
-			serverSorting: false,
-				 transport: {
-				  read:{
-					url: '/ajxfun',
-					dataType: "json",
-				  },
-					destroy: {
-  url: '/ajxfun/delete/',
-  dataType: 'json',
-  type: 'get',
-  complete: function (e) {
-    $("#grid").data("kendoGrid").dataSource.read();
-    console.log(e.responseText);
 
-    var response = JSON.parse(e.responseText);
 
-    if (e.responseText=="true") {
-      toastr.success("{{__ "User Deleted Successfully!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-    } else if (response.result === "deep") {
-      toastr.error(response.message, { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-    } else {
-      toastr.error("{{__ 'Error! User Can Not Be Deleted!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-    }
-  }
-}
-					
-				 }, 
-				schema: {
-                        model: {
-							id: "_id",
-                            fields: {
-                                _id: { validation: { required: true } },
-                                firstname: { validation: { required: true } },
-                                middlename: { validation: { required: true } },
-                                lastname: { validation: { required: true } },
-                                email: { validation: { required: true } },
-                            }
-                        }
-                    },
-                    pageSize: 10,
-					batch: false,
-					requestEnd: function (e) {
-								if (e.type == "create" && e.response) {
-									enablefilter();
-							}
-						}
-                }, 
-                sortable: true,
-                reorderable: true,
-                groupable: true,
-                resizable: true,
-                filterable: {
-					mode: "row",
-					 messages: {
-          info: "{{__ 'Show items with value that:'}}",
-		  isEqualTo: "{{__ 'Is equal to'}}",
-		  and: "{{__ 'And'}}",
-		  or: "{{__ 'Or'}}",
-		  clear: "{{__ 'Clear'}}",
-		  filter: "{{__ 'Filter'}}",
-		  isTrue: "{{__ 'is true'}}",
-      isFalse: "{{__ 'is false'}}",
-      isEmpty: "{{__ 'is empty'}}",
-      isNotEmpty: "{{__ 'is not empty'}}"
-        },
-		operators: {
-      string: {
-        eq: "{{__ 'is equal to'}}",
-        neq: "{{__ 'is not equal to'}}",
-        startswith: "{{__ 'starts with'}}",
-        contains: "{{__ 'contains'}}",
-        doesnotcontain: "{{__ 'does not contain'}}",
-        endswith: "{{__ 'ends with'}}",
-        isnull: "{{__ 'is null'}}",
-        isnotnull: "{{__ 'is not null'}}"
-      }
-    }
-				},
-                columnMenu: {
-    messages: {
-      columns: "{{__ 'Columns'}}",
-	  filter : "{{__ 'Filter'}}",
-	  sortAscending: "{{__ 'Sort Ascending'}}", 
-	  sortDescending: "{{__ 'Sort Descending'}}", 
-    },
-  },
-				pageable: {
-					input: true,
-					numeric: false,
-					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100],
-					messages: {
-	  display: "{{__ '{0} - {1} of {2} items'}}",
-      empty: "{{__ 'No items to display'}}",
-      page: "{{__ 'Page'}}",
-	  of: "{{__ 'of {0}'}}", 
-      itemsPerPage: "{{__ 'items per page'}}",
-      first: "{{__ 'Go to the first page'}}",
-      previous: "{{__ 'Go to the previous page'}}",
-      next: "{{__ 'Go to the next page'}}",
-      last: "{{__ 'Go to the last page'}}",
-      refresh: "{{__ 'Refresh'}}"
-    }
-				},
-				
-				noRecords: true,
-				messages: {
-            noRecords: "{{__ 'No records available.'}}"
-        },
-                columns: [
-				 
-					{
-                        field: "firstname" ,
-                        title: "{{__ 'Username'}}",
-						template:"<left>" + "<div class='customer-photo'" + 
-						"style='background-image:url(/images/upload/#=photo #);'></div> " + "#= firstname # #= middlename # #= lastname #",
-                        width: 220
-                    }, 
-					{
-                        field: "email",
-                         title: "{{__ 'Email Address'}}",
-                        width: 220
-                    },
-					{
-                        field: "role_nm.role_nm",
-                         title: "{{__ 'Role'}}",
-                        width: 100
-                    },
-					{
-                        field: "birthdate",
-                         title: "{{__ 'Birth Date'}}",
-						 width: 140
-                    },
-					{
-                        field: "occupation",
-                         title: "{{__ 'Occupation'}}",
-						 hidden: true,
-                        width: 150
-                    },
-					{
-                        field: "mobile",
-                         title: "{{__ 'Contact'}}",
-						 template: "+ #= ccode # #= mobile #",
-                        width: 140
-                    },
-					{
-                        field: "address",
-                         title: "{{__ 'Address'}}",
-						 hidden: true,
-                        width: 400
-                    },
-					{
-                        field: "country",
-                         title: "{{__ 'Country'}}",
-	                   hidden: true,
-                        width: 150
-                    },
-					{
-                        field: "state",
-                         title: "{{__ 'State'}}",
-						 hidden: true,
-                        width: 150
-                    },
-					{
-                        field: "city",
-                         title: "{{__ 'City'}}",
-						 hidden: true,
-                        width: 150
-                    },
-					{
-                        field: "pincode",
-                         title: "{{__ 'Pincode'}}",
-						 template:"#= pincode && pincode.trim() !== '' ? pincode : 'N/A' #",
-						 hidden: true,
-                        width: 100
-                    },
-					
- {
-						width: "200px",
-						command:
-						[
-							{
-								template : "<center>" 
-							},
-							
-							  /* { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "addrole/"+id;
-								  return false;
-								} 
-							},   */
-							{template : "&nbsp;" },
-							{{!-- console.log({{accessrightdata.update}}),
-							console.log({{accessrightdata.delete}}),
-							console.log({{accessrightdata.add}}), --}}
+																		<script>
+																			jQuery(document).ready(function () {
 
-							{{#ifCond accessrightdata.view "||" session.admin_access}}
-							 { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "viewuser/"+id;
-								  return false;
-								} 
-							},
-							{{/ifCond}}
-							{template : "&nbsp;" },
+																				var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
+																				$('body').on('change', '.export', function () {
+																					var value = $(this).val();
+																					if (value == 'csv') {
+																						$("#grid").getKendoGrid().saveAsExcel();
+																					} else if (value == 'pdf') {
+																						$("#grid").getKendoGrid().saveAsPDF();
+																					}
+																				});
 
-							/* Edit action start */
-							{{#ifCond accessrightdata.update "||" session.admin_access}}
-							 { 
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-							
-								  var id = clickedRow._id; 
-								  console.log(id);
-								  window.location.href = "adduser/"+id;
-								  return false;
-								} 
-							},
-							{{/ifCond}}
-							{template : "&nbsp;" },
-							{{#ifCond accessrightdata.delete "||" session.admin_access}}
-							{
-									name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
-										click: function(e) {
-											e.preventDefault();
-											var tr = $(e.target).closest("tr");
-											var data = this.dataItem(tr);
-											if (confirm(`{{__ "Are You sure wan't to delete this User ?"}}`)) {
-												var grid = $("#grid").data("kendoGrid");
-												grid.dataSource.remove(data)
-												grid.dataSource.sync();
-											}
-										}
-								},
-							{{/ifCond}}
-							
-							/* Delete action end */
-							
-							{template : "</center>" },
+
+																				var window1 = $("#window").kendoWindow({
+																					title: "{{__ 'Alert !'}}",
+																					resizable: false,
+																					visible: false, //the window will not appear before its .open method is called
+
+																				}).data("kendoWindow");
+
+																				var element = $("#grid").kendoGrid({
+																					//var path='{{path}}';	
+																					pdf: {
+																						headerBackground: "#567",
+																						headerColor: "#fff",
+																						evenBackground: "#eee",
+																						allPages: true,
+																						template: $("#page-template").html(),
+																						avoidLinks: true,
+																						fileName: "User-list.pdf",// Bug 277	
+																						paperSize: "A4",
+
+																						margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+																						landscape: true,
+																						repeatHeaders: true,
+																						scale: 0.8,
+
+																					},
+																					excel: {
+																						fileName: "User-list.xlsx",// Bug 277
+																						allPages: true
+																					},
+																					scrollable: true,
+																					pdfExport: function (e) {
+																						var grid = $("#grid").data("kendoGrid");
+																						grid.hideColumn(11);
+																						e.promise
+																							.done(function () {
+																								grid.showColumn(11);
+																							});
+																					},
+
+																					dataSource: {
+																						serverPaging: false,
+																						serverSorting: false,
+																						transport: {
+																							read: {
+																								url: '/ajxfun',
+																								dataType: "json",
+																							},
+																							destroy: {
+																								url: '/ajxfun/delete/',
+																								dataType: 'json',
+																								type: 'get',
+																								complete: function (e) {
+																									$("#grid").data("kendoGrid").dataSource.read();
+																									console.log(e.responseText);
+
+																									var response = JSON.parse(e.responseText);
+
+																									if (e.responseText == "true") {
+																										toastr.success("{{__ "User Deleted Successfully!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+																									} else if (response.result === "deep") {
+																										toastr.error(response.message, { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+																									} else {
+																										toastr.error("{{__ 'Error! User Can Not Be Deleted!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+																									}
+																								}
+																							}
+
+																						},
+																						schema: {
+																							model: {
+																								id: "_id",
+																								fields: {
+																									_id: { validation: { required: true } },
+																									firstname: { validation: { required: true } },
+																									middlename: { validation: { required: true } },
+																									lastname: { validation: { required: true } },
+																									email: { validation: { required: true } },
+																								}
+																							}
+																						},
+																						pageSize: 10,
+																						batch: false,
+																						requestEnd: function (e) {
+																							if (e.type == "create" && e.response) {
+																								enablefilter();
+																							}
+																						}
+																					},
+																					sortable: true,
+																					reorderable: true,
+																					groupable: true,
+																					resizable: true,
+																					filterable: {
+																						mode: "row",
+																						messages: {
+																							info: "{{__ 'Show items with value that:'}}",
+																							isEqualTo: "{{__ 'Is equal to'}}",
+																							and: "{{__ 'And'}}",
+																							or: "{{__ 'Or'}}",
+																							clear: "{{__ 'Clear'}}",
+																							filter: "{{__ 'Filter'}}",
+																							isTrue: "{{__ 'is true'}}",
+																							isFalse: "{{__ 'is false'}}",
+																							isEmpty: "{{__ 'is empty'}}",
+																							isNotEmpty: "{{__ 'is not empty'}}"
+																						},
+																						operators: {
+																							string: {
+																								eq: "{{__ 'is equal to'}}",
+																								neq: "{{__ 'is not equal to'}}",
+																								startswith: "{{__ 'starts with'}}",
+																								contains: "{{__ 'contains'}}",
+																								doesnotcontain: "{{__ 'does not contain'}}",
+																								endswith: "{{__ 'ends with'}}",
+																								isnull: "{{__ 'is null'}}",
+																								isnotnull: "{{__ 'is not null'}}"
+																							}
+																						}
+																					},
+																					columnMenu: {
+																						messages: {
+																							columns: "{{__ 'Columns'}}",
+																							filter: "{{__ 'Filter'}}",
+																							sortAscending: "{{__ 'Sort Ascending'}}",
+																							sortDescending: "{{__ 'Sort Descending'}}",
+																						},
+																					},
+																					pageable: {
+																						input: true,
+																						numeric: false,
+																						pageSize: 10,
+																						pageSizes: [10, 20, 25, 50, 100],
+																						messages: {
+																							display: "{{__ '{0} - {1} of {2} items'}}",
+																							empty: "{{__ 'No items to display'}}",
+																							page: "{{__ 'Page'}}",
+																							of: "{{__ 'of {0}'}}",
+																							itemsPerPage: "{{__ 'items per page'}}",
+																							first: "{{__ 'Go to the first page'}}",
+																							previous: "{{__ 'Go to the previous page'}}",
+																							next: "{{__ 'Go to the next page'}}",
+																							last: "{{__ 'Go to the last page'}}",
+																							refresh: "{{__ 'Refresh'}}"
+																						}
+																					},
+
+																					noRecords: true,
+																					messages: {
+																						noRecords: "{{__ 'No records available.'}}"
+																					},
+																					columns: [
+
+																						{
+																							field: "firstname",
+																							title: "{{__ 'Username'}}",
+																							template: "<left>" + "<div class='customer-photo'" +
+																								"style='background-image:url(/images/upload/#=photo #);'></div> " + "#= firstname # #= middlename # #= lastname #",
+																							width: 220
+																						},
+																						{
+																							field: "email",
+																							title: "{{__ 'Email Address'}}",
+																							width: 220
+																						},
+																						{
+																							field: "role_nm.role_nm",
+																							title: "{{__ 'Role'}}",
+																							width: 100
+																						},
+																						{
+																							field: "birthdate",
+																							title: "{{__ 'Birth Date'}}",
+																							template: "#= birthdate && birthdate.trim() !== '' ? birthdate : 'N/A' #",
+																							width: 140
+																						},
+																						{
+																							field: "occupation",
+																							title: "{{__ 'Occupation'}}",
+																							template: "#= occupation && occupation.trim() !== '' ? occupation : 'N/A' #",
+																							hidden: true,
+																							width: 150
+																						},
+																						{
+																							field: "mobile",
+																							title: "{{__ 'Contact'}}",
+																							template: "+#= ccode # #= mobile #",
+																							width: 140
+																						},
+																						{
+																							field: "address",
+																							title: "{{__ 'Address'}}",
+																							template: "#= address && address.trim() !== '' ? address : 'N/A' #",
+																							hidden: true,
+																							width: 400
+																						},
+																						{
+																							field: "country",
+																							title: "{{__ 'Country'}}",
+																							template: "#= country && country.trim() !== '' ? country : 'N/A' #",
+																							hidden: true,
+																							width: 150
+																						},
+																						{
+																							field: "state",
+																							title: "{{__ 'State'}}",
+																							template: "#= state && state.trim() !== '' ? state : 'N/A' #",
+																							hidden: true,
+																							width: 150
+																						},
+																						{
+																							field: "city",
+																							title: "{{__ 'City'}}",
+																							template: "#= city && city.trim() !== '' ? city : 'N/A' #",
+																							hidden: true,
+																							width: 150
+																						},
+																						{
+																							field: "pincode",
+																							title: "{{__ 'Pincode'}}",
+																							template: "#= pincode && pincode.trim() !== '' ? pincode : 'N/A' #",
+																							hidden: true,
+																							width: 100
+																						},
+
+																						{
+																							width: "200px",
+																							command:
+																								[
+																									{
+																										template: "<center>"
+																									},
+
+																									/* { 
+																									  name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
+																									  click:function(e) 
+																									  {
+																										var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+																									   
+																										var id = clickedRow._id;
+																										window.location.href = "addrole/"+id;
+																										return false;
+																									  } 
+																								  },   */
+																									{ template: "&nbsp;" },
+																									{{!-- console.log({{ accessrightdata.update }}),
+																					
+																			}),
+																				console.log({{ accessrightdata.add }}), --}}
+
+																			{{#ifCond accessrightdata.view "||" session.admin_access}}
+																			{
+																				name: "pageview", text: "", className: "btn btn-icon btn-outline-light", iconClass: "ft-eye",
+																					click: function(e) {
+																						var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+
+																						var id = clickedRow._id;
+																						window.location.href = "viewuser/" + id;
+																						return false;
+																					}
+																			},
+																			{{/ifCond }}
+																			{ template: "&nbsp;" },
+
+																			/* Edit action start */
+																			{{#ifCond accessrightdata.update "||" session.admin_access}}
+																			{
+																				name: "pageEdit", text: "", className: "btn btn-icon btn-outline-light", iconClass: "fa fa-pencil",
+																					click: function(e) {
+																						var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+
+																						var id = clickedRow._id;
+																						
+																						window.location.href = "adduser/" + id;
+																						return false;
+																					}
+																			},
+																			{{/ifCond }}
+																			{ template: "&nbsp;" },
+																			{{#ifCond accessrightdata.delete "||" session.admin_access}}
+																			{
+																				name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
+																					click: function(e) {
+																						e.preventDefault();
+																						var tr = $(e.target).closest("tr");
+																						var data = this.dataItem(tr);
+																						if (confirm(`{{__ "Are You sure wan't to delete this User ?"}}`)) {
+																							var grid = $("#grid").data("kendoGrid");
+																							grid.dataSource.remove(data)
+																							grid.dataSource.sync();
+																						}
+																					}
+																			},
+																			{{/ifCond }}
+
+																			/* Delete action end */
+
+																			{ template: "</center>" },
 							 
-							], 
-							{{#ifCond accessrightdata.add "||" session.admin_access}}
-							
-							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><a href='adduser'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i>{{__ "New"}}</button></a></center>"
-							{{/ifCond}}
+							],
+																			{{#ifCond accessrightdata.add "||" session.admin_access}}
+
+																			title: "{{__ "Action"}}",
+																				headerTemplate: "<center><a href='adduser'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i>{{__ "New"}}</button></a></center>"
+																			{{/ifCond }}
 					}
                 ],
-				editable: {
-                mode: "inline"
-				}
+																			editable: {
+																				mode: "inline"
+																			}
             }); 
         });
-		 
-        </script>
-			 
+
+																		</script>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</section>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							</div>
-						</div>
-						</div>
-						</div>
-					</section>
+						</section>
+					</div>
 				</div>
-				</div>
-			</div>
 			</div>
 		</div>
-		</section>
 	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
+</div>

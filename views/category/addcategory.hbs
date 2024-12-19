@@ -66,17 +66,16 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Enter Category Type<span class="red">*</span></label>
+							<label>Category Type Name<span class="red">*</span></label>
 							<input  class="form-control" name="cate_type_ajax" id="cateType" >
-							<p><span class="emsg hidden" style="color:#e30b0b">{{#with ..}}{{__ "The category type name may only contain alphabets, space and _ ,`'.^-"}}{{/with}}</span></p>
+							<p class="help-block model-err-class"><span class="emsg hidden" style="color:#e30b0b">{{__ "The category type name may only contain alphabets, space and _ ,`'.^-"}}</span></p>
+							<p class="model-err-class-text" style="color:#e30b0b"></p>
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-success submit_cate">{{__ "Add"}}</button>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">{{__ "Close"}}</button>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -110,6 +109,7 @@ $(document).ready(function(){
 		if(text!=''){
 			$('.cate_name-error').remove();
 			$("#cateType").css('border-color','#2b542c');			
+			$(".model-err-class-text").text("");
 		}
 	});
 
@@ -127,8 +127,9 @@ $(document).ready(function(){
 				$(".cate_type").append("<option value='"+name.toLowerCase()+"'>"+name+"</option>");
 				$("#myModal2").modal("toggle");			
 			}else{
-				$("#cateType").css('border-color','#a94442');
-				$('<span class="invalid-feedback cate_name-error"> This field is required.</span>" ').insertAfter("#cateType");
+				$("#cateType").css('border-color','#e30b0b');
+				{{!-- $('<span class="invalid-feedback cate_name-error"> This field is required.</span>" ').insertAfter(".model-err-class"); --}}
+				$(".model-err-class-text").text("Category Type is required.");
 			} 
 		}	
 	});
@@ -148,14 +149,17 @@ $('.submit_cate').click(function() {
 var $regexname=/^([a-zA-Z _ ,`'.^-]{0,16})$/;
     $('#cateType').on('keypress keydown keyup',function(){
 	 if (!$(this).val().match($regexname)) {
+		console.log("not match");
 	  // there is a mismatch, hence show the error message
 		 $('.emsg').removeClass('hidden');
 		 $('.emsg').show();
+		 
 		 $(this).val('');
 	 }
    else{
 		// else, do not display message
 		$('.emsg').addClass('hidden');
+	
 	   }
 });	
 });

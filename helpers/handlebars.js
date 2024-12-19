@@ -174,7 +174,7 @@ module.exports = {
 					
 					for(var j = 0 ; j< array[i].length; j++)
 					{ 
-						console.log("second loop");
+						
 						if(array[i][j] == v1){					
 						 return "checked";
 						}					
@@ -222,7 +222,7 @@ module.exports = {
 			return new hbs.SafeString(limit);
 		},
 	ifCond: function (v1, operator, v2, options) {
-		   console.log(v1,operator,v2)
+		  
 		switch (operator) {
 			case '==':
 				return (v1 == v2) ? options.fn(this) : options.inverse(this);
@@ -247,12 +247,12 @@ module.exports = {
 		}
 	   },
 	   isCustomer : function(role_slug, options) {
-		console.log("role", role_slug);
+		
 		if (role_slug !== 'customer') {
-			console.log("1");
+			
 			return options.fn(this);
 		} else {
-			console.log("2");
+			
 			return options.inverse(this);
 		}
 	},
@@ -396,12 +396,12 @@ module.exports = {
 			return new hbs.SafeString(add);			
 		},
 		attachfile:function(v1, options){
-			var translatedLabel = __("Attach file");	
+			var translatedLabel = __("Attach File");	
 			if(v1=="data"){
-				var add = '<div id="attachfile" class="col-md-12 p-0 d-flex justify-content-between"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light"  name="attachfile" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
+				var add = '<div id="attachfile" class="col-md-12 p-0 d-flex justify-content-between"><div class="form-group" style="float:left; width: 90%; margin-right: 8px; "><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload yy"  name="attachfile" onchange="return ValidateExtensionForAttachFile()" type="file" multiple></div><button style="margin-bottom: 27px;" class="btn" type="button" onclick="deleteattachfile()"><i class=" ft-x"></i></button></div>'; 		
 			}
 			else{
-				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light  docfile" id="fileupload" name="attachfile" type="file" multiple></div><div class="help-block"></div></div>';
+				var add= '<div class="col-md-12 p-0"><div class="form-group"><label class="custom-control-label-date ml-2">'+translatedLabel+'</label><input class="form-control border-light fileUpload yy docfile" id="fileupload" name="attachfile" type="file" onchange="return ValidateExtensionForAttachFile()" multiple></div><div class="help-block"></div></div>';
 			}
 			return new hbs.SafeString(add);
 		},
@@ -418,6 +418,7 @@ module.exports = {
 		
 		getdate: function(date,format) {
 			// THIS USE ONLY HBS DATE FORMATE
+			
 			try {
 				if(date!=''){
 							 var date1=date;
@@ -449,7 +450,7 @@ module.exports = {
 	},
 	jsonS: function (str) {
 			
-			return JSON.stringify(str);
+			return JSON.stringify(str,null,2);
 		},
 		humanize: function(str) {
 			// THIS USE ONLY HBS DATE FORMATE

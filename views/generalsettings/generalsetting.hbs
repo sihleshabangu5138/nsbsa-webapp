@@ -139,7 +139,7 @@
 										<div class="form-group input">
 											<div class="col-md-12 form-control border-light">
 												<input type="text" data-validation-regex-regex="([A-Za-z_,`.'^-]{1,100})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers' setlang}}{{/with}}" required name="com_name" {{#if this.com_name}} id="com" value="{{this.com_name}}" {{/if}}  id="userinput_com" >
-												<label for="com" >{{#with ..}}{{__ "Company name" setlang}}{{/with}}<span class="required red">*</span></label>
+												<label for="com" >{{#with ..}}{{__ "Company Name" setlang}}{{/with}}<span class="required red">*</span></label>
 											</div>	<div class="help-block"></div>	
 										</div>
 									</div>
@@ -174,7 +174,7 @@
 											
 											<div class="pos_mobile plusi form-control-position" style='float:left'><i class="ft-plus"></i>
 											</div>
-						<input type="text" required name="country_code" id="ccode" class="form-control"  minlength="2" maxlength="3" data-validation-required-message="{{#with ..}}{{__ "Country code is required"}}{{/with}}" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" id="userinput_c_code"  {{#if this.country_code}} value="{{this.country_code}}" {{/if}} style="margin-left: 14px;"> 
+						<input type="text" required name="country_code" id="ccode" class="form-control"  minlength="2" maxlength="3" data-validation-required-message="{{#with ..}}{{__ "Country Code is required"}}{{/with}}" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" id="userinput_c_code"  {{#if this.country_code}} value="{{this.country_code}}" {{/if}} style="margin-left: 14px;"> 
 						<label >{{#with ..}}{{__ "Country code" setlang}}{{/with}}<span class="required red">*</span></label>
 					    </div><div class="help-block"></div>  
 										</div>
@@ -411,8 +411,8 @@
 									<div class="col-md-6">
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
-											<input type="text" required id="userinput3"   maxlength="10" required data-validation-containsnumber-regex="(\d)+"data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" {{#if this.zipcode}} value="{{this.zipcode}}" {{/if}} name="zipcode">
-											<label for="userinput3">{{#with ..}}{{__ "zip code" setlang}}{{/with}}<span class="required red">*</span></label>
+											<input type="text"  id="userinput3"   maxlength="10" required data-validation-containsnumber-regex="(\d)+"data-validation-containsnumber-message="{{#with ..}}{{__ "No Characters, Only Numbers"}}{{/with}}" aria-invalid="false" {{#if this.zipcode}} value="{{this.zipcode}}" {{/if}} name="zipcode">
+											<label for="userinput3">{{#with ..}}{{__ "zip Code" setlang}}{{/with}}<span class="required red">*</span></label>
 										</div>	<div class="help-block"></div>	
 									</div>
 									</div>
@@ -572,7 +572,7 @@
 											<input type="text" required id="userinput3" {{#if this.imgupload_size}} value="{{this.imgupload_size}}" {{/if}} name="imgupload_size" minlength="1" maxlength="5" required="" data-validation-regex-regex="(\d)+" data-validation-regex-message="{{#with ..}}{{__ "The Image upload size is must be a number."}}{{/with}}">
 											
 					
-											<label for="userinput3">{{#with ..}}{{__ "image upload size(MB)" setlang}}{{/with}} <span class="required red">*</span></label>
+											<label for="userinput3">{{#with ..}}{{__ "Image Upload Size(MB)" setlang}}{{/with}} <span class="required red">*</span></label>
 										</div>	<div class="help-block"></div>	
 									</div>
 									</div>
@@ -583,7 +583,7 @@
 					<div class="form-group input">
 						<div class="col-md-12 form-control border-light"> 
 							<input type="text" required id="userinput3" {{#if this.docupload_size}} value="{{this.docupload_size}}" {{/if}} name="docupload_size" minlength="1" maxlength="5" data-validation-regex-regex="(\d)+"  data-validation-regex-message="{{#with ..}}{{__ "The Documents upload size is must be a number."}}{{/with}}">
-							<label for="userinput3">{{#with ..}}{{__ "Documents Upload size(MB)" setlang}}{{/with}}<span class="required red">*</span></label> 
+							<label for="userinput3">{{#with ..}}{{__ "Documents Upload Size(MB)" setlang}}{{/with}}<span class="required red">*</span></label> 
 						</div>	<div class="help-block"></div>	
 					</div>
 					</div>
@@ -1171,7 +1171,7 @@
 									<div class="form-group input">
 										<div class="col-md-12 form-control border-light">
 											<input id="userinput1" class="form-control" data-validation-regex-regex="(^[1-9]\d*\s*(\.\d+)?(px|em|rem|%|vw|vh|pt|pc|mm|cm|in)?$)" placeholder="ex: 12 px, pc, %..." data-validation-required-message="{{#with ..}}{{__ "logo width is required"}}{{/with}}" type="text"   name="pdf_logo_width" {{#if this.pdf_logo_width}} value="{{this.pdf_logo_width}}" {{/if}}>
-											<label for="userinput1">{{#with ..}}{{__ "logo width" setlang}}{{/with}}<span class="red">*</span></label>
+											<label for="userinput1">{{#with ..}}{{__ "Logo Width" setlang}}{{/with}}<span class="red">*</span></label>
 										</div> <div class="help-block"></div>
 									</div>
 								</div>	
@@ -1206,7 +1206,7 @@
 							<div class="col-md-6">
 							<div class="form-group row">
 								<div class="col-md-12 input">
-								<label class="ml-1 custom-top-label top" for="userinput7">{{#with ..}}{{__ "signature Image for pdf" setlang}}{{/with}}<span class="red">*</span></label> 
+								<label class="ml-1 custom-top-label top" for="userinput7">{{#with ..}}{{__ "Signature Image for pdf" setlang}}{{/with}}<span class="red">*</span></label> 
 								<input class="form-control border-light" id="company_logo1" type="file" name="company_logo" {{#if this.signature_image}} value="{{this.signature_image}}" {{else}} data-validation-required-message={{#with ..}}{{__ "Profile Image is required"}}{{/with}} {{/if}}  id="userinput5">
 								{{#if this.signature_image}} <br/><img class="existing_user_image update_time_team_image" src="/images/upload/generalsetting/{{this.signature_image}}"> 
 								<input class="form-control border-light" name="sig_photo_old" value="{{this.signature_image}}" type="hidden" id="userinput5"> {{/if}}
@@ -1279,7 +1279,7 @@
 															data-validation-required-message="{{#with ..}}{{__ " Secret Key is
 															required"}}{{/with}}" {{#if this.stripe_secret_key}}
 															value="{{this.stripe_secret_key}}" {{/if}}>
-														<label for="userinput1">{{#with ..}}{{__ "Stripe secret key" setlang}}{{/with}}<span
+														<label for="userinput1">{{#with ..}}{{__ "Stripe Secret key" setlang}}{{/with}}<span
 																class="red">*</span></label>
 													</div>
 													<div class="help-block"></div>
@@ -1293,7 +1293,7 @@
 															data-validation-required-message="{{#with ..}}{{__ "Public Key is
 															required"}}{{/with}}" {{#if this.stripe_publishable_key}}
 															value="{{this.stripe_publishable_key}}" {{/if}}>
-														<label for="userinput2">{{#with ..}}{{__ "Stripe public key" setlang}}{{/with}}<span
+														<label for="userinput2">{{#with ..}}{{__ "Stripe Public key" setlang}}{{/with}}<span
 																class="red">*</span></label>
 													</div>
 												<div class="help-block"></div>

@@ -1,116 +1,126 @@
 {{breadcrums (__ 'Home') (__ 'Approved Loans')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
-    <div class="content-wrapper">
-	<div class="content-header row">
-	<div class="col-xl-12 col-lg-12 box-four-view">
-	<div class="card_boxnf">
-	<div class="card-content">
-	<div class="card-body pl-0 pr-0">
-		<fieldset class="form-group position-relative">
-		<div class="row">
-		{{!-- <div class="col-lg-3 col-md-6 col-12">
-		<div class="controls position-relative has-icon-right">
-			<input type="text" class="form-control square" value="{{__ 'All Loans'}}" placeholder="Addon To Right" readonly="readonly">
-			<div class="form-control-position ">
-				<span class="primary">{{this.count}}</span>
-			</div>
-		</div>
-		</div> --}}
-		<div class="col-lg-4 col-md-6 col-12 pb-1">
-			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Total Loans'}}" placeholder="Addon To Right" readonly="readonly">
-				<div class="form-control-position">
-					<span class="text-warning">
-						<a href="totalloans" style="text-decoration: underline !important;">{{this.count}}</a>
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12 pb-1">
-			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Approved Loans'}}" placeholder="Addon To Right" readonly="readonly">
-					<div class="form-control-position">
-						<span class="red">
-							<a href="loanlist" style="text-decoration: underline !important;">{{this.approveloan}}</a>
-						</span>
-					</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12 pb-1">
-			<div class="controls position-relative has-icon-right">
-				<input type="text" class="form-control square" value="{{__ 'Disapproved Loans'}}" placeholder="Addon To Right" readonly="readonly">
-				<div class="form-control-position">
-					<span class="success">
-						<a href="disapproveloan" style="text-decoration: underline !important;">{{this.disapproveloan}}</a>	
-					</span>
-				</div>
-			</div>
-		</div>
-		</div>
-		</fieldset>
-		<div class="row" style="">
-		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements ews-heading">
-					<ul class="list-inline mb-0">
-					<li id="export">
-						<select class="select2 form-control export">
-							<option value="" disabled selected>{{__ "Export"}}</option>
-							<option value="csv">{{__ "XLSX"}}</option>
-							<option value="pdf">{{__ "PDF"}}</option>
-						</select>
-					</li>	
-					</ul>
-				</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-	<div class="row">
-	<div class="col-md-12">
-	<div class="card"> 
-	<div class="card-content collpase show">
-			{{#if messages.error  }}
-				<script>
-					toastr.error("{{messages.error}}","{{__ 'Error!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
-			{{#if messages.success }}
-				<script>
-					toastr.success("{{messages.success}}","{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
-		<!-- Zero configuration table -->
-        <section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
-                <div class="card-body card-dashboard card-design">
-					
-					<section id="horizontal">
-						<div class="row">
-						<div class="col-12">
-						<div class="card">
-							
-							<div class="card-content collapse show" id="NF-datatable">
-							<div class="card-body">
-								<div id="grid"></div>
-								<div id="window"></div>
-								
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="col-xl-12 col-lg-12 box-four-view">
+				<div class="card_boxnf">
+					<div class="card-content">
+						<div class="card-body pl-0 pr-0">
+							<fieldset class="form-group position-relative">
+								<div class="row">
+									{{!-- <div class="col-lg-3 col-md-6 col-12">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square" value="{{__ 'All Loans'}}"
+												placeholder="Addon To Right" readonly="readonly">
+											<div class="form-control-position ">
+												<span class="primary">{{this.count}}</span>
+											</div>
+										</div>
+									</div> --}}
+									<div class="col-lg-4 col-md-6 col-12 pb-1">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square" value="{{__ 'Total Loans'}}"
+												placeholder="Addon To Right" readonly="readonly">
+											<div class="form-control-position">
+												<span class="text-warning">
+													<a href="totalloans"
+														style="text-decoration: underline !important;">{{this.count}}</a>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6 col-12 pb-1">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square"
+												value="{{__ 'Approved Loans'}}" placeholder="Addon To Right"
+												readonly="readonly">
+											<div class="form-control-position">
+												<span class="red">
+													<a href="loanlist"
+														style="text-decoration: underline !important;">{{this.approveloan}}</a>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6 col-12 pb-1">
+										<div class="controls position-relative has-icon-right">
+											<input type="text" class="form-control square"
+												value="{{__ 'Disapproved Loans'}}" placeholder="Addon To Right"
+												readonly="readonly">
+											<div class="form-control-position">
+												<span class="success">
+													<a href="disapproveloan"
+														style="text-decoration: underline !important;">{{this.disapproveloan}}</a>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<div class="row" style="">
+								<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right">
+									<a class="heading-elements-toggle"><i
+											class="fa fa-ellipsis-v font-medium-3"></i></a>
+									<div class="heading-elements ews-heading">
+										<ul class="list-inline mb-0">
+											<li id="export">
+												<select class="select2 form-control export">
+													<option value="" disabled selected>{{__ "Export"}}</option>
+													<option value="csv">{{__ "XLSX"}}</option>
+													<option value="pdf">{{__ "PDF"}}</option>
+												</select>
+											</li>
+										</ul>
+									</div>
+								</div>
 							</div>
 						</div>
-							
-							<div class="card-content collapse show">
-							<div class="card-body card-dashboard">
-							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-content collpase show">
+					{{#if messages.error }}
+						<script>
+							toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+						</script>
+					{{/if}}
+					{{#if messages.success }}
+						<script>
+							toastr.success("{{messages.success}}", "{{__ 'Success!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+						</script>
+					{{/if}}
+					<!-- Zero configuration table -->
+					<section id="configuration">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
 
-							<script type="x/kendo-template" id="page-template">
+									<div class="card-content collapse show">
+										<div class="card-body card-dashboard card-design">
+
+											<section id="horizontal">
+												<div class="row">
+													<div class="col-12">
+														<div class="card">
+
+															<div class="card-content collapse show" id="NF-datatable">
+																<div class="card-body">
+																	<div id="grid"></div>
+																	<div id="window"></div>
+
+																</div>
+															</div>
+
+															<div class="card-content collapse show">
+																<div class="card-body card-dashboard">
+
+
+																	<script type="x/kendo-template" id="page-template">
 								 <div class="page-template">
 									<div class="header">
 									   <div style="float: right"></div>
@@ -121,9 +131,10 @@
 									</div>
 								</div>
 							</script>
-							<script type="text/x-kendo-template" id="windowTemplate">
-								
-								
+																	<script type="text/x-kendo-template"
+																		id="windowTemplate">
+
+
 								<div class="swal-modal">
 									<span class="swal-icon--warning__body">
 										<span class="swal-icon--warning__dot"></span>
@@ -141,469 +152,457 @@
 								</div>
 							</script>
 
-	
-    <script>
-       jQuery(document).ready(function() {
-	   
-	   
-			var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
-				$('body').on('change', '.export', function() {
-				var value = $(this).val();
-				if(value == 'csv')
-				{
-					$("#grid").getKendoGrid().saveAsExcel();
-				}else if(value == 'pdf')
-				{
-					$("#grid").getKendoGrid().saveAsPDF();
-				}
-			});
-		 var window1 = $("#window").kendoWindow({
-            title: "{{__ 'Alert !'}}",
-			resizable: false,
-            visible: false, //the window will not appear before its .open method is called
-           
-        }).data("kendoWindow");
-		
-		var element=$("#grid").kendoGrid({
-			//var path='{{path}}';	
-				pdf: {
-		allPages: true,
-		template: $("#page-template").html(),
-		avoidLinks: true,
-		fileName: "Loan-list.pdf",// Bug 277	
-		paperSize: "A4",
-		margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
-		landscape: true,
-		repeatHeaders: true,
-		scale: 0.8
-		},
-		excel: {
-		fileName: "Loan-list.xlsx",// Bug 277
-		allPages:true
-		},
-		scrollable: true,
-		pdfExport: function(e) {
-                  var grid = $("#grid").data("kendoGrid");
-					//grid.hideColumn(0);
-					grid.hideColumn(9);
-                  e.promise
-                  .done(function() {
-                    // grid.showColumn(0);
-                     grid.showColumn(9);
-                  });
-                },
-				
-				dataSource: {
-				serverPaging: false,
-			serverSorting: false,
-				 transport: {
-				  read:{
-					url: '/ajxfun/loanlist',
-					dataType: "json",
-				  },
-					destroy:{
-							url: '/ajxfun/deleteloan/',
-							dataType: "json",
-							type:'get',
-							complete: function(e) {
-								$("#grid").data("kendoGrid").dataSource.read(); 
-								console.log(e.responseText);
-								if(e.responseText=="true"){
-									
-									toastr.success("{{__ "Loan Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
-									
-								}else{
-									
-									 toastr.error("{{__ " Error! Loan Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
-									 
-								}
-							}
-						},
-					}, 
-				schema: {
-                        model: {
-							id: "_id",
-                            fields: {
-                                _id: { validation: { required: true } },
-                                firstname: { validation: { required: true } },
-                                middlename: { validation: { required: true } },
-                                lastname: { validation: { required: true } },
-                                email: { validation: { required: true } },
-                            }
-                        }
-                    },
-                    pageSize: 10,
-					batch: false,
-					requestEnd: function (e) {
-								if (e.type == "create" && e.response) {
-									enablefilter();
-							}
-						}
-                },
-                
-                sortable: true,
-                reorderable: true,
-                groupable: true,
-                resizable: true,
-                filterable: {
-					mode: "row",
-					 messages: {
-          info: "{{__ 'Show items with value that:'}}",
-		  isEqualTo: "{{__ 'Is equal to'}}",
-		  and: "{{__ 'And'}}",
-		  or: "{{__ 'Or'}}",
-		  clear: "{{__ 'Clear'}}",
-		  filter: "{{__ 'Filter'}}",
-		  isTrue: "{{__ 'is true'}}",
-      isFalse: "{{__ 'is false'}}",
-      isEmpty: "{{__ 'is empty'}}",
-      isNotEmpty: "{{__ 'is not empty'}}"
-        },
-		operators: {
-      string: {
-        eq: "{{__ 'is equal to'}}",
-        neq: "{{__ 'is not equal to'}}",
-        startswith: "{{__ 'starts with'}}",
-        contains: "{{__ 'contains'}}",
-        doesnotcontain: "{{__ 'does not contain'}}",
-        endswith: "{{__ 'ends with'}}",
-        isnull: "{{__ 'is null'}}",
-        isnotnull: "{{__ 'is not null'}}"
-      }
-    }
-				},
-                columnMenu: {
-    messages: {
-      columns: "{{__ 'Columns'}}",
-	  filter : "{{__ 'Filter'}}",
-	  sortAscending: "{{__ 'Sort Ascending'}}", 
-	  sortDescending: "{{__ 'Sort Descending'}}", 
-    },
-  },
-												pageable: {
-					input: true,
-					numeric: false,
-					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100],
-					messages: {
-	  display: "{{__ '{0} - {1} of {2} items'}}",
-      empty: "{{__ 'No items to display'}}",
-      page: "{{__ 'Page'}}",
-	  of: "{{__ 'of {0}'}}", 
-      itemsPerPage: "{{__ 'items per page'}}",
-      first: "{{__ 'Go to the first page'}}",
-      previous: "{{__ 'Go to the previous page'}}",
-      next: "{{__ 'Go to the next page'}}",
-      last: "{{__ 'Go to the last page'}}",
-      refresh: "{{__ 'Refresh'}}"
-    }
-				},
-				
-			noRecords: true,
-			messages: {
-            noRecords: "{{__ 'No records available.'}}"
-        },
-                columns: [
-					{
-                        field: "loancount" ,
-                        title: "{{__ 'Loan No.'}}",
-                        width: 130
-                    }, 
-					{
-                        field: "loan.type" ,
-                        title: "{{__ 'Loan Type'}}",
-                        width: 130,
-						template: function(dataItem) {
-                        return dataItem.loan && dataItem.loan.type ? dataItem.loan.type : "N/A"; // Check for loan type
-                        }
-                    }, 
-					{
-                        field: "user.firstname",
-                        title: "{{__ 'User Name'}}", 
-						
-						template : function(dataItem) {
-                         return (dataItem.user && dataItem.user.firstname && dataItem.user.lastname) 
-                                ? dataItem.user.firstname + " " + dataItem.user.lastname 
-                                : "N/A"; // Check for user name
-                        },
-                         width: 130
-                    },
-					
-					{
-                        field: "description",
-                        title: "{{__ 'Loan Description'}}",
-                        width: 240,
-						hidden: true
-                    },
-					{
-                        field: "loanamount",
-                         title: "{{{currencyList session.generaldata.currency}}} "+"{{__ 'Loan Amount'}}",
-                        width: 130
-                    },
-					{
-                        field: "interestrate",
-                         title: "{{__ 'Interest Rate'}}"+" %",
-                        width: 130
-                    },
-					{{#isCustomer session.role_slug}}
-					{
-                        field: "approvestatus",
-                        title: "{{__ 'Approved Status'}}",
-						template: '<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
-						width: 130,
-                    },
-					{{/isCustomer}}
-					{
-                        field: "years",
-                         title: "{{__ 'Loan period in years'}}",
-						 <!-- template: "<div class='123'>{{getcountrybyid '#= country #' }}</div>", -->
-	                   hidden: true,
-                        width: 120
-                    },
-					{
-                        field: "startdate",
-                         title: "{{__ 'Start Date'}}",
-						 hidden: true,
-                        width: 150
-                    },
-					
-					{
-                        field: "enddate",
-                         title: "{{__ 'End Date'}}",
-						 hidden: true,
-                        width: 150
-                    },
-										{{!-- {{#hiddenmodules session.access_rights.random.owndata session.admin_access}}
-					 {
-        field: "user.username",
-        title: "{{__ 'Added By'}}",
-		hidden: true,
-        width: 150,
-		template: function(data) {
-            return data.user ? data.user.username : '';
-        }
-    },
-	{{/hiddenmodules}} --}}
-					{
-						width: "200px",
-						command:
-						[
-							{
-								template : "<center>" 
-							},
-							
-							  /* { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "addrole/"+id;
-								  return false;
-								} 
-							},   */
-							{template : "&nbsp;" },
-							{{#ifCond accessrightdata.view "||" session.admin_access}}
-							 { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-eye",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 console.log(clickedRow,"---------");
-								  var id = clickedRow._id; 
-										console.log({{{jsonS session}}})
-										console.log("{{session.role_slug }}");
-								  	if("{{ session.role_slug }}" == "customer"){
-										let loanUser = clickedRow.user._id;
-										let currentUser = "{{session.user_id}}";
-										if(loanUser == currentUser){
-								  			window.location.href = "viewloan/"+id;
-										} else {
-											toastr.error("{{__ 'You do not have permission to view this loan.'}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-											{{!-- $(e.currentTarget).hide(); --}}
-										}
-									} else{
-										window.location.href = "viewloan/"+id;
-									}
-								  return false;
-								} 
-							},
-							{{/ifCond}}
-							{template : "&nbsp;" },
 
-							/* Edit action start */
-							{{#ifCond accessrightdata.update "||" session.admin_access}}
-							 { 
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "addloan/"+id;
-								  return false;
-								} 
-							},
-							{{/ifCond}}
-							{template : "&nbsp;" },
-							{{#ifCond accessrightdata.delete "||" session.admin_access}}
-							{
-									name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
-										click: function(e) {
-											e.preventDefault();
-											var tr = $(e.target).closest("tr");
-											var data = this.dataItem(tr);
-											 
-											if (confirm(`{{__ "Are You sure wan't to delete this loan ?"}}`)) {
-												var grid = $("#grid").data("kendoGrid");
-												grid.dataSource.remove(data)
-												grid.dataSource.sync();
-											}
-										}
-								},
-							{{/ifCond}}
-							
-							/* Delete action end */
-							
-							{template : "</center>" },
+																	<script>
+																		jQuery(document).ready(function () {
+
+
+																			var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
+																			$('body').on('change', '.export', function () {
+																				var value = $(this).val();
+																				if (value == 'csv') {
+																					$("#grid").getKendoGrid().saveAsExcel();
+																				} else if (value == 'pdf') {
+																					$("#grid").getKendoGrid().saveAsPDF();
+																				}
+																			});
+																			var window1 = $("#window").kendoWindow({
+																				title: "{{__ 'Alert !'}}",
+																				resizable: false,
+																				visible: false, //the window will not appear before its .open method is called
+
+																			}).data("kendoWindow");
+
+																			var element = $("#grid").kendoGrid({
+																				//var path='{{path}}';	
+																				pdf: {
+																					allPages: true,
+																					template: $("#page-template").html(),
+																					avoidLinks: true,
+																					fileName: "Loan-list.pdf",// Bug 277	
+																					paperSize: "A4",
+																					margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+																					landscape: true,
+																					repeatHeaders: true,
+																					scale: 0.8
+																				},
+																				excel: {
+																					fileName: "Loan-list.xlsx",// Bug 277
+																					allPages: true
+																				},
+																				scrollable: true,
+																				pdfExport: function (e) {
+																					var grid = $("#grid").data("kendoGrid");
+																					//grid.hideColumn(0);
+																					grid.hideColumn(9);
+																					e.promise
+																						.done(function () {
+																							// grid.showColumn(0);
+																							grid.showColumn(9);
+																						});
+																				},
+
+																				dataSource: {
+																					serverPaging: false,
+																					serverSorting: false,
+																					transport: {
+																						read: {
+																							url: '/ajxfun/loanlist',
+																							dataType: "json",
+																						},
+																						destroy: {
+																							url: '/ajxfun/deleteloan/',
+																							dataType: "json",
+																							type: 'get',
+																							complete: function (e) {
+																								$("#grid").data("kendoGrid").dataSource.read();
+																								console.log(e.responseText);
+																								if (e.responseText == "true") {
+
+																									toastr.success("{{__ "Loan Deleted Successfully!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+
+																								} else {
+
+																									toastr.error("{{__ " Error! Loan Can Not Be Deleted!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+
+																								}
+																							}
+																						},
+																					},
+																					schema: {
+																						model: {
+																							id: "_id",
+																							fields: {
+																								_id: { validation: { required: true } },
+																								firstname: { validation: { required: true } },
+																								middlename: { validation: { required: true } },
+																								lastname: { validation: { required: true } },
+																								email: { validation: { required: true } },
+																							}
+																						}
+																					},
+																					pageSize: 10,
+																					batch: false,
+																					requestEnd: function (e) {
+																						if (e.type == "create" && e.response) {
+																							enablefilter();
+																						}
+																					}
+																				},
+
+																				sortable: true,
+																				reorderable: true,
+																				groupable: true,
+																				resizable: true,
+																				filterable: {
+																					mode: "row",
+																					messages: {
+																						info: "{{__ 'Show items with value that:'}}",
+																						isEqualTo: "{{__ 'Is equal to'}}",
+																						and: "{{__ 'And'}}",
+																						or: "{{__ 'Or'}}",
+																						clear: "{{__ 'Clear'}}",
+																						filter: "{{__ 'Filter'}}",
+																						isTrue: "{{__ 'is true'}}",
+																						isFalse: "{{__ 'is false'}}",
+																						isEmpty: "{{__ 'is empty'}}",
+																						isNotEmpty: "{{__ 'is not empty'}}"
+																					},
+																					operators: {
+																						string: {
+																							eq: "{{__ 'is equal to'}}",
+																							neq: "{{__ 'is not equal to'}}",
+																							startswith: "{{__ 'starts with'}}",
+																							contains: "{{__ 'contains'}}",
+																							doesnotcontain: "{{__ 'does not contain'}}",
+																							endswith: "{{__ 'ends with'}}",
+																							isnull: "{{__ 'is null'}}",
+																							isnotnull: "{{__ 'is not null'}}"
+																						}
+																					}
+																				},
+																				columnMenu: {
+																					messages: {
+																						columns: "{{__ 'Columns'}}",
+																						filter: "{{__ 'Filter'}}",
+																						sortAscending: "{{__ 'Sort Ascending'}}",
+																						sortDescending: "{{__ 'Sort Descending'}}",
+																					},
+																				},
+																				pageable: {
+																					input: true,
+																					numeric: false,
+																					pageSize: 10,
+																					pageSizes: [10, 20, 25, 50, 100],
+																					messages: {
+																						display: "{{__ '{0} - {1} of {2} items'}}",
+																						empty: "{{__ 'No items to display'}}",
+																						page: "{{__ 'Page'}}",
+																						of: "{{__ 'of {0}'}}",
+																						itemsPerPage: "{{__ 'items per page'}}",
+																						first: "{{__ 'Go to the first page'}}",
+																						previous: "{{__ 'Go to the previous page'}}",
+																						next: "{{__ 'Go to the next page'}}",
+																						last: "{{__ 'Go to the last page'}}",
+																						refresh: "{{__ 'Refresh'}}"
+																					}
+																				},
+
+																				noRecords: true,
+																				messages: {
+																					noRecords: "{{__ 'No records available.'}}"
+																				},
+																				columns: [
+																					{
+																						field: "loancount",
+																						title: "{{__ 'Loan No.'}}",
+																						width: 130
+																					},
+																					{
+																						field: "loan.type",
+																						title: "{{__ 'Loan Type'}}",
+																						width: 130,
+																						template: function (dataItem) {
+																							return dataItem.loan && dataItem.loan.type ? dataItem.loan.type : "N/A"; // Check for loan type
+																						}
+																					},
+																					{
+																						field: "user.firstname",
+																						title: "{{__ 'User Name'}}",
+
+																						template: function (dataItem) {
+																							return (dataItem.user && dataItem.user.firstname && dataItem.user.lastname)
+																								? dataItem.user.firstname + " " + dataItem.user.lastname
+																								: "N/A"; // Check for user name
+																						},
+																						width: 130
+																					},
+
+																					{
+																						field: "description",
+																						title: "{{__ 'Loan Description'}}",
+																						width: 240,
+																						hidden: true
+																					},
+																					{
+																						field: "loanamount",
+																						title: "{{{currencyList session.generaldata.currency}}} " + "{{__ 'Loan Amount'}}",
+																						width: 130
+																					},
+																					{
+																						field: "interestrate",
+																						title: "{{__ 'Interest Rate'}}" + " %",
+																						width: 130
+																					},
+																					{{#isCustomer session.role_slug}}
+					{
+																					field: "approvestatus",
+																					title: "{{__ 'Approved Status'}}",
+																					template: '<label class="switch remove_switch"><input id="approvestatus" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: approvestatus" #= approvestatus ? checked="checked" : "" #><span class="slider round"></span></label>',
+																					width: 130,
+																				},
+																				{{/isCustomer}}
+																			{
+																				field: "years",
+																				title: "{{__ 'Loan Period In Years'}}",
+																				<!-- template: "<div class='123'>{{getcountrybyid '#= country #' }}</div>", -->
+																				hidden: true,
+																				width: 120
+																			},
+																			{
+																				field: "startdate",
+																				title: "{{__ 'Start Date'}}",
+																				hidden: true,
+																				width: 150
+																			},
+
+																			{
+																				field: "enddate",
+																				title: "{{__ 'End Date'}}",
+																				hidden: true,
+																				width: 150
+																			},
+																			{{!-- {{#hiddenmodules session.access_rights.random.owndata session.admin_access}}
+																			{
+																				field: "user.username",
+																				title: "{{__ 'Added By'}}",
+																				hidden: true,
+																				width: 150,
+																				template: function (data) {
+																					return data.user ? data.user.username : '';
+																				}
+																			},
+																			{{/hiddenmodules}} --}}
+																			{
+																				width: "200px",
+																				command:
+																					[
+																						{
+																							template: "<center>"
+																						},
+
+																						/* { 
+																						  name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
+																						  click:function(e) 
+																						  {
+																							var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+																						   
+																							var id = clickedRow._id;
+																							window.location.href = "addrole/"+id;
+																							return false;
+																						  } 
+																					  },   */
+																						{ template: "&nbsp;" },
+																						{{#ifCond accessrightdata.view "||" session.admin_access}}
+							 {
+																				name: "pageview", text: "", className: "btn btn-icon btn-outline-light", iconClass: "fa fa-eye",
+																				click: function (e) {
+																					var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+
+																					var id = clickedRow._id;
+
+																					if ("{{ session.role_slug }}" == "customer") {
+																						let loanUser = clickedRow.user._id;
+																						let currentUser = "{{session.user_id}}";
+																						if (loanUser == currentUser) {
+																							window.location.href = "viewloan/" + id;
+																						} else {
+																							toastr.error("{{__ 'You do not have permission to view this loan.'}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+																							{{!--$(e.currentTarget).hide(); --}}
+																						}
+																					} else {
+																						window.location.href = "viewloan/" + id;
+																					}
+																					return false;
+																				}
+																			},
+																			{{/ ifCond}}
+																			{ template: "&nbsp;" },
+
+																			/* Edit action start */
+																			{{#ifCond accessrightdata.update "||" session.admin_access}}
+																			{
+																				name: "pageEdit", text: "", className: "btn btn-icon btn-outline-light", iconClass: "fa fa-pencil",
+																				click: function (e) {
+																					var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+
+																					var id = clickedRow._id;
+																					window.location.href = "addloan/" + id;
+																					return false;
+																				}
+																			},
+																			{{/ ifCond}}
+																			{ template: "&nbsp;" },
+																			{{#ifCond accessrightdata.delete "||" session.admin_access}}
+																			{
+																				name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
+																				click: function (e) {
+																					e.preventDefault();
+																					var tr = $(e.target).closest("tr");
+																					var data = this.dataItem(tr);
+
+																					if (confirm(`{{__ "Are You sure wan't to delete this loan ?"}}`)) {
+																						var grid = $("#grid").data("kendoGrid");
+																						grid.dataSource.remove(data)
+																						grid.dataSource.sync();
+																					}
+																				}
+																			},
+																			{{/ ifCond}}
+
+																			/* Delete action end */
+
+																			{ template: "</center>" },
 							 
-							], 
-							{{#ifCond accessrightdata.add "||" session.admin_access}}
-							
-							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><a href='addloan'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
-							{{/ifCond}}
+							],
+																			{{#ifCond accessrightdata.add "||" session.admin_access }}
+
+																			title: "{{__ "Action"}}",
+																			headerTemplate: "<center><a href='addloan'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+							{{/ ifCond}}
 					}
                 ],
-				editable: {
-                mode: "inline"
-            }
+																			editable: {
+																			mode: "inline"
+																		}
             }); 
         });
-        </script> 
+																	</script>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
 							</div>
-							</div>
-						</div>
-						</div>
 						</div>
 					</section>
 				</div>
-				</div>
-			</div>
 			</div>
 		</div>
-		</section>
 	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-{{!-- <script type="text/javascript">  
-       $('body').on('click', '#approvestatus', function(e) 
-		{		
-			if($(this).prop("checked") == true)
+</div>
+</div>
+{{!--
+<script type="text/javascript">
+	$('body').on('click', '#approvestatus', function (e) {
+		if ($(this).prop("checked") == true)
 			console.log("checked");
-				{
-					var id = $(this).val(); 
-					var value = "checked"; 
-					<!-- alert(value); -->
-					$.ajax({
-						type: 'POST',
-						url: '/ajxfun/approveloan/',
-						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-						data : {id:id,approvestatus:value,name:'approvestatus'},
-						success: function (response)
-						{		
-							toastr.success("{{__ "Approved ! Loan Approved successfully!"}}", "Success!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-							setTimeout(function() {
-								window.location.replace('/loan/loanlist'); 
-							}, 1500);
+		{
+			var id = $(this).val();
+			var value = "checked";
+			<!-- alert(value); -->
+			$.ajax({
+				type: 'POST',
+				url: '/ajxfun/approveloan/',
+				headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+				data: { id: id, approvestatus: value, name: 'approvestatus' },
+				success: function (response) {
+					toastr.success("{{__ "Approved! Loan Approved successfully!"}}", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+					setTimeout(function () {
+						window.location.replace('/loan/loanlist');
+					}, 1500);
 
-						},
-						error: function(e) 
-						{		
-							
-							console.log(e);
-						}
-					});
-					
+				},
+				error: function (e) {
+
+					console.log(e);
 				}
-			else if($(this).prop("checked") == false) {
-				console.log("unchecked");
-				var id = $(this).val(); 
-					var value = null; 
-					<!-- alert("checked"); -->
-					$.ajax({
-						type: 'get',
-						url: '/ajxfun/disapproveloan',
-						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-						data : {id:id,approvestatus:value,name:'approvestatus'},
-						success: function (response){
-						 toastr.success("Loan Disapproved successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 }); 
-							setTimeout(function() {
-								window.location.replace('/loan/disapproveloan'); 
-							}, 1500);
+			});
 
-						},
-						error: function(e) 
-						{	console.log(e);
-						}
-					});
-			}
-		});
-    </script> --}}
-	<script type="text/javascript">  
-       $('body').on('click', '#approvestatus', function(e) 
-		{		
-			if($(this).prop("checked") == true)
-				{
-					var id = $(this).val(); 
-					var value = "checked"; 
-					<!-- alert(value); -->
-					$.ajax({
-						type: 'POST',
-						url: '/ajxfun/approveloan/',
-						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-						data : {id:id,approvestatus:value,name:'approvestatus'},
-						success: function (response)
-						{		
-							toastr.success("{{__ "Approved ! Loan Approved Successfully!"}}", "Success!" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-							setTimeout(function() {
-								window.location.replace('/loan/loanlist'); 
-							}, 1500);
-
-						},
-						error: function(e) 
-						{		
-							
-							console.log(e);
-						}
-					});
+		}
+			else if ($(this).prop("checked") == false) {
+			console.log("unchecked");
+			var id = $(this).val();
+			var value = null; 
 					
-				}
-			else if($(this).prop("checked") == false) {
-				var id = $(this).val(); 
-					var value = null; 
-					<!-- alert("checked"); -->
-					$.ajax({
-						type: 'POST',
-						url: '/ajxfun/approveloan/',
-						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-						data : {id:id,approvestatus:value,name:'approvestatus'},
-						success: function (response){
-						 toastr.success("Loan Disapproved Successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 }); 
-							setTimeout(function() {
-								window.location.replace('/loan/disapproveloan'); 
-							}, 1500);
+				$.ajax({
+					type: 'get',
+					url: '/ajxfun/disapproveloan',
+					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+					data: { id: id, approvestatus: value, name: 'approvestatus' },
+					success: function (response) {
+						toastr.success("Loan Disapproved successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
+						setTimeout(function () {
+							window.location.replace('/loan/disapproveloan');
+						}, 1500);
 
-						},
-						error: function(e) 
-						{	console.log(e);
-						}
-					});
-			}
-		});
-    </script> 
-	
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				});
+		}
+	});
+</script> --}}
+<script type="text/javascript">
+	$('body').on('click', '#approvestatus', function (e) {
+		if ($(this).prop("checked") == true) {
+			var id = $(this).val();
+			var value = "checked";
+			<!-- alert(value); -->
+			$.ajax({
+				type: 'POST',
+				url: '/ajxfun/approveloan/',
+				headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+				data: { id: id, approvestatus: value, name: 'approvestatus' },
+				success: function (response) {
+					toastr.success("{{__ "Approved! Loan Approved Successfully!"}}", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+					setTimeout(function () {
+						window.location.replace('/loan/loanlist');
+					}, 1500);
+
+				},
+				error: function (e) {
+
+					console.log(e);
+				}
+			});
+
+		}
+		else if ($(this).prop("checked") == false) {
+			var id = $(this).val();
+			var value = null; 
+					
+				$.ajax({
+					type: 'POST',
+					url: '/ajxfun/approveloan/',
+					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+					data: { id: id, approvestatus: value, name: 'approvestatus' },
+					success: function (response) {
+						toastr.success("Loan Disapproved Successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
+						setTimeout(function () {
+							window.location.replace('/loan/disapproveloan');
+						}, 1500);
+
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				});
+		}
+	});
+</script>

@@ -43,7 +43,7 @@
 				<div class="">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Service for"}}{{/with}}</label>
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Service For"}}{{/with}}</label>
 						<select class="select2 form-control export cate_type" data-validation-required-message="{{#with ..}}{{__ "This  is required"}}{{/with}}" name="servicefor" >
 							<option value="All" {{#ifCond result.servicefor "==" "All"}}selected{{/ifCond}} >{{#with ..}}{{__ "All"setlang}} {{/with}}</option>
 							<option value="Male" {{#ifCond result.servicefor "==" "Male"}}selected{{/ifCond}}>{{#with ..}}{{__ "Male"setlang}} {{/with}}</option>
@@ -93,7 +93,7 @@
 			</div>
 			<div class="col-lg-3 col-md-2 p-0 padding-mobile">
 			<button type="button" id="add_doc" class="btn shover p-1" style="background-color:#6badc2;color:#fff">
-				<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
+				<i class="icon-plus4"></i>{{#with ..}}{{__ "Add More"}}{{/with}}
             </button>
 			</div>
 			</div>			
@@ -127,27 +127,54 @@
 			</div>			
 		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Pricing and Related Details"}}{{/with}}</p>
 			<div class="row">
-				<div class="col-lg-4 col-md-7">
-				<div class="form-group input">
-				<div class="col-md-12 pl-0 form-control bordern">
-					<label for="userinput1">{{#with ..}}{{__ "Service Duration:"}}{{/with}}<span class="required red">*</span><div class="help-block"></div></label>
-						<input name="duration_hour" class="inputnumber border-light duration_hour" type="number" min="1" max="100000 " data-validation-required-message="{{#with ..}}{{__ "Service Duration is required"}}{{/with}}" {{#if this.duration_hour}} value="{{this.duration_hour}}"{{/if}}>
+				
+				<div class="col-lg-6 col-md-12">
+					<div class="form-group">
+						<label for="serviceDuration">
+							{{#with ..}}{{__ "Service Duration:"}}{{/with}}
+							<span class="required red">*</span>
+						</label>
+						<div class="row align-items-center">
+							<div class="col-6 p-0">
+								<input id="serviceDuration" name="duration_hour" class="form-control inputnumber duration_hour py-1"
+									placeholder="Hours" type="number" min="1" max="100000"
+									data-validation-required-message="{{#with ..}}{{__ 'Service Duration is required'}}{{/with}}" {{#if
+									this.duration_hour}} value="{{this.duration_hour}}" {{/if}}>
+							</div>
+				
+							<div class="col-md-6">
+								<div class="form-group input m-0">
+									<div class="">
+										<ul class="list-inline mb-0">
+											<li class="col-md-12 p-0 form-control" id="export">
+												<label class="ml-1 custom-top-label top" style="z-index:9">
+													{{#with ..}}{{__ "Duration Minute"}}{{/with}}<span class="red"></span>
+												</label>
+												<select class="form-control duration_minute px-2" name="duration_minute">
+													<option value="00" {{#ifCond result.duration_minute "==" "00" }}selected{{/ifCond}}>
+														00</option>
+													<option value="15" {{#ifCond result.duration_minute "==" "15" }}selected{{/ifCond}}>
+														15</option>
+													<option value="30" {{#ifCond result.duration_minute "==" "30" }}selected{{/ifCond}}>
+														30</option>
+													<option value="45" {{#ifCond result.duration_minute "==" "45" }}selected{{/ifCond}}>
+														45</option>
+												</select>
+											</li>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+				
+						</div>
+						<!-- Help Block for Validation -->
+						<div class="help-block"></div>
+					</div>
 				</div>
-				</div>
-				</div>
-				<div class="form-group col-lg-2 p-0 col-md-5 padding-mobile ">
-					<label style="font-weight:100; margin-right:11px">{{#with ..}}{{__ "Hour"}}{{/with}}</label>
-					<label style="font-weight:100; margin-bottom:0px">
-						<select class="form-control duration_minute m-0" name="duration_minute">
-							<option value="00" {{#ifCond result.duration_minute "==" "00"}}selected{{/ifCond}}>00</option>
-							<option value="15" {{#ifCond result.duration_minute "==" "15"}}selected{{/ifCond}}>15</option>
-							<option value="30" {{#ifCond result.duration_minute "==" "30"}}selected{{/ifCond}}>30</option>
-							<option value="45" {{#ifCond result.duration_minute "==" "45"}}selected{{/ifCond}}>45</option>
-						</select>
-					</label>
-					<label style="font-weight:100;">{{#with ..}}{{__ "Minute"}}{{/with}}</label>
-				</div>
-			<div class="col-md-6">
+
+				
+			<div class="col-md-6 align-self-end">
 			<div class="form-group">
 			<div class="col-md-12 form-control">
 			<div class="skin skin-flat row ">
@@ -238,7 +265,7 @@
                     </div>
                     <div class="col-md-2 p-0 padding-mobile">
                         <button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
-                            <i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
+                            <i class="icon-plus4"></i>{{#with ..}}{{__ "Add More"}}{{/with}}
                         </button>
                     </div>
                 </div>
@@ -253,7 +280,7 @@
                                 <div class="col-md-12 p-0">
                                     <div class="form-group">
                                         <label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Attach File" setlang}}{{/with}}<span class="required red">*</span></label>
-                                        <input class="form-control border-light fileUpload att_file" id="fileUpload" name="attachfile" {{#if this}} value="{{this}}" {{/if}} type="file" multiple>
+                                        <input class="form-control border-light fileUpload att_file" id="fileUpload" name="attachfile" onchange="return ValidateExtensionForAttachFile()"  {{#if this}} value="{{this}}" {{/if}} type="file" multiple>
                                         {{#if this}}
                                             <p class="d-inline-block mr-2">{{this}}</p>
                                             <a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
@@ -269,7 +296,7 @@
                     </div>
                     <div class="col-md-2 p-0 padding-mobile">
                         <button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
-                            <i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
+                            <i class="icon-plus4"></i>{{#with ..}}{{__ "Add More"}}{{/with}}
                         </button>
                     </div>
                 </div>
@@ -286,7 +313,7 @@
                 </div>
                 <div class="col-md-2 p-0 padding-mobile">
                     <button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
-                        <i class="icon-plus4"></i>{{__ "Add more"}}
+                        <i class="icon-plus4"></i>{{__ "Add More"}}
                     </button>
                 </div>
             </div>
@@ -298,7 +325,7 @@
                 </div>
                 <div class="col-md-2 p-0 padding-mobile">
                     <button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
-                        <i class="icon-plus4"></i>{{__ "Add more"}}
+                        <i class="icon-plus4"></i>{{__ "Add More"}}
                     </button>
                 </div>
             </div>
@@ -619,7 +646,7 @@ $(document).ready(function(){
 
 <script type="text/javascript">
         function ValidateExtension(){
-		<!-- alert("123"); -->
+	
 		m=0;
 		$('.imageUpload').each(function(){
 			  let files = this.files;
@@ -737,3 +764,68 @@ $(document).ready(function(){
     });
 </script>
 {{/each}}
+
+	{{#each setting as |geninfom|}}
+<script type="text/javascript">
+    function ValidateExtensionForAttachFile() {
+        let errorCount = 0;
+
+        // Loop through all file upload elements with the class 'fileUpload'
+        $('.fileUpload').each(function () {
+            const fileInput = $(this);
+
+            if (fileInput.val() !== '') {
+                const fileUpload = fileInput.val();
+
+                // Allowed file extensions dynamically populated from variables
+                const allowedFiles = [];
+                const extensions = {
+                    pdf: "{{geninfom.doctype_Pdf}}",
+                    doc: "{{geninfom.doctype_Doc}}",
+                    docx: "{{geninfom.doctype_Docx}}",
+                    xls: "{{geninfom.doctype_Xls}}",
+                    xlsx: "{{geninfom.doctype_Xlsx}}",
+                  
+                };
+
+                // Push valid extensions into the array
+                Object.values(extensions).forEach((ext) => {
+                    if (ext) allowedFiles.push(ext);
+                });
+
+                // Create regex for validating file extension
+                const regex = new RegExp(
+                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
+                    "i"
+                );
+
+                // Validate file extension
+                if (!regex.test(fileUpload)) {
+                    errorCount++;
+                   alert(`Only ${allowedFiles.join(', ')} formats are allowed.`);
+                    fileInput.val(""); // Reset the input field
+                    return true; // Skip further validation for this input
+                }
+
+                // Validate file size
+                const fileSizeMB = parseFloat((fileInput[0].files[0].size / 1024 / 1024).toFixed(2));
+                const maxFileSizeMB = parseFloat("{{geninfom.docupload_size}}");
+
+                if (fileSizeMB > maxFileSizeMB) {
+                     alert(`Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
+                    fileInput.val(""); // Reset the input field
+                    return true; // Skip further validation for this input
+                }
+
+                // Clear any existing error messages or notices
+                fileInput.siblings('.notice').html("");
+            }
+        });
+
+        // Return false if there were validation errors
+        return errorCount === 0;
+    }
+</script>
+
+
+	{{/each}}

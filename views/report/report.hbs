@@ -33,7 +33,20 @@
                 </div>
                 <div class="card-content">
                   <div class="pichartcenter">
+                    {{#if this.loanno}}
                     <div id="piechart2" class="chart-container-custom"></div>
+                    {{else if this.deloanno}}
+                    <div id="piechart2" class="chart-container-custom"></div>
+                    {{else}}
+                    <div class="no-loans-message"> 
+               <div class="no-data-img">
+                <img src="/images/upload/generalsetting/no-data.png" width="100%" alt="No Data" class="image-fluid" style="max-height: 600px;">
+               </div>
+               
+              </div>
+                    {{/if}}
+
+                    
                 </div>
                 </div>
               </div>
@@ -58,7 +71,7 @@ function drawChart() {
   var data = google.visualization.arrayToDataTable([
   ['Task', 'Hours per Day'],
   ['{{__ "Active Users" setlang}}', parseInt(count)],
-  ['{{__ "Deactive users" setlang}}', parseInt(decount)]
+  ['{{__ "Deactive Users" setlang}}', parseInt(decount)]
 ]);
 
   // Optional; add a title and set the width and height of the chart

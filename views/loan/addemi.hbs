@@ -573,19 +573,21 @@ $('body').on('change', '.dropdown_change', function ()
 	})
 </script>
 
+
 {{!-- // intergration stripe payment gateway --}}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    var stripe = Stripe(`{{stripePublishableKey}}`); // Access to public stripe key
-	 var payment_type = $('#payment_type');
+  // Access to public stripe key
 	
+	 var payment_type = $('#payment_type');
+		
 	$(document).ready(async () =>{ 
-		$('#checkout-button-user').on('click', async function (event) {
-			 var payment_type = $('#payment_type');
-			 
-			// Prevent the default form submission
+		
+	$(document).on('click', '#checkout-button-user', async function (event) {
+		
 			event.preventDefault();
-
+				 try {
+   var stripe = Stripe(`{{stripePublishableKey}}`);
 			// Get the payment amount
 			const principalamount = parseFloat($('#emipermonth').val().replace(/,/g, ''))
 			const interestamount = parseFloat($('#interest').val().replace(/,/g, ''))
@@ -593,7 +595,7 @@ $('body').on('change', '.dropdown_change', function ()
 			const loan_no = $('.loan_no').val();
 			const payableamount = principalamount + interestamount;
 			console.log(payableamount,"--------");
-			try {
+		
 				// Make a request to your backend to create a Checkout Session using fetch
 				const data = await $.ajax({
 					url: '/ajaxfun/create-checkout-session',
@@ -602,24 +604,48 @@ $('body').on('change', '.dropdown_change', function ()
 					data: JSON.stringify({ amount: payableamount, emiid: emiid , loanno: loan_no})
 				});
 
-				// Redirect to Stripe Checkout page
-				const result = await stripe.redirectToCheckout({ sessionId: data.id });
+				
+				const result = await stripe.redirectToCheckout({ sessionId: data.id }); 
 				
 				if (result.error) {
 					console.error('----Error:', result.error);
 					toastr.error(result.error, "{{ __ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
 					
-				}
-			} catch (error) {
-				console.error('Error--------:', error);
+				} 
+			} 
+			catch (error) {
 				
-					toastr.error(error.responseJSON.error,"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-	
+	 if (error.message && error.message.includes("Please call Stripe() with your publishable key")) {
+				console.log("IntegrationError occurred");
+				toastr.error(
+					"Please ensure Stripe is initialized with a valid publishable key.",
+					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
+				);
+			} else if (error.responseJSON && error.responseJSON.error) {
+				if (error.responseJSON.error.includes("Invalid API Key provided")) {
+					
+					toastr.error(
+					"Please enter a valid Stripe Secret key.",
+					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
+				);
+				} else {
+					toastr.error(
+					error.responseJSON.error,
+					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
+				);
+				}
+				console.log("IntegrationError occurred1");
+				
+			} else {
+			console.log("IntegrationError occurred2");
+				toastr.error(
+					error.message || "An unexpected error occurred.",
+					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
+				);
 			}
-		
-		});
+		}
+	});
 	}); 
 
 	
 </script>
-{{!-- interfratoin of payment gateway is over --}}

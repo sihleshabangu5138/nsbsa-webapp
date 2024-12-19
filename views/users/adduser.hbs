@@ -153,7 +153,7 @@
 					</div>
 					<div class="col-md-12 form-control border-light">
 						<input type="text" name="ccode"  id="ccode" style="margin-left:12px" class="form-control" minlength="2" maxlength="5" data-validation-required-message="{{#with ..}}{{__ "Country code is required"}}{{/with}}" data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="{{#with ..}}{{__ "Only Numbers"}}{{/with}}" aria-invalid="false" {{#if this.ccode}} value="{{this.ccode}}"{{/if}} readonly>
-						<label for="ccode" style="margin-left:12px">{{#with ..}}{{__ "Country code" setlang}}{{/with}} <span class="required red">*</span></label>
+						<label for="ccode" style="margin-left:12px">{{#with ..}}{{__ "Country Code" setlang}}{{/with}}<span class="required red">*</span></label>
 					</div><div class="help-block"></div>
 				</div>
 				</div>
@@ -327,7 +327,7 @@
 			<div class="form-group input">
 			<div class="col-md-12 form-control border-light">
 				<input type="password" id="userinput_2" class="" name="password" data-validation-regex-regex="([A-Za-z0-9_@]{6,12})" data-validation-regex-message="{{#with ..}}{{__ "Password must be of 6 to 12 digits"}}{{/with}}" {{#if this.password}} {{else}} required data-validation-required-message="{{#with ..}}{{__ "Password is required"}}{{/with}}"  {{/if}}>
-				<label for="userinput_2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}} *{{/if}}</span></label>
+				<label for="userinput_2">{{#with ..}}{{__ "Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}}*{{/if}}</span></label>
 				{{#if this.password}}
 				<input class="form-control border-light"  name="password_old" value="{{this.password}}" type="hidden"  placeholder="" id="userinput52" > {{/if}}
 
@@ -338,7 +338,7 @@
 			<div class="form-group input">
 				<div class="col-md-12 form-control border-light">
 					<input type="password" id="userinput21" class="" name="confirmpassword"  data-validation-match-match="password"  {{#if this.confirmpassword}} {{/if}}>
-					<label for="userinput21">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}} *{{/if}}</span></label>
+					<label for="userinput21">{{#with ..}}{{__ "Confirm Password" setlang}}{{/with}}<span class="required red">{{#if this.password}} {{else}}*{{/if}}</span></label>
 				</div><div class="help-block"></div>
 			</div>
 			</div>
@@ -654,7 +654,7 @@
 							</div>
                         </div>
 						<button type="button" data-repeater-create class="btn shover" style="background-color:#6badc2;color:#fff">
-							<i class="icon-plus4"></i>{{__ "Add other family member"}}
+							<i class="icon-plus4"></i>{{__ "Add Other Family Member"}}
                         </button>
                 </div>
 			

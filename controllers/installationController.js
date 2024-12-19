@@ -48,7 +48,7 @@ exports.postIns = async (req, res) => {
       imgupload_size: "11",
       state: 112,
       currency: "USD",
-      date_format: "m/d/Y",
+      date_format: req.body.date_format,
       language: req.body.sys_language,
       time_format: "24",
       imgtype_jpeg: "jpeg",

@@ -614,7 +614,7 @@
 	" Error! Notification can not be deleted!": " ข้อผิดพลาด! ไม่สามารถลบการแจ้งเตือนได้!",
 	"An error occurred while processing your request.": "เกิดข้อผิดพลาดขณะดำเนินการคำขอของคุณ",
 	"Add EMI": "เพิ่ม EMI",
-	"Emi paid successfully.": "ชำระ EMI สำเร็จแล้ว",
+	"Emi Paid Successfully.": "ชำระ EMI สำเร็จแล้ว",
 	"Total Ammount": "ยอดรวม",
 	"Select State first": "เลือกสถานะก่อน",
 	"Add Tag": "เพิ่มแท็ก",

@@ -12,7 +12,7 @@
 			<form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/addloan"  enctype="multipart/form-data">
 			{{#each data as |result|}}
 
-			<p class="form-section text-bold-600 font-medium-2"><i class="iconify mr-1 " data-icon="fa-solid:hand-holding-usd" data-inline="false"></i> {{#with ..}}{{__ "Loan details" setlang}}{{/with}}</p>
+			<p class="form-section text-bold-600 font-medium-2"><i class="iconify mr-1 " data-icon="fa-solid:hand-holding-usd" data-inline="false"></i> {{#with ..}}{{__ "Loan Details" setlang}}{{/with}}</p>
 			
 			<div class="form-body user_form">
 				<div class="row">
@@ -62,7 +62,7 @@
 				<div class="form-field">	
 					<textarea maxlength="300" id="loantypdesc" {{#if this.description}} value="{{this.description}}"{{/if}}  name=	"description" data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,300})" data-validation-regex-message="{{#with ..}}{{__ 'Only Characters, no numbers'}}{{/with}}" data-validation-required-message="{{#with ..}}{{__ "Loan description is required"}}{{/with}}">{{this.description}}</textarea>
 					<span class="txt-title-label"></span>
-					<label class="text-area address">{{#with ..}}{{__ "Loan description" setlang}}{{/with}}<span class="required red">*</span></label>
+					<label class="text-area address">{{#with ..}}{{__ "Loan Description" setlang}}{{/with}}<span class="required red">*</span></label>
 				</div>
 				</div><div class="help-block"></div>
 				</div>
@@ -94,7 +94,7 @@
 				<div class="card-content">
 					<!-- <div class="card-body"> -->
 					<fieldset>
-					<label>{{#with ..}}{{__ "Annual interest rate" setlang}}{{/with}}<span class="required red">*</span></label>
+					<label>{{#with ..}}{{__ "Annual Interest Rate" setlang}}{{/with}}<span class="required red">*</span></label>
 						<div class="input-group touchspincolor">
 						<input type="text" id="interestrate" class="touchspin "  data-bts-step="0.25" data-bts-decimals="2" data-bts-postfix="%" name="interestrate" data-validation-required-message="{{#with ..}}{{__ 'Interest rate is required'}}{{/with}}"  {{#if this.interestrate}} value="{{this.interestrate}}"{{/if}} />
 						</div>
@@ -107,7 +107,7 @@
 				<div class="card">
 				<div class="card-content">
 						<fieldset>
-						<label for="spinner">{{#with ..}}{{__ "Loan Period in years" setlang}}{{/with}}<span class="required red">*</span></label>
+						<label for="spinner">{{#with ..}}{{__ "Loan Period In Years" setlang}}{{/with}}<span class="required red">*</span></label>
 						<div class="input-group bootstrap-touchspin touchspincolor">
 						<input id="spinner" type="text" data-min="0" data-max="100" data-validation-required-message="{{#with ..}}{{__ 'Years are required'}}{{/with}}" data-bts-step="0.1" data-bts-decimals="1" class="touchspin form-control" name="years" {{#if this.years}} value="{{this.years}}"{{/if}} value="1" style="display: block;">
 
@@ -134,7 +134,7 @@
 						<div class="form-group row">
 						<div class="col-md-12">
 
-						<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Start Date of loan" setlang}}{{/with}}<span class="required red">*</span></label>
+						<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Start Date Of Loan" setlang}}{{/with}}<span class="required red">*</span></label>
 
 						<input type='text' class="form-control startdate dateformat"  data-validation-required-message="{{#with ..}}{{__ 'Start Date is required'}}{{/with}}" name="startdate" {{#if this.startdate}} value="{{getdate this.startdate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false">
 
@@ -146,7 +146,7 @@
 						<div class="form-group row">
 						<div class="col-md-12">
 	
-						<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "End Date of loan" setlang}}{{/with}}<span class="required red">*</span></label>
+						<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "End Date Of Loan" setlang}}{{/with}}<span class="required red">*</span></label>
 						<input type='text'  class="form-control enddate dateformat"  data-validation-required-message="{{#with ..}}{{__ "End Date is required"}}{{/with}}" name="enddate" {{#if this.enddate}} value="{{getdate this.enddate ../session.generaldata.date_format}}" {{else}} value="{{getdate '' ../session.generaldata.date_format}}" {{/if}} aria-invalid="false"  id="enddate"> 
 						<i class="ft-calendar icon-care"></i> 
 						</div>
@@ -167,7 +167,7 @@
 				</div>
 				</div>
 				
-				<p class="form-section text-bold-600 font-medium-2 border-light"> <i class="iconify mr-1" data-icon="fa-solid:file-invoice-dollar" data-inline="false"></i>{{#with ..}}{{__ " Financial details (Customer's income)" setlang}}{{/with}}</p>
+				<p class="form-section text-bold-600 font-medium-2 border-light"> <i class="iconify mr-1" data-icon="fa-solid:file-invoice-dollar" data-inline="false"></i>{{#with ..}}{{__ " Financial Details (Customer's Income)" setlang}}{{/with}}</p>
 				
 				<div class="row">
 				<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
@@ -175,7 +175,7 @@
 				<div class="card-content">
 					<!-- <div class="card-body"> -->
 					<fieldset>
-					<label>{{#with ..}}{{__ "Income per annum" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span></label>
+					<label>{{#with ..}}{{__ "Income Per Annum" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span></label>
 						<div class="input-group touchspincolor">
 						<input type="text" class="touchspin " id="incomeperyear" name="incomeperyear" oninput="calculateMonthlyIncome()" {{#if this.incomeperyear}} value="{{this.incomeperyear}}"{{/if}} value="0"/>
 						</div>
@@ -188,7 +188,7 @@
 				<div class="card-content">
 					<!-- <div class="card-body"> -->
 					<fieldset>
-					<label>{{#with ..}}{{__ "Income per month" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span> </label>
+					<label>{{#with ..}}{{__ "Income Per Month" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span> </label>
 						<div class="input-group touchspincolor">
 						<input type="text" class="touchspin " id="incomepermonth" name="incomepermonth" oninput="calculateAnnualIncome()"  {{#if this.incomepermonth}} value="{{this.incomepermonth}}"{{/if}} value="0" />
 						</div>
@@ -254,10 +254,10 @@
 				</div>
 				</div>
 				<button type="button" id="add_doc" class="btn shover" style="background-color:#6badc2;color:#fff">
-					<i class="icon-plus4"></i>{{#with ..}}{{__ "Add document"}}{{/with}}
+					<i class="icon-plus4"></i>{{#with ..}}{{__ "Add Document"}}{{/with}}
 				</button>
 				
-				<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Colleague Information for Inquiry" setlang}}{{/with}} </p>
+				<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Colleague Information For Inquiry" setlang}}{{/with}} </p>
 				
 				<div class="row">
 				
@@ -284,7 +284,7 @@
 						<div class=""> 
 						<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Colleague Address Type" setlang}}{{/with}}</label> 
 							<select class="select2 form-control export" id="export" name="addtype" data-validation-required-message="{{#with ..}}{{__ "Colleague address type is required"}}{{/with}}" onchange='Checkaddtype(this.value)'> 
-							<option>{{#with ..}}{{__ "Select colleague address type"}}{{/with}}</option>
+							<option>{{#with ..}}{{__ "Select Colleague Address Type"}}{{/with}}</option>
 							<option value="home" {{#ifCond this.addtype '==' 'home'}} selected {{/ifCond}}>{{#with ..}}{{__ "Home"}}{{/with}}</option>
 							<option value="work"{{#ifCond this.addtype '==' 'work'}} selected {{/ifCond}}>{{#with ..}}{{__ "Work"}}{{/with}}</option>			
 							<option value="other"{{#ifCond this.addtype '==' 'other'}} selected {{/ifCond}}>{{#with ..}}{{__ "Other"}}{{/with}}</option>
@@ -319,93 +319,91 @@
 				
 				</div>
 					{{/each}}
-					{{#if note}}
-		<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Add Note" setlang}}</p>
-				<div class="row">	
-				{{#each note}}
-						<div class="col-md-12 col-xl-6 pb-1" style="float:left">
-						<div class="row">
-						<div class="col-md-10 add_note">
-						{{#if this.note }}
-							{{#each this.note}}
-						<div class="col-md-12 p-0 mr-0">
-							<div class="form-group">
-								<label class="custom-control-label-date ml-2"  style="z-index: 9;">{{#with ..}}{{__ "Add Note" setlang}}{{/with}}</label>
-								<textarea class="form-control custom-control" rows="4" name="note" style="resize:none" {{#if this}}value="{{this}}"{{/if}} >{{this}}</textarea>
-							<span class="required red notice"></span>
-							</div><div class="help-block"></div>
-							{{!-- <button type="button" class="btn btn-danger remove-note" style="margin-top: 10px;">
-								<i class="icon-cross2"></i>Remove
-							</button> --}}
-						</div>
-						{{/each}}
-						{{else}}
-							{{addnote "nodata"}}
-						{{/if}}
-						</div>
-						<div class="col-md-2 p-0 padding-mobile">
-						<button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
-							<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
-						</button>
-						</div>
-						</div>
-						</div>
-						
-						<div class="col-md-12 col-xl-5" style="float:left">
-						<div class="row">
-						<div class="col-md-10 add_file">
-						{{#if this.fileattach }}
-						{{#each this.fileattach}}
-						{{log this}}
-							<div class="col-md-12 p-0">
-							<div class="form-group">
-								<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Attach File" setlang}}{{/with}}<span class="required red">*</span></label>
-								<input class="form-control border-light  docfile" id="fileUpload" name="attachfile" {{#if this}} value="{{this}}" {{/if}} type="file" multiple>
-								{{#if this}}
-								<p class="d-inline-block mr-2">{{this}}</p>
-						<a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
-								<input class="form-control border-light  doc_old_in" name="attachfile_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
-								{{/if}}
-							</div>
-							<div class="help-block"></div>
-						</div>
-						{{/each}}
-						{{else}}
-							{{attachfile 'nodata'}}
-						{{/if}}
-						</div>
-						<div class="col-md-2 p-0 padding-mobile">
-						<button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
-							<i class="icon-plus4"></i>{{#with ..}}{{__ "Add more"}}{{/with}}
-						</button>
-						</div>
-						</div>
-						</div>
+					
+										{{#if note}}
+			<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Add Note"}}</p>
+			<div class="row">	
+			{{#each note}}
+					<div class="col-lg-12 col-xl-6 pb-1" style="float:left">
+					<div class="row">
+					<div class="col-md-10 add_note">
+					{{#if this.note }}
+						{{#each this.note}}
+					<div class="col-md-12 p-0 mr-0">
+						<div class="form-group">
+							<label class="custom-control-label-date ml-2"  style="z-index: 9;">{{__ "Add Note" setlang}}</label>
+							<textarea class="form-control custom-control" rows="4" name="note" style="resize:none" {{#if this}}value="{{this}}"{{/if}} >{{this}}</textarea>
+						<span class="required red notice"></span>
+						</div><div class="help-block"></div>
+					</div>
 					{{/each}}
+					{{else}}
+						{{addnote 'nodata'}}
+					{{/if}}
+					</div>
+					<div class="col-md-2 p-0 padding-mobile">
+					<button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
+						<i class="icon-plus4"></i>{{#with ..}}{{__ "Add More" setlang}}{{/with}}
+					</button>
+					</div>
+					</div>
+					</div>
+					
+					<div class="col-lg-12 col-xl-6 pb-1" style="float:left">
+					<div class="row">
+					<div class="col-md-10 add_file">
+					{{#if this.fileattach }}
+					{{#each this.fileattach}}
+					{{log this}}
+						<div class="col-md-12 p-0">
+						<div class="form-group">
+							<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Attach File" setlang}}{{/with}}<span class="required red">*</span></label>
+							<input class="form-control border-light fileUpload docfile" onchange="return ValidateExtensionForAttachFile()"  id="fileUpload" name="attachfile" {{#if this}} value="{{this}}" {{/if}} type="file" multiple>
+							{{#if this}}
+							<p class="d-inline-block mr-2">{{this}}</p>
+					<a href="/images/upload/{{this}}" download="{{this}}" target="_blank">{{#with ..}}{{__ "Download"}}{{/with}}</a> 
+							<input class="form-control border-light fileUpload doc_old_in" name="attachfile_old"  value="{{this}}" type="hidden"  placeholder="" id="userinput5" >
+							{{/if}}
+						</div>
+						<div class="help-block"></div>
+					</div>
+					{{/each}}
+					{{else}}
+						{{attachfile 'nodata'}}
+					{{/if}}	
+					</div>
+					<div class="col-md-2 p-0 padding-mobile">
+					<button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
+						<i class="icon-plus4"></i>{{#with ..}}{{__ "Add More" setlang}}{{/with}}
+					</button>
+					</div>
+					</div>
+					</div>
+				{{/each}}
 				</div>
 				{{else}}
     <p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{__ "Add Note"}}</p>
     <div class="row">
-        <div class="col-xxl-6" style="float:left">
+        <div class="col-md-6" style="float:left">
             <div class="row">
-                <div class="col-xxl-8 add_note">
+                <div class="col-md-10 add_note">
                     {{addnote 'nodata'}}
                 </div>
-                <div class="col-xxl-4 p-0 padding-mobile">
+                <div class="col-md-2 p-0 padding-mobile">
                     <button type="button" id="add_note" class="btn shover" style="background-color:#6badc2;color:#fff">
-                        <i class="icon-plus4"></i>{{__ "Add more"}}
+                        <i class="icon-plus4"></i>{{__ "Add More"}}
                     </button>
                 </div>
             </div>
         </div>
-        <div class="col-xxl-6" style="float:left">
+        <div class="col-md-6" style="float:left">
             <div class="row">
                 <div class="col-md-10 add_file">
                     {{attachfile 'nodata'}}
                 </div>
-                <div class="col-md-3 p-0 padding-mobile">
-                    <button type="button" id="add_file" class="btn shover " style="background-color:#6badc2;color:#fff;magin-right:10px">
-                        <i class="icon-plus4"></i>{{__ "Add more"}}
+                <div class="col-md-2 p-0 padding-mobile">
+                    <button type="button" id="add_file" class="btn shover" style="background-color:#6badc2;color:#fff">
+                        <i class="icon-plus4"></i>{{__ "Add More"}}
                     </button>
                 </div>
             </div>
@@ -716,13 +714,9 @@
 			if (startDate) {
 				var momentStartDate = moment(startDate, originalDateFormate, true);
     if (momentStartDate.isValid()) {
-        // Determine the format of the start date
-        {{!-- var startDateFormat = getDateFormat(startDate); --}}
-		
-
-        // Format the end date based on the start date format
+        
         var endDate = momentStartDate.add(totalEMIMonths, 'months').format(originalDateFormate);
-
+		console.log(endDate);
         $('[name="enddate"]').val(endDate);
     } else {
         console.error('Invalid start date format');
@@ -731,23 +725,6 @@
 			}
 		}
 
-		{{!-- function getDateFormat(dateString) {
-    // Check the format of the date string and return the corresponding format
-    if (/^\d{2}-\d{2}-\d{4}$/.test(dateString)) {
-        return 'MM-DD-YYYY';
-    } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) {
-        return 'MM/DD/YYYY';
-    } else if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
-        return 'YYYY-MM-DD';
-    } else if (moment(dateString, 'MMM DD, YYYY', true).isValid()) {
-        return 'MMM DD, YYYY';
-    } else {
-        // Handle unrecognized date format as needed
-        console.error('Unrecognized date format');
-        return null;
-    }
-
-} --}}
 		
 		// Initialize the touchspin plugin for Total EMI Months
 		$('[name="totalemimonth"]').TouchSpin({
@@ -888,7 +865,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 			});
 	</script>
 	{{#each geninfo as |geninfom|}}
-	<script type="text/javascript">
+	{{!-- <script type="text/javascript">
     function ValidateExtension() {
        
         let errorCount = 0;
@@ -906,7 +883,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
                 const doc = "{{geninfom.doctype_Doc}}";
                 const docx = "{{geninfom.doctype_Docx}}";
                 const xls = "{{geninfom.doctype_Xls}}";
-                const zip = "{{geninfom.doctype_Zip}}";
+              
                 const xlsx = "{{geninfom.doctype_Xlsx}}";
 
             
@@ -921,7 +898,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
                     `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
                     "i"
                 );
-
+console.log(regex.test(fileUpload));
                 if (!regex.test(fileUpload)) {
                     errorCount++;
                     alert(`Only ${allowedFiles.join(', ')} formats are allowed.`);
@@ -934,7 +911,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
                     const limit = parseFloat("{{geninfom.docupload_size}}");
 
                     if (size > limit) {
-                        alert(__ `Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
+                        alert(`Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
                         fileInput.val(""); // Reset the input field
                         return false;
                     }
@@ -946,7 +923,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
             return false; // Validation failed
         }
     }
-</script>
+</script> --}}
 
 	{{/each}}
 	<script>
@@ -1030,6 +1007,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 		});
 
 	});
+	
 	</script>
 	{{#each newfield as |customvalid|}}
 	<script type="text/javascript">
@@ -1067,4 +1045,68 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 				}
 			});
 	</script>
+	{{/each}}
+		{{#each geninfo as |geninfom|}}
+<script type="text/javascript">
+    function ValidateExtensionForAttachFile() {
+        let errorCount = 0;
+
+        // Loop through all file upload elements with the class 'fileUpload'
+        $('.fileUpload').each(function () {
+            const fileInput = $(this);
+
+            if (fileInput.val() !== '') {
+                const fileUpload = fileInput.val();
+
+                // Allowed file extensions dynamically populated from variables
+                const allowedFiles = [];
+                const extensions = {
+                    pdf: "{{geninfom.doctype_Pdf}}",
+                    doc: "{{geninfom.doctype_Doc}}",
+                    docx: "{{geninfom.doctype_Docx}}",
+                    xls: "{{geninfom.doctype_Xls}}",
+                    xlsx: "{{geninfom.doctype_Xlsx}}",
+                  
+                };
+
+                // Push valid extensions into the array
+                Object.values(extensions).forEach((ext) => {
+                    if (ext) allowedFiles.push(ext);
+                });
+
+                // Create regex for validating file extension
+                const regex = new RegExp(
+                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
+                    "i"
+                );
+
+                // Validate file extension
+                if (!regex.test(fileUpload)) {
+                    errorCount++;
+                   alert(`Only ${allowedFiles.join(', ')} formats are allowed.`);
+                    fileInput.val(""); // Reset the input field
+                    return true; // Skip further validation for this input
+                }
+
+                // Validate file size
+                const fileSizeMB = parseFloat((fileInput[0]?.files[0]?.size / 1024 / 1024).toFixed(2));
+                const maxFileSizeMB = parseFloat("{{geninfom.docupload_size}}");
+
+                if (fileSizeMB > maxFileSizeMB) {
+                     alert(`Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
+                    fileInput.val(""); // Reset the input field
+                    return true; // Skip further validation for this input
+                }
+
+                // Clear any existing error messages or notices
+                fileInput.siblings('.notice').html("");
+            }
+        });
+
+        // Return false if there were validation errors
+        return errorCount === 0;
+    }
+</script>
+
+
 	{{/each}}

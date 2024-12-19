@@ -61,10 +61,8 @@ exports.getAddLoanType = async (req, res) => {
             customfield_value.forEach(element => {
                 element.id_d = new mongoose.Types.ObjectId(element.custom_field_id).toString();
                 element.customfield_value[0] = functions.handleInputDateOrValue(element.customfield_value[0],currentDateFormat,"toFrontend");
-                console.log(element.customfield_value[0])
             });
 
-            // console.log(customfield_value,"---------------");
             res.render('loan/addloantype', { title: "Edit Loan Type", data: result, id: id, session: req.session, setlang: languages, newfield: customfield, customfield_value: customfield_value, messages: req.flash() });
         } else {
             const news = [{ 'userid': '-1' }];
@@ -1348,7 +1346,7 @@ exports.getViewLoan = async (req, res) => {
             }
         }
     ])
-    for (const value1 of result2) {
+        for (const value1 of result2) {
         if (value1.loan.approvestatus == 1 || value1.loan.status == 0) {
             alert_data.push(value1);
         }
@@ -1357,8 +1355,7 @@ exports.getViewLoan = async (req, res) => {
             //    emi.date = functions.getdate(emi.daate, req.session.generaldata.date_format);
             //     return emi
             // })
-           
-            console.log("data =", result[0]['approvestatus']);
+
             res.render('loan/viewloan', {
                 title: "View Loan",
                 emi: emilist,
@@ -1527,7 +1524,7 @@ exports.postEmiDetails = async (req, res) => {
                 await Mail.sendMail(result1[0].email, subtrans, trans);
             }
 
-            req.flash('success', res.__('Emi paid successfully.'));
+            req.flash('success', res.__('Emi Paid Successfully.'));
             res.redirect('/loan/loanlist');
         } catch (err) {
             console.error(err);

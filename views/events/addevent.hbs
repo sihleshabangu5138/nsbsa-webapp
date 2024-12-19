@@ -53,9 +53,9 @@
 				<label class="ml-1 custom-top-label">{{#with ..}}{{__ "Duration"}}{{/with}}<span class="red">*</span></label>
 				<div class="d-inline-block custom-control custom-checkbox mr-1 margin_left_custom_field">
 					<label class="checkbox-inline mr-2">
-					<input type="radio" name="duration" data-validation-required-message="{{#with ..}}{{__ "Duration is required"}}{{/with}}" value="Multiple days" class="moredays" {{#ifCond this.duration "==" "Multiple days"}}checked{{/ifCond}}><span>{{#with ..}}{{__ "Multiple days"}}{{/with}}</span></label>
+					<input type="radio" name="duration" data-validation-required-message="{{#with ..}}{{__ "Duration is required"}}{{/with}}" value="Multiple Days" class="moredays" {{#ifCond this.duration "==" "Multiple days"}}checked{{/ifCond}}><span>{{#with ..}}{{__ "Multiple days"}}{{/with}}</span></label>
 					<label class="checkbox-inline mr-2">
-					<input type="radio" name="duration" id="Minimum" class="oneday" value="One day" {{#ifCond this.duration "==" "One day"}}checked{{/ifCond}}><span>{{#with ..}}{{__ "One day"}}{{/with}}</span></label>
+					<input type="radio" name="duration" id="Minimum" class="oneday" value="One Day" {{#ifCond this.duration "==" "One day"}}checked{{/ifCond}}><span>{{#with ..}}{{__ "One day"}}{{/with}}</span></label>
 				</div>
 			</div>
 			</div>
@@ -65,7 +65,7 @@
 				<div class="col-md-6 startdates" {{#if this.startdate}}  {{else}} style="display:none;" {{/if}} >
 				<div class="form-group row">
 					<div class="col-md-12">
-					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Start date"}}{{/with}}<span class="required red">*</span></label>
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Start Date"}}{{/with}}<span class="required red">*</span></label>
 					<input type='text' id="setdate" class="form-control afterdate dateformat"  data-validation-required-message="{{#with ..}}{{__ 'Start Date is required'}}{{/with}}" {{#if this.startdate}} value="{{this.startdate}}" {{else}}  {{/if}} name="startdate" aria-invalid="false">
 					<i class="ft-calendar icon-care"></i> 
 					</div>
@@ -75,7 +75,7 @@
 				<div class="col-md-6 enddates" {{#if this.enddate}}  {{else}} style="display:none;" {{/if}}>
 					<div class="form-group row">
 					<div class="col-md-12">
-					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "End date"}}{{/with}}<span class="required red">*</span></label>
+					<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "End Date"}}{{/with}}<span class="required red">*</span></label>
 					<input type='text' id="getdate" class="form-control afterdate dateformat"  data-validation-required-message="{{#with ..}}{{__ 'End Date is required'}}{{/with}}" {{#if this.enddate}} value="{{this.enddate}}" {{else}}  {{/if}} name="enddate"  aria-invalid="false">
 					<i class="ft-calendar icon-care"></i> 
 					</div>

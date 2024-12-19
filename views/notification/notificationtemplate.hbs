@@ -1,68 +1,70 @@
 {{breadcrums (__ 'Home') (__ 'Notification Templates')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
 	<div class="row" style="">
-	
-		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right" >
-		<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements ews-heading">
-					<ul class="list-inline mb-0">
+
+		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right">
+			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+			<div class="heading-elements ews-heading">
+				<ul class="list-inline mb-0">
 					<li id="export">
 						<select class="select2 form-control export">
 							<option value="">{{__ "Export"}}</option>
 							<option value="csv">{{__ "XLSX"}}</option>
 							<option value="pdf">{{__ "PDF"}}</option>
 						</select>
-					</li>	
-					</ul>
-				</div>
+					</li>
+				</ul>
+			</div>
 		</div>
-		</div>
-    <div class="content-wrapper">
-	<div class="row">
-	<div class="col-md-12">
-	<div class="card">
-	 
-	<div class="card-content collpase show">
-	 {{#if messages.error  }}
-			<script>
-					toastr.error("{{messages.error}}","{{__ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
-			{{#if messages.success }}
-				<script>
-					toastr.success("{{messages.success}}","{{__ 'Success!'}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000});
-				</script>
-			{{/if}}
-		<!-- Zero configuration table -->
-        <section id="configuration">
-        <div class="row">
-            <div class="col-12">
-             <div class="card">
-                
-                <div class="card-content collapse show">
-				
-		
-				
-                <div class="card-body card-dashboard card-design">
-					
-					<section id="horizontal">
-						<div class="row">
-						<div class="col-12">
-						<div class="card">
-							
-							<div class="card-content collapse show" id="NF-datatable">
-							<div class="card-body p-0">
-								<div id="grid"></div>
-								<div id="window"></div>
-								
-							</div>
-						</div>
-							
-							<div class="card-content collapse show">
-							<div class="card-body card-dashboard">
-							
+	</div>
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
 
-							<script type="x/kendo-template" id="page-template">
+					<div class="card-content collpase show">
+						{{#if messages.error }}
+							<script>
+								toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+							</script>
+						{{/if}}
+						{{#if messages.success }}
+							<script>
+								toastr.success("{{messages.success}}", "{{__ 'Success!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+							</script>
+						{{/if}}
+						<!-- Zero configuration table -->
+						<section id="configuration">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+
+										<div class="card-content collapse show">
+
+
+
+											<div class="card-body card-dashboard card-design">
+
+												<section id="horizontal">
+													<div class="row">
+														<div class="col-12">
+															<div class="card">
+
+																<div class="card-content collapse show"
+																	id="NF-datatable">
+																	<div class="card-body p-0">
+																		<div id="grid"></div>
+																		<div id="window"></div>
+
+																	</div>
+																</div>
+
+																<div class="card-content collapse show">
+																	<div class="card-body card-dashboard">
+
+
+																		<script type="x/kendo-template"
+																			id="page-template">
 								 <div class="page-template">
 									<div class="header">
 									   <div style="float: right"></div>
@@ -73,9 +75,10 @@
 									</div>
 								</div>
 							</script>
-							<script type="text/x-kendo-template" id="windowTemplate">
-								
-								
+																		<script type="text/x-kendo-template"
+																			id="windowTemplate">
+
+
 								<div class="swal-modal">
 									<span class="swal-icon--warning__body">
 										<span class="swal-icon--warning__dot"></span>
@@ -95,280 +98,277 @@
 								
 							</script>
 
-	
-    <script >
-       jQuery(document).ready(function() {
-	   
-	var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
-		$('body').on('change', '.export', function() {
-		var value = $(this).val();
-		if(value == 'csv')
-		{
-			$("#grid").getKendoGrid().saveAsExcel();
-		}else if(value == 'pdf')
-		{
-			$("#grid").getKendoGrid().saveAsPDF();
-		}
-	});
-		
-		
-		 var window1 = $("#window").kendoWindow({
-            title: " Warning !",
-			resizable: false,
-            visible: false, //the window will not appear before its .open method is called
-           
-        }).data("kendoWindow");
-		
-		
-		var element=$("#grid").kendoGrid({
-			//var path='{{path}}';	
-				pdf: {
-		allPages: true,
-		template: $("#page-template").html(),
-		avoidLinks: true,
-		fileName: "notificationtemplate-list.pdf",// Bug 277	
-		paperSize: "A4",
-		margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
-		landscape: true,
-		repeatHeaders: true,
-		scale: 0.8
-		},
-		excel: {
-		fileName: "notificationtemplate-list.xlsx",// Bug 277
-		allPages:true
-		},
-		scrollable: true,
-		pdfExport: function(e) {
-                  var grid = $("#grid").data("kendoGrid");
-                  grid.hideColumn(5);
-                  e.promise
-                  .done(function() {
-                      grid.showColumn(5);
-                  });
-                },
-				
-				dataSource: {
-				serverPaging: false,
-			serverSorting: false,
-				 transport: {
-					read: {  
-						url: '/ajxfun/notificationtemplate',
-						dataType: "json", 
-					},
-					destroy:{
-							url: '/ajxfun/notificationtemplate/delete',
-							dataType: "json",
-							type:'get',
-							complete: function(e) {
-								$("#grid").data("kendoGrid").dataSource.read(); 
-								console.log(e.responseText);
-								if(e.responseText=="true"){
-									
-									toastr.success("{{__ " Notification Deleted Successfully!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
-									
-								}else{
-									
-									 toastr.error("{{__ " Error! Notification Can Not Be Deleted!"}}", {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}); 
-									 
-								}
-							}
-						},
-				 }, 
-				schema: {
-                        model: {
-							id: "_id",
-                            fields: {
-                                _id: { validation: { required: true } },
-                                rule_title: { validation: { required: true } },
-                                rule_desc: { validation: { required: true } },
-                            }
-                        }
-                    },  
-                    pageSize: 10,
-					batch: false,
-					requestEnd: function (e) {
-								if (e.type == "create" && e.response) {
-									enablefilter();
-							}
-						}
-                },
-                
-                sortable: true,
-                reorderable: true,
-                groupable: true,
-                resizable: true,
-                filterable: {
-					mode: "row",
-					 messages: {
-          info: "{{__ 'Show items with value that:'}}",
-		  isEqualTo: "{{__ 'Is equal to'}}",
-		  and: "{{__ 'And'}}",
-		  or: "{{__ 'Or'}}",
-		  clear: "{{__ 'Clear'}}",
-		  filter: "{{__ 'Filter'}}",
-		  isTrue: "{{__ 'is true'}}",
-      isFalse: "{{__ 'is false'}}",
-      isEmpty: "{{__ 'is empty'}}",
-      isNotEmpty: "{{__ 'is not empty'}}"
-        },
-		operators: {
-      string: {
-        eq: "{{__ 'is equal to'}}",
-        neq: "{{__ 'is not equal to'}}",
-        startswith: "{{__ 'starts with'}}",
-        contains: "{{__ 'contains'}}",
-        doesnotcontain: "{{__ 'does not contain'}}",
-        endswith: "{{__ 'ends with'}}",
-        isnull: "{{__ 'is null'}}",
-        isnotnull: "{{__ 'is not null'}}"
-      }
-    }
-				},
-                columnMenu: {
-    messages: {
-      columns: "{{__ 'Columns'}}",
-	  filter : "{{__ 'Filter'}}",
-	  sortAscending: "{{__ 'Sort Ascending'}}", 
-	  sortDescending: "{{__ 'Sort Descending'}}", 
-    },
-  },
-								pageable: {
-					input: true,
-					numeric: false,
-					pageSize: 10,
-					pageSizes: [10, 20, 25, 50, 100],
-					messages: {
-	  display: "{{__ '{0} - {1} of {2} items'}}",
-      empty: "{{__ 'No items to display'}}",
-      page: "{{__ 'Page'}}",
-	  of: "{{__ 'of {0}'}}", 
-      itemsPerPage: "{{__ 'items per page'}}",
-      first: "{{__ 'Go to the first page'}}",
-      previous: "{{__ 'Go to the previous page'}}",
-      next: "{{__ 'Go to the next page'}}",
-      last: "{{__ 'Go to the last page'}}",
-      refresh: "{{__ 'Refresh'}}"
-    }
-				},
-                noRecords: true,
-				messages: {
-            noRecords: "{{__ 'No records available.'}}"
-        },
-                columns: [
-					
-					{
-                        field: "notificationtype",
-                        title: "{{__ "Notification Type"}}",
-						width: 80
-                    }, {
-                        field: "slug",
-                        title: "{{__ "Slug"}}",
-						width: 80
-                    },  
-					{
-                        field: "templatetitle",
-                         title: "{{__ "Template Title"}}",
-                        width: 90
-                    },				
-					 {
-                        field: "subject",
-                         title: "{{__ "Subject"}}",
-                        width: 100
-                    },				
-					 {
-                        field: "content",
-                         title: "{{__ "Content"}}",
-                        width: 350
-                    },	
-					{
-						width: "100px",
-						command:
-						[
-							{
-								template : "<center>" 
-							},
-							
-							  /* { 
-								name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
-								click:function(e) 
-								{
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id;
-								  window.location.href = "addrole/"+id;
-								  return false;
-								} 
-							},   */
-							{template : "&nbsp;" },
-							{{!-- console.log({{accessrightdata.update}}),
-							console.log({{accessrightdata.delete}}),
-							console.log({{accessrightdata.add}}), --}}
 
-							/* Edit action start */
-							{{#ifCond accessrightdata.update "||" session.admin_access}}
-							 { 
-								name: "pageEdit", text:"", className: "btn btn-icon btn-outline-light",iconClass:"fa fa-pencil",
-								click:function(e) 
-								{ 
-								  var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
-								 
-								  var id = clickedRow._id; 
-								  window.location.href = "addnotificationtemplate/"+id;
-								  return false;
-								} 
-							},
-							{{/ifCond}}
-							{template : "&nbsp;" },
-							{{#ifCond accessrightdata.delete "||" session.admin_access}}
-							{
-									name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
-										click: function(e) {
-											e.preventDefault();
-											var tr = $(e.target).closest("tr");
-											var data = this.dataItem(tr);
-											if (confirm(`{{__ "Are You sure wan't to delete this custom field ?"}}`)) {
-												var grid = $("#grid").data("kendoGrid");
-												grid.dataSource.remove(data)
-												grid.dataSource.sync();
-											}
-										}
-								},
-							{{/ifCond}}
-							
-							/* Delete action end */
-							
-							{template : "</center>" },
+																		<script>
+																			jQuery(document).ready(function () {
+
+																				var windowTemplate = kendo.template($("#windowTemplate").html());//for delete popup
+																				$('body').on('change', '.export', function () {
+																					var value = $(this).val();
+																					if (value == 'csv') {
+																						$("#grid").getKendoGrid().saveAsExcel();
+																					} else if (value == 'pdf') {
+																						$("#grid").getKendoGrid().saveAsPDF();
+																					}
+																				});
+
+
+																				var window1 = $("#window").kendoWindow({
+																					title: " Warning !",
+																					resizable: false,
+																					visible: false, //the window will not appear before its .open method is called
+
+																				}).data("kendoWindow");
+
+
+																				var element = $("#grid").kendoGrid({
+																					//var path='{{path}}';	
+																					pdf: {
+																						allPages: true,
+																						template: $("#page-template").html(),
+																						avoidLinks: true,
+																						fileName: "notificationtemplate-list.pdf",// Bug 277	
+																						paperSize: "A4",
+																						margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+																						landscape: true,
+																						repeatHeaders: true,
+																						scale: 0.8
+																					},
+																					excel: {
+																						fileName: "notificationtemplate-list.xlsx",// Bug 277
+																						allPages: true
+																					},
+																					scrollable: true,
+																					pdfExport: function (e) {
+																						var grid = $("#grid").data("kendoGrid");
+																						grid.hideColumn(5);
+																						e.promise
+																							.done(function () {
+																								grid.showColumn(5);
+																							});
+																					},
+
+																					dataSource: {
+																						serverPaging: false,
+																						serverSorting: false,
+																						transport: {
+																							read: {
+																								url: '/ajxfun/notificationtemplate',
+																								dataType: "json",
+																							},
+																							destroy: {
+																								url: '/ajxfun/notificationtemplate/delete',
+																								dataType: "json",
+																								type: 'get',
+																								complete: function (e) {
+																									$("#grid").data("kendoGrid").dataSource.read();
+																									console.log(e.responseText);
+																									if (e.responseText == "true") {
+
+																										toastr.success("{{__ " Notification Deleted Successfully!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+
+																									} else {
+
+																										toastr.error("{{__ " Error! Notification Can Not Be Deleted!"}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+
+																									}
+																								}
+																							},
+																						},
+																						schema: {
+																							model: {
+																								id: "_id",
+																								fields: {
+																									_id: { validation: { required: true } },
+																									rule_title: { validation: { required: true } },
+																									rule_desc: { validation: { required: true } },
+																								}
+																							}
+																						},
+																						pageSize: 10,
+																						batch: false,
+																						requestEnd: function (e) {
+																							if (e.type == "create" && e.response) {
+																								enablefilter();
+																							}
+																						}
+																					},
+
+																					sortable: true,
+																					reorderable: true,
+																					groupable: true,
+																					resizable: true,
+																					filterable: {
+																						mode: "row",
+																						messages: {
+																							info: "{{__ 'Show items with value that:'}}",
+																							isEqualTo: "{{__ 'Is equal to'}}",
+																							and: "{{__ 'And'}}",
+																							or: "{{__ 'Or'}}",
+																							clear: "{{__ 'Clear'}}",
+																							filter: "{{__ 'Filter'}}",
+																							isTrue: "{{__ 'is true'}}",
+																							isFalse: "{{__ 'is false'}}",
+																							isEmpty: "{{__ 'is empty'}}",
+																							isNotEmpty: "{{__ 'is not empty'}}"
+																						},
+																						operators: {
+																							string: {
+																								eq: "{{__ 'is equal to'}}",
+																								neq: "{{__ 'is not equal to'}}",
+																								startswith: "{{__ 'starts with'}}",
+																								contains: "{{__ 'contains'}}",
+																								doesnotcontain: "{{__ 'does not contain'}}",
+																								endswith: "{{__ 'ends with'}}",
+																								isnull: "{{__ 'is null'}}",
+																								isnotnull: "{{__ 'is not null'}}"
+																							}
+																						}
+																					},
+																					columnMenu: {
+																						messages: {
+																							columns: "{{__ 'Columns'}}",
+																							filter: "{{__ 'Filter'}}",
+																							sortAscending: "{{__ 'Sort Ascending'}}",
+																							sortDescending: "{{__ 'Sort Descending'}}",
+																						},
+																					},
+																					pageable: {
+																						input: true,
+																						numeric: false,
+																						pageSize: 10,
+																						pageSizes: [10, 20, 25, 50, 100],
+																						messages: {
+																							display: "{{__ '{0} - {1} of {2} items'}}",
+																							empty: "{{__ 'No items to display'}}",
+																							page: "{{__ 'Page'}}",
+																							of: "{{__ 'of {0}'}}",
+																							itemsPerPage: "{{__ 'items per page'}}",
+																							first: "{{__ 'Go to the first page'}}",
+																							previous: "{{__ 'Go to the previous page'}}",
+																							next: "{{__ 'Go to the next page'}}",
+																							last: "{{__ 'Go to the last page'}}",
+																							refresh: "{{__ 'Refresh'}}"
+																						}
+																					},
+																					noRecords: true,
+																					messages: {
+																						noRecords: "{{__ 'No records available.'}}"
+																					},
+																					columns: [
+
+																						{
+																							field: "notificationtype",
+																							title: "{{__ "Notification Type"}}",
+																							width: 80
+																						}, {
+																							field: "slug",
+																							title: "{{__ "Slug"}}",
+																							width: 80
+																						},
+																						{
+																							field: "templatetitle",
+																							title: "{{__ "Template Title"}}",
+																							width: 90
+																						},
+																						{
+																							field: "subject",
+																							title: "{{__ "Subject"}}",
+																							width: 100
+																						},
+																						{
+																							field: "content",
+																							title: "{{__ "Content"}}",
+																							width: 350
+																						},
+																						{
+																							width: "100px",
+																							command:
+																								[
+																									{
+																										template: "<center>"
+																									},
+
+																									/* { 
+																									  name: "pageview", text:"", className: "btn btn-icon btn-outline-light",iconClass:"ft-eye",
+																									  click:function(e) 
+																									  {
+																										var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+																									   
+																										var id = clickedRow._id;
+																										window.location.href = "addrole/"+id;
+																										return false;
+																									  } 
+																								  },   */
+																									{ template: "&nbsp;" },
+																									{{!-- console.log({{ accessrightdata.update }}),
+																					console.log({{ accessrightdata.delete }
+																			}),
+																				console.log({{ accessrightdata.add }}), --}}
+
+																			/* Edit action start */
+																			{{#ifCond accessrightdata.update "||" session.admin_access}}
+																			{
+																				name: "pageEdit", text: "", className: "btn btn-icon btn-outline-light", iconClass: "fa fa-pencil",
+																					click: function(e) {
+																						var clickedRow = this.dataItem($(e.currentTarget).closest("tr"));
+
+																						var id = clickedRow._id;
+																						window.location.href = "addnotificationtemplate/" + id;
+																						return false;
+																					}
+																			},
+																			{{/ifCond }}
+																			{ template: "&nbsp;" },
+																			{{#ifCond accessrightdata.delete "||" session.admin_access}}
+																			{
+																				name: "Delete", text: "", className: "btn btn-icon color-red delete_role btn-outline-light", iconClass: "fa fa-trash",
+																					click: function(e) {
+																						e.preventDefault();
+																						var tr = $(e.target).closest("tr");
+																						var data = this.dataItem(tr);
+																						if (confirm(`{{__ "Are You sure wan't to delete this custom field ?"}}`)) {
+																							var grid = $("#grid").data("kendoGrid");
+																							grid.dataSource.remove(data)
+																							grid.dataSource.sync();
+																						}
+																					}
+																			},
+																			{{/ifCond }}
+
+																			/* Delete action end */
+
+																			{ template: "</center>" },
 							 
-							], 
-							{{#ifCond accessrightdata.add "||" session.admin_access}}
-							
-							title: "{{__ "Action"}}", 
-							headerTemplate: "<center><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
-							{{/ifCond}}
+							],
+																			{{#ifCond accessrightdata.add "||" session.admin_access }}
+
+																			title: "{{__ "Action"}}",
+																				headerTemplate: "<center><a href='addnotificationtemplate'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+																			{{/ifCond }}
 					}
                 ],
-				editable: {
-                mode: "inline"
-            }
+																			editable: {
+																				mode: "inline"
+																			}
             }); 
         });
-        </script>  
+																		</script>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</section>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							</div>
-						</div>
-						</div>
-						</div>
-					</section>
+						</section>
+					</div>
 				</div>
-				</div>
-			</div>
 			</div>
 		</div>
-		</section>
 	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	 
+</div>

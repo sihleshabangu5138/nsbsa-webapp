@@ -630,7 +630,6 @@ function binb2b64(binarray)
 require.define("/test.js", function (require, module, exports, __dirname, __filename) {
     var crypto = require('crypto')
 var abc = crypto.createHash('sha1').update('abc').digest('hex')
-console.log(abc)
 //require('hello').inlineCall().call2()
 
 });

@@ -427,13 +427,14 @@ function myFunction() {
 												 <!-- to 24-07-2019</p> -->
 											<!-- <br> -->	
 			 
-		 
-		  <div class="row1 match-height" id="calendar">
+		 	 {{!-- {{#hiddenmodules session.access_rights.product.view session.admin_access}} --}}
+		  <div class="row1 match-height " id="loanInfo">
           <div class="app-content center-layout mt-2 mx-md-3 px-1" id="user_list">
             <div class="card">
               <div class="card-content">
                 <div class="card-body px-0">
                     <ul class="nav nav-tabs nav-top-border no-hover-bg">
+						 {{#hiddenmodules session.access_rights.loanlist.view session.admin_access}}
                       <li class="nav-item">
                         <a class="nav-link active" id="baseIcon-tab11" data-toggle="tab" aria-controls="tabIcon11"
                         href="#tabIcon11" aria-expanded="true"><i class="fa fa-play"></i> {{__ "Loan Information"}}</a>
@@ -442,27 +443,406 @@ function myFunction() {
                         <a class="nav-link" id="baseIcon-tab12" data-toggle="tab" aria-controls="tabIcon12"
                         href="#tabIcon12" aria-expanded="false"><i class="fa fa-flag"></i>{{__ "EMI Information"}}</a>
                       </li>
+					  {{/hiddenmodules}}
+					  {{#hiddenmodules session.access_rights.alert.view session.admin_access}}
                       <li class="nav-item">
                         <a class="nav-link" id="baseIcon-tab13" data-toggle="tab" aria-controls="tabIcon13"
                         href="#tabIcon13" aria-expanded="false"><i class="fa fa-cog"></i>{{__ "Alert Details"}}</a>
                       </li>
+					{{/hiddenmodules}}
                     </ul>
                     <div class="tab-content px-1 pt-1">
+						  {{#hiddenmodules session.access_rights.loanlist.view session.admin_access}}
                       <div role="tabpanel" class="tab-pane active text-center" id="tabIcon11" aria-expanded="true"
                       aria-labelledby="baseIcon-tab11">
-						<h3><strong>{{__ "Coming Soon . . ."}}</strong></h3>
+						<div role="tabpanel" class="tab-pane active" id="tabIcon11" aria-expanded="true"
+							aria-labelledby="baseIcon-tab11">
+							<div class="app-content center-layout mt-2 mx-md-3 px-1">
+								<div class="content-wrapper">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card">
+												<div class="card-content collpase show">
+													<section id="configuration">
+														<div class="row">
+															<div class="col-12">
+																<div class="card">
+																	<div class="card-content collapse show">
+																		<div
+																			class="card-body card-dashboard card-design">
+																			<section id="horizontal">
+																				<div class="row">
+																					<div class="col-12">
+																						<div class="card">
+																							<div id="tableBox"
+																								class="table-responsive">
+																								<table
+																									class="table designtable">
+																									<thead
+																										class="headcolor">
+																										<tr>
+																											<th>{{__
+																												'Loan No.'}}
+																											</th>
+																											<th>{{__
+																												'Loan Type'}}
+																											</th>
+																											<th>{{__
+																												'Username'}}
+																											</th>
+																											<th>{{__
+																												'Loan Amount'}}
+																											</th>
+																											
+																											<th>{{__
+																												'Interest Rate %'}}
+																											</th>
+																											<th>{{__
+																												'Starting Date'}}
+																											</th>
+																											{{!-- <th>{{__
+																												'Ending Date'}}
+																											</th> --}}
+																											<th>{{__
+																												'Approve Status'}}
+																											</th>
+																											
+																										</tr>
+																									</thead>
+
+																									<tbody>		
+																									{{#if loanDetail}}
+  																										{{#if loanDetail.length}}
+
+																										{{#each loanDetail as |result|}} 
+																										
+																										<tr
+																											class="colortr">
+																											<td
+																												class="bordertop">
+																											
+																												{{result.loancount}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												{{this.loantype.type}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												
+																												 {{result.user.firstname}} {{result.user.lastname}}
+																												
+																											</td>
+																											<td
+																												class="bordertop">
+																												{{
+																												result.loanamount}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												{{
+																												result.interestrate}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												
+																												{{getdate result.startdate ../session.generaldata.date_format}}
+																											</td>
+																											{{!-- <td
+																												class="bordertop">
+																												{{getdate result.enddate ../session.generaldata.date_format}}
+																											</td> --}}
+																											
+																											<td
+																												class="bordertop">
+																												
+																													{{#ifCond
+																													this.approvestatus
+																													'=='
+																													'0'}}<button
+																													disabled
+																														type="button"
+																														class="btn btn-info"
+																														style="cursor: default; color:#fff">{{#with
+																														..}}{{__
+																														'Pending'}}{{/with}}</button>{{/ifCond}}
+																												{{#ifCond
+																												this.approvestatus
+																												'=='
+																												'1'}}<button
+																													type="button"
+																													disabled
+																													class="btn"
+																													style="background-color:#00c735; color:#fff; cursor:default">{{#with
+																													..}}{{__
+																													'Approved'}}{{/with}}</button>{{/ifCond}}
+																											</td>
+																										</tr>
+
+																										{{/each}}
+																										{{/if}}
+																										{{else}}
+																										<tr>
+																											<td colspan="6" class="text-center h5 border-0">
+																												<p class="mb-0">{{__ "You have not applied for any loan."}}</p>
+																										
+																											</td>
+																										</tr>
+																										
+																										
+																										{{/if}}
+																										
+																									</tbody>
+																								</table>
+																							
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</section>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</section>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
                       </div>
                       <div class="tab-pane text-center" id="tabIcon12" aria-labelledby="baseIcon-tab12">
-						<h3><strong>{{__ "Coming Soon . . ."}}</strong></h3>
+						
+						<div role="tabpanel" class="tab-pane active" id="tabIcon12" aria-expanded="true"
+							aria-labelledby="baseIcon-tab11">
+							<div class="app-content center-layout mt-2 mx-md-3 px-1">
+								<div class="content-wrapper">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card">
+												<div class="card-content collpase show">
+													<section id="configuration">
+														<div class="row">
+															<div class="col-12">
+																<div class="card">
+																	<div class="card-content collapse show">
+																		<div
+																			class="card-body card-dashboard card-design">
+																			<section id="horizontal">
+																				<div class="row">
+																					<div class="col-12">
+																						<div class="card">
+																							<div id="tableBox"
+																								class="table-responsive">
+																								<table
+																									class="table designtable">
+																									<thead
+																										class="headcolor">
+																										<tr>
+																											<th>{{__
+																												'No.'}}
+																											</th>
+																											
+																											<th>{{__
+																												'Loan No.'}}
+																											</th>
+
+																											<th>{{__
+																												'Date'}}
+																											</th>
+																											<th>{{__
+																												'Principal'}}
+																											</th>
+																											
+																											<th>{{__
+																												'Total
+																												Ammount'}}
+																											</th>
+																											<th>{{__
+																												'Remaining
+																												Balance'}}
+																											</th>
+																											<th>{{__
+																												'Status'}}
+																											</th>
+																										</tr>
+																									</thead>
+
+																									<tbody >
+																											{{#if loanDetail}}
+  																										{{#if loanDetail.length}}
+
+
+																										{{#each emiDetail as |results|}}
+																										 {{#each results as |result|}}	
+																										
+																										<tr
+																											class="colortr">
+																											<td
+																												class="bordertop">
+																											
+																												{{result.month}}
+																											</td>
+																											<td
+																												class="bordertop">
+																											
+																												{{result.loan_id.loancount}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												{{getdate result.date ../../session.generaldata.date_format}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												{{formatNumber
+																												result.principal
+																												2 '.'
+																												','}}
+																											</td>
+																											
+																											<td
+																												class="bordertop">
+																												{{formatNumber
+																												result.totalpayment
+																												2 '.'
+																												','}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												{{formatNumber
+																												result.remainingBalance
+																												2 '.'
+																												','}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												<a
+																													href="/loan/addemi/{{result._id}}">
+																													{{#ifCond
+																													this.status
+																													'=='
+																													'0'}}<button
+																														type="button"
+																														class="btn btn-info">{{#with
+																														..}}{{__
+																														'pending'}}{{/with}}</button>{{/ifCond}}</a>
+																												{{#ifCond
+																												this.status
+																												'=='
+																												'1'}}<button
+																													type="button"
+																													disabled
+																													class="btn"
+																													style="background-color:#00c735; color:#fff">{{#with
+																													..}}{{__
+																													'Completed'}}{{/with}}</button>{{/ifCond}}
+																											</td>
+																										</tr>
+
+																										{{/each}}
+																										{{/each}}
+																												
+																										{{/if}}
+																										{{else}}
+																										<tr>
+																											<td colspan="6" class="text-center h5 border-0">
+																												<p class="mb-0">{{__ "You have not applied for any loan."}}</p>
+																										
+																											</td>
+																										</tr>
+																										
+																										
+																										{{/if}}
+																										
+																									</tbody>
+																								</table>
+																							
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</section>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</section>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
                       </div>
+					  {{/hiddenmodules}}
+					    {{#hiddenmodules session.access_rights.alert.view session.admin_access}}
                       <div class="tab-pane text-center" id="tabIcon13" aria-labelledby="baseIcon-tab3">
-						<h3><strong>{{__ "Coming Soon . . ."}}</strong></h3>
+								{{#if alert_data}}
+							{{#each alert_data as |data_emi|}}
+
+							<div class="col-12 col-lg-8 view_alert mb-1">
+								<div class="row">
+									<div class="col-12 col-lg-8 p-1">
+										<i class="ft-alert-triangle"></i>
+										<div class="alert_details">
+											<h3>{{#with ..}}{{__ "Upcoming Emi Month"}}{{/with}}</h3>
+											<p>{{#with ..}}{{__ "You EMI month"}}{{/with}} {{data_emi.date}}. {{#with
+												..}}{{__ "Your EMI month payment is"}}{{/with}} {{formatNumber
+												data_emi.totalpayment 2 '.' ','}}</p>
+										</div>
+									</div>
+									<div class="col-12 col-lg-4 p-1 float-right">
+										<p class="date_alert">{{data_emi.date}}</p>
+									</div>
+								</div>
+							</div>
+
+							{{/each}}
+							{{else}}
+							<h4 class="mb-1 mt-1 ml-1">{{__ "No alert Found."}}</h4>
+							{{/if}}
                       </div>
+				{{/hiddenmodules}}
                     </div>
                   </div>
 				</div>
             </div>
           </div>
           </div> 
+		  {{!-- {{/hiddenmodules}} --}}
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+
+		let loanInfoContainer = $('#loanInfo');
+	
+		if({{session.admin_access }}== 1){
+				console.log("1")
+			loanInfoContainer.css("display","initial")
+		}else if("{{ session.access_rights.loanlist.view}}"  || "{{session.access_rights.alert.view}}"  ){
+			loanInfoContainer.css("display","initial")
+		}else{
+			loanInfoContainer.css("display","none")
+							console.log("3")
+
+		}
+		{{!-- if({{"session.access_rights.loanlist.view"}}) --}}
+		var id = '{{id}}';
+  	var sessionUserId = '{{session.user_id}}';
+ 	let role = "{{session.role_slug}}"
+	if(role == "customer"){ // only  display own loans 
+	console.log(id == sessionUserId)
+		if(id == sessionUserId){
+		loanInfoContainer.css("display","initial")
+		}else{
+			loanInfoContainer.css("display","none")
+		}
+ }
+	})
+</script>

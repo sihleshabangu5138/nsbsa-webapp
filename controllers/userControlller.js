@@ -12,6 +12,8 @@ const Customfields = require('../models/Customfields');
 const CustomFieldMeta = require('../models/CustomFieldMeta');
 const NotificationTemplate = require('../models/Notificationtemplate');
 const ActivityLog = require('../models/Activitylog');
+const LoanDetails = require('../models/LoanDetails');
+const Emidetails = require('../models/Emi_details');
 // const { validationResult } = require('express-validator');
 const https = require('https');
 const NotificationBadges = require('../models/Notification_badges');
@@ -21,6 +23,7 @@ const Mail = require('../config/email');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 const functions = require('../helpers/function');
+const EmiDetails = require('../models/Emi_details');
 // router.use(lang.init)
 
 exports.getEditUser = async (req, res) => {
@@ -29,20 +32,18 @@ exports.getEditUser = async (req, res) => {
 
   if (id) {
     try {
-      console.log("role_session", req.session.role)
       let result_data = [];
       const result = await User.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
       // const result_data = await User.find({"_id":new mongoose.Types.ObjectId(id)}).lean();
       result_data = result;
       result_data[0].id_d = new mongoose.Types.ObjectId(result[0].role).toString();
 
-      console.log("result_data:", result_data[0].id_d)
       const role_name = await Role.find({}).lean();
       for (const [key, value] of Object.entries(role_name)) {
         role_name[key].id_d = new mongoose.Types.ObjectId(value._id).toString();
-        console.log("role_name:", role_name[key].id_d);
+        
       };
-      console.log("role_name1:", result[0].role);
+     
       const settings = await Generalsetting.find().lean(); 
       const jsonData = fs.readFileSync('public/data/countries.json', 'utf8');
       const jsonParsed = JSON.parse(jsonData);
@@ -57,7 +58,7 @@ exports.getEditUser = async (req, res) => {
         setting: settings,
         messages:req.flash()
       });
-      console.log("id", id)
+      
 
     } catch (err) {
       console.error(err);
@@ -90,14 +91,14 @@ exports.postEditUser = async function (req, res) {
   const id = req.body.id;
   global.msg = 1
   if (id) {
-    console.log(req.session.role)
+   
     const myquery = { "_id": new mongoose.Types.ObjectId(id) };
     let photo = req.body.photo_old;
     let pass = req.body.password_old;
     let roleid = req.body.role;
-    console.log("roleid", roleid);
+   
     let idrole = new mongoose.Types.ObjectId(roleid);
-    console.log("idrole", idrole);
+    
 
     if (req.file != undefined) {
       photo = req.file.filename;
@@ -140,7 +141,7 @@ exports.postEditUser = async function (req, res) {
       req.session.username = req.body.username;
       req.session.photo = photo;
       // req.session.role = idrole;
-      req.flash('success', res.__('User Updated Successfully.'));
+      req.flash('success', res.__('Profile Updated Successfully.'));
       res.redirect('/dashboard');
     } catch (err) {
       console.error(err);
@@ -181,7 +182,7 @@ exports.postEditUser = async function (req, res) {
       req.session.username = req.body.username;
       req.session.photo = photo;
       // req.session.role = idrole;
-      req.flash('success', res.__('User Added Successfully.'));
+      req.flash('success', res.__('Profile Added Successfully.'));
       res.redirect('/dashboard');
     } catch (err) {
       console.error(err);
@@ -758,8 +759,6 @@ exports.getViewUser = async (req, res) => {
     if (id) {
       let result_data = [];
       const result = await User.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
-      // result_data = result;
-      // result_data[0].id_d = new mongoose.Types.ObjectId(result[0].role).toString();
       const role = { "_id": new mongoose.Types.ObjectId(result[0].role).toString() };
 
       const role_name = await Role.find(role).lean();
@@ -771,10 +770,60 @@ exports.getViewUser = async (req, res) => {
         familyData.id_d = new mongoose.Types.ObjectId(familyData._id).toString();
       }
 
-      res.render('users/viewuser', { title: "View User", data: result, role: role_name, family: familyData, id: id, session: req.session });
-      console.log("User", result);
-      console.log("Role", role_name);
-      console.log("Family", familyData);
+      let loanDetail = await LoanDetails.find({ user: id })
+      .populate({ path: "loantype", select: "type" }) 
+      .populate({ path: "user", select: "firstname lastname" })
+      .lean(); 
+    loanDetail = loanDetail.filter(item => item.status === 1)
+    loanDetail = loanDetail.map(item => ({
+      ...item,
+      _id: item._id.toString(),
+      loantype: item.loantype ? {
+        ...item.loantype,
+        _id: item.loantype._id.toString(),
+      } : null,
+      user: item.user ? {
+        ...item.user,
+        _id: item.user._id.toString(),
+      } : null,
+      createdby: item.createdby.toString(),
+    }));
+    
+    let emiDetail = [];
+    for (const ele of loanDetail) {
+      const emi = await EmiDetails.find({ loan_id: ele._id })
+        .populate({ path: "loan_id", select: "loancount approvestatus" })
+        .lean();
+    
+      emiDetail.push(
+        emi.map(e => ({
+          ...e,
+          _id: e._id.toString(),
+          loan_id:e.loan_id ?  {...e.loan_id, _id: e.loan_id.toString()} : null         
+        }))
+      );
+      }
+     
+      emiDetail = emiDetail.map((innerArray) => {
+       return innerArray.filter((ele) => ele.loan_id.approvestatus === 1)
+      }
+      );
+      
+
+    res.render('users/viewuser', {
+      title: "View User",
+      data: result,
+      loanDetail,
+      emiDetail,
+      role: role_name,
+      family: familyData,
+      id: id,
+      session: req.session,
+    });
+      
+     
+      res.render('users/viewuser', { title: "View User", data: result, loanDetail, emiDetail, role: role_name, family: familyData, id: id, session: req.session });
+    
 
     } else {
       const news = [{ 'userid': '-1' }];

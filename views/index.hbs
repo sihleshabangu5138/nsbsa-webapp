@@ -308,7 +308,7 @@
                   <table id="recent-orders" class="table table-borderless mb-0 recent-events">
                     <thead>
                       <tr>
-                        <th>{{__ "Event title"}}</th>
+                        <th>{{__ "Event Title"}}</th>
                         <th>{{__ "Event Description"}}</th>
                         <th>{{__ "Start Date"}}</th>
                         <th>{{__ "End Date"}}</th>
@@ -392,6 +392,7 @@
                 <h4 class="card-title text-capitalize">{{__ "Types of Loan"}}</h4>
                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                <div class="heading-elements">
+
 					<a href="/loan/loantypelist" title="{{__ "View Loan types" }}"><i class="ft-external-link"></i></a>
 				</div>
               </div>
@@ -403,12 +404,14 @@
 				 
                   <table id="recent-orders" class="table table-borderless mb-0">
                     <thead>
+                       {{#if loandata}}
                       <tr>
                         <th>{{__ "Loan Type"}}</th>
 						<th>{{__ "Interest Rate"}}</th>	
                       </tr>
                     </thead>
                     <tbody>
+                     
 					{{#each loandata}}
                       <tr>
                         <td class="text-truncate">
@@ -417,6 +420,14 @@
                         <td class="text-truncate">{{this.interestrate}} %</td>
                       </tr>
 					{{/each}}   
+                    {{else}}
+                    <div class="no-loans-message"> 
+               <div class="no-data-img">
+                <img src="/images/upload/generalsetting/no-data.png" width="100%" class="image-fluid" alt="No Data" style="max-height: 300px;">
+               </div>
+               
+              </div>
+                    {{/if}}
                     </tbody>
                   </table>
                 </div>
@@ -460,8 +471,11 @@
               {{else if this.num_of_disloan}}
               <div id="piechart2" class="chart-container"></div>
               {{else}}
-              <div class="no-loans-message d-flex justify-content-center align-items-center" style="height:300px; width:100;"> 
-                <h5>{{__ "No loans available at the moment."}}</h5>
+              <div class="no-loans-message"> 
+               <div class="no-data-img">
+                <img src="/images/upload/generalsetting/no-data.png" width="100%" height="300px" alt="No Data">
+               </div>
+               
               </div>
               {{/if}}
             </div>
@@ -476,42 +490,48 @@
 	
 <!--/ Product sale & buyers -->
 
-<!--   -->
-{{!-- <script src="/js/scripts/extensions/lang-all.js"></script> --}}
-<script type="text/javascript" src="/js/loader.js"></script>
-
-{{!-- modal for event popup script  --}}
-<script type="text/x-kendo-template" id="eventModalTemplate">
-  <div class="swal-modal p-1 rounded shadow-sm">
-    <!-- Title -->
-    <div class="swal-title text-center fw-bold mb-1">
-      <h4>#: Title #</h4>
-    </div>
-
-    <!-- Event Details -->
-    <div class="swal-text d-flex flex-column align-items-start mt-2  bg-light border rounded">
-      <div class="mb-1 d-flex ">
-        <strong>{{__ "Start Date:"}} </strong>
-        <p class="text-muted">#: kendo.toString(new Date(StartDate), "MM/dd/yyyy") #</p>
+<!-- Event Model Start -->
+<div class="modal fade" id="EventDetailModel" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h4 class="modal-title">{{__ "Event Details"}}</h4>
+<div>
+        	<a title="{{__ "View Event" }}" class="event-view-redirect" style="cursor:pointer;color:#009c9f;" ><i class="ft-external-link" style="font-weight:700"></i></a>
+        <button type="button" class="close" style="font-size:1.7rem" data-dismiss="modal">&times;</button>
       </div>
-      <div class="mb-1 d-flex">
-        <strong>{{__ "End Date:"}}</strong>
-        <p class="text-muted">#: kendo.toString(new Date(EndDate), "MM/dd/yyyy") #</p>
       </div>
-      <div class="mb-1 d-flex ">
-        <strong>{{__ "Description:"}}</strong>
-        <p class="text-muted">#: Description ? kendo.toString(Description) : "N/A" #</p>
-      </div>
-    </div>
-
-    <!-- Footer with Close Button -->
-    <div class="swal-footer text-center">
-      <div class="swal-button-container mt-2 mb-1 mx-auto">
-        <button class="swal-button swal-button--confirm btn btn-primary" id="closeButton">{{{__ "Close"}}}</button>
+      <div class="modal-body">
+        <div class="event-details">
+          <div class="mb-3">
+            <strong>{{__ "Title:"}}</strong> 
+            <span class="event-title"></span>
+          </div>
+          <div class="mb-3">
+            <strong>{{__ "Start Date:"}}</strong>
+            <span class="event-start"></span>
+          </div>
+          <div class="mb-3">
+            <strong>{{__ "End Date:"}}</strong>
+            <span class="event-end"></span>
+          </div>
+          <div class="mb-3">
+            <strong>{{__ "Venue:"}}</strong>
+            <span class="event-venue"></span>
+          </div>
+          <div class="mb-3">
+            <strong>{{__ "Description:"}}</strong>
+            <span class="event-description"></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</script>
+</div>
+<!-- Event Model End -->
+{{!-- <script src="/js/scripts/extensions/lang-all.js"></script> --}}
+<script type="text/javascript" src="/js/loader.js"></script>
 
 <script>
 function emi_chart(loanAmount, totalInterest, monthlyEMI) {
@@ -614,36 +634,38 @@ $('#dashboard_calendar').fullCalendar({
     });
   },
   eventClick: function (event) {
-    // Prepare event data
-    var eventData = {
-      Title: event.title,
-      Description: event.description,
-      StartDate: event.start,
-      EndDate: event.end,
-    };
-
-    // Check if the Kendo Window exists, if not, create it
-    if (!window.window1) {
-      window.window1 = $("<div />").kendoWindow({
-        title: "{{__ 'Event Details'}}",
-        actions: ["Close"],
-        modal: true,
-        visible: false,
-        resizable: false,
-        width: "400px", // Adjust as needed
-        height: "auto", // Adjust as needed
-      }).data("kendoWindow");
-    }
     
-    // Set the content of the window using the template
-    var template = kendo.template($("#eventModalTemplate").html());
-    window1.content(template(eventData));
-    window1.center().open();
+    let originalDateFormate;
+  let dates = {
+    'm/d/Y': 'MM/DD/YYYY',
+    'm-d-Y': 'MM-DD-YYYY',
+    "d-m-Y": 'DD-MM-YYYY',
+    "d/m/Y": 'DD/MM/YYYY',
+    "Y-m-d": 'YYYY-MM-DD',
+    "F j, Y": 'MMMM D, YYYY'
+  }
+   let generalDateFormate = '{{session.generaldata.date_format}}';
+  
+  if (dates[generalDateFormate]) {
+    originalDateFormate = dates[generalDateFormate];
+  };
+ $('#EventDetailModel .event-title').text(event.title);
+ $('#EventDetailModel .event-venue').text(event.venue);
+ 
+ $('#EventDetailModel .event-description').text(event.description);
+  $('#EventDetailModel .event-start').text(moment(event.start._i).format(originalDateFormate));
+  $('#EventDetailModel .event-end').text(moment(event.end._i).subtract(1, 'days').format(originalDateFormate));
+$('#EventDetailModel .event-view-redirect').click(function () {
+    const newUrl = `/events/viewevent/${event.event_id}`;
+    $(this).attr('href', newUrl);
+    
+    window.location.href = newUrl;
+});
+  
+  
+  // Show the modal
+  $('#EventDetailModel').modal('show');
 
-    // Close logic (if the Close button is present in the modal)
-    $(document).on("click", "#closeButton", function () {
-      window1.close();
-    });
   },
 });
     /* EMI CALCULATOR */

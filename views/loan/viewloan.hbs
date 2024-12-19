@@ -38,13 +38,13 @@
 										<div class="row">
 											<div
 												class="col-xl-5 col-md-12 col-12 col-sm-12 col-xs-12 card-content collapse show pb-1">
-												<h6><b>{{#with ..}}{{__ "Loan description:" setlang}}{{/with}}</b>
+												<h6><b>{{#with ..}}{{__ "Loan Description:" setlang}}{{/with}}</b>
 													{{displayOrNA this.description}}</h6>
 											</div>
 											<div
 												class="col-xl-4 col-md-6 col-12 col-sm-12 col-xs-12 card-content collapse show pb-1">
 												<h6>
-													<b>{{#with ..}}{{__ "Loan amount" setlang}}{{/with}}
+													<b>{{#with ..}}{{__ "Loan Amount" setlang}}{{/with}}
 														({{{currencyList ../session.generaldata.currency}}}):</b>
 													{{formatNumber this.loanamount 0 ','','}}
 												</h6>
@@ -67,7 +67,7 @@
 				</div>
 				<div class="col-xl-12 col-sm-12 col-md-12 col-12   text-center  p-1 ">
 					<button onclick="myFunction()" id="myBtn" type="button" class="viewbtn bg-transparent border-0 "
-						style="outline:none;">{{#with ..}}{{__ "View more" setlang}}{{/with}}<br /><i
+						style="outline:none;">{{#with ..}}{{__ "View More" setlang}}{{/with}}<br /><i
 							class='fa  fa-2x'>&#xf107;</i></button>
 				</div>
 		</div>
@@ -118,7 +118,7 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="row">
-										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Work detail"
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Work Detail"
 											setlang}}{{/with}}
 										</div>
 										<div class="col-sm-6 col-6">
@@ -168,7 +168,7 @@
 
 								<div class="col-sm-6">
 									<div class="row">
-										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Income per year"
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Income Per Year"
 											setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
 										</div>
 										<div class="col-sm-6 col-6">
@@ -181,8 +181,8 @@
 							<div class="row p-1">
 								<div class="col-sm-6">
 									<div class="row">
-										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Income per
-											month" setlang}}{{/with}} ({{{currencyList
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Income Per
+											Month" setlang}}{{/with}} ({{{currencyList
 											../session.generaldata.currency}}})
 										</div>
 										<div class="col-sm-6 col-6">
@@ -194,7 +194,7 @@
 
 								<div class="col-sm-6">
 									<div class="row">
-										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Documents shown"
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Documents Shown"
 											setlang}}{{/with}}
 										</div>
 										<div class="col-sm-6 col-6">
@@ -300,14 +300,14 @@
 
 		if (dots.style.display === "none") {
 			dots.style.display = "inline";
-			btnText.innerHTML = "{{{__ 'View more'}}} <br/><i class='fa fa-2x'>&#xf107;</i>";
+			btnText.innerHTML = "{{{__ 'View More'}}} <br/><i class='fa fa-2x'>&#xf107;</i>";
 			moreText.style.display = "none";
-			viewbtn.style.display = "{{{__ 'View more'}}}";
+			viewbtn.style.display = "{{{__ 'View More'}}}";
 		} else {
 			dots.style.display = "none";
-			btnText.innerHTML = "{{{__ 'View less'}}} <br/><i class='fa fa-2x'>&#xf106;</i>";
+			btnText.innerHTML = "{{{__ 'View Less'}}} <br/><i class='fa fa-2x'>&#xf106;</i>";
 			moreText.style.display = "inline";
-			viewbtn.style.display = "{{{__ 'View less'}}}";
+			viewbtn.style.display = "{{{__ 'View Less'}}}";
 		}
 	}
 
@@ -325,7 +325,7 @@
 						<li class="nav-item">
 							<a class="nav-link active" id="baseIcon-tab11" data-toggle="tab" aria-controls="tabIcon11"
 								href="#tabIcon11" aria-expanded="true"><i class="fa fa-play"></i>{{__ 'EMI
-								details'}}</a>
+								Details'}}</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" id="baseIcon-tab13" data-toggle="tab" aria-controls="tabIcon13"
@@ -396,6 +396,7 @@
 																									<tbody>
 																										{{#each emi as
 																										|result|}}
+																										
 
 																										<tr
 																											class="colortr">
@@ -553,18 +554,14 @@
 															<div class="col-12">
 																<div class="card">
 																	<div class="card-content collapse show">
-																		<div
-																			class="card-body card-dashboard card-design">
+																		<div class="card-body card-dashboard card-design">
 																			<section id="horizontal">
 																				<div class="row">
 																					<div class="col-12">
 																						<div class="card">
-																							<div id="tableBox"
-																								class="table-responsive">
-																								<table
-																									class="table designtable">
-																									<thead
-																										class="headcolor">
+																							<div id="tableBox" class="table-responsive">
+																								<table class="table designtable">
+																									<thead class="headcolor">
 																										<tr>
 																											<th>{{__
 																												'No'}}
@@ -590,34 +587,28 @@
 																												Amount'}}
 																											</th>
 																									</thead>
-
+							
 																									<tbody>
 																										{{#each
 																										repayment as
 																										|result|}}
-																										<tr
-																											class="colortr">
-																											<td
-																												class="bordertop">
+																										<tr class="colortr">
+																											<td class="bordertop">
 																												{{result.month}}
 																											</td>
-																											<td
-																												class="bordertop">
+																											<td class="bordertop">
 																												{{
 																												result.date}}
 																											</td>
 																											<!-- <td class="bordertop">{{formatNumber result.paymentemimonth }}</td> -->
-																											<td
-																												class="bordertop">
+																											<td class="bordertop">
 																												{{result.payment_type}}
 																											</td>
-																											<td
-																												class="bordertop">
+																											<td class="bordertop">
 																												{{formatNumber
 																												result.repayments}}
 																											</td>
-																											<td
-																												class="bordertop">
+																											<td class="bordertop">
 																												{{formatNumber
 																												result.repaymentamount
 																												}}</td>
@@ -631,10 +622,10 @@
 																										<!-- <td>-</td>  -->
 																										<!-- <td>-</td>  -->
 																										<!-- </tr> -->
-
+							
 																									</tbody>
 																								</table>
-
+							
 																							</div>
 																						</div>
 																					</div>

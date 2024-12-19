@@ -229,7 +229,7 @@
 }
 .k-split-button.k-state-border-down > .k-button,
 .k-split-button.k-state-border-up > .k-button {
-  color: #2e2e2e;
+  color: #ffffff;
   background-color: #596672;
   border-color: #b6b6b6;
   background-image: none;
@@ -247,7 +247,7 @@
 }
 .k-split-button:focus:not(.k-state-disabled) > .k-state-active,
 .k-split-button:focus:not(.k-state-disabled) > .k-button:hover {
-  color: #2e2e2e;
+  color: #ffffff;
   background-color: #596672;
   border-color: #c5c5c5;
   background-image: none;
@@ -419,6 +419,9 @@ textarea.k-textbox:hover,
   background-color: #fff;
   color: #2e2e2e;
 }
+.k-input:hover{
+  color: #ffffff;
+}
 .k-block,
 .k-widget,
 .k-popup,
@@ -426,6 +429,9 @@ textarea.k-textbox:hover,
 .k-toolbar,
 .k-dropdown .k-input {
   color: #2e2e2e;
+}
+.k-dropdown:hover, .k-input:hover ,.k-dropdown-wrap:hover , .k-state-default:hover , .k-state-hover{
+  color: #ffffff !important;
 }
 .k-inverse {
   color: #ffffff;
@@ -703,7 +709,7 @@ html .km-pane-wrapper .k-header {
 .k-calendar .k-nav-fast.k-state-hover {
   text-decoration: none;
   background-color: #596672;
-  color: #2e2e2e;
+  color: #ffffff;
 }
 .k-calendar .k-link.k-state-hover {
   border-radius: 4px;
@@ -822,13 +828,13 @@ td.k-state-focused.k-state-selected {
 .k-list > .k-state-hover,
 .k-scheduler .k-scheduler-toolbar ul li.k-state-hover,
 .k-pager-wrap .k-link:hover,
-.k-dropdown .k-state-focused,
+.k-dropdown .k-dropdown:hover .k-state-focused,
 .k-filebrowser-dropzone,
 .k-mobile-list .k-item > .k-link:active,
 .k-mobile-list .k-item > .k-label:active,
 .k-mobile-list .k-edit-label.k-check:active,
 .k-mobile-list .k-recur-view .k-check:active {
-  color: #2e2e2e;
+  /* color: #ffffff; */
   background-color: #596672;
   border-color: #b6b6b6;
 }
@@ -839,7 +845,7 @@ td.k-state-focused.k-state-selected {
 }
 /* this selector should be used separately, otherwise old IEs ignore the whole rule */
 .k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2):active {
-  color: #2e2e2e;
+  color: #ffffff;
   background-color: #596672;
   border-color: #b6b6b6;
 }
@@ -954,6 +960,7 @@ div.k-filebrowser-dropzone em {
 }
 .k-slider-selection {
   background-color: #596672;
+
 }
 .k-slider-horizontal .k-tick {
   background-image: url('https://kendo.cdn.telerik.com/2018.2.620/styles/Default/slider-h.gif');
@@ -1138,6 +1145,7 @@ div.k-filebrowser-dropzone em {
 }
 .k-grid tr:hover {
   background-color: #596672;
+  /* color:#fff; */
   background-image: none;
   background-image: none, linear-gradient(to bottom, #596672);
   background-position: 50% 50%;
@@ -1290,7 +1298,7 @@ div.k-filebrowser-dropzone em {
 }
 .k-state-selected.k-line {
   background-color: #596672;
-  color: #596672;
+  /* color: #ffffff; */
 }
 .k-resource {
   background-color: #ffffff;
@@ -1445,6 +1453,7 @@ div.k-filebrowser-dropzone em {
   border-radius: 4px 0 0 0;
 }
 .k-numeric-wrap .k-link.k-state-selected {
+  
   background-color: #596672;
 }
 .k-multiselect.k-state-border-down .k-multiselect-wrap {
@@ -1566,6 +1575,7 @@ html .km-pane-wrapper .km-widget,
 }
 .km-pane-wrapper .k-mobile-list .k-item.k-state-selected {
   background-color: #596672;
+
   border-top-color: #e1143d;
 }
 .km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check:first-child {
@@ -1611,11 +1621,13 @@ html .km-pane-wrapper .km-widget,
   background-position: 50% 50%;
   background-color: #ececec;
   border-color: #c5c5c5;
+
 }
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-hover {
   background-color: #596672;
+  color:#fff;
   background-image: none;
   background-image: none, linear-gradient(to bottom, #596672);
   background-position: 50% 50%;
@@ -2016,6 +2028,7 @@ textarea.k-textbox,
     background-image: none;
     background-image: none, linear-gradient(to bottom, #596672);
     background-color: #596672;
+    /* color:#fff; */
   }
   .k-webkit .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view > .k-link,
   .k-ff .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view > .k-link,
@@ -2239,13 +2252,16 @@ textarea.k-textbox,
 .k-spreadsheet .k-resize-hint-handle,
 .k-spreadsheet .k-resize-hint-marker {
   background-color: #596672;
+  /* color:#fff; */
 }
 .k-spreadsheet .k-resize-hint-vertical .k-resize-hint-handle,
 .k-spreadsheet .k-resize-hint-vertical .k-resize-hint-marker {
   background-color: #596672;
+  /* color:#fff; */
 }
 .k-spreadsheet .k-single-selection::after {
   background-color: #596672;
+  /* color:#fff; */
   border-color: #ffffff;
 }
 .k-spreadsheet .k-auto-fill-punch {
@@ -2278,9 +2294,7 @@ textarea.k-textbox,
 .k-spreadsheet-sample {
   color: #7a7a7a;
 }
-.k-state-selected .k-spreadsheet-sample {
-  color: inherit;
-}
+
 .k-spreadsheet-window .k-list {
   border-color: #d5d5d5;
   border-radius: 4px;
@@ -2310,6 +2324,7 @@ textarea.k-textbox,
 }
 .k-spreadsheet-popup .k-button:hover {
   background-color: #596672;
+  color:#fff;
 }
 .k-spreadsheet-popup .k-state-active {
   background-color: #596672;
@@ -2516,8 +2531,8 @@ textarea.k-textbox,
   background-color: #fff;
 }
 .k-listbox .k-item:hover:not(.k-state-disabled) {
-  color: #2e2e2e;
   background-color: #596672;
+  color:#fff;
   border-color: transparent;
 }
 .k-listbox .k-drop-hint {

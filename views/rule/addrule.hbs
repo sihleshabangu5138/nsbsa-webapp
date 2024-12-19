@@ -54,7 +54,7 @@
 				<div class="">
 					<ul class="list-inline mb-0">
 					<li class="col-md-12 p-0 form-control" id="export">
-					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Applicable for amount" setlang}}{{/with}}<span class="red">*</span></label>
+					    <label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Applicable For Amount" setlang}}{{/with}}<span class="red">*</span></label>
 						<select class="select2 form-control export" data-validation-required-message="{{#with ..}}{{__ "Applicable for amount is required"}}{{/with}}" name="loan_amount_rule">
 							<option value="">{{#with ..}}{{__ "Applicable for amount" setlang}}{{/with}}</option>
 							<option value="Less Than 50,000" {{#ifCond this.loan_amount_rule '==' 'Less Than 50,000'}} selected {{/ifCond}}>{{#with ..}}{{__ "Less Than 50,000" setlang}}{{/with}}</option>
