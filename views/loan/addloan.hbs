@@ -865,7 +865,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 			});
 	</script>
 	{{#each geninfo as |geninfom|}}
-	{{!-- <script type="text/javascript">
+	<script type="text/javascript">
     function ValidateExtension() {
        
         let errorCount = 0;
@@ -876,7 +876,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 
            
             if (fileInput.val() !== '') {
-                const fileUpload = fileInput.val();
+                const fileUpload = fileInput.val().replaceAll(' ', '-');
                 const allowedFiles = [];
 
                 const pdf = "{{geninfom.doctype_Pdf}}";
@@ -894,11 +894,7 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
                 if (xlsx) allowedFiles.push(xlsx);
 
               
-                const regex = new RegExp(
-                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
-                    "i"
-                );
-console.log(regex.test(fileUpload));
+                  const regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
                 if (!regex.test(fileUpload)) {
                     errorCount++;
                     alert(`Only ${allowedFiles.join(', ')} formats are allowed.`);
@@ -923,7 +919,7 @@ console.log(regex.test(fileUpload));
             return false; // Validation failed
         }
     }
-</script> --}}
+</script>
 
 	{{/each}}
 	<script>
@@ -1020,7 +1016,7 @@ console.log(regex.test(fileUpload));
 					var image="{{customvalid.filetype}}";
 					var res = image.split(",");
 					allowedFiles=res;
-					var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+					const regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 					if (!regex.test(imageUpload.toLowerCase())) {
 						m++;
 						$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
@@ -1056,7 +1052,8 @@ console.log(regex.test(fileUpload));
             const fileInput = $(this);
 
             if (fileInput.val() !== '') {
-                const fileUpload = fileInput.val();
+                const fileUpload = fileInput.val().replaceAll(' ', '-');
+				
 
                 // Allowed file extensions dynamically populated from variables
                 const allowedFiles = [];
@@ -1075,10 +1072,7 @@ console.log(regex.test(fileUpload));
                 });
 
                 // Create regex for validating file extension
-                const regex = new RegExp(
-                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
-                    "i"
-                );
+                  const regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 
                 // Validate file extension
                 if (!regex.test(fileUpload)) {
@@ -1089,7 +1083,7 @@ console.log(regex.test(fileUpload));
                 }
 
                 // Validate file size
-                const fileSizeMB = parseFloat((fileInput[0]?.files[0]?.size / 1024 / 1024).toFixed(2));
+                const fileSizeMB = parseFloat((fileInput[0].files[0].size / 1024 / 1024).toFixed(2));
                 const maxFileSizeMB = parseFloat("{{geninfom.docupload_size}}");
 
                 if (fileSizeMB > maxFileSizeMB) {

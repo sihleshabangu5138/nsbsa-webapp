@@ -902,7 +902,7 @@ $('document').ready(function(){
 		$('.imageUpload').each(function(){
 			  let files = this.files;
 			if($(this).val() != '') {
-				var imageUpload=$(this).val();
+				var imageUpload=$(this).val().replaceAll(' ', '-');
 				var allowedFiles = [];
 				var jpeg="{{geninfom.imgtype_jpeg}}";
 				var jpg="{{geninfom.imgtype_jpg}}";
@@ -916,7 +916,7 @@ $('document').ready(function(){
 				if(png!=''){
 					allowedFiles.push('{{geninfom.imgtype_png}}');
 				}
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				  const regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
 					$(this).val("");
@@ -973,7 +973,7 @@ $('document').ready(function(){
 				var image="{{customvalid.filetype}}";
 				 var res = image.split(",");
 				allowedFiles=res;
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				var regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					m++;
 					{{!-- $(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only."); --}}

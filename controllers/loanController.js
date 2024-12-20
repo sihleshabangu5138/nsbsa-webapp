@@ -289,10 +289,12 @@ exports.getLoanList = async function (req, res, next) {
         let access_data = [];
         const session_id = req.query.session_id; // Get the session_id from query params
         const failstatus = req.query.status;
+        const generalSettings = await Generalsetting.findOne({}).lean();
+        const stripeSKey = (generalSettings.stripe_secret_key || null);
         // const stripe = Stripe(req.session.generaldata.stripe_secret_key || '');
         let stripe;
-        if (req.session.generaldata?.stripe_secret_key) {
-            stripe = require('stripe')(req.session.generaldata.stripe_secret_key);
+        if (stripeSKey || stripeSKey !== null) {
+            stripe = require('stripe')(stripeSKey);
         }
        
         if (session_id) {
@@ -391,7 +393,7 @@ exports.getLoanList = async function (req, res, next) {
               }
 
               // Flash success message and redirect to loan list page
-              req.flash("success", res.__("EMI paid successfully."));
+              req.flash("success", res.__("EMI Paid Successfully."));
               res.redirect("/loan/loanlist");
             } else {
               // If payment wasn't successful, flash an error message
@@ -596,13 +598,7 @@ exports.postAddLoan = async (req, res) => {
         let i = 0;
         let currentDateFormate = functions.formatDatesToGeneralData(req.session.generaldata.date_format);
 
-        // Notes and Attach file start
-        // const note = req.body.note;
-        // if (Array.isArray(note)) {
-        //     addnote.push(...note);
-        // } else {
-        //     addnote.push(note);
-        // }
+        
         const note = req.body.note;
         let addnote = [];
 
@@ -687,7 +683,7 @@ exports.postAddLoan = async (req, res) => {
             // const enddate = moment(req.body.enddate, ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD']).format("YYYY-MM-DD");
             const startdate = moment(req.body.startdate, currentDateFormate).format("YYYY-MM-DD");
             const enddate = moment(req.body.enddate, currentDateFormate).format("YYYY-MM-DD");
-            console.log(startdate, "--------------------------", enddate)
+           
 
             const savedLoan = await LoanDetails.findByIdAndUpdate(
                 { "_id": new mongoose.Types.ObjectId(id) },
@@ -1391,6 +1387,7 @@ exports.getEmiDetails = async (req, res) => {
             const loanlist = await LoanDetails.find({ _id: result_data[0].loan_id }).lean();
             const typeofloan = await Loantype.find({ _id: loanlist[0].loantype }).lean();
             const customfield = await CustomField.find({ $and: [{ 'module_name': 'emi' }, { 'field_visibility': 1 }] }).lean();
+            const generalSettings =  await Generalsetting.findOne({}).lean();
 
             const usersrole = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
             const rolename = usersrole.role_slug;
@@ -1404,10 +1401,10 @@ exports.getEmiDetails = async (req, res) => {
             for (const [key, value] of Object.entries(customfield_value)) {
                 customfield_value[key].id_d = new mongoose.Types.ObjectId(value.custom_field_id).toString();
             }
-           
-            res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value, stripePublishableKey: req.session.generaldata.stripe_publishable_key , role:rolename});
+          console.log("generalSettings",generalSettings.stripe_publishable_key);
+            res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value, stripePublishableKey: generalSettings.stripe_publishable_key || null , role:rolename});
             console.log("loan approval=",loanlist[0]['approvestatus']);
-            // res.render('loan/addemi', { title: 'Add EMI', loan: loanlist, data: result_data, type: typeofloan, id: id, session: req.session, newfield: customfield, customfield_value: customfield_value });
+           
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
@@ -1416,7 +1413,8 @@ exports.getEmiDetails = async (req, res) => {
         const news = [{ 'userid': '-1' }];
         try {
             const customfield = await CustomField.find({ $and: [{ 'module_name': 'emi' }, { 'field_visibility': 1 }] }).lean();
-            res.render('loan/addemi', { title: 'Add EMI', data: news, family: news, session: req.session, newfield: customfield, stripePublishableKey: req.session.generaldata.stripe_publishable_key });
+            const generalSettings =  await Generalsetting.findOne({}).lean();
+            res.render('loan/addemi', { title: 'Add EMI', data: news, family: news, session: req.session, newfield: customfield, stripePublishableKey:  generalSettings.stripe_publishable_key || null });
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
@@ -1494,8 +1492,7 @@ exports.postEmiDetails = async (req, res) => {
                 loan_id: rr.loan_id,
                 status: 0,
             });
-            console.log(remian);
-            console.log("rr", result1)
+            
             for (const notification of notificationTemplates) {
                 const message = notification.content;
                 const subject = notification.subject;

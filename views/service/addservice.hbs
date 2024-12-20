@@ -137,12 +137,40 @@
 						<div class="row align-items-center">
 							<div class="col-6 p-0">
 								<input id="serviceDuration" name="duration_hour" class="form-control inputnumber duration_hour py-1"
-									placeholder="Hours" type="number" min="1" max="100000"
+									placeholder="Hours" type="number" min="1" max="100000" style="padding: 0.80rem 1rem !important"
 									data-validation-required-message="{{#with ..}}{{__ 'Service Duration is required'}}{{/with}}" {{#if
 									this.duration_hour}} value="{{this.duration_hour}}" {{/if}}>
 							</div>
-				
-							<div class="col-md-6">
+{{!--  --}}
+
+<div class="col-md-6">
+								<div class="form-group input mb-0">
+									<div class="">
+										<ul class="list-inline mb-0">
+											<li class="col-md-12 p-0 form-control" id="export">
+												<label class="ml-1 custom-top-label top" style="z-index:9">{{#with ..}}{{__ "Service
+													For"}}{{/with}}</label>
+												<select class="select2 form-control export cate_type"
+													data-validation-required-message="{{#with ..}}{{__ " This is required"}}{{/with}}"
+													name="servicefor">
+													<option value="00" {{#ifCond result.duration_minute "==" "00" }}selected{{/ifCond}}>
+														00</option>
+													<option value="15" {{#ifCond result.duration_minute "==" "15" }}selected{{/ifCond}}>
+														15</option>
+													<option value="30" {{#ifCond result.duration_minute "==" "30" }}selected{{/ifCond}}>
+														30</option>
+													<option value="45" {{#ifCond result.duration_minute "==" "45" }}selected{{/ifCond}}>
+														45</option>
+												</select>
+											</li>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+
+
+							{{!-- <div class="col-md-6">
 								<div class="form-group input m-0">
 									<div class="">
 										<ul class="list-inline mb-0">
@@ -165,18 +193,18 @@
 									</div>
 									
 								</div>
-							</div>
+							</div> --}}
 				
 						</div>
-						<!-- Help Block for Validation -->
-						<div class="help-block"></div>
+						
+						<div class="help-block" style="font-size: 11px;line-height: 19px;"></div>
 					</div>
 				</div>
 
 				
-			<div class="col-md-6 align-self-end">
+			<div class="col-md-6" style="padding-top:1.95rem">
 			<div class="form-group">
-			<div class="col-md-12 form-control">
+			<div class="col-md-12 form-control" style="padding: 0.50rem 1rem">
 			<div class="skin skin-flat row ">
 			<div class="input-group">
 			<label class="custom-control-label custom-top-label ml-2">{{#with ..}}{{__ "Price Type"}}{{/with}}</label>
@@ -651,7 +679,7 @@ $(document).ready(function(){
 		$('.imageUpload').each(function(){
 			  let files = this.files;
 			if($(this).val() != '') {
-				var imageUpload=$(this).val();
+				var imageUpload=$(this).val().replaceAll(' ', '-');
 				var allowedFiles = [];
 				var jpeg="{{geninfom.imgtype_jpeg}}";
 				var jpg="{{geninfom.imgtype_jpg}}";
@@ -665,7 +693,7 @@ $(document).ready(function(){
 				if(png!=''){
 					allowedFiles.push('{{geninfom.imgtype_png}}');
 				}
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				var regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
 					$(this).val("");
@@ -717,7 +745,7 @@ $(document).ready(function(){
 				var image="{{customvalid.filetype}}";
 				 var res = image.split(",");
 				allowedFiles=res;
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				var regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					m++;
 					alert("Only {{customvalid.filetype}} formats are allowed.");
@@ -775,7 +803,7 @@ $(document).ready(function(){
             const fileInput = $(this);
 
             if (fileInput.val() !== '') {
-                const fileUpload = fileInput.val();
+                const fileUpload = fileInput.val().replaceAll(' ', '-');
 
                 // Allowed file extensions dynamically populated from variables
                 const allowedFiles = [];
@@ -794,10 +822,7 @@ $(document).ready(function(){
                 });
 
                 // Create regex for validating file extension
-                const regex = new RegExp(
-                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
-                    "i"
-                );
+                const regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 
                 // Validate file extension
                 if (!regex.test(fileUpload)) {

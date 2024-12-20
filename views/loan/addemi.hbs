@@ -582,19 +582,21 @@ $('body').on('change', '.dropdown_change', function ()
 	 var payment_type = $('#payment_type');
 		
 	$(document).ready(async () =>{ 
+		console.log("{{stripePublishableKey}}","stripePublishableKey")
 		
 	$(document).on('click', '#checkout-button-user', async function (event) {
-		
+	
 			event.preventDefault();
 				 try {
-   var stripe = Stripe(`{{stripePublishableKey}}`);
+            var stripe = Stripe(`{{stripePublishableKey}}`);
+  
 			// Get the payment amount
 			const principalamount = parseFloat($('#emipermonth').val().replace(/,/g, ''))
 			const interestamount = parseFloat($('#interest').val().replace(/,/g, ''))
 			const emiid = $('#userinput1').val();
 			const loan_no = $('.loan_no').val();
 			const payableamount = principalamount + interestamount;
-			console.log(payableamount,"--------");
+		
 		
 				// Make a request to your backend to create a Checkout Session using fetch
 				const data = await $.ajax({
@@ -614,6 +616,7 @@ $('body').on('change', '.dropdown_change', function ()
 				} 
 			} 
 			catch (error) {
+				console.log(error);
 				
 	 if (error.message && error.message.includes("Please call Stripe() with your publishable key")) {
 				console.log("IntegrationError occurred");

@@ -620,7 +620,7 @@
 		$('.imageUpload').each(function(){
 			  let files = this.files;
 			if($(this).val() != '') {
-				var imageUpload=$(this).val();
+				var imageUpload=$(this).val().replaceAll(' ', '-');
 				var allowedFiles = [];
 				var jpeg="{{geninfom.imgtype_jpeg}}";
 				var jpg="{{geninfom.imgtype_jpg}}";
@@ -634,7 +634,7 @@
 				if(png!=''){
 					allowedFiles.push('{{geninfom.imgtype_png}}');
 				}
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				var regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");;
 				if (!regex.test(imageUpload.toLowerCase())) {
 					alert("Only " + allowedFiles.join(', ') + " formats are allowed.");
 					$(this).val("");
@@ -771,7 +771,7 @@ $(document).ready(function(){
             const fileInput = $(this);
 
             if (fileInput.val() !== '') {
-                const fileUpload = fileInput.val();
+                const fileUpload = fileInput.val().replaceAll(' ', '-');
 
                 // Allowed file extensions dynamically populated from variables
                 const allowedFiles = [];
@@ -790,10 +790,7 @@ $(document).ready(function(){
                 });
 
                 // Create regex for validating file extension
-                const regex = new RegExp(
-                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
-                    "i"
-                );
+                const regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 
                 // Validate file extension
                 if (!regex.test(fileUpload)) {

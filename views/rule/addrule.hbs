@@ -395,14 +395,16 @@
 
            
             if (fileInput.val() !== '') {
-                const fileUpload = fileInput.val();
+                const fileUpload = fileInput.val().replaceAll(' ', '-');
+				console.log(fileUpload);
+
+				
                 const allowedFiles = [];
 
                 const pdf = "{{geninfom.doctype_Pdf}}";
                 const doc = "{{geninfom.doctype_Doc}}";
                 const docx = "{{geninfom.doctype_Docx}}";
                 const xls = "{{geninfom.doctype_Xls}}";
-                const zip = "{{geninfom.doctype_Zip}}";
                 const xlsx = "{{geninfom.doctype_Xlsx}}";
 
             
@@ -413,15 +415,12 @@
                 if (xlsx) allowedFiles.push(xlsx);
 
               
-                const regex = new RegExp(
-                    `([a-zA-Z0-9\\s_\\.-:])+\\.(${allowedFiles.join('|')})$`,
-                    "i"
-                );
+                const regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 
                 if (!regex.test(fileUpload)) {
                     errorCount++;
                     alert(`Only ${allowedFiles.join(', ')} formats are allowed.`);
-                    fileInput.val(""); // Reset the input field
+                    fileInput.val(""); 
                 } else {
                     fileInput.siblings('.notice').html(""); // Clear any existing notices
 
@@ -431,7 +430,7 @@
 
                     if (size > limit) {
                         alert(`Too large file size. Only files smaller than {{geninfom.docupload_size}}MB can be uploaded.`);
-                        fileInput.val(""); // Reset the input field
+                        fileInput.val(""); 
                         return false;
                     }
                 }
@@ -484,7 +483,7 @@ $(document).ready(function(){
 				var image="{{customvalid.filetype}}";
 				 var res = image.split(",");
 				allowedFiles=res;
-				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+				var regex = new RegExp(`\\.(${allowedFiles.join('|')})$`, "i");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					m++;
 					alert("Only {{customvalid.filetype}} formats are allowed.");				}

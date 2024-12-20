@@ -99,7 +99,7 @@
         <div class="row reminder_div ">         	
  		<div class="col-md-4 col-lg-3">
           <div class="form-group">
-          <div class="col-md-12 form-control">
+          <div class="col-md-12 form-control " style="padding: 0.45rem;">
           <div class="skin skin-flat row">
            <div class="input-group">
             <label class="custom-control-label custom-top-label ml-2">{{#with ..}}{{__ "Reminder Time" setlang}}{{/with}}<span class="red">*</span></label>
@@ -115,10 +115,12 @@
 		</div>
 		</div>	 
 				<div class="form-group col-md-8 col-lg-9 mb-2 contact-repeater pl-0">
-					<div data-repeater-list="reminderdata">
+					<div class="row">
+					<div data-repeater-list="reminderdata col-10" style="flex: 1;">
+						
 					{{#each this.reminderdata}}
 						<div class="row" data-repeater-item> 
-							<div class="col-md-4 ">
+							<div class="col-md-5 " style="padding-right: 0;">
 							<div class="col-12"> 
 							<div class="controls">
 								  <input type="number" name="number" class="form-control" required="" data-validation-required-message="{{#with ..}}{{__ "This field is required"}}{{/with}}" minlength="1" maxlength="20" placeholder="{{#with ..}}{{__ "Enter number between 1 - 20"}}{{/with}}" aria-invalid="false"  name="number" {{#if this.number}} value="{{this.number}}" {{/if}}>
@@ -126,7 +128,7 @@
 							</div>
 							</div>
 							</div>
-							<div class="col-md-5 padding-top-m ">
+							<div class="col-md-5  padding-top-m " style="padding: 0;">
 							   <div class="col-12 ">
 								<label class="custom-control-label-date ml-2" style="z-index:99">{{#with ..}}{{__ "Select Days" setlang}}{{/with}}<span class="required red">*</span></label> 
 								<select class="select1 form-control t_t valid  mb-2" name="recurense"  id="recurense"> 	
@@ -139,7 +141,7 @@
 								</select>
 							  </div>	
 					        </div>  
-							<div class="col-md-3 notCustomerBlock"> 
+							<div class="col-md-2  notCustomerBlock"> 
 							    <div class="col-12">
 								  <div class="input-group-append"> 
 								  <span class="input-group-btn" id="button-addon2">
@@ -151,10 +153,11 @@
 							</div>
 							{{/each}}
                         </div>
-						<div class="col-2" style="float: right;">
+						<div class="col-2" >
 						<button type="button" data-repeater-create id="repeater-button"  class="btn btn-secondary "><i class="icon-plus4"></i> {{#with ..}}{{__ "Add More" setlang}}{{/with}}
                         </button>
 						</div>
+                        </div>
                 </div>
 	    </div>
 	 </div>   

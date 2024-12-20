@@ -1,5 +1,6 @@
 {
 	"0": "0",
+	"2024": "2024",
 	"Using Account Details": "استخدام تفاصيل الحساب",
 	"Login": "تسجيل الدخول",
 	"New User?": "مستخدم جديد؟",
@@ -1160,5 +1161,15 @@
 	"Event deleted successfully!": "تم حذف الحدث بنجاح!",
 	"Approved ! Loan Approved successfully!": "تمت الموافقة! تمت الموافقة على القرض بنجاح!",
 	"Loan disapproved successfully!": "تم رفض القرض بنجاح!",
-	"Loan approved successfully!": "تمت الموافقة على القرض بنجاح!"
+	"Loan approved successfully!": "تمت الموافقة على القرض بنجاح!",
+	"Company Name": "Company Name",
+	"Country Code is required": "Country Code is required",
+	"zip Code": "zip Code",
+	"Image Upload Size(MB)": "Image Upload Size(MB)",
+	"Documents Upload Size(MB)": "Documents Upload Size(MB)",
+	"Logo Width": "Logo Width",
+	"Signature Image for pdf": "Signature Image for pdf",
+	"Stripe Secret key": "Stripe Secret key",
+	"Stripe Public key": "Stripe Public key",
+	"Copyright": "Copyright"
 }

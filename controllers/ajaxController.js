@@ -26,6 +26,7 @@ const Loantype = require('../models/Loantype');
 const Rule = require('../models/Rule');
 const Notes = require('../models/Notes');
 const ActivityLog = require('../models/Activitylog');
+const Generalsetting = require('../models/GeneralSetting');
 const Setting = require('../models/Settings');
 // const lang = require('../config/languageconfig');
 const countriesData = require('../public/data/countries.json');
@@ -1948,9 +1949,11 @@ exports.verifyPurchaseKey = async (req, res) => {
 
 exports.createCheckoutSession = async (req, res) => {
 	const { amount, emiid } = req.body; // Amount in cents
-	console.log("amount sdfsafsaf")
+
 	try {
-		const stripe = Stripe(req.session.generaldata.stripe_secret_key);
+		const generalSettings =  await Generalsetting.findOne({}).lean();
+		const stripe = Stripe(generalSettings.stripe_secret_key || null);
+		console.log("generalSettings.stripe_secret_key",generalSettings.stripe_secret_key)
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [{
