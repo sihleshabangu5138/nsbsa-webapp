@@ -1821,7 +1821,8 @@ exports.postCheckdbConnect = async (req, res) => {
 		// Connect to MongoDB
 		// const mongoURI = `mongodb://${db_host}`;
 		// const mongoURI = `mongodb://${db_username}:${db_pass}@${db_host}`;
-		const mongoURI = `mongodb://127.0.0.1:27017/${dbname}`;
+		const mongoURI = "mongodb+srv://sihleshabangu5138:test123@cluster0.nk9ud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 		const client = new MongoClient(mongoURI);
 		console.log('Connecting to MongoDB...');
 		await client.connect();
