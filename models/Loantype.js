@@ -8,6 +8,8 @@ const loantypeSchema = new mongoose.Schema({
   interestrate: String,
   latepaymentcharge: String,
   processingfee: String,
+  initiationfee: String,
+  administrationfee: String,
   addedby: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',

@@ -91,6 +91,8 @@ exports.postAddLoanType = async (req, res) => {
                     interestrate: req.body.interestrate,
                     latepaymentcharge: req.body.latepaymentcharge,
                     processingfee: req.body.processingfee,
+                    initiationfee: req.body.initiationfee,
+                    administrationfee: req.body.administrationfee,
                     updatedby: new mongoose.Types.ObjectId(req.session.user_id),
                 }
             };
@@ -226,6 +228,8 @@ exports.postAddLoanType = async (req, res) => {
                 interestrate: req.body.interestrate,
                 latepaymentcharge: req.body.latepaymentcharge,
                 processingfee: req.body.processingfee,
+                initiationfee: req.body.initiationfee,
+                administrationfee: req.body.administrationfee,
                 addedby: new mongoose.Types.ObjectId(req.session.user_id),
             };
             console.log('OBJ:', myobj);
@@ -700,6 +704,8 @@ exports.postAddLoan = async (req, res) => {
                     enddate: enddate,
                     totalemimonth: req.body.totalemimonth,
                     processingfee: req.body.processingfee,
+                    initiationfee: req.body.initiationfee,
+                    administrationfee: req.body.administrationfee,
                     incomeperyear: req.body.incomeperyear,
                     incomepermonth: req.body.incomepermonth,
                     oincome: req.body.oincome,
@@ -978,6 +984,8 @@ exports.postAddLoan = async (req, res) => {
                 enddate: enddate,
                 totalemimonth: req.body.totalemimonth,
                 processingfee: req.body.processingfee,
+                initiationfee: req.body.initiationfee,
+                administrationfee: req.body.administrationfee,
                 incomeperyear: req.body.incomeperyear,
                 incomepermonth: req.body.incomepermonth,
                 oincome: req.body.oincome,

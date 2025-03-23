@@ -135,6 +135,32 @@
                  </div><div class="help-block"></div>
                </div>
              </div>
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Initiation Fee" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}  </label>
+                     <div class="input-group touchspincolor">
+					 <input type="text" class="touchspin " name="initiationfee" {{#if this.initiationfee}} value="{{this.initiationfee}}"{{/if}} value="0" />
+                     </div>
+                   </fieldset>
+                 </div><div class="help-block"></div>
+               </div>
+             </div>
+			<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+             <div class="card">
+               <div class="card-content">
+                 <!-- <div class="card-body"> -->
+				<fieldset>
+				<label>{{#with ..}}{{__ "Administration Fee" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}}  </label>
+                     <div class="input-group touchspincolor">
+					 <input type="text" class="touchspin " name="administrationfee" {{#if this.initiationfee}} value="{{this.administrationfee}}"{{/if}} value="0" />
+                     </div>
+                   </fieldset>
+                 </div><div class="help-block"></div>
+               </div>
+             </div>
 		</div>
 		{{/each}}
 	

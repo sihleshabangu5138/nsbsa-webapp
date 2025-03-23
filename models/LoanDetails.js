@@ -13,6 +13,8 @@ const loanDetailsSchema = new mongoose.Schema({
   enddate: String,
   totalemimonth: String,
   processingfee: String,
+  initiationfee: String,
+  administrationfee: String,
   incomeperyear: String,
   incomepermonth: String,
   oincome: String,

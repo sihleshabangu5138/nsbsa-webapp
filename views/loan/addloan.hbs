@@ -165,6 +165,32 @@
 					</div><div class="help-block"></div>
 				</div>
 				</div>
+				<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+				<div class="card">
+				<div class="card-content">
+					<!-- <div class="card-body"> -->
+					<fieldset>
+					<label>{{#with ..}}{{__ "Initiation Fee" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span> </label>
+						<div class="input-group touchspincolor">
+						<input type="text" id="initiationfee" class="touchspin " name="initiationfee" {{#if this.initiationfee}} value="{{this.initiationfee}}"{{/if}}/>
+						</div>
+					</fieldset>
+					</div><div class="help-block"></div>
+				</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-12" style="float:right">
+				<div class="card">
+				<div class="card-content">
+					<!-- <div class="card-body"> -->
+					<fieldset>
+					<label>{{#with ..}}{{__ "Administration Fee" setlang}}{{/with}} {{{currencyList ../session.generaldata.currency}}} <span class="required red">*</span> </label>
+						<div class="input-group touchspincolor">
+						<input type="text" id="administrationfee" class="touchspin " name="administrationfee" {{#if this.administrationfee}} value="{{this.administrationfee}}"{{/if}}/>
+						</div>
+					</fieldset>
+					</div><div class="help-block"></div>
+				</div>
+				</div>
 				</div>
 				
 				<p class="form-section text-bold-600 font-medium-2 border-light"> <i class="iconify mr-1" data-icon="fa-solid:file-invoice-dollar" data-inline="false"></i>{{#with ..}}{{__ " Financial Details (Customer's Income)" setlang}}{{/with}}</p>
@@ -851,6 +877,8 @@ $('[name="years"]').on('touchspin.on.startupspin', function () {
 								$('#interestrate').val(loantype[0].interestrate);
 								$('#interest').val(loantype[0].interestrate);
 								$('#processingfee').val(loantype[0].processingfee);
+								$('#initiationfee').val(loantype[0].initiationfee);
+								$('#administrationfee').val(loantype[0].administrationfee);
 							},
 					error: function(e) 
 							{

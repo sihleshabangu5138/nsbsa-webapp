@@ -86,7 +86,7 @@ border-spacing: 0 15px;
 	/*div#sticky-wrapper.sticky-wrapper > div{background-image: -webkit-linear-gradient(left,#29244e 0,#6368abf2 100%); height:50px;}
 	div#sticky-wrapper.sticky-wrapper > div{background-image: -webkit-linear-gradient(left,#404E67 0,#6F85AD 100%); height:50px;}*/
 	
-	 #sticky-wrapper.sticky-wrapper > div{ background-image: url(../images/brodcrum.png) !important;  height:50px;background-size: cover;} 
+	 #sticky-wrapper.sticky-wrapper > div{ background-color: #000000 !important;  height:50px;background-size: cover;} 
 	
 	.header-navbar .navbar-container{background:none;}
 	

@@ -113,7 +113,7 @@ $(".body-overlay").css("display","block");
  var companyLogo = "{{session.company_logo}}";
 
   // Set the background image dynamically
-  $(".loader_c").css("background-image", "url('/images/upload/generalsetting/" + companyLogo + "')");
+  $(".loader_c").append("<img src='/images/upload/generalsetting/" + companyLogo + "' />");
  document.onreadystatechange = function() {
             if (document.readyState === "complete") {
                 //document.querySelector("body").style.visibility = "hidden";
