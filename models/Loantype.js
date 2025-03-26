@@ -7,7 +7,6 @@ const loantypeSchema = new mongoose.Schema({
   loan_max_amount: String,
   interestrate: String,
   latepaymentcharge: String,
-  processingfee: String,
   initiationfee: String,
   administrationfee: String,
   addedby: {

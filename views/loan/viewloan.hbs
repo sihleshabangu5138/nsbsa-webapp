@@ -178,7 +178,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="row p-1">
+
+														<div class="row p-1">
 								<div class="col-sm-6">
 									<div class="row">
 										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Income Per
@@ -221,21 +222,92 @@
 
 							</div>
 
+							<div class="row p-1">
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Loan Amount" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+										</div>
+										<div class="col-sm-6 col-6">
+											<span class="colon">:</span>
+											<div class="tabletext"> {{this.loanamount}}</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Annual Interest Rate" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+										</div>
+										<div class="col-sm-6 col-6">
+											<span class="colon">:</span>
+											<div class="tabletext"> {{this.interestrate}}%</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row p-1">
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Initiation Fee" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+										</div>
+										<div class="col-sm-6 col-6">
+											<span class="colon">:</span>
+											<div class="tabletext"> {{this.initiationfee}}</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Administration Fee" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+										</div>
+										<div class="col-sm-6 col-6">
+											<span class="colon">:</span>
+											<div class="tabletext"> {{this.administrationfee}}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row p-1">
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Month 1" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+										</div>
+										<div class="col-sm-6 col-6">
+											<span class="colon">:</span>
+											<div class="tabletext"> {{formatDecimal this.first_monthly_payment 2}}</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Month 2 to upwards" setlang}}{{/with}} ({{{currencyList ../session.generaldata.currency}}})
+										</div>
+										<div class="col-sm-6 col-6">
+											<span class="colon">:</span>
+											<div class="tabletext"> {{formatDecimal this.monthly_payment 2}}</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="h3 p-1">
-							<i class="fa fa fa-user" aria-hidden="true"></i> {{#with ..}}{{__ "Colleague Information"
+							<i class="fa fa fa-user" aria-hidden="true"></i> {{#with ..}}{{__ "Customer Information"
 							setlang}}{{/with}}
 						</div>
 						<div class="container-fluid ">
 							<div class="row p-1">
 								<div class="col-sm-6">
 									<div class="row">
-										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Colleague Name"
+										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Customer Name"
 											setlang}}{{/with}}
 										</div>
 										<div class="col-sm-6 col-6">
 											<span class="colon">:</span>
-											<div class="tabletext">{{displayOrNA this.colleague}}</div>
+											<div class="tabletext">{{displayOrNA this.customer}}</div>
 										</div>
 									</div>
 								</div>
@@ -266,12 +338,12 @@
 								<div class="col-sm-6 ">
 									<div class="row">
 										<div class="col-sm-6 col-6 font-weight-bold ">{{#with ..}}{{__ "Address
-											Colleague" setlang}}{{/with}}
+											Customer" setlang}}{{/with}}
 										</div>
 										<div class="col-sm-6 col-6">
 											<span class="colon">:</span>
 											<div class="tabletext">
-												{{#if (eq this.addtype "Select colleague address type")}}
+												{{#if (eq this.addtype "Select customer address type")}}
 												N/A
 												{{else}}
 												{{displayOrNA this.addtype}}

@@ -1,7 +1,10 @@
 /*Header css start */
 html body .pace .pace-progress{background:#d50000;}
 .card{height:auto !important;}
-img.nifty-logo { max-height: 30px;}
+img.nifty-logo { max-height: 50px;}
+.navbar-brand {
+	padding: 4px 0px !important; ;
+}
 .form-control:focus{border-color:#404E67 }
 .dropdown-item.active, .dropdown-item:active{background-color: #F5F7FA; color:#000;}
 ol.breadcrumb li.breadcrumb-item > a {color: #404e67;}
@@ -18,9 +21,9 @@ ol.breadcrumb li.breadcrumb-item > a {color: #404e67;}
 .block_four .card .card-content .media .p-1.white.media-body{  border-radius: 0px 10px 10px 0px;padding-left: 0px !important; }
 .block_four .card .card-content .media .p-1.white.media-body  .progress{background-color: #000000; background: rgba(40, 73, 120, 0.5);}
 .block_four .card .card-content .media .p-1.white.media-body .progress-bar{ background-color: #ffffff;}
-.block_first{background-color:#4098e4;} 
-.block_second{background-color:#0bbdda;} 
-.block_violet{background-color:#663de6;} 
+.block_first{background-color: #c1a051;} 
+.block_second{background-color:#c1a051;} 
+.block_violet{background-color: #c1a051;} 
  
 .block_four .card {background-color:transparent; box-shadow: none;}
 

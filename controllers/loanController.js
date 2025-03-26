@@ -90,7 +90,6 @@ exports.postAddLoanType = async (req, res) => {
                     loan_max_amount: req.body.loan_max_amount,
                     interestrate: req.body.interestrate,
                     latepaymentcharge: req.body.latepaymentcharge,
-                    processingfee: req.body.processingfee,
                     initiationfee: req.body.initiationfee,
                     administrationfee: req.body.administrationfee,
                     updatedby: new mongoose.Types.ObjectId(req.session.user_id),
@@ -227,7 +226,6 @@ exports.postAddLoanType = async (req, res) => {
                 loan_max_amount: req.body.loan_max_amount,
                 interestrate: req.body.interestrate,
                 latepaymentcharge: req.body.latepaymentcharge,
-                processingfee: req.body.processingfee,
                 initiationfee: req.body.initiationfee,
                 administrationfee: req.body.administrationfee,
                 addedby: new mongoose.Types.ObjectId(req.session.user_id),
@@ -688,7 +686,8 @@ exports.postAddLoan = async (req, res) => {
             const startdate = moment(req.body.startdate, currentDateFormate).format("YYYY-MM-DD");
             const enddate = moment(req.body.enddate, currentDateFormate).format("YYYY-MM-DD");
            
-
+            const monthly_payment = Number(req.body.loanamount||0) * (Number(req.body.interestrate||0)/100)/12 + Number(req.body.administrationfee||0);
+            const first_monthly_payment = Number(req.body.loanamount||0) * (Number(req.body.interestrate||0)/100)/12 + Number(req.body.initiationfee||0) + Number(req.body.administrationfee||0);
             const savedLoan = await LoanDetails.findByIdAndUpdate(
                 { "_id": new mongoose.Types.ObjectId(id) },
                 {
@@ -703,14 +702,15 @@ exports.postAddLoan = async (req, res) => {
                     startdate: startdate,
                     enddate: enddate,
                     totalemimonth: req.body.totalemimonth,
-                    processingfee: req.body.processingfee,
                     initiationfee: req.body.initiationfee,
                     administrationfee: req.body.administrationfee,
                     incomeperyear: req.body.incomeperyear,
                     incomepermonth: req.body.incomepermonth,
+                    first_monthly_payment: first_monthly_payment.toFixed(0),
+                    monthly_payment: monthly_payment.toFixed(0),
                     oincome: req.body.oincome,
                     workdetail: req.body.workdetail,
-                    colleague: req.body.colleague,
+                    customer: req.body.customer,
                     address: req.body.address,
                     mobile: req.body.mobile,
                     addtype: req.body.addtype,
@@ -969,7 +969,8 @@ exports.postAddLoan = async (req, res) => {
             const loantype = new mongoose.Types.ObjectId(type);
             const startdate = moment(req.body.startdate, currentDateFormate).format("YYYY-MM-DD");
             const enddate = moment(req.body.enddate, currentDateFormate).format("YYYY-MM-DD");
-          
+            const monthly_payment = Number(req.body.loanamount||0) * (Number(req.body.interestrate||0)/100)/12 + Number(req.body.administrationfee||0);
+            const first_monthly_payment = Number(req.body.loanamount||0) * (Number(req.body.interestrate||0)/100)/12 + Number(req.body.initiationfee||0) + Number(req.body.administrationfee||0);
 
             const myLoan = {
                 loancount: req.body.loancount,
@@ -983,14 +984,15 @@ exports.postAddLoan = async (req, res) => {
                 startdate: startdate,
                 enddate: enddate,
                 totalemimonth: req.body.totalemimonth,
-                processingfee: req.body.processingfee,
                 initiationfee: req.body.initiationfee,
                 administrationfee: req.body.administrationfee,
                 incomeperyear: req.body.incomeperyear,
                 incomepermonth: req.body.incomepermonth,
+                first_monthly_payment: first_monthly_payment.toFixed(0),
+                monthly_payment: monthly_payment.toFixed(0),
                 oincome: req.body.oincome,
                 workdetail: req.body.workdetail,
-                colleague: req.body.colleague,
+                customer: req.body.customer,
                 address: req.body.address,
                 mobile: req.body.mobile,
                 addtype: req.body.addtype,
