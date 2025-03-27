@@ -415,7 +415,7 @@
 					{{#each loandata}}
                       <tr>
                         <td class="text-truncate">
-                          <span class="badge badge-default badge-success">{{this.type}}</span>
+                          <span class="badge badge-default badge-light">{{this.type}}</span>
                         </td>
                         <td class="text-truncate">{{this.interestrate}} %</td>
                       </tr>
@@ -554,8 +554,8 @@ function emi_chart(loanAmount, totalInterest, monthlyEMI) {
             title: '{{__ "EMI Calculator"}}',
             pieHole: 0.5,  // Make the hole in the center larger for a creative look
             slices: {
-                0: { color: '#3366cc' }, // Loan Amount
-                1: { color: '#dc3912' }, // Total Interest
+                0: { color: '#c1a051' }, // Loan Amount
+                1: { color: '#514f49' }, // Total Interest
                 {{!-- 2: { color: '#ff9900' }   Monthly EMI --}}
             },
             animation: {
@@ -815,7 +815,11 @@ function drawChart() {
 ]);
 
   // Optional; add a title and set the width and height of the chart
-  var options = {'width':600, 'height':300};
+  var options = {
+    'width':600, 
+    'height':300,
+    'colors': ['#c1a051', '#524f49'], 
+    };
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -838,8 +842,11 @@ function drawChart() {
 ]);
 
   // Optional; add a title and set the width and height of the chart
-  var options = {'width':600, 'height':300};
-
+  var options = {
+    'width':600, 
+    'height':300,
+    'colors': ['#c1a051', '#524f49'], 
+    };
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
   chart.draw(data, options);

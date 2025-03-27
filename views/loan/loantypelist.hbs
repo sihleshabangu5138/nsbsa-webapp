@@ -10,10 +10,12 @@
 		<!-- <button type="button" id="btn-go" class="border border-light round mr-1 go">{{__ "GO"}}</button> -->
 		<!-- </div> -->
 		<!-- </div> -->
+		
 		<div class=" col-lg-12 col-md-12 mb-1 prrr-2 heading-elements p-0 text-right">
 			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
 			<div class="heading-elements ews-heading">
 				<ul class="list-inline mb-0">
+					<a href='addloantype'><button type='button' class='btn addnew btn-lg'><i class='fa fa-plus'></i> {{__ "New"}}</button></a>
 					<li id="export">
 						<select class="select2 form-control export">
 							<option value="" disabled selected>{{__ "Export"}}</option>
@@ -371,7 +373,7 @@
 																				{{#ifCond accessrightdata.add "||" session.admin_access }}
 
 																				title: "{{__ "Action"}}",
-																				headerTemplate: "<center><a href='addloantype'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+																				headerTemplate: "<center>{{__ "Action"}}</center>"
 							{{/ ifCond}}
 					}
                 ],
