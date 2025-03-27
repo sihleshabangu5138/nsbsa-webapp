@@ -6,6 +6,7 @@
 			<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
 			<div class="heading-elements ews-heading">
 				<ul class="list-inline mb-0">
+										<a href='addservice'><button type='button' class='btn addnew btn-lg'><i class='fa fa-plus'></i> {{__ "New"}}</button></a>
 					<li id="export">
 						<select class="select2 form-control export">
 							<option value="">{{__ "Export"}}</option>
@@ -435,7 +436,7 @@
 																				{{#ifCond accessrightdata.add "||" session.admin_access}}
 
 																				title: "{{__ "Action"}}",
-																				headerTemplate: "<center><a href='addservice	'><button type='button' class='btn addnew btn-sm'><i class='fa fa-plus'></i> {{__ "New"}}</button></a></center>"
+																				headerTemplate: "<center>{{__ "Action"}}</center>"
 							{{/ ifCond}}
 					}
                 ],

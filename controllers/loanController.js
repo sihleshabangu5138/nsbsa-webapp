@@ -713,6 +713,7 @@ exports.postAddLoan = async (req, res) => {
                     customer: req.body.customer,
                     address: req.body.address,
                     mobile: req.body.mobile,
+                    email: req.body.email,
                     addtype: req.body.addtype,
                     othertext: req.body.othertext,
                     createdby: new mongoose.Types.ObjectId(req.session.user_id),
@@ -995,6 +996,7 @@ exports.postAddLoan = async (req, res) => {
                 customer: req.body.customer,
                 address: req.body.address,
                 mobile: req.body.mobile,
+                email: req.body.email,
                 addtype: req.body.addtype,
                 othertext: req.body.othertext,
                 status: 1,
@@ -1280,6 +1282,7 @@ exports.getViewLoan = async (req, res) => {
         if (id) {
             const result = await LoanDetails.find({ "_id": new mongoose.Types.ObjectId(id) }).lean();
             // result_data = result;
+            console.log("🚀 ~ exports.getViewLoan= ~ result:", result)
             const approvedstatus = result[0].approvestatus;
             // result_data[0].id_d = new mongoose.Types.ObjectId(result_data[0].user).toString();
 

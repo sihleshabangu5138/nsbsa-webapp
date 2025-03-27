@@ -23,6 +23,7 @@ const loanDetailsSchema = new mongoose.Schema({
   customer: String,
   address: String,
   mobile: String,
+  email: String,  
   addtype: String,
   othertext: String,
   status: Number,
