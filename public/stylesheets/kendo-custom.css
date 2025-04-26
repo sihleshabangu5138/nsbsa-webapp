@@ -1145,7 +1145,7 @@ div.k-filebrowser-dropzone em {
 }
 .k-grid tr:hover {
   background-color: #596672;
-  /* color:#fff; */
+  color:#fff;
   background-image: none;
   background-image: none, linear-gradient(to bottom, #596672);
   background-position: 50% 50%;
