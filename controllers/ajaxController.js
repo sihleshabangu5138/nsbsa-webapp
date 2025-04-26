@@ -1819,11 +1819,9 @@ exports.postCheckdbConnect = async (req, res) => {
 
 	try {
 		// Connect to MongoDB
-		// const mongoURI = `mongodb://${db_host}`;
-		// const mongoURI = `mongodb://${db_username}:${db_pass}@${db_host}`;
-		const mongoURI = "mongodb+srv://sihleshabangu5138:test123@cluster0.nk9ud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+		const mongoURI = `mongodb+srv://${db_username}:${db_pass}@${db_host}/${dbname}?retryWrites=true&w=majority&appName=Cluster0`;
 
-		const client = new MongoClient(mongoURI);
+		const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 		console.log('Connecting to MongoDB...');
 		await client.connect();
 		console.log('Connected to MongoDB');
@@ -1841,6 +1839,8 @@ exports.postCheckdbConnect = async (req, res) => {
 		} else {
 			// If the database does not exist, check the connection
 			const connectionResult = await checkConnection(db_username, db_pass, db_host, dbname);
+
+			console.log('Connection result:', connectionResult.success, connectionResult.message);
 
 			if (connectionResult.success) {
 				// If the connection is successful, send a success response

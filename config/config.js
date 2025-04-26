@@ -3,25 +3,12 @@
 const mongoose = require('mongoose');
 require('dotenv').config(); // Load environment variables from .env
 
-const connectToDatabase = async(db_username, db_pass, db_host, dbname) => {
+const connectToDatabase = async () => {
+  let mongoDbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}?retryWrites=true&w=majority&appName=Cluster0`;
 
-  let mongoDbUrl;
-  if (db_username && db_pass && db_host && dbname) {
-    // mongoDbUrl = `mongodb://${db_username}:${db_pass}@${db_host}/${dbname}?authSource=admin`;
-     mongoDbUrl = "mongodb+srv://sihleshabangu5138:test123@cluster0.nk9ud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-    // mongoDbUrl = `mongodb://127.0.0.1:27017/${dbname}`;
-  } else {
-    const {
-      DB_USERNAME,
-      DB_PASSWORD,
-      DB_HOST,
-      DB_DATABASE,
-    } = process.env;
-
-    // mongoDbUrl = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE}?authSource=admin`;
-    mongoDbUrl = "mongodb+srv://sihleshabangu5138:test123@cluster0.nk9ud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
+  if (!mongoDbUrl) {
+    console.error('MongoDB connection string is not defined in the environment variables.');
+    return { error: 'MongoDB connection string is not defined.' };
   }
   try {
     await mongoose.connect(mongoDbUrl, {
@@ -54,105 +41,51 @@ const connectToDatabase = async(db_username, db_pass, db_host, dbname) => {
     if (error.name === 'MongoNotConnectedError') {
       console.error('MongoDB client is not connected. Ensure a successful connection before running operations.');
       // return { error: 'MongoDB client is not connected.' };
-    } 
+    }
 
     // For other errors, throw the error to propagate it to the caller
     throw error;
   }
 };
-const checkConnection = async(db_username, db_pass, db_host, dbname) => {
+
+
+const checkConnection = async (db_username, db_pass, db_host, dbname) => {
+  const mongoURI = `mongodb+srv://${db_username}:${db_pass}@${db_host}/${dbname}?retryWrites=true&w=majority&appName=Cluster0`;
+
   try {
-    // const mongoDbUrl = `mongodb://${db_username}:${db_pass}@${db_host}/${dbname}?authSource=admin`
-
-    const mongoDbUrl  = "mongodb+srv://sihleshabangu5138:test123@cluster0.nk9ud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-    await mongoose.connect(mongoDbUrl, {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      autoIndex: false, // Prevent automatic index creation
+    const connection = await mongoose.createConnection(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
 
-    const db = mongoose.connection;
+    return new Promise((resolve, reject) => {
+      connection.on('error', (err) => {
+        console.error('Error connecting to MongoDB:', err);
+        reject({ success: false, message: 'Failed to connect to MongoDB: ' + err.message });
+      });
 
-    db.on('error', (err) => {
-      console.error('Error connecting to MongoDB:', err);
-      mongoose.connection.close();
+      connection.once('open', () => {
+        console.log('Connected to the MongoDB database');
+        connection.close(); // Important: close after checking
+        resolve({ success: true, message: 'Connection successful' });
+      });
     });
-    
-
-    console.log(mongoose.connection.readyState)
-    const success = db.readyState === 1;
-
-    // Disconnect from MongoDB
-    mongoose.connection.close();  
-
-    return { success };
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
-
-    if (
-      error instanceof mongoose.Error &&
-      error.name === 'MongoServerError' &&
-      error.code === 18
-    ) {
-      // Authentication failed, return an error response
-      return { error: 'Authentication failed. Please check your credentials.' };
-    }
-
-    // For other errors, throw the error to propagate it to the caller
-    return { error: 'Error connecting to MongoDB. Please check your connection settings.' };
+    return { success: false, message: error.message };
   }
-}
+};
 
+
+// db.createUser({
+//   user: "root",
+//   pwd: "rootpassword",
+//   roles: ["readWrite", "dbAdmin"]
+// })
 
 module.exports = {
   connectToDatabase,
   checkConnection,
 };
-// const checkConnection = async(db_username, db_pass, db_host, dbname) => {
-
-//   try {
-//     const mongoDbUrl = `mongodb://${db_username}:${db_pass}@${db_host}/${dbname}`
-//     console.log(mongoDbUrl)
-//     const connection = mongoose.createConnection(mongoDbUrl, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     });
-
-//     connection.on('error', (err) => {
-//       console.error('Error connecting to MongoDB:', err);
-//     });
-
-//     connection.once('open', () => {
-//       console.log('Connected to the MongoDB database');
-//     });
-    
-//     console.log(connection.readyState)
-//     return connection;
-//   } catch (error) {
-//     console.error('Error connecting to MongoDB:', error);
-//     if (error instanceof mongoose.Error && error.name === 'MongoServerError' && error.code === 18) {
-//       // Authentication failed, return an error response
-//       return { error: 'Authentication failed. Please check your credentials.' };
-//     }
-//     // For other errors, throw the error to propagate it to the caller
-//     throw error;
-//   }
-// }
-
-
-
-//set the database username & password
-//    mongo
-
-//    use $database name
-
-//    use admin
-
-// db.createUser({
-// user: "root",
-// pwd: "rootpassword",
-// roles: ["readWrite", "dbAdmin"]
-// })
 
 // exit
