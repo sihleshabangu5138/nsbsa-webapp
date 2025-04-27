@@ -109,11 +109,10 @@
 									</div>
 
 									<p class="form-section text-bold-600 font-medium-2 border-light"><i
-											class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Customer
+											class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Personal
 										Information" setlang}}{{/with}} </p>
 
 									<div class="row">
-
 										<div class="col-md-6 notCustomerBlock">
 											<div class="form-group input">
 												<div class="col-md-12 form-control border-light">
@@ -122,8 +121,36 @@
 														data-validation-regex-message="{{#with ..}}{{__ " Only
 														Characters, no numbers"}}{{/with}}" {{#if this.customer}}
 														value="{{this.customer}}" {{/if}}>
-													<label for="customer">{{#with ..}}{{__ "Customer Name"
+													<label for="customer">{{#with ..}}{{__ "Member Name And Surname"
 														setlang}}{{/with}} </label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" id="customerid" class="" name="customerid"
+														data-validation-regex-regex="([A-Za-z_,.`'^ -]{1,50})"
+														data-validation-regex-message="{{#with ..}}{{__ " Only
+														Characters, no numbers"}}{{/with}}" {{#if this.customerid}}
+														value="{{this.customerid}}" {{/if}}>
+													<label for="customerid">{{#with ..}}{{__ "ID Number"
+														setlang}}{{/with}} </label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" name="email" class="form-control"
+														data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})"
+														data-validation-regex-message="{{#with ..}}{{__ " Email must be
+														a valid email"}}{{/with}}" aria-invalid="false" {{#if
+														this.email}} value="{{this.email}}" {{/if}}>
+													<label for="userinput4">{{#with ..}}{{__ "Email"
+														setlang}}{{/with}}</label>
 												</div>
 												<div class="help-block"></div>
 											</div>
@@ -137,13 +164,108 @@
 														Contact Number may only contain numbers"}}{{/with}}"
 														aria-invalid="false" {{#if this.mobile}} value="{{this.mobile}}"
 														{{/if}}>
-													<label for="userinput4">{{#with ..}}{{__ "Phone/Mobile"
+													<label for="userinput4">{{#with ..}}{{__ "Contact Number (WhatsApp)"
 														setlang}}{{/with}}</label>
 												</div>
 												<div class="help-block"></div>
 											</div>
 										</div>
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="col-md-12 border-light"
+													style="border: 1px solid #ddd; padding: 10px; border-radius: 5px; display:flex;gap: 10px; align-items:center;">
+													<label style="margin-bottom: 0px;">{{#with ..}}{{__ "Are there
+														people you would like to be part
+														of your group?"}}{{/with}}</label>
+													<div style="margin-top: 10px;">
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="radio"
+																name="grouppeople" id="grouppeopleyes" value="yes" {{#if
+																(eq this.grouppeople "yes" )}}checked{{/if}}>
+															<label class="form-check-label" for="grouppeopleyes">{{#with
+																..}}{{__
+																"Yes"}}{{/with}}</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="radio"
+																name="grouppeople" id="grouppeopleno" value="no" {{#if
+																(eq this.grouppeople "no" )}}checked{{/if}}>
+															<label class="form-check-label" for="grouppeopleno">{{#with
+																..}}{{__
+																"No"}}{{/with}}</label>
+														</div>
+													</div>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" id="nextofkin" class="" name="nextofkin"
+														data-validation-regex-regex="([A-Za-z_,.`'^ -]{1,50})"
+														data-validation-regex-message="{{#with ..}}{{__ " Only
+														Characters, no numbers"}}{{/with}}" {{#if this.nextofkin}}
+														value="{{this.nextofkin}}" {{/if}}>
+													<label for="nextofkin">{{#with ..}}{{__ "Next of Kin"
+														setlang}}{{/with}} </label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
 
+										<div class="col-md-6 notCustomerBlock">
+											<div class="form-group input">
+												<label></label>
+												<div class="">
+													<label class="custom-control-label-date ml-2"
+														style="z-index:99">{{#with ..}}{{__ "Gender"
+														setlang}}{{/with}}</label>
+													<select class="select2 form-control export" id="export"
+														name="gender"
+														data-validation-required-message="{{#with ..}}{{__ " Customer
+														address type is required"}}{{/with}}">
+														<option>{{#with ..}}{{__ "Select Gender"}}{{/with}}</option>
+														<option value="male" {{#ifCond this.gender '==' 'male' }}
+															selected {{/ifCond}}>{{#with ..}}{{__ "Male"}}{{/with}}
+														</option>
+														<option value="female" {{#ifCond this.gender '==' 'female' }}
+															selected {{/ifCond}}>{{#with ..}}{{__ "Female"}}{{/with}}
+														</option>
+														<option value="other" {{#ifCond this.gender '==' 'other' }}
+															selected {{/ifCond}}>{{#with ..}}{{__ "Other"}}{{/with}}
+														</option>
+													</select>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="col-md-12 border-light"
+													style="border: 1px solid #ddd; padding: 10px; border-radius: 5px; display:flex;gap: 10px; align-items:center;">
+													<label style="margin-bottom: 0px;">{{#with ..}}{{__
+														"Disability"}}{{/with}}</label>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" name="disability"
+															id="disabilityyes" value="yes" {{#if (eq
+															this.disability "yes" )}}checked{{/if}}>
+														<label class="form-check-label" for="disabilityyes">{{#with
+															..}}{{__
+															"Yes"}}{{/with}}</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" name="disability"
+															id="disabilityno" value="no" {{#if (eq this.disability "no"
+															)}}checked{{/if}}>
+														<label class="form-check-label" for="disabilityno">{{#with
+															..}}{{__
+															"No"}}{{/with}}</label>
+													</div>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
 										<div class="col-md-6 notCustomerBlock">
 											<div class="form-group input">
 												<label></label>
@@ -211,26 +333,62 @@
 												<div class="help-block"></div>
 											</div>
 										</div>
-
-																					<div class="col-md-6">
-												<div class="form-group input">
-													<div class="col-md-12 form-control border-light">
-														<input type="text" name="email" class="form-control"
-														    data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})"
-															data-validation-regex-message="{{#with ..}}{{__ "
-															Email must be a valid email"}}{{/with}}"
-															aria-invalid="false" {{#if this.email}} value="{{this.email}}"
-															{{/if}}>
-														<label for="userinput4">{{#with ..}}{{__ "Email"
-															setlang}}{{/with}}</label>
-													</div>
-													<div class="help-block"></div>
-												</div>
-											</div>
-
 									</div>
 
-									
+									<p class="form-section text-bold-600 font-medium-2 border-light"><i
+											class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Group
+										Information" setlang}}{{/with}} </p>
+									<div class="row">
+										<div class="col-md-6 notCustomerBlock">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" id="groupnameandnumber" class=""
+														name="groupnameandnumber" {{#if this.groupnameandnumber}}
+														value="{{this.groupnameandnumber}}" {{/if}}>
+													<label for="groupnameandnumber">{{#with ..}}{{__ "Group Name and
+														Number"
+														setlang}}{{/with}} </label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										<div class="col-md-6 notCustomerBlock">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" id="leadernameandnumber" class=""
+														name="leadernameandnumber" {{#if this.leadernameandnumber}}
+														value="{{this.leadernameandnumber}}" {{/if}}>
+													<label for="leadernameandnumber">{{#with ..}}{{__ "Group Leaders Name and Contact Details"
+														setlang}}{{/with}} </label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										<div class="col-md-6 notCustomerBlock">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" id="memberapproval" class=""
+														name="memberapproval" {{#if this.memberapproval}}
+														value="{{this.memberapproval}}" {{/if}}>
+													<label for="memberapproval">{{#with ..}}{{__ "Group Member Approval"
+														setlang}}{{/with}} </label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										<div class="col-md-6 notCustomerBlock">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" id="motivation" class=""
+														name="motivation" {{#if this.motivation}}
+														value="{{this.motivation}}" {{/if}}>
+													<label for="motivation">{{#with ..}}{{__ "Motivation"
+														setlang}}{{/with}} </label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+									</div>
 
 									<p class="form-section text-bold-600 font-medium-2 border-light"><i
 											class="iconify mr-1 " data-icon="fxemoji:informationsource"
