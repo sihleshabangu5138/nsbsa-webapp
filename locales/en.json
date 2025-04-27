@@ -1,5 +1,6 @@
 {
 	"2024": "2024",
+	"2025": "2025",
 	"Your Username": "Your Username",
 	"Enter Password": "Enter Password",
 	"Login": "Login",
@@ -1089,5 +1090,6 @@
 	"Payable Amount": "Payable Amount",
 	"Arrear": "Arrear",
 	"Loan Status": "Loan Status",
-	"Total Arrear": "Total Arrear"
+	"Total Arrear": "Total Arrear",
+	"NSBSA": "NSBSA"
 }
