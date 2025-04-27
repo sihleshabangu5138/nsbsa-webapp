@@ -1468,6 +1468,8 @@ exports.postEmiDetails = async (req, res) => {
 
     if (id) {
         try {
+            const previousData = await EmiDetails.findOne(myquery);
+
             const newvalues = {
                 $set: {
                     payment_type: req.body.payment_type,
@@ -1475,6 +1477,7 @@ exports.postEmiDetails = async (req, res) => {
                     cheque_accountno: req.body.cheque_accountno,
                     cheque_date: req.body.cheque_date,
                     paymentamount: req.body.paymentamount,
+                    arrearamount: (previousData.totalpayment - req.body.totalpayment),
                     status: 1,
                     addedby: new mongoose.Types.ObjectId(req.session.user_id),
                 },

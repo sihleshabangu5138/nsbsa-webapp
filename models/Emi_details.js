@@ -23,6 +23,7 @@ const emiDetailsSchema = new mongoose.Schema({
   cheque_name: String,
   payment_type: String,
   paymentamount: String,
+  arrearamount: String,
   mail_noti: Number,
   addedby: {
     type: mongoose.Schema.Types.ObjectId,

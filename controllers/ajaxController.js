@@ -1097,82 +1097,132 @@ exports.getReminderDelete = async (req, res) => {
 exports.getLoanList = async (req, res) => {
 	try {
 		const role = await Role.findOne({ _id: new mongoose.Types.ObjectId(req.session.role) }).lean();
+
 		let query;
 		if (req.session.admin_access !== 1) {
 			if (req.session.access_rights && req.session.access_rights.loanlist && req.session.access_rights.loanlist.owndata) {
-				// query = { $and: [{ status: 1, approvestatus: 1,user: new mongoose.Types.ObjectId(req.session.user_id) }] };
 				if (role.role_nm === "Staff") {
 					query = { $and: [{ status: 1, approvestatus: 1, createdby: new mongoose.Types.ObjectId(req.session.user_id) }] };
-					console.log("rr");
 				} else {
 					query = { $and: [{ status: 1, approvestatus: 1, user: new mongoose.Types.ObjectId(req.session.user_id) }] };
-					console.log("aa");
 				}
 			} else {
 				query = { $and: [{ status: 1, approvestatus: 1 }] };
-
 			}
 		} else {
 			query = { $and: [{ status: 1, approvestatus: 1 }] };
 		}
-		// const query = { $and: [{ status: 1 }, { approvestatus: 1 }] };
-
-		//   const result = await LoanDetails.aggregate([
-		// 	{
-		// 	  $lookup: {
-		// 		from: Loantype.collection,
-		// 		localField: "loantype",
-		// 		foreignField: "_id",
-		// 		as: "loan",
-		// 	  },
-		// 	},
-		// 	{
-		// 	  $unwind: "$loan",
-		// 	},
-		// 	{
-		// 	  $lookup: {
-		// 		from: Users.collection.name,
-		// 		localField: "user",
-		// 		foreignField: "_id",
-		// 		as: "user",
-		// 	  },
-		// 	},
-		// 	{
-		// 	  $unwind: "$user",
-		// 	},
-		// 	{
-		// 	  $match: query,
-		// 	},
-		//   ]).exec();
+		
 		const result = await LoanDetails.aggregate([
 			{
-				$match: query,
+			  $match: query,
 			},
 			{
-				$lookup: {
-					from: Loantype.collection.name,
-					localField: "loantype",
-					foreignField: "_id",
-					as: "loan",
-				},
+			  $lookup: {
+				from: Loantype.collection.name,
+				localField: "loantype",
+				foreignField: "_id",
+				as: "loan",
+			  },
 			},
 			{
-				$lookup: {
-					from: Users.collection.name,
-					localField: "user",
-					foreignField: "_id",
-					as: "user",
-				},
+			  $lookup: {
+				from: Users.collection.name,
+				localField: "user",
+				foreignField: "_id",
+				as: "user",
+			  },
 			},
 			{
-				$addFields: {
-					loan: { $arrayElemAt: ["$loan", 0] },
-					user: { $arrayElemAt: ["$user", 0] },
-				},
+			  $lookup: {
+				from: "emi_details",
+				localField: "_id",
+				foreignField: "loan_id",
+				as: "emiDetails",
+			  },
 			},
-		]);
-
-		res.json(result);
+			{
+			  $addFields: {
+				loan: { $arrayElemAt: ["$loan", 0] },
+				user: { $arrayElemAt: ["$user", 0] },
+				emiDetails: { $ifNull: ["$emiDetails", []] },
+				emiDetailsArrearCount: {
+				  $size: {
+					$filter: {
+					  input: "$emiDetails",
+					  as: "emi",
+					  cond: { $gt: [{ $toDouble: "$$emi.arrearamount" }, 0] },
+					},
+				  },
+				},
+				emiDetailsArrearSum: {
+				  $sum: {
+					$map: {
+					  input: {
+						$filter: {
+						  input: "$emiDetails",
+						  as: "emi",
+						  cond: { $gt: [{ $toDouble: "$$emi.arrearamount" }, 0] },
+						},
+					  },
+					  as: "emi",
+					  in: { $toDouble: "$$emi.arrearamount" },
+					},
+				  },
+				},
+			  },
+			},
+			{
+			  $addFields: {
+				loanStatus: {
+				  $let: {
+					vars: {
+					  arrearCount: "$emiDetailsArrearCount",
+					  statusMap: [
+						{ value: 0, status: "Up To Date" },
+						{ value: 1, status: "1 Month Arrear" },
+						{ value: 2, status: "2 Month Arrear" },
+						{ value: 3, status: "3 or More Month Arrear" },
+					  ],
+					},
+					in: {
+					  $cond: {
+						if: { $gte: ["$$arrearCount", 3] },
+						then: "3 or More Month Arrear",
+						else: {
+						  $arrayElemAt: [
+							{
+							  $filter: {
+								input: "$$statusMap",
+								as: "status",
+								cond: { $eq: ["$$status.value", "$$arrearCount"] },
+							  },
+							},
+							0,
+						  ],
+						},
+					  },
+					},
+				  },
+				},
+			  },
+			},
+			{
+			  $project: {
+				emiDetails: 0, // Exclude emiDetails array from final output
+			  },
+			},
+		  ]);
+		  
+		  // Set loanStatus to be just the status string, not an object
+		  const formattedResult = result.map(loan => {
+			loan.loanStatus = loan.loanStatus.status; // Get the status string from the object
+			return loan;
+		  });
+		  
+		  res.json(formattedResult);
+		  ``
+		  
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ error: 'An error occurred' });
