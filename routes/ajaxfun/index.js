@@ -79,6 +79,7 @@ router.get('/ajxfun/duplicateemail', isAuthenticated, AjaxFun.getDuplicateEmail)
 router.get('/ajxfun/skubarcode', isAuthenticated, AjaxFun.getBarcode);
 router.post('/ajxfun/addrole', isAuthenticated, AjaxFun.postAddRole);
 router.post('/ajxfun/approveloan', isAuthenticated, AjaxFun.postApproveLoan);
+router.post('/ajxfun/loanpaid', isAuthenticated, AjaxFun.postLoanPaid);
 router.post('/ajxfun/state', isAuthenticated, AjaxFun.postState);
 router.post('/ajxfun/city', isAuthenticated, AjaxFun.postCity);
 router.post('/ajxfun/countrycode', isAuthenticated, AjaxFun.postCcode);

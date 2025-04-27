@@ -363,6 +363,14 @@
 																					width: 130,
 																				},
 																				{{/isCustomer}}
+																				{{#isCustomer session.role_slug}}
+					{
+																					field: "loanpaid",
+																					title: "{{__ 'Loan Paid'}}",
+																					template: '<label class="switch remove_switch"><input id="loanpaid" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: loanpaid" #= loanpaid ? checked="checked" : "" #><span class="slider round"></span></label>',
+																					width: 130,
+																				},
+																				{{/isCustomer}}
 																			{
 																				field: "years",
 																				title: "{{__ 'Loan Period In Years'}}",
@@ -515,58 +523,6 @@
 	</div>
 </div>
 </div>
-{{!--
-<script type="text/javascript">
-	$('body').on('click', '#approvestatus', function (e) {
-		if ($(this).prop("checked") == true)
-			console.log("checked");
-		{
-			var id = $(this).val();
-			var value = "checked";
-			<!-- alert(value); -->
-			$.ajax({
-				type: 'POST',
-				url: '/ajxfun/approveloan/',
-				headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-				data: { id: id, approvestatus: value, name: 'approvestatus' },
-				success: function (response) {
-					toastr.success("{{__ "Approved! Loan Approved successfully!"}}", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-					setTimeout(function () {
-						window.location.replace('/loan/loanlist');
-					}, 1500);
-
-				},
-				error: function (e) {
-
-					console.log(e);
-				}
-			});
-
-		}
-			else if ($(this).prop("checked") == false) {
-			console.log("unchecked");
-			var id = $(this).val();
-			var value = null; 
-					
-				$.ajax({
-					type: 'get',
-					url: '/ajxfun/disapproveloan',
-					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-					data: { id: id, approvestatus: value, name: 'approvestatus' },
-					success: function (response) {
-						toastr.success("Loan Disapproved successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
-						setTimeout(function () {
-							window.location.replace('/loan/disapproveloan');
-						}, 1500);
-
-					},
-					error: function (e) {
-						console.log(e);
-					}
-				});
-		}
-	});
-</script> --}}
 <script type="text/javascript">
 	$('body').on('click', '#approvestatus', function (e) {
 		if ($(this).prop("checked") == true) {
@@ -605,6 +561,52 @@
 						toastr.success("Loan Disapproved Successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
 						setTimeout(function () {
 							window.location.replace('/loan/disapproveloan');
+						}, 1500);
+
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				});
+		}
+	});
+	$('body').on('click', '#loanpaid', function (e) {
+		if ($(this).prop("checked") == true) {
+			var id = $(this).val();
+			var value = "checked";
+			<!-- alert(value); -->
+			$.ajax({
+				type: 'POST',
+				url: '/ajxfun/loanpaid/',
+				headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+				data: { id: id, loanpaid: value, name: 'loanpaid' },
+				success: function (response) {
+					toastr.success("{{__ "Paid! Loan Paid Status Change Successfully!"}}", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+					setTimeout(function () {
+						window.location.replace('/loan/loanlist');
+					}, 1500);
+
+				},
+				error: function (e) {
+
+					console.log(e);
+				}
+			});
+
+		}
+		else if ($(this).prop("checked") == false) {
+			var id = $(this).val();
+			var value = null; 
+					
+				$.ajax({
+					type: 'POST',
+					url: '/ajxfun/loanpaid/',
+					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+					data: { id: id, loanpaid: value, name: 'loanpaid' },
+					success: function (response) {
+						toastr.success("Paid! Loan Paid Status Change Successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
+						setTimeout(function () {
+							window.location.replace('/loan/loanlist');
 						}, 1500);
 
 					},

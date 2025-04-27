@@ -1074,5 +1074,9 @@
 	"Group Name and\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tNumber": "Group Name and\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tNumber",
 	"Group Leaders Name and Contact Details": "Group Leaders Name and Contact Details",
 	"Group Member Approval": "Group Member Approval",
-	"Motivation": "Motivation"
+	"Motivation": "Motivation",
+	"Paid Status": "Paid Status",
+	"Paid! Loan Paid Status Change Successfully!": "Paid! Loan Paid Status Change Successfully!",
+	"Loan Paid": "Loan Paid",
+	"Loan Paid status change Successfully.": "Loan Paid status change Successfully."
 }
