@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 require('dotenv').config(); // Load environment variables from .env
 
 const connectToDatabase = async () => {
-  let mongoDbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}?retryWrites=true&w=majority&appName=Cluster0`;
+  const mongoDbUrl = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}?authSource=admin`
+  //let mongoDbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}?retryWrites=true&w=majority&appName=Cluster0`;
 
   if (!mongoDbUrl) {
     console.error('MongoDB connection string is not defined in the environment variables.');
@@ -50,7 +51,8 @@ const connectToDatabase = async () => {
 
 
 const checkConnection = async (db_username, db_pass, db_host, dbname) => {
-  const mongoURI = `mongodb+srv://${db_username}:${db_pass}@${db_host}/${dbname}?retryWrites=true&w=majority&appName=Cluster0`;
+  const mongoURI = `mongodb://${db_username}:${db_pass}@${db_host}/${dbname}?authSource=admin`
+  // const mongoURI = `mongodb+srv://${db_username}:${db_pass}@${db_host}/${dbname}?retryWrites=true&w=majority&appName=Cluster0`;
 
   try {
     const connection = await mongoose.createConnection(mongoURI, {
