@@ -1927,12 +1927,10 @@ MAIL_PASS=
 
 exports.postCheckdbConnect = async (req, res) => {
 	const { dbname, db_username, db_pass, db_host } = req.body;
-	// console.log(dbname, db_username, db_pass, db_host);
 
 	try {
 		// Connect to MongoDB
-		const mongoURI = `mongodb://${db_username}:${db_pass}@${db_host}/${dbname}?authSource=admin`
-		//const mongoURI = `mongodb+srv://${db_username}:${db_pass}@${db_host}/${dbname}?retryWrites=true&w=majority&appName=Cluster0`;
+		const mongoURI = `mongodb+srv://${db_username}:${db_pass}@${db_host}/${dbname}?retryWrites=true&w=majority&appName=Cluster0`;
 
 		const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 		console.log('Connecting to MongoDB...');
