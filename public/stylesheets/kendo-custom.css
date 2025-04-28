@@ -1136,6 +1136,26 @@ div.k-filebrowser-dropzone em {
 .k-state-active {
   box-shadow: none;
 }
+
+.k-grid tr.update-to-date{
+  background-color: green;
+  color:white;
+}
+
+.k-grid tr.one-month-arrear {
+  background-color: yellow;
+}
+
+.k-grid tr.two-month-arrear {
+  background-color: orange;
+  color: white;
+}
+
+.k-grid tr.three-month-arrear {
+  background-color: red;
+  color: #ffff;
+}
+
 .k-grid tr:hover {
   background-color: #596672;
   color:#fff;

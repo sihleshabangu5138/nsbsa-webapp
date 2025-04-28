@@ -239,6 +239,7 @@
 																								middlename: { validation: { required: true } },
 																								lastname: { validation: { required: true } },
 																								email: { validation: { required: true } },
+																								emiDetailsArrearCount: { type: "number" },
 																							}
 																						}
 																					},
@@ -250,7 +251,27 @@
 																						}
 																					}
 																				},
+																				dataBound: function () {
+																								var grid = this; // reference to the grid
+																								var rows = grid.items(); // get all rows
 
+																								rows.each(function () {
+																									var row = $(this);
+																									var dataItem = grid.dataItem(row); // get the dataItem of the row
+																									var emiDetailsArrearCount = dataItem.emiDetailsArrearCount;
+
+																									// Add class based on the emiDetailsArrearCount value
+																									if (emiDetailsArrearCount === 0) {
+																										row.addClass("update-to-date");
+																									} else if (emiDetailsArrearCount === 1) {
+																										row.addClass("one-month-arrear");
+																									} else if (emiDetailsArrearCount === 2) {
+																										row.addClass("two-month-arrear");
+																									} else if (emiDetailsArrearCount === 3) {
+																										row.addClass("three-month-arrear");
+																									}
+																								});
+																							},
 																				sortable: true,
 																				reorderable: true,
 																				groupable: true,
