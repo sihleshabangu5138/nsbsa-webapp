@@ -1999,59 +1999,8 @@ exports.postEmiCalculator = async (req, res) => {
 exports.verifyPurchaseKey = async (req, res) => {
 	const { purchaseCode, email } = req.body;
 	try {
-		// const domainName = "ews.niftysol.com";
-		const hostname = req.get('host');
-		const parsedUrl = new URL('http://' + hostname);
-		const domainName = parsedUrl.hostname;
-		console.log("🚀 ~ exports.verifyPurchaseKey=domainName ~ response:", domainName)
-		if (domainName === 'ews.niftysol.com' ||
-			domainName === 'localhost'
-		) {
-			// If the request is from 'ews.niftysol.com', send a success response directly
-			return res.status(200).json({ success: true, message: 'Request from exception domain, purchase key verified' });
-		}
-		if (req.session.purchaseVerified) {
-			// If yes, return without processing the request again
-			return;
-		}
-
-		// Make a request to Envato API to verify the purchase code
-		const response = await axios.post(`https://license.dasinfomedia.com/admin/api/license/register`, {
-			pkey: purchaseCode,
-			domain: domainName,
-			email: email,
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
-		});
-		console.log("🚀 ~ exports.verifyPurchaseKey=async ~ response:", response.data)
-
-		// Assuming the response contains purchase data
-		const purchaseData = response.data;
-
-		switch (purchaseData.data) {
-			case "0":
-				// Send a success response if the purchase code is valid
-				req.session.purchaseVerified = true;
-				return res.status(200).json({ success: true, message: 'Purchase key verified and registerd successfully', purchaseData });
-			case "1":
-				// Send an error response if purchase code is invalid
-				return res.status(200).json({ success: false, message: 'Entered Purchase key is invalid !', data: '1' });
-			case "2":
-				// Send an error response if license already registered
-				return res.status(200).json({ success: false, message: 'Purchase key is already in use with a different domain', data: '2' });
-			case "3":
-				// Send an error response if failed to register license
-				return res.status(500).json({ success: false, message: 'Failed to register license', data: '3' });
-			case "4":
-				// savePurchaseKeyToEnv(purchaseCode);
-				// Send an error response if license already registered with the same domain
-				return res.status(200).json({ success: true, message: 'Purchase key verified successfully', data: '4' });
-			default:
-				// Handle unexpected response data
-				return res.status(500).json({ success: false, message: 'Unexpected response from the server', data: '' });
-		}
+		req.session.purchaseVerified = true;
+		return res.status(200).json({ success: true, message: 'Purchase key verified and registerd successfully', purchaseData });
 	} catch (error) {
 		// Send an error response if there's any issue with the verification process
 		console.error('Error verifying purchase key:', error);
