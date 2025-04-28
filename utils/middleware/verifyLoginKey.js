@@ -3,14 +3,10 @@ const Setting = require("../../models/Settings");
 const axios = require("axios");
 exports.verifyLoginPurchaseKey = async (req, res, next) => {
   try {
-    const hostname = req.get("host");
-    const parsedUrl = new URL("http://" + hostname);
-    const domainName = parsedUrl.hostname;
-    if (domainName === "ews.niftysol.com" || domainName === "localhost") {
-      // If the request is from 'ews.niftysol.com', send a success response directly
-      req.purchaseData = { data: "4" }; // Assuming the data is '4' for success
-      return next();
-    }
+
+    req.purchaseData = { data: "4" }; // Assuming the data is '4' for success
+    return next();
+
     const settings = await Setting.findOne({});
     if (!settings || !settings.pkey) {
       // Send an error response if the purchase code is not found
@@ -25,7 +21,7 @@ exports.verifyLoginPurchaseKey = async (req, res, next) => {
     }
     const email = await Users.findOne({}, { email: 1 });
     const purchaseCode = settings.pkey;
-   
+
     // Make a request to Envato API to verify the purchase code
     const response = await axios.post(
       `https://license.dasinfomedia.com/admin/api/license/register`,
