@@ -1997,15 +1997,8 @@ exports.postEmiCalculator = async (req, res) => {
 };
 
 exports.verifyPurchaseKey = async (req, res) => {
-	const { purchaseCode, email } = req.body;
-	try {
-		req.session.purchaseVerified = true;
-		return res.status(200).json({ success: true, message: 'Purchase key verified and registerd successfully', purchaseData });
-	} catch (error) {
-		// Send an error response if there's any issue with the verification process
-		console.error('Error verifying purchase key:', error);
-		return res.status(500).json({ success: false, message: 'Internal server error' });
-	}
+	req.session.purchaseVerified = true;
+	return res.status(200).json({ success: true, message: 'Purchase key verified and registerd successfully' });
 };
 
 exports.createCheckoutSession = async (req, res) => {
