@@ -61,6 +61,8 @@
 					  
 				<select class="select2 form-control export" id="export" data-validation-required-message="{{#with ..}}{{__ 'Minimum Range of Amount is required' setlang}}{{/with}}" name="loan_min_amount" aria-hidden="true" aria-invalid="true"> 
 						<option value="" >{{#with ..}}{{__ "Select Minimum Range Of Amount" setlang}}{{/with}}</option>
+						
+						<option value="500" {{#ifCond this.loan_min_amount '==' '500'}} selected {{/ifCond}}>500</option>
 						<option value="50000" {{#ifCond this.loan_min_amount '==' '50000'}} selected {{/ifCond}}>{{#with ..}}{{__ "Less Than 50,000" setlang}}{{/with}}</option>
 						
 						<option value="100000" {{#ifCond this.loan_min_amount '==' '100000'}} selected {{/ifCond}}>1,00,000</option>
@@ -85,6 +87,7 @@
 			 <select class="select2 form-control export" id="export" maxlength="50" data-validation-required-message="{{#with ..}}{{__ "Maximum Range of Amount is required"}}{{/with}}" name="loan_max_amount" aria-hidden="true" aria-invalid="true"> 
 			 
 						<option value="">{{#with ..}}{{__ "Select Maximum Range of Amount" setlang}}{{/with}}</option>
+						<option value="3000" {{#ifCond this.loan_max_amount '==' '3000'}} selected {{/ifCond}}>3,000</option>
 						
 						<option value="300000" {{#ifCond this.loan_max_amount '==' '300000'}} selected {{/ifCond}}>3,00,000</option>
 						

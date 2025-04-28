@@ -90,14 +90,7 @@
   /* background-image: none, linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0px, rgba(255, 255, 255, 0) 100%); */
 
 }
-.k-button:hover,
-.k-button.k-state-hover {
-  color: #2e2e2e;
-  border-color: #b6b6b6;
-  background-color: #596672;
-  background-image: none;
-  background-image: none, linear-gradient(to bottom, #596672);
-}
+
 .k-button:active,
 .k-button.k-state-active {
   color: #ffffff;
@@ -1143,9 +1136,29 @@ div.k-filebrowser-dropzone em {
 .k-state-active {
   box-shadow: none;
 }
+
+.k-grid tr.update-to-date{
+  background-color: green;
+  color:white;
+}
+
+.k-grid tr.one-month-arrear {
+  background-color: yellow;
+}
+
+.k-grid tr.two-month-arrear {
+  background-color: orange;
+  color: white;
+}
+
+.k-grid tr.three-month-arrear {
+  background-color: red;
+  color: #ffff;
+}
+
 .k-grid tr:hover {
   background-color: #596672;
-  /* color:#fff; */
+  color:#fff;
   background-image: none;
   background-image: none, linear-gradient(to bottom, #596672);
   background-position: 50% 50%;

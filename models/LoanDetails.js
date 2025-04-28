@@ -20,14 +20,27 @@ const loanDetailsSchema = new mongoose.Schema({
   incomepermonth: String,
   oincome: String,
   workdetail: String,
+
   customer: String,
-  address: String,
-  mobile: String,
+  customerid: String,
   email: String,  
+  mobile: String,
+  grouppeople: String,
+  nextofkin: String,
+  gender: String,
+  disability: String,
   addtype: String,
   othertext: String,
+  address: String,
+
+  groupnameandnumber: String,
+  leadernameandnumber: String,
+  memberapproval: String,
+  motivation: String,
+
   status: Number,
   approvestatus: Number,
+  loanpaid: Number,
   createdby: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
 });
 

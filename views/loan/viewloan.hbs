@@ -466,11 +466,14 @@
 																											</th>
 																											<th>{{__
 																												'Total
-																												Ammount'}}
+																												Amount'}}
 																											</th>
 																											<th>{{__
 																												'Remaining
 																												Balance'}}
+																											</th>
+																											<th>{{__
+																												'Arrear'}}
 																											</th>
 																											<th>{{__
 																												'Status'}}
@@ -518,6 +521,13 @@
 																												class="bordertop">
 																												{{formatNumber
 																												result.remainingBalance
+																												2 '.'
+																												','}}
+																											</td>
+																											<td
+																												class="bordertop">
+																												{{formatNumber
+																												result.arrearamount
 																												2 '.'
 																												','}}
 																											</td>

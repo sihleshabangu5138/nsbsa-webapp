@@ -58,8 +58,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // session store on db start ----------------------------------
 const store = MongoStore.create({
-  // mongoUrl: `mongodb://127.0.0.1:27017/${process.env.DB_DATABASE}`,
-  mongoUrl : "mongodb+srv://sihleshabangu5138:test123@cluster0.nk9ud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  mongoUrl: `mongodb://127.0.0.1:27017/${process.env.DB_DATABASE}`,
+  //mongoUrl: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}?retryWrites=true&w=majority&appName=Cluster0`,
   touchAfter: 24 * 3600 //in second
 });
 

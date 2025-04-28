@@ -1,567 +1,696 @@
- {{breadcrums (__ 'Home') (__ 'Add EMI')}}
+{{breadcrums (__ 'Home') (__ 'Add EMI')}}
 <div class="app-content center-layout mt-2 mx-md-3 px-1">
-    <div class="content-wrapper">
-	<div class="row">
-	<div class="col-md-12">
-	<div class="card">
-	<div class="card-content collpase show">
-	<div class="card-body">
-	<script>
-			$(document).ready(function(){
-				
-				$('.beforedate').each(function(){
-				$(this).data("DateTimePicker").maxDate(new Date());
-				});
-				$('.afterdate').each(function(){
-				$(this).data("DateTimePicker").minDate(new Date());
-				});
-				$('.today').each(function(){
-				$(this).data("DateTimePicker").minDate(new Date());
-				$(this).data("DateTimePicker").maxDate(new Date());
-				});
-			});
-		</script>
-		{{#if messages.error }}
-		<script>
-			toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-		</script>
-		{{/if}}
-	{{#each loan}}
-		<form id="formID" class="needs-validation form form-horizontal" novalidate method="POST" action="/loan/addemi" >
-			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Your loan details" setlang}}{{/with}}</p>
-			<div class="row">
-			<div class="col-md-6">
-				<div class="form-group input">
-				<div class="col-md-12 form-control border-light">
-					<input type="text" name="loancount" id="readonlyInput" readonly="readonly" class="form-control loan_no" aria-invalid="false" {{#if this.loancount}} value="{{this.loancount}}"{{/if}}>
-					<label for="userinput4">{{#with ..}}{{__ "Loan No." setlang}}{{/with}}</label>
-				</div><div class="help-block"></div>
-				</div>
-			</div>
-			{{#each ../type as |result|}}
-			<div class="col-md-6">
-				<div class="form-group input">
-				<div class="col-md-12 form-control border-light">
-					<input type="text" name="loantype" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if result.type}} value="{{result.type}}"{{/if}}>
-					<label for="userinput4">{{#with ..}}{{__ "Loan Type" setlang}}{{/with}}</label>
-				</div><div class="help-block"></div>
-				</div>
-			</div>
-			{{/each}}
-			
-			</div>
-			{{/each}}
-			{{#each data}}
-			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Your EMI information according to your loan period" setlang}}{{/with}}</p>
-			<div class="row">
-			<div class="col-md-6">
-				<div class="form-group input">
-				<div class="col-md-12 form-control border-light">
-				<input type="hidden" id="userinput1" name="id" {{#if this._id}} value="{{this._id}}"{{/if}} />
-					<input type="text" name="month_on" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.month}} value="{{this.month}}"{{/if}}>
-					<label for="userinput4">{{#with ..}}{{__ "This EMI Month" setlang}}{{/with}}</label>
-				</div><div class="help-block"></div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group input">
-				<div class="col-md-12 form-control border-light">
-					{{!-- change name here from monthon to monthup --}}
-					<input type="text" name="monthup" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.remainingBalance}} value="{{formatNumber this.remainingBalance 0 ','','}}"{{else}} value="0"{{/if}}>
-					<label for="userinput4">{{#with ..}}{{__ "Amount Remaining" setlang}}{{/with}}</label>
-				</div><div class="help-block"></div>
-				</div>
-			</div>
-			<script>
-				$(document).ready(function(){
-
-				   
-					let generalDateFormate = "{{../session.generaldata.date_format}}"	
-					let originalDateFormate;
-					let dates = {
-						'm/d/Y': 'MM/DD/YYYY',
-						'm-d-Y': 'MM-DD-YYYY',
-						"d-m-Y": 'DD-MM-YYYY',
-						"d/m/Y": 'DD/MM/YYYY',
-						"Y-m-d": 'YYYY-MM-DD',
-						"F j, Y": 'MMMM D, YYYY'
-					}
-					if (dates[generalDateFormate]) {
-						originalDateFormate = dates[generalDateFormate];
-					}
-
-					let startDate = $(".startdate").val();
-					startDate = moment(startDate, "YYYY-MM-DD").format(originalDateFormate);
-					$(".startdate").val(startDate)
-
-					let endDate = moment(startDate, originalDateFormate).add(10, 'days').format(originalDateFormate);
-					$(".end_date").val(endDate);
-
-				});
-			</script> 
-			<div class="col-md-6">
-			<div class="form-group row">
+	<div class="content-wrapper">
+		<div class="row">
 			<div class="col-md-12">
+				<div class="card">
+					<div class="card-content collpase show">
+						<div class="card-body">
+							<script>
+								$(document).ready(function () {
 
-			<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "EMI Start Date" setlang}}{{/with}}<span class="required red">*</span></label>
-			<input type='text' id="readonlyInput" readonly="readonly" class="form-control startdate "  data-validation-required-message="Start Date is required" name="emistartdate" {{#if this.date}} value="{{this.date}}"{{/if}}><i class="ft-calendar icon-care"></i> 
-				
-			</div><div class="help-block"></div>
-			</div>
-			</div>
-			<div class="col-md-6">
-			<div class="form-group row">
-			<div class="col-md-12">
-
-			<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "EMI Due Date" setlang}}{{/with}}<span class="required red">*</span></label>
-			<!-- <input type='text'  class="form-control end_date" id="readonlyInput" readonly="" name="emienddate"><i class="ft-calendar icon-care"></i>  -->
-			<input type='text'  class="form-control end_date dateformat"  data-validation-required-message="End Date is required" name="emienddate"   id="readonlyInput" readonly="readonly" ><i class="ft-calendar icon-care"></i> 	
-			</div><div class="help-block"></div>
-			</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group input">
-				<div class="col-md-12 form-control border-light">
-					<input type="text" name="emipermonth" id="emipermonth" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.principal}} value="{{formatNumber this.principal 0 ','','}}"{{/if}}>
-					<label for="userinput4">{{#with ..}}{{__ "EMI Amount for this month" setlang}}{{/with}}</label>
-				</div><div class="help-block"></div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group input">
-				<div class="col-md-12 form-control border-light">
-					<input type="text" name="interest" id="interest" class="form-control" id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if this.interest}} value="{{formatNumber this.interest 0 ','','}}"{{/if}}>
-					<label for="userinput4">{{#with ..}}{{__ "Interest Rate for this month" setlang}}{{/with}}</label>
-				</div><div class="help-block"></div>
-				</div>
-			</div>			
-			</div>
-
-			<div id="userside" style="display: none;">
-				<div class="col-md-12 form-group p-0">
-			
-					<button type="submit" class="btn btn-secondary" id="checkout-button-user">
-						{{__ "Pay now"}}
-					</button>
-			
-				</div>
-			</div>
-			<div id="adminside" style="display: none;">
-				<p class="form-section text-bold-600 font-medium-2"><i class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Payment Method" setlang}}{{/with}}</p>
-				<div class="form-body user_form">
-					<div class="row">
-						<div class="col-md-6 notCustomerBlock">
-							<div class="form-group input">
-								<div class="">
-									<ul class="list-inline mb-0">
-										<li class="col-md-12 p-0 form-control" id="export">
-											<!-- <select class="select2 form-control export" name="paytype" > -->
-											<!-- <option>{{__ "Select your payment mode"}}</option> -->
-											<!-- <option value="cash" {{#ifCond this.paytype '==' 'cash'}} selected {{/ifCond}}>Cash</option> -->
-											<!-- <option value="creditcard" {{#ifCond this.paytype '==' 'creditcard'}} selected {{/ifCond}}>Credit card</option> -->
-											<!-- <option value="debitcard"{{#ifCond this.paytype '==' 'debitcard'}} selected {{/ifCond}}>Debit Card</option> -->
-											<!-- <option value="netbanking"{{#ifCond this.paytype '==' 'netbanking'}} selected {{/ifCond}}>Net Banking</option> -->
-											<!-- </select> -->
-											<label class="ml-1 custom-top-label top" style="z-index:99" for="type">{{#with ..}}{{__
-												"Select your payment mode" setlang}}{{/with}}<span
-													class="required red">*</span></label>
-											<select id="payment_type" class="select2 form-control dropdown_change"
-												name="payment_type" data-validation-required-message="{{#with ..}}{{__ "Payment Type is required"}}{{/with}}">
-												<option value="">{{#with ..}}{{__ "Select Input Type" setlang}}{{/with}}</option>
-												<option value="cash" name="payment_type" {{#ifCond this.payment_type '==' 'cash' }}
-													selected {{/ifCond}}>{{#with ..}}{{__ "Cash" setlang}}{{/with}}</option>
-												{{!-- <option value="creditcard" name="payment_type" {{#ifCond
-													this.payment_type '==' 'creditcard' }} selected {{/ifCond}}>{{#with ..}}{{__
-													"Credit Card" setlang}}{{/with}}</option>
-												<option value="debitcard" name="payment_type" {{#ifCond
-													this.payment_type '==' 'debitcard' }} selected {{/ifCond}}>{{#with ..}}{{__
-													"Debit Card" setlang}}{{/with}}</option> --}}
-												<option value="netbanking" name="payment_type" {{#ifCond
-													this.payment_type '==' 'netbanking' }} selected {{/ifCond}}>{{#with ..}}{{__
-													"Net Banking" setlang}}{{/with}}</option>
-												<option value="cheque" name="cheque_detail" {{#ifCond
-													this.cheque_detail '==' 'cheque' }} selected {{/ifCond}}>{{#with ..}}{{__
-													"Cheque" setlang}}{{/with}}</option>
-											</select>
-										</li><div class="help-block"></div>
-									</ul>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row cheque_cat" style="display:none;">
-					<div class="col-md-6">
-						<div class="form-group input">
-							<div class="col-md-12 form-control border-light">
-								<input type="text" maxlength="30" class=" c_label" name="cheque_name" {{#if this.cheque_name}}
-									value="{{this.cheque_name}}" {{else}} {{/if}}
-									data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})"
-									data-validation-regex-message='{{__ "Only Characters, no numbers"}}' aria-invalid="false">
-								<label>{{#with ..}}{{__ "Name of the pay" setlang}}{{/with}}</label>
-							</div>
-						</div>
-						<div class="form-group input">
-							<div class="col-md-12 form-control border-light">
-								<input type="text" maxlength="30" class="form-control c_label" name="cheque_accountno" {{#if
-									this.cheque_accountno}} value="{{this.cheque_accountno}}" {{else}} {{/if}}
-									data-validation-containsnumber-regex="(\d)+"
-									data-validation-containsnumber-message="No Characters, Only Numbers" aria-invalid="false">
-								<label>{{#with ..}}{{__ "Account number" setlang}}{{/with}}</label>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group row">
-							<div class="col-md-12">
-								<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "Payment Date"
-									setlang}}{{/with}}<span class=""></span></label>
-								<input type='text' class="form-control  dateformat" name="cheque_date" {{#if this.cheque_date}}
-									value="{{this.cheque_date}}" {{else}} {{/if}} aria-invalid="false">
-								<i class="ft-calendar icon-care"></i>
-							</div>
-						</div>
-						<div class="help-block"></div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group row">
-							<div class="col-md-12 border-light">
-								<!-- <input type="text" maxlength="30"  class="form-control c_label" > -->
-								<!-- <label>Amount</label> -->
-								<fieldset>
-									<label>{{#with ..}}{{__ "Cheque Amount" setlang}}{{/with}}<span class=""></span></label>
-									<div class="input-group touchspincolor">
-										<input type="text" id="paymentamount" class="touchspin "
-											data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"
-											name="paymentamount" data-bts-step="1" {{#if this.paymentamount}}
-											value="{{this.paymentamount}}" {{/if}} />
+									$('.beforedate').each(function () {
+										$(this).data("DateTimePicker").maxDate(new Date());
+									});
+									$('.afterdate').each(function () {
+										$(this).data("DateTimePicker").minDate(new Date());
+									});
+									$('.today').each(function () {
+										$(this).data("DateTimePicker").minDate(new Date());
+										$(this).data("DateTimePicker").maxDate(new Date());
+									});
+								});
+							</script>
+							{{#if messages.error }}
+							<script>
+								toastr.error("{{messages.error}}", "{{__ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+							</script>
+							{{/if}}
+							{{#each loan}}
+							<form id="formID" class="needs-validation form form-horizontal" novalidate method="POST"
+								action="/loan/addemi">
+								<p class="form-section text-bold-600 font-medium-2 border-light"><i
+										class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Your loan details"
+									setlang}}{{/with}}</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group input">
+											<div class="col-md-12 form-control border-light">
+												<input type="text" name="loancount" id="readonlyInput"
+													readonly="readonly" class="form-control loan_no"
+													aria-invalid="false" {{#if this.loancount}}
+													value="{{this.loancount}}" {{/if}}>
+												<label for="userinput4">{{#with ..}}{{__ "Loan No."
+													setlang}}{{/with}}</label>
+											</div>
+											<div class="help-block"></div>
+										</div>
 									</div>
-								</fieldset>
-							</div>
-						</div>
-					</div>
-					<!-- <div class="col-md-2"> -->
-					<!-- <input type="button"  name="menu_web" class="btn btn-primary add_more_checkbox" value="Add More"> -->
-					<!-- </div>  -->
-				</div>
-			
-				<!----cheque detailes end-->
-				{{/each}}
-				<!-- Custome fields Start-->
-			{{#if newfield}}
-			<p class="form-section text-bold-600 font-medium-2 border-light"><i class="fa fa-address-card-o" aria-hidden="true"></i>
-				{{__ "Custom fields"}} </p>
-			<div class="row">
-			
-				{{#each newfield as |datafield|}}
-				{{#ifCond datafield.field_type "==" "text"}}
-				<div class="col-md-6 notCustomerBlock">
-					<div class="form-group input">
-						<div class="col-md-12 form-control border-light">
-							<input type="text" name="customfields[{{datafield._id}}]" {{#ifEqual datafield.validation "nullable"
-								}}{{/ifEqual}} {{#ifEqual datafield.validation "required" }}
-								data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#ifEqual
-								datafield.validation "numeric" }} data-validation-regex-regex="([0-9_, .-]{{regexlimit}})"
-								{{/ifEqual}} {{#ifEqual datafield.validation "alpha" }}
-								data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})" {{/ifEqual}} {{#ifEqual
-								datafield.validation "alpha_space" }}
-								data-validation-regex-message="{{__ 'Only Characters, no numbers'}}"
-								data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})" {{/ifEqual}} {{#ifEqual
-								datafield.validation "alpha_num" }} data-validation-regex-regex="([A-Za-z0-9_, .-]{{regexlimit}})"
-								{{/ifEqual}} {{#ifEqual datafield.validation "email" }}
-								data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" {{/ifEqual}} {{#ifEqual
-								datafield.validation "url" }}
-								data-validation-regex-regex="^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$"
-								{{/ifEqual}} {{#ifEqual datafield.validation "before_or_equal:today" }} {{/ifEqual}} {{#ifEqual
-								datafield.validation "date_equals:today" }} {{/ifEqual}} {{#ifEqual
-								datafield.validation "after_or_equal:today" }} {{/ifEqual}} {{#if datafield.minival}}
-								minlength={{datafield.minival}} {{/if}} {{#if datafield.maxival}}
-								maxlength={{datafield.maxival}}{{/if}} {{#each ../customfield_value as |custome_value| }} {{#ifCond
-								custome_value.id_d "==" datafield.id_d}} value="{{custome_value.customfield_value}}" {{/ifCond}}
-								{{/each}}>
-							<label>{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span
-									class="required red">*</span>{{/ifEqual}}</label>
-						</div>
-						<div class="help-block"></div>
-					</div>
-				</div>
-				{{/ifCond}}
-				{{#ifCond datafield.field_type "==" "textarea"}}
-				<div class="col-md-6">
-					<div class="form-group input">
-						<div class="col-md-12 form-control border-light textarea_css" style="border: 1px solid #ddd;">
-							<div class="form-field">
-								<textarea name="customfields[{{datafield._id}}]" {{#ifEqual datafield.validation "nullable"
-									}}{{/ifEqual}} {{#ifEqual datafield.validation "required" }}
-									data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#ifEqual
-									datafield.validation "numeric" }} data-validation-regex-regex="([0-9_, .-]{{regexlimit}})"
-									{{/ifEqual}} {{#ifEqual datafield.validation "alpha" }}
-									data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})" {{/ifEqual}} {{#ifEqual
-									datafield.validation "alpha_space" }}
-									data-validation-regex-message="{{__ 'Only Characters, no numbers'}}"
-									data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})" {{/ifEqual}} {{#ifEqual
-									datafield.validation "alpha_num" }}
-									data-validation-regex-regex="([A-Za-z0-9_, .-]{{regexlimit}})" {{/ifEqual}} {{#ifEqual
-									datafield.validation "email" }}
-									data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" {{/ifEqual}}
-									{{#ifEqual datafield.validation "url" }}
-									data-validation-regex-regex="^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$"
-									{{/ifEqual}} {{#ifEqual datafield.validation "before_or_equal:today" }} {{/ifEqual}} {{#ifEqual
-									datafield.validation "date_equals:today" }} {{/ifEqual}} {{#ifEqual
-									datafield.validation "after_or_equal:today" }} {{/ifEqual}} {{#if datafield.minival}}
-									minlength={{datafield.minival}} {{/if}} {{#if datafield.maxival}}
-									maxlength={{datafield.maxival}}{{/if}} {{#each ../customfield_value as |custome_value| }}
-									{{#ifCond custome_value.id_d "==" datafield.id_d}} value="{{custome_value.customfield_value}}"
-									{{/ifCond}}
-									{{/each}}>{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "=="datafield.id_d}}{{custome_value.customfield_value}}{{/ifCond}}{{/each}}</textarea>
-								<span class="txt-title-label"></span>
-								<label class="text-area address ">{{datafield.label}}{{#ifEqual datafield.validation
-									"required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-							</div>
-						</div>
-						<div class="help-block"></div>
-					</div>
-				</div>
-				{{/ifCond}}
-				{{#ifCond datafield.field_type "==" "checkbox"}}
-				<div class="col-md-6">
-					<div class="form-group">
-						<div class="col-md-12 form-control">
-							<div class="skin skin-flat row">
-								<div class="input-group">
-									<label class="ml-1 custom-top-label">{{datafield.label}}{{#ifEqual datafield.validation
-										"required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-									{{#each datafield.c_label as |datafile_data|}}
-									<div class="d-inline-block custom-control custom-checkbox mr-1">
-										<input type="checkbox" class="custom-control-input hideattar"
-											name="customfields[{{datafield._id}}]" value="{{this}}" {{#ifEqual
-											datafield.validation "nullable" }}{{/ifEqual}} {{#ifEqual
-											datafield.validation "required" }}
-											data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#each
-											../../customfield_value as |custome_value| }} {{#ifCond custome_value.id_d "=="
-											datafield.id_d}} {{#ifCond datafile_data "==" custome_value.customfield_value}} checked
-											{{/ifCond}} {{/ifCond}} {{/each}}>
-										<label class="custom-control-label" for="colorCheck1">{{this}}</label>
+									{{#each ../type as |result|}}
+									<div class="col-md-6">
+										<div class="form-group input">
+											<div class="col-md-12 form-control border-light">
+												<input type="text" name="loantype" class="form-control"
+													id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if
+													result.type}} value="{{result.type}}" {{/if}}>
+												<label for="userinput4">{{#with ..}}{{__ "Loan Type"
+													setlang}}{{/with}}</label>
+											</div>
+											<div class="help-block"></div>
+										</div>
 									</div>
 									{{/each}}
-			
+
 								</div>
-			
-							</div>
-						</div>
-						<div class="help-block"></div>
-					</div>
-				</div>
-				{{/ifCond}}
-				{{#ifCond datafield.field_type "==" "dropdown"}}
-				<div class="col-md-6">
-					<div class="form-group input">
-						<div class="heading-elements ">
-							<ul class="list-inline mb-0">
-								<li class="col-md-12 p-0 form-control" id="export">
-									<label class="ml-1 custom-top-label top" style="z-index:9">{{datafield.label}}{{#ifEqual
-										datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-									<select class="select2 form-control export" name="customfields[{{datafield._id}}]" {{#ifEqual
-										datafield.validation "nullable" }}{{/ifEqual}} {{#ifEqual datafield.validation "required" }}
-										data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#each
-										../customfield_value as |custome_value| }} {{#ifCond custome_value.id_d "=="
-										datafield.id_d}} value="{{custome_value.customfield_value}}" {{/ifCond}} {{/each}}>
-										<option value="">Select {{datafield.label}}</option>
-										{{#each datafield.d_label as |datafile_data|}}
-										<option value="{{this}}" {{#each ../../customfield_value as |custome_value| }} {{#ifCond
-											custome_value.id_d "==" datafield.id_d}} {{#ifCond datafile_data "=="
-											custome_value.customfield_value}} selected {{/ifCond}} {{/ifCond}} {{/each}}>{{this}}
-										</option>
+								{{/each}}
+								{{#each data}}
+								<p class="form-section text-bold-600 font-medium-2 border-light"><i
+										class="icon-users font-medium-2 mr-1"></i>{{#with ..}}{{__ "Your EMI information
+									according to your loan period" setlang}}{{/with}}</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group input">
+											<div class="col-md-12 form-control border-light">
+												<input type="hidden" id="userinput1" name="id" {{#if this._id}}
+													value="{{this._id}}" {{/if}} />
+												<input type="text" name="month_on" class="form-control"
+													id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if
+													this.month}} value="{{this.month}}" {{/if}}>
+												<label for="userinput4">{{#with ..}}{{__ "This EMI Month"
+													setlang}}{{/with}}</label>
+											</div>
+											<div class="help-block"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group input">
+											<div class="col-md-12 form-control border-light">
+												{{!-- change name here from monthon to monthup --}}
+												<input type="text" name="monthup" class="form-control"
+													id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if
+													this.remainingBalance}}
+													value="{{formatNumber this.remainingBalance 0 ','','}}" {{else}}
+													value="0" {{/if}}>
+												<label for="userinput4">{{#with ..}}{{__ "Amount Remaining"
+													setlang}}{{/with}}</label>
+											</div>
+											<div class="help-block"></div>
+										</div>
+									</div>
+									<script>
+										$(document).ready(function () {
+
+
+											let generalDateFormate = "{{../session.generaldata.date_format}}"
+											let originalDateFormate;
+											let dates = {
+												'm/d/Y': 'MM/DD/YYYY',
+												'm-d-Y': 'MM-DD-YYYY',
+												"d-m-Y": 'DD-MM-YYYY',
+												"d/m/Y": 'DD/MM/YYYY',
+												"Y-m-d": 'YYYY-MM-DD',
+												"F j, Y": 'MMMM D, YYYY'
+											}
+											if (dates[generalDateFormate]) {
+												originalDateFormate = dates[generalDateFormate];
+											}
+
+											let startDate = $(".startdate").val();
+											startDate = moment(startDate, "YYYY-MM-DD").format(originalDateFormate);
+											$(".startdate").val(startDate)
+
+											let endDate = moment(startDate, originalDateFormate).add(10, 'days').format(originalDateFormate);
+											$(".end_date").val(endDate);
+
+										});
+									</script>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-12">
+
+												<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "EMI
+													Start Date" setlang}}{{/with}}<span
+														class="required red">*</span></label>
+												<input type='text' id="readonlyInput" readonly="readonly"
+													class="form-control startdate "
+													data-validation-required-message="Start Date is required"
+													name="emistartdate" {{#if this.date}} value="{{this.date}}"
+													{{/if}}><i class="ft-calendar icon-care"></i>
+
+											</div>
+											<div class="help-block"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group row">
+											<div class="col-md-12">
+
+												<label class="custom-control-label-date ml-2">{{#with ..}}{{__ "EMI Due
+													Date" setlang}}{{/with}}<span class="required red">*</span></label>
+												<!-- <input type='text'  class="form-control end_date" id="readonlyInput" readonly="" name="emienddate"><i class="ft-calendar icon-care"></i>  -->
+												<input type='text' class="form-control end_date dateformat"
+													data-validation-required-message="End Date is required"
+													name="emienddate" id="readonlyInput" readonly="readonly"><i
+													class="ft-calendar icon-care"></i>
+											</div>
+											<div class="help-block"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group input">
+											<div class="col-md-12 form-control border-light">
+												<input type="text" name="emipermonth" id="emipermonth"
+													class="form-control" id="readonlyInput" readonly="readonly"
+													aria-invalid="false" {{#if this.principal}}
+													value="{{formatNumber this.principal 0 ','','}}" {{/if}}>
+												<label for="userinput4">{{#with ..}}{{__ "EMI Amount for this month"
+													setlang}}{{/with}}</label>
+											</div>
+											<div class="help-block"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group input">
+											<div class="col-md-12 form-control border-light">
+												<input type="text" name="interest" id="interest" class="form-control"
+													id="readonlyInput" readonly="readonly" aria-invalid="false" {{#if
+													this.interest}} value="{{formatNumber this.interest 0 ','','}}"
+													{{/if}}>
+												<label for="userinput4">{{#with ..}}{{__ "Interest Rate for this month"
+													setlang}}{{/with}}</label>
+											</div>
+											<div class="help-block"></div>
+										</div>
+									</div>
+								</div>
+
+								<div id="userside" style="display: none;">
+									<div class="col-md-12 form-group p-0">
+
+										<button type="submit" class="btn btn-secondary" id="checkout-button-user">
+											{{__ "Pay now"}}
+										</button>
+
+									</div>
+								</div>
+								<div id="adminside" style="display: none;">
+									<p class="form-section text-bold-600 font-medium-2"><i
+											class="ft-user font-medium-2 mr-1"></i>{{#with ..}}{{__ "Payment Method"
+										setlang}}{{/with}}</p>
+									<div class="form-body user_form">
+										<div class="row">
+											<div class="col-md-6 notCustomerBlock">
+												<div class="form-group input">
+													<div class="">
+														<ul class="list-inline mb-0">
+															<li class="col-md-12 p-0 form-control" id="export">
+																<label class="ml-1 custom-top-label top"
+																	style="z-index:99" for="type">{{#with ..}}{{__
+																	"Select your payment mode" setlang}}{{/with}}<span
+																		class="required red">*</span></label>
+																<select id="payment_type"
+																	class="select2 form-control dropdown_change"
+																	name="payment_type"
+																	data-validation-required-message="{{#with ..}}{{__ "
+																	Payment Type is required"}}{{/with}}">
+																	<option value="">{{#with ..}}{{__ "Select Input
+																		Type" setlang}}{{/with}}</option>
+																	<option value="cash" name="payment_type" {{#ifCond
+																		this.payment_type '==' 'cash' }} selected
+																		{{/ifCond}}>{{#with ..}}{{__ "Cash"
+																		setlang}}{{/with}}</option>
+																	<option value="debitorder" name="payment_type"
+																		{{#ifCond this.payment_type '==' 'debitorder' }}
+																		selected {{/ifCond}}>{{#with ..}}{{__
+																		"Debit Order" setlang}}{{/with}}</option>
+																	<option value="eft" name="payment_type" {{#ifCond
+																		this.payment_type '==' 'eft' }} selected
+																		{{/ifCond}}>{{#with ..}}{{__
+																		"EFT" setlang}}{{/with}}</option>
+																	{{!-- <option value="netbanking" name="payment_type"
+																		{{#ifCond this.payment_type '==' 'netbanking' }}
+																		selected {{/ifCond}}>{{#with ..}}{{__
+																		"Net Banking" setlang}}{{/with}}</option>
+																	<option value="cheque" name="cheque_detail"
+																		{{#ifCond this.cheque_detail '==' 'cheque' }}
+																		selected {{/ifCond}}>{{#with ..}}{{__
+																		"Cheque" setlang}}{{/with}}</option> --}}
+																</select>
+															</li>
+															<div class="help-block"></div>
+														</ul>
+													</div>
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group input">
+													<div class="col-md-12 form-control border-light">
+														<input type="text" name="totalpayment" id="totalpayment"
+															class="form-control" aria-invalid="false" {{#if
+															this.totalpayment}}
+															value="{{formatNumber this.totalpayment 0 ','','}}" {{/if}}>
+														<label for="userinput4">{{#with ..}}{{__ "Payable Amount"
+															setlang}}{{/with}}</label>
+													</div>
+													<div class="help-block"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row cheque_cat" style="display:none;">
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" maxlength="30" class=" c_label"
+														name="cheque_name" {{#if this.cheque_name}}
+														value="{{this.cheque_name}}" {{else}} {{/if}}
+														data-validation-regex-regex="([A-Za-z_, `.'^-]{1,50})"
+														data-validation-regex-message='{{__ "Only Characters, no numbers"}}'
+														aria-invalid="false">
+													<label>{{#with ..}}{{__ "Name of the pay" setlang}}{{/with}}</label>
+												</div>
+											</div>
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" maxlength="30" class="form-control c_label"
+														name="cheque_accountno" {{#if this.cheque_accountno}}
+														value="{{this.cheque_accountno}}" {{else}} {{/if}}
+														data-validation-containsnumber-regex="(\d)+"
+														data-validation-containsnumber-message="No Characters, Only Numbers"
+														aria-invalid="false">
+													<label>{{#with ..}}{{__ "Account number" setlang}}{{/with}}</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group row">
+												<div class="col-md-12">
+													<label class="custom-control-label-date ml-2">{{#with ..}}{{__
+														"Payment Date"
+														setlang}}{{/with}}<span class=""></span></label>
+													<input type='text' class="form-control  dateformat"
+														name="cheque_date" {{#if this.cheque_date}}
+														value="{{this.cheque_date}}" {{else}} {{/if}}
+														aria-invalid="false">
+													<i class="ft-calendar icon-care"></i>
+												</div>
+											</div>
+											<div class="help-block"></div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group row">
+												<div class="col-md-12 border-light">
+													<!-- <input type="text" maxlength="30"  class="form-control c_label" > -->
+													<!-- <label>Amount</label> -->
+													<fieldset>
+														<label>{{#with ..}}{{__ "Cheque Amount" setlang}}{{/with}}<span
+																class=""></span></label>
+														<div class="input-group touchspincolor">
+															<input type="text" id="paymentamount" class="touchspin "
+																data-bts-postfix="{{{currencyList ../session.generaldata.currency}}}"
+																name="paymentamount" data-bts-step="1" {{#if
+																this.paymentamount}} value="{{this.paymentamount}}"
+																{{/if}} />
+														</div>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+										<!-- <div class="col-md-2"> -->
+										<!-- <input type="button"  name="menu_web" class="btn btn-primary add_more_checkbox" value="Add More"> -->
+										<!-- </div>  -->
+									</div>
+
+									<!----cheque detailes end-->
+									{{/each}}
+									<!-- Custome fields Start-->
+									{{#if newfield}}
+									<p class="form-section text-bold-600 font-medium-2 border-light"><i
+											class="fa fa-address-card-o" aria-hidden="true"></i>
+										{{__ "Custom fields"}} </p>
+									<div class="row">
+
+										{{#each newfield as |datafield|}}
+										{{#ifCond datafield.field_type "==" "text"}}
+										<div class="col-md-6 notCustomerBlock">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light">
+													<input type="text" name="customfields[{{datafield._id}}]" {{#ifEqual
+														datafield.validation "nullable" }}{{/ifEqual}} {{#ifEqual
+														datafield.validation "required" }}
+														data-validation-required-message="{{datafield.label}} is required"
+														{{/ifEqual}} {{#ifEqual datafield.validation "numeric" }}
+														data-validation-regex-regex="([0-9_, .-]{{regexlimit}})"
+														{{/ifEqual}} {{#ifEqual datafield.validation "alpha" }}
+														data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})"
+														{{/ifEqual}} {{#ifEqual datafield.validation "alpha_space" }}
+														data-validation-regex-message="{{__ 'Only Characters, no numbers'}}"
+														data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})"
+														{{/ifEqual}} {{#ifEqual datafield.validation "alpha_num" }}
+														data-validation-regex-regex="([A-Za-z0-9_, .-]{{regexlimit}})"
+														{{/ifEqual}} {{#ifEqual datafield.validation "email" }}
+														data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})"
+														{{/ifEqual}} {{#ifEqual datafield.validation "url" }}
+														data-validation-regex-regex="^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$"
+														{{/ifEqual}} {{#ifEqual
+														datafield.validation "before_or_equal:today" }} {{/ifEqual}}
+														{{#ifEqual datafield.validation "date_equals:today" }}
+														{{/ifEqual}} {{#ifEqual
+														datafield.validation "after_or_equal:today" }} {{/ifEqual}}
+														{{#if datafield.minival}} minlength={{datafield.minival}}
+														{{/if}} {{#if datafield.maxival}}
+														maxlength={{datafield.maxival}}{{/if}} {{#each
+														../customfield_value as |custome_value| }} {{#ifCond
+														custome_value.id_d "==" datafield.id_d}}
+														value="{{custome_value.customfield_value}}" {{/ifCond}}
+														{{/each}}>
+													<label>{{datafield.label}}{{#ifEqual datafield.validation
+														"required"}}<span
+															class="required red">*</span>{{/ifEqual}}</label>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										{{/ifCond}}
+										{{#ifCond datafield.field_type "==" "textarea"}}
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="col-md-12 form-control border-light textarea_css"
+													style="border: 1px solid #ddd;">
+													<div class="form-field">
+														<textarea name="customfields[{{datafield._id}}]" {{#ifEqual
+															datafield.validation "nullable" }}{{/ifEqual}} {{#ifEqual
+															datafield.validation "required" }}
+															data-validation-required-message="{{datafield.label}} is required"
+															{{/ifEqual}} {{#ifEqual datafield.validation "numeric" }}
+															data-validation-regex-regex="([0-9_, .-]{{regexlimit}})"
+															{{/ifEqual}} {{#ifEqual datafield.validation "alpha" }}
+															data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})"
+															{{/ifEqual}} {{#ifEqual datafield.validation "alpha_space"
+															}}
+															data-validation-regex-message="{{__ 'Only Characters, no numbers'}}"
+															data-validation-regex-regex="([A-Za-z_, .-]{{regexlimit}})"
+															{{/ifEqual}} {{#ifEqual datafield.validation "alpha_num" }}
+															data-validation-regex-regex="([A-Za-z0-9_, .-]{{regexlimit}})"
+															{{/ifEqual}} {{#ifEqual datafield.validation "email" }}
+															data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})"
+															{{/ifEqual}} {{#ifEqual datafield.validation "url" }}
+															data-validation-regex-regex="^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$"
+															{{/ifEqual}} {{#ifEqual
+															datafield.validation "before_or_equal:today" }} {{/ifEqual}}
+															{{#ifEqual datafield.validation "date_equals:today" }}
+															{{/ifEqual}} {{#ifEqual
+															datafield.validation "after_or_equal:today" }} {{/ifEqual}}
+															{{#if datafield.minival}} minlength={{datafield.minival}}
+															{{/if}} {{#if datafield.maxival}}
+															maxlength={{datafield.maxival}}{{/if}} {{#each
+															../customfield_value as |custome_value| }} {{#ifCond
+															custome_value.id_d "==" datafield.id_d}}
+															value="{{custome_value.customfield_value}}" {{/ifCond}}
+															{{/each}}>{{#each ../customfield_value as |custome_value| }}{{#ifCond  custome_value.id_d "=="datafield.id_d}}{{custome_value.customfield_value}}{{/ifCond}}{{/each}}</textarea>
+														<span class="txt-title-label"></span>
+														<label class="text-area address ">{{datafield.label}}{{#ifEqual
+															datafield.validation
+															"required"}}<span
+																class="required red">*</span>{{/ifEqual}}</label>
+													</div>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										{{/ifCond}}
+										{{#ifCond datafield.field_type "==" "checkbox"}}
+										<div class="col-md-6">
+											<div class="form-group">
+												<div class="col-md-12 form-control">
+													<div class="skin skin-flat row">
+														<div class="input-group">
+															<label
+																class="ml-1 custom-top-label">{{datafield.label}}{{#ifEqual
+																datafield.validation
+																"required"}}<span
+																	class="required red">*</span>{{/ifEqual}}</label>
+															{{#each datafield.c_label as |datafile_data|}}
+															<div
+																class="d-inline-block custom-control custom-checkbox mr-1">
+																<input type="checkbox"
+																	class="custom-control-input hideattar"
+																	name="customfields[{{datafield._id}}]"
+																	value="{{this}}" {{#ifEqual
+																	datafield.validation "nullable" }}{{/ifEqual}}
+																	{{#ifEqual datafield.validation "required" }}
+																	data-validation-required-message="{{datafield.label}} is required"
+																	{{/ifEqual}} {{#each ../../customfield_value as
+																	|custome_value| }} {{#ifCond custome_value.id_d "=="
+																	datafield.id_d}} {{#ifCond datafile_data "=="
+																	custome_value.customfield_value}} checked
+																	{{/ifCond}} {{/ifCond}} {{/each}}>
+																<label class="custom-control-label"
+																	for="colorCheck1">{{this}}</label>
+															</div>
+															{{/each}}
+
+														</div>
+
+													</div>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										{{/ifCond}}
+										{{#ifCond datafield.field_type "==" "dropdown"}}
+										<div class="col-md-6">
+											<div class="form-group input">
+												<div class="heading-elements ">
+													<ul class="list-inline mb-0">
+														<li class="col-md-12 p-0 form-control" id="export">
+															<label class="ml-1 custom-top-label top"
+																style="z-index:9">{{datafield.label}}{{#ifEqual
+																datafield.validation "required"}}<span
+																	class="required red">*</span>{{/ifEqual}}</label>
+															<select class="select2 form-control export"
+																name="customfields[{{datafield._id}}]" {{#ifEqual
+																datafield.validation "nullable" }}{{/ifEqual}}
+																{{#ifEqual datafield.validation "required" }}
+																data-validation-required-message="{{datafield.label}} is required"
+																{{/ifEqual}} {{#each ../customfield_value as
+																|custome_value| }} {{#ifCond custome_value.id_d "=="
+																datafield.id_d}}
+																value="{{custome_value.customfield_value}}" {{/ifCond}}
+																{{/each}}>
+																<option value="">Select {{datafield.label}}</option>
+																{{#each datafield.d_label as |datafile_data|}}
+																<option value="{{this}}" {{#each ../../customfield_value
+																	as |custome_value| }} {{#ifCond
+																	custome_value.id_d "==" datafield.id_d}} {{#ifCond
+																	datafile_data "==" custome_value.customfield_value}}
+																	selected {{/ifCond}} {{/ifCond}} {{/each}}>{{this}}
+																</option>
+																{{/each}}
+															</select>
+														</li>
+													</ul>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										{{/ifCond}}
+										{{#ifCond datafield.field_type "==" "date"}}
+
+
+										<div class="col-md-6">
+											<div class="form-group row">
+												<div class="col-md-12">
+													<label class="custom-control-label-date ml-2">
+														{{datafield.label}}{{#ifEqual datafield.validation
+														"required"}}<span class="required red">*</span>{{/ifEqual}}
+													</label>
+
+													<input type="text" name="customfields[{{datafield._id}}]"
+														aria-invalid="false"
+														class="form-control dateformat {{#ifEqual datafield.validation "
+														before_or_equal:today"}}beforedate{{/ifEqual}} {{#ifEqual
+														datafield.validation "after_or_equal:today"
+														}}afterdate{{/ifEqual}} {{#ifEqual
+														datafield.validation "date_equals:today" }}today{{/ifEqual}}"
+														{{#ifEqual datafield.validation "required" }}
+														data-validation-required-message="{{datafield.label}} is required"
+														{{/ifEqual}} {{#each ../customfield_value as |custome_value|}}
+														{{#ifCond custome_value.id_d "==" datafield.id_d}}
+														value="{{custome_value.customfield_value}}" {{/ifCond}}
+														{{/each}}>
+
+													<i class="ft-calendar icon-care"></i>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										{{/ifCond}}
+										{{#ifCond datafield.field_type "==" "radio"}}
+										<div class="col-md-6">
+											<div class="form-group">
+												<div class="col-md-12 form-control">
+													<div class="skin skin-flat row ">
+														<div class="input-group">
+															<label
+																class="custom-control-label custom-top-label ml-2">{{datafield.label}}{{#ifEqual
+																datafield.validation "required"}}<span
+																	class="required red">*</span>{{/ifEqual}}</label>
+															&nbsp;&nbsp;&nbsp;
+															{{#each datafield.r_label as |datafile_data|}}
+															<div
+																class="d-inline-block custom-control custom-radio mr-1">
+																<input type="radio"
+																	name="customfields[{{datafield._id}}]"
+																	value="{{datafile_data}}" {{#ifEqual
+																	datafield.validation "nullable" }}{{/ifEqual}}
+																	{{#ifEqual datafield.validation "required" }}
+																	data-validation-required-message="{{datafield.label}} is required"
+																	{{/ifEqual}} {{log datafile_data}}
+																	{{log "hbsssssssssssss" }} {{#each
+																	../../customfield_value as |custome_value| }}
+																	{{#ifCond custome_value.id_d "==" datafield.id_d}}
+																	{{#ifCond datafile_data "=="
+																	custome_value.customfield_value}} checked
+																	{{/ifCond}} {{/ifCond}} {{/each}}>
+																<label class="custom-control-label">{{this}}</label>
+																&nbsp; &nbsp;&nbsp; &nbsp;
+																&nbsp; &nbsp;&nbsp; &nbsp;
+															</div>
+															{{/each}}
+
+														</div>
+													</div>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										{{/ifCond}}
+										{{#ifCond datafield.field_type "==" "file"}}
+										<div class="col-md-6">
+											<div class="form-group row">
+												<div class="col-md-12">
+													<label
+														class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual
+														datafield.validation
+														"required"}}{{#unless ../customfield_value}}{{else}}<span
+															class="required red">*</span>{{/unless}}{{/ifEqual}}</label>
+													<input class="form-control border-light validimage" {{#ifEqual
+														datafield.validation "required" }} {{#unless
+														../customfield_value}}
+														data-validation-required-message="{{datafield.label}} is required"
+														{{/unless}} {{/ifEqual}} {{#each ../customfield_value as
+														|custome_value| }} {{#ifCond custome_value.id_d "=="
+														datafield.id_d}} value="{{custome_value.customfield_value}}"
+														{{/ifCond}} {{/each}} name="{{datafield._id}}" type="file">
+
+													{{#each ../customfield_value as |custome_value| }}
+													{{#ifCond custome_value.id_d "==" datafield.id_d}}
+													<p>{{custome_value.customfield_value}}</p>
+													<input class="form-control border-light edit_val"
+														name="customphoto_old"
+														value="{{custome_value.customfield_value}}" type="hidden"
+														placeholder="" id="userinput5">
+													{{/ifCond}}
+													{{/each}}
+
+													<span class="required red notice"></span>
+												</div>
+												<div class="help-block"></div>
+											</div>
+										</div>
+										{{/ifCond}}
 										{{/each}}
-									</select>
-								</li>
-							</ul>
-						</div>
-						<div class="help-block"></div>
-					</div>
-				</div>
-				{{/ifCond}}
-				{{#ifCond datafield.field_type "==" "date"}}
-			
-			
-				<div class="col-md-6">
-					<div class="form-group row">
-						<div class="col-md-12">
-							<label class="custom-control-label-date ml-2">
-								{{datafield.label}}{{#ifEqual datafield.validation "required"}}<span
-									class="required red">*</span>{{/ifEqual}}
-							</label>
-			
-							<input type="text" name="customfields[{{datafield._id}}]" aria-invalid="false"
-								class="form-control dateformat {{#ifEqual datafield.validation "
-								before_or_equal:today"}}beforedate{{/ifEqual}} {{#ifEqual
-								datafield.validation "after_or_equal:today" }}afterdate{{/ifEqual}} {{#ifEqual
-								datafield.validation "date_equals:today" }}today{{/ifEqual}}" {{#ifEqual
-								datafield.validation "required" }}
-								data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{#each
-								../customfield_value as |custome_value|}} {{#ifCond custome_value.id_d "==" datafield.id_d}}
-								value="{{custome_value.customfield_value}}" {{/ifCond}} {{/each}}>
-			
-							<i class="ft-calendar icon-care"></i>
-						</div>
-						<div class="help-block"></div>
-					</div>
-				</div>
-				{{/ifCond}}
-				{{#ifCond datafield.field_type "==" "radio"}}
-				<div class="col-md-6">
-					<div class="form-group">
-						<div class="col-md-12 form-control">
-							<div class="skin skin-flat row ">
-								<div class="input-group">
-									<label class="custom-control-label custom-top-label ml-2">{{datafield.label}}{{#ifEqual
-										datafield.validation "required"}}<span class="required red">*</span>{{/ifEqual}}</label>
-									&nbsp;&nbsp;&nbsp;
-									{{#each datafield.r_label as |datafile_data|}}
-									<div class="d-inline-block custom-control custom-radio mr-1">
-										<input type="radio" name="customfields[{{datafield._id}}]" value="{{datafile_data}}"
-											{{#ifEqual datafield.validation "nullable" }}{{/ifEqual}} {{#ifEqual
-											datafield.validation "required" }}
-											data-validation-required-message="{{datafield.label}} is required" {{/ifEqual}} {{log
-											datafile_data}} {{log "hbsssssssssssss" }} {{#each ../../customfield_value as
-											|custome_value| }} {{#ifCond custome_value.id_d "==" datafield.id_d}} {{#ifCond
-											datafile_data "==" custome_value.customfield_value}} checked {{/ifCond}} {{/ifCond}}
-											{{/each}}>
-										<label class="custom-control-label">{{this}}</label>
-										&nbsp; &nbsp;&nbsp; &nbsp;
-										&nbsp; &nbsp;&nbsp; &nbsp;
 									</div>
-									{{/each}}
-			
+									{{/if}}
+									<!-- Custome fields End-->
+									<div class="form-actions left sight">
+										<button type="submit" class="btn btn-secondary" id="checkout-button">
+											<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
+										</button>
+										{{!-- <button type="reset"
+											class="btn btn-warning mr-1 btn-outline-light text-muted">
+											<i class="ft-refresh-cw"></i> {{__ "Reset"}}
+										</button> --}}
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
-						<div class="help-block"></div>
 					</div>
 				</div>
-				{{/ifCond}}
-				{{#ifCond datafield.field_type "==" "file"}}
-				<div class="col-md-6">
-					<div class="form-group row">
-						<div class="col-md-12">
-							<label class="custom-control-label-date ml-2">{{datafield.label}}{{#ifEqual datafield.validation
-								"required"}}{{#unless ../customfield_value}}{{else}}<span
-									class="required red">*</span>{{/unless}}{{/ifEqual}}</label>
-							<input class="form-control border-light validimage" {{#ifEqual datafield.validation "required" }}
-								{{#unless ../customfield_value}} data-validation-required-message="{{datafield.label}} is required"
-								{{/unless}} {{/ifEqual}} {{#each ../customfield_value as |custome_value| }} {{#ifCond
-								custome_value.id_d "==" datafield.id_d}} value="{{custome_value.customfield_value}}" {{/ifCond}}
-								{{/each}} name="{{datafield._id}}" type="file">
-			
-							{{#each ../customfield_value as |custome_value| }}
-							{{#ifCond custome_value.id_d "==" datafield.id_d}}
-							<p>{{custome_value.customfield_value}}</p>
-							<input class="form-control border-light edit_val" name="customphoto_old"
-								value="{{custome_value.customfield_value}}" type="hidden" placeholder="" id="userinput5">
-							{{/ifCond}}
-							{{/each}}
-			
-							<span class="required red notice"></span>
-						</div>
-						<div class="help-block"></div>
-					</div>
-				</div>
-				{{/ifCond}}
-				{{/each}}
 			</div>
-			{{/if}}
-				<!-- Custome fields End-->
-				<div class="form-actions left sight">
-					<button type="submit" class="btn btn-secondary" id="checkout-button">
-						<i class="fa fa-check-square-o"></i> {{__ "Submit"}}
-					</button>
-					{{!-- <button type="reset" class="btn btn-warning mr-1 btn-outline-light text-muted">
-						<i class="ft-refresh-cw"></i> {{__ "Reset"}}
-					</button> --}}
-				</div>
-			</div>
-</form>	
+		</div>
+	</div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div> 
 <script>
-$(document).ready(function () 
-{
-$('body').on('change', '.dropdown_change', function () 
-	{
-		var dropdwon_data = $(".dropdown_change option:selected").val();
+	$(document).ready(function () {
+		$('body').on('change', '.dropdown_change', function () {
+			var dropdwon_data = $(".dropdown_change option:selected").val();
 
-		if (dropdwon_data == 'text' || dropdwon_data == 'textarea') 
-		{    
-			$('.cheque_cat').fadeOut(1000);
-			 
+			if (dropdwon_data == 'text' || dropdwon_data == 'textarea') {
+				$('.cheque_cat').fadeOut(1000);
 
-		} 
-		else if (dropdwon_data == 'cheque') 
-		{
+
+			}
+			else if (dropdwon_data == 'cheque') {
 			<!-- $('.only_number,.only_char,.char_space,.char_num,.email,.url,.date').iCheck('disable'); -->
-			<!-- $('.only_number,.only_char,.char_space,.char_num,.email,.url,.date').attr('disabled', true); -->
-			 
-			$('.cheque_cat').fadeIn(1000);
-		} 
-		else 
-		{
-			<!-- $('.only_number,.only_char,.char_space,.char_num,.email,.url,.date').iCheck('disable'); -->
-			<!-- $('.only_number,.only_char,.char_space,.char_num,.email,.url,.date').attr('disabled', false); -->
-			  
-			$('.cheque_cat').fadeOut(1000); 
-			 
-		}
-	}); 
-});  
+			< !--$('.only_number,.only_char,.char_space,.char_num,.email,.url,.date').attr('disabled', true); -->
+
+					$('.cheque_cat').fadeIn(1000);
+			}
+			else {
+			< !--$('.only_number,.only_char,.char_space,.char_num,.email,.url,.date').iCheck('disable'); -->
+			< !--$('.only_number,.only_char,.char_space,.char_num,.email,.url,.date').attr('disabled', false); -->
+
+					$('.cheque_cat').fadeOut(1000);
+
+			}
+		});
+	});  
 </script>
 {{#each newfield as |customvalid|}}
 <script type="text/javascript">
-       $('document').ready(function(){
-		m=0;
-		$('.validimage').on('blur', function(){
-			if($(this).val() != '') {
-				var imageUpload=$(this).val();
+	$('document').ready(function () {
+		m = 0;
+		$('.validimage').on('blur', function () {
+			if ($(this).val() != '') {
+				var imageUpload = $(this).val();
 				var allowedFiles = [];
-				var image="{{customvalid.filetype}}";
-				 var res = image.split(",");
-				allowedFiles=res;
+				var image = "{{customvalid.filetype}}";
+				var res = image.split(",");
+				allowedFiles = res;
 				var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
 				if (!regex.test(imageUpload.toLowerCase())) {
 					m++;
 					$(this).siblings('.notice').html("Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.");
 				}
-				else{
+				else {
 					$(this).siblings('.notice').html("");
 				}
 			}
 		});
-		$('.validimage').on('change', function() {
-		if("{{customvalid.field_type}}" == "file"){
-			var size = (this.files[0].size/1024/1024).toFixed(2);
-			var limit="{{customvalid.filesize}}";
-			if(size > limit){
-				alert("size should be less than or equal to {{customvalid.filesize}} mb");
-				$('.validimage').val("");
+		$('.validimage').on('change', function () {
+			if ("{{customvalid.field_type}}" == "file") {
+				var size = (this.files[0].size / 1024 / 1024).toFixed(2);
+				var limit = "{{customvalid.filesize}}";
+				if (size > limit) {
+					alert("size should be less than or equal to {{customvalid.filesize}} mb");
+					$('.validimage').val("");
+				}
 			}
-		}
 		});
-			if(m>0){
+		if (m > 0) {
 			return false;
-			}
-        });
+		}
+	});
 </script>
 {{/each}}
 
 <script>
-	$(document).ready(async ()=>{
+	$(document).ready(async () => {
 		var rolle = "{{role}}";
-	
+
 		if (rolle === "customer") {
 			$('#userside').css("display", "block");
 			$('#adminside').remove(); // Removes the element entirely from the DOM
@@ -577,78 +706,78 @@ $('body').on('change', '.dropdown_change', function ()
 {{!-- // intergration stripe payment gateway --}}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-  // Access to public stripe key
-	
-	 var payment_type = $('#payment_type');
-		
-	$(document).ready(async () =>{ 
-		console.log("{{stripePublishableKey}}","stripePublishableKey")
-		
-	$(document).on('click', '#checkout-button-user', async function (event) {
-	
+	// Access to public stripe key
+
+	var payment_type = $('#payment_type');
+
+	$(document).ready(async () => {
+		console.log("{{stripePublishableKey}}", "stripePublishableKey")
+
+		$(document).on('click', '#checkout-button-user', async function (event) {
+
 			event.preventDefault();
-				 try {
-            var stripe = Stripe(`{{stripePublishableKey}}`);
-  
-			// Get the payment amount
-			const principalamount = parseFloat($('#emipermonth').val().replace(/,/g, ''))
-			const interestamount = parseFloat($('#interest').val().replace(/,/g, ''))
-			const emiid = $('#userinput1').val();
-			const loan_no = $('.loan_no').val();
-			const payableamount = principalamount + interestamount;
-		
-		
+			try {
+				var stripe = Stripe(`{{stripePublishableKey}}`);
+
+				// Get the payment amount
+				const principalamount = parseFloat($('#emipermonth').val().replace(/,/g, ''))
+				const interestamount = parseFloat($('#interest').val().replace(/,/g, ''))
+				const emiid = $('#userinput1').val();
+				const loan_no = $('.loan_no').val();
+				const payableamount = principalamount + interestamount;
+
+
 				// Make a request to your backend to create a Checkout Session using fetch
 				const data = await $.ajax({
 					url: '/ajaxfun/create-checkout-session',
 					type: 'POST',
 					contentType: 'application/json',
-					data: JSON.stringify({ amount: payableamount, emiid: emiid , loanno: loan_no})
+					data: JSON.stringify({ amount: payableamount, emiid: emiid, loanno: loan_no })
 				});
 
-				
-				const result = await stripe.redirectToCheckout({ sessionId: data.id }); 
-				
+
+				const result = await stripe.redirectToCheckout({ sessionId: data.id });
+
 				if (result.error) {
 					console.error('----Error:', result.error);
 					toastr.error(result.error, "{{ __ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-					
-				} 
-			} 
+
+				}
+			}
 			catch (error) {
 				console.log(error);
-				
-	 if (error.message && error.message.includes("Please call Stripe() with your publishable key")) {
-				console.log("IntegrationError occurred");
-				toastr.error(
-					"Please ensure Stripe is initialized with a valid publishable key.",
-					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
-				);
-			} else if (error.responseJSON && error.responseJSON.error) {
-				if (error.responseJSON.error.includes("Invalid API Key provided")) {
-					
-					toastr.error(
-					"Please enter a valid Stripe Secret key.",
-					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
-				);
-				} else {
-					toastr.error(
-					error.responseJSON.error,
-					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
-				);
-				}
-				console.log("IntegrationError occurred1");
-				
-			} else {
-			console.log("IntegrationError occurred2");
-				toastr.error(
-					error.message || "An unexpected error occurred.",
-					"{{ __ 'Error!'}}" , {"showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000}
-				);
-			}
-		}
-	});
-	}); 
 
-	
+				if (error.message && error.message.includes("Please call Stripe() with your publishable key")) {
+					console.log("IntegrationError occurred");
+					toastr.error(
+						"Please ensure Stripe is initialized with a valid publishable key.",
+						"{{ __ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 }
+					);
+				} else if (error.responseJSON && error.responseJSON.error) {
+					if (error.responseJSON.error.includes("Invalid API Key provided")) {
+
+						toastr.error(
+							"Please enter a valid Stripe Secret key.",
+							"{{ __ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 }
+						);
+					} else {
+						toastr.error(
+							error.responseJSON.error,
+							"{{ __ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 }
+						);
+					}
+					console.log("IntegrationError occurred1");
+
+				} else {
+					console.log("IntegrationError occurred2");
+					toastr.error(
+						error.message || "An unexpected error occurred.",
+						"{{ __ 'Error!'}}", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 }
+					);
+				}
+			}
+		});
+	});
+
+
 </script>

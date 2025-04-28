@@ -239,6 +239,7 @@
 																								middlename: { validation: { required: true } },
 																								lastname: { validation: { required: true } },
 																								email: { validation: { required: true } },
+																								emiDetailsArrearCount: { type: "number" },
 																							}
 																						}
 																					},
@@ -250,7 +251,27 @@
 																						}
 																					}
 																				},
+																				dataBound: function () {
+																								var grid = this; // reference to the grid
+																								var rows = grid.items(); // get all rows
 
+																								rows.each(function () {
+																									var row = $(this);
+																									var dataItem = grid.dataItem(row); // get the dataItem of the row
+																									var emiDetailsArrearCount = dataItem.emiDetailsArrearCount;
+
+																									// Add class based on the emiDetailsArrearCount value
+																									if (emiDetailsArrearCount === 0) {
+																										row.addClass("update-to-date");
+																									} else if (emiDetailsArrearCount === 1) {
+																										row.addClass("one-month-arrear");
+																									} else if (emiDetailsArrearCount === 2) {
+																										row.addClass("two-month-arrear");
+																									} else if (emiDetailsArrearCount === 3) {
+																										row.addClass("three-month-arrear");
+																									}
+																								});
+																							},
 																				sortable: true,
 																				reorderable: true,
 																				groupable: true,
@@ -363,6 +384,14 @@
 																					width: 130,
 																				},
 																				{{/isCustomer}}
+																				{{#isCustomer session.role_slug}}
+					{
+																					field: "loanpaid",
+																					title: "{{__ 'Loan Paid'}}",
+																					template: '<label class="switch remove_switch"><input id="loanpaid" data-toggle="toggle" type="checkbox" value="#= id #" data-bind="checked: loanpaid" #= loanpaid ? checked="checked" : "" #><span class="slider round"></span></label>',
+																					width: 130,
+																				},
+																				{{/isCustomer}}
 																			{
 																				field: "years",
 																				title: "{{__ 'Loan Period In Years'}}",
@@ -383,10 +412,20 @@
 																				hidden: true,
 																				width: 150
 																			}, { 
+																				field: "loanStatus",
+																				title: "{{__ 'Loan Status'}}",
+																				width: 100
+																			}, { 
+																				field: "emiDetailsArrearSum",
+																				title: "{{__ 'Total Arrear'}}",
+																				width: 100
+																			},
+																			 { 
 																				field: "initiationfee",
 																				title: "{{__ 'Initiation Fee'}}",
 																				width: 100
-																			}, {
+																			},
+																			 {
 																				field: "administrationfee",
 																				title: "{{__ 'Administration Fee'}}",
 																				width: 100
@@ -515,58 +554,6 @@
 	</div>
 </div>
 </div>
-{{!--
-<script type="text/javascript">
-	$('body').on('click', '#approvestatus', function (e) {
-		if ($(this).prop("checked") == true)
-			console.log("checked");
-		{
-			var id = $(this).val();
-			var value = "checked";
-			<!-- alert(value); -->
-			$.ajax({
-				type: 'POST',
-				url: '/ajxfun/approveloan/',
-				headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-				data: { id: id, approvestatus: value, name: 'approvestatus' },
-				success: function (response) {
-					toastr.success("{{__ "Approved! Loan Approved successfully!"}}", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
-					setTimeout(function () {
-						window.location.replace('/loan/loanlist');
-					}, 1500);
-
-				},
-				error: function (e) {
-
-					console.log(e);
-				}
-			});
-
-		}
-			else if ($(this).prop("checked") == false) {
-			console.log("unchecked");
-			var id = $(this).val();
-			var value = null; 
-					
-				$.ajax({
-					type: 'get',
-					url: '/ajxfun/disapproveloan',
-					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-					data: { id: id, approvestatus: value, name: 'approvestatus' },
-					success: function (response) {
-						toastr.success("Loan Disapproved successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
-						setTimeout(function () {
-							window.location.replace('/loan/disapproveloan');
-						}, 1500);
-
-					},
-					error: function (e) {
-						console.log(e);
-					}
-				});
-		}
-	});
-</script> --}}
 <script type="text/javascript">
 	$('body').on('click', '#approvestatus', function (e) {
 		if ($(this).prop("checked") == true) {
@@ -605,6 +592,52 @@
 						toastr.success("Loan Disapproved Successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
 						setTimeout(function () {
 							window.location.replace('/loan/disapproveloan');
+						}, 1500);
+
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				});
+		}
+	});
+	$('body').on('click', '#loanpaid', function (e) {
+		if ($(this).prop("checked") == true) {
+			var id = $(this).val();
+			var value = "checked";
+			<!-- alert(value); -->
+			$.ajax({
+				type: 'POST',
+				url: '/ajxfun/loanpaid/',
+				headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+				data: { id: id, loanpaid: value, name: 'loanpaid' },
+				success: function (response) {
+					toastr.success("{{__ "Paid! Loan Paid Status Change Successfully!"}}", "Success!", { "showMethod": "fadeIn", "hideMethod": "fadeOut", timeOut: 5000 });
+					setTimeout(function () {
+						window.location.replace('/loan/loanlist');
+					}, 1500);
+
+				},
+				error: function (e) {
+
+					console.log(e);
+				}
+			});
+
+		}
+		else if ($(this).prop("checked") == false) {
+			var id = $(this).val();
+			var value = null; 
+					
+				$.ajax({
+					type: 'POST',
+					url: '/ajxfun/loanpaid/',
+					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+					data: { id: id, loanpaid: value, name: 'loanpaid' },
+					success: function (response) {
+						toastr.success("Paid! Loan Paid Status Change Successfully!", "Success!", { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 3000 });
+						setTimeout(function () {
+							window.location.replace('/loan/loanlist');
 						}, 1500);
 
 					},
