@@ -93,7 +93,7 @@ app.use(function (err, req, res, next) {
   res.render('error', { layout: 'errorlayout', statuscode: err.statusCode });
 });
 
-const port = process.env.PORT || 5555;
+const port = process.env.PORT || 80;
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });
