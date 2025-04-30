@@ -1091,5 +1091,6 @@
 	"Arrear": "Arrear",
 	"Loan Status": "Loan Status",
 	"Total Arrear": "Total Arrear",
-	"NSBSA": "NSBSA"
+	"NSBSA": "NSBSA",
+	"Only numbers allowed, minimum 13 digits": "Only numbers allowed, minimum 13 digits"
 }

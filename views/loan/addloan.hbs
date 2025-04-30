@@ -130,11 +130,11 @@
 										<div class="col-md-6">
 											<div class="form-group input">
 												<div class="col-md-12 form-control border-light">
-													<input type="text" id="customerid" class="" name="customerid"
-														data-validation-regex-regex="([A-Za-z_,.`'^ -]{1,50})"
-														data-validation-regex-message="{{#with ..}}{{__ " Only
-														Characters, no numbers"}}{{/with}}" {{#if this.customerid}}
-														value="{{this.customerid}}" {{/if}}>
+												<input type="text" id="customerid" class="" name="customerid"
+													data-validation-regex-regex="^\d{13,}$"
+													data-validation-regex-message="{{#with ..}}{{__ 'Only numbers allowed, minimum 13 digits'}}{{/with}}"
+													{{#if this.customerid}} value="{{this.customerid}}" {{/if}}>
+
 													<label for="customerid">{{#with ..}}{{__ "ID Number"
 														setlang}}{{/with}} </label>
 												</div>
@@ -320,10 +320,7 @@
 													<div class="form-field">
 
 														<textarea name="address"
-															data-validation-regex-regex="([A-Za-z0-9_,` .'^-]{1,150})"
-															data-validation-regex-message="{{#with ..}}{{__ " Address
-															may only contain characters, numbers, space and
-															_,`.'^-"}}{{/with}}" {{#if this.address}}
+															{{#if this.address}}
 															value="{{this.address}}" {{/if}}>{{this.address}}</textarea>
 														<span class="txt-title-label"></span>
 														<label class="text-area address ">{{#with ..}}{{__ "Address"

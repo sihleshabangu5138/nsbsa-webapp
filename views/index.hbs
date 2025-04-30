@@ -674,13 +674,13 @@ $('#EventDetailModel .event-view-redirect').click(function () {
 		Loan_Term_idSlider = document.getElementById('Loan_Term_id');
 
 		noUiSlider.create(loanamountSlider, {
-			start: 100000,
+			start: 500,
 			step: 1000,
 			behaviour: 'snap',
 			connect: 'lower',
 			range: {
-				'min': 100000,
-				'max': 100000000
+				'min': 500,
+				'max': 1000000
 			}
 		});
 		loanamountSlider.noUiSlider.on('update', function (values, handle) {
