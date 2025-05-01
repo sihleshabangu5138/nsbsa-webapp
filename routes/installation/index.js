@@ -38,7 +38,7 @@ async function checkAndDeleteDatabase(req, res, next) {
         fs.writeFileSync('.env', '');
         console.log('Database deleted successfully');
         // After deleting the database, redirect to the installation page
-        res.render('installation', { title: 'NiftyEWS', layout: 'loginlayout' });
+        res.render('installation', { title: 'NSBSA', layout: 'loginlayout' });
       } else {
         // Continue to the next middleware if conditions are not met
         res.redirect('/');
@@ -51,7 +51,7 @@ async function checkAndDeleteDatabase(req, res, next) {
   } else {
     // .env file does not have complete data, redirect to the installation page
     console.log('redirect to installation because of empty env');
-    return res.render('installation', { title: 'NiftyEWS', layout: 'loginlayout' });
+    return res.render('installation', { title: 'NSBSA', layout: 'loginlayout' });
   }
 }
 
