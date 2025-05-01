@@ -56,7 +56,7 @@ async function isconnected(req, res, next) {
   if (!DB_USERNAME || !DB_PASSWORD || !DB_HOST || !DB_DATABASE) {
     console.log('redirect to installation');
     fs.writeFileSync('.env', '');
-    return res.render('installation', { title: 'NiftyEWS', layout: 'loginlayout' });
+    return res.render('installation', { title: 'NSBSA', layout: 'loginlayout' });
   }
   else {
     return next();
@@ -81,7 +81,7 @@ async function isinstalled(req, res, next) {
     await mongoose.connection.db.dropDatabase();
     fs.writeFileSync('.env', '');
     console.log('Database deleted successfully');
-    res.render('installation', { title: 'NiftyEWS', layout: 'loginlayout', currentStep: 2 });
+    res.render('installation', { title: 'NSBSA', layout: 'loginlayout', currentStep: 2 });
   }
 }
 
@@ -93,7 +93,7 @@ function isAuthenticated(req, res, next) {
   if (req.session.username !== undefined) {
     return next();
   } else {
-    res.render('login', { title: 'NiftyEWS', layout: 'loginlayout' });
+    res.render('login', { title: 'NSBSA', layout: 'loginlayout' });
   }
 }
 
